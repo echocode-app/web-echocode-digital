@@ -12,6 +12,10 @@ export const API_ERROR_CATALOG = {
   VALIDATION_FAILED: { status: 400, publicMessage: 'Invalid request payload' },
   INVALID_JSON_BODY: { status: 400, publicMessage: 'Invalid JSON body' },
   INVALID_PAGINATION: { status: 400, publicMessage: 'Invalid pagination query' },
+  ATTACHMENT_NOT_SUPPORTED_YET: {
+    status: 400,
+    publicMessage: 'Attachment upload is not supported yet',
+  },
   UNAUTHORIZED: { status: 401, publicMessage: 'Unauthorized' },
   AUTH_MISSING_TOKEN: { status: 401, publicMessage: 'Unauthorized' },
   AUTH_INVALID_TOKEN: { status: 401, publicMessage: 'Unauthorized' },
@@ -19,6 +23,7 @@ export const API_ERROR_CATALOG = {
   FORBIDDEN: { status: 403, publicMessage: 'Forbidden' },
   PERMISSION_DENIED: { status: 403, publicMessage: 'Forbidden' },
   INTERNAL_ENDPOINT_DISABLED: { status: 403, publicMessage: 'Forbidden' },
+  NOT_IMPLEMENTED: { status: 501, publicMessage: 'Not implemented' },
   INTERNAL_ERROR: { status: 500, publicMessage: 'Unexpected server error' },
   SERVICE_UNAVAILABLE: { status: 503, publicMessage: 'Service unavailable' },
   FIREBASE_UNAVAILABLE: { status: 503, publicMessage: 'Service unavailable' },
