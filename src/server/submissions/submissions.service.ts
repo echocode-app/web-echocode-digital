@@ -26,6 +26,7 @@ function hasOwnKey<T extends string>(
 function assertPreParseSubmissionGuards(rawBody: unknown): void {
   if (!isObjectRecord(rawBody)) return;
 
+  // Preserve explicit candidate=NOT_IMPLEMENTED even when candidate file metadata is malformed.
   if (rawBody.formType === 'candidate') {
     throw ApiError.fromCode(
       'NOT_IMPLEMENTED',
@@ -83,7 +84,7 @@ function toCreateRecordInputFromProjectDraft(
 export async function createProjectSubmission(
   params: CreateProjectSubmissionParams,
 ): Promise<CreateSubmissionResponseDto> {
-  // Keep candidate rejection stable even when candidate file metadata is malformed.
+  // Run contract guards before shared schema validation to keep stable error codes.
   assertPreParseSubmissionGuards(params.rawBody);
 
   const parsed = parseSubmissionCreatePayload(params.rawBody);
@@ -96,6 +97,7 @@ export async function createProjectSubmission(
   }
 
   if (parsed.attachment != null) {
+    // Verify uploaded object metadata before persisting any Firestore record.
     await verifyUploadedProjectAttachment({
       path: parsed.attachment.path,
       mimeType: parsed.attachment.mimeType,
@@ -110,6 +112,7 @@ export async function createProjectSubmission(
       'Project submission draft produced more than one attachment in single-file flow',
     );
   }
+
   const recordInput = toCreateRecordInputFromProjectDraft(draft);
   const createdRecord = await createSubmissionRecord(recordInput);
 

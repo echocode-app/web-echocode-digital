@@ -54,5 +54,52 @@ export type CreateSubmissionResponseDto = {
 
 export type CreateProjectSubmissionParams = {
   rawBody: unknown;
-  requestId?: string;
+};
+
+export type SubmissionListStatus =
+  | 'new'
+  | 'in_review'
+  | 'contacted'
+  | 'rejected'
+  | 'accepted';
+
+export const SUBMISSION_LIST_STATUSES = [
+  'new',
+  'in_review',
+  'contacted',
+  'rejected',
+  'accepted',
+] as const satisfies readonly SubmissionListStatus[];
+
+export type SubmissionListSortBy = 'createdAt';
+export type SubmissionListSortOrder = 'asc' | 'desc';
+
+export type ListSubmissionsQueryInput = {
+  page: number;
+  limit: number;
+  sortBy: SubmissionListSortBy;
+  sortOrder: SubmissionListSortOrder;
+  status?: SubmissionListStatus;
+};
+
+export type SubmissionListItemDto = {
+  id: string;
+  formType: string;
+  status: SubmissionListStatus;
+  contact: {
+    name: string | null;
+    email: string | null;
+  };
+  hasAttachment: boolean;
+  createdAt: string;
+};
+
+export type ListSubmissionsResponseDto = {
+  items: SubmissionListItemDto[];
+  meta: {
+    page: number;
+    limit: number;
+    total: number;
+    totalPages: number;
+  };
 };

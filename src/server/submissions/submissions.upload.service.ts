@@ -27,8 +27,6 @@ export const projectUploadInitRequestSchema = z.object({
   file: initUploadFileSchema,
 });
 
-export type ProjectUploadInitRequest = z.infer<typeof projectUploadInitRequestSchema>;
-
 export type CreateProjectUploadInitParams = {
   rawBody: unknown;
 };
@@ -84,6 +82,7 @@ function assertProjectAttachmentPolicy(input: {
 }
 
 function assertTmpUploadPath(path: string): void {
+  // Enforce strict tmp prefix to prevent cross-collection/path injection on submit.
   if (!path.startsWith(TMP_UPLOAD_PREFIX)) {
     throw ApiError.fromCode(
       'ATTACHMENT_VERIFICATION_FAILED',
@@ -127,6 +126,7 @@ export async function createProjectUploadInit(
 
   let uploadUrl: string;
   try {
+    // Content-Type is bound into the signed URL request so upload/submit metadata can be cross-checked.
     const [signedUrl] = await file.getSignedUrl({
       version: 'v4',
       action: 'write',
@@ -181,6 +181,7 @@ export async function verifyUploadedProjectAttachment(
 
   let metadata: GcsFileMetadata;
   try {
+    // Submit-time verification intentionally treats missing object as client error (invalid upload flow state).
     const [rawMetadata] = await file.getMetadata();
     metadata = rawMetadata;
   } catch (cause) {

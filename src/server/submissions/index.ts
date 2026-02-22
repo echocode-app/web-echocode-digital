@@ -5,6 +5,10 @@ export {
   type SubmissionDraft,
 } from '@/server/submissions/validation';
 export { createProjectSubmission } from '@/server/submissions/submissions.service';
+export {
+  listSubmissions,
+  listSubmissionsQuerySchema,
+} from '@/server/submissions/submissions.list.service';
 export { createSubmissionRecord } from '@/server/submissions/submissions.repository';
 export {
   createProjectUploadInit,
@@ -20,6 +24,12 @@ export type {
   CreateSubmissionRecordInput,
   CreateSubmissionResponseDto,
   CreatedSubmissionRecord,
+  ListSubmissionsQueryInput,
+  ListSubmissionsResponseDto,
+  SubmissionListItemDto,
+  SubmissionListSortBy,
+  SubmissionListSortOrder,
+  SubmissionListStatus,
   SubmissionFirestoreDocMvp,
 } from '@/server/submissions/submissions.types';
 export type {

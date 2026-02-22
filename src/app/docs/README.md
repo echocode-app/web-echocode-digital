@@ -318,6 +318,32 @@ Environment policy:
 
 `buildSubmissionDraft(...)` нормалізує payload у стабільну server shape перед записом у БД.
 
+## Forms Submissions (implemented backend scope)
+
+### Project Form Create
+
+- `POST /api/forms/submissions` (public, no auth)
+- підтримується `formType = project`; `candidate` поки повертає `NOT_IMPLEMENTED`
+- Firestore schema (MVP, `submissions/{docId}`): `formType`, `status`, `contact`, `content`, `attachments`, `createdAt`, `updatedAt`
+- success response: `{ success: true, data: { id, status, createdAt } }`
+
+### Project File Upload Flow
+
+- `POST /api/forms/uploads/init` генерує signed `PUT` URL з TTL `10min`
+- tmp path format: `uploads/submissions/tmp/<uuid>` (без розширення)
+- submit-time verification у `POST /api/forms/submissions`: prefix + object existence + `contentType` + `size` cross-check
+- Storage bucket має бути явно заданий через `FIREBASE_STORAGE_BUCKET` (fail-fast без fallback bucket)
+- zero-byte files відхиляються і на init-policy, і на verification
+- MVP limitations: tmp file лишається фінальним шляхом; orphan tmp files не прибираються автоматично; finalize/move відсутній
+
+### Admin Submissions List
+
+- `GET /api/admin/submissions` (`auth: true`, permission: `submissions.read`)
+- pagination strategy: offset (`page`, `limit`) + `count()` для `total/totalPages`
+- sorting: тільки `createdAt` (`asc|desc`), optional `status` filter
+- response DTO item: `id`, `formType`, `status`, `contact.{name,email}`, `hasAttachment`, `createdAt`
+- internal fields (`content.message`, `attachments[]`, `updatedAt`) не експонуються
+
 ## Ключові env-параметри (поточна ітерація)
 
 - `NODE_ENV`
