@@ -1,0 +1,13 @@
+{
+  "Layout": {
+    "Header": {
+      "navigation": {
+        "services": "Послуги",
+        "portfolio": "Портфоліо",
+        "partnership": "Партнерство",
+        "team": "Команда",
+        "career": "Карʼєра"
+      }
+    }
+  }
+}

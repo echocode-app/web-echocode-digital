@@ -1,0 +1,13 @@
+{
+  "Layout": {
+    "Header": {
+      "navigation": {
+        "services": "Leistungsbereiche",
+        "portfolio": "Portfolio",
+        "partnership": "Partnerschaft",
+        "team": "Team",
+        "career": "Karriere"
+      }
+    }
+  }
+}

@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { useLockBodyScroll } from '@/hooks/useLockBodyScroll';
 
 import MobaileNavList from './MobileNavList';
-import LanguageSwitcher from '@/components/I18n/LanguageSwitcher';
+import LanguageSwitcher from '@/components/UI/LanguageSwitcher';
 import Logo from '@/components/UI/Logo';
 import Link from 'next/link';
 
