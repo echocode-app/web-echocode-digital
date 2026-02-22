@@ -1,0 +1,13 @@
+{
+  "Layout": {
+    "Header": {
+      "navigation": {
+        "services": "Service Directions",
+        "portfolio": "Portfolio",
+        "partnership": "Partnership",
+        "team": "Team",
+        "career": "Career"
+      }
+    }
+  }
+}
