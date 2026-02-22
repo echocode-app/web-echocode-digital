@@ -16,6 +16,10 @@ export const API_ERROR_CATALOG = {
     status: 400,
     publicMessage: 'Attachment upload is not supported yet',
   },
+  ATTACHMENT_VERIFICATION_FAILED: {
+    status: 400,
+    publicMessage: 'Attachment verification failed',
+  },
   UNAUTHORIZED: { status: 401, publicMessage: 'Unauthorized' },
   AUTH_MISSING_TOKEN: { status: 401, publicMessage: 'Unauthorized' },
   AUTH_INVALID_TOKEN: { status: 401, publicMessage: 'Unauthorized' },

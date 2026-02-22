@@ -7,6 +7,10 @@ export {
 export { createProjectSubmission } from '@/server/submissions/submissions.service';
 export { createSubmissionRecord } from '@/server/submissions/submissions.repository';
 export {
+  createProjectUploadInit,
+  verifyUploadedProjectAttachment,
+} from '@/server/submissions/submissions.upload.service';
+export {
   fromCreatedSubmissionSnapshot,
   toCreateSubmissionResponseDto,
   toSubmissionFirestoreCreateDoc,
@@ -18,3 +22,8 @@ export type {
   CreatedSubmissionRecord,
   SubmissionFirestoreDocMvp,
 } from '@/server/submissions/submissions.types';
+export type {
+  CreateProjectUploadInitParams,
+  CreateProjectUploadInitResponseDto,
+  VerifyUploadedProjectAttachmentInput,
+} from '@/server/submissions/submissions.upload.service';

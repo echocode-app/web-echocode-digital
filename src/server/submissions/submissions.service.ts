@@ -3,6 +3,7 @@ import {
   buildSubmissionDraft,
   parseSubmissionCreatePayload,
 } from '@/server/submissions/validation';
+import { verifyUploadedProjectAttachment } from '@/server/submissions/submissions.upload.service';
 import { createSubmissionRecord } from '@/server/submissions/submissions.repository';
 import { toCreateSubmissionResponseDto } from '@/server/submissions/submissions.mapper';
 import type {
@@ -22,7 +23,7 @@ function hasOwnKey<T extends string>(
   return Object.prototype.hasOwnProperty.call(value, key);
 }
 
-function assertCommit1PreParseGuards(rawBody: unknown): void {
+function assertPreParseSubmissionGuards(rawBody: unknown): void {
   if (!isObjectRecord(rawBody)) return;
 
   if (rawBody.formType === 'candidate') {
@@ -37,10 +38,7 @@ function assertCommit1PreParseGuards(rawBody: unknown): void {
     hasOwnKey(rawBody, 'attachment') &&
     rawBody.attachment != null
   ) {
-    throw ApiError.fromCode(
-      'ATTACHMENT_NOT_SUPPORTED_YET',
-      'Project attachment upload is not supported in Commit 1',
-    );
+    return;
   }
 }
 
@@ -78,15 +76,15 @@ function toCreateRecordInputFromProjectDraft(
       message: draft.message ?? null,
       profileUrl: null,
     },
-    attachments: [],
+    attachments: draft.attachments,
   };
 }
 
 export async function createProjectSubmission(
   params: CreateProjectSubmissionParams,
 ): Promise<CreateSubmissionResponseDto> {
-  // Commit 1 contract requires these responses even if file metadata is malformed.
-  assertCommit1PreParseGuards(params.rawBody);
+  // Keep candidate rejection stable even when candidate file metadata is malformed.
+  assertPreParseSubmissionGuards(params.rawBody);
 
   const parsed = parseSubmissionCreatePayload(params.rawBody);
 
@@ -98,13 +96,20 @@ export async function createProjectSubmission(
   }
 
   if (parsed.attachment != null) {
-    throw ApiError.fromCode(
-      'ATTACHMENT_NOT_SUPPORTED_YET',
-      'Project attachment upload is not supported in Commit 1',
-    );
+    await verifyUploadedProjectAttachment({
+      path: parsed.attachment.path,
+      mimeType: parsed.attachment.mimeType,
+      sizeBytes: parsed.attachment.sizeBytes,
+    });
   }
 
   const draft = buildSubmissionDraft(parsed);
+  if (draft.attachments.length > 1) {
+    throw ApiError.fromCode(
+      'INTERNAL_ERROR',
+      'Project submission draft produced more than one attachment in single-file flow',
+    );
+  }
   const recordInput = toCreateRecordInputFromProjectDraft(draft);
   const createdRecord = await createSubmissionRecord(recordInput);
 

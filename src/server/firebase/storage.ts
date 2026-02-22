@@ -11,10 +11,15 @@ assertServerOnly('src/server/firebase/storage');
 /** Returns a centralized Storage bucket instance for server operations. */
 export function getFirebaseStorageBucket(): Bucket {
   try {
+    if (!env.firebaseStorageBucket) {
+      throw ApiError.fromCode(
+        'FIREBASE_UNAVAILABLE',
+        'Firebase Storage bucket is not configured',
+      );
+    }
+
     const storage = getStorage(getFirebaseAdminApp());
-    const bucket = env.firebaseStorageBucket
-      ? storage.bucket(env.firebaseStorageBucket)
-      : storage.bucket();
+    const bucket = storage.bucket(env.firebaseStorageBucket);
 
     if (!bucket.name) {
       throw ApiError.fromCode(
