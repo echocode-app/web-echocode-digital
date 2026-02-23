@@ -1,0 +1,22 @@
+[
+  {
+    "title": "LEVEL 01",
+    "subTitle": "Functional",
+    "desc": "Deep manual logic testing. Your users get exactly what you promised in the specs."
+  },
+  {
+    "title": "LEVEL 02",
+    "subTitle": "Automation",
+    "desc": "Writing regression auto-tests (CI/CD). Fast releases without the fear of \"breaking things\"."
+  },
+  {
+    "title": "LEVEL 03",
+    "subTitle": "Security",
+    "desc": "Vulnerability scanning and penetration testing. Protection against data leaks and loss."
+  },
+  {
+    "title": "LEVEL 04",
+    "subTitle": "Load ＆ Stress",
+    "desc": "Simulating peak loads. Your product stays stable during massive user traffic surges."
+  }
+]
