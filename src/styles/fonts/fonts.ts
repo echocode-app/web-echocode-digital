@@ -1,4 +1,4 @@
-import { Poppins, Inter, Montserrat } from 'next/font/google';
+import { Poppins, Inter, Rubik } from 'next/font/google';
 import localFont from 'next/font/local';
 
 export const poppins = Poppins({
@@ -7,9 +7,9 @@ export const poppins = Poppins({
   subsets: ['latin'],
 });
 
-export const play = Montserrat({
-  variable: '--font-play',
-  weight: ['400'],
+export const rubik = Rubik({
+  variable: '--font-rubik',
+  weight: ['400', '700'],
   subsets: ['latin'],
 });
 
