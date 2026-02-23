@@ -1,0 +1,13 @@
+{
+  "HomePage": {
+    "HeroSection": {
+      "title": "Echocode: Digital Studio",
+      "subtitle": "Engineering high-scale digital ecosystems. From concept to market dominance.",
+      "orderButton": "Place an Order"
+    },
+    "BasedOnSection": {
+      "title": "SPECIALIZING IN THE FULL CYCLE OF MOBILE ＆ WEB DEVELOPMENT",
+      "subtitle": "We don’t just code; we build digital power. Our team blends deep tech expertise with strategy to deliver products that outperform the market and redefine user experience."
+    }
+  }
+}

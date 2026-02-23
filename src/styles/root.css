@@ -63,8 +63,8 @@
   --color-white: #fff;
   --color-accent: #fd266c;
   --color-accent-hover: #fac175;
-  --color-gray1: rgba(255, 255, 255, 0.01);
   --color-gray7: rgba(255, 255, 255, 0.07);
+  --color-gray1: rgba(255, 255, 255, 0.01);
   --color-gray10: rgba(255, 255, 255, 0.1);
   --color-gray60: rgba(255, 255, 255, 0.6);
   --color-gray75: rgba(255, 255, 255, 0.75);
@@ -111,11 +111,19 @@
   .font-title {
     font-family: var(--font-wadik), sans-serif;
   }
+  html[lang='ua'] .font-title,
+  html[lang='de'] .font-title,
+  html[lang='es'] .font-title {
+    font-family: var(--font-rubik), sans-serif;
+  }
   .font-main {
     font-family: var(--font-poppins), sans-serif;
   }
   .font-extra {
     font-family: var(--font-inter), sans-serif;
+  }
+  .font-wadik {
+    font-family: var(--font-wadik);
   }
 
   .duration-main {

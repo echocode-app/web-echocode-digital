@@ -1,0 +1,13 @@
+{
+  "HomePage": {
+    "HeroSection": {
+      "title": "Echocode: Estudio Digital",
+      "subtitle": "Ingeniería de ecosistemas digitales a gran escala. Desde el concepto hasta el dominio del mercado.",
+      "orderButton": "Realizar un pedido"
+    },
+    "BasedOnSection": {
+      "title": "ESPECIALIZADOS EN EL CICLO COMPLETO DEL DESARROLLO MÓVIL ＆ DESARROLLO WEB",
+      "subtitle": "No solo escribimos código; construimos poder digital. Nuestro equipo combina una profunda experiencia técnica con estrategia para crear productos que superan al mercado y redefinen la experiencia del usuario."
+    }
+  }
+}

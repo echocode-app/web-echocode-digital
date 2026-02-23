@@ -3,9 +3,10 @@
 import { ReactNode } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useLocale } from 'next-intl';
 
 export const navLinkBaseClass =
-  'relative font-main uppercase text-main-base-link ' +
+  'relative font-main uppercase ' +
   'bg-main-gradient bg-clip-text bg-transparent ' +
   'transition-all duration-main ' +
   'group-hover:text-transparent group-hover:bg-clip-text group-hover:after:opacity-100 ' +
@@ -22,6 +23,9 @@ interface NavLinkProps {
 }
 
 const NavLink = ({ children, link }: NavLinkProps) => {
+  const locale = useLocale();
+  const textSize = locale === 'ua' ? 'text-main-sm font-semibold' : 'text-main-base-link';
+
   const pathname = usePathname();
   const isActive = pathname === link || pathname.startsWith(link + '/');
 
@@ -29,7 +33,7 @@ const NavLink = ({ children, link }: NavLinkProps) => {
     <Link
       href={link}
       data-text={children}
-      className={`${isActive ? navLinkActiveClass : ''} ${navLinkBaseClass}`}
+      className={`${navLinkBaseClass} ${isActive ? navLinkActiveClass : ''}  ${textSize}`}
     >
       {children}
     </Link>
