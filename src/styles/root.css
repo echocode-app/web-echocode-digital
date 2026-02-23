@@ -114,7 +114,7 @@
   html[lang='ua'] .font-title,
   html[lang='de'] .font-title,
   html[lang='es'] .font-title {
-    font-family: var(--font-play), sans-serif;
+    font-family: var(--font-rubik), sans-serif;
   }
   .font-main {
     font-family: var(--font-poppins), sans-serif;

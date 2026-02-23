@@ -10,7 +10,7 @@ const HeroSection = () => {
       <SectionContainer>
         <h1
           className="max-w-85.5 mx-auto mb-4 font-title text-title-3xl text-center 
-        md:max-w-170 md:text-title-6xl uppercase"
+        md:max-w-170 md:text-title-6xl font-semibold  uppercase"
         >
           {t('title')}
         </h1>

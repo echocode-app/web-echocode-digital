@@ -1,5 +1,6 @@
 import HeroSection from '@/components/sections/directions/game/HeroSection';
-import SolutionSection from '@/components/sections/directions/game/SolutionSection/SolutionSection';
+import SolutionSection from '@/components/sections/directions/game/SolutionSection';
+import UniversesSection from '@/components/sections/directions/game/UniversesSection';
 import StaticGradientLine from '@/components/UI/StaticGradientLine';
 
 const GameDevelopment = () => {
@@ -8,6 +9,7 @@ const GameDevelopment = () => {
       <HeroSection />
       <StaticGradientLine />
       <SolutionSection />
+      <UniversesSection />
     </>
   );
 };
