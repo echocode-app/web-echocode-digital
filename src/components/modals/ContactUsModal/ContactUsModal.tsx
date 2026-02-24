@@ -53,8 +53,8 @@ const ContactUsModal = () => {
             <p className="text-white">
               Get professional advice. Use the form or write us an email:
             </p>
-            <Link href={'mailto:hello@echocode.com'} className="font-semibold text-accent">
-              hello@echocode.com
+            <Link href={'mailto:hello@echocode.app'} className="font-semibold text-accent">
+              hello@echocode.app
             </Link>
           </div>
           <ContactUsForm />
