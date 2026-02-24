@@ -5,7 +5,7 @@ import ArmorList from './ArmorList';
 
 const ArmorSection = () => {
   return (
-    <section className="pb-10 md:pb-25">
+    <section className="pb-10 md:pb-31">
       <SectionGradientLine height="1" />
       <SectionContainer>
         <div className="mb-10 md:mb-18">
