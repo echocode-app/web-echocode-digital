@@ -1,0 +1,35 @@
+import SectionContainer from '@/components/UI/section/SectionContainer';
+import SectionTitle from '@/components/UI/section/SectionTitle';
+
+const PhilosophySection = () => {
+  return (
+    <section className="pt-6 md:pt-16 pb-10 md:pb-25">
+      <SectionContainer>
+        <div className="flex flex-wrap gap-10 lg:gap-3 justify-center">
+          <div className="max-w-127">
+            <div className="mb-2.5">
+              <SectionTitle>Team Philosophy</SectionTitle>
+            </div>
+            <p className="max-w-105 text-main-sm mb-5">
+              Great products are not created by isolated developers. They are built by small,
+              focused, cross-functional teams.
+            </p>
+            <ul className="flex flex-wrap gap-2 text-accent text-[13px]">
+              <li>#Product engineers</li>
+              <li>#Designers</li>
+              <li>#QA engineers</li>
+              <li>#Growth & ASO specialists</li>
+            </ul>
+          </div>
+          <div className="p-3 max-w-120 border-2 border-accent rounded-secondary">
+            <p className="font-title text-[16px] md:text-[20px]">
+              All aligned around one goal — making your product succeed.
+            </p>
+          </div>
+        </div>
+      </SectionContainer>
+    </section>
+  );
+};
+
+export default PhilosophySection;
