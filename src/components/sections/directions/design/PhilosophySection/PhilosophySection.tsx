@@ -4,7 +4,7 @@ import PhilosophyList from './PhilosophyList';
 
 const PhilosophySection = () => {
   return (
-    <section className="pt-16 pb-10 md:pb-25">
+    <section className="pt-16 pb-20 md:pb-25">
       <SectionContainer>
         <div className="mb-10">
           <SectionTitle>PHILOSOPHY</SectionTitle>
