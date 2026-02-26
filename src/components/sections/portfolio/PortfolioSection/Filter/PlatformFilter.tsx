@@ -18,8 +18,11 @@ const PlatformFilter = () => {
 
   return (
     <>
-      <div className="mb-3 flex gap-4 flex-col md:flex-row  items-center md:justify-between p-3 rounded-secondary bg-gray16 backdrop-blur-[6px]">
-        <ul className="flex gap-2 sm:gap-3">
+      <div
+        className="mb-3 flex gap-4 flex-col md:flex-row
+       items-center md:justify-between p-3 mx-auto w-full sm:w-fit md:w-full rounded-secondary bg-gray16 backdrop-blur-[6px]"
+      >
+        <ul className="flex justify-between gap-2 sm:gap-3">
           <FilterItem link={buildQuery(searchParams, 'platform')} title="All" active={!platform} />
           <FilterItem
             title="IOS"

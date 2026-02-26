@@ -11,7 +11,7 @@ interface ProjectItemProps {
 
 const ProjectItem = ({ image, title, id, platforms }: ProjectItemProps) => {
   return (
-    <li className="group w-full max-w-[320px]">
+    <li className="group w-full sm:w-[320px] max-w-[320px]">
       <Link href={`/portfolio/${id}`}>
         <div className="relative mb-4 w-full sm:w-[320px] aspect-video h-50 overflow-hidden rounded-secondary">
           <Image
