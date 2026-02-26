@@ -8,7 +8,10 @@ interface ProjectListProps {
 
 const ProjectList = ({ list }: ProjectListProps) => {
   return (
-    <ul className="flex flex-wrap justify-center gap-5 gap-y-8 pt-5">
+    <ul
+      className="flex flex-wrap flex-col md:flex-row justify-center
+     items-center md:justify-start gap-5 gap-y-8 pt-5 w-full mx-auto"
+    >
       {list.map((item) => (
         <ProjectItem key={item.id} {...item} />
       ))}

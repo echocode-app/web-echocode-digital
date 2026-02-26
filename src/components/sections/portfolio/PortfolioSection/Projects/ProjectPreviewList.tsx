@@ -7,7 +7,7 @@ interface ProjectPreviewListProps {
 
 const ProjectPreviewList = ({ list }: ProjectPreviewListProps) => {
   return (
-    <ul className="flex flex-wrap justify-center gap-5 gap-y-8 pt-5">
+    <ul className="flex flex-wrap flex-col md:flex-row items-center justify-center md:justify-start gap-5 gap-y-8 pt-5">
       {list.map((item) => (
         <ProjectPreviewItem key={item.id} {...item} />
       ))}
