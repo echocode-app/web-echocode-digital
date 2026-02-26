@@ -1,9 +1,9 @@
 [
-  { "link": "/portfolio?type=ios", "image": "/images/portfolio/ios.png", "title": "iOS" },
+  { "link": "/portfolio?platform=ios", "image": "/images/portfolio/ios.png", "title": "iOS" },
   {
-    "link": "/portfolio?type=android",
+    "link": "/portfolio?platform=android",
     "image": "/images/portfolio/android.png",
     "title": "android"
   },
-  { "link": "/portfolio?type=web", "image": "/images/portfolio/web.png", "title": "web" }
+  { "link": "/portfolio?platform=web", "image": "/images/portfolio/web.png", "title": "web" }
 ]

@@ -1,0 +1,58 @@
+[
+  {
+    "image": "/images/portfolio/projects/dummy.png",
+    "title": "Fintech Wallet",
+    "platforms": ["ios", "android"],
+    "id": "fintech-wallet",
+    "categories": ["utility", "everyday"]
+  },
+  {
+    "image": "/images/portfolio/projects/dummy.png",
+    "title": "Online Learning Platform",
+    "platforms": ["web"],
+    "id": "online-learning",
+    "categories": ["education", "creative"]
+  },
+  {
+    "image": "/images/portfolio/projects/dummy.png",
+    "title": "Travel Planner",
+    "platforms": ["ios", "android", "web"],
+    "id": "travel-planner",
+    "categories": ["travel", "utility"]
+  },
+  {
+    "image": "/images/portfolio/projects/dummy.png",
+    "title": "Health Tracker",
+    "platforms": ["ios", "android"],
+    "id": "health-tracker",
+    "categories": ["health", "everyday"]
+  },
+  {
+    "image": "/images/portfolio/projects/dummy.png",
+    "title": "E-commerce Marketplace",
+    "platforms": ["web", "ios"],
+    "id": "ecommerce-marketplace",
+    "categories": ["e-commerce", "utility"]
+  },
+  {
+    "image": "/images/portfolio/projects/dummy.png",
+    "title": "Creative Studio",
+    "platforms": ["web"],
+    "id": "creative-studio",
+    "categories": ["creative"]
+  },
+  {
+    "image": "/images/portfolio/projects/dummy.png",
+    "title": "iGaming Platform",
+    "platforms": ["web", "unity"],
+    "id": "igaming-platform",
+    "categories": ["igaming", "creative"]
+  },
+  {
+    "image": "/images/portfolio/projects/dummy.png",
+    "title": "Fitness Coach App",
+    "platforms": ["ios", "android"],
+    "id": "fitness-coach",
+    "categories": ["health", "utility"]
+  }
+]

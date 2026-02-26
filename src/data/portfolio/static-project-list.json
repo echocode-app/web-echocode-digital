@@ -1,0 +1,23 @@
+[
+  {
+    "image": "/images/portfolio/projects/food.png",
+    "title": "Food and drink",
+    "platforms": ["ios", "android"],
+    "id": "food",
+    "categories": ["health", "everyday", "utility"]
+  },
+  {
+    "image": "/images/portfolio/projects/cleaning.jpg",
+    "title": "cleaning",
+    "platforms": ["ios", "android"],
+    "id": "cleaning",
+    "categories": ["everyday", "utility"]
+  },
+  {
+    "image": "/images/portfolio/projects/e-commers.jpg",
+    "title": "E-commers",
+    "platforms": ["ios", "android"],
+    "id": "e-commers",
+    "categories": ["e-commerce", "utility", "creative"]
+  }
+]
