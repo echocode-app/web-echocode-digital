@@ -1,13 +1,64 @@
 {
   "HomePage": {
     "HeroSection": {
-      "title": "Echocode: Digital Studio",
       "subtitle": "Engineering high-scale digital ecosystems. From concept to market dominance.",
       "orderButton": "Place an Order"
     },
     "BasedOnSection": {
       "title": "SPECIALIZING IN THE FULL CYCLE OF MOBILE ＆ WEB DEVELOPMENT",
-      "subtitle": "We don’t just code; we build digital power. Our team blends deep tech expertise with strategy to deliver products that outperform the market and redefine user experience."
+      "subtitle": "We don’t just code; we build digital power. Our team blends deep tech expertise with strategy to deliver products that outperform the market and redefine user experience.",
+      "metrics": {
+        "delivered": "Custom products delivered worldwide",
+        "experts": "Senior and Middle Level IT Experts",
+        "prototypeTime": "Average time from idea to a clickable prototype",
+        "returningClients": "Client return bringing next big ideas to life"
+      }
+    },
+    "DirectionsSection": {
+      "title": "Service Directions",
+      "directions": {
+        "mobile": {
+          "title": "Mobile Development",
+          "description": "Premium native iOS and Android applications. We focus on high-speed performance, intuitive UX, and secure backend integration."
+        },
+        "web": {
+          "title": "Web Development",
+          "description": "Custom web ecosystems and PWA. Focused on stability, fast load times, and efficient business logic."
+        },
+        "game": {
+          "title": "Game Development",
+          "description": "Pushing the boundaries of digital interaction to forge next-generation immersive gameplay experiences."
+        },
+        "igaming": {
+          "title": "iGaming",
+          "description": "High-frequency entertainment ecosystems. We engineer scalable architectures for high-load operations and secure transactional infrastructure."
+        },
+        "qa": {
+          "title": "QA",
+          "description": "Precision-driven system resilience. We eliminate architectural vulnerabilities through rigorous automated cycles to ensure absolute operational stability."
+        }
+      },
+      "loadMoreBtn": "Load More"
+    },
+    "ServicesSection": {
+      "title": "Our services",
+      "subtitle": "We go beyond outsourcing. We become your dedicated tech partner, ensuring your product evolves with the market trends."
+    },
+    "PortfolioSection": {
+      "title": "Portfolio",
+      "subtitle": "Our latest work. From scalable platforms to niche mobile apps, we deliver technology that works for your business."
+    },
+    "PartnersSection": {
+      "title": "Partners"
+    },
+    "LocationsSection": {
+      "title": "Our locations",
+      "subtitle": "Global footprint, local expertise. With distributed teams and strategic offices, we deliver high-end solutions to clients worldwide",
+      "locations": {
+        "kyiv": "Kyiv",
+        "berlin": "Berlin",
+        "remote": "Remote"
+      }
     }
   }
 }

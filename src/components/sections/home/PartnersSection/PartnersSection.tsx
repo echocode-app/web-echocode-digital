@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 
 import partners from '@/data/partners.json';
 
@@ -8,12 +9,14 @@ import SectionTitle from '@/components/UI/section/SectionTitle';
 import PartnersList from './PartnerList';
 
 const PartnersSection = () => {
+  const t = useTranslations('HomePage.PartnersSection');
+
   return (
     <section className="pb-10 md:pb-25">
       <SectionGradientLine height="2" />
       <SectionContainer>
         <div className="mb-10">
-          <SectionTitle>Partners</SectionTitle>
+          <SectionTitle>{t('title')}</SectionTitle>
         </div>
         <div className="relative flex items-center py-19.25 h-70 w-full overflow-hidden">
           <Image

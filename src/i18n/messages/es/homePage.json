@@ -1,13 +1,64 @@
 {
   "HomePage": {
     "HeroSection": {
-      "title": "Echocode: Estudio Digital",
       "subtitle": "Ingeniería de ecosistemas digitales a gran escala. Desde el concepto hasta el dominio del mercado.",
       "orderButton": "Realizar un pedido"
     },
     "BasedOnSection": {
       "title": "ESPECIALIZADOS EN EL CICLO COMPLETO DEL DESARROLLO MÓVIL ＆ DESARROLLO WEB",
-      "subtitle": "No solo escribimos código; construimos poder digital. Nuestro equipo combina una profunda experiencia técnica con estrategia para crear productos que superan al mercado y redefinen la experiencia del usuario."
+      "subtitle": "No solo escribimos código; construimos poder digital. Nuestro equipo combina una profunda experiencia técnica con estrategia para crear productos que superan al mercado y redefinen la experiencia del usuario.",
+      "metrics": {
+        "delivered": "Productos personalizados entregados en todo el mundo",
+        "experts": "Expertos en TI de nivel Middle y Senior",
+        "prototypeTime": "Tiempo promedio desde la idea hasta un prototipo interactivo",
+        "returningClients": "Clientes que regresan con nuevas grandes ideas"
+      }
+    },
+    "DirectionsSection": {
+      "title": "Áreas de servicio",
+      "directions": {
+        "mobile": {
+          "title": "Desarrollo móvil",
+          "description": "Aplicaciones nativas premium para iOS y Android. Nos enfocamos en alto rendimiento, UX intuitivo e integración segura del backend."
+        },
+        "web": {
+          "title": "Desarrollo web",
+          "description": "Ecosistemas web personalizados y PWA. Enfocados en estabilidad, tiempos de carga rápidos y lógica empresarial eficiente."
+        },
+        "game": {
+          "title": "Desarrollo de juegos",
+          "description": "Llevamos los límites de la interacción digital para crear experiencias de juego inmersivas de nueva generación."
+        },
+        "igaming": {
+          "title": "iGaming",
+          "description": "Ecosistemas de entretenimiento de alta frecuencia. Diseñamos arquitecturas escalables para grandes cargas y una infraestructura transaccional segura."
+        },
+        "qa": {
+          "title": "QA",
+          "description": "Resiliencia del sistema impulsada por la precisión. Eliminamos vulnerabilidades arquitectónicas mediante rigurosos ciclos de pruebas automatizadas."
+        }
+      },
+      "loadMoreBtn": "Cargar más"
+    },
+    "ServicesSection": {
+      "title": "Nuestros servicios",
+      "subtitle": "Vamos más allá del outsourcing. Nos convertimos en su socio tecnológico dedicado, asegurando que su producto evolucione según las tendencias del mercado."
+    },
+    "PortfolioSection": {
+      "title": "Portafolio",
+      "subtitle": "Nuestros trabajos más recientes. Desde plataformas escalables hasta aplicaciones móviles especializadas, ofrecemos tecnología que funciona para su negocio."
+    },
+    "PartnersSection": {
+      "title": "Socios"
+    },
+    "LocationsSection": {
+      "title": "Nuestras ubicaciones",
+      "subtitle": "Presencia global, experiencia local. Con equipos distribuidos y oficinas estratégicas, brindamos soluciones de alto nivel a clientes en todo el mundo",
+      "locations": {
+        "kyiv": "Kiev",
+        "berlin": "Berlín",
+        "remote": "Remoto"
+      }
     }
   }
 }

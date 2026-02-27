@@ -2,12 +2,25 @@
   "Layout": {
     "Header": {
       "navigation": {
-        "services": "Direcciones de servicios",
+        "services": "Servicios",
         "portfolio": "Portafolio",
         "partnership": "Asociación",
         "team": "Equipo",
         "career": "Carrera"
       }
+    },
+    "Footer": {
+      "title": "TIENES UN PROYECTO EN MENTE?",
+      "subtitle": "Diseñamos arquitecturas digitales que cambian las reglas del juego. Cada píxel y cada línea de código están pensados para un rendimiento máximo.",
+      "nav": {
+        "services": "Servicios",
+        "portfolio": "Portafolio",
+        "partnership": "Asociación",
+        "careers": "Carreras"
+      },
+      "contactUsBtn": "Contacto",
+      "mailTitle": "Simplemente envíanos tu correo electrónico de contacto y nos pondremos en contacto contigo.",
+      "mailSubtitle": "Tu correo electrónico"
     }
   }
 }

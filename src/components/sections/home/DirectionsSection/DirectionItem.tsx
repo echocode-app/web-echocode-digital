@@ -1,15 +1,18 @@
-import Image from 'next/image';
 import Link from 'next/link';
+import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 
 interface DirectionItemProps {
   link: string;
   position: string;
   image: string;
   title: string;
-  description: string;
+  descriptionKey: string;
 }
 
-const DirectionItem = ({ position, image, title, description, link }: DirectionItemProps) => {
+const DirectionItem = ({ position, image, title, descriptionKey, link }: DirectionItemProps) => {
+  const t = useTranslations('HomePage.DirectionsSection');
+
   return (
     <Link
       href={link}
@@ -34,12 +37,12 @@ const DirectionItem = ({ position, image, title, description, link }: DirectionI
       </div>
       <div>
         <h3
-          className="mb-2.5 font-title font-bold text-title-base md:text-title-2xl
-         group-hover:text-accent duration-main"
+          className="mb-2.5 font-wadik font-bold text-title-base md:text-title-2xl
+         group-hover:text-accent duration-main uppercase"
         >
           {title}
         </h3>
-        <p className="text-main-sm text-gray75">{description}</p>
+        <p className="text-main-sm text-gray75">{t(descriptionKey)}</p>
       </div>
     </Link>
   );

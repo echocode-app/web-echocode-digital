@@ -23,7 +23,7 @@ const LanguageSwitcher = () => {
       <div className="relative w-6 h-5">
         <Image src="/UI/globe.svg" alt="Globe" fill />
       </div>
-      <p className="font-title text-[10px] sm:text-title-xs uppercase">{locale}</p>
+      <p className="font-wadik text-[10px] sm:text-title-xs uppercase">{locale}</p>
     </button>
   );
 };

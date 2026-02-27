@@ -1,13 +1,64 @@
 {
   "HomePage": {
     "HeroSection": {
-      "title": "Echocode: Digitale Agentur",
       "subtitle": "Engineering von großskaligen digitalen Ökosystemen. Vom Konzept bis zur Marktführerschaft.",
       "orderButton": "Bestellung aufgeben"
     },
     "BasedOnSection": {
       "title": "SPEZIALISIERT AUF DEN VOLLSTÄNDIGEN ZYKLUS DER MOBILEN ＆ WEBENTWICKLUNG",
-      "subtitle": "Wir schreiben nicht nur Code – wir schaffen digitale Stärke. Unser Team vereint tiefgehende technische Expertise mit Strategie, um Produkte zu liefern, die den Markt übertreffen und das Nutzererlebnis neu definieren."
+      "subtitle": "Wir schreiben nicht nur Code – wir schaffen digitale Stärke. Unser Team vereint tiefgehende technische Expertise mit Strategie, um Produkte zu liefern, die den Markt übertreffen und das Nutzererlebnis neu definieren.",
+      "metrics": {
+        "delivered": "Maßgeschneiderte Produkte weltweit geliefert",
+        "experts": "IT-Experten auf Senior-und Middle-Level",
+        "prototypeTime": "Durchschnittliche Zeit von der Idee bis zum klickbaren Prototyp",
+        "returningClients": "Wiederkehrende Kunden mit neuen großen Ideen"
+      }
+    },
+    "DirectionsSection": {
+      "title": "Servicebereiche",
+      "directions": {
+        "mobile": {
+          "title": "Mobile Entwicklung",
+          "description": "Premium-native iOS- und Android-Anwendungen. Fokus auf hohe Performance, intuitive UX und sichere Backend-Integration."
+        },
+        "web": {
+          "title": "Webentwicklung",
+          "description": "Individuelle Web-Ökosysteme und PWA. Ausgerichtet auf Stabilität, schnelle Ladezeiten und effiziente Geschäftslogik."
+        },
+        "game": {
+          "title": "Spieleentwicklung",
+          "description": "Wir erweitern die Grenzen digitaler Interaktion, um immersive Spielerlebnisse der nächsten Generation zu schaffen."
+        },
+        "igaming": {
+          "title": "iGaming",
+          "description": "Hochfrequente Entertainment-Ökosysteme. Wir entwickeln skalierbare Architekturen für hohe Lasten und sichere Transaktionsinfrastrukturen."
+        },
+        "qa": {
+          "title": "QA",
+          "description": "Präzisionsgetriebene Systemstabilität. Durch rigorose automatisierte Testzyklen eliminieren wir architektonische Schwachstellen."
+        }
+      },
+      "loadMoreBtn": "Mehr laden"
+    },
+    "ServicesSection": {
+      "title": "Unsere Services",
+      "subtitle": "Wir gehen über Outsourcing hinaus. Wir werden Ihr engagierter Tech-Partner und stellen sicher, dass sich Ihr Produkt entsprechend den Markttrends weiterentwickelt."
+    },
+    "PortfolioSection": {
+      "title": "Portfolio",
+      "subtitle": "Unsere neuesten Arbeiten. Von skalierbaren Plattformen bis zu spezialisierten mobilen Apps liefern wir Technologie, die für Ihr Geschäft funktioniert."
+    },
+    "PartnersSection": {
+      "title": "Partner"
+    },
+    "LocationsSection": {
+      "title": "Unsere Standorte",
+      "subtitle": "Globale Präsenz, lokale Expertise. Mit verteilten Teams und strategischen Büros liefern wir erstklassige Lösungen für Kunden weltweit",
+      "locations": {
+        "kyiv": "Kiew",
+        "berlin": "Berlin",
+        "remote": "Remote"
+      }
     }
   }
 }

@@ -19,7 +19,7 @@ const Header = () => {
         <div className="flex justify-between items-center z-10">
           <Link href={'/'} className="flex items-center lg:mr-9.25 gap-3 z-10">
             <Logo />
-            <p className="font-wadik hidden xl:block text-title-xs">Echocode.app</p>
+            <p className="font-wadik hidden xl:block text-title-xs uppercase">Echocode.app</p>
           </Link>
           <div className="hidden md:block">
             <NavList />

@@ -8,6 +8,19 @@
         "team": "Team",
         "career": "Karriere"
       }
+    },
+    "Footer": {
+      "title": "HABEN SIE EIN PROJEKT IM SINN?",
+      "subtitle": "Wir entwerfen digitale Architekturen, die das Spiel verändern. Jedes Pixel und jede Codezeile ist auf maximale Performance ausgelegt.",
+      "nav": {
+        "services": "Services",
+        "portfolio": "Portfolio",
+        "partnership": "Partnerschaft",
+        "careers": "Karriere"
+      },
+      "contactUsBtn": "Kontakt",
+      "mailTitle": "Senden Sie uns einfach Ihre Kontakt-E-Mail-Adresse und wir werden Sie kontaktieren.",
+      "mailSubtitle": "Ihre E-Mail"
     }
   }
 }

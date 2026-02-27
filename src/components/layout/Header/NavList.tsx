@@ -33,16 +33,16 @@ const NavList = () => {
           <DropdownList />
         </li>
         <li>
-          <NavLink link={'/portfolio'}> {t('portfolio')}</NavLink>
+          <NavLink link={'/portfolio'}>{t('portfolio')}</NavLink>
         </li>
         <li>
-          <NavLink link={'/partnership'}> {t('partnership')}</NavLink>
+          <NavLink link={'/partnership'}>{t('partnership')}</NavLink>
         </li>
         <li>
-          <NavLink link={'/team'}> {t('team')}</NavLink>
+          <NavLink link={'/team'}>{t('team')}</NavLink>
         </li>
         <li>
-          <NavLink link={'/career'}> {t('career')}</NavLink>
+          <NavLink link={'/career'}>{t('career')}</NavLink>
         </li>
       </ul>
     </nav>

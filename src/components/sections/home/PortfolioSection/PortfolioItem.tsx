@@ -21,7 +21,7 @@ const PortfolioItem = ({ link, image, title }: PortfolioItemProps) => {
             will-change-transform"
           />
         </div>
-        <h3 className="font-title mb-px text-title-sm group-hover:text-accent duration-main">
+        <h3 className="font-wadik mb-px text-title-sm group-hover:text-accent duration-main">
           {title}
         </h3>
         <p

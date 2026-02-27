@@ -1,8 +1,9 @@
 import { Dispatch, SetStateAction } from 'react';
+import Image from 'next/image';
+import { useLocale, useTranslations } from 'next-intl';
 
 import NavLink from '../NavLink';
 import MobileDropdownList from './MobileDropdownList';
-import Image from 'next/image';
 
 interface MobileNavListProps {
   onClose: () => void;
@@ -11,6 +12,10 @@ interface MobileNavListProps {
 }
 
 const MobileNavList = ({ onClose, isOpenDropdown, setIsOpenDropdown }: MobileNavListProps) => {
+  const t = useTranslations('Layout.Header.navigation');
+  const locale = useLocale();
+  const textSize = locale === 'ua' ? 'text-main-sm font-semibold' : 'text-main-base-link';
+
   return (
     <ul className="flex flex-col items-center gap-8">
       <li>
@@ -18,9 +23,10 @@ const MobileNavList = ({ onClose, isOpenDropdown, setIsOpenDropdown }: MobileNav
           type="button"
           aria-expanded={isOpenDropdown}
           onClick={() => setIsOpenDropdown((prev) => !prev)}
-          className={`relative flex gap-1  items-center font-main uppercase text-main-base-link text-center`}
+          className={`relative flex gap-1 mx-auto items-center font-main uppercase text-main-base-link text-center 
+            ${textSize}`}
         >
-          Service Directions
+          {t('services')}
           <div className="relative w-5 h-5">
             <Image
               src={'/UI/dropdown.svg'}
@@ -40,16 +46,16 @@ const MobileNavList = ({ onClose, isOpenDropdown, setIsOpenDropdown }: MobileNav
       </li>
 
       <li onClick={onClose}>
-        <NavLink link="/portfolio">Portfolio</NavLink>
+        <NavLink link="/portfolio">{t('portfolio')}</NavLink>
       </li>
       <li onClick={onClose}>
-        <NavLink link="/partnership">Partnership</NavLink>
+        <NavLink link="/partnership">{t('partnership')}</NavLink>
       </li>
       <li onClick={onClose}>
-        <NavLink link="/team">Team</NavLink>
+        <NavLink link="/team">{t('team')}</NavLink>
       </li>
       <li onClick={onClose}>
-        <NavLink link="/career">Career</NavLink>
+        <NavLink link="/career">{t('career')}</NavLink>
       </li>
     </ul>
   );
