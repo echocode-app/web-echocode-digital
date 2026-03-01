@@ -122,11 +122,29 @@ export function mapDashboardOverview(raw: DashboardRawAggregates): DashboardOver
       projectLeadMixPct: sanitizeNumber(raw.derived.funnel.projectLeadMixPct),
       vacancyLeadMixPct: sanitizeNumber(raw.derived.funnel.vacancyLeadMixPct),
     },
-    sources: raw.derived.sources.map((source) => ({
+    sources: (raw.derived.sources ?? []).map((source) => ({
       source: source.source,
       leads: sanitizeNumber(source.leads),
-      conversionRate: sanitizeNumber(source.conversionRate),
+      share: sanitizeNumber(source.share),
+      ...(typeof source.conversionRate === 'number'
+        ? { conversionRate: sanitizeNumber(source.conversionRate) }
+        : {}),
     })),
+    leadVelocity: {
+      leadsLast7Days: sanitizeNumber(raw.derived.leadVelocity.leadsLast7Days),
+      leadsLast30Days: sanitizeNumber(raw.derived.leadVelocity.leadsLast30Days),
+      averageDaily7d: sanitizeNumber(raw.derived.leadVelocity.averageDaily7d),
+      averageDaily30d: sanitizeNumber(raw.derived.leadVelocity.averageDaily30d),
+      velocityRatio: sanitizeNumber(raw.derived.leadVelocity.velocityRatio),
+      direction: raw.derived.leadVelocity.direction,
+    },
+    trafficQualityInsight: {
+      conversionTrendSlope7d: sanitizeNumber(raw.derived.trafficQualityInsight.conversionTrendSlope7d),
+      trafficTrendPct7d: sanitizeNumber(raw.derived.trafficQualityInsight.trafficTrendPct7d),
+      conversionTrendPct7d: sanitizeNumber(raw.derived.trafficQualityInsight.conversionTrendPct7d),
+      warning: raw.derived.trafficQualityInsight.warning,
+      message: raw.derived.trafficQualityInsight.message,
+    },
     leadQualityRatio: sanitizeNumber(raw.derived.leadQualityRatio),
     bestDay: raw.derived.bestDay,
     bestDayShare: sanitizeNumber(raw.derived.bestDayShare),

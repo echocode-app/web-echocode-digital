@@ -1,56 +1,24 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { type ReactNode, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { ActionsPanel, ChartPanel, ChartSkeleton } from '@/components/admin/dashboard/DashboardPanels';
 import ExecutiveInsightsPanel from '@/components/admin/dashboard/ExecutiveInsightsPanel';
 import FunnelSnapshot from '@/components/admin/dashboard/FunnelSnapshot';
 import KpiCard from '@/components/admin/dashboard/KpiCard';
+import LeadVelocityBadge from '@/components/admin/dashboard/LeadVelocityBadge';
 import { DASHBOARD_OVERVIEW_MOCK } from '@/components/admin/dashboard/mockOverview';
 import SmartAlertStrip from '@/components/admin/dashboard/SmartAlertStrip';
 import SourcePerformanceBlock from '@/components/admin/dashboard/SourcePerformanceBlock';
-import WidgetHeader from '@/components/admin/dashboard/ui/WidgetHeader';
-import type { DashboardKpiKey, DashboardOverviewDto } from '@/server/admin/dashboard/dashboard.types';
+import TrafficQualityInsight from '@/components/admin/dashboard/TrafficQualityInsight';
+import { DASHBOARD_MOCK_QUERY_KEY, KPI_CONFIG, PANEL_INFO_TEXT } from '@/components/admin/dashboard/dashboard.config';
+import type { DashboardOverviewDto } from '@/server/admin/dashboard/dashboard.types';
 import { getFirebaseClientAuth } from '@/lib/firebase/client';
 
 type LoadState = 'loading' | 'ready' | 'error';
-
-type KpiConfig = {
-  metricKey: DashboardKpiKey;
-  title: string;
-};
-
-const kpiConfig: KpiConfig[] = [
-  { metricKey: 'totalSubmissions', title: 'Total submissions' },
-  { metricKey: 'projectLeads', title: 'Project leads' },
-  { metricKey: 'vacancyLeads', title: 'Vacancy leads' },
-  { metricKey: 'activeVacancies', title: 'Active vacancies' },
-  { metricKey: 'portfolioItems', title: 'Portfolio items' },
-  { metricKey: 'conversionRate7d', title: '7d conversion rate' },
-];
-
-const PANEL_INFO_TEXT = {
-  submissions: 'Daily submission volume over the last 30 days. Helps identify growth trends and seasonal patterns.',
-  leadDistribution:
-    'Monthly segmented distribution of project and vacancy leads for the current year.',
-  leadDistributionYear:
-    'Distribution of leads between project inquiries and vacancy-related submissions for the current year to date.',
-  topVacancies:
-    'Job positions ranked by number of applications in the last 30 days. Identifies highest-demand roles.',
-  trafficVsLeads:
-    'Daily comparison between website traffic and total leads. Used to evaluate funnel efficiency and conversion behavior.',
-  actions: 'Quick access to the most important administrative workflows.',
-} as const;
-const DASHBOARD_MOCK_QUERY_KEY = 'mockDashboard';
-
-function ChartSkeleton() {
-  return (
-    <div className="h-[280px] min-w-0 rounded-(--radius-base) border border-gray16 bg-base-gray p-4 shadow-main">
-      <div className="h-full animate-pulse rounded bg-gray10" />
-    </div>
-  );
-}
+const INITIAL_VISIBLE_SECTIONS = 2;
+const SECTION_PORTION_SIZE = 2;
 
 const LineTrendChart = dynamic(() => import('@/components/admin/dashboard/charts/LineTrendChart'), {
   ssr: false,
@@ -113,64 +81,12 @@ async function fetchOverview(signal: AbortSignal): Promise<DashboardOverviewDto>
   return payload.data;
 }
 
-function ChartPanel({
-  title,
-  info,
-  children,
-  mobileScrollable = false,
-}: {
-  title: string;
-  info: string;
-  children: ReactNode;
-  mobileScrollable?: boolean;
-}) {
-  return (
-    <article className="min-w-0 rounded-(--radius-base) border border-gray16 bg-base-gray p-4 shadow-main">
-      <WidgetHeader title={title} info={info} />
-      {mobileScrollable ? (
-        <div className="mt-3 h-[240px] min-w-0 overflow-x-auto overflow-y-hidden">
-          <div className="h-full min-w-[680px] md:min-w-0">{children}</div>
-        </div>
-      ) : (
-        <div className="mt-3 h-[240px] min-w-0">{children}</div>
-      )}
-    </article>
-  );
-}
-
-function ActionsPanel() {
-  return (
-    <article className="min-w-0 rounded-(--radius-base) border border-gray16 bg-base-gray p-4 shadow-main">
-      <WidgetHeader title="Actions" info={PANEL_INFO_TEXT.actions} />
-      <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-3">
-        <Link
-          href="/admin/submissions"
-          className="rounded-(--radius-secondary) border border-gray16 bg-black/40 px-3 py-2 text-center font-main text-main-sm text-gray75 transition duration-main hover:border-accent-hover hover:text-white"
-        >
-          Review submissions
-        </Link>
-        <Link
-          href="/admin/vacancies"
-          className="rounded-(--radius-secondary) border border-gray16 bg-black/40 px-3 py-2 text-center font-main text-main-sm text-gray75 transition duration-main hover:border-accent-hover hover:text-white"
-        >
-          Manage vacancies
-        </Link>
-        <Link
-          href="/admin/portfolio"
-          className="rounded-(--radius-secondary) border border-gray16 bg-black/40 px-3 py-2 text-center font-main text-main-sm text-gray75 transition duration-main hover:border-accent-hover hover:text-white"
-        >
-          Update portfolio
-        </Link>
-      </div>
-    </article>
-  );
-}
-
 export default function DashboardGrid() {
   const searchParams = useSearchParams();
   const useMockMode = searchParams.get(DASHBOARD_MOCK_QUERY_KEY) === '1';
   const [overview, setOverview] = useState<DashboardOverviewDto | null>(null);
   const [state, setState] = useState<LoadState>('loading');
+  const [visibleSections, setVisibleSections] = useState(INITIAL_VISIBLE_SECTIONS);
 
   useEffect(() => {
     if (useMockMode) return;
@@ -194,10 +110,11 @@ export default function DashboardGrid() {
 
   const activeOverview = useMockMode ? DASHBOARD_OVERVIEW_MOCK : overview;
   const activeState: LoadState = useMockMode ? 'ready' : state;
+  const sourceRows = activeOverview?.sources ?? [];
 
   const kpiCards = useMemo(() => {
     if (activeState !== 'ready' || !activeOverview) {
-      return kpiConfig.map((item) => (
+      return KPI_CONFIG.map((item) => (
         <KpiCard
           key={item.metricKey}
           metricKey={item.metricKey}
@@ -212,7 +129,7 @@ export default function DashboardGrid() {
       ));
     }
 
-    return kpiConfig.map((item) => (
+    return KPI_CONFIG.map((item) => (
       <KpiCard
         key={item.metricKey}
         metricKey={item.metricKey}
@@ -232,22 +149,35 @@ export default function DashboardGrid() {
     );
   }
 
+  const sectionCount = 6;
+  const canLoadMore = visibleSections < sectionCount;
+  const showSection = (index: number) => visibleSections >= index;
+
   return (
     <section className="min-w-0 space-y-4">
       {activeOverview ? <SmartAlertStrip alerts={activeOverview.alerts} /> : null}
 
-      <div className="grid min-w-0 gap-4 sm:grid-cols-2 xl:grid-cols-3">{kpiCards}</div>
+      {showSection(1) ? (
+        <>
+          <div className="grid min-w-0 gap-4 sm:grid-cols-2 xl:grid-cols-3">{kpiCards}</div>
+          {activeOverview ? (
+            <div className="min-w-0">
+              <LeadVelocityBadge velocity={activeOverview.leadVelocity} />
+            </div>
+          ) : null}
+        </>
+      ) : null}
 
-      {activeOverview ? (
-        <div className={`grid min-w-0 gap-4 ${activeOverview.sources.length > 0 ? 'xl:grid-cols-2' : ''}`}>
+      {showSection(2) && activeOverview ? (
+        <div className={`grid min-w-0 gap-4 ${sourceRows.length > 0 ? 'xl:grid-cols-2' : ''}`}>
           <FunnelSnapshot funnel={activeOverview.funnel} />
-          {activeOverview.sources.length > 0 ? (
-            <SourcePerformanceBlock sources={activeOverview.sources} />
+          {sourceRows.length > 0 ? (
+            <SourcePerformanceBlock sources={sourceRows} />
           ) : null}
         </div>
       ) : null}
 
-      {activeOverview ? (
+      {showSection(3) && activeOverview ? (
         <ExecutiveInsightsPanel
           leadQualityRatio={activeOverview.leadQualityRatio}
           bestDay={activeOverview.bestDay}
@@ -262,45 +192,68 @@ export default function DashboardGrid() {
         />
       ) : null}
 
-      <div className="grid min-w-0 gap-4 xl:grid-cols-2">
-        <ChartPanel title="Submissions (30d)" info={PANEL_INFO_TEXT.submissions} mobileScrollable>
-          {activeOverview ? (
-            <LineTrendChart data={activeOverview.charts.submissionsTrend} />
-          ) : (
-            <ChartSkeleton />
-          )}
-        </ChartPanel>
+      {showSection(4) ? (
+        <div className="grid min-w-0 gap-4 xl:grid-cols-2">
+          <ChartPanel title="Submissions (30d)" info={PANEL_INFO_TEXT.submissions} mobileScrollable>
+            {activeOverview ? (
+              <LineTrendChart data={activeOverview.charts.submissionsTrend} />
+            ) : (
+              <ChartSkeleton />
+            )}
+          </ChartPanel>
 
-        <ChartPanel title="Traffic vs leads (30d)" info={PANEL_INFO_TEXT.trafficVsLeads} mobileScrollable>
-          {activeOverview ? (
-            <AreaTrafficChart data={activeOverview.charts.trafficVsLeads} />
-          ) : (
-            <ChartSkeleton />
-          )}
-        </ChartPanel>
-      </div>
+          <ChartPanel title="Traffic vs leads (30d)" info={PANEL_INFO_TEXT.trafficVsLeads} mobileScrollable>
+            {activeOverview ? (
+              <div className="flex h-full min-w-0 flex-col">
+                <div className="min-h-0 flex-1">
+                  <AreaTrafficChart data={activeOverview.charts.trafficVsLeads} />
+                </div>
+                <TrafficQualityInsight insight={activeOverview.trafficQualityInsight} />
+              </div>
+            ) : (
+              <ChartSkeleton />
+            )}
+          </ChartPanel>
+        </div>
+      ) : null}
 
-      <div className="grid min-w-0 gap-4">
-        <ChartPanel title="Lead distribution (YTD by month)" info={PANEL_INFO_TEXT.leadDistribution} mobileScrollable>
-          {activeOverview ? (
-            <LeadDistributionSegmentedChart data={activeOverview.charts.leadDistributionYearMonthly} />
-          ) : (
-            <ChartSkeleton />
-          )}
-        </ChartPanel>
-      </div>
+      {showSection(5) ? (
+        <div className="grid min-w-0 gap-4">
+          <ChartPanel title="Lead distribution (YTD by month)" info={PANEL_INFO_TEXT.leadDistribution} mobileScrollable>
+            {activeOverview ? (
+              <LeadDistributionSegmentedChart data={activeOverview.charts.leadDistributionYearMonthly} />
+            ) : (
+              <ChartSkeleton />
+            )}
+          </ChartPanel>
+        </div>
+      ) : null}
 
-      <div className="grid min-w-0 gap-4">
-        <ChartPanel title="Top vacancies by applications" info={PANEL_INFO_TEXT.topVacancies} mobileScrollable>
-          {activeOverview ? (
-            <BarTopVacanciesChart data={activeOverview.charts.topVacancies} />
-          ) : (
-            <ChartSkeleton />
-          )}
-        </ChartPanel>
-      </div>
+      {showSection(6) ? (
+        <>
+          <div className="grid min-w-0 gap-4">
+            <ChartPanel title="Top vacancies by applications" info={PANEL_INFO_TEXT.topVacancies} mobileScrollable>
+              {activeOverview ? (
+                <BarTopVacanciesChart data={activeOverview.charts.topVacancies} />
+              ) : (
+                <ChartSkeleton />
+              )}
+            </ChartPanel>
+          </div>
 
-      <ActionsPanel />
+          <ActionsPanel />
+        </>
+      ) : null}
+
+      {canLoadMore ? (
+        <button
+          type="button"
+          onClick={() => setVisibleSections((prev) => Math.min(prev + SECTION_PORTION_SIZE, sectionCount))}
+          className="block mx-auto px-6 py-2 font-title text-title-sm rounded-base border-2 border-accent shadow-button hover:bg-accent duration-main cursor-pointer uppercase"
+        >
+          Load more
+        </button>
+      ) : null}
     </section>
   );
 }

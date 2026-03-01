@@ -1,5 +1,5 @@
 import { ApiError } from '@/server/lib/errors';
-import { trackEventBestEffort } from '@/server/analytics';
+import { resolveEventAttribution, trackEventBestEffort } from '@/server/analytics';
 import {
   buildSubmissionDraft,
   parseSubmissionCreatePayload,
@@ -24,7 +24,11 @@ function hasOwnKey<T extends string>(
   return Object.prototype.hasOwnProperty.call(value, key);
 }
 
-function assertPreParseSubmissionGuards(rawBody: unknown, requestHeaders?: Headers): void {
+function assertPreParseSubmissionGuards(
+  rawBody: unknown,
+  requestHeaders: Headers | undefined,
+  attribution: ReturnType<typeof resolveEventAttribution>,
+): void {
   if (!isObjectRecord(rawBody)) return;
 
   // Preserve explicit candidate=NOT_IMPLEMENTED even when candidate file metadata is malformed.
@@ -32,6 +36,12 @@ function assertPreParseSubmissionGuards(rawBody: unknown, requestHeaders?: Heade
     void trackEventBestEffort({
       eventType: 'apply_vacancy',
       headers: requestHeaders,
+      metadata: withAttributionMetadata(
+        {
+          stage: 'candidate_not_implemented',
+        },
+        attribution,
+      ),
     });
 
     throw ApiError.fromCode(
@@ -87,11 +97,31 @@ function toCreateRecordInputFromProjectDraft(
   };
 }
 
+function withAttributionMetadata(
+  base: Record<string, unknown>,
+  attribution: ReturnType<typeof resolveEventAttribution>,
+): Record<string, unknown> {
+  if (!attribution) return base;
+  return {
+    ...base,
+    attribution: {
+      source: attribution.source,
+      medium: attribution.medium ?? null,
+      campaign: attribution.campaign ?? null,
+    },
+  };
+}
+
 export async function createProjectSubmission(
   params: CreateProjectSubmissionParams,
 ): Promise<CreateSubmissionResponseDto> {
+  const eventAttribution = resolveEventAttribution({
+    rawBody: params.rawBody,
+    headers: params.requestHeaders,
+  });
+
   // Run contract guards before shared schema validation to keep stable error codes.
-  assertPreParseSubmissionGuards(params.rawBody, params.requestHeaders);
+  assertPreParseSubmissionGuards(params.rawBody, params.requestHeaders, eventAttribution);
 
   const parsed = parseSubmissionCreatePayload(params.rawBody);
 
@@ -99,6 +129,12 @@ export async function createProjectSubmission(
     await trackEventBestEffort({
       eventType: 'apply_vacancy',
       headers: params.requestHeaders,
+      metadata: withAttributionMetadata(
+        {
+          stage: 'candidate_not_implemented',
+        },
+        eventAttribution,
+      ),
     });
 
     throw ApiError.fromCode(
@@ -131,10 +167,13 @@ export async function createProjectSubmission(
     eventType: 'submit_project',
     headers: params.requestHeaders,
     source: 'website',
-    metadata: {
-      submissionId: createdRecord.id,
-      hasAttachment: recordInput.attachments.length > 0,
-    },
+    metadata: withAttributionMetadata(
+      {
+        submissionId: createdRecord.id,
+        hasAttachment: recordInput.attachments.length > 0,
+      },
+      eventAttribution,
+    ),
   });
 
   return toCreateSubmissionResponseDto(createdRecord);

@@ -22,7 +22,7 @@ export default function InfoTooltip({
       >
         {icon}
       </button>
-      <div className="pointer-events-none absolute right-0 top-full z-[70] mt-2 w-[min(260px,calc(100vw-2rem))] origin-top-right scale-95 rounded-(--radius-secondary) border border-gray16 bg-base-gray p-3 font-main text-main-xs text-gray75 opacity-0 shadow-button transition duration-main group-hover:scale-100 group-hover:opacity-100 group-focus-within:scale-100 group-focus-within:opacity-100">
+      <div className="pointer-events-none absolute right-0 top-full z-70 mt-2 w-[min(260px,calc(100vw-2rem))] origin-top-right scale-95 rounded-(--radius-secondary) border border-gray16 bg-base-gray p-3 font-main text-main-xs text-gray75 opacity-0 shadow-button transition duration-main group-hover:scale-100 group-hover:opacity-100 group-focus-within:scale-100 group-focus-within:opacity-100">
         {text}
       </div>
     </div>

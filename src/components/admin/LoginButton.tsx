@@ -5,15 +5,6 @@ import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 import { getFirebaseClientAuth } from '@/lib/firebase/client';
 
-type LoginState = 'idle' | 'loading' | 'success' | 'unauthorized' | 'forbidden' | 'error';
-
-const STATE_MESSAGES: Record<Exclude<LoginState, 'idle' | 'loading'>, string> = {
-  success: 'Access granted. You can proceed to the admin area.',
-  unauthorized: 'Session is invalid. Please sign in again.',
-  forbidden: 'Access denied for this account.',
-  error: 'Login failed. Try again in a few seconds.',
-};
-
 const toRecord = (value: unknown): Record<string, unknown> => {
   if (!value || typeof value !== 'object') {
     return {};
@@ -24,7 +15,8 @@ const toRecord = (value: unknown): Record<string, unknown> => {
 
 export default function LoginButton() {
   const router = useRouter();
-  const [state, setState] = useState<LoginState>('idle');
+  const [isLoading, setIsLoading] = useState(false);
+  const [feedback, setFeedback] = useState<string | null>(null);
 
   const authorizeAdmin = async (idToken: string): Promise<Response> => {
     console.info('[admin-login] calling /api/admin/me with bearer token');
@@ -38,7 +30,8 @@ export default function LoginButton() {
   };
 
   const handleGoogleLogin = async () => {
-    setState('loading');
+    setIsLoading(true);
+    setFeedback(null);
 
     try {
       console.info('[admin-login] starting Google sign-in');
@@ -87,23 +80,22 @@ export default function LoginButton() {
       }
 
       if (response.ok) {
-        setState('success');
         router.replace('/admin');
         return;
       }
 
       if (response.status === 401) {
         await signOut(auth).catch(() => undefined);
-        setState('unauthorized');
+        setFeedback('Session is invalid. Please sign in again.');
         return;
       }
 
       if (response.status === 403) {
-        setState('forbidden');
+        setFeedback('Access denied for this account.');
         return;
       }
 
-      setState('error');
+      setFeedback('Login failed. Try again in a few seconds.');
     } catch (error) {
       const normalizedError = toRecord(error);
       const errorCode =
@@ -126,14 +118,11 @@ export default function LoginButton() {
         stack: errorStack,
         raw: normalizedError,
       });
-      setState('error');
+      setFeedback('Login failed. Try again in a few seconds.');
+    } finally {
+      setIsLoading(false);
     }
   };
-
-  const isLoading = state === 'loading';
-  const feedback = state !== 'idle' && state !== 'loading' ? STATE_MESSAGES[state] : null;
-  const feedbackClass = state === 'success' ? 'text-gray75' : 'text-accent';
-  const feedbackWeightClass = state === 'success' ? 'font-normal' : 'font-bold';
 
   return (
     <div className="w-full space-y-3">
@@ -162,7 +151,7 @@ export default function LoginButton() {
         <p
           className={`font-main text-main-xs transition-all duration-600 ease-in-out ${
             feedback
-              ? `opacity-100 translate-y-0 ${feedbackClass} ${feedbackWeightClass}`
+              ? 'opacity-100 translate-y-0 text-accent font-bold'
               : 'opacity-0 -translate-y-0.5 text-transparent'
           }`}
           aria-live="polite"

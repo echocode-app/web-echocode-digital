@@ -13,7 +13,7 @@ export default function SourcePerformanceBlock({ sources }: SourcePerformanceBlo
     <article className="min-w-0 rounded-(--radius-base) border border-gray16 bg-base-gray p-4 shadow-main">
       <WidgetHeader
         title="Source performance"
-        info="Top traffic sources by lead volume for the last 30 days with estimated source conversion."
+        info="Top attributed sources by lead volume for the last 30 days with conversion and share context."
       />
 
       <div className="mt-3 min-w-0 space-y-2">
@@ -25,7 +25,13 @@ export default function SourcePerformanceBlock({ sources }: SourcePerformanceBlo
             <p className="min-w-0 truncate font-main text-main-xs text-gray75">{source.source}</p>
             <p className="text-right font-main text-main-xs text-white">{source.leads}</p>
             <p className="text-right font-main text-main-xs text-accent-hover">
-              <SymbolSafeText text={`${source.conversionRate.toFixed(2)}%`} />
+              <SymbolSafeText
+                text={
+                  typeof source.conversionRate === 'number'
+                    ? `${source.conversionRate.toFixed(2)}% · ${source.share.toFixed(2)}%`
+                    : `${source.share.toFixed(2)}%`
+                }
+              />
             </p>
           </div>
         ))}

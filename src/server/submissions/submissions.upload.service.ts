@@ -8,7 +8,7 @@ import {
   isDocumentMimeType,
   isImageMimeType,
 } from '@/shared/validation/submissions';
-import { trackEventBestEffort } from '@/server/analytics';
+import { resolveEventAttribution, trackEventBestEffort } from '@/server/analytics';
 import { getFirebaseStorageBucket } from '@/server/firebase/storage';
 import { validate } from '@/server/lib';
 import { ApiError } from '@/server/lib/errors';
@@ -107,6 +107,10 @@ function toIsoString(date: Date): string {
 export async function createProjectUploadInit(
   params: CreateProjectUploadInitParams,
 ): Promise<CreateProjectUploadInitResponseDto> {
+  const eventAttribution = resolveEventAttribution({
+    rawBody: params.rawBody,
+    headers: params.requestHeaders,
+  });
   const parsed = validate(projectUploadInitRequestSchema, params.rawBody);
 
   if (parsed.formType !== 'project') {
@@ -150,6 +154,15 @@ export async function createProjectUploadInit(
     metadata: {
       stage: 'upload_init',
       mimeType: parsed.file.mimeType,
+      ...(eventAttribution
+        ? {
+            attribution: {
+              source: eventAttribution.source,
+              medium: eventAttribution.medium ?? null,
+              campaign: eventAttribution.campaign ?? null,
+            },
+          }
+        : {}),
     },
   });
 

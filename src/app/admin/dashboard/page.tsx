@@ -8,3 +8,5 @@ export default function AdminDashboardPage() {
     </section>
   );
 }
+
+// http://localhost:3000/admin/dashboard?mockDashboard=1

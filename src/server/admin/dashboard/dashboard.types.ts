@@ -70,7 +70,25 @@ export type FunnelDto = {
 export type SourcePerformanceDto = {
   source: string;
   leads: number;
-  conversionRate: number;
+  share: number;
+  conversionRate?: number;
+};
+
+export type LeadVelocityDto = {
+  leadsLast7Days: number;
+  leadsLast30Days: number;
+  averageDaily7d: number;
+  averageDaily30d: number;
+  velocityRatio: number;
+  direction: 'accelerating' | 'slowing' | 'stable';
+};
+
+export type TrafficQualityInsightDto = {
+  conversionTrendSlope7d: number;
+  trafficTrendPct7d: number;
+  conversionTrendPct7d: number;
+  warning: boolean;
+  message: string | null;
 };
 
 export type DashboardOverviewDto = {
@@ -85,7 +103,9 @@ export type DashboardOverviewDto = {
   };
   alerts: AlertDto[];
   funnel: FunnelDto;
-  sources: SourcePerformanceDto[];
+  sources?: SourcePerformanceDto[];
+  leadVelocity: LeadVelocityDto;
+  trafficQualityInsight: TrafficQualityInsightDto;
   leadQualityRatio: number;
   bestDay: string;
   bestDayShare: number;

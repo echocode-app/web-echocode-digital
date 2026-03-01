@@ -4,7 +4,7 @@ export default function AdminPortfolioPage() {
   return (
     <section className="space-y-4">
       <h1 className="font-title text-title-2xl text-white">Portfolio</h1>
-      <SkeletonCard title="Portfolio manager" hint="CRUD placeholder aligned with frontend model." />
+      <SkeletonCard title="Portfolio manager" hint="Server endpoint is ready." />
     </section>
   );
 }

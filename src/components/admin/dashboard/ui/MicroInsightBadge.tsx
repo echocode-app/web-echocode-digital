@@ -37,7 +37,7 @@ export default function MicroInsightBadge({ changePct, direction }: MicroInsight
   return (
     <div className="relative inline-flex max-w-full items-center gap-1.5">
       {isHighAnomaly ? (
-        <span className="pointer-events-none absolute inset-0 rounded-(--radius-secondary) border border-[#fac175]/40 opacity-70 animate-pulse" />
+        <span className="pointer-events-none absolute inset-0 rounded-(--radius-secondary) border border-accent-hover/40 opacity-70 animate-pulse" />
       ) : null}
       <span
         className={`relative inline-flex items-center gap-1 rounded-(--radius-secondary) border border-current/20 px-2 py-1 font-main text-main-xs ${colorClasses}`}

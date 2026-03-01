@@ -1,6 +1,7 @@
 import { FieldValue } from 'firebase-admin/firestore';
 import { getFirestoreDb } from '@/server/firebase/firestore';
 import { logger } from '@/server/lib/logger';
+import { resolveEventAttribution } from '@/server/analytics/attribution';
 
 export type AnalyticsEventType =
   | 'submit_project'
@@ -12,9 +13,14 @@ type AnalyticsEventDoc = {
   eventType: AnalyticsEventType;
   source: string | null;
   country: string | null;
-  metadata: Record<string, string | number | boolean | null>;
+  metadata: AnalyticsMetadataMap;
   timestamp: FieldValue;
 };
+
+type AnalyticsMetadataPrimitive = string | number | boolean | null;
+interface AnalyticsMetadataMap {
+  [key: string]: AnalyticsMetadataPrimitive | AnalyticsMetadataMap;
+}
 
 export type TrackEventInput = {
   eventType: AnalyticsEventType;
@@ -25,10 +31,10 @@ export type TrackEventInput = {
 
 function toSafeMetadata(
   metadata: Record<string, unknown> | undefined,
-): Record<string, string | number | boolean | null> {
+): AnalyticsMetadataMap {
   if (!metadata) return {};
 
-  const safe: Record<string, string | number | boolean | null> = {};
+  const safe: AnalyticsMetadataMap = {};
   for (const [key, value] of Object.entries(metadata)) {
     if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') {
       safe[key] = value;
@@ -37,6 +43,14 @@ function toSafeMetadata(
 
     if (value == null) {
       safe[key] = null;
+      continue;
+    }
+
+    if (typeof value === 'object' && !Array.isArray(value)) {
+      const nested = toSafeMetadata(value as Record<string, unknown>);
+      if (Object.keys(nested).length > 0) {
+        safe[key] = nested;
+      }
     }
   }
 
@@ -77,12 +91,47 @@ function extractCountry(headers?: Headers): string | null {
   );
 }
 
+function hasAttributionMetadata(metadata: AnalyticsMetadataMap): boolean {
+  const attribution = metadata.attribution;
+  return typeof attribution === 'object' && attribution !== null && !Array.isArray(attribution);
+}
+
+function withPageViewAttribution(
+  eventType: AnalyticsEventType,
+  metadata: AnalyticsMetadataMap,
+  input: TrackEventInput,
+): AnalyticsMetadataMap {
+  if (eventType !== 'page_view' || hasAttributionMetadata(metadata)) {
+    return metadata;
+  }
+
+  const attribution = resolveEventAttribution({
+    rawBody: input.metadata,
+    headers: input.headers,
+  });
+
+  if (!attribution) {
+    return metadata;
+  }
+
+  return {
+    ...metadata,
+    attribution: {
+      source: attribution.source,
+      medium: attribution.medium ?? null,
+      campaign: attribution.campaign ?? null,
+    },
+  };
+}
+
 export async function trackEvent(input: TrackEventInput): Promise<void> {
+  const safeMetadata = toSafeMetadata(input.metadata);
+
   const payload: AnalyticsEventDoc = {
     eventType: input.eventType,
     source: extractSource(input.headers, input.source),
     country: extractCountry(input.headers),
-    metadata: toSafeMetadata(input.metadata),
+    metadata: withPageViewAttribution(input.eventType, safeMetadata, input),
     timestamp: FieldValue.serverTimestamp(),
   };
 
