@@ -9,7 +9,10 @@ export {
   listSubmissions,
   listSubmissionsQuerySchema,
 } from '@/server/submissions/submissions.list.service';
-export { createSubmissionRecord } from '@/server/submissions/submissions.repository';
+export {
+  createSubmissionRecord,
+  updateSubmissionStatusRecord,
+} from '@/server/submissions/submissions.repository';
 export {
   createProjectUploadInit,
   verifyUploadedProjectAttachment,
@@ -30,7 +33,10 @@ export type {
   SubmissionListSortBy,
   SubmissionListSortOrder,
   SubmissionListStatus,
+  SubmissionWorkflowStatus,
   SubmissionFirestoreDocMvp,
+  UpdateSubmissionStatusInput,
+  UpdateSubmissionStatusResponseDto,
 } from '@/server/submissions/submissions.types';
 export type {
   CreateProjectUploadInitParams,

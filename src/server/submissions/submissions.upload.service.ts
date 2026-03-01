@@ -8,6 +8,7 @@ import {
   isDocumentMimeType,
   isImageMimeType,
 } from '@/shared/validation/submissions';
+import { trackEventBestEffort } from '@/server/analytics';
 import { getFirebaseStorageBucket } from '@/server/firebase/storage';
 import { validate } from '@/server/lib';
 import { ApiError } from '@/server/lib/errors';
@@ -29,6 +30,7 @@ export const projectUploadInitRequestSchema = z.object({
 
 export type CreateProjectUploadInitParams = {
   rawBody: unknown;
+  requestHeaders?: Headers;
 };
 
 export type CreateProjectUploadInitResponseDto = {
@@ -141,6 +143,15 @@ export async function createProjectUploadInit(
       { cause },
     );
   }
+
+  await trackEventBestEffort({
+    eventType: 'submit_project',
+    headers: params.requestHeaders,
+    metadata: {
+      stage: 'upload_init',
+      mimeType: parsed.file.mimeType,
+    },
+  });
 
   return {
     uploadUrl,

@@ -1,6 +1,11 @@
 import type { FieldValue, Timestamp } from 'firebase-admin/firestore';
 
-export type SubmissionStatusMvp = 'new';
+export type SubmissionWorkflowStatus =
+  | 'new'
+  | 'in_review'
+  | 'contacted'
+  | 'rejected'
+  | 'closed';
 export type SubmissionFormTypeMvp = 'project';
 
 export type SubmissionAttachmentMvp = {
@@ -23,12 +28,13 @@ export type SubmissionContentMvp = {
 
 export type SubmissionFirestoreDocMvp = {
   formType: SubmissionFormTypeMvp;
-  status: SubmissionStatusMvp;
+  status: SubmissionWorkflowStatus;
   contact: SubmissionContactMvp;
   content: SubmissionContentMvp;
   attachments: SubmissionAttachmentMvp[];
   createdAt: FieldValue;
   updatedAt: FieldValue;
+  updatedBy?: string;
 };
 
 export type CreateSubmissionRecordInput = {
@@ -41,34 +47,30 @@ export type CreateSubmissionRecordInput = {
 export type CreatedSubmissionRecord = {
   id: string;
   formType: SubmissionFormTypeMvp;
-  status: SubmissionStatusMvp;
+  status: SubmissionWorkflowStatus;
   createdAt: Timestamp;
   updatedAt: Timestamp;
 };
 
 export type CreateSubmissionResponseDto = {
   id: string;
-  status: SubmissionStatusMvp;
+  status: SubmissionWorkflowStatus;
   createdAt: string;
 };
 
 export type CreateProjectSubmissionParams = {
   rawBody: unknown;
+  requestHeaders?: Headers;
 };
 
-export type SubmissionListStatus =
-  | 'new'
-  | 'in_review'
-  | 'contacted'
-  | 'rejected'
-  | 'accepted';
+export type SubmissionListStatus = SubmissionWorkflowStatus;
 
 export const SUBMISSION_LIST_STATUSES = [
   'new',
   'in_review',
   'contacted',
   'rejected',
-  'accepted',
+  'closed',
 ] as const satisfies readonly SubmissionListStatus[];
 
 export type SubmissionListSortBy = 'createdAt';
@@ -102,4 +104,17 @@ export type ListSubmissionsResponseDto = {
     total: number;
     totalPages: number;
   };
+};
+
+export type UpdateSubmissionStatusInput = {
+  submissionId: string;
+  status: SubmissionWorkflowStatus;
+  updatedBy: string;
+};
+
+export type UpdateSubmissionStatusResponseDto = {
+  id: string;
+  status: SubmissionWorkflowStatus;
+  updatedAt: string;
+  updatedBy: string | null;
 };

@@ -43,7 +43,7 @@ service cloud.firestore {
     }
 
     function isSubmissionStatus(status) {
-      return status in ['new', 'in_review', 'done', 'rejected'];
+      return status in ['new', 'in_review', 'contacted', 'rejected', 'closed'];
     }
 
     function isValidSubmissionShape(data) {

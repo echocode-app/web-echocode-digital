@@ -107,6 +107,16 @@ function toNullableString(value: unknown): string | null {
   return typeof value === 'string' ? value : null;
 }
 
+function toIsoTimestamp(value: unknown, fallbackLabel: string): string {
+  if (!(value instanceof Timestamp)) {
+    throw ApiError.fromCode(
+      'INTERNAL_ERROR',
+      `${fallbackLabel} is missing valid timestamp`,
+    );
+  }
+  return timestampToIsoString(value);
+}
+
 function toObjectRecord(value: unknown): Record<string, unknown> | null {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return null;
   return value as Record<string, unknown>;
@@ -152,6 +162,6 @@ export function toSubmissionListItemDto(
       email: contact ? toNullableString(contact.email) : null,
     },
     hasAttachment: attachments.length > 0,
-    createdAt: timestampToIsoString(createdAt),
+    createdAt: toIsoTimestamp(createdAt, `Submission "${snapshot.id}" createdAt`),
   };
 }

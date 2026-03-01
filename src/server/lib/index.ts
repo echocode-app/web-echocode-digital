@@ -17,8 +17,14 @@ export { fail, ok } from '@/server/lib/response';
 export type { ApiFailure, ApiResponse, ApiSuccess } from '@/server/lib/response';
 export { validate } from '@/server/lib/validate';
 export { withApi } from '@/server/lib/withApi';
+export { withProtectedApi } from '@/server/lib/withApi';
 export { withAdminApi } from '@/server/lib/withApi';
 export { withPaginatedApi } from '@/server/lib/withApi';
-export type { ApiHandlerContext, PaginatedApiHandlerContext } from '@/server/lib/withApi';
+export type {
+  ApiHandlerContext,
+  PaginatedApiHandlerContext,
+  ProtectedApiHandlerContext,
+  ProtectedPaginatedApiHandlerContext,
+} from '@/server/lib/withApi';
 export type { ApiErrorCode } from '@/server/lib/errors';
 export { ApiError, isApiError, toApiError } from '@/server/lib/errors';

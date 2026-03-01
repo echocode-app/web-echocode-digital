@@ -30,7 +30,7 @@ class ConfigurationError extends Error {
 
 const envSchema = z.object({
   NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
-  DEVELOPER_ACCESS_MODE: z.enum(['full', 'readonly']).default('full'),
+  DEVELOPER_ACCESS_MODE: z.enum(['full', 'readonly']).default('readonly'),
   FIREBASE_PROJECT_ID: z.string().trim().min(1).optional(),
   FIREBASE_CLIENT_EMAIL: z.string().trim().email().optional(),
   FIREBASE_PRIVATE_KEY: z.string().trim().min(1).optional(),

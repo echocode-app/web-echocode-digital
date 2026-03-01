@@ -1,4 +1,5 @@
 import { ApiError } from '@/server/lib/errors';
+import { trackEventBestEffort } from '@/server/analytics';
 import {
   buildSubmissionDraft,
   parseSubmissionCreatePayload,
@@ -23,11 +24,16 @@ function hasOwnKey<T extends string>(
   return Object.prototype.hasOwnProperty.call(value, key);
 }
 
-function assertPreParseSubmissionGuards(rawBody: unknown): void {
+function assertPreParseSubmissionGuards(rawBody: unknown, requestHeaders?: Headers): void {
   if (!isObjectRecord(rawBody)) return;
 
   // Preserve explicit candidate=NOT_IMPLEMENTED even when candidate file metadata is malformed.
   if (rawBody.formType === 'candidate') {
+    void trackEventBestEffort({
+      eventType: 'apply_vacancy',
+      headers: requestHeaders,
+    });
+
     throw ApiError.fromCode(
       'NOT_IMPLEMENTED',
       'Candidate form submissions are not implemented in Commit 1',
@@ -85,11 +91,16 @@ export async function createProjectSubmission(
   params: CreateProjectSubmissionParams,
 ): Promise<CreateSubmissionResponseDto> {
   // Run contract guards before shared schema validation to keep stable error codes.
-  assertPreParseSubmissionGuards(params.rawBody);
+  assertPreParseSubmissionGuards(params.rawBody, params.requestHeaders);
 
   const parsed = parseSubmissionCreatePayload(params.rawBody);
 
   if (parsed.formType === 'candidate') {
+    await trackEventBestEffort({
+      eventType: 'apply_vacancy',
+      headers: params.requestHeaders,
+    });
+
     throw ApiError.fromCode(
       'NOT_IMPLEMENTED',
       'Candidate form submissions are not implemented in Commit 1',
@@ -115,6 +126,16 @@ export async function createProjectSubmission(
 
   const recordInput = toCreateRecordInputFromProjectDraft(draft);
   const createdRecord = await createSubmissionRecord(recordInput);
+
+  await trackEventBestEffort({
+    eventType: 'submit_project',
+    headers: params.requestHeaders,
+    source: 'website',
+    metadata: {
+      submissionId: createdRecord.id,
+      hasAttachment: recordInput.attachments.length > 0,
+    },
+  });
 
   return toCreateSubmissionResponseDto(createdRecord);
 }

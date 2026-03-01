@@ -15,6 +15,10 @@ type InferSchema<TSchema extends AnyZodSchema | undefined> = TSchema extends Any
 type PermissionRequirement = Parameters<typeof requirePermission>[1];
 type PermissionMode = Parameters<typeof requirePermission>[2];
 
+type AuthOptions = {
+  bootstrapAdmin?: boolean;
+};
+
 type WithApiOptions<
   TQuerySchema extends AnyZodSchema | undefined,
   TBodySchema extends AnyZodSchema | undefined,
@@ -25,7 +29,22 @@ type WithApiOptions<
   querySchema?: TQuerySchema;
   bodySchema?: TBodySchema;
   pagination?: boolean;
+  authOptions?: AuthOptions;
 };
+
+type WithProtectedApiOptions<
+  TQuerySchema extends AnyZodSchema | undefined,
+  TBodySchema extends AnyZodSchema | undefined,
+> = Omit<WithApiOptions<TQuerySchema, TBodySchema>, 'auth'> &
+  (
+    | {
+        auth: true;
+      }
+    | {
+        auth?: boolean;
+        permissions: PermissionRequirement;
+      }
+  );
 
 type WithPaginatedApiOptions<
   TQuerySchema extends AnyZodSchema | undefined,
@@ -35,19 +54,36 @@ type WithPaginatedApiOptions<
 type WithAdminApiOptions<
   TQuerySchema extends AnyZodSchema | undefined,
   TBodySchema extends AnyZodSchema | undefined,
-> = Omit<WithApiOptions<TQuerySchema, TBodySchema>, 'auth' | 'permissions'>;
+> = Omit<WithApiOptions<TQuerySchema, TBodySchema>, 'auth' | 'permissions'> & {
+  permissions?: PermissionRequirement;
+  permissionMode?: PermissionMode;
+};
 
 export type ApiHandlerContext<TQuery = undefined, TBody = undefined> = {
   req: NextRequest;
   requestId: string;
   auth: AuthContext | null;
-  query: TQuery | undefined;
-  body: TBody | undefined;
+  query: TQuery;
+  body: TBody;
   pagination: PaginationQuery | null;
+};
+
+export type ProtectedApiHandlerContext<TQuery = undefined, TBody = undefined> = Omit<
+  ApiHandlerContext<TQuery, TBody>,
+  'auth'
+> & {
+  auth: AuthContext;
 };
 
 export type PaginatedApiHandlerContext<TQuery = undefined, TBody = undefined> = Omit<
   ApiHandlerContext<TQuery, TBody>,
+  'pagination'
+> & {
+  pagination: PaginationQuery;
+};
+
+export type ProtectedPaginatedApiHandlerContext<TQuery = undefined, TBody = undefined> = Omit<
+  ProtectedApiHandlerContext<TQuery, TBody>,
   'pagination'
 > & {
   pagination: PaginationQuery;
@@ -104,7 +140,7 @@ export function withApi<
 
         let authContext: AuthContext | null = null;
         if (options.auth || options.permissions) {
-          authContext = await requireAuth(req);
+          authContext = await requireAuth(req, options.authOptions);
         }
         if (authContext && options.permissions) {
           requirePermission(authContext, options.permissions, options.permissionMode ?? 'all');
@@ -114,14 +150,39 @@ export function withApi<
           req,
           requestId,
           auth: authContext,
-          query,
-          body,
+          query: query as InferSchema<TQuerySchema>,
+          body: body as InferSchema<TBodySchema>,
           pagination,
         });
       },
       { requestId },
     );
   };
+}
+
+export function withProtectedApi<
+  TData,
+  TQuerySchema extends AnyZodSchema | undefined = undefined,
+  TBodySchema extends AnyZodSchema | undefined = undefined,
+>(
+  handler: (
+    context: ProtectedApiHandlerContext<InferSchema<TQuerySchema>, InferSchema<TBodySchema>>,
+  ) => Promise<TData> | TData,
+  options: WithProtectedApiOptions<TQuerySchema, TBodySchema>,
+): (req: NextRequest) => Promise<NextResponse> {
+  return withApi(
+    async (context) => {
+      if (!context.auth) {
+        throw ApiError.fromCode('UNAUTHORIZED', 'Protected API handler requires auth context');
+      }
+
+      return handler({
+        ...context,
+        auth: context.auth,
+      });
+    },
+    options,
+  );
 }
 
 /**
@@ -169,13 +230,25 @@ export function withAdminApi<
   TBodySchema extends AnyZodSchema | undefined = undefined,
 >(
   handler: (
-    context: ApiHandlerContext<InferSchema<TQuerySchema>, InferSchema<TBodySchema>>,
+    context: ProtectedApiHandlerContext<InferSchema<TQuerySchema>, InferSchema<TBodySchema>>,
   ) => Promise<TData> | TData,
   options: WithAdminApiOptions<TQuerySchema, TBodySchema> = {},
 ): (req: NextRequest) => Promise<NextResponse> {
-  return withApi(handler, {
+  const extraPermissions = options.permissions
+    ? Array.isArray(options.permissions)
+      ? options.permissions
+      : [options.permissions]
+    : [];
+  const permissions = Array.from(new Set([ADMIN_ACCESS_PERMISSION, ...extraPermissions]));
+
+  return withProtectedApi(handler, {
     ...options,
     auth: true,
-    permissions: ADMIN_ACCESS_PERMISSION,
+    permissions,
+    permissionMode: 'all',
+    authOptions: {
+      ...(options.authOptions ?? {}),
+      bootstrapAdmin: true,
+    },
   });
 }
