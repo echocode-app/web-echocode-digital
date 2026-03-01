@@ -52,8 +52,8 @@ export type SubmissionsOverviewRawAggregates = {
   };
   funnel: FunnelRaw;
   charts: {
-    submissionsTrend30d: SubmissionsTrendPointRaw[];
-    errorsTrend30d?: ErrorsTrendPointRaw[];
+    submissionsTrendYtd: SubmissionsTrendPointRaw[];
+    errorsTrendCurrentMonth?: ErrorsTrendPointRaw[];
   };
 };
 
@@ -130,12 +130,22 @@ function isUploadInitStage(metadata: unknown): boolean {
 
 async function countSubmissionsInRange(range: DateRange): Promise<number> {
   const firestore = getFirestoreDb();
-  const query = firestore
+  const legacySubmissionsQuery = firestore
     .collection('submissions')
     .where('createdAt', '>=', Timestamp.fromDate(range.start))
     .where('createdAt', '<', Timestamp.fromDate(range.end));
 
-  return readCount(query, 'Failed to count submissions in date range');
+  const clientSubmissionsQuery = firestore
+    .collection('client_submissions')
+    .where('createdAt', '>=', Timestamp.fromDate(range.start))
+    .where('createdAt', '<', Timestamp.fromDate(range.end));
+
+  const [legacyCount, clientCount] = await Promise.all([
+    readCount(legacySubmissionsQuery, 'Failed to count legacy submissions in date range'),
+    readCount(clientSubmissionsQuery, 'Failed to count client submissions in date range'),
+  ]);
+
+  return normalizeSafeNumber(legacyCount + clientCount);
 }
 
 async function countAnyAnalyticsEventInRange(eventTypes: readonly string[], range: DateRange): Promise<number> {
@@ -198,19 +208,24 @@ async function computeAverageSubmitTimeMinutes(range: DateRange): Promise<number
 }
 
 function buildFunnelSnapshot(modalOpen: number, submitAttempt: number, submitSuccess: number): FunnelRaw {
-  const baseline = modalOpen > 0
-    ? modalOpen
-    : submitAttempt;
+  const normalizedSubmitSuccess = normalizeSafeNumber(submitSuccess);
+  const normalizedSubmitAttempt = submitAttempt > 0
+    ? normalizeSafeNumber(submitAttempt)
+    : normalizedSubmitSuccess;
+  const normalizedModalOpen = modalOpen > 0
+    ? normalizeSafeNumber(modalOpen)
+    : normalizedSubmitAttempt;
+  const baseline = normalizedModalOpen > 0 ? normalizedModalOpen : normalizedSubmitAttempt;
 
-  const conversionRate = percentage(submitSuccess, baseline);
+  const conversionRate = percentage(normalizedSubmitSuccess, baseline);
   const rawDropOff = baseline > 0
-    ? percentage(Math.max(baseline - submitSuccess, 0), baseline)
+    ? percentage(Math.max(baseline - normalizedSubmitSuccess, 0), baseline)
     : 0;
 
   return {
-    modalOpen,
-    submitAttempt,
-    submitSuccess,
+    modalOpen: normalizedModalOpen,
+    submitAttempt: normalizedSubmitAttempt,
+    submitSuccess: normalizedSubmitSuccess,
     conversionRate,
     dropOffRate: Number(rawDropOff.toFixed(2)),
   };
@@ -220,7 +235,7 @@ export async function getSubmissionsOverviewRawAggregates(): Promise<Submissions
   const todayStart = startOfUtcDay(new Date());
   const last7Days = getRangeFromDays(todayStart, 7, 0);
   const previous7Days = getRangeFromDays(todayStart, 7, 7);
-  const dayRanges30 = getDayRanges(todayStart, 30);
+  const dayRangesCurrentMonth = getDayRanges(todayStart, todayStart.getUTCDate());
   const monthRangesYear = getCurrentYearMonthRanges(todayStart);
 
   const [
@@ -236,8 +251,8 @@ export async function getSubmissionsOverviewRawAggregates(): Promise<Submissions
     avgSubmitTimeCurrent7,
     avgSubmitTimePrevious7,
     submissionsCountsYear,
-    submissionsCounts30,
-    errorsTrendCounts30,
+    submissionsCountsCurrentMonth,
+    errorsTrendCountsCurrentMonth,
   ] = await Promise.all([
     countSubmissionsInRange(last7Days),
     countSubmissionsInRange(previous7Days),
@@ -251,11 +266,11 @@ export async function getSubmissionsOverviewRawAggregates(): Promise<Submissions
     computeAverageSubmitTimeMinutes(last7Days),
     computeAverageSubmitTimeMinutes(previous7Days),
     Promise.all(monthRangesYear.map(({ range }) => countSubmissionsInRange(range))),
-    Promise.all(dayRanges30.map((range) => countSubmissionsInRange(range))),
-    Promise.all(dayRanges30.map((range) => countAnyAnalyticsEventInRange(SUBMIT_ERROR_EVENT_TYPES, range))),
+    Promise.all(dayRangesCurrentMonth.map((range) => countSubmissionsInRange(range))),
+    Promise.all(dayRangesCurrentMonth.map((range) => countAnyAnalyticsEventInRange(SUBMIT_ERROR_EVENT_TYPES, range))),
   ]);
 
-  const submissionsTrend30d: SubmissionsTrendPointRaw[] = monthRangesYear.map((entry, index) => ({
+  const submissionsTrendYtd: SubmissionsTrendPointRaw[] = monthRangesYear.map((entry, index) => ({
     month: entry.month,
     value: normalizeSafeNumber(submissionsCountsYear[index] ?? 0),
   }));
@@ -266,15 +281,11 @@ export async function getSubmissionsOverviewRawAggregates(): Promise<Submissions
   const hasErrorRateTracking =
     submitErrorCurrent7 > 0 || submitErrorPrevious7 > 0 || submitAttemptCurrent7 > 0 || submitAttemptPrevious7 > 0;
 
-  const hasErrorTrend = errorsTrendCounts30.some((count) => count > 0);
-
-  const errorsTrend30d: ErrorsTrendPointRaw[] | undefined = hasErrorTrend
-    ? dayRanges30.map((range, index) => ({
-        date: toIsoDate(range.start),
-        success: normalizeSafeNumber(submissionsCounts30[index] ?? 0),
-        error: normalizeSafeNumber(errorsTrendCounts30[index] ?? 0),
-      }))
-    : undefined;
+  const errorsTrendCurrentMonth: ErrorsTrendPointRaw[] = dayRangesCurrentMonth.map((range, index) => ({
+    date: toIsoDate(range.start),
+    success: normalizeSafeNumber(submissionsCountsCurrentMonth[index] ?? 0),
+    error: normalizeSafeNumber(errorsTrendCountsCurrentMonth[index] ?? 0),
+  }));
 
   const funnel = buildFunnelSnapshot(
     normalizeSafeNumber(modalOpen7),
@@ -311,8 +322,8 @@ export async function getSubmissionsOverviewRawAggregates(): Promise<Submissions
     },
     funnel,
     charts: {
-      submissionsTrend30d,
-      ...(errorsTrend30d ? { errorsTrend30d } : {}),
+      submissionsTrendYtd,
+      errorsTrendCurrentMonth,
     },
   };
 }

@@ -4,19 +4,22 @@ type MetricLike = SubmissionsOverviewDto['kpis']['submissions7d'];
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 
-function buildLast30Dates(): string[] {
+function buildCurrentMonthDates(): string[] {
   const today = new Date();
-  const utcToday = new Date(Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate()));
+  const year = today.getUTCFullYear();
+  const month = today.getUTCMonth();
+  const monthStart = new Date(Date.UTC(year, month, 1));
+  const nextMonthStart = new Date(Date.UTC(year, month + 1, 1));
+  const daysInMonth = Math.round((nextMonthStart.getTime() - monthStart.getTime()) / DAY_MS);
 
-  return Array.from({ length: 30 }, (_, index) => {
-    const d = new Date(utcToday.getTime() - (29 - index) * DAY_MS);
+  return Array.from({ length: daysInMonth }, (_, index) => {
+    const d = new Date(monthStart.getTime() + index * DAY_MS);
     return d.toISOString().slice(0, 10);
   });
 }
 
 function buildMonthsToDate(): string[] {
-  const currentMonthIndex = new Date().getUTCMonth();
-  return Array.from({ length: currentMonthIndex + 1 }, (_, index) => String(index + 1).padStart(2, '0'));
+  return Array.from({ length: 12 }, (_, index) => String(index + 1).padStart(2, '0'));
 }
 
 export function zeroMetric(): MetricLike {
@@ -28,8 +31,8 @@ export function zeroMetric(): MetricLike {
 }
 
 export function normalizeMonthlyTrend(
-  trend: SubmissionsOverviewDto['charts']['submissionsTrend30d'] | undefined,
-): SubmissionsOverviewDto['charts']['submissionsTrend30d'] {
+  trend: SubmissionsOverviewDto['charts']['submissionsTrendYtd'] | undefined,
+): SubmissionsOverviewDto['charts']['submissionsTrendYtd'] {
   const source = new Map((trend ?? []).map((item) => [item.month, item.value]));
   return buildMonthsToDate().map((month) => ({
     month,
@@ -38,10 +41,10 @@ export function normalizeMonthlyTrend(
 }
 
 export function normalizeErrorsTrend(
-  trend: SubmissionsOverviewDto['charts']['errorsTrend30d'] | undefined,
-): NonNullable<SubmissionsOverviewDto['charts']['errorsTrend30d']> {
+  trend: SubmissionsOverviewDto['charts']['errorsTrendCurrentMonth'] | undefined,
+): NonNullable<SubmissionsOverviewDto['charts']['errorsTrendCurrentMonth']> {
   const source = new Map((trend ?? []).map((item) => [item.date, item]));
-  return buildLast30Dates().map((date) => {
+  return buildCurrentMonthDates().map((date) => {
     const item = source.get(date);
     return {
       date,
@@ -63,8 +66,8 @@ export function buildReadyOverview(activeOverview: SubmissionsOverviewDto | null
       errorRate7d: activeOverview.kpis.errorRate7d ?? zeroMetric(),
     },
     charts: {
-      submissionsTrend30d: normalizeMonthlyTrend(activeOverview.charts.submissionsTrend30d),
-      errorsTrend30d: normalizeErrorsTrend(activeOverview.charts.errorsTrend30d),
+      submissionsTrendYtd: normalizeMonthlyTrend(activeOverview.charts.submissionsTrendYtd),
+      errorsTrendCurrentMonth: normalizeErrorsTrend(activeOverview.charts.errorsTrendCurrentMonth),
     },
   };
 }

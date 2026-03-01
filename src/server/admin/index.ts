@@ -17,3 +17,10 @@ export {
   getAdminSubmissionsOverview,
   type SubmissionsOverviewDto,
 } from '@/server/admin/submissions/submissions.metrics.service';
+export {
+  createClientProjectSubmission,
+  createClientProjectUploadInit,
+  getAdminClientSubmissionDetails,
+  listAdminClientSubmissions,
+  setAdminClientSubmissionStatus,
+} from '@/server/forms/client-project';

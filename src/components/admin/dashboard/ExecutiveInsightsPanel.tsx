@@ -32,7 +32,7 @@ export default function ExecutiveInsightsPanel({
   conversionDropOffPct,
 }: ExecutiveInsightsPanelProps) {
   return (
-    <article className="min-w-0 rounded-(--radius-base) border border-gray16 bg-base-gray p-4 shadow-main">
+    <article className="min-w-0 rounded-(--radius-base) border border-gray16 bg-base-gray p-4">
       <WidgetHeader
         title="Executive insights"
         info="High-signal indicators for lead quality, timing, entity performance, growth pace and conversion pressure."

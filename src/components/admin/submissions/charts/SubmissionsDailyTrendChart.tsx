@@ -12,26 +12,12 @@ import {
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import type { SubmissionsOverviewDto } from '@/server/admin/submissions/submissions.metrics.service';
+import { ADMIN_MONTH_SHORT_LABELS_EN } from '@/shared/admin/constants';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
 type SubmissionsDailyTrendChartProps = {
-  data: SubmissionsOverviewDto['charts']['submissionsTrend30d'];
-};
-
-const MONTH_LABELS: Record<string, string> = {
-  '01': 'Jan',
-  '02': 'Feb',
-  '03': 'Mar',
-  '04': 'Apr',
-  '05': 'May',
-  '06': 'Jun',
-  '07': 'Jul',
-  '08': 'Aug',
-  '09': 'Sep',
-  '10': 'Oct',
-  '11': 'Nov',
-  '12': 'Dec',
+  data: SubmissionsOverviewDto['charts']['submissionsTrendYtd'];
 };
 
 const options: ChartOptions<'bar'> = {
@@ -80,7 +66,7 @@ const options: ChartOptions<'bar'> = {
 function SubmissionsDailyTrendChart({ data }: SubmissionsDailyTrendChartProps) {
   const chartData = useMemo(
     () => ({
-      labels: data.map((item) => MONTH_LABELS[item.month] ?? item.month),
+      labels: data.map((item) => ADMIN_MONTH_SHORT_LABELS_EN[item.month] ?? item.month),
       datasets: [
         {
           label: 'Submissions',

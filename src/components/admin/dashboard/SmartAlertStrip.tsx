@@ -23,7 +23,7 @@ export default function SmartAlertStrip({ alerts }: SmartAlertStripProps) {
   if (alerts.length === 0) return null;
 
   return (
-    <section className="min-w-0 rounded-(--radius-base) border border-gray16 bg-base-gray p-3 shadow-main">
+    <section className="min-w-0 rounded-(--radius-base) border border-gray16 bg-base-gray p-3">
       <div className="flex min-w-0 flex-wrap gap-2">
         {alerts.slice(0, 3).map((alert) => (
           <article

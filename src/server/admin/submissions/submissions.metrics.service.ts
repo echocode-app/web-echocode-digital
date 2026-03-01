@@ -17,8 +17,8 @@ export type SubmissionsOverviewDto = {
     dropOffRate: number;
   };
   charts: {
-    submissionsTrend30d: { month: string; value: number }[];
-    errorsTrend30d?: { date: string; success: number; error: number }[];
+    submissionsTrendYtd: { month: string; value: number }[];
+    errorsTrendCurrentMonth?: { date: string; success: number; error: number }[];
   };
 };
 

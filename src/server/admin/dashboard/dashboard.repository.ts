@@ -59,18 +59,24 @@ export async function getDashboardRawAggregates(): Promise<DashboardRawAggregate
   // All windows are UTC-based to keep stable daily boundaries across environments.
   const todayStart = startOfUtcDay(new Date());
   const currentYearStart = new Date(Date.UTC(todayStart.getUTCFullYear(), 0, 1));
+  const currentMonthStart = new Date(Date.UTC(todayStart.getUTCFullYear(), todayStart.getUTCMonth(), 1));
   const last7Days = getRangeFromDays(todayStart, 7, 0);
   const previous7Days = getRangeFromDays(todayStart, 7, 7);
   const last30Days = getRangeFromDays(todayStart, 30, 0);
   const previous30Days = getRangeFromDays(todayStart, 30, 30);
+  const currentMonthRange: DateRange = {
+    start: currentMonthStart,
+    end: addDays(todayStart, 1),
+  };
   const currentYearRange: DateRange = {
     start: currentYearStart,
     end: addDays(todayStart, 1),
   };
-  const dayRanges30 = getDayRanges(todayStart, 30);
+  const dayRangesCurrentMonth = getDayRanges(todayStart, todayStart.getUTCDate());
   const monthRangesYear = getCurrentYearMonthRanges(todayStart);
 
   const submissionsTotalQuery = firestore.collection('submissions');
+  const clientSubmissionsTotalQuery = firestore.collection('client_submissions');
   const activeVacanciesQuery = firestore.collection('vacancies').where('isPublished', '==', true);
   const portfolioTotalQuery = firestore.collection('portfolio');
 
@@ -78,9 +84,17 @@ export async function getDashboardRawAggregates(): Promise<DashboardRawAggregate
     .collection('submissions')
     .where('createdAt', '>=', Timestamp.fromDate(last7Days.start))
     .where('createdAt', '<', Timestamp.fromDate(last7Days.end));
+  const clientSubmissionsLast7Query = firestore
+    .collection('client_submissions')
+    .where('createdAt', '>=', Timestamp.fromDate(last7Days.start))
+    .where('createdAt', '<', Timestamp.fromDate(last7Days.end));
 
   const submissionsPrev7Query = firestore
     .collection('submissions')
+    .where('createdAt', '>=', Timestamp.fromDate(previous7Days.start))
+    .where('createdAt', '<', Timestamp.fromDate(previous7Days.end));
+  const clientSubmissionsPrev7Query = firestore
+    .collection('client_submissions')
     .where('createdAt', '>=', Timestamp.fromDate(previous7Days.start))
     .where('createdAt', '<', Timestamp.fromDate(previous7Days.end));
 
@@ -88,9 +102,17 @@ export async function getDashboardRawAggregates(): Promise<DashboardRawAggregate
     .collection('submissions')
     .where('createdAt', '>=', Timestamp.fromDate(last30Days.start))
     .where('createdAt', '<', Timestamp.fromDate(last30Days.end));
+  const clientSubmissionsLast30Query = firestore
+    .collection('client_submissions')
+    .where('createdAt', '>=', Timestamp.fromDate(last30Days.start))
+    .where('createdAt', '<', Timestamp.fromDate(last30Days.end));
 
   const submissionsPrev30Query = firestore
     .collection('submissions')
+    .where('createdAt', '>=', Timestamp.fromDate(previous30Days.start))
+    .where('createdAt', '<', Timestamp.fromDate(previous30Days.end));
+  const clientSubmissionsPrev30Query = firestore
+    .collection('client_submissions')
     .where('createdAt', '>=', Timestamp.fromDate(previous30Days.start))
     .where('createdAt', '<', Timestamp.fromDate(previous30Days.end));
 
@@ -140,12 +162,17 @@ export async function getDashboardRawAggregates(): Promise<DashboardRawAggregate
 
   const [
     totalSubmissions,
+    clientSubmissionsTotal,
     activeVacancies,
     portfolioItems,
     totalSubmissionsLast7,
+    clientSubmissionsLast7,
     totalSubmissionsPrev7,
+    clientSubmissionsPrev7,
     totalSubmissionsLast30,
+    clientSubmissionsLast30,
     totalSubmissionsPrev30,
+    clientSubmissionsPrev30,
     activeVacanciesLast7,
     activeVacanciesPrev7,
     activeVacanciesLast30,
@@ -185,12 +212,17 @@ export async function getDashboardRawAggregates(): Promise<DashboardRawAggregate
     topPortfolio,
   ] = await Promise.all([
     readCount(submissionsTotalQuery, 'Failed to count total submissions'),
+    readCount(clientSubmissionsTotalQuery, 'Failed to count total client submissions'),
     readCount(activeVacanciesQuery, 'Failed to count active vacancies'),
     readCount(portfolioTotalQuery, 'Failed to count portfolio items'),
     readCount(submissionsLast7Query, 'Failed to count submissions for last 7 days'),
+    readCount(clientSubmissionsLast7Query, 'Failed to count client submissions for last 7 days'),
     readCount(submissionsPrev7Query, 'Failed to count submissions for previous 7 days'),
+    readCount(clientSubmissionsPrev7Query, 'Failed to count client submissions for previous 7 days'),
     readCount(submissionsLast30Query, 'Failed to count submissions for last 30 days'),
+    readCount(clientSubmissionsLast30Query, 'Failed to count client submissions for last 30 days'),
     readCount(submissionsPrev30Query, 'Failed to count submissions for previous 30 days'),
+    readCount(clientSubmissionsPrev30Query, 'Failed to count client submissions for previous 30 days'),
     readCount(vacanciesLast7Query, 'Failed to count active vacancies for last 7 days'),
     readCount(vacanciesPrev7Query, 'Failed to count active vacancies for previous 7 days'),
     readCount(vacanciesLast30Query, 'Failed to count active vacancies for last 30 days'),
@@ -221,11 +253,11 @@ export async function getDashboardRawAggregates(): Promise<DashboardRawAggregate
     countAnalyticsEventInRange('page_view', previous7Days),
     countAnalyticsEventInRange('page_view', last30Days),
     countAnalyticsEventInRange('page_view', previous30Days),
-    getSubmissionsTrend(dayRanges30),
-    getTrafficAndLeadsSeries(dayRanges30),
-    getProjectLeadsByDay(dayRanges30),
+    getSubmissionsTrend(dayRangesCurrentMonth),
+    getTrafficAndLeadsSeries(dayRangesCurrentMonth),
+    getProjectLeadsByDay(dayRangesCurrentMonth),
     getLeadDistributionYearMonthly(monthRangesYear),
-    getTopVacancies(last30Days),
+    getTopVacancies(currentMonthRange),
     getSourcePerformance(last30Days),
     getTopPortfolioItem(last30Days),
   ]);
@@ -260,7 +292,7 @@ export async function getDashboardRawAggregates(): Promise<DashboardRawAggregate
   const portfolioItemsPreviousMoM = normalizeSafeNumber(Math.max(portfolioItemsPrev30, portfolioActionsPrev30));
 
   const funnel = buildFunnel(pageViewsLast30, projectLeadsLast30, vacancyLeadsLast30);
-  const weekdayInsights = getWeekdayInsights(dayRanges30, projectLeadsByDay, trafficVsLeads);
+  const weekdayInsights = getWeekdayInsights(dayRangesCurrentMonth, projectLeadsByDay, trafficVsLeads);
 
   const topVacancy = topVacancies[0] ?? {
     label: 'No data',
@@ -296,7 +328,7 @@ export async function getDashboardRawAggregates(): Promise<DashboardRawAggregate
 
   return {
     totals: {
-      totalSubmissions: normalizeSafeNumber(totalSubmissions),
+      totalSubmissions: normalizeSafeNumber(totalSubmissions + clientSubmissionsTotal),
       projectLeads: normalizeSafeNumber(projectLeadsCurrent),
       vacancyLeads: normalizeSafeNumber(vacancyLeadsCurrent),
       activeVacancies: normalizeSafeNumber(activeVacancies),
@@ -305,8 +337,8 @@ export async function getDashboardRawAggregates(): Promise<DashboardRawAggregate
     },
     windows: {
       totalSubmissions: {
-        current: normalizeSafeNumber(totalSubmissionsLast7),
-        previous: normalizeSafeNumber(totalSubmissionsPrev7),
+        current: normalizeSafeNumber(totalSubmissionsLast7 + clientSubmissionsLast7),
+        previous: normalizeSafeNumber(totalSubmissionsPrev7 + clientSubmissionsPrev7),
       },
       projectLeads: {
         current: normalizeSafeNumber(projectLeadsCurrent),
@@ -331,8 +363,8 @@ export async function getDashboardRawAggregates(): Promise<DashboardRawAggregate
     },
     windowsMoM: {
       totalSubmissions: {
-        current: normalizeSafeNumber(totalSubmissionsLast30),
-        previous: normalizeSafeNumber(totalSubmissionsPrev30),
+        current: normalizeSafeNumber(totalSubmissionsLast30 + clientSubmissionsLast30),
+        previous: normalizeSafeNumber(totalSubmissionsPrev30 + clientSubmissionsPrev30),
       },
       projectLeads: {
         current: normalizeSafeNumber(projectLeadsLast30),

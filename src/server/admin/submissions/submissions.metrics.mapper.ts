@@ -84,13 +84,13 @@ export function mapSubmissionsOverview(
       dropOffRate: sanitizeNumber(raw.funnel.dropOffRate),
     },
     charts: {
-      submissionsTrend30d: raw.charts.submissionsTrend30d.map((point) => ({
+      submissionsTrendYtd: raw.charts.submissionsTrendYtd.map((point) => ({
         month: point.month,
         value: sanitizeNumber(point.value),
       })),
-      ...(raw.charts.errorsTrend30d
+      ...(raw.charts.errorsTrendCurrentMonth
         ? {
-            errorsTrend30d: raw.charts.errorsTrend30d.map((point) => ({
+            errorsTrendCurrentMonth: raw.charts.errorsTrendCurrentMonth.map((point) => ({
               date: point.date,
               success: sanitizeNumber(point.success),
               error: sanitizeNumber(point.error),

@@ -23,6 +23,24 @@
 7. Оновити документацію, якщо змінився контракт API або серверна поведінка
 8. Комітити тільки після повністю успішного `npm run check`
 
+## Останні зміни серверної логіки (лаконічно)
+
+- `client_submissions`:
+- додано `soft delete` (поля `isDeleted`, `deletedAt`, `deletedBy`) без фізичного видалення документа.
+- list/read логіка оновлена: soft-deleted записи приховуються з активного переліку.
+
+- Admin API для client submissions:
+- додано `DELETE /api/admin/submissions/clients/delete?submissionId=...` для soft delete.
+- додано логування дії в `admin_logs` з `actionType: client_submission.soft_delete`.
+
+- Client submission attachments:
+- у Firestore для нових заявок зберігається `imageName` (оригінальна назва файлу).
+- details DTO повертає `imageName` для коректного відображення в адмінці.
+
+- Dashboard/Submissions aggregates:
+- `totalSubmissions` у dashboard враховує обидва джерела: `submissions` + `client_submissions`.
+- метрики `Success vs errors`/funnel працюють на `analytics_events` і поточних UTC-діапазонах.
+
 ## Що вже реалізовано у серверному фундаменті
 
 ### Базова серверна структура

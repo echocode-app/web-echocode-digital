@@ -1,9 +1,6 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
-import { SUBMISSIONS_OVERVIEW_MOCK } from '@/components/admin/submissions/mockOverview';
-import { SUBMISSIONS_MOCK_QUERY_KEY } from '@/components/admin/submissions/submissions.config';
 import { buildReadyOverview } from '@/components/admin/submissions/submissions.overview.utils';
 import type { SubmissionsOverviewDto } from '@/server/admin/submissions/submissions.metrics.service';
 import { getFirebaseClientAuth } from '@/lib/firebase/client';
@@ -46,14 +43,10 @@ async function fetchSubmissionsOverview(signal: AbortSignal): Promise<Submission
 }
 
 export function useSubmissionsOverview() {
-  const searchParams = useSearchParams();
-  const useMockMode = searchParams.get(SUBMISSIONS_MOCK_QUERY_KEY) === '1';
   const [overview, setOverview] = useState<SubmissionsOverviewDto | null>(null);
   const [state, setState] = useState<LoadState>('loading');
 
   useEffect(() => {
-    if (useMockMode) return;
-
     const controller = new AbortController();
 
     fetchSubmissionsOverview(controller.signal)
@@ -63,16 +56,16 @@ export function useSubmissionsOverview() {
       })
       .catch(() => {
         if (!controller.signal.aborted) {
-          setOverview(SUBMISSIONS_OVERVIEW_MOCK);
-          setState('ready');
+          setOverview(null);
+          setState('error');
         }
       });
 
     return () => controller.abort();
-  }, [useMockMode]);
+  }, []);
 
-  const activeOverview = useMockMode ? SUBMISSIONS_OVERVIEW_MOCK : overview;
-  const activeState: LoadState = useMockMode ? 'ready' : state;
+  const activeOverview = overview;
+  const activeState: LoadState = state;
   const readyOverview = useMemo(() => buildReadyOverview(activeOverview), [activeOverview]);
 
   return {

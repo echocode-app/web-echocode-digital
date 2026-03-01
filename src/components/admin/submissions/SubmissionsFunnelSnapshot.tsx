@@ -31,7 +31,7 @@ export default function SubmissionsFunnelSnapshot({ funnel }: SubmissionsFunnelS
         info="Snapshot of contact modal flow: open to attempt to successful submission."
       />
 
-      <div className="mt-3 flex min-w-0 items-center gap-2 overflow-x-auto pb-1">
+      <div className="mt-3 flex min-w-0 items-center gap-3 overflow-x-auto px-2 md:px-4 lg:px-6 pb-1">
         <div className="min-w-28 flex-1">
           <FunnelStep label="Modal open" value={funnel.modalOpen} />
         </div>
@@ -45,7 +45,7 @@ export default function SubmissionsFunnelSnapshot({ funnel }: SubmissionsFunnelS
         </div>
       </div>
 
-      <div className="mt-3 grid min-w-0 gap-2 sm:grid-cols-2">
+      <div className="mt-3 grid min-w-0 gap-2 px-2 md:px-4 lg:px-6 sm:grid-cols-2">
         <p className="rounded-(--radius-secondary) border border-gray16 bg-black/20 px-2 py-1 font-main text-main-xs text-gray75">
           <SymbolSafeText text={`Conversion: ${formatPct(funnel.conversionRate)}`} />
         </p>
