@@ -9,3 +9,7 @@ export {
   listAdminLogsQuerySchema,
   logAdminAction,
 } from '@/server/admin/admin-logs.service';
+export {
+  getAdminDashboardOverview,
+  type DashboardOverviewDto,
+} from '@/server/admin/dashboard';

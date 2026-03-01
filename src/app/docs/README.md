@@ -356,3 +356,33 @@ Environment policy:
 - `FIREBASE_CHECK_STORAGE`
 - `INTERNAL_FIREBASE_CHECK_ENABLED`
 - `ADMIN_BOOTSTRAP_EMAILS`
+
+## Admin Dashboard Overview (server module)
+
+### Endpoint
+
+- `GET /api/admin/dashboard/overview`
+- wrapper: `withAdminApi(...)`
+- required permission: `admin.access`
+- runtime: `nodejs`
+
+### Server module structure
+
+- `src/server/admin/dashboard/dashboard.types.ts` - DTO/types contract
+- `src/server/admin/dashboard/dashboard.repository.ts` - Firestore aggregation logic
+- `src/server/admin/dashboard/dashboard.mapper.ts` - response normalization/sanitization
+- `src/server/admin/dashboard/dashboard.service.ts` - orchestration boundary
+- `src/server/admin/dashboard/index.ts` - module exports
+
+### Response highlights
+
+- KPI bundle with WoW trend and MoM delta
+- chart datasets (`submissionsTrend`, `trafficVsLeads`, `topVacancies`, `leadDistribution`, `leadDistributionYear`, `leadDistributionYearMonthly`)
+- executive data (`alerts`, `funnel`, `sources`, `leadQualityRatio`, `bestDay`, top entities, growth velocity, conversion drop-off)
+
+### Aggregation constraints
+
+- time-range based queries only: `last7`, `previous7`, `last30`, `previous30`, `YTD`
+- count-first strategy with Firestore `count()` where possible
+- no unbounded collection scans in dashboard repository logic
+- dynamic source aggregation (no hardcoded source allow-list)

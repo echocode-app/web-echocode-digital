@@ -5,9 +5,10 @@ import { createProjectSubmission } from '@/server/submissions';
 export const runtime = 'nodejs';
 
 export const POST = withApi(
-  async ({ body }) => {
+  async ({ req, body }) => {
     return createProjectSubmission({
       rawBody: body,
+      requestHeaders: req.headers,
     });
   },
   {

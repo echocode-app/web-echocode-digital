@@ -1,23 +1,14 @@
-import { ApiError, withApi } from '@/server/lib';
-import { listSubmissions, listSubmissionsQuerySchema } from '@/server/submissions/submissions.list.service';
+import { getAdminSubmissionsList } from '@/server/admin';
+import { withAdminApi } from '@/server/lib';
+import { listSubmissionsQuerySchema } from '@/server/submissions/submissions.list.service';
 
 export const runtime = 'nodejs';
 
-export const GET = withApi(
+export const GET = withAdminApi(
   async ({ query }) => {
-    if (!query) {
-      throw ApiError.fromCode(
-        'INTERNAL_ERROR',
-        'Validated query is required for submissions list endpoint',
-      );
-    }
-
-    return listSubmissions({
-      query,
-    });
+    return getAdminSubmissionsList(query);
   },
   {
-    auth: true,
     permissions: 'submissions.read',
     querySchema: listSubmissionsQuerySchema,
   },
