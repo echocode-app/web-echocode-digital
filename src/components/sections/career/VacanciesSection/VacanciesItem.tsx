@@ -1,14 +1,20 @@
 import Link from 'next/link';
 import { Vacancy } from './types/vacancies';
 
-const VacanciesItem = ({ hotPosition, title, conditions, id }: Vacancy) => {
+const VacanciesItem = ({ hotPosition, title, position, conditions, id }: Vacancy) => {
   return (
-    <li className="flex flex-col gap-3 min-[490px]:flex-row items-start min-[490px]:items-center  min-[490px]:gap-0 justify-between  p-3 max-w-175 w-full border border-[#343434] rounded-secondary">
+    <li
+      className="flex flex-col gap-3 min-[490px]:flex-row 
+    items-start min-[490px]:items-center  min-[490px]:gap-0 justify-between 
+     p-3 max-w-175 w-full border border-main-border rounded-secondary"
+    >
       <div>
         {hotPosition && (
           <strong className="block font-wadik text-title-xs text-accent mb-3">Hot position</strong>
         )}
-        <h3 className="font-wadik mb-3">{title}</h3>
+        <h3 className="font-wadik mb-3">
+          {title} {position && position}
+        </h3>
         <ul className="flex gap-2">
           {conditions.map((item, i) => (
             <li

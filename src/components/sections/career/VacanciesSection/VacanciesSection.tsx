@@ -8,13 +8,15 @@ import NotFound from './NotFound';
 const vacancies: Vacancy[] = [
   {
     hotPosition: true,
-    title: 'iOS Developer (Trainee)',
+    title: 'iOS Developer ',
+    position: '(Trainee)',
     conditions: ['Engineering', 'Remote'],
     id: 'iosdev',
   },
   {
     hotPosition: false,
-    title: 'QA Engineer (Middle)',
+    title: 'QA Engineer ',
+    position: '(Middle)',
     conditions: ['Quality Assurance', 'Remote'],
     id: 'qaenginer',
   },
