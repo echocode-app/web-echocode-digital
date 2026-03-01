@@ -45,12 +45,11 @@ export function getDayRanges(todayStart: Date, days: number): DateRange[] {
 
 export function getCurrentYearMonthRanges(todayStart: Date): Array<{ month: string; range: DateRange }> {
   const year = todayStart.getUTCFullYear();
-  const currentMonth = todayStart.getUTCMonth();
 
-  return Array.from({ length: currentMonth + 1 }, (_, monthIndex) => {
+  return Array.from({ length: 12 }, (_, monthIndex) => {
     const start = new Date(Date.UTC(year, monthIndex, 1));
-    const end = monthIndex === currentMonth
-      ? addDays(todayStart, 1)
+    const end = monthIndex === 11
+      ? new Date(Date.UTC(year + 1, 0, 1))
       : new Date(Date.UTC(year, monthIndex + 1, 1));
 
     return {

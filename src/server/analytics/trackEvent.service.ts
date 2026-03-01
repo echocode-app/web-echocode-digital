@@ -7,7 +7,10 @@ export type AnalyticsEventType =
   | 'submit_project'
   | 'submit_vacancy'
   | 'apply_vacancy'
-  | 'page_view';
+  | 'page_view'
+  | 'contact_modal_open'
+  | 'submit_project_attempt'
+  | 'submit_project_error';
 
 type AnalyticsEventDoc = {
   eventType: AnalyticsEventType;

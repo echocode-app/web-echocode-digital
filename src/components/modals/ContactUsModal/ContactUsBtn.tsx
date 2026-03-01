@@ -1,5 +1,8 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
+import { rememberContactModalReturnPath } from '@/components/modals/ContactUsModal/contactModal.navigation';
 
 const ContactUsBtn = () => {
   return (
@@ -11,6 +14,7 @@ const ContactUsBtn = () => {
         <Link
           href="/contact"
           scroll={false}
+          onClick={rememberContactModalReturnPath}
           className="w-14.5 h-14.5 rounded-full bg-accent 
                        shadow-lg flex items-center justify-center cursor-pointer"
         >
