@@ -20,7 +20,7 @@ function velocityLabel(direction: LeadVelocityDto['direction']): string {
 
 export default function LeadVelocityBadge({ velocity }: LeadVelocityBadgeProps) {
   return (
-    <article className="min-w-0 w-full rounded-(--radius-base) border border-gray16 bg-base-gray p-3 shadow-main">
+    <article className="min-w-0 w-full rounded-(--radius-base) border border-gray16 bg-base-gray p-3">
       <WidgetHeader
         title="Lead velocity"
         info="Compares average daily leads in the last 7 days versus the last 30 days to show acceleration, slowdown, or stability."

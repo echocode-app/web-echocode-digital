@@ -1,6 +1,10 @@
 import { Timestamp } from 'firebase-admin/firestore';
 import { getFirestoreDb } from '@/server/firebase/firestore';
 import { ApiError } from '@/server/lib/errors';
+import {
+  VACANCY_ANALYTICS_ID_KEYS,
+  VACANCY_ANALYTICS_LABEL_KEYS,
+} from '@/server/vacancies';
 import type {
   SourcePerformanceDto,
   TopVacancyPointDto,
@@ -40,15 +44,7 @@ function extractVacancyKey(metadata: unknown): string | null {
   if (!metadata || typeof metadata !== 'object' || Array.isArray(metadata)) return null;
 
   const map = metadata as Record<string, unknown>;
-  const candidates = [
-    map.vacancyId,
-    map.vacancySlug,
-    map.vacancy,
-    map.jobId,
-    map.jobSlug,
-    map.slug,
-    map.positionId,
-  ];
+  const candidates = VACANCY_ANALYTICS_ID_KEYS.map((key) => map[key]);
 
   for (const value of candidates) {
     if (typeof value === 'string' && value.trim().length > 0) {
@@ -63,7 +59,7 @@ function extractVacancyKey(metadata: unknown): string | null {
 function extractVacancyLabel(metadata: unknown): string | null {
   if (!metadata || typeof metadata !== 'object' || Array.isArray(metadata)) return null;
   const map = metadata as Record<string, unknown>;
-  const candidates = [map.vacancyTitle, map.jobTitle, map.title, map.position];
+  const candidates = VACANCY_ANALYTICS_LABEL_KEYS.map((key) => map[key]);
 
   for (const value of candidates) {
     if (typeof value === 'string' && value.trim().length > 0) {
@@ -198,23 +194,26 @@ function addSourceStats(
 // Source block is derived from first-touch metadata.attribution.source values.
 export async function getSourcePerformance(last30Days: DateRange): Promise<SourcePerformanceDto[]> {
   const sourceStats = new Map<string, { pageViews: number; projectLeads: number; vacancyLeads: number }>();
-  const fallbackDirectSource = 'direct';
 
   await Promise.all([
     scanAnalyticsEventsByTypeInRange('page_view', last30Days, (data) => {
-      const source = extractAttributionSource(data.metadata) ?? fallbackDirectSource;
+      const source = extractAttributionSource(data.metadata);
+      if (!source) return;
       addSourceStats(sourceStats, source, { pageViews: 1 });
     }),
     scanAnalyticsEventsByTypeInRange('submit_project', last30Days, (data) => {
-      const source = extractAttributionSource(data.metadata) ?? fallbackDirectSource;
+      const source = extractAttributionSource(data.metadata);
+      if (!source) return;
       addSourceStats(sourceStats, source, { projectLeads: 1 });
     }),
     scanAnalyticsEventsByTypeInRange('submit_vacancy', last30Days, (data) => {
-      const source = extractAttributionSource(data.metadata) ?? fallbackDirectSource;
+      const source = extractAttributionSource(data.metadata);
+      if (!source) return;
       addSourceStats(sourceStats, source, { vacancyLeads: 1 });
     }),
     scanAnalyticsEventsByTypeInRange('apply_vacancy', last30Days, (data) => {
-      const source = extractAttributionSource(data.metadata) ?? fallbackDirectSource;
+      const source = extractAttributionSource(data.metadata);
+      if (!source) return;
       addSourceStats(sourceStats, source, { vacancyLeads: 1 });
     }),
   ]);

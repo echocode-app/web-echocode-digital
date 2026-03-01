@@ -23,7 +23,7 @@ export default function SmartAlertStrip({ alerts }: SmartAlertStripProps) {
   if (alerts.length === 0) return null;
 
   return (
-    <section className="min-w-0 rounded-(--radius-base) border border-gray16 bg-base-gray p-3 shadow-main">
+    <section className="min-w-0 rounded-(--radius-base) border border-gray16 bg-base-gray p-3">
       <div className="flex min-w-0 flex-wrap gap-2">
         {alerts.slice(0, 3).map((alert) => (
           <article
@@ -33,7 +33,7 @@ export default function SmartAlertStrip({ alerts }: SmartAlertStripProps) {
             <span className="inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-current/40 text-[10px] leading-none">
               {alertIcon(alert.level)}
             </span>
-            <SymbolSafeText text={alert.message} className="min-w-0 break-words text-gray75" />
+            <SymbolSafeText text={alert.message} className="min-w-0 wrap-break-word text-gray75" />
           </article>
         ))}
       </div>

@@ -6,12 +6,16 @@ import { ApiError } from '@/server/lib/errors';
 
 export type AdminActionType =
   | 'submissions.status.update'
+  | 'client_submission.status_update'
+  | 'client_submission.comment_add'
+  | 'client_submission.soft_delete'
   | 'portfolio.manage'
   | 'vacancies.manage'
   | 'admin.login';
 
 export type AdminEntityType =
   | 'submission'
+  | 'client_submission'
   | 'portfolio'
   | 'vacancy'
   | 'auth';
