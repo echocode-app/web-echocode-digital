@@ -1,0 +1,22 @@
+[
+  {
+    "title": "FIXED PRICE",
+    "desc": "Clear deadlines and a fixed budget. Perfect for projects with specific technical requirements.",
+    "priority": "Predictability"
+  },
+  {
+    "title": "Time ＆ Material",
+    "desc": "Hourly-based billing for maximum agility. Ideal for projects with shifting requirements.",
+    "priority": "FLEXIBILITY"
+  },
+  {
+    "title": "HYBRID",
+    "desc": "Base cost + performance bonuses. We share the risks and success together with you.",
+    "priority": "Scalability"
+  },
+  {
+    "title": "REV. SHARE",
+    "desc": "Full product immersion. We invest our time and expertise in exchange for a share of the profit.",
+    "priority": "Long-term Growth"
+  }
+]
