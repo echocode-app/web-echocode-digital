@@ -11,6 +11,8 @@ function metric(value: number): string {
 }
 
 export default function FunnelSnapshot({ funnel }: FunnelSnapshotProps) {
+  const progressValue = Math.max(0, Math.min(funnel.leadToTrafficRatio, 100));
+
   return (
     <article className="min-w-0 rounded-(--radius-base) border border-gray16 bg-base-gray p-4 shadow-main">
       <WidgetHeader
@@ -35,9 +37,12 @@ export default function FunnelSnapshot({ funnel }: FunnelSnapshotProps) {
         </div>
       </div>
 
-      <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-gray10">
-        <div className="h-full bg-accent-hover/70" style={{ width: `${Math.min(funnel.leadToTrafficRatio, 100)}%` }} />
-      </div>
+      <progress
+        className="mt-3 block h-1.5 w-full appearance-none overflow-hidden rounded-full [&::-webkit-progress-bar]:rounded-full [&::-webkit-progress-bar]:bg-gray10 [&::-webkit-progress-value]:rounded-full [&::-webkit-progress-value]:bg-accent-hover/70 [&::-moz-progress-bar]:rounded-full [&::-moz-progress-bar]:bg-accent-hover/70"
+        value={progressValue}
+        max={100}
+        aria-label="Lead to traffic ratio"
+      />
 
       <div className="mt-3 grid min-w-0 grid-cols-1 gap-2 sm:grid-cols-2">
         <p className="min-w-0 rounded-(--radius-secondary) border border-gray16 bg-black/20 px-2 py-1 font-main text-main-xs text-gray75">

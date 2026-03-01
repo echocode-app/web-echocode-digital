@@ -13,3 +13,7 @@ export {
   getAdminDashboardOverview,
   type DashboardOverviewDto,
 } from '@/server/admin/dashboard';
+export {
+  getAdminSubmissionsOverview,
+  type SubmissionsOverviewDto,
+} from '@/server/admin/submissions/submissions.metrics.service';

@@ -73,7 +73,7 @@ export default function Sidebar({ role }: SidebarProps) {
           type="button"
           onClick={handleLogout}
           disabled={isSigningOut}
-          className="block w-full rounded-(--radius-secondary) border border-gray16 px-3 py-2.5 text-left font-main text-main-sm text-gray75 transition duration-main hover:border-accent-hover hover:text-white disabled:cursor-not-allowed disabled:opacity-60"
+          className="block w-full text-center rounded-(--radius-secondary) border border-gray16 px-3 py-2.5 font-main text-main-sm text-gray75 transition duration-main hover:border-accent-hover hover:text-white disabled:cursor-not-allowed disabled:opacity-60"
         >
           {isSigningOut ? 'Logging out...' : 'Logout'}
         </button>

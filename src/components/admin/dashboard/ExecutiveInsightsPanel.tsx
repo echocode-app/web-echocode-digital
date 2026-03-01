@@ -40,7 +40,7 @@ export default function ExecutiveInsightsPanel({
 
       <div className="mt-3 grid min-w-0 gap-2 sm:grid-cols-2 xl:grid-cols-3">
         <div className="min-w-0 rounded-(--radius-secondary) border border-gray16 bg-black/25 p-2">
-          <p className="font-main text-main-xs text-gray60">Lead quality ratio</p>
+          <h4 className="font-main text-main-xs text-gray60">Lead quality ratio</h4>
           <p className="mt-1 font-title text-title-base text-white">
             <SymbolSafeText text={`${leadQualityRatio.toFixed(2)}%`} />
           </p>
@@ -48,30 +48,30 @@ export default function ExecutiveInsightsPanel({
         </div>
 
         <div className="min-w-0 rounded-(--radius-secondary) border border-gray16 bg-black/25 p-2">
-          <p className="font-main text-main-xs text-gray60">Best performing day</p>
+          <h4 className="font-main text-main-xs text-gray60">Best performing day</h4>
           <p className="mt-1 font-title text-title-base text-white">{bestDay}</p>
           <p className="font-main text-main-xs text-gray75">
             <SymbolSafeText
               text={`${bestDayShare.toFixed(2)}% of project leads, traffic delta ${pct(bestDayTrafficDeltaPct)}`}
-              className="break-words"
+              className="wrap-break-word"
             />
           </p>
         </div>
 
         <div className="min-w-0 rounded-(--radius-secondary) border border-gray16 bg-black/25 p-2">
-          <p className="font-main text-main-xs text-gray60">Best portfolio item</p>
+          <h4 className="font-main text-main-xs text-gray60">Best portfolio item</h4>
           <p className="mt-1 truncate font-title text-title-base text-white">{topPortfolioItem}</p>
           <p className="font-main text-main-xs text-gray75">{topPortfolioViews} views (30d)</p>
         </div>
 
         <div className="min-w-0 rounded-(--radius-secondary) border border-gray16 bg-black/25 p-2">
-          <p className="font-main text-main-xs text-gray60">Most applied vacancy</p>
+          <h4 className="font-main text-main-xs text-gray60">Most applied vacancy</h4>
           <p className="mt-1 truncate font-title text-title-base text-white">{topVacancyItem}</p>
           <p className="font-main text-main-xs text-gray75">{topVacancyApplications} applications (30d)</p>
         </div>
 
         <div className="min-w-0 rounded-(--radius-secondary) border border-gray16 bg-black/25 p-2">
-          <p className="font-main text-main-xs text-gray60">Growth velocity (MoM)</p>
+          <h4 className="font-main text-main-xs text-gray60">Growth velocity (MoM)</h4>
           <p className="mt-1 font-title text-title-base text-white">
             <SymbolSafeText text={pct(growthVelocityMoM)} />
           </p>
@@ -79,7 +79,7 @@ export default function ExecutiveInsightsPanel({
         </div>
 
         <div className="min-w-0 rounded-(--radius-secondary) border border-gray16 bg-black/25 p-2">
-          <p className="font-main text-main-xs text-gray60">Conversion drop-off</p>
+          <h4 className="font-main text-main-xs text-gray60">Conversion drop-off</h4>
           <p className="mt-1 font-title text-title-base text-white">
             <SymbolSafeText text={`${conversionDropOffPct.toFixed(2)}%`} />
           </p>
