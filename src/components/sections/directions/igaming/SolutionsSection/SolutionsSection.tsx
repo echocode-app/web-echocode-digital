@@ -6,7 +6,7 @@ const SolutionsSection = () => {
   return (
     <section className="pt-10 pb-15 md:pb-10">
       <SectionContainer>
-        <div className="flex justify-center lg:justify-between">
+        <div className="flex justify-center gap-2 lg:justify-between">
           <SolutionsImage />
           <div>
             <h2 className="font-title text-title-3xl mb-6">Solutions Ecosystem</h2>
