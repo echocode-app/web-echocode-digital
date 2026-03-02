@@ -5,7 +5,7 @@ import solutions from '@/data/directions/solutions.json';
 
 const SolutionList = () => {
   return (
-    <ul className="max-w-141 flex flex-col gap-6">
+    <ul className="max-w-154 flex flex-col gap-6">
       <li className="flex flex-col gap-3 py-3">
         <div className="flex gap-2">
           <div className="relative w-5.5 h-6">
