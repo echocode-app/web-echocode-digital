@@ -8,7 +8,7 @@ interface ValueSectionProps {
 
 const ValueSection = ({ title, subtitle }: ValueSectionProps) => {
   return (
-    <section className="pb-10 md:pb-27">
+    <section className="pt-10 pb-10 md:pb-27">
       <SectionContainer>
         <div className="mb-2.5">
           <SectionTitle>{title}</SectionTitle>

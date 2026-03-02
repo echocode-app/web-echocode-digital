@@ -1,4 +1,7 @@
 {
+  "heroSection": {
+    "image": { "path": "/images/rabbits/hero/vacancy/qa.png" }
+  },
   "valueSection": {
     "title": "QA that proves its value",
     "subtitle": "Design at Echocode is not just about visuals, it's about hypotheses that turn into revenue. We are looking for a designer with a strong analytical approach who can defend their decisions based on data and user experience."

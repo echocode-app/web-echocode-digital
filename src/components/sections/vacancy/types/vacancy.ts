@@ -1,7 +1,12 @@
 export interface CareerData {
+  heroSection: VacancyHeroSection;
   valueSection: ValueSection;
   descriptionSections: DescriptionSection[];
   selectionSection: SelectionStep[];
+}
+
+export interface VacancyHeroSection {
+  image: { path: string };
 }
 
 export interface ValueSection {

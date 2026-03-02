@@ -9,7 +9,7 @@ const VacanciesList = ({ list }: VacanciesListProps) => {
   return (
     <ul className="flex flex-col items-center gap-10">
       {list.map((item) => (
-        <VacanciesItem key={item.id} {...item} />
+        <VacanciesItem key={item.vacancyId} {...item} />
       ))}
     </ul>
   );
