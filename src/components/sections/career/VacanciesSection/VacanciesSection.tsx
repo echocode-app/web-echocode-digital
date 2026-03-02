@@ -8,23 +8,27 @@ import NotFound from './NotFound';
 const vacancies: Vacancy[] = [
   {
     hotPosition: true,
-    title: 'iOS Developer ',
-    position: '(Trainee)',
+    vacancyTitle: 'iOS Developer ',
+    level: '(Trainee)',
     conditions: ['Engineering', 'Remote'],
-    id: 'iosdev',
+    vacancyId: 'iosdev',
+    vacancySlug: 'iosdev',
+    employmentType: 'Remote / Full-time',
   },
   {
-    hotPosition: false,
-    title: 'QA Engineer ',
-    position: '(Middle)',
+    vacancyTitle: 'QA Engineer ',
+    level: '(Middle)',
     conditions: ['Quality Assurance', 'Remote'],
-    id: 'qaenginer',
+    vacancyId: 'qaengineer',
+    vacancySlug: 'qaengineer',
+    employmentType: 'Remote / Full-time',
   },
   {
-    hotPosition: false,
-    title: 'UI／UX Designer',
+    vacancyTitle: 'UI／UX Designer',
     conditions: ['Design', 'Remote'],
-    id: 'designer',
+    vacancyId: 'designer',
+    vacancySlug: 'designer',
+    employmentType: 'Remote / Full-time',
   },
 ];
 

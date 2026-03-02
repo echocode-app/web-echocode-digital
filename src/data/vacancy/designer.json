@@ -1,0 +1,92 @@
+{
+  "heroSection": {
+    "image": { "path": "/images/rabbits/hero/vacancy/designer.png" }
+  },
+  "valueSection": {
+    "title": "Design that proves its value",
+    "subtitle": "At Echocode, we don’t just find bugs. Our QA department is the guardian of product quality. We are looking for a specialist who understands the business value of a stable release and isn’t afraid to take responsibility for the final result."
+  },
+  "descriptionSections": [
+    {
+      "title": "What will you be working on?",
+      "values": [
+        {
+          "title": "End-to-end Quality:",
+          "desc": "Participation in the formation of product strategy together with CEO and engineers."
+        },
+        {
+          "title": "Conversion Design:",
+          "desc": "Creating and testing interfaces that increase LTV and conversions."
+        },
+        {
+          "title": "RATEDesign System:",
+          "desc": "Support and development of a scalable design system in Figma."
+        },
+        {
+          "title": "RATEUser Feedback:",
+          "desc": "Feedback analysis and iterative UX improvement."
+        }
+      ]
+    },
+    {
+      "title": "Our expectations",
+      "values": [
+        {
+          "title": "Strong portfolio",
+          "desc": "Mobile products (iOS/Android)."
+        },
+        {
+          "title": "Figma Expert Level",
+          "desc": "Auto Layout, Variables, Prototyping."
+        },
+        {
+          "title": "Understanding psychology",
+          "desc": "User and the principles of behavioral economics."
+        },
+        {
+          "title": "Knowledge of technical limitations of platforms",
+          "desc": "What is easy for a developer to implement and what is not."
+        }
+      ]
+    },
+    {
+      "title": "Your Soft Skills Stack",
+      "values": [
+        {
+          "title": "Ability to justify design decisions",
+          "desc": "Every decision has a hypothesis, data, and a clear impact on the user and the business."
+        },
+        {
+          "title": "Willingness to delve into numbers and product metrics",
+          "desc": "We work with conversions, flows, and funnels, not just aesthetics."
+        },
+        {
+          "title": "High level of autonomy",
+          "desc": "The ability to independently lead a task from idea to measurable result."
+        }
+      ]
+    }
+  ],
+  "selectionSection": [
+    {
+      "title": "Step 01",
+      "subTitle": "Portfolio Review",
+      "desc": "We evaluate thinking, decision logic, and the real impact of design."
+    },
+    {
+      "title": "Step 02",
+      "subTitle": "Design Challenge",
+      "desc": "We check how you formulate hypotheses and work with constraints."
+    },
+    {
+      "title": "Step 03",
+      "subTitle": "Interview",
+      "desc": "A conversation with the product team about approach, process, and collaboration."
+    },
+    {
+      "title": "Step 04",
+      "subTitle": "Offer",
+      "desc": "Transparent offer and start of cooperation without unnecessary steps."
+    }
+  ]
+}

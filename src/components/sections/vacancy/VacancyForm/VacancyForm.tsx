@@ -5,17 +5,23 @@ import Image from 'next/image';
 import VacancyImage from './VacancyImage';
 
 interface VacancyFormProps {
-  vacancy: string;
+  vacancyData: {
+    vacancyId: string;
+    vacancySlug?: string;
+    vacancyTitle: string;
+    level?: string;
+    conditions?: string[];
+  };
 }
 
-const VacancyForm = ({ vacancy }: VacancyFormProps) => {
-  console.log(vacancy);
+const VacancyForm = ({ vacancyData }: VacancyFormProps) => {
+  console.log(vacancyData);
   const inputRef = useRef<HTMLInputElement>(null);
   const [fileName, setFileName] = useState<string | null>(null);
 
   return (
     <section className="pb-10 md:pb-4.5">
-      <div className="mb-10 bg-main-gradient w-full h-px" />
+      <div className="mb-10 bg-main-gradient w-full max-w-305 mx-auto h-px" />
       <div
         className="relative max-w-318 px-8 mx-auto flex flex-col  xl:flex-row xl:justify-between 
       items-center xl:items-start gap-58 xl:gap-40"
