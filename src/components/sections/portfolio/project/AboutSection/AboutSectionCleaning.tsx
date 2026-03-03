@@ -25,11 +25,11 @@ const AboutSectionCleaning = () => {
                 src="/images/projects/right-phone.png"
                 alt="right-phone"
                 fill
-                className="object-contain rotate-[22.4deg]"
+                className="object-contain rotate-22"
               />
 
               <Image
-                src="/images/projects/e-commers/right-screen.png"
+                src="/images/projects/cleaning/right-screen.png"
                 alt="screen"
                 fill
                 className="absolute z-10 object-cover scale-104 -translate-x-1 -translate-y-0.5 overflow-visible"
@@ -47,7 +47,7 @@ const AboutSectionCleaning = () => {
                 className="-rotate-22 absolute lg:-translate-y-30"
               />
               <Image
-                src="/images/projects/e-commers/left-screen.png"
+                src="/images/projects/cleaning/left-screen.png"
                 alt="screen"
                 fill
                 className="absolute z-10 object-cover scale-104 translate-x-1 -translate-y-0.5 lg:-translate-y-30.5 overflow-visible"

@@ -1,4 +1,7 @@
 import { AboutSectionECommerse } from '@/components/sections/portfolio/project/AboutSection';
+import { ImplementationSection } from '@/components/sections/portfolio/project/ImplementationSection';
+
+import implementations from '@/data/portfolio/projects/implementations/e-commerce.json';
 
 const ECommers = () => {
   return (
@@ -9,6 +12,10 @@ const ECommers = () => {
         </h1>
       </section>
       <AboutSectionECommerse />
+      <ImplementationSection
+        list={implementations}
+        subtitle="We began with in-depth market research and UI analysis of top-tier fashion apps."
+      />
     </>
   );
 };
