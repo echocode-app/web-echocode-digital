@@ -16,7 +16,7 @@ const ImplementationCleaningSection = () => {
         <div className="flex gap-10 lg:gap-0 flex-col lg:flex-row items-center lg:justify-between">
           <div className="relative aspect-426/324 w-full min-[458px]:w-106.5 min-[458px]:h-81">
             <Image
-              src={'/images/projects/cleaning/implementation.jpg'}
+              src={'/images/projects/cleaning/implementation-cleaning.jpg'}
               alt="Implementation"
               fill
               sizes="426px"
