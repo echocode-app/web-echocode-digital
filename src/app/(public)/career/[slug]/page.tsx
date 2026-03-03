@@ -1,13 +1,12 @@
 import { notFound } from 'next/navigation';
 
 import StaticGradientLine from '@/components/UI/StaticGradientLine';
-import DescriptionSections from '@/components/sections/vacancy/DescriptionSection';
-import HeroSection from '@/components/sections/vacancy/HeroSection';
-import SelectionSection from '@/components/sections/vacancy/SelectionSection';
-import VacancyForm from '@/components/sections/vacancy/VacancyForm';
-import ValueSection from '@/components/sections/vacancy/ValueSection';
-
-import handleStaticVacancy from '@/components/sections/vacancy/utils/handleStaticVacancy';
+import handleStaticVacancy from '@/components/sections/career/vacancy/utils/handleStaticVacancy';
+import HeroSection from '@/components/sections/career/vacancy/HeroSection';
+import ValueSection from '@/components/sections/career/vacancy/ValueSection';
+import DescriptionSections from '@/components/sections/career/vacancy/DescriptionSection';
+import SelectionSection from '@/components/sections/career/vacancy/SelectionSection';
+import VacancyForm from '@/components/sections/career/vacancy/VacancyForm';
 
 import { Vacancy } from '@/components/sections/career/VacanciesSection/types/vacancies';
 
@@ -44,16 +43,16 @@ interface VacancyPageProps {
 
 const VacancyPage = async ({ params }: VacancyPageProps) => {
   const { slug } = await params;
-  const careerData = handleStaticVacancy(slug);
-  const foundVacancy: Vacancy | undefined = vacancies.find(
-    ({ vacancySlug }) => vacancySlug === slug,
+  const vacancy = vacancies.find(
+    ({ vacancySlug, vacancyId }) => vacancySlug === slug || vacancyId === slug,
   );
+  const careerData = handleStaticVacancy(slug);
 
-  if (!careerData || !foundVacancy || !slug) {
+  if (!vacancy || !careerData || !slug) {
     notFound();
   }
 
-  const { vacancyTitle, level, employmentType, vacancyId, vacancySlug, conditions } = foundVacancy;
+  const { vacancyTitle, level, employmentType, vacancyId, vacancySlug, conditions } = vacancy;
   const { heroSection, valueSection, descriptionSections, selectionSection } = careerData;
 
   const formData = {

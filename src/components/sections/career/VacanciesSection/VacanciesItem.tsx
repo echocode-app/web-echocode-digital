@@ -1,7 +1,14 @@
 import Link from 'next/link';
 import { Vacancy } from './types/vacancies';
 
-const VacanciesItem = ({ hotPosition, vacancyTitle, level, conditions, vacancySlug }: Vacancy) => {
+const VacanciesItem = ({
+  hotPosition,
+  vacancyTitle,
+  level,
+  conditions,
+  vacancySlug,
+  vacancyId,
+}: Vacancy) => {
   return (
     <li
       className="flex flex-col gap-3 min-[490px]:flex-row 
@@ -33,7 +40,7 @@ const VacanciesItem = ({ hotPosition, vacancyTitle, level, conditions, vacancySl
         </ul>
       </div>
       <Link
-        href={`/career/${vacancySlug}`}
+        href={`/career/${vacancySlug ? vacancySlug : vacancyId}`}
         className="mx-auto min-[490px]:mx-0 h-fit w-fit font-title text-[10px] bg-main-gradient px-5.5 py-2 rounded-base"
       >
         apply now

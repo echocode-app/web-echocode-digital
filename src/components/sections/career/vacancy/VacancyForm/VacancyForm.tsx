@@ -8,7 +8,7 @@ interface VacancyFormProps {
   vacancyData: {
     vacancyId: string;
     vacancySlug?: string;
-    vacancyTitle: string;
+    vacancyTitle?: string;
     level?: string;
     conditions?: string[];
   };
@@ -90,7 +90,7 @@ const VacancyForm = ({ vacancyData }: VacancyFormProps) => {
           </div>
           <button
             type="submit"
-            className="w-full py-2.5 px-6 font-title bg-main-gradient rounded-base text-[10px]"
+            className="w-full py-2.5 px-6 font-title bg-main-gradient rounded-base text-[10px] cursor-pointer"
           >
             Apply For this poition
           </button>
