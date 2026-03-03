@@ -1,4 +1,5 @@
-import CycleCard from '../../directions/components/CycleCard';
+import CycleCard from '@/components/sections/directions/components/CycleCard';
+
 import { SelectionStep } from '../types/vacancy';
 
 interface SelectionListProps {
