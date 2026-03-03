@@ -1,7 +1,9 @@
 import { AboutSectionFood } from '@/components/sections/portfolio/project/AboutSection';
+import ChallengesSection from '@/components/sections/portfolio/project/ChallengesSection';
 import { ImplementationSection } from '@/components/sections/portfolio/project/ImplementationSection';
 
 import implementations from '@/data/portfolio/projects/implementations/food.json';
+import challenges from '@/data/portfolio/projects/challenges/food.json';
 
 const Food = () => {
   return (
@@ -15,6 +17,11 @@ const Food = () => {
       <ImplementationSection
         list={implementations}
         subtitle="We began with in-depth market research and UI analysis of top-tier fashion apps."
+      />
+      <ChallengesSection
+        list={challenges}
+        image="/images/projects/food/challenges.jpg"
+        position="0% 50%"
       />
     </>
   );
