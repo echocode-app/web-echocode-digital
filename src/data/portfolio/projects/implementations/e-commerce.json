@@ -1,0 +1,27 @@
+[
+  {
+    "title": "01. STRATEGY",
+    "subTitle": "Analysis",
+    "desc": "Competitor research User journey mapping"
+  },
+  {
+    "title": "02. UX／UI",
+    "subTitle": "Design",
+    "desc": "UX flows & wireframes Clean, modular UI design"
+  },
+  {
+    "title": "03. CODE",
+    "subTitle": "Development",
+    "desc": "Agile iOS development E-commerce features"
+  },
+  {
+    "title": "04. DEVOPS",
+    "subTitle": "Integration",
+    "desc": "Payments & shipping APIs Third-party services"
+  },
+  {
+    "title": "05. GROWTH",
+    "subTitle": "Release ＆ ASO",
+    "desc": "Testing & QA assurance Product launch"
+  }
+]

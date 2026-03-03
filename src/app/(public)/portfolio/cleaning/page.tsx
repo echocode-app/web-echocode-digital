@@ -1,4 +1,5 @@
 import AboutSectionCleaning from '@/components/sections/portfolio/project/AboutSection/AboutSectionCleaning';
+import { ImplementationCleaningSection } from '@/components/sections/portfolio/project/ImplementationSection';
 
 const Cleaning = () => {
   return (
@@ -9,6 +10,7 @@ const Cleaning = () => {
         </h1>
       </section>
       <AboutSectionCleaning />
+      <ImplementationCleaningSection />
     </>
   );
 };
