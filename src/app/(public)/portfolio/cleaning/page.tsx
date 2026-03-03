@@ -1,5 +1,8 @@
 import AboutSectionCleaning from '@/components/sections/portfolio/project/AboutSection/AboutSectionCleaning';
+import ChallengesSection from '@/components/sections/portfolio/project/ChallengesSection';
 import { ImplementationCleaningSection } from '@/components/sections/portfolio/project/ImplementationSection';
+
+import challenges from '@/data/portfolio/projects/challenges/cleaning.json';
 
 const Cleaning = () => {
   return (
@@ -11,6 +14,11 @@ const Cleaning = () => {
       </section>
       <AboutSectionCleaning />
       <ImplementationCleaningSection />
+      <ChallengesSection
+        list={challenges}
+        image="/images/projects/cleaning/challenges.png"
+        position="50% 50%"
+      />
     </>
   );
 };

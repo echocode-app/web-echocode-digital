@@ -1,7 +1,9 @@
 import { AboutSectionECommerse } from '@/components/sections/portfolio/project/AboutSection';
+import ChallengesSection from '@/components/sections/portfolio/project/ChallengesSection';
 import { ImplementationSection } from '@/components/sections/portfolio/project/ImplementationSection';
 
 import implementations from '@/data/portfolio/projects/implementations/e-commerce.json';
+import challenges from '@/data/portfolio/projects/challenges/e-commerce.json';
 
 const ECommers = () => {
   return (
@@ -15,6 +17,11 @@ const ECommers = () => {
       <ImplementationSection
         list={implementations}
         subtitle="We began with in-depth market research and UI analysis of top-tier fashion apps."
+      />
+      <ChallengesSection
+        list={challenges}
+        image="/images/projects/e-commers/challenges.jpg"
+        position="0% 50%"
       />
     </>
   );
