@@ -2,10 +2,12 @@ import { AboutSectionFood } from '@/components/sections/portfolio/project/AboutS
 import ChallengesSection from '@/components/sections/portfolio/project/ChallengesSection';
 import { ImplementationSection } from '@/components/sections/portfolio/project/ImplementationSection';
 import PlanningSection from '@/components/sections/portfolio/project/PlanningSection/PlanningSection';
+import FeaturesSection from '@/components/sections/portfolio/project/FeaturesSection';
 
 import implementations from '@/data/portfolio/projects/implementations/food.json';
 import challenges from '@/data/portfolio/projects/challenges/food.json';
 import planning from '@/data/portfolio/projects/planning/food.json';
+import features from '@/data/portfolio/projects/features/food.json';
 
 const Food = () => {
   return (
@@ -30,6 +32,7 @@ const Food = () => {
         image={'/images/projects/food/planning.png'}
         imageStyle="relative w-full max-w-[570px] aspect-570/600"
       />
+      <FeaturesSection list={features} />
     </>
   );
 };

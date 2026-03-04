@@ -1,11 +1,13 @@
 import { AboutSectionECommerse } from '@/components/sections/portfolio/project/AboutSection';
-import ChallengesSection from '@/components/sections/portfolio/project/ChallengesSection';
 import { ImplementationSection } from '@/components/sections/portfolio/project/ImplementationSection';
-import PlanningSection from '@/components/sections/portfolio/project/PlanningSection/PlanningSection';
+import ChallengesSection from '@/components/sections/portfolio/project/ChallengesSection';
+import PlanningSection from '@/components/sections/portfolio/project/PlanningSection';
+import FeaturesSection from '@/components/sections/portfolio/project/FeaturesSection/FeaturesSection';
 
 import implementations from '@/data/portfolio/projects/implementations/e-commerce.json';
 import challenges from '@/data/portfolio/projects/challenges/e-commerce.json';
-import planning from '@/data/portfolio/projects/planning/e-commers.json';
+import planning from '@/data/portfolio/projects/planning/e-commerce.json';
+import features from '@/data/portfolio/projects/features/e-commerce.json';
 
 const ECommers = () => {
   return (
@@ -30,6 +32,7 @@ const ECommers = () => {
         image={'/images/projects/e-commers/planning.png'}
         imageStyle="relative w-full max-w-157.5 aspect-157.5/139"
       />
+      <FeaturesSection list={features} />
     </>
   );
 };
