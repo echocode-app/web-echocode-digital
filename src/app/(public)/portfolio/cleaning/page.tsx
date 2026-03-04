@@ -1,8 +1,10 @@
 import AboutSectionCleaning from '@/components/sections/portfolio/project/AboutSection/AboutSectionCleaning';
 import ChallengesSection from '@/components/sections/portfolio/project/ChallengesSection';
 import { ImplementationCleaningSection } from '@/components/sections/portfolio/project/ImplementationSection';
+import PlanningSection from '@/components/sections/portfolio/project/PlanningSection/PlanningSection';
 
 import challenges from '@/data/portfolio/projects/challenges/cleaning.json';
+import planning from '@/data/portfolio/projects/planning/cleaning.json';
 
 const Cleaning = () => {
   return (
@@ -18,6 +20,11 @@ const Cleaning = () => {
         list={challenges}
         image="/images/projects/cleaning/challenges.png"
         position="50% 50%"
+      />
+      <PlanningSection
+        list={planning}
+        image={'/images/projects/cleaning/planning.png'}
+        imageStyle="relative w-full max-w-[570px] aspect-570/600"
       />
     </>
   );

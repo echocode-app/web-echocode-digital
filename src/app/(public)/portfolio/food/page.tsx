@@ -1,9 +1,11 @@
 import { AboutSectionFood } from '@/components/sections/portfolio/project/AboutSection';
 import ChallengesSection from '@/components/sections/portfolio/project/ChallengesSection';
 import { ImplementationSection } from '@/components/sections/portfolio/project/ImplementationSection';
+import PlanningSection from '@/components/sections/portfolio/project/PlanningSection/PlanningSection';
 
 import implementations from '@/data/portfolio/projects/implementations/food.json';
 import challenges from '@/data/portfolio/projects/challenges/food.json';
+import planning from '@/data/portfolio/projects/planning/food.json';
 
 const Food = () => {
   return (
@@ -22,6 +24,11 @@ const Food = () => {
         list={challenges}
         image="/images/projects/food/challenges.jpg"
         position="0% 50%"
+      />
+      <PlanningSection
+        list={planning}
+        image={'/images/projects/food/planning.png'}
+        imageStyle="relative w-full max-w-[570px] aspect-570/600"
       />
     </>
   );

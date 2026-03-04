@@ -1,0 +1,31 @@
+[
+  {
+    "title": "Input",
+    "desc": [
+      "Two-sided platform for clients and cleaners",
+      "Flexible scheduling with transparent pricing",
+      "Stripe integration for payments",
+      "Clear admin dashboard & simple UX",
+      "In-app messaging & reviews"
+    ]
+  },
+  {
+    "title": "Analysis",
+    "desc": [
+      "Defined user personas and mapped journeys",
+      "Modeled all feature modules",
+      "Created wireframes and prototypes",
+      "Planned timeline and phased rollout"
+    ]
+  },
+  {
+    "title": "Outcomes",
+    "desc": [
+      "Native iOS app with intuitive interface",
+      "Secure Stripe payments",
+      "Role-based access for clients, cleaners, admins",
+      "Admin dashboard with stats & controls",
+      "Integrated feedback and review system"
+    ]
+  }
+]

@@ -1,9 +1,11 @@
 import { AboutSectionECommerse } from '@/components/sections/portfolio/project/AboutSection';
 import ChallengesSection from '@/components/sections/portfolio/project/ChallengesSection';
 import { ImplementationSection } from '@/components/sections/portfolio/project/ImplementationSection';
+import PlanningSection from '@/components/sections/portfolio/project/PlanningSection/PlanningSection';
 
 import implementations from '@/data/portfolio/projects/implementations/e-commerce.json';
 import challenges from '@/data/portfolio/projects/challenges/e-commerce.json';
+import planning from '@/data/portfolio/projects/planning/e-commers.json';
 
 const ECommers = () => {
   return (
@@ -22,6 +24,11 @@ const ECommers = () => {
         list={challenges}
         image="/images/projects/e-commers/challenges.jpg"
         position="0% 50%"
+      />
+      <PlanningSection
+        list={planning}
+        image={'/images/projects/e-commers/planning.png'}
+        imageStyle="relative w-full max-w-157.5 aspect-157.5/139"
       />
     </>
   );
