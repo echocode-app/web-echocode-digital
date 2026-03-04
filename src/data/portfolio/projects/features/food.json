@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Visual Menu Browsing",
+    "desc": "Categorized dishes with rich visuals and details"
+  },
+  {
+    "title": "Favorites",
+    "desc": "Users can save favorite items for quick reordering"
+  },
+  {
+    "title": "Geolocation",
+    "desc": "Detects nearby restaurants and filters results by distance"
+  },
+  {
+    "title": "Loyalty Program",
+    "desc": "Users track point balance, history, and rewards"
+  },
+  {
+    "title": "Promotions ＆ News",
+    "desc": "Live feed of seasonal offers and announcements"
+  },
+  {
+    "title": "QR Scanner",
+    "desc": "Enables users to unlock offers or earn rewards in-store"
+  }
+]

@@ -1,5 +1,6 @@
 import AboutSectionCleaning from '@/components/sections/portfolio/project/AboutSection/AboutSectionCleaning';
 import ChallengesSection from '@/components/sections/portfolio/project/ChallengesSection';
+import FeaturesCleanning from '@/components/sections/portfolio/project/FeaturesSection/FeaturesCleanning';
 import { ImplementationCleaningSection } from '@/components/sections/portfolio/project/ImplementationSection';
 import PlanningSection from '@/components/sections/portfolio/project/PlanningSection/PlanningSection';
 
@@ -26,6 +27,7 @@ const Cleaning = () => {
         image={'/images/projects/cleaning/planning.png'}
         imageStyle="relative w-full max-w-[570px] aspect-570/600"
       />
+      <FeaturesCleanning />
     </>
   );
 };

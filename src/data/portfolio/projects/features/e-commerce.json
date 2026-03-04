@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Favorites",
+    "desc": "Allows users to save items and return to them later"
+  },
+  {
+    "title": "Cart ＆ Checkout",
+    "desc": "Smooth and secure payment flow via Stripe and PayPal"
+  },
+  {
+    "title": "Order History",
+    "desc": "View previous purchases and order statuses"
+  },
+  {
+    "title": "Category-based catalog",
+    "desc": "Filtered by gender, age, brand, size, and price"
+  },
+  {
+    "title": "Personal User Account",
+    "desc": "Track orders, update info, manage preferences"
+  },
+  {
+    "title": "Real-time Shipping",
+    "desc": "FedEx (US) and DPD (EU) \nintegration"
+  }
+]
