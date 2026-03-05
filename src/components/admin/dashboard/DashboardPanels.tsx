@@ -39,42 +39,67 @@ export function ChartPanel({
 
 export function ActionsPanel() {
   return (
-    <article className="min-w-0 rounded-(--radius-base) border border-gray16 bg-base-gray p-4">
-      <h2 className="font-main text-title-xs uppercase tracking-[0.2em] text-gray60">Actions</h2>
-      <div className="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2 sm:gap-3 lg:grid-cols-3">
+    <article className="min-w-0">
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <h2 className="font-main text-title-xs uppercase tracking-[0.2em] text-gray60">Actions</h2>
+        <p className="font-main text-main-xs text-gray60">Internal admin quick links</p>
+      </div>
+
+      <div className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2">
         <Link
           href="/"
-          className="rounded-(--radius-secondary) border border-gray16 bg-black/40 px-2.5 py-1.5 text-center font-main text-main-xs text-gray75 transition duration-main hover:border-accent-hover hover:text-white sm:px-3 sm:py-2 sm:text-main-sm"
+          className="rounded-(--radius-secondary) border border-[#8f6bff]/40 bg-[#8f6bff]/14 px-2.5 py-1.5 text-center font-main text-main-xs text-[#e5dcff] transition duration-main hover:border-[#8f6bff]/60 hover:text-white sm:px-3 sm:py-2 sm:text-main-sm"
         >
           echocode.digital
         </Link>
         <Link
+          href="https://echocode.app/"
+          className="rounded-(--radius-secondary) border border-[#ff9f43]/40 bg-[linear-gradient(90deg,rgba(255,121,63,0.16),rgba(255,186,93,0.16))] px-2.5 py-1.5 text-center font-main text-main-xs text-[#ffe1c2] transition duration-main hover:border-[#ff9f43]/60 hover:text-white sm:px-3 sm:py-2 sm:text-main-sm"
+        >
+          echocode.app
+        </Link>
+      </div>
+
+      <div className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4">
+        <Link
+          href="/admin/dashboard"
+          className="rounded-(--radius-secondary) border border-gray16/80 bg-black/20 px-2.5 py-1.5 text-center font-main text-main-xs text-gray60 transition duration-main hover:border-gray16 hover:text-gray75 sm:px-3 sm:py-2 sm:text-main-sm"
+        >
+          Dashboard
+        </Link>
+        <Link
           href="/admin/submissions"
-          className="rounded-(--radius-secondary) border border-gray16 bg-black/40 px-2.5 py-1.5 text-center font-main text-main-xs text-gray75 transition duration-main hover:border-accent-hover hover:text-white sm:px-3 sm:py-2 sm:text-main-sm"
+          className="rounded-(--radius-secondary) border border-gray16/80 bg-black/20 px-2.5 py-1.5 text-center font-main text-main-xs text-gray60 transition duration-main hover:border-gray16 hover:text-gray75 sm:px-3 sm:py-2 sm:text-main-sm"
         >
           Submissions metrics
         </Link>
         <Link
+          href="/admin/submissions/clients"
+          className="rounded-(--radius-secondary) border border-gray16/80 bg-black/20 px-2.5 py-1.5 text-center font-main text-main-xs text-gray60 transition duration-main hover:border-gray16 hover:text-gray75 sm:px-3 sm:py-2 sm:text-main-sm"
+        >
+          Clients
+        </Link>
+        <Link
           href="/admin/portfolio"
-          className="rounded-(--radius-secondary) border border-gray16 bg-black/40 px-2.5 py-1.5 text-center font-main text-main-xs text-gray75 transition duration-main hover:border-accent-hover hover:text-white sm:px-3 sm:py-2 sm:text-main-sm"
+          className="rounded-(--radius-secondary) border border-gray16/80 bg-black/20 px-2.5 py-1.5 text-center font-main text-main-xs text-gray60 transition duration-main hover:border-gray16 hover:text-gray75 sm:px-3 sm:py-2 sm:text-main-sm"
         >
           Portfolio
         </Link>
         <Link
           href="/admin/vacancies"
-          className="rounded-(--radius-secondary) border border-gray16 bg-black/40 px-2.5 py-1.5 text-center font-main text-main-xs text-gray75 transition duration-main hover:border-accent-hover hover:text-white sm:px-3 sm:py-2 sm:text-main-sm"
+          className="rounded-(--radius-secondary) border border-gray16/80 bg-black/20 px-2.5 py-1.5 text-center font-main text-main-xs text-gray60 transition duration-main hover:border-gray16 hover:text-gray75 sm:px-3 sm:py-2 sm:text-main-sm"
         >
           Vacancies
         </Link>
         <Link
           href="/admin/logs"
-          className="rounded-(--radius-secondary) border border-gray16 bg-black/40 px-2.5 py-1.5 text-center font-main text-main-xs text-gray75 transition duration-main hover:border-accent-hover hover:text-white sm:px-3 sm:py-2 sm:text-main-sm"
+          className="rounded-(--radius-secondary) border border-gray16/80 bg-black/20 px-2.5 py-1.5 text-center font-main text-main-xs text-gray60 transition duration-main hover:border-gray16 hover:text-gray75 sm:px-3 sm:py-2 sm:text-main-sm"
         >
           Logs
         </Link>
         <Link
           href="/admin/info"
-          className="rounded-(--radius-secondary) border border-gray16 bg-black/40 px-2.5 py-1.5 text-center font-main text-main-xs text-gray75 transition duration-main hover:border-accent-hover hover:text-white sm:px-3 sm:py-2 sm:text-main-sm"
+          className="rounded-(--radius-secondary) border border-gray16/80 bg-black/20 px-2.5 py-1.5 text-center font-main text-main-xs text-gray60 transition duration-main hover:border-gray16 hover:text-gray75 sm:px-3 sm:py-2 sm:text-main-sm"
         >
           Info
         </Link>

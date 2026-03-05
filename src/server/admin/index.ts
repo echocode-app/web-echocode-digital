@@ -11,6 +11,7 @@ export {
 } from '@/server/admin/admin-logs.service';
 export {
   getAdminDashboardOverview,
+  getAdminDashboardGeography,
   type DashboardOverviewDto,
 } from '@/server/admin/dashboard';
 export {

@@ -13,42 +13,22 @@ import {
   type ChartOptions,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import type { TrafficVsLeadsPointDto } from '@/server/admin/dashboard/dashboard.types';
+import type { DashboardPeriod, TrafficVsLeadsPointDto } from '@/server/admin/dashboard/dashboard.types';
+import { ADMIN_MONTH_SHORT_LABELS_EN } from '@/shared/admin/constants';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Legend, Filler);
 
 type AreaTrafficChartProps = {
   data: TrafficVsLeadsPointDto[];
+  period: DashboardPeriod;
 };
 
-function buildMonthDates(baseDateIso: string): string[] {
-  const baseDate = new Date(`${baseDateIso}T00:00:00.000Z`);
-  const year = baseDate.getUTCFullYear();
-  const month = baseDate.getUTCMonth();
-  const monthStart = new Date(Date.UTC(year, month, 1));
-  const nextMonthStart = new Date(Date.UTC(year, month + 1, 1));
-  const daysInMonth = Math.round((nextMonthStart.getTime() - monthStart.getTime()) / (24 * 60 * 60 * 1000));
-
-  return Array.from({ length: daysInMonth }, (_, index) => {
-    const day = new Date(monthStart.getTime() + index * 24 * 60 * 60 * 1000);
-    return day.toISOString().slice(0, 10);
-  });
-}
-
-function normalizeToFullMonth(data: TrafficVsLeadsPointDto[]): TrafficVsLeadsPointDto[] {
-  const todayIso = new Date().toISOString().slice(0, 10);
-  const baseDateIso = data[0]?.date ?? todayIso;
-  const fullMonthDates = buildMonthDates(baseDateIso);
-  const byDate = new Map(data.map((item) => [item.date, item]));
-
-  return fullMonthDates.map((date) => {
-    const point = byDate.get(date);
-    return {
-      date,
-      traffic: point?.traffic ?? 0,
-      leads: point?.leads ?? 0,
-    };
-  });
+function formatLabel(dateIso: string, period: DashboardPeriod): string {
+  if (period === 'year') {
+    const month = dateIso.slice(5, 7);
+    return ADMIN_MONTH_SHORT_LABELS_EN[month] ?? month;
+  }
+  return dateIso.slice(8);
 }
 
 const baseOptions: ChartOptions<'line'> = {
@@ -100,10 +80,9 @@ const baseOptions: ChartOptions<'line'> = {
   },
 };
 
-function AreaTrafficChart({ data }: AreaTrafficChartProps) {
-  const normalizedData = useMemo(() => normalizeToFullMonth(data), [data]);
-  const isAllZero = normalizedData.every((item) => item.traffic === 0 && item.leads === 0);
-  const maxValue = normalizedData.reduce((acc, item) => Math.max(acc, item.traffic, item.leads), 0);
+function AreaTrafficChart({ data, period }: AreaTrafficChartProps) {
+  const isAllZero = data.every((item) => item.traffic === 0 && item.leads === 0);
+  const maxValue = data.reduce((acc, item) => Math.max(acc, item.traffic, item.leads), 0);
 
   const options = useMemo<ChartOptions<'line'>>(
     () => ({
@@ -129,11 +108,11 @@ function AreaTrafficChart({ data }: AreaTrafficChartProps) {
 
   const chartData = useMemo(
     () => ({
-      labels: normalizedData.map((item) => item.date.slice(8)),
+      labels: data.map((item) => formatLabel(item.date, period)),
       datasets: [
         {
           label: 'Traffic',
-          data: normalizedData.map((item) => item.traffic),
+          data: data.map((item) => item.traffic),
           borderColor: '#fac175',
           pointRadius: isAllZero ? 2 : 0,
           pointHoverRadius: 3,
@@ -144,7 +123,7 @@ function AreaTrafficChart({ data }: AreaTrafficChartProps) {
         },
         {
           label: 'Leads',
-          data: normalizedData.map((item) => item.leads),
+          data: data.map((item) => item.leads),
           borderColor: '#fd266c',
           pointRadius: isAllZero ? 2 : 0,
           pointHoverRadius: 3,
@@ -155,14 +134,14 @@ function AreaTrafficChart({ data }: AreaTrafficChartProps) {
         },
       ],
     }),
-    [isAllZero, normalizedData],
+    [data, isAllZero, period],
   );
 
   if (isAllZero) {
     return (
       <div className="flex h-full min-h-0 items-center justify-center rounded-(--radius-secondary) border border-dashed border-gray16 bg-black/20 p-3 text-center">
         <p className="font-main text-main-xs text-gray60">
-          No tracked page views or leads yet for the current month.
+          No tracked page views or leads yet for {period === 'year' ? 'the current year' : `the current ${period}`}.
         </p>
       </div>
     );

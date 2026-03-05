@@ -47,7 +47,7 @@ export default function VacanciesOverviewGrid() {
   return (
     <section className="min-w-0 space-y-4">
       {showSection(1) ? (
-        <div className="grid min-w-0 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+        <div className="grid min-w-0 gap-4 md:grid-cols-2 xl:grid-cols-3">
           {overview ? (
             <>
               <KpiCard metricKey="vacancyLeads" title="Vacancy leads (7d)" metric={overview.kpis.vacancyLeads} />

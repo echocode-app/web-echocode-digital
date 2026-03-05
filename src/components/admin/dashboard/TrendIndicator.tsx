@@ -40,7 +40,7 @@ export default function TrendIndicator({ trend }: TrendIndicatorProps) {
   const trendText = `${prefix}${trend.changePct.toFixed(2)}%`;
 
   return (
-    <div className={`inline-flex items-center gap-1.5 font-main text-main-xs ${trendColor(trend.direction)}`}>
+    <div className={`inline-flex flex-wrap items-center gap-1.5 font-main text-main-xs leading-tight ${trendColor(trend.direction)}`}>
       <TrendArrow direction={trend.direction} />
       <SymbolSafeText text={trendText} />
     </div>

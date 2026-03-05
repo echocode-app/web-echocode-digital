@@ -1,54 +1,31 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import type { DashboardOverviewDto } from '@/server/admin/dashboard/dashboard.types';
-import { getFirebaseClientAuth } from '@/lib/firebase/client';
+import { fetchAdminData } from '@/components/admin/api/fetchAdminData';
+import type { DashboardOverviewDto, DashboardPeriod } from '@/server/admin/dashboard/dashboard.types';
 
 export type DashboardOverviewLoadState = 'loading' | 'ready' | 'error';
 
-async function fetchDashboardOverview(signal: AbortSignal): Promise<DashboardOverviewDto> {
-  const auth = getFirebaseClientAuth();
-  const user = auth.currentUser;
-
-  if (!user) {
-    throw new Error('Unauthorized');
-  }
-
-  const token = await user.getIdToken(true);
-
-  const response = await fetch('/api/admin/dashboard/overview', {
-    method: 'GET',
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-    cache: 'no-store',
+async function fetchDashboardOverview(
+  period: DashboardPeriod,
+  signal: AbortSignal,
+): Promise<DashboardOverviewDto> {
+  return fetchAdminData<DashboardOverviewDto>({
+    url: `/api/admin/dashboard/overview?period=${period}`,
     signal,
+    requestErrorMessage: 'Failed to fetch dashboard overview',
+    payloadErrorMessage: 'Invalid dashboard payload',
   });
-
-  if (!response.ok) {
-    throw new Error('Failed to fetch dashboard overview');
-  }
-
-  const payload = (await response.json()) as {
-    success: boolean;
-    data?: DashboardOverviewDto;
-  };
-
-  if (!payload.success || !payload.data) {
-    throw new Error('Invalid dashboard payload');
-  }
-
-  return payload.data;
 }
 
-export function useDashboardOverview() {
+export function useDashboardOverview(period: DashboardPeriod = 'week') {
   const [overview, setOverview] = useState<DashboardOverviewDto | null>(null);
   const [state, setState] = useState<DashboardOverviewLoadState>('loading');
 
   useEffect(() => {
     const controller = new AbortController();
 
-    fetchDashboardOverview(controller.signal)
+    fetchDashboardOverview(period, controller.signal)
       .then((data) => {
         setOverview(data);
         setState('ready');
@@ -61,7 +38,7 @@ export function useDashboardOverview() {
       });
 
     return () => controller.abort();
-  }, []);
+  }, [period]);
 
   return { overview, state };
 }

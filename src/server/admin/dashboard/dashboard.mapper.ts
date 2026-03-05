@@ -73,6 +73,7 @@ function mapKpi(
 
 export function mapDashboardOverview(raw: DashboardRawAggregates): DashboardOverviewDto {
   return {
+    trafficVsLeadsPeriod: raw.trafficVsLeadsPeriod,
     kpis: {
       totalSubmissions: mapKpi('totalSubmissions', raw),
       projectLeads: mapKpi('projectLeads', raw),

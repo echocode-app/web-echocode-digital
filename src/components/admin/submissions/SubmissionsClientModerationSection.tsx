@@ -1,7 +1,6 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import Link from 'next/link';
 import { useMemo } from 'react';
 import { ChartPanel, ChartSkeleton } from '@/components/admin/dashboard/DashboardPanels';
 import { useClientSubmissionsOverview } from '@/components/admin/client-submissions/useClientSubmissionsOverview';
@@ -84,15 +83,6 @@ export default function SubmissionsClientModerationSection() {
           </div>
         )}
       </ChartPanel>
-
-      <div className="flex justify-end">
-        <Link
-          href="/admin/submissions/clients"
-          className="rounded-(--radius-secondary) border border-gray16 bg-black/40 px-3 py-2 font-main text-main-sm text-gray75 transition duration-main hover:border-accent-hover hover:text-white"
-        >
-          Open client submissions moderation
-        </Link>
-      </div>
     </section>
   );
 }

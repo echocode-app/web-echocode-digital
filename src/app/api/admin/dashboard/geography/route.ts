@@ -1,12 +1,12 @@
-import { getAdminDashboardOverview } from '@/server/admin';
-import { withAdminApi } from '@/server/lib';
 import { z } from 'zod';
+import { getAdminDashboardGeography } from '@/server/admin';
+import { withAdminApi } from '@/server/lib';
 
 export const runtime = 'nodejs';
 
 export const GET = withAdminApi(
   async ({ query }) => {
-    return getAdminDashboardOverview(query.period);
+    return getAdminDashboardGeography(query.period);
   },
   {
     permissions: 'admin.access',
@@ -15,5 +15,3 @@ export const GET = withAdminApi(
     }),
   },
 );
-
-// http://localhost:3000/admin/dashboard?mockDashboard=1   ---> mock

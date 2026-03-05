@@ -59,6 +59,7 @@ export function mapSubmissionsOverview(
   const errorRate = raw.kpis.errorRate7d;
 
   return {
+    period: raw.period,
     kpis: {
       submissions7d: toKpi(raw.kpis.submissions7d.current, raw.kpis.submissions7d.previous),
       conversion7d: toKpi(raw.kpis.conversion7d.current, raw.kpis.conversion7d.previous),
@@ -84,19 +85,15 @@ export function mapSubmissionsOverview(
       dropOffRate: sanitizeNumber(raw.funnel.dropOffRate),
     },
     charts: {
-      submissionsTrendYtd: raw.charts.submissionsTrendYtd.map((point) => ({
-        month: point.month,
+      submissionsTrend: raw.charts.submissionsTrend.map((point) => ({
+        label: point.label,
         value: sanitizeNumber(point.value),
       })),
-      ...(raw.charts.errorsTrendCurrentMonth
-        ? {
-            errorsTrendCurrentMonth: raw.charts.errorsTrendCurrentMonth.map((point) => ({
-              date: point.date,
-              success: sanitizeNumber(point.success),
-              error: sanitizeNumber(point.error),
-            })),
-          }
-        : {}),
+      errorsTrend: raw.charts.errorsTrend.map((point) => ({
+        label: point.label,
+        success: sanitizeNumber(point.success),
+        error: sanitizeNumber(point.error),
+      })),
     },
   };
 }

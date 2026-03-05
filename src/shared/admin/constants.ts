@@ -13,6 +13,21 @@ export const ADMIN_MONTH_SHORT_LABELS_EN: Record<string, string> = {
   '12': 'Dec',
 };
 
+export const ADMIN_PERIOD_VALUES = ['week', 'month', 'year'] as const;
+export type AdminPeriodValue = (typeof ADMIN_PERIOD_VALUES)[number];
+
+export const ADMIN_PERIOD_LABEL: Record<AdminPeriodValue, string> = {
+  week: 'Current week',
+  month: 'Current month',
+  year: 'Current year',
+};
+
+export const ADMIN_PERIOD_SWITCH_LABEL: Record<AdminPeriodValue, string> = {
+  week: '7',
+  month: 'month',
+  year: 'year',
+};
+
 export const CLIENT_SUBMISSION_STATUS_VALUES = [
   'new',
   'viewed',
@@ -28,4 +43,3 @@ export const EMPTY_CLIENT_SUBMISSION_STATUS_COUNTS = {
   rejected: 0,
   deferred: 0,
 } as const;
-
