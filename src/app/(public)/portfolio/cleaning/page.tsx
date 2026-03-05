@@ -3,6 +3,7 @@ import ChallengesSection from '@/components/sections/portfolio/project/Challenge
 import FeaturesCleanning from '@/components/sections/portfolio/project/FeaturesSection/FeaturesCleanning';
 import { ImplementationCleaningSection } from '@/components/sections/portfolio/project/ImplementationSection';
 import PlanningSection from '@/components/sections/portfolio/project/PlanningSection/PlanningSection';
+import ScreensSection from '@/components/sections/portfolio/project/ScreensSection';
 
 import challenges from '@/data/portfolio/projects/challenges/cleaning.json';
 import planning from '@/data/portfolio/projects/planning/cleaning.json';
@@ -28,6 +29,7 @@ const Cleaning = () => {
         imageStyle="relative w-full max-w-[570px] aspect-570/600"
       />
       <FeaturesCleanning />
+      <ScreensSection imagePath="/images/projects/cleaning/screens.png" />
     </>
   );
 };
