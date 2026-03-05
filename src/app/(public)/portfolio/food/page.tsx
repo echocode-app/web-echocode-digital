@@ -3,6 +3,7 @@ import ChallengesSection from '@/components/sections/portfolio/project/Challenge
 import { ImplementationSection } from '@/components/sections/portfolio/project/ImplementationSection';
 import PlanningSection from '@/components/sections/portfolio/project/PlanningSection/PlanningSection';
 import FeaturesSection from '@/components/sections/portfolio/project/FeaturesSection';
+import ScreensSection from '@/components/sections/portfolio/project/ScreensSection';
 
 import implementations from '@/data/portfolio/projects/implementations/food.json';
 import challenges from '@/data/portfolio/projects/challenges/food.json';
@@ -33,6 +34,7 @@ const Food = () => {
         imageStyle="relative w-full max-w-[570px] aspect-570/600"
       />
       <FeaturesSection list={features} />
+      <ScreensSection imagePath="/images/projects/food/screens.png" />
     </>
   );
 };

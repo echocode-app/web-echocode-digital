@@ -3,6 +3,7 @@ import { ImplementationSection } from '@/components/sections/portfolio/project/I
 import ChallengesSection from '@/components/sections/portfolio/project/ChallengesSection';
 import PlanningSection from '@/components/sections/portfolio/project/PlanningSection';
 import FeaturesSection from '@/components/sections/portfolio/project/FeaturesSection/FeaturesSection';
+import ScreensSection from '@/components/sections/portfolio/project/ScreensSection';
 
 import implementations from '@/data/portfolio/projects/implementations/e-commerce.json';
 import challenges from '@/data/portfolio/projects/challenges/e-commerce.json';
@@ -33,6 +34,7 @@ const ECommers = () => {
         imageStyle="relative w-full max-w-157.5 aspect-157.5/139"
       />
       <FeaturesSection list={features} />
+      <ScreensSection imagePath="/images/projects/e-commers/screens.png" />
     </>
   );
 };
