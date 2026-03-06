@@ -4,6 +4,7 @@ import ChallengesSection from '@/components/sections/portfolio/project/Challenge
 import PlanningSection from '@/components/sections/portfolio/project/PlanningSection';
 import FeaturesSection from '@/components/sections/portfolio/project/FeaturesSection/FeaturesSection';
 import ScreensSection from '@/components/sections/portfolio/project/ScreensSection';
+import ProptotypeSection from '@/components/sections/portfolio/project/PrototypeSection';
 
 import implementations from '@/data/portfolio/projects/implementations/e-commerce.json';
 import challenges from '@/data/portfolio/projects/challenges/e-commerce.json';
@@ -35,6 +36,18 @@ const ECommers = () => {
       />
       <FeaturesSection list={features} />
       <ScreensSection imagePath="/images/projects/e-commers/screens.png" />
+      <ProptotypeSection
+        leftBgImage={'/images/projects/e-commers/left-bg.png'}
+        rightBgImage={'/images/projects/e-commers/right-bg.png'}
+      >
+        <iframe
+          src="https://embed.figma.com/proto/8M2Etv0l9Hgs656uoInQmT/e-commerce?scaling=scale-down&content-scaling=fixed&page-id=0%3A1&node-id=0-8167&starting-point-node-id=0%3A8167&embed-host=share&hide-ui=1"
+          allowFullScreen
+          title="Interactive prototype of the E-commerce App"
+          width="354px"
+          height="697px"
+        />
+      </ProptotypeSection>
     </>
   );
 };
