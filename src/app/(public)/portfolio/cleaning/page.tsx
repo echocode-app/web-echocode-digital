@@ -3,6 +3,7 @@ import ChallengesSection from '@/components/sections/portfolio/project/Challenge
 import FeaturesCleanning from '@/components/sections/portfolio/project/FeaturesSection/FeaturesCleanning';
 import { ImplementationCleaningSection } from '@/components/sections/portfolio/project/ImplementationSection';
 import PlanningSection from '@/components/sections/portfolio/project/PlanningSection/PlanningSection';
+import ProptotypeSection from '@/components/sections/portfolio/project/PrototypeSection';
 import ScreensSection from '@/components/sections/portfolio/project/ScreensSection';
 
 import challenges from '@/data/portfolio/projects/challenges/cleaning.json';
@@ -30,6 +31,18 @@ const Cleaning = () => {
       />
       <FeaturesCleanning />
       <ScreensSection imagePath="/images/projects/cleaning/screens.png" />
+      <ProptotypeSection
+        leftBgImage={'/images/projects/cleaning/left-bg.png'}
+        rightBgImage={'/images/projects/cleaning/right-bg.png'}
+      >
+        <iframe
+          src="https://embed.figma.com/proto/DSZc6u4EWXyp9DqX1F5qQr/Prototype-Cleaning?scaling=none&content-scaling=fixed&page-id=0%3A1&node-id=1-4827&starting-point-node-id=1%3A4827&embed-host=share&hide-ui=1"
+          allowFullScreen
+          title="Interactive prototype of the Cleaning App"
+          width="354px"
+          height="697px"
+        />
+      </ProptotypeSection>
     </>
   );
 };
