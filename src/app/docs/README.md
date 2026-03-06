@@ -23,7 +23,24 @@
 7. Оновити документацію, якщо змінився контракт API або серверна поведінка
 8. Комітити тільки після повністю успішного `npm run check`
 
+## Mock Submission Smoke Test
+
+- локальний seed script для нових moderation queues:
+- `BASE_URL=http://127.0.0.1:3000 npm run seed:mock:submissions`
+- скрипт створює:
+- кілька `/api/forms/email-submissions`
+- кілька `/api/forms/vacancy-submissions` для `iosdev`, `qaengineer`, `designer`
+- для vacancy flow скрипт проходить повний сценарій `uploads/init -> signed PUT -> vacancy-submissions`
+
 ## Останні зміни серверної логіки (лаконічно)
+
+- API handoff docs for frontend integration:
+- `docs/openapi/openapi.yaml` - OpenAPI contract for all active API routes.
+- `docs/openapi/SCENARIOS.md` - most common frontend/backend integration scenarios.
+- `src/app/docs/SUBMISSIONS_INTEGRATION_HANDOFF.md` - practical integration checklist for frontend.
+- canonical vacancy candidates moderation namespace: `/api/admin/vacancies/candidates/*`
+- legacy compatibility alias remains available: `/api/admin/submissions/vacancies/*` (deprecated)
+- local/open-app documentation route: `/docs/api`
 
 - `client_submissions`:
 - додано `soft delete` (поля `isDeleted`, `deletedAt`, `deletedBy`) без фізичного видалення документа.

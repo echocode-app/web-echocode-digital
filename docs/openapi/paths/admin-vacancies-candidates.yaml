@@ -1,0 +1,139 @@
+/api/admin/vacancies/candidates:
+  get:
+    tags: [Admin Vacancy Candidates]
+    operationId: listAdminVacancyCandidates
+    summary: List vacancy candidate submissions queue (canonical)
+    parameters:
+      - $ref: '../openapi.yaml#/components/parameters/Limit20'
+      - $ref: '../openapi.yaml#/components/parameters/Cursor'
+      - $ref: '../openapi.yaml#/components/parameters/StatusModeration'
+      - name: vacancyKey
+        in: query
+        schema:
+          type: string
+      - $ref: '../openapi.yaml#/components/parameters/DateFrom'
+      - $ref: '../openapi.yaml#/components/parameters/DateTo'
+    responses:
+      '200':
+        description: Queue page
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/GenericListEnvelope'
+      '401':
+        $ref: '../openapi.yaml#/components/responses/Unauthorized'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/Forbidden'
+
+/api/admin/vacancies/candidates/overview:
+  get:
+    tags: [Admin Vacancy Candidates]
+    operationId: getAdminVacancyCandidatesOverview
+    summary: Get vacancy candidate queue overview and grouping
+    responses:
+      '200':
+        description: Overview payload
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/GenericOverviewEnvelope'
+      '401':
+        $ref: '../openapi.yaml#/components/responses/Unauthorized'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/Forbidden'
+
+/api/admin/vacancies/candidates/{submissionId}:
+  get:
+    tags: [Admin Vacancy Candidates]
+    operationId: getAdminVacancyCandidateDetails
+    summary: Get vacancy candidate submission details (auto-marks new as viewed)
+    parameters:
+      - $ref: '../openapi.yaml#/components/parameters/SubmissionIdPath'
+    responses:
+      '200':
+        description: Details payload
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/GenericDetailsEnvelope'
+      '400':
+        $ref: '../openapi.yaml#/components/responses/BadRequest'
+      '401':
+        $ref: '../openapi.yaml#/components/responses/Unauthorized'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/Forbidden'
+
+/api/admin/vacancies/candidates/status:
+  patch:
+    tags: [Admin Vacancy Candidates]
+    operationId: updateAdminVacancyCandidateStatus
+    summary: Update vacancy candidate moderation status
+    parameters:
+      - $ref: '../openapi.yaml#/components/parameters/SubmissionIdQuery'
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../openapi.yaml#/components/schemas/UpdateStatusRequest'
+    responses:
+      '200':
+        description: Updated
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/UpdateStatusEnvelope'
+      '400':
+        $ref: '../openapi.yaml#/components/responses/BadRequest'
+      '401':
+        $ref: '../openapi.yaml#/components/responses/Unauthorized'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/Forbidden'
+
+/api/admin/vacancies/candidates/comment:
+  post:
+    tags: [Admin Vacancy Candidates]
+    operationId: addAdminVacancyCandidateComment
+    summary: Add moderator comment to vacancy candidate submission
+    parameters:
+      - $ref: '../openapi.yaml#/components/parameters/SubmissionIdQuery'
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../openapi.yaml#/components/schemas/AddCommentRequest'
+    responses:
+      '200':
+        description: Comment added
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/AddCommentEnvelope'
+      '400':
+        $ref: '../openapi.yaml#/components/responses/BadRequest'
+      '401':
+        $ref: '../openapi.yaml#/components/responses/Unauthorized'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/Forbidden'
+
+/api/admin/vacancies/candidates/delete:
+  delete:
+    tags: [Admin Vacancy Candidates]
+    operationId: softDeleteAdminVacancyCandidateSubmission
+    summary: Soft delete vacancy candidate submission
+    parameters:
+      - $ref: '../openapi.yaml#/components/parameters/SubmissionIdQuery'
+    responses:
+      '200':
+        description: Soft deleted
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/SoftDeleteEnvelope'
+      '400':
+        $ref: '../openapi.yaml#/components/responses/BadRequest'
+      '401':
+        $ref: '../openapi.yaml#/components/responses/Unauthorized'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/Forbidden'
