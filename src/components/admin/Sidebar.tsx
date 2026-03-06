@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useState } from 'react';
 import { signOut } from 'firebase/auth';
 import Link from 'next/link';
@@ -34,11 +35,9 @@ function SidebarNav({
         .filter((item) => item.visible)
         .map((item) => {
           const isNested = Boolean(item.parentHref);
-          const isClientsSubitem = item.href === '/admin/submissions/clients';
-          const isActive = item.href === '/admin/submissions'
-            ? pathname === '/admin/submissions'
-              || pathname.startsWith('/admin/submissions/')
-            : pathname === item.href;
+          const isSubmissionsSubitem = item.parentHref === '/admin/submissions';
+          const isVacanciesSubitem = item.parentHref === '/admin/vacancies';
+          const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
 
           return (
             <Link
@@ -49,7 +48,7 @@ function SidebarNav({
                 isActive
                   ? 'bg-gray16 text-white shadow-[0_6px_20px_rgba(0,0,0,0.35)]'
                   : 'text-gray75 hover:bg-gray10 hover:text-white'
-              } ${isNested ? `ml-3 border-l pl-4 text-main-xs ${isClientsSubitem ? 'border-accent' : 'border-gray16'}` : ''}`}
+              } ${isNested ? `ml-3 border-l pl-4 text-main-xs ${isSubmissionsSubitem ? 'border-accent' : isVacanciesSubitem ? 'border-[#ffd38e]' : 'border-gray16'}` : ''}`}
             >
               {item.label}
             </Link>
@@ -68,8 +67,10 @@ export default function Sidebar({ role, isMobileOpen = false, onCloseMobile }: S
     { href: '/admin/dashboard', label: 'Dashboard', visible: true },
     { href: '/admin/submissions', label: 'Submissions metrics', visible: true },
     { href: '/admin/submissions/clients', label: 'Clients', visible: true, parentHref: '/admin/submissions' },
+    { href: '/admin/submissions/emails', label: 'Emails', visible: true, parentHref: '/admin/submissions' },
     { href: '/admin/portfolio', label: 'Portfolio', visible: true },
     { href: '/admin/vacancies', label: 'Vacancies', visible: true },
+    { href: '/admin/vacancies/candidates', label: 'Candidates', visible: true, parentHref: '/admin/vacancies' },
     { href: '/admin/logs', label: 'Logs', visible: role === 'developer' },
     { href: '/admin/info', label: 'Info', visible: true },
   ];
@@ -125,7 +126,7 @@ export default function Sidebar({ role, isMobileOpen = false, onCloseMobile }: S
                 title="Close navigation"
                 className="inline-flex h-9 w-9 items-center justify-center rounded-(--radius-secondary) border border-gray16 text-gray75 transition duration-main hover:text-white"
               >
-                <span className="text-base leading-none" aria-hidden="true">X</span>
+                <Image src="/UI/close.svg" width={18} height={18} alt="" aria-hidden="true" />
               </button>
             </div>
 

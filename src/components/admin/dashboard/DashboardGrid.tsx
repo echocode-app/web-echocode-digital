@@ -5,6 +5,9 @@ import { useState } from 'react';
 import { ChartPanel, ChartSkeleton } from '@/components/admin/dashboard/DashboardPanels';
 import DashboardGeographySection from '@/components/admin/dashboard/geography/DashboardGeographySection';
 import LeadVelocityBadge from '@/components/admin/dashboard/LeadVelocityBadge';
+import NewClientSubmissionsAlert from '@/components/admin/dashboard/NewClientSubmissionsAlert';
+import NewEmailSubmissionsAlert from '@/components/admin/dashboard/queue-alerts/NewEmailSubmissionsAlert';
+import NewVacancyCandidatesAlert from '@/components/admin/dashboard/queue-alerts/NewVacancyCandidatesAlert';
 import SmartAlertStrip from '@/components/admin/dashboard/SmartAlertStrip';
 import SourcePerformanceBlock from '@/components/admin/dashboard/SourcePerformanceBlock';
 import TrafficQualityInsight from '@/components/admin/dashboard/TrafficQualityInsight';
@@ -36,6 +39,12 @@ export default function DashboardGrid() {
 
   return (
     <section className="min-w-0 space-y-4">
+      <div className="space-y-2">
+        <NewClientSubmissionsAlert />
+        <NewVacancyCandidatesAlert />
+        <NewEmailSubmissionsAlert />
+      </div>
+
       <div className="grid min-w-0 gap-4 xl:grid-cols-2">
         <article className="min-w-0 space-y-4 rounded-(--radius-base) border border-gray16 bg-base-gray p-4 shadow-main">
           {overview ? (
@@ -51,7 +60,7 @@ export default function DashboardGrid() {
         {overview ? <SourcePerformanceBlock sources={overview.sources ?? []} /> : <ChartSkeleton />}
       </div>
 
-      <ChartPanel title={`Traffic vs leads (${ADMIN_PERIOD_LABEL[period]})`} info={PANEL_INFO_TEXT.trafficVsLeads} mobileScrollable>
+      <ChartPanel title={`Traffic vs tracked leads (${ADMIN_PERIOD_LABEL[period]})`} info={PANEL_INFO_TEXT.trafficVsLeads} mobileScrollable>
         {overview ? (
           <div className="flex h-full min-w-0 flex-col">
             <div className="mb-2 flex justify-start lg:justify-end">

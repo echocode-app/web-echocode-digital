@@ -50,10 +50,10 @@ export default function VacanciesOverviewGrid() {
         <div className="grid min-w-0 gap-4 md:grid-cols-2 xl:grid-cols-3">
           {overview ? (
             <>
-              <KpiCard metricKey="vacancyLeads" title="Vacancy leads (7d)" metric={overview.kpis.vacancyLeads} />
+              <KpiCard metricKey="vacancyLeads" title="Vacancy candidate leads (7d)" metric={overview.kpis.vacancyLeads} />
               <KpiCard metricKey="activeVacancies" title="Active vacancies" metric={overview.kpis.activeVacancies} />
               <article className="min-w-0 rounded-(--radius-base) border border-gray16 bg-base-gray p-4 shadow-main">
-                <p className="font-main text-title-xs uppercase tracking-[0.14em] text-gray60">Top vacancy (month)</p>
+                <p className="font-main text-title-xs uppercase tracking-[0.14em] text-gray60">Top vacancy by candidate applications (month)</p>
                 <p className="mt-2 truncate font-title text-title-lg text-white">{overview.topVacancyItem}</p>
                 <p className="mt-2 font-main text-main-sm text-gray75">
                   {overview.topVacancyApplications} applications
@@ -64,7 +64,7 @@ export default function VacanciesOverviewGrid() {
             <>
               <KpiCard
                 metricKey="vacancyLeads"
-                title="Vacancy leads (7d)"
+                title="Vacancy candidate leads (7d)"
                 metric={{ value: 0, trend: { current: 0, previous: 0, changePct: 0, direction: 'flat' }, momChangePct: 0 }}
                 loading
               />
@@ -82,13 +82,13 @@ export default function VacanciesOverviewGrid() {
 
       {showSection(2) ? (
         <div className="grid min-w-0 gap-4">
-          <ChartPanel title="Top vacancies by applications" info={PANEL_INFO_TEXT.topVacancies} mobileScrollable>
+          <ChartPanel title="Top vacancies by candidate applications" info={PANEL_INFO_TEXT.topVacancies} mobileScrollable>
             {overview ? <BarTopVacanciesChart data={overview.charts.topVacancies} /> : <ChartSkeleton />}
           </ChartPanel>
 
           <ChartPanel
-            title="Vacancy leads by month (YTD)"
-            info="Monthly vacancy-related leads for the current year (submit_vacancy + apply_vacancy)."
+            title="Vacancy candidate leads by month (YTD)"
+            info="Monthly vacancy candidate leads for the current year from vacancy submit and apply analytics events (submit_vacancy + apply_vacancy)."
             mobileScrollable
           >
             {overview ? <VacancyLeadsByMonthChart data={overview.charts.leadDistributionYearMonthly} /> : <ChartSkeleton />}

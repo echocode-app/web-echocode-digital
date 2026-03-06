@@ -6,23 +6,23 @@ export type KpiConfig = {
 };
 
 export const KPI_CONFIG: KpiConfig[] = [
-  { metricKey: 'totalSubmissions', title: 'Total submissions' },
-  { metricKey: 'projectLeads', title: 'Project leads' },
-  { metricKey: 'vacancyLeads', title: 'Vacancy leads' },
+  { metricKey: 'totalSubmissions', title: 'Tracked submissions (core + client)' },
+  { metricKey: 'projectLeads', title: 'Client project leads' },
+  { metricKey: 'vacancyLeads', title: 'Vacancy candidate leads' },
   { metricKey: 'activeVacancies', title: 'Active vacancies' },
   { metricKey: 'portfolioItems', title: 'Portfolio items' },
-  { metricKey: 'conversionRate7d', title: '7d conversion rate' },
+  { metricKey: 'conversionRate7d', title: '7d project conversion rate' },
 ];
 
 export const PANEL_INFO_TEXT = {
-  submissions: 'Daily submission volume for the current month (from day 1 to today).',
+  submissions: 'Tracked submission volume across the selected reporting period for the moderation-backed submission queues.',
   leadDistribution:
-    'Monthly segmented distribution of project and vacancy leads for the current year.',
+    'Lead mix for the selected reporting period: client project leads versus vacancy candidate leads.',
   leadDistributionYear:
-    'Distribution of leads between project inquiries and vacancy-related submissions for the current year to date.',
+    'Year-to-date lead mix: client project inquiries versus vacancy candidate submissions.',
   topVacancies:
-    'Job positions ranked by number of applications in the current month.',
+    'Vacancy positions ranked by candidate applications in the current month (submit_vacancy + apply_vacancy analytics events).',
   trafficVsLeads:
-    'Daily comparison between website traffic and total leads for the current month.',
+    'Comparison between website traffic and tracked leads for the selected reporting period: client project leads plus vacancy candidate leads.',
   actions: 'Quick access to the most important administrative workflows.',
 } as const;

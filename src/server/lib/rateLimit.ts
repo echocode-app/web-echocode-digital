@@ -3,7 +3,12 @@ import { ApiError } from '@/server/lib/errors';
 
 export type PublicRateLimitInput = {
   request: NextRequest;
-  scope: 'forms.uploads.init' | 'forms.client-project.submit' | 'forms.client-project.image.init';
+  scope:
+    | 'forms.uploads.init'
+    | 'forms.client-project.submit'
+    | 'forms.client-project.image.init'
+    | 'forms.email-submissions.create'
+    | 'forms.vacancy-submissions.create';
 };
 
 type ScopePolicy = {
@@ -15,6 +20,8 @@ const RATE_LIMIT_POLICIES: Record<PublicRateLimitInput['scope'], ScopePolicy> = 
   'forms.uploads.init': { limit: 20, windowMs: 60_000 },
   'forms.client-project.image.init': { limit: 12, windowMs: 60_000 },
   'forms.client-project.submit': { limit: 8, windowMs: 60_000 },
+  'forms.email-submissions.create': { limit: 12, windowMs: 60_000 },
+  'forms.vacancy-submissions.create': { limit: 8, windowMs: 60_000 },
 };
 
 type Entry = {

@@ -19,7 +19,7 @@ export default function LayoutShell({ role, email, children }: LayoutShellProps)
   useLockBodyScroll(isMobileSidebarOpen);
 
   return (
-    <div className="min-h-screen bg-black text-white md:flex">
+    <div className="admin-ui-shell min-h-screen bg-black text-white md:flex">
       <Sidebar role={role} isMobileOpen={isMobileSidebarOpen} onCloseMobile={() => setIsMobileSidebarOpen(false)} />
       <div className="flex min-h-screen flex-1 flex-col">
         <Header email={email} role={role} onOpenMobileSidebar={() => setIsMobileSidebarOpen(true)} />

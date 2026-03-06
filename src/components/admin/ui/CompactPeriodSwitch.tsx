@@ -30,7 +30,7 @@ export default function CompactPeriodSwitch({ value, onChange, className }: Comp
               className={isActive ? 'text-accent' : 'text-gray60 hover:text-gray75'}
               aria-label={option.ariaLabel}
               title={option.ariaLabel}
-              aria-pressed={isActive}
+              aria-current={isActive ? 'true' : undefined}
             >
               {option.label}
             </button>

@@ -37,7 +37,7 @@ export default function SubmissionsFunnelSnapshot({
     <article className="min-w-0 rounded-(--radius-base) border border-gray16 bg-base-gray p-4 shadow-main">
       <WidgetHeader
         title={`Contact funnel (${periodLabel})`}
-        info="Snapshot of contact modal flow: open to attempt to successful submission."
+        info="Contact modal funnel for the selected period: modal opens, submit attempts, and successful modal submissions from the tracked contact flow."
       />
       <div className="mt-2 flex justify-start lg:justify-end">
         <CompactPeriodSwitch value={period} onChange={onPeriodChange} />

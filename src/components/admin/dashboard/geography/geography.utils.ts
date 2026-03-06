@@ -21,6 +21,7 @@ export type GeographyChartRow = {
   views: number;
   sharePct: number;
   color: string;
+  colorIndex: number;
 };
 
 export function resolveCountryLabel(countryCode: string): string {
@@ -50,6 +51,7 @@ export function buildGeographyChartRows(
     views: item.views,
     sharePct: item.sharePct,
     color: GEOGRAPHY_CHART_COLORS[index % GEOGRAPHY_CHART_COLORS.length] ?? GEOGRAPHY_CHART_COLORS[0],
+    colorIndex: index % GEOGRAPHY_CHART_COLORS.length,
   }));
 
   if (restViews > 0) {
@@ -59,6 +61,7 @@ export function buildGeographyChartRows(
       views: restViews,
       sharePct: Number(restPct.toFixed(2)),
       color: GEOGRAPHY_CHART_COLORS[GEOGRAPHY_CHART_COLORS.length - 1] ?? 'rgba(148, 163, 184, 0.9)',
+      colorIndex: GEOGRAPHY_CHART_COLORS.length - 1,
     });
   }
 

@@ -46,8 +46,8 @@ export default function SubmissionsDetailsSection({
       <div className="grid min-w-0 gap-4">
         {showSubmissionsTrend ? (
           <ChartPanel
-            title={`Submissions (${periodLabel})`}
-            info="Submissions distribution for the selected period."
+            title={`Tracked submissions (${periodLabel})`}
+            info="Tracked submission volume grouped by the selected reporting period across the moderation-backed submission queues."
             mobileScrollable
           >
             <div className="mb-2 flex justify-start lg:justify-end">
@@ -64,7 +64,7 @@ export default function SubmissionsDetailsSection({
         {showErrorsTrend && (overview ? (
           <ChartPanel
             title={`Success vs errors (${periodLabel})`}
-            info="Successful submissions compared with tracked submit errors for the selected period."
+            info="Successful tracked submissions compared with tracked submit errors for the selected reporting period."
             mobileScrollable
           >
             <div className="mb-2 flex justify-start lg:justify-end">
@@ -75,7 +75,7 @@ export default function SubmissionsDetailsSection({
         ) : state === 'loading' ? (
           <ChartPanel
             title={`Success vs errors (${periodLabel})`}
-            info="Successful submissions compared with tracked submit errors for the selected period."
+            info="Successful tracked submissions compared with tracked submit errors for the selected reporting period."
             mobileScrollable
           >
             <div className="mb-2 flex justify-start lg:justify-end">

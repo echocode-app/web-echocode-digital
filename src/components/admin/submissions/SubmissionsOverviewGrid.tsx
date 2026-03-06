@@ -36,8 +36,8 @@ export default function SubmissionsOverviewGrid() {
   const submissionsTrendPeriodLabel = ADMIN_PERIOD_LABEL[submissionsTrendPeriod];
   const errorsPeriodLabel = ADMIN_PERIOD_LABEL[errorsPeriod];
   const submissionsChartTitle = submissionsTrendPeriod === 'year'
-    ? `Submissions by month (${submissionsTrendPeriodLabel})`
-    : `Submissions by day (${submissionsTrendPeriodLabel})`;
+    ? `Tracked submissions by month (${submissionsTrendPeriodLabel})`
+    : `Tracked submissions by day (${submissionsTrendPeriodLabel})`;
 
   if (kpiState === 'error') {
     return (
@@ -77,7 +77,7 @@ export default function SubmissionsOverviewGrid() {
 
         <ChartPanel
           title={submissionsChartTitle}
-          info="Submissions distribution for the selected period."
+          info="Tracked submission volume grouped by the selected reporting period across the moderation-backed submission queues."
           mobileScrollable
         >
           <div className="mb-2 flex justify-start lg:justify-end">

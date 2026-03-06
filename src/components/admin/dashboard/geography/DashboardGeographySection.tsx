@@ -11,6 +11,7 @@ import { useDashboardGeography } from '@/components/admin/dashboard/geography/us
 import CompactPeriodSwitch from '@/components/admin/ui/CompactPeriodSwitch';
 import type { DashboardPeriod } from '@/server/admin/dashboard/dashboard.types';
 import { ADMIN_PERIOD_LABEL } from '@/shared/admin/constants';
+import styles from '@/components/admin/dashboard/geography/DashboardGeographySection.module.css';
 
 const DashboardGeographyRadialChart = dynamic(
   () => import('@/components/admin/dashboard/charts/DashboardGeographyRadialChart'),
@@ -27,6 +28,16 @@ function formatInt(value: number): string {
 type DashboardGeographySectionProps = {
   enabled: boolean;
 };
+
+const DOT_COLOR_CLASS = [
+  styles.dotColor0,
+  styles.dotColor1,
+  styles.dotColor2,
+  styles.dotColor3,
+  styles.dotColor4,
+  styles.dotColor5,
+  styles.dotColor6,
+] as const;
 
 export default function DashboardGeographySection({ enabled }: DashboardGeographySectionProps) {
   const [period, setPeriod] = useState<DashboardPeriod>('week');
@@ -73,7 +84,9 @@ export default function DashboardGeographySection({ enabled }: DashboardGeograph
                     className="flex items-center justify-between rounded-(--radius-secondary) border border-gray16 bg-black/20 px-2 py-1.5"
                   >
                     <div className="flex min-w-0 items-center gap-2">
-                      <span className="inline-block h-2.5 w-2.5 rounded-full" style={{ backgroundColor: row.color }} />
+                      <span
+                        className={`inline-block h-2.5 w-2.5 rounded-full ${DOT_COLOR_CLASS[row.colorIndex] ?? DOT_COLOR_CLASS[0]}`}
+                      />
                       <p className="truncate font-main text-main-xs text-gray75">{row.label}</p>
                     </div>
                     <p className="font-main text-main-xs text-gray60">
