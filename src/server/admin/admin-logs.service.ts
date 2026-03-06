@@ -9,6 +9,12 @@ export type AdminActionType =
   | 'client_submission.status_update'
   | 'client_submission.comment_add'
   | 'client_submission.soft_delete'
+  | 'email_submission.status_update'
+  | 'email_submission.comment_add'
+  | 'email_submission.soft_delete'
+  | 'vacancy_submission.status_update'
+  | 'vacancy_submission.comment_add'
+  | 'vacancy_submission.soft_delete'
   | 'portfolio.manage'
   | 'vacancies.manage'
   | 'admin.login';
@@ -16,6 +22,8 @@ export type AdminActionType =
 export type AdminEntityType =
   | 'submission'
   | 'client_submission'
+  | 'email_submission'
+  | 'vacancy_submission'
   | 'portfolio'
   | 'vacancy'
   | 'auth';

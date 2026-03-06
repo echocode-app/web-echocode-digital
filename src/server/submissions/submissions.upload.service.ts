@@ -8,14 +8,15 @@ import {
   isDocumentMimeType,
   isImageMimeType,
 } from '@/shared/validation/submissions';
+import {
+  SUBMISSIONS_TMP_UPLOAD_PATH_PATTERN,
+  SUBMISSIONS_TMP_UPLOAD_PREFIX,
+  SUBMISSIONS_UPLOAD_URL_TTL_MS,
+} from '@/shared/forms/submissionsUpload.constants';
 import { resolveEventAttribution, trackEventBestEffort } from '@/server/analytics';
 import { getFirebaseStorageBucket } from '@/server/firebase/storage';
 import { validate } from '@/server/lib';
 import { ApiError } from '@/server/lib/errors';
-
-const TMP_UPLOAD_PREFIX = 'uploads/submissions/tmp/';
-const UPLOAD_URL_TTL_MS = 10 * 60 * 1000;
-const UUID_PATH_PATTERN = /^uploads\/submissions\/tmp\/[0-9a-f-]{36}$/;
 
 const initUploadFileSchema = z.object({
   originalName: z.string().trim().min(1).max(255),
@@ -23,8 +24,8 @@ const initUploadFileSchema = z.object({
   sizeBytes: z.number().int().positive(),
 });
 
-export const projectUploadInitRequestSchema = z.object({
-  formType: z.string().trim().min(1),
+export const submissionUploadInitRequestSchema = z.object({
+  formType: z.enum(['project', 'vacancy']),
   file: initUploadFileSchema,
 });
 
@@ -83,16 +84,42 @@ function assertProjectAttachmentPolicy(input: {
   }
 }
 
+function assertVacancyCvPolicy(input: {
+  mimeType: string;
+  sizeBytes: number;
+}): void {
+  if (input.sizeBytes <= 0) {
+    throw ApiError.fromCode(
+      'ATTACHMENT_VERIFICATION_FAILED',
+      'CV size must be greater than 0 bytes',
+    );
+  }
+
+  if (!isDocumentMimeType(input.mimeType)) {
+    throw ApiError.fromCode(
+      'ATTACHMENT_VERIFICATION_FAILED',
+      `Unsupported CV MIME type: ${input.mimeType}`,
+    );
+  }
+
+  if (input.sizeBytes > MAX_DOCUMENT_SIZE_BYTES) {
+    throw ApiError.fromCode(
+      'ATTACHMENT_VERIFICATION_FAILED',
+      `CV exceeds allowed size for MIME type ${input.mimeType}`,
+    );
+  }
+}
+
 function assertTmpUploadPath(path: string): void {
   // Enforce strict tmp prefix to prevent cross-collection/path injection on submit.
-  if (!path.startsWith(TMP_UPLOAD_PREFIX)) {
+  if (!path.startsWith(SUBMISSIONS_TMP_UPLOAD_PREFIX)) {
     throw ApiError.fromCode(
       'ATTACHMENT_VERIFICATION_FAILED',
       'Attachment path must use submissions tmp prefix',
     );
   }
 
-  if (!UUID_PATH_PATTERN.test(path)) {
+  if (!SUBMISSIONS_TMP_UPLOAD_PATH_PATTERN.test(path)) {
     throw ApiError.fromCode(
       'ATTACHMENT_VERIFICATION_FAILED',
       'Attachment path format is invalid',
@@ -111,23 +138,23 @@ export async function createProjectUploadInit(
     rawBody: params.rawBody,
     headers: params.requestHeaders,
   });
-  const parsed = validate(projectUploadInitRequestSchema, params.rawBody);
+  const parsed = validate(submissionUploadInitRequestSchema, params.rawBody);
 
-  if (parsed.formType !== 'project') {
-    throw ApiError.fromCode(
-      'NOT_IMPLEMENTED',
-      'Only project form upload init is implemented',
-    );
+  if (parsed.formType === 'project') {
+    assertProjectAttachmentPolicy({
+      mimeType: parsed.file.mimeType,
+      sizeBytes: parsed.file.sizeBytes,
+    });
+  } else {
+    assertVacancyCvPolicy({
+      mimeType: parsed.file.mimeType,
+      sizeBytes: parsed.file.sizeBytes,
+    });
   }
 
-  assertProjectAttachmentPolicy({
-    mimeType: parsed.file.mimeType,
-    sizeBytes: parsed.file.sizeBytes,
-  });
-
   const bucket = getFirebaseStorageBucket();
-  const path = `${TMP_UPLOAD_PREFIX}${randomUUID()}`;
-  const expiresAtDate = new Date(Date.now() + UPLOAD_URL_TTL_MS);
+  const path = `${SUBMISSIONS_TMP_UPLOAD_PREFIX}${randomUUID()}`;
+  const expiresAtDate = new Date(Date.now() + SUBMISSIONS_UPLOAD_URL_TTL_MS);
   const file = bucket.file(path);
 
   let uploadUrl: string;
@@ -149,10 +176,11 @@ export async function createProjectUploadInit(
   }
 
   await trackEventBestEffort({
-    eventType: 'submit_project',
+    eventType: parsed.formType === 'project' ? 'submit_project' : 'submit_vacancy',
     headers: params.requestHeaders,
     metadata: {
       stage: 'upload_init',
+      formType: parsed.formType,
       mimeType: parsed.file.mimeType,
       ...(eventAttribution
         ? {
@@ -249,6 +277,6 @@ export async function verifyUploadedProjectAttachment(
 export const projectAttachmentUploadPolicy = {
   allowedImageMimeTypes: ALLOWED_IMAGE_MIME_TYPES,
   allowedDocumentMimeTypes: ALLOWED_DOCUMENT_MIME_TYPES,
-  tmpPrefix: TMP_UPLOAD_PREFIX,
-  ttlMs: UPLOAD_URL_TTL_MS,
+  tmpPrefix: SUBMISSIONS_TMP_UPLOAD_PREFIX,
+  ttlMs: SUBMISSIONS_UPLOAD_URL_TTL_MS,
 } as const;

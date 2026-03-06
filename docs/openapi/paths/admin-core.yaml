@@ -1,0 +1,55 @@
+/api/admin/me:
+  get:
+    tags: [Admin Core]
+    operationId: getAdminMe
+    summary: Get authenticated admin profile
+    responses:
+      '200':
+        description: Auth profile
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/SuccessEnvelope'
+      '401':
+        $ref: '../openapi.yaml#/components/responses/Unauthorized'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/Forbidden'
+
+/api/admin/logs:
+  get:
+    tags: [Admin Core]
+    operationId: listAdminLogs
+    summary: List admin audit logs
+    parameters:
+      - name: page
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 20
+      - name: actionType
+        in: query
+        schema:
+          type: string
+      - name: entityType
+        in: query
+        schema:
+          type: string
+    responses:
+      '200':
+        description: Logs page
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/SuccessEnvelope'
+      '401':
+        $ref: '../openapi.yaml#/components/responses/Unauthorized'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/Forbidden'

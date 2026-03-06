@@ -1,55 +1,32 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
+import { fetchAdminData } from '@/components/admin/api/fetchAdminData';
 import { buildReadyOverview } from '@/components/admin/submissions/submissions.overview.utils';
-import type { SubmissionsOverviewDto } from '@/server/admin/submissions/submissions.metrics.service';
-import { getFirebaseClientAuth } from '@/lib/firebase/client';
+import type { SubmissionsOverviewDto, SubmissionsPeriod } from '@/server/admin/submissions/submissions.metrics.service';
 
 export type LoadState = 'loading' | 'ready' | 'error';
 
-async function fetchSubmissionsOverview(signal: AbortSignal): Promise<SubmissionsOverviewDto> {
-  const auth = getFirebaseClientAuth();
-  const user = auth.currentUser;
-
-  if (!user) {
-    throw new Error('Unauthorized');
-  }
-
-  const token = await user.getIdToken(true);
-
-  const response = await fetch('/api/admin/submissions/overview', {
-    method: 'GET',
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-    cache: 'no-store',
+async function fetchSubmissionsOverview(
+  period: SubmissionsPeriod,
+  signal: AbortSignal,
+): Promise<SubmissionsOverviewDto> {
+  return fetchAdminData<SubmissionsOverviewDto>({
+    url: `/api/admin/submissions/overview?period=${period}`,
     signal,
+    requestErrorMessage: 'Failed to fetch submissions overview',
+    payloadErrorMessage: 'Invalid submissions overview payload',
   });
-
-  if (!response.ok) {
-    throw new Error('Failed to fetch submissions overview');
-  }
-
-  const payload = (await response.json()) as {
-    success: boolean;
-    data?: SubmissionsOverviewDto;
-  };
-
-  if (!payload.success || !payload.data) {
-    throw new Error('Invalid submissions overview payload');
-  }
-
-  return payload.data;
 }
 
-export function useSubmissionsOverview() {
+export function useSubmissionsOverview(period: SubmissionsPeriod = 'week') {
   const [overview, setOverview] = useState<SubmissionsOverviewDto | null>(null);
   const [state, setState] = useState<LoadState>('loading');
 
   useEffect(() => {
     const controller = new AbortController();
 
-    fetchSubmissionsOverview(controller.signal)
+    fetchSubmissionsOverview(period, controller.signal)
       .then((data) => {
         setOverview(data);
         setState('ready');
@@ -62,7 +39,7 @@ export function useSubmissionsOverview() {
       });
 
     return () => controller.abort();
-  }, []);
+  }, [period]);
 
   const activeOverview = overview;
   const activeState: LoadState = state;

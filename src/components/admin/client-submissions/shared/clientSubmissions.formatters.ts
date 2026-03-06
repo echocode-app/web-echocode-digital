@@ -1,7 +1,12 @@
-import type { ClientSubmissionListItemDto } from './clientSubmissions.types';
+import type { ClientSubmissionStatus } from '@/server/forms/client-project/clientProject.types';
 import { CLIENT_SUBMISSION_STATUS_SORT_PRIORITY } from './clientSubmissions.constants';
 
-export function sortRowsByStatusAndDate(items: ClientSubmissionListItemDto[]): ClientSubmissionListItemDto[] {
+type ModerationListRow = {
+  status: ClientSubmissionStatus;
+  date: string;
+};
+
+export function sortRowsByStatusAndDate<T extends ModerationListRow>(items: T[]): T[] {
   return [...items].sort((a, b) => {
     const statusDelta = CLIENT_SUBMISSION_STATUS_SORT_PRIORITY[a.status] - CLIENT_SUBMISSION_STATUS_SORT_PRIORITY[b.status];
     if (statusDelta !== 0) return statusDelta;

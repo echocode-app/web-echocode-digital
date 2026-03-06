@@ -8,6 +8,42 @@ Dev Vercel: https://echocode-newsite.vercel.app/
 - npm `11.7.0`
 - If you use nvm: `nvm use`
 
+## Main commands
+
+- `npm run dev` - local Next.js app
+- `npm run typecheck` - TypeScript validation
+- `npm run lint` - ESLint validation
+- `npm run openapi:lint` - OpenAPI validation
+- `npm run check` - required pre-commit check (`typecheck + lint + openapi:lint + build`)
+- `npm run test:firestore:rules` - Firestore Rules tests
+- `npm run test:storage:rules` - Storage Rules tests
+- `BASE_URL=http://127.0.0.1:3000 npm run seed:mock:submissions` - mock email/candidate submissions for admin smoke test
+
+## API documentation
+
+- Swagger UI locally and in production: `/docs/api`
+- Raw OpenAPI spec: `/api/docs/openapi/openapi.yaml`
+- Source files:
+- `docs/openapi/openapi.yaml`
+- `docs/openapi/SCENARIOS.md`
+- `src/app/docs/SUBMISSIONS_INTEGRATION_HANDOFF.md`
+
+## Admin moderation queues
+
+- Client submissions: `/admin/submissions/clients`
+- Email submissions: `/admin/submissions/emails`
+- Vacancy candidates: `/admin/vacancies/candidates`
+
+Canonical admin API namespaces:
+
+- `/api/admin/submissions/clients/*`
+- `/api/admin/submissions/emails/*`
+- `/api/admin/vacancies/candidates/*`
+
+Legacy compatibility alias remains available:
+
+- `/api/admin/submissions/vacancies/*`
+
 ## Commit checklist
 
 1. `git pull`
@@ -17,6 +53,11 @@ Dev Vercel: https://echocode-newsite.vercel.app/
 5. `npm run check`
 6. `git add ...`
 7. `git commit -m "message"`
+
+If Firebase Rules changed, also run:
+
+1. `npm run test:firestore:rules`
+2. `npm run test:storage:rules`
 
 ## Lockfile rule (important)
 

@@ -2,7 +2,10 @@ import type { DashboardKpiDto } from '@/server/admin/dashboard/dashboard.types';
 import { mapSubmissionsOverview } from '@/server/admin/submissions/submissions.metrics.mapper';
 import { getSubmissionsOverviewRawAggregates } from '@/server/admin/submissions/submissions.metrics.repository';
 
+export type SubmissionsPeriod = 'week' | 'month' | 'year';
+
 export type SubmissionsOverviewDto = {
+  period: SubmissionsPeriod;
   kpis: {
     submissions7d: DashboardKpiDto;
     conversion7d: DashboardKpiDto;
@@ -17,12 +20,12 @@ export type SubmissionsOverviewDto = {
     dropOffRate: number;
   };
   charts: {
-    submissionsTrendYtd: { month: string; value: number }[];
-    errorsTrendCurrentMonth?: { date: string; success: number; error: number }[];
+    submissionsTrend: { label: string; value: number }[];
+    errorsTrend: { label: string; success: number; error: number }[];
   };
 };
 
-export async function getAdminSubmissionsOverview(): Promise<SubmissionsOverviewDto> {
-  const raw = await getSubmissionsOverviewRawAggregates();
+export async function getAdminSubmissionsOverview(period: SubmissionsPeriod = 'week'): Promise<SubmissionsOverviewDto> {
+  const raw = await getSubmissionsOverviewRawAggregates(period);
   return mapSubmissionsOverview(raw);
 }

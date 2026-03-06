@@ -14,6 +14,17 @@ body {
   color: var(--main-text-color);
 }
 
+/* Keep admin interactions explicit without affecting the public site styling. */
+.admin-ui-shell a,
+.admin-ui-shell button:not(:disabled),
+.admin-ui-shell [role='button'],
+.admin-ui-shell input[type='button'],
+.admin-ui-shell input[type='submit'],
+.admin-ui-shell input[type='reset'],
+.admin-ui-shell summary {
+  cursor: pointer;
+}
+
 @keyframes marquee {
   from {
     transform: translateX(0);

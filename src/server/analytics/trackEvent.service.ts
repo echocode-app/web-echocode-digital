@@ -5,6 +5,7 @@ import { resolveEventAttribution } from '@/server/analytics/attribution';
 
 export type AnalyticsEventType =
   | 'submit_project'
+  | 'submit_email'
   | 'submit_vacancy'
   | 'apply_vacancy'
   | 'page_view'

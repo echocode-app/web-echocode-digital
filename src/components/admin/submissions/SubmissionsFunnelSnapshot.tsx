@@ -1,9 +1,13 @@
 import SymbolSafeText from '@/components/admin/dashboard/ui/SymbolSafeText';
 import WidgetHeader from '@/components/admin/dashboard/ui/WidgetHeader';
+import CompactPeriodSwitch from '@/components/admin/ui/CompactPeriodSwitch';
 import type { SubmissionsOverviewDto } from '@/server/admin/submissions/submissions.metrics.service';
 
 type SubmissionsFunnelSnapshotProps = {
   funnel: SubmissionsOverviewDto['funnel'];
+  period: 'week' | 'month' | 'year';
+  periodLabel: string;
+  onPeriodChange: (next: 'week' | 'month' | 'year') => void;
 };
 
 function formatCount(value: number): string {
@@ -23,13 +27,21 @@ function FunnelStep({ label, value }: { label: string; value: number }) {
   );
 }
 
-export default function SubmissionsFunnelSnapshot({ funnel }: SubmissionsFunnelSnapshotProps) {
+export default function SubmissionsFunnelSnapshot({
+  funnel,
+  period,
+  periodLabel,
+  onPeriodChange,
+}: SubmissionsFunnelSnapshotProps) {
   return (
     <article className="min-w-0 rounded-(--radius-base) border border-gray16 bg-base-gray p-4 shadow-main">
       <WidgetHeader
-        title="Contact funnel (7d)"
-        info="Snapshot of contact modal flow: open to attempt to successful submission."
+        title={`Contact funnel (${periodLabel})`}
+        info="Contact modal funnel for the selected period: modal opens, submit attempts, and successful modal submissions from the tracked contact flow."
       />
+      <div className="mt-2 flex justify-start lg:justify-end">
+        <CompactPeriodSwitch value={period} onChange={onPeriodChange} />
+      </div>
 
       <div className="mt-3 flex min-w-0 items-center gap-3 overflow-x-auto px-2 md:px-4 lg:px-6 pb-1">
         <div className="min-w-28 flex-1">

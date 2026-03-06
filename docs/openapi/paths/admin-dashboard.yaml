@@ -1,0 +1,37 @@
+/api/admin/dashboard/overview:
+  get:
+    tags: [Admin Dashboard]
+    operationId: getAdminDashboardOverview
+    summary: Get dashboard overview aggregates
+    parameters:
+      - $ref: '../openapi.yaml#/components/parameters/Period'
+    responses:
+      '200':
+        description: Dashboard overview payload
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/SuccessEnvelope'
+      '401':
+        $ref: '../openapi.yaml#/components/responses/Unauthorized'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/Forbidden'
+
+/api/admin/dashboard/geography:
+  get:
+    tags: [Admin Dashboard]
+    operationId: getAdminDashboardGeography
+    summary: Get dashboard geography metrics
+    parameters:
+      - $ref: '../openapi.yaml#/components/parameters/Period'
+    responses:
+      '200':
+        description: Geography payload
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/SuccessEnvelope'
+      '401':
+        $ref: '../openapi.yaml#/components/responses/Unauthorized'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/Forbidden'

@@ -17,8 +17,15 @@ import { ADMIN_MONTH_SHORT_LABELS_EN } from '@/shared/admin/constants';
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
 type SubmissionsDailyTrendChartProps = {
-  data: SubmissionsOverviewDto['charts']['submissionsTrendYtd'];
+  data: SubmissionsOverviewDto['charts']['submissionsTrend'];
 };
+
+function formatBucketLabel(label: string): string {
+  if (/^\d{2}$/.test(label)) {
+    return ADMIN_MONTH_SHORT_LABELS_EN[label] ?? label;
+  }
+  return label;
+}
 
 const options: ChartOptions<'bar'> = {
   responsive: true,
@@ -66,7 +73,7 @@ const options: ChartOptions<'bar'> = {
 function SubmissionsDailyTrendChart({ data }: SubmissionsDailyTrendChartProps) {
   const chartData = useMemo(
     () => ({
-      labels: data.map((item) => ADMIN_MONTH_SHORT_LABELS_EN[item.month] ?? item.month),
+      labels: data.map((item) => formatBucketLabel(item.label)),
       datasets: [
         {
           label: 'Submissions',

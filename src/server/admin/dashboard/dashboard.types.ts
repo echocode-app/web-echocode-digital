@@ -1,4 +1,5 @@
 export type TrendDirection = 'up' | 'down' | 'flat';
+export type DashboardPeriod = 'week' | 'month' | 'year';
 
 export type TrendStats = {
   current: number;
@@ -49,6 +50,18 @@ export type TrafficVsLeadsPointDto = {
   leads: number;
 };
 
+export type DashboardGeographyCountryDto = {
+  country: string;
+  views: number;
+  sharePct: number;
+};
+
+export type DashboardGeographyDto = {
+  period: DashboardPeriod;
+  totalPageViews: number;
+  countries: DashboardGeographyCountryDto[];
+};
+
 export type AlertDto = {
   id: string;
   level: 'warning' | 'alert' | 'anomaly' | 'volatility';
@@ -92,6 +105,7 @@ export type TrafficQualityInsightDto = {
 };
 
 export type DashboardOverviewDto = {
+  trafficVsLeadsPeriod: DashboardPeriod;
   kpis: Record<DashboardKpiKey, DashboardKpiDto>;
   charts: {
     submissionsTrend: SubmissionsTrendPointDto[];
@@ -119,6 +133,7 @@ export type DashboardOverviewDto = {
 };
 
 export type DashboardRawAggregates = {
+  trafficVsLeadsPeriod: DashboardPeriod;
   totals: {
     totalSubmissions: number;
     projectLeads: number;
@@ -145,7 +160,15 @@ export type DashboardRawAggregates = {
   };
   derived: Omit<
     DashboardOverviewDto,
-    'kpis' | 'charts'
+    'trafficVsLeadsPeriod' | 'kpis' | 'charts'
   >;
   charts: DashboardOverviewDto['charts'];
+};
+
+export type DashboardGeographyRawCountry = DashboardGeographyCountryDto;
+
+export type DashboardGeographyRaw = {
+  period: DashboardPeriod;
+  totalPageViews: number;
+  countries: DashboardGeographyRawCountry[];
 };

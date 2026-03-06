@@ -2,6 +2,7 @@
 
 import dynamic from 'next/dynamic';
 import { ChartPanel, ChartSkeleton } from '@/components/admin/dashboard/DashboardPanels';
+import CompactPeriodSwitch from '@/components/admin/ui/CompactPeriodSwitch';
 import type { SubmissionsOverviewDto } from '@/server/admin/submissions/submissions.metrics.service';
 import type { LoadState } from '@/components/admin/submissions/useSubmissionsOverview';
 
@@ -24,6 +25,9 @@ const SubmissionsErrorsTrendChart = dynamic(
 type SubmissionsDetailsSectionProps = {
   state: LoadState;
   overview: SubmissionsOverviewDto | null;
+  period: 'week' | 'month' | 'year';
+  periodLabel: string;
+  onPeriodChange: (next: 'week' | 'month' | 'year') => void;
   showSubmissionsTrend?: boolean;
   showErrorsTrend?: boolean;
 };
@@ -31,6 +35,9 @@ type SubmissionsDetailsSectionProps = {
 export default function SubmissionsDetailsSection({
   state,
   overview,
+  period,
+  periodLabel,
+  onPeriodChange,
   showSubmissionsTrend = true,
   showErrorsTrend = true,
 }: SubmissionsDetailsSectionProps) {
@@ -39,12 +46,15 @@ export default function SubmissionsDetailsSection({
       <div className="grid min-w-0 gap-4">
         {showSubmissionsTrend ? (
           <ChartPanel
-            title="Submissions by month (YTD)"
-            info="Current-year submissions grouped by month (Y axis) with count on X axis."
+            title={`Tracked submissions (${periodLabel})`}
+            info="Tracked submission volume grouped by the selected reporting period across the moderation-backed submission queues."
             mobileScrollable
           >
+            <div className="mb-2 flex justify-start lg:justify-end">
+              <CompactPeriodSwitch value={period} onChange={onPeriodChange} />
+            </div>
             {overview ? (
-              <SubmissionsDailyTrendChart data={overview.charts.submissionsTrendYtd} />
+              <SubmissionsDailyTrendChart data={overview.charts.submissionsTrend} />
             ) : (
               <ChartSkeleton />
             )}
@@ -53,18 +63,24 @@ export default function SubmissionsDetailsSection({
 
         {showErrorsTrend && (overview ? (
           <ChartPanel
-            title="Success vs errors (Current month)"
-            info="Daily successful submissions compared with tracked submit errors for the current month."
+            title={`Success vs errors (${periodLabel})`}
+            info="Successful tracked submissions compared with tracked submit errors for the selected reporting period."
             mobileScrollable
           >
-            <SubmissionsErrorsTrendChart data={overview.charts.errorsTrendCurrentMonth ?? []} />
+            <div className="mb-2 flex justify-start lg:justify-end">
+              <CompactPeriodSwitch value={period} onChange={onPeriodChange} />
+            </div>
+            <SubmissionsErrorsTrendChart data={overview.charts.errorsTrend} periodLabel={periodLabel} />
           </ChartPanel>
         ) : state === 'loading' ? (
           <ChartPanel
-            title="Success vs errors (Current month)"
-            info="Daily successful submissions compared with tracked submit errors for the current month."
+            title={`Success vs errors (${periodLabel})`}
+            info="Successful tracked submissions compared with tracked submit errors for the selected reporting period."
             mobileScrollable
           >
+            <div className="mb-2 flex justify-start lg:justify-end">
+              <CompactPeriodSwitch value={period} onChange={onPeriodChange} />
+            </div>
             <ChartSkeleton />
           </ChartPanel>
         ) : null)}

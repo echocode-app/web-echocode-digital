@@ -1,26 +1,26 @@
-import { Timestamp } from 'firebase-admin/firestore';
 import { getFirestoreDb } from '@/server/firebase/firestore';
 import type {
+  DashboardPeriod,
   DashboardRawAggregates,
   LeadDistributionDto,
 } from '@/server/admin/dashboard/dashboard.types';
 import {
-  addDays,
   countAnalyticsEventInRange,
   countVacancyLeadsInRange,
-  getCurrentYearMonthRanges,
-  getDayRanges,
   getLeadDistributionYearMonthly,
   getProjectLeadsByDay,
-  getRangeFromDays,
   getSubmissionsTrend,
   getTrafficAndLeadsSeries,
   normalizeSafeNumber,
   pctChange,
   percentage,
   readCount,
-  startOfUtcDay,
 } from '@/server/admin/dashboard/dashboard.repository.core';
+import {
+  buildDashboardCountQueries,
+  countAdminActionsInRange,
+} from '@/server/admin/dashboard/dashboard.repository.queries';
+import { buildDashboardRepositoryRanges } from '@/server/admin/dashboard/dashboard.repository.ranges';
 import {
   getSourcePerformance,
   getTopPortfolioItem,
@@ -34,131 +34,10 @@ import {
   getWeekdayInsights,
 } from '@/server/admin/dashboard/dashboard.repository.insights';
 
-type DateRange = {
-  start: Date;
-  end: Date;
-};
-
-async function countAdminActionsInRange(
-  actionType: 'vacancies.manage' | 'portfolio.manage',
-  range: DateRange,
-): Promise<number> {
+export async function getDashboardRawAggregates(period: DashboardPeriod = 'week'): Promise<DashboardRawAggregates> {
   const firestore = getFirestoreDb();
-  const query = firestore
-    .collection('admin_logs')
-    .where('actionType', '==', actionType)
-    .where('timestamp', '>=', Timestamp.fromDate(range.start))
-    .where('timestamp', '<', Timestamp.fromDate(range.end));
-
-  return readCount(query, `Failed to count admin logs for ${actionType}`);
-}
-
-export async function getDashboardRawAggregates(): Promise<DashboardRawAggregates> {
-  const firestore = getFirestoreDb();
-
-  // All windows are UTC-based to keep stable daily boundaries across environments.
-  const todayStart = startOfUtcDay(new Date());
-  const currentYearStart = new Date(Date.UTC(todayStart.getUTCFullYear(), 0, 1));
-  const currentMonthStart = new Date(Date.UTC(todayStart.getUTCFullYear(), todayStart.getUTCMonth(), 1));
-  const last7Days = getRangeFromDays(todayStart, 7, 0);
-  const previous7Days = getRangeFromDays(todayStart, 7, 7);
-  const last30Days = getRangeFromDays(todayStart, 30, 0);
-  const previous30Days = getRangeFromDays(todayStart, 30, 30);
-  const currentMonthRange: DateRange = {
-    start: currentMonthStart,
-    end: addDays(todayStart, 1),
-  };
-  const currentYearRange: DateRange = {
-    start: currentYearStart,
-    end: addDays(todayStart, 1),
-  };
-  const dayRangesCurrentMonth = getDayRanges(todayStart, todayStart.getUTCDate());
-  const monthRangesYear = getCurrentYearMonthRanges(todayStart);
-
-  const submissionsTotalQuery = firestore.collection('submissions');
-  const clientSubmissionsTotalQuery = firestore.collection('client_submissions');
-  const activeVacanciesQuery = firestore.collection('vacancies').where('isPublished', '==', true);
-  const portfolioTotalQuery = firestore.collection('portfolio');
-
-  const submissionsLast7Query = firestore
-    .collection('submissions')
-    .where('createdAt', '>=', Timestamp.fromDate(last7Days.start))
-    .where('createdAt', '<', Timestamp.fromDate(last7Days.end));
-  const clientSubmissionsLast7Query = firestore
-    .collection('client_submissions')
-    .where('createdAt', '>=', Timestamp.fromDate(last7Days.start))
-    .where('createdAt', '<', Timestamp.fromDate(last7Days.end));
-
-  const submissionsPrev7Query = firestore
-    .collection('submissions')
-    .where('createdAt', '>=', Timestamp.fromDate(previous7Days.start))
-    .where('createdAt', '<', Timestamp.fromDate(previous7Days.end));
-  const clientSubmissionsPrev7Query = firestore
-    .collection('client_submissions')
-    .where('createdAt', '>=', Timestamp.fromDate(previous7Days.start))
-    .where('createdAt', '<', Timestamp.fromDate(previous7Days.end));
-
-  const submissionsLast30Query = firestore
-    .collection('submissions')
-    .where('createdAt', '>=', Timestamp.fromDate(last30Days.start))
-    .where('createdAt', '<', Timestamp.fromDate(last30Days.end));
-  const clientSubmissionsLast30Query = firestore
-    .collection('client_submissions')
-    .where('createdAt', '>=', Timestamp.fromDate(last30Days.start))
-    .where('createdAt', '<', Timestamp.fromDate(last30Days.end));
-
-  const submissionsPrev30Query = firestore
-    .collection('submissions')
-    .where('createdAt', '>=', Timestamp.fromDate(previous30Days.start))
-    .where('createdAt', '<', Timestamp.fromDate(previous30Days.end));
-  const clientSubmissionsPrev30Query = firestore
-    .collection('client_submissions')
-    .where('createdAt', '>=', Timestamp.fromDate(previous30Days.start))
-    .where('createdAt', '<', Timestamp.fromDate(previous30Days.end));
-
-  const vacanciesLast7Query = firestore
-    .collection('vacancies')
-    .where('createdAt', '>=', Timestamp.fromDate(last7Days.start))
-    .where('createdAt', '<', Timestamp.fromDate(last7Days.end))
-    .where('isPublished', '==', true);
-
-  const vacanciesPrev7Query = firestore
-    .collection('vacancies')
-    .where('createdAt', '>=', Timestamp.fromDate(previous7Days.start))
-    .where('createdAt', '<', Timestamp.fromDate(previous7Days.end))
-    .where('isPublished', '==', true);
-
-  const vacanciesLast30Query = firestore
-    .collection('vacancies')
-    .where('createdAt', '>=', Timestamp.fromDate(last30Days.start))
-    .where('createdAt', '<', Timestamp.fromDate(last30Days.end))
-    .where('isPublished', '==', true);
-
-  const vacanciesPrev30Query = firestore
-    .collection('vacancies')
-    .where('createdAt', '>=', Timestamp.fromDate(previous30Days.start))
-    .where('createdAt', '<', Timestamp.fromDate(previous30Days.end))
-    .where('isPublished', '==', true);
-
-  const portfolioLast7Query = firestore
-    .collection('portfolio')
-    .where('createdAt', '>=', Timestamp.fromDate(last7Days.start))
-    .where('createdAt', '<', Timestamp.fromDate(last7Days.end));
-
-  const portfolioPrev7Query = firestore
-    .collection('portfolio')
-    .where('createdAt', '>=', Timestamp.fromDate(previous7Days.start))
-    .where('createdAt', '<', Timestamp.fromDate(previous7Days.end));
-
-  const portfolioLast30Query = firestore
-    .collection('portfolio')
-    .where('createdAt', '>=', Timestamp.fromDate(last30Days.start))
-    .where('createdAt', '<', Timestamp.fromDate(last30Days.end));
-
-  const portfolioPrev30Query = firestore
-    .collection('portfolio')
-    .where('createdAt', '>=', Timestamp.fromDate(previous30Days.start))
-    .where('createdAt', '<', Timestamp.fromDate(previous30Days.end));
+  const ranges = buildDashboardRepositoryRanges(period);
+  const queries = buildDashboardCountQueries(firestore, ranges);
 
   const [
     totalSubmissions,
@@ -211,55 +90,55 @@ export async function getDashboardRawAggregates(): Promise<DashboardRawAggregate
     sources,
     topPortfolio,
   ] = await Promise.all([
-    readCount(submissionsTotalQuery, 'Failed to count total submissions'),
-    readCount(clientSubmissionsTotalQuery, 'Failed to count total client submissions'),
-    readCount(activeVacanciesQuery, 'Failed to count active vacancies'),
-    readCount(portfolioTotalQuery, 'Failed to count portfolio items'),
-    readCount(submissionsLast7Query, 'Failed to count submissions for last 7 days'),
-    readCount(clientSubmissionsLast7Query, 'Failed to count client submissions for last 7 days'),
-    readCount(submissionsPrev7Query, 'Failed to count submissions for previous 7 days'),
-    readCount(clientSubmissionsPrev7Query, 'Failed to count client submissions for previous 7 days'),
-    readCount(submissionsLast30Query, 'Failed to count submissions for last 30 days'),
-    readCount(clientSubmissionsLast30Query, 'Failed to count client submissions for last 30 days'),
-    readCount(submissionsPrev30Query, 'Failed to count submissions for previous 30 days'),
-    readCount(clientSubmissionsPrev30Query, 'Failed to count client submissions for previous 30 days'),
-    readCount(vacanciesLast7Query, 'Failed to count active vacancies for last 7 days'),
-    readCount(vacanciesPrev7Query, 'Failed to count active vacancies for previous 7 days'),
-    readCount(vacanciesLast30Query, 'Failed to count active vacancies for last 30 days'),
-    readCount(vacanciesPrev30Query, 'Failed to count active vacancies for previous 30 days'),
-    readCount(portfolioLast7Query, 'Failed to count portfolio items for last 7 days'),
-    readCount(portfolioPrev7Query, 'Failed to count portfolio items for previous 7 days'),
-    readCount(portfolioLast30Query, 'Failed to count portfolio items for last 30 days'),
-    readCount(portfolioPrev30Query, 'Failed to count portfolio items for previous 30 days'),
-    countAdminActionsInRange('vacancies.manage', last7Days),
-    countAdminActionsInRange('vacancies.manage', previous7Days),
-    countAdminActionsInRange('vacancies.manage', last30Days),
-    countAdminActionsInRange('vacancies.manage', previous30Days),
-    countAdminActionsInRange('portfolio.manage', last7Days),
-    countAdminActionsInRange('portfolio.manage', previous7Days),
-    countAdminActionsInRange('portfolio.manage', last30Days),
-    countAdminActionsInRange('portfolio.manage', previous30Days),
-    countAnalyticsEventInRange('submit_project', last7Days),
-    countAnalyticsEventInRange('submit_project', previous7Days),
-    countAnalyticsEventInRange('submit_project', last30Days),
-    countAnalyticsEventInRange('submit_project', previous30Days),
-    countVacancyLeadsInRange(last7Days),
-    countVacancyLeadsInRange(previous7Days),
-    countVacancyLeadsInRange(last30Days),
-    countVacancyLeadsInRange(previous30Days),
-    countAnalyticsEventInRange('submit_project', currentYearRange),
-    countVacancyLeadsInRange(currentYearRange),
-    countAnalyticsEventInRange('page_view', last7Days),
-    countAnalyticsEventInRange('page_view', previous7Days),
-    countAnalyticsEventInRange('page_view', last30Days),
-    countAnalyticsEventInRange('page_view', previous30Days),
-    getSubmissionsTrend(dayRangesCurrentMonth),
-    getTrafficAndLeadsSeries(dayRangesCurrentMonth),
-    getProjectLeadsByDay(dayRangesCurrentMonth),
-    getLeadDistributionYearMonthly(monthRangesYear),
-    getTopVacancies(currentMonthRange),
-    getSourcePerformance(last30Days),
-    getTopPortfolioItem(last30Days),
+    readCount(queries.submissionsTotalQuery, 'Failed to count total submissions'),
+    readCount(queries.clientSubmissionsTotalQuery, 'Failed to count total client submissions'),
+    readCount(queries.activeVacanciesQuery, 'Failed to count active vacancies'),
+    readCount(queries.portfolioTotalQuery, 'Failed to count portfolio items'),
+    readCount(queries.submissionsLast7Query, 'Failed to count submissions for last 7 days'),
+    readCount(queries.clientSubmissionsLast7Query, 'Failed to count client submissions for last 7 days'),
+    readCount(queries.submissionsPrev7Query, 'Failed to count submissions for previous 7 days'),
+    readCount(queries.clientSubmissionsPrev7Query, 'Failed to count client submissions for previous 7 days'),
+    readCount(queries.submissionsLast30Query, 'Failed to count submissions for last 30 days'),
+    readCount(queries.clientSubmissionsLast30Query, 'Failed to count client submissions for last 30 days'),
+    readCount(queries.submissionsPrev30Query, 'Failed to count submissions for previous 30 days'),
+    readCount(queries.clientSubmissionsPrev30Query, 'Failed to count client submissions for previous 30 days'),
+    readCount(queries.vacanciesLast7Query, 'Failed to count active vacancies for last 7 days'),
+    readCount(queries.vacanciesPrev7Query, 'Failed to count active vacancies for previous 7 days'),
+    readCount(queries.vacanciesLast30Query, 'Failed to count active vacancies for last 30 days'),
+    readCount(queries.vacanciesPrev30Query, 'Failed to count active vacancies for previous 30 days'),
+    readCount(queries.portfolioLast7Query, 'Failed to count portfolio items for last 7 days'),
+    readCount(queries.portfolioPrev7Query, 'Failed to count portfolio items for previous 7 days'),
+    readCount(queries.portfolioLast30Query, 'Failed to count portfolio items for last 30 days'),
+    readCount(queries.portfolioPrev30Query, 'Failed to count portfolio items for previous 30 days'),
+    countAdminActionsInRange(firestore, 'vacancies.manage', ranges.last7Days),
+    countAdminActionsInRange(firestore, 'vacancies.manage', ranges.previous7Days),
+    countAdminActionsInRange(firestore, 'vacancies.manage', ranges.last30Days),
+    countAdminActionsInRange(firestore, 'vacancies.manage', ranges.previous30Days),
+    countAdminActionsInRange(firestore, 'portfolio.manage', ranges.last7Days),
+    countAdminActionsInRange(firestore, 'portfolio.manage', ranges.previous7Days),
+    countAdminActionsInRange(firestore, 'portfolio.manage', ranges.last30Days),
+    countAdminActionsInRange(firestore, 'portfolio.manage', ranges.previous30Days),
+    countAnalyticsEventInRange('submit_project', ranges.last7Days),
+    countAnalyticsEventInRange('submit_project', ranges.previous7Days),
+    countAnalyticsEventInRange('submit_project', ranges.last30Days),
+    countAnalyticsEventInRange('submit_project', ranges.previous30Days),
+    countVacancyLeadsInRange(ranges.last7Days),
+    countVacancyLeadsInRange(ranges.previous7Days),
+    countVacancyLeadsInRange(ranges.last30Days),
+    countVacancyLeadsInRange(ranges.previous30Days),
+    countAnalyticsEventInRange('submit_project', ranges.currentYearRange),
+    countVacancyLeadsInRange(ranges.currentYearRange),
+    countAnalyticsEventInRange('page_view', ranges.last7Days),
+    countAnalyticsEventInRange('page_view', ranges.previous7Days),
+    countAnalyticsEventInRange('page_view', ranges.last30Days),
+    countAnalyticsEventInRange('page_view', ranges.previous30Days),
+    getSubmissionsTrend(ranges.dayRangesCurrentMonth),
+    getTrafficAndLeadsSeries(ranges.trafficVsLeadsRanges),
+    getProjectLeadsByDay(ranges.dayRangesCurrentMonth),
+    getLeadDistributionYearMonthly(ranges.monthRangesYear),
+    getTopVacancies(ranges.currentMonthRange),
+    getSourcePerformance(ranges.last30Days),
+    getTopPortfolioItem(ranges.last30Days),
   ]);
 
   const leadDistribution: LeadDistributionDto = {
@@ -292,7 +171,7 @@ export async function getDashboardRawAggregates(): Promise<DashboardRawAggregate
   const portfolioItemsPreviousMoM = normalizeSafeNumber(Math.max(portfolioItemsPrev30, portfolioActionsPrev30));
 
   const funnel = buildFunnel(pageViewsLast30, projectLeadsLast30, vacancyLeadsLast30);
-  const weekdayInsights = getWeekdayInsights(dayRangesCurrentMonth, projectLeadsByDay, trafficVsLeads);
+  const weekdayInsights = getWeekdayInsights(ranges.dayRangesCurrentMonth, projectLeadsByDay, trafficVsLeads);
 
   const topVacancy = topVacancies[0] ?? {
     label: 'No data',
@@ -327,6 +206,7 @@ export async function getDashboardRawAggregates(): Promise<DashboardRawAggregate
   });
 
   return {
+    trafficVsLeadsPeriod: period,
     totals: {
       totalSubmissions: normalizeSafeNumber(totalSubmissions + clientSubmissionsTotal),
       projectLeads: normalizeSafeNumber(projectLeadsCurrent),

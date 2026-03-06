@@ -12,12 +12,21 @@ import {
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import type { SubmissionsOverviewDto } from '@/server/admin/submissions/submissions.metrics.service';
+import { ADMIN_MONTH_SHORT_LABELS_EN } from '@/shared/admin/constants';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
 type SubmissionsErrorsTrendChartProps = {
-  data: NonNullable<SubmissionsOverviewDto['charts']['errorsTrendCurrentMonth']>;
+  data: SubmissionsOverviewDto['charts']['errorsTrend'];
+  periodLabel: string;
 };
+
+function formatBucketLabel(label: string): string {
+  if (/^\d{2}$/.test(label)) {
+    return ADMIN_MONTH_SHORT_LABELS_EN[label] ?? label;
+  }
+  return label;
+}
 
 const options: ChartOptions<'bar'> = {
   responsive: true,
@@ -71,12 +80,12 @@ const options: ChartOptions<'bar'> = {
   },
 };
 
-function SubmissionsErrorsTrendChart({ data }: SubmissionsErrorsTrendChartProps) {
+function SubmissionsErrorsTrendChart({ data, periodLabel }: SubmissionsErrorsTrendChartProps) {
   const isAllZero = data.every((item) => item.success === 0 && item.error === 0);
 
   const chartData = useMemo(
     () => ({
-      labels: data.map((item) => item.date.slice(5)),
+      labels: data.map((item) => formatBucketLabel(item.label)),
       datasets: [
         {
           label: 'Success',
@@ -110,7 +119,9 @@ function SubmissionsErrorsTrendChart({ data }: SubmissionsErrorsTrendChartProps)
   if (isAllZero) {
     return (
       <div className="flex h-full min-h-0 items-center justify-center rounded-(--radius-secondary) border border-dashed border-gray16 bg-black/20 p-3 text-center">
-        <p className="font-main text-main-xs text-gray60">No success/error events tracked yet for the current month.</p>
+        <p className="font-main text-main-xs text-gray60">
+          No success/error events tracked yet for {periodLabel.toLowerCase()}.
+        </p>
       </div>
     );
   }
