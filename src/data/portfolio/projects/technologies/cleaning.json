@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Admin Panel",
+    "desc": "Next.js"
+  },
+  {
+    "title": "Backend",
+    "desc": "Node.js"
+  },
+  {
+    "title": "Notifications",
+    "desc": "Firebase or custom WebSocket"
+  },
+  {
+    "title": "Database",
+    "desc": "Stripe API"
+  },
+  {
+    "title": "Project Management",
+    "desc": "Scrum methodology with 2-week sprints"
+  },
+  {
+    "title": "Payment Integration",
+    "desc": "Stripe API"
+  }
+]

@@ -5,11 +5,13 @@ import PlanningSection from '@/components/sections/portfolio/project/PlanningSec
 import FeaturesSection from '@/components/sections/portfolio/project/FeaturesSection/FeaturesSection';
 import ScreensSection from '@/components/sections/portfolio/project/ScreensSection';
 import ProptotypeSection from '@/components/sections/portfolio/project/PrototypeSection';
+import TechnologySection from '@/components/sections/portfolio/project/TechnologySection';
 
 import implementations from '@/data/portfolio/projects/implementations/e-commerce.json';
 import challenges from '@/data/portfolio/projects/challenges/e-commerce.json';
 import planning from '@/data/portfolio/projects/planning/e-commerce.json';
 import features from '@/data/portfolio/projects/features/e-commerce.json';
+import technologies from '@/data/portfolio/projects/technologies/e-commerce.json';
 
 const ECommers = () => {
   return (
@@ -48,6 +50,7 @@ const ECommers = () => {
           height="697px"
         />
       </ProptotypeSection>
+      <TechnologySection list={technologies} />
     </>
   );
 };
