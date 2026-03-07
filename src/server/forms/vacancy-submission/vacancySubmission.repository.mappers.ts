@@ -72,6 +72,7 @@ export function mapVacancySubmissionDocToRecord(
     id,
     profileUrl: typeof data.profileUrl === 'string' ? data.profileUrl : '',
     cvFile: mapCvFile(data),
+    cvUrl: null,
     vacancy,
     vacancyKey: typeof data.vacancyKey === 'string' ? data.vacancyKey : toVacancyKey(vacancy),
     status: toModerationStatus(data.status),

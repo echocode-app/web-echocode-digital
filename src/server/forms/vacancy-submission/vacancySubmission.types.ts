@@ -49,6 +49,7 @@ export type VacancySubmissionRecordDto = {
   id: string;
   profileUrl: string;
   cvFile: VacancySubmissionCvInput;
+  cvUrl: string | null;
   vacancy: VacancySubmissionContextSnapshot;
   vacancyKey: string;
   status: ModerationStatus;
