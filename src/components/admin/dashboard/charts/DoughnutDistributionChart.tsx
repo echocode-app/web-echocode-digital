@@ -10,6 +10,11 @@ import {
   type ChartOptions,
 } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
+import {
+  ADMIN_CHART_TOOLTIP_BASE,
+  formatTooltipCount,
+  formatTooltipPercent,
+} from '@/components/admin/charts/chartTooltip';
 import type { LeadDistributionDto } from '@/server/admin/dashboard/dashboard.types';
 
 ChartJS.register(DoughnutController, ArcElement, Tooltip, Legend);
@@ -35,16 +40,35 @@ const options: ChartOptions<'doughnut'> = {
       position: 'bottom',
     },
     tooltip: {
-      backgroundColor: 'rgba(20,20,20,0.92)',
-      borderColor: 'rgba(255,255,255,0.16)',
-      borderWidth: 1,
-      titleColor: '#fff',
-      bodyColor: 'rgba(255,255,255,0.75)',
+      ...ADMIN_CHART_TOOLTIP_BASE,
     },
   },
 };
 
 function DoughnutDistributionChart({ data }: DoughnutDistributionChartProps) {
+  const total = data.project + data.vacancy;
+  const optionsWithCallbacks = useMemo<ChartOptions<'doughnut'>>(
+    () => ({
+      ...options,
+      plugins: {
+        ...options.plugins,
+        tooltip: {
+          ...ADMIN_CHART_TOOLTIP_BASE,
+          callbacks: {
+            title: (items) => String(items[0]?.label ?? ''),
+            label: (ctx) => `Tracked leads: ${formatTooltipCount(Number(ctx.parsed ?? 0))}`,
+            footer: (items) => {
+              const value = Number(items[0]?.parsed ?? 0);
+              const share = total > 0 ? (value / total) * 100 : 0;
+              return `Share of total leads: ${formatTooltipPercent(share)}`;
+            },
+          },
+        },
+      },
+    }),
+    [total],
+  );
+
   const chartData = useMemo(
     () => ({
       labels: ['Project', 'Vacancy'],
@@ -61,7 +85,7 @@ function DoughnutDistributionChart({ data }: DoughnutDistributionChartProps) {
     [data],
   );
 
-  return <Doughnut options={options} data={chartData} />;
+  return <Doughnut options={optionsWithCallbacks} data={chartData} />;
 }
 
 export default memo(DoughnutDistributionChart);

@@ -28,9 +28,16 @@ export default function SmartAlertStrip({ alerts }: SmartAlertStripProps) {
         {alerts.slice(0, 3).map((alert) => (
           <article
             key={alert.id}
-            className={`inline-flex min-h-10 min-w-0 flex-1 items-center gap-2 rounded-(--radius-secondary) border border-gray16 border-l-2 px-3 py-2 font-main text-main-xs ${alertTone(alert.level)}`}
+            className={`inline-flex min-h-10 min-w-0 
+              flex-1 items-center gap-2 rounded-(--radius-secondary) 
+              border border-gray16 border-l-2 
+              px-3 py-2 font-main 
+              text-main-xs ${alertTone(alert.level)}`}
           >
-            <span className="inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-current/40 text-[10px] leading-none">
+            <span className="inline-flex h-4 w-4 shrink-0 
+            items-center justify-center 
+            rounded-full border border-current/40 text-[10px] 
+            leading-none">
               {alertIcon(alert.level)}
             </span>
             <SymbolSafeText text={alert.message} className="min-w-0 wrap-break-word text-gray75" />

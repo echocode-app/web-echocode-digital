@@ -18,6 +18,18 @@ export default function ClientSubmissionCommentsPanel({
   onCommentTextChange,
   onSaveComment,
 }: ClientSubmissionCommentsPanelProps) {
+  const formatCommentAuthor = (comment: ClientSubmissionCommentDto): string => {
+    if (comment.authorProfile) {
+      return [
+        comment.authorProfile.displayName,
+        comment.authorProfile.roleLabel,
+        comment.authorProfile.uid,
+      ].filter(Boolean).join(' · ');
+    }
+
+    return comment.authorEmail ?? comment.authorUid;
+  };
+
   return (
     <>
       <div className="rounded-(--radius-secondary) border border-gray16 bg-black/20 p-3">
@@ -52,9 +64,9 @@ export default function ClientSubmissionCommentsPanel({
         {comments.length > 0 ? (
           <ul className="mt-2 space-y-2">
             {comments.map((comment) => (
-              <li key={comment.id} className="rounded-(--radius-secondary) border border-[#ffd38e] bg-white/45 p-2">
+              <li key={comment.id} className="rounded-(--radius-secondary) border border-[#ffd38e] bg-white p-2">
                 <p className="font-main text-main-xs text-black/65">
-                  {comment.authorEmail ?? comment.authorUid} · {formatDate(comment.createdAt)} {formatTime(comment.createdAt)}
+                  {formatCommentAuthor(comment)} · {formatDate(comment.createdAt)} {formatTime(comment.createdAt)}
                 </p>
                 <p className="mt-1 whitespace-pre-wrap font-main text-main-sm text-black">{comment.text}</p>
               </li>

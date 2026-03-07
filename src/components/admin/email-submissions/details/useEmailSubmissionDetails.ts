@@ -50,20 +50,23 @@ export function useEmailSubmissionDetails(submissionId: string) {
 
   const title = useMemo(() => details?.email || 'Email submission', [details]);
 
-  const onStatusChange = useCallback(async (nextStatus: EmailSubmissionStatus) => {
-    if (!details) return;
-    setIsStatusSaving(true);
+  const onStatusChange = useCallback(
+    async (nextStatus: EmailSubmissionStatus) => {
+      if (!details) return;
+      setIsStatusSaving(true);
 
-    try {
-      await updateEmailSubmissionStatus({ submissionId: details.id, status: nextStatus });
-      setDetails((prev) => (prev ? { ...prev, status: nextStatus } : prev));
-      showToast('success', `Status updated to "${nextStatus}".`);
-    } catch (error) {
-      showToast('error', error instanceof Error ? error.message : 'Unable to update status.');
-    } finally {
-      setIsStatusSaving(false);
-    }
-  }, [details, showToast]);
+      try {
+        await updateEmailSubmissionStatus({ submissionId: details.id, status: nextStatus });
+        setDetails((prev) => (prev ? { ...prev, status: nextStatus } : prev));
+        showToast('success', `Status updated to "${nextStatus}".`);
+      } catch (error) {
+        showToast('error', error instanceof Error ? error.message : 'Unable to update status.');
+      } finally {
+        setIsStatusSaving(false);
+      }
+    },
+    [details, showToast],
+  );
 
   const onAddComment = useCallback(async () => {
     if (!details) return;

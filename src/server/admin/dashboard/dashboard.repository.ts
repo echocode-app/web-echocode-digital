@@ -16,10 +16,7 @@ import {
   percentage,
   readCount,
 } from '@/server/admin/dashboard/dashboard.repository.core';
-import {
-  buildDashboardCountQueries,
-  countAdminActionsInRange,
-} from '@/server/admin/dashboard/dashboard.repository.queries';
+import { buildDashboardCountQueries } from '@/server/admin/dashboard/dashboard.repository.queries';
 import { buildDashboardRepositoryRanges } from '@/server/admin/dashboard/dashboard.repository.ranges';
 import {
   getSourcePerformance,
@@ -34,7 +31,9 @@ import {
   getWeekdayInsights,
 } from '@/server/admin/dashboard/dashboard.repository.insights';
 
-export async function getDashboardRawAggregates(period: DashboardPeriod = 'week'): Promise<DashboardRawAggregates> {
+export async function getDashboardRawAggregates(
+  period: DashboardPeriod = 'week',
+): Promise<DashboardRawAggregates> {
   const firestore = getFirestoreDb();
   const ranges = buildDashboardRepositoryRanges(period);
   const queries = buildDashboardCountQueries(firestore, ranges);
@@ -52,22 +51,6 @@ export async function getDashboardRawAggregates(period: DashboardPeriod = 'week'
     clientSubmissionsLast30,
     totalSubmissionsPrev30,
     clientSubmissionsPrev30,
-    activeVacanciesLast7,
-    activeVacanciesPrev7,
-    activeVacanciesLast30,
-    activeVacanciesPrev30,
-    portfolioItemsLast7,
-    portfolioItemsPrev7,
-    portfolioItemsLast30,
-    portfolioItemsPrev30,
-    vacancyActionsLast7,
-    vacancyActionsPrev7,
-    vacancyActionsLast30,
-    vacancyActionsPrev30,
-    portfolioActionsLast7,
-    portfolioActionsPrev7,
-    portfolioActionsLast30,
-    portfolioActionsPrev30,
     projectLeadsCurrent,
     projectLeadsPrevious,
     projectLeadsLast30,
@@ -95,29 +78,25 @@ export async function getDashboardRawAggregates(period: DashboardPeriod = 'week'
     readCount(queries.activeVacanciesQuery, 'Failed to count active vacancies'),
     readCount(queries.portfolioTotalQuery, 'Failed to count portfolio items'),
     readCount(queries.submissionsLast7Query, 'Failed to count submissions for last 7 days'),
-    readCount(queries.clientSubmissionsLast7Query, 'Failed to count client submissions for last 7 days'),
+    readCount(
+      queries.clientSubmissionsLast7Query,
+      'Failed to count client submissions for last 7 days',
+    ),
     readCount(queries.submissionsPrev7Query, 'Failed to count submissions for previous 7 days'),
-    readCount(queries.clientSubmissionsPrev7Query, 'Failed to count client submissions for previous 7 days'),
+    readCount(
+      queries.clientSubmissionsPrev7Query,
+      'Failed to count client submissions for previous 7 days',
+    ),
     readCount(queries.submissionsLast30Query, 'Failed to count submissions for last 30 days'),
-    readCount(queries.clientSubmissionsLast30Query, 'Failed to count client submissions for last 30 days'),
+    readCount(
+      queries.clientSubmissionsLast30Query,
+      'Failed to count client submissions for last 30 days',
+    ),
     readCount(queries.submissionsPrev30Query, 'Failed to count submissions for previous 30 days'),
-    readCount(queries.clientSubmissionsPrev30Query, 'Failed to count client submissions for previous 30 days'),
-    readCount(queries.vacanciesLast7Query, 'Failed to count active vacancies for last 7 days'),
-    readCount(queries.vacanciesPrev7Query, 'Failed to count active vacancies for previous 7 days'),
-    readCount(queries.vacanciesLast30Query, 'Failed to count active vacancies for last 30 days'),
-    readCount(queries.vacanciesPrev30Query, 'Failed to count active vacancies for previous 30 days'),
-    readCount(queries.portfolioLast7Query, 'Failed to count portfolio items for last 7 days'),
-    readCount(queries.portfolioPrev7Query, 'Failed to count portfolio items for previous 7 days'),
-    readCount(queries.portfolioLast30Query, 'Failed to count portfolio items for last 30 days'),
-    readCount(queries.portfolioPrev30Query, 'Failed to count portfolio items for previous 30 days'),
-    countAdminActionsInRange(firestore, 'vacancies.manage', ranges.last7Days),
-    countAdminActionsInRange(firestore, 'vacancies.manage', ranges.previous7Days),
-    countAdminActionsInRange(firestore, 'vacancies.manage', ranges.last30Days),
-    countAdminActionsInRange(firestore, 'vacancies.manage', ranges.previous30Days),
-    countAdminActionsInRange(firestore, 'portfolio.manage', ranges.last7Days),
-    countAdminActionsInRange(firestore, 'portfolio.manage', ranges.previous7Days),
-    countAdminActionsInRange(firestore, 'portfolio.manage', ranges.last30Days),
-    countAdminActionsInRange(firestore, 'portfolio.manage', ranges.previous30Days),
+    readCount(
+      queries.clientSubmissionsPrev30Query,
+      'Failed to count client submissions for previous 30 days',
+    ),
     countAnalyticsEventInRange('submit_project', ranges.last7Days),
     countAnalyticsEventInRange('submit_project', ranges.previous7Days),
     countAnalyticsEventInRange('submit_project', ranges.last30Days),
@@ -134,7 +113,7 @@ export async function getDashboardRawAggregates(period: DashboardPeriod = 'week'
     countAnalyticsEventInRange('page_view', ranges.previous30Days),
     getSubmissionsTrend(ranges.dayRangesCurrentMonth),
     getTrafficAndLeadsSeries(ranges.trafficVsLeadsRanges),
-    getProjectLeadsByDay(ranges.dayRangesCurrentMonth),
+    getProjectLeadsByDay(ranges.dayRangesCurrentMonthToDate),
     getLeadDistributionYearMonthly(ranges.monthRangesYear),
     getTopVacancies(ranges.currentMonthRange),
     getSourcePerformance(ranges.last30Days),
@@ -158,20 +137,30 @@ export async function getDashboardRawAggregates(period: DashboardPeriod = 'week'
   const conversionLast30 = percentage(projectLeadsLast30, pageViewsLast30);
   const conversionPrev30 = percentage(projectLeadsPrev30, pageViewsPrev30);
 
-  const activeVacanciesCurrentWoW = normalizeSafeNumber(Math.max(activeVacanciesLast7, vacancyActionsLast7));
-  const activeVacanciesPreviousWoW = normalizeSafeNumber(Math.max(activeVacanciesPrev7, vacancyActionsPrev7));
+  // Historical published-state diffs are not currently modeled, so we keep these KPI trends neutral
+  // instead of deriving misleading movement from admin action volume.
+  const activeVacanciesCurrentWoW = normalizeSafeNumber(activeVacancies);
+  const activeVacanciesPreviousWoW = normalizeSafeNumber(activeVacancies);
 
-  const portfolioItemsCurrentWoW = normalizeSafeNumber(Math.max(portfolioItemsLast7, portfolioActionsLast7));
-  const portfolioItemsPreviousWoW = normalizeSafeNumber(Math.max(portfolioItemsPrev7, portfolioActionsPrev7));
+  const portfolioItemsCurrentWoW = normalizeSafeNumber(portfolioItems);
+  const portfolioItemsPreviousWoW = normalizeSafeNumber(portfolioItems);
 
-  const activeVacanciesCurrentMoM = normalizeSafeNumber(Math.max(activeVacanciesLast30, vacancyActionsLast30));
-  const activeVacanciesPreviousMoM = normalizeSafeNumber(Math.max(activeVacanciesPrev30, vacancyActionsPrev30));
+  const activeVacanciesCurrentMoM = normalizeSafeNumber(activeVacancies);
+  const activeVacanciesPreviousMoM = normalizeSafeNumber(activeVacancies);
 
-  const portfolioItemsCurrentMoM = normalizeSafeNumber(Math.max(portfolioItemsLast30, portfolioActionsLast30));
-  const portfolioItemsPreviousMoM = normalizeSafeNumber(Math.max(portfolioItemsPrev30, portfolioActionsPrev30));
+  const portfolioItemsCurrentMoM = normalizeSafeNumber(portfolioItems);
+  const portfolioItemsPreviousMoM = normalizeSafeNumber(portfolioItems);
 
   const funnel = buildFunnel(pageViewsLast30, projectLeadsLast30, vacancyLeadsLast30);
-  const weekdayInsights = getWeekdayInsights(ranges.dayRangesCurrentMonth, projectLeadsByDay, trafficVsLeads);
+  const trafficVsLeadsForInsights = trafficVsLeads.slice(
+    0,
+    ranges.trafficVsLeadsInsightRanges.length,
+  );
+  const weekdayInsights = getWeekdayInsights(
+    ranges.dayRangesCurrentMonthToDate,
+    projectLeadsByDay,
+    trafficVsLeadsForInsights,
+  );
 
   const topVacancy = topVacancies[0] ?? {
     label: 'No data',
@@ -185,7 +174,7 @@ export async function getDashboardRawAggregates(period: DashboardPeriod = 'week'
     projectLeadsLast30,
     vacancyLeadsLast30,
   );
-  const trafficQualityInsight = buildTrafficQualityInsight(trafficVsLeads);
+  const trafficQualityInsight = buildTrafficQualityInsight(trafficVsLeadsForInsights);
   const topSourceSharePct = sources[0]?.share ?? 0;
 
   const growthVelocityMoM = pctChange(
@@ -193,9 +182,10 @@ export async function getDashboardRawAggregates(period: DashboardPeriod = 'week'
     projectLeadsPrev30 + vacancyLeadsPrev30,
   );
 
-  const conversionDropOffPct = conversionLast30 >= conversionPrev30
-    ? 0
-    : Number((conversionPrev30 - conversionLast30).toFixed(2));
+  const conversionDropOffPct =
+    conversionLast30 >= conversionPrev30
+      ? 0
+      : Number((conversionPrev30 - conversionLast30).toFixed(2));
 
   const alerts = buildAlerts({
     trafficWowPct: pctChange(pageViewsCurrent, pageViewsPrevious),

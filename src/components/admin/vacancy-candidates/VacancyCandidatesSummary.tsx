@@ -29,7 +29,9 @@ export default function VacancyCandidatesSummary() {
       <article className="rounded-(--radius-base) border border-gray16 bg-base-gray p-4">
         <div className="flex items-start justify-between gap-3">
           <div>
-            <h2 className="font-main text-title-xs uppercase tracking-[0.14em] text-gray60">Candidates queue</h2>
+            <h2 className="font-main text-title-xs uppercase tracking-[0.14em] text-gray60">
+              Candidates queue
+            </h2>
           </div>
           <InfoTooltip
             label="Vacancy candidates workflow info"
@@ -49,14 +51,18 @@ export default function VacancyCandidatesSummary() {
           <MetricTile label="Deferred" value={values.byStatus.deferred} />
         </div>
         {state === 'error' ? (
-          <p className="mt-2 font-main text-main-xs text-[#ff6d7a]">Unable to load summary metrics.</p>
+          <p className="mt-2 font-main text-main-xs text-[#ff6d7a]">
+            Unable to load summary metrics.
+          </p>
         ) : null}
       </article>
 
       <article className="rounded-(--radius-base) border border-gray16 bg-base-gray p-4">
         <div className="flex items-start justify-between gap-3">
           <div>
-            <h2 className="font-main text-title-xs uppercase tracking-[0.14em] text-gray60">Vacancy grouping</h2>
+            <h2 className="font-main text-title-xs uppercase tracking-[0.14em] text-gray60">
+              Vacancy grouping
+            </h2>
           </div>
           <InfoTooltip
             label="Vacancy grouping info"
@@ -65,29 +71,55 @@ export default function VacancyCandidatesSummary() {
         </div>
 
         <div className="mt-4 grid gap-3 lg:grid-cols-2">
-          {values.byVacancy.length > 0 ? values.byVacancy.map((group) => {
-            const latest = group.latestSubmissionAt ? formatDateTime(group.latestSubmissionAt) : null;
+          {values.byVacancy.length > 0 ? (
+            values.byVacancy.map((group) => {
+              const latest = group.latestSubmissionAt
+                ? formatDateTime(group.latestSubmissionAt)
+                : null;
 
-            return (
-              <div key={group.vacancyKey} className="rounded-(--radius-secondary) border border-gray16 bg-black/20 p-3">
-                <div className="flex flex-wrap items-start justify-between gap-3">
-                  <div>
-                    <p className="font-title text-title-xs text-white">{group.vacancy.vacancyTitle || group.vacancyKey}</p>
-                    <p className="mt-1 font-main text-main-xs text-gray60">{group.vacancy.level || 'Level not specified'} · {group.vacancy.employmentType || 'Employment not specified'}</p>
+              return (
+                <div
+                  key={group.vacancyKey}
+                  className="rounded-(--radius-secondary) border border-gray16 bg-black/20 p-3"
+                >
+                  <div className="flex flex-wrap items-start justify-between gap-3">
+                    <div>
+                      <p className="font-title text-title-xs text-white">
+                        {group.vacancy.vacancyTitle || group.vacancyKey}
+                      </p>
+                      <p className="mt-1 font-main text-main-xs text-gray60">
+                        {group.vacancy.level || 'Level not specified'} ·{' '}
+                        {group.vacancy.employmentType || 'Employment not specified'}
+                      </p>
+                    </div>
+                    <span className="rounded-(--radius-secondary) 
+                    border border-[#ffd38e] 
+                    bg-[linear-gradient(90deg,#fff3cf,#ffe9f2)] 
+                    px-2 py-1 
+                    font-main text-main-xs text-black/80">
+                      {group.submissionsTotal} total
+                    </span>
                   </div>
-                  <span className="rounded-(--radius-secondary) border border-[#ffd38e] bg-[linear-gradient(90deg,#fff3cf,#ffe9f2)] px-2 py-1 font-main text-main-xs text-black/80">
-                    {group.submissionsTotal} total
-                  </span>
+                  <div className="mt-3 flex flex-wrap gap-2 font-main text-main-xs text-gray75">
+                    <span className="rounded-(--radius-secondary) border border-gray16 px-2 py-1">
+                      New: {group.newCount}
+                    </span>
+                    <span className="rounded-(--radius-secondary) border border-gray16 px-2 py-1">
+                      Key: {group.vacancyKey}
+                    </span>
+                    {latest ? (
+                      <span className="rounded-(--radius-secondary) border border-gray16 px-2 py-1">
+                        Latest: {latest.date} {latest.time}
+                      </span>
+                    ) : null}
+                  </div>
                 </div>
-                <div className="mt-3 flex flex-wrap gap-2 font-main text-main-xs text-gray75">
-                  <span className="rounded-(--radius-secondary) border border-gray16 px-2 py-1">New: {group.newCount}</span>
-                  <span className="rounded-(--radius-secondary) border border-gray16 px-2 py-1">Key: {group.vacancyKey}</span>
-                  {latest ? <span className="rounded-(--radius-secondary) border border-gray16 px-2 py-1">Latest: {latest.date} {latest.time}</span> : null}
-                </div>
-              </div>
-            );
-          }) : (
-            <p className="font-main text-main-sm text-gray75">No candidate submissions grouped by vacancy yet.</p>
+              );
+            })
+          ) : (
+            <p className="font-main text-main-sm text-gray75">
+              No candidate submissions grouped by vacancy yet.
+            </p>
           )}
         </div>
       </article>

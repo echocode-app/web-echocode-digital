@@ -43,7 +43,11 @@ export function mapComments(commentsValue: unknown): ModerationCommentDto[] {
     .map((entry): ModerationCommentDto | null => {
       if (!entry || typeof entry !== 'object' || Array.isArray(entry)) return null;
       const comment = entry as Partial<ModerationCommentStored>;
-      if (!(comment.createdAt instanceof Timestamp) || typeof comment.id !== 'string' || typeof comment.text !== 'string') {
+      if (
+        !(comment.createdAt instanceof Timestamp) ||
+        typeof comment.id !== 'string' ||
+        typeof comment.text !== 'string'
+      ) {
         return null;
       }
 
@@ -52,6 +56,7 @@ export function mapComments(commentsValue: unknown): ModerationCommentDto[] {
         text: comment.text,
         authorUid: typeof comment.authorUid === 'string' ? comment.authorUid : 'unknown',
         authorEmail: typeof comment.authorEmail === 'string' ? comment.authorEmail : null,
+        authorProfile: null,
         createdAt: toIso(comment.createdAt),
       };
     })

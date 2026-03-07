@@ -77,4 +77,3 @@ export function resolveEventAttribution(input: {
 
   return extractAttributionFromHeaders(input.headers);
 }
-

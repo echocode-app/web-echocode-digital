@@ -11,6 +11,7 @@ import {
   type ChartOptions,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
+import { ADMIN_CHART_TOOLTIP_BASE, formatTooltipCount } from '@/components/admin/charts/chartTooltip';
 import type { TopVacancyPointDto } from '@/server/admin/dashboard/dashboard.types';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
@@ -31,11 +32,7 @@ const options: ChartOptions<'bar'> = {
       display: false,
     },
     tooltip: {
-      backgroundColor: 'rgba(20,20,20,0.92)',
-      borderColor: 'rgba(255,255,255,0.16)',
-      borderWidth: 1,
-      titleColor: '#fff',
-      bodyColor: 'rgba(255,255,255,0.75)',
+      ...ADMIN_CHART_TOOLTIP_BASE,
     },
   },
   scales: {
@@ -65,6 +62,27 @@ function trimLabel(label: string): string {
 }
 
 function BarTopVacanciesChart({ data }: BarTopVacanciesChartProps) {
+  const optionsWithCallbacks = useMemo<ChartOptions<'bar'>>(
+    () => ({
+      ...options,
+      plugins: {
+        ...options.plugins,
+        tooltip: {
+          ...ADMIN_CHART_TOOLTIP_BASE,
+          callbacks: {
+            title: (items) => data[items[0]?.dataIndex ?? 0]?.label ?? '',
+            label: (ctx) => `Candidate applications: ${formatTooltipCount(Number(ctx.parsed.x ?? ctx.parsed ?? 0))}`,
+            footer: (items) => {
+              const item = data[items[0]?.dataIndex ?? 0];
+              return item ? `Vacancy ID: ${item.vacancyId}` : '';
+            },
+          },
+        },
+      },
+    }),
+    [data],
+  );
+
   const chartData = useMemo(
     () => ({
       labels: data.map((item) => trimLabel(item.label)),
@@ -80,7 +98,7 @@ function BarTopVacanciesChart({ data }: BarTopVacanciesChartProps) {
     [data],
   );
 
-  return <Bar options={options} data={chartData} />;
+  return <Bar options={optionsWithCallbacks} data={chartData} />;
 }
 
 export default memo(BarTopVacanciesChart);

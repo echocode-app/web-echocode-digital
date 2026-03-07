@@ -12,7 +12,10 @@ import type {
 
 const BASE_PATH = '/api/admin/vacancies/candidates';
 
-export async function fetchVacancyCandidatesList(query: string, signal?: AbortSignal): Promise<VacancyCandidatesListResponseDto> {
+export async function fetchVacancyCandidatesList(
+  query: string,
+  signal?: AbortSignal,
+): Promise<VacancyCandidatesListResponseDto> {
   const token = await getAdminIdTokenOrThrow();
   const response = await fetch(`${BASE_PATH}?${query}`, {
     method: 'GET',
@@ -22,7 +25,12 @@ export async function fetchVacancyCandidatesList(query: string, signal?: AbortSi
   });
 
   if (!response.ok) {
-    throw new Error(await parseAdminApiError(response, 'Failed to load candidate submissions. Please refresh the page.'));
+    throw new Error(
+      await parseAdminApiError(
+        response,
+        'Failed to load candidate submissions. Please refresh the page.',
+      ),
+    );
   }
 
   const payload = (await response.json()) as {
@@ -42,21 +50,27 @@ export async function updateVacancyCandidateStatus(input: {
   status: VacancySubmissionStatus;
 }): Promise<void> {
   const token = await getAdminIdTokenOrThrow();
-  const response = await fetch(`${BASE_PATH}/status?submissionId=${encodeURIComponent(input.submissionId)}`, {
-    method: 'PATCH',
-    headers: {
-      ...withAuthHeaders(token),
-      'Content-Type': 'application/json',
+  const response = await fetch(
+    `${BASE_PATH}/status?submissionId=${encodeURIComponent(input.submissionId)}`,
+    {
+      method: 'PATCH',
+      headers: {
+        ...withAuthHeaders(token),
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ status: input.status }),
     },
-    body: JSON.stringify({ status: input.status }),
-  });
+  );
 
   if (!response.ok) {
     throw new Error(await parseAdminApiError(response, 'Status update failed. Please try again.'));
   }
 }
 
-export async function fetchVacancyCandidateDetails(submissionId: string, signal?: AbortSignal): Promise<VacancyCandidateDetailsDto> {
+export async function fetchVacancyCandidateDetails(
+  submissionId: string,
+  signal?: AbortSignal,
+): Promise<VacancyCandidateDetailsDto> {
   const token = await getAdminIdTokenOrThrow();
   const response = await fetch(`${BASE_PATH}/${encodeURIComponent(submissionId)}`, {
     method: 'GET',
@@ -66,7 +80,9 @@ export async function fetchVacancyCandidateDetails(submissionId: string, signal?
   });
 
   if (!response.ok) {
-    throw new Error(await parseAdminApiError(response, 'Failed to load details. Try refreshing the page.'));
+    throw new Error(
+      await parseAdminApiError(response, 'Failed to load details. Try refreshing the page.'),
+    );
   }
 
   const payload = (await response.json()) as {
@@ -86,14 +102,17 @@ export async function addVacancyCandidateComment(input: {
   comment: string;
 }): Promise<ModerationCommentDto> {
   const token = await getAdminIdTokenOrThrow();
-  const response = await fetch(`${BASE_PATH}/comment?submissionId=${encodeURIComponent(input.submissionId)}`, {
-    method: 'POST',
-    headers: {
-      ...withAuthHeaders(token),
-      'Content-Type': 'application/json',
+  const response = await fetch(
+    `${BASE_PATH}/comment?submissionId=${encodeURIComponent(input.submissionId)}`,
+    {
+      method: 'POST',
+      headers: {
+        ...withAuthHeaders(token),
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ comment: input.comment }),
     },
-    body: JSON.stringify({ comment: input.comment }),
-  });
+  );
 
   if (!response.ok) {
     throw new Error(await parseAdminApiError(response, 'Comment add failed. Please try again.'));
@@ -113,16 +132,19 @@ export async function addVacancyCandidateComment(input: {
   return payload.data.comment;
 }
 
-export async function softDeleteVacancyCandidate(input: {
-  submissionId: string;
-}): Promise<void> {
+export async function softDeleteVacancyCandidate(input: { submissionId: string }): Promise<void> {
   const token = await getAdminIdTokenOrThrow();
-  const response = await fetch(`${BASE_PATH}/delete?submissionId=${encodeURIComponent(input.submissionId)}`, {
-    method: 'DELETE',
-    headers: withAuthHeaders(token),
-  });
+  const response = await fetch(
+    `${BASE_PATH}/delete?submissionId=${encodeURIComponent(input.submissionId)}`,
+    {
+      method: 'DELETE',
+      headers: withAuthHeaders(token),
+    },
+  );
 
   if (!response.ok) {
-    throw new Error(await parseAdminApiError(response, 'Unable to delete submission. Please try again.'));
+    throw new Error(
+      await parseAdminApiError(response, 'Unable to delete submission. Please try again.'),
+    );
   }
 }

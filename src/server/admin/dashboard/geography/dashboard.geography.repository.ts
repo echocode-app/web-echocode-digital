@@ -1,5 +1,6 @@
 import { addDays, getRangeFromDays, scanAnalyticsEventsByTypeInRange, startOfUtcDay } from '@/server/admin/dashboard/dashboard.repository.core';
 import type { DashboardPeriod, DashboardGeographyRaw, DashboardGeographyRawCountry } from '@/server/admin/dashboard/dashboard.types';
+import { startOfAdminMonth, startOfAdminYear } from '@/shared/time/europeKiev';
 
 function normalizeCountry(input: unknown): string {
   if (typeof input !== 'string') {
@@ -23,13 +24,13 @@ function resolveRange(period: DashboardPeriod): { start: Date; end: Date } {
 
   if (period === 'month') {
     return {
-      start: new Date(Date.UTC(todayStart.getUTCFullYear(), todayStart.getUTCMonth(), 1)),
+      start: startOfAdminMonth(todayStart),
       end: addDays(todayStart, 1),
     };
   }
 
   return {
-    start: new Date(Date.UTC(todayStart.getUTCFullYear(), 0, 1)),
+    start: startOfAdminYear(todayStart),
     end: addDays(todayStart, 1),
   };
 }

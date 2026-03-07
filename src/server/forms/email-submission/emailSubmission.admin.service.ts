@@ -1,5 +1,9 @@
 import { ApiError } from '@/server/lib/errors';
 import {
+  attachAdminProfilesToComments,
+  getAdminUserProfileByUid,
+} from '@/server/admin/admin-users.service';
+import {
   addEmailSubmissionComment,
   getEmailSubmissionById,
   getEmailSubmissionsOverview,
@@ -62,6 +66,18 @@ export async function getAdminEmailSubmissionsOverview(): Promise<EmailSubmissio
   return getEmailSubmissionsOverview();
 }
 
+async function attachEmailSubmissionReviewerProfile(
+  item: EmailSubmissionDetailsDto['item'],
+): Promise<EmailSubmissionDetailsDto> {
+  return {
+    item: {
+      ...item,
+      comments: await attachAdminProfilesToComments(item.comments ?? []),
+      reviewedByProfile: await getAdminUserProfileByUid(item.reviewedBy),
+    },
+  };
+}
+
 async function autoMarkEmailSubmissionViewed(input: {
   submissionId: string;
   adminUid: string;
@@ -83,10 +99,13 @@ async function autoMarkEmailSubmissionViewed(input: {
 
   const refreshed = await getEmailSubmissionById(input.submissionId);
   if (!refreshed) {
-    throw ApiError.fromCode('INTERNAL_ERROR', 'Failed to reload email submission after auto-view update');
+    throw ApiError.fromCode(
+      'INTERNAL_ERROR',
+      'Failed to reload email submission after auto-view update',
+    );
   }
 
-  return { item: refreshed };
+  return attachEmailSubmissionReviewerProfile(refreshed);
 }
 
 export async function getAdminEmailSubmissionDetails(input: {
@@ -104,7 +123,7 @@ export async function getAdminEmailSubmissionDetails(input: {
     return autoMarkEmailSubmissionViewed(input);
   }
 
-  return { item };
+  return attachEmailSubmissionReviewerProfile(item);
 }
 
 export async function setAdminEmailSubmissionStatus(input: {
@@ -121,7 +140,10 @@ export async function setAdminEmailSubmissionStatus(input: {
   }
 
   if (existing.status !== 'new' && input.status === 'new') {
-    throw ApiError.fromCode('BAD_REQUEST', 'Status cannot be changed back to "new" after initial processing');
+    throw ApiError.fromCode(
+      'BAD_REQUEST',
+      'Status cannot be changed back to "new" after initial processing',
+    );
   }
 
   const update = await updateEmailSubmissionStatus({

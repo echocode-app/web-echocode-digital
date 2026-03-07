@@ -21,11 +21,13 @@ export type FunnelRaw = {
 };
 
 export type SubmissionsTrendPointRaw = {
+  date: string;
   label: string;
   value: number;
 };
 
 export type ErrorsTrendPointRaw = {
+  date: string;
   label: string;
   success: number;
   error: number;

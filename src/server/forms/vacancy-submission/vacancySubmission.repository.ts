@@ -81,11 +81,16 @@ export async function createVacancySubmissionRecord(input: {
     };
   } catch (cause) {
     if (cause instanceof ApiError) throw cause;
-    throw ApiError.fromCode('FIREBASE_UNAVAILABLE', 'Failed to create vacancy submission', { cause });
+    throw ApiError.fromCode('FIREBASE_UNAVAILABLE', 'Failed to create vacancy submission', {
+      cause,
+    });
   }
 }
 
-function buildListQuery(firestore: FirebaseFirestore.Firestore, input: ListQueryInput): FirebaseFirestore.Query {
+function buildListQuery(
+  firestore: FirebaseFirestore.Firestore,
+  input: ListQueryInput,
+): FirebaseFirestore.Query {
   let query: FirebaseFirestore.Query = firestore.collection(VACANCY_SUBMISSIONS_COLLECTION);
 
   if (input.status) {
@@ -125,7 +130,8 @@ function matchesFallbackFilters(data: Record<string, unknown>, input: ListQueryI
   if (input.vacancyKey) {
     // Rebuild key from snapshot when historical docs do not have precomputed vacancyKey.
     const vacancy = mapVacancySnapshot(data);
-    const docVacancyKey = typeof data.vacancyKey === 'string' ? data.vacancyKey : toVacancyKey(vacancy);
+    const docVacancyKey =
+      typeof data.vacancyKey === 'string' ? data.vacancyKey : toVacancyKey(vacancy);
     if (docVacancyKey !== input.vacancyKey) {
       return false;
     }
@@ -137,7 +143,11 @@ function matchesFallbackFilters(data: Record<string, unknown>, input: ListQueryI
 async function listWithFallback(
   firestore: FirebaseFirestore.Firestore,
   input: ListQueryInput,
-): Promise<{ items: VacancySubmissionListItemDto[]; nextCursor: VacancySubmissionCursor | null; hasNextPage: boolean }> {
+): Promise<{
+  items: VacancySubmissionListItemDto[];
+  nextCursor: VacancySubmissionCursor | null;
+  hasNextPage: boolean;
+}> {
   let baseQuery: FirebaseFirestore.Query = firestore.collection(VACANCY_SUBMISSIONS_COLLECTION);
 
   if (input.dateFrom) {
@@ -152,7 +162,10 @@ async function listWithFallback(
 
   baseQuery = baseQuery.orderBy('createdAt', 'desc').orderBy(FieldPath.documentId(), 'desc');
   if (input.cursor) {
-    baseQuery = baseQuery.startAfter(Timestamp.fromMillis(input.cursor.createdAtMs), input.cursor.id);
+    baseQuery = baseQuery.startAfter(
+      Timestamp.fromMillis(input.cursor.createdAtMs),
+      input.cursor.id,
+    );
   }
 
   const filtered: FirebaseFirestore.QueryDocumentSnapshot[] = [];
@@ -170,7 +183,9 @@ async function listWithFallback(
     try {
       batchSnapshot = await batchQuery.get();
     } catch (scanCause) {
-      throw ApiError.fromCode('FIREBASE_UNAVAILABLE', 'Failed to list vacancy submissions', { cause: scanCause });
+      throw ApiError.fromCode('FIREBASE_UNAVAILABLE', 'Failed to list vacancy submissions', {
+        cause: scanCause,
+      });
     }
 
     if (batchSnapshot.empty) {
@@ -194,9 +209,10 @@ async function listWithFallback(
   const hasNextPage = filtered.length > input.limit;
   const pageDocs = hasNextPage ? filtered.slice(0, input.limit) : filtered;
   const items = pageDocs.map(mapVacancySubmissionDocToListItem);
-  const nextCursor = hasNextPage && pageDocs.length > 0
-    ? mapVacancySubmissionDocToCursor(pageDocs[pageDocs.length - 1])
-    : null;
+  const nextCursor =
+    hasNextPage && pageDocs.length > 0
+      ? mapVacancySubmissionDocToCursor(pageDocs[pageDocs.length - 1])
+      : null;
 
   return { items, nextCursor, hasNextPage };
 }
@@ -243,17 +259,21 @@ export async function listVacancySubmissions(input: ListQueryInput): Promise<{
     const hasNextPage = filtered.length > input.limit;
     const pageDocs = hasNextPage ? filtered.slice(0, input.limit) : filtered;
     const items = pageDocs.map(mapVacancySubmissionDocToListItem);
-    const nextCursor = hasNextPage && pageDocs.length > 0
-      ? mapVacancySubmissionDocToCursor(pageDocs[pageDocs.length - 1])
-      : null;
+    const nextCursor =
+      hasNextPage && pageDocs.length > 0
+        ? mapVacancySubmissionDocToCursor(pageDocs[pageDocs.length - 1])
+        : null;
 
     return { items, nextCursor, hasNextPage };
   } catch (cause) {
     const message = cause instanceof Error ? cause.message : String(cause);
-    const requiresIndex = message.includes('FAILED_PRECONDITION') && message.includes('requires an index');
+    const requiresIndex =
+      message.includes('FAILED_PRECONDITION') && message.includes('requires an index');
 
     if (!requiresIndex || (!input.status && !input.vacancyKey)) {
-      throw ApiError.fromCode('FIREBASE_UNAVAILABLE', 'Failed to list vacancy submissions', { cause });
+      throw ApiError.fromCode('FIREBASE_UNAVAILABLE', 'Failed to list vacancy submissions', {
+        cause,
+      });
     }
 
     return listWithFallback(firestore, input);
@@ -279,7 +299,10 @@ export async function getVacancySubmissionById(
 
   const data = snapshot.data();
   if (!data) {
-    throw ApiError.fromCode('INTERNAL_ERROR', `Vacancy submission "${submissionId}" payload is missing`);
+    throw ApiError.fromCode(
+      'INTERNAL_ERROR',
+      `Vacancy submission "${submissionId}" payload is missing`,
+    );
   }
 
   if (!options?.includeDeleted && isSoftDeleted(data)) {
@@ -293,7 +316,10 @@ export async function updateVacancySubmissionStatus(input: {
   submissionId: string;
   status: VacancySubmissionStatus;
   adminUid: string;
-}): Promise<{ previousStatus: VacancySubmissionStatus; updated: UpdateVacancySubmissionStatusResponseDto }> {
+}): Promise<{
+  previousStatus: VacancySubmissionStatus;
+  updated: UpdateVacancySubmissionStatusResponseDto;
+}> {
   const firestore = getFirestoreDb();
   const docRef = firestore.collection(VACANCY_SUBMISSIONS_COLLECTION).doc(input.submissionId);
 
@@ -301,12 +327,18 @@ export async function updateVacancySubmissionStatus(input: {
     return await firestore.runTransaction(async (tx) => {
       const snapshot = await tx.get(docRef);
       if (!snapshot.exists) {
-        throw ApiError.fromCode('BAD_REQUEST', `Vacancy submission "${input.submissionId}" not found`);
+        throw ApiError.fromCode(
+          'BAD_REQUEST',
+          `Vacancy submission "${input.submissionId}" not found`,
+        );
       }
 
       const data = snapshot.data();
       if (!data || isSoftDeleted(data)) {
-        throw ApiError.fromCode('BAD_REQUEST', `Vacancy submission "${input.submissionId}" not found`);
+        throw ApiError.fromCode(
+          'BAD_REQUEST',
+          `Vacancy submission "${input.submissionId}" not found`,
+        );
       }
 
       const previousStatus = toModerationStatus(data.status);
@@ -332,7 +364,9 @@ export async function updateVacancySubmissionStatus(input: {
     });
   } catch (cause) {
     if (cause instanceof ApiError) throw cause;
-    throw ApiError.fromCode('FIREBASE_UNAVAILABLE', 'Failed to update vacancy submission status', { cause });
+    throw ApiError.fromCode('FIREBASE_UNAVAILABLE', 'Failed to update vacancy submission status', {
+      cause,
+    });
   }
 }
 
@@ -347,12 +381,18 @@ export async function addVacancySubmissionComment(
     return await firestore.runTransaction(async (tx) => {
       const snapshot = await tx.get(docRef);
       if (!snapshot.exists) {
-        throw ApiError.fromCode('BAD_REQUEST', `Vacancy submission "${input.submissionId}" not found`);
+        throw ApiError.fromCode(
+          'BAD_REQUEST',
+          `Vacancy submission "${input.submissionId}" not found`,
+        );
       }
 
       const data = snapshot.data();
       if (!data || isSoftDeleted(data)) {
-        throw ApiError.fromCode('BAD_REQUEST', `Vacancy submission "${input.submissionId}" not found`);
+        throw ApiError.fromCode(
+          'BAD_REQUEST',
+          `Vacancy submission "${input.submissionId}" not found`,
+        );
       }
 
       const createdAt = Timestamp.now();
@@ -383,7 +423,9 @@ export async function addVacancySubmissionComment(
     });
   } catch (cause) {
     if (cause instanceof ApiError) throw cause;
-    throw ApiError.fromCode('FIREBASE_UNAVAILABLE', 'Failed to add vacancy submission comment', { cause });
+    throw ApiError.fromCode('FIREBASE_UNAVAILABLE', 'Failed to add vacancy submission comment', {
+      cause,
+    });
   }
 }
 
@@ -398,12 +440,18 @@ export async function softDeleteVacancySubmission(input: {
     return await firestore.runTransaction(async (tx) => {
       const snapshot = await tx.get(docRef);
       if (!snapshot.exists) {
-        throw ApiError.fromCode('BAD_REQUEST', `Vacancy submission "${input.submissionId}" not found`);
+        throw ApiError.fromCode(
+          'BAD_REQUEST',
+          `Vacancy submission "${input.submissionId}" not found`,
+        );
       }
 
       const data = snapshot.data();
       if (!data || isSoftDeleted(data)) {
-        throw ApiError.fromCode('BAD_REQUEST', `Vacancy submission "${input.submissionId}" not found`);
+        throw ApiError.fromCode(
+          'BAD_REQUEST',
+          `Vacancy submission "${input.submissionId}" not found`,
+        );
       }
 
       const now = Timestamp.now();
@@ -423,7 +471,9 @@ export async function softDeleteVacancySubmission(input: {
     });
   } catch (cause) {
     if (cause instanceof ApiError) throw cause;
-    throw ApiError.fromCode('FIREBASE_UNAVAILABLE', 'Failed to delete vacancy submission', { cause });
+    throw ApiError.fromCode('FIREBASE_UNAVAILABLE', 'Failed to delete vacancy submission', {
+      cause,
+    });
   }
 }
 

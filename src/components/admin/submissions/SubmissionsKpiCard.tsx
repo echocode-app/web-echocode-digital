@@ -85,10 +85,7 @@ export default function SubmissionsKpiCard({
         <TrendIndicator trend={metric.trend} />
       </div>
       <div className="mt-2">
-        <MicroInsightBadge
-          changePct={metric.trend.changePct}
-          direction={metric.trend.direction}
-        />
+        <MicroInsightBadge changePct={metric.trend.changePct} direction={metric.trend.direction} />
       </div>
     </article>
   );

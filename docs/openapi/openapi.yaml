@@ -40,6 +40,8 @@ paths:
   /api/internal/firebase-check:
     $ref: './paths/system.yaml#/~1api~1internal~1firebase-check'
 
+  /api/analytics/page-view:
+    $ref: './paths/public-forms.yaml#/~1api~1analytics~1page-view'
   /api/forms/uploads/init:
     $ref: './paths/public-forms.yaml#/~1api~1forms~1uploads~1init'
   /api/forms/submissions:

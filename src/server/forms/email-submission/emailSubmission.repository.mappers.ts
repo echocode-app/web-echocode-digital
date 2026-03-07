@@ -38,7 +38,8 @@ export function mapEmailSubmissionDocToListItem(
     source: mapSubmissionSource(data.source),
     date: toIso(data.createdAt),
     status: toModerationStatus(data.status),
-    commentsCount: Number.isFinite(commentsCount) && commentsCount > 0 ? Math.trunc(commentsCount) : 0,
+    commentsCount:
+      Number.isFinite(commentsCount) && commentsCount > 0 ? Math.trunc(commentsCount) : 0,
   };
 }
 
@@ -60,6 +61,7 @@ export function mapEmailSubmissionDocToRecord(
     createdAt: toIso(data.createdAt),
     updatedAt: toIso(data.updatedAt),
     reviewedBy: typeof data.reviewedBy === 'string' ? data.reviewedBy : null,
+    reviewedByProfile: null,
     reviewedAt: reviewedAtIso,
     comments: mapComments(data.comments),
   };

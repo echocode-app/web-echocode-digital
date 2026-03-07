@@ -1,3 +1,41 @@
+/api/analytics/page-view:
+  post:
+    tags: [Public Forms]
+    operationId: trackPageView
+    summary: Track public page view event
+    description: |
+      Best-effort page view analytics endpoint used by the public site.
+      Country is resolved on the server from proxy headers (for example Vercel or Cloudflare).
+    security: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [path, url]
+            properties:
+              path:
+                type: string
+              url:
+                type: string
+              title:
+                type: [string, 'null']
+              referrer:
+                type: [string, 'null']
+              source:
+                type: string
+                example: website
+    responses:
+      '200':
+        description: Event accepted
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/SuccessEnvelope'
+      '400':
+        $ref: '../openapi.yaml#/components/responses/BadRequest'
+
 /api/forms/uploads/init:
   post:
     tags: [Public Forms]
@@ -108,7 +146,12 @@
             properties:
               eventType:
                 type: string
-                enum: [contact_modal_open, submit_project_attempt, submit_project_error]
+                enum:
+                  - contact_modal_open
+                  - contact_modal_close
+                  - contact_modal_cta_click
+                  - submit_project_attempt
+                  - submit_project_error
               metadata:
                 type: object
                 additionalProperties: true

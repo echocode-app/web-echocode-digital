@@ -10,7 +10,10 @@ import type {
   EmailSubmissionsListResponseDto,
 } from './emailSubmissions.types';
 
-export async function fetchEmailSubmissionsList(query: string, signal?: AbortSignal): Promise<EmailSubmissionsListResponseDto> {
+export async function fetchEmailSubmissionsList(
+  query: string,
+  signal?: AbortSignal,
+): Promise<EmailSubmissionsListResponseDto> {
   const token = await getAdminIdTokenOrThrow();
   const response = await fetch(`/api/admin/submissions/emails?${query}`, {
     method: 'GET',
@@ -20,7 +23,12 @@ export async function fetchEmailSubmissionsList(query: string, signal?: AbortSig
   });
 
   if (!response.ok) {
-    throw new Error(await parseAdminApiError(response, 'Failed to load email submissions. Please refresh the page.'));
+    throw new Error(
+      await parseAdminApiError(
+        response,
+        'Failed to load email submissions. Please refresh the page.',
+      ),
+    );
   }
 
   const payload = (await response.json()) as {
@@ -40,31 +48,42 @@ export async function updateEmailSubmissionStatus(input: {
   status: EmailSubmissionStatus;
 }): Promise<void> {
   const token = await getAdminIdTokenOrThrow();
-  const response = await fetch(`/api/admin/submissions/emails/status?submissionId=${encodeURIComponent(input.submissionId)}`, {
-    method: 'PATCH',
-    headers: {
-      ...withAuthHeaders(token),
-      'Content-Type': 'application/json',
+  const response = await fetch(
+    `/api/admin/submissions/emails/status?submissionId=${encodeURIComponent(input.submissionId)}`,
+    {
+      method: 'PATCH',
+      headers: {
+        ...withAuthHeaders(token),
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ status: input.status }),
     },
-    body: JSON.stringify({ status: input.status }),
-  });
+  );
 
   if (!response.ok) {
     throw new Error(await parseAdminApiError(response, 'Status update failed. Please try again.'));
   }
 }
 
-export async function fetchEmailSubmissionDetails(submissionId: string, signal?: AbortSignal): Promise<EmailSubmissionDetailsDto> {
+export async function fetchEmailSubmissionDetails(
+  submissionId: string,
+  signal?: AbortSignal,
+): Promise<EmailSubmissionDetailsDto> {
   const token = await getAdminIdTokenOrThrow();
-  const response = await fetch(`/api/admin/submissions/emails/${encodeURIComponent(submissionId)}`, {
-    method: 'GET',
-    headers: withAuthHeaders(token),
-    cache: 'no-store',
-    signal,
-  });
+  const response = await fetch(
+    `/api/admin/submissions/emails/${encodeURIComponent(submissionId)}`,
+    {
+      method: 'GET',
+      headers: withAuthHeaders(token),
+      cache: 'no-store',
+      signal,
+    },
+  );
 
   if (!response.ok) {
-    throw new Error(await parseAdminApiError(response, 'Failed to load details. Try refreshing the page.'));
+    throw new Error(
+      await parseAdminApiError(response, 'Failed to load details. Try refreshing the page.'),
+    );
   }
 
   const payload = (await response.json()) as {
@@ -84,14 +103,17 @@ export async function addEmailSubmissionComment(input: {
   comment: string;
 }): Promise<ModerationCommentDto> {
   const token = await getAdminIdTokenOrThrow();
-  const response = await fetch(`/api/admin/submissions/emails/comment?submissionId=${encodeURIComponent(input.submissionId)}`, {
-    method: 'POST',
-    headers: {
-      ...withAuthHeaders(token),
-      'Content-Type': 'application/json',
+  const response = await fetch(
+    `/api/admin/submissions/emails/comment?submissionId=${encodeURIComponent(input.submissionId)}`,
+    {
+      method: 'POST',
+      headers: {
+        ...withAuthHeaders(token),
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ comment: input.comment }),
     },
-    body: JSON.stringify({ comment: input.comment }),
-  });
+  );
 
   if (!response.ok) {
     throw new Error(await parseAdminApiError(response, 'Comment add failed. Please try again.'));
@@ -111,16 +133,19 @@ export async function addEmailSubmissionComment(input: {
   return payload.data.comment;
 }
 
-export async function softDeleteEmailSubmission(input: {
-  submissionId: string;
-}): Promise<void> {
+export async function softDeleteEmailSubmission(input: { submissionId: string }): Promise<void> {
   const token = await getAdminIdTokenOrThrow();
-  const response = await fetch(`/api/admin/submissions/emails/delete?submissionId=${encodeURIComponent(input.submissionId)}`, {
-    method: 'DELETE',
-    headers: withAuthHeaders(token),
-  });
+  const response = await fetch(
+    `/api/admin/submissions/emails/delete?submissionId=${encodeURIComponent(input.submissionId)}`,
+    {
+      method: 'DELETE',
+      headers: withAuthHeaders(token),
+    },
+  );
 
   if (!response.ok) {
-    throw new Error(await parseAdminApiError(response, 'Unable to delete submission. Please try again.'));
+    throw new Error(
+      await parseAdminApiError(response, 'Unable to delete submission. Please try again.'),
+    );
   }
 }

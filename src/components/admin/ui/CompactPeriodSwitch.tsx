@@ -1,6 +1,11 @@
 'use client';
 
-import { ADMIN_PERIOD_LABEL, ADMIN_PERIOD_SWITCH_LABEL, ADMIN_PERIOD_VALUES, type AdminPeriodValue } from '@/shared/admin/constants';
+import {
+  ADMIN_PERIOD_LABEL,
+  ADMIN_PERIOD_SWITCH_LABEL,
+  ADMIN_PERIOD_VALUES,
+  type AdminPeriodValue,
+} from '@/shared/admin/constants';
 
 export type CompactPeriodValue = AdminPeriodValue;
 
@@ -16,9 +21,20 @@ const OPTIONS = ADMIN_PERIOD_VALUES.map((value) => ({
   ariaLabel: ADMIN_PERIOD_LABEL[value],
 }));
 
-export default function CompactPeriodSwitch({ value, onChange, className }: CompactPeriodSwitchProps) {
+export default function CompactPeriodSwitch({
+  value,
+  onChange,
+  className,
+}: CompactPeriodSwitchProps) {
   return (
-    <div className={['flex items-center gap-2 text-xs font-main uppercase tracking-[0.09em] text-gray60', className ?? ''].join(' ').trim()}>
+    <div
+      className={[
+        'flex flex-wrap items-center justify-start gap-x-2 gap-y-1 text-xs font-main uppercase tracking-[0.09em] text-gray60 sm:text-main-xs',
+        className ?? '',
+      ]
+        .join(' ')
+        .trim()}
+    >
       {OPTIONS.map((option, index) => {
         const isActive = option.value === value;
 

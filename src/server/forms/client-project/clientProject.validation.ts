@@ -95,7 +95,11 @@ export function assertSafeAttachmentName(originalName: string): void {
   const fileName = originalName.trim().toLowerCase();
   const extension = getSafeExtension(fileName);
 
-  if (!ALLOWED_CLIENT_PROJECT_ATTACHMENT_EXTENSIONS.includes(extension as (typeof ALLOWED_CLIENT_PROJECT_ATTACHMENT_EXTENSIONS)[number])) {
+  if (
+    !ALLOWED_CLIENT_PROJECT_ATTACHMENT_EXTENSIONS.includes(
+      extension as (typeof ALLOWED_CLIENT_PROJECT_ATTACHMENT_EXTENSIONS)[number],
+    )
+  ) {
     throw new Error('Unsupported attachment extension');
   }
 
@@ -124,7 +128,11 @@ export function decodeClientSubmissionCursor(raw: string): ClientSubmissionCurso
   const json = Buffer.from(raw, 'base64').toString('utf8');
   const parsed = JSON.parse(json) as { createdAtMs?: unknown; id?: unknown };
 
-  if (!Number.isSafeInteger(parsed.createdAtMs) || typeof parsed.id !== 'string' || parsed.id.trim().length === 0) {
+  if (
+    !Number.isSafeInteger(parsed.createdAtMs) ||
+    typeof parsed.id !== 'string' ||
+    parsed.id.trim().length === 0
+  ) {
     throw new Error('Invalid cursor');
   }
 

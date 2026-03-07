@@ -5,7 +5,13 @@ import { withApi } from '@/server/lib';
 export const runtime = 'nodejs';
 
 const bodySchema = z.object({
-  eventType: z.enum(['contact_modal_open', 'submit_project_attempt', 'submit_project_error']),
+  eventType: z.enum([
+    'contact_modal_open',
+    'contact_modal_close',
+    'contact_modal_cta_click',
+    'submit_project_attempt',
+    'submit_project_error',
+  ]),
   metadata: z.record(z.string(), z.unknown()).optional(),
 });
 

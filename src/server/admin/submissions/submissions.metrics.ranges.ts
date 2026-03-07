@@ -2,14 +2,19 @@ import type { DateRange } from '@/server/admin/dashboard/dashboard.repository.co
 import {
   addDays,
   getCurrentYearMonthRanges,
-  getDayRanges,
-  getRangeFromDays,
+  getDayRangesFrom,
   toIsoDate,
 } from '@/server/admin/dashboard/dashboard.repository.core';
+import {
+  getAdminDaysInMonth,
+  startOfAdminMonth,
+  startOfAdminWeek,
+  startOfAdminYear,
+} from '@/shared/time/europeKiev';
 import type { SubmissionsOverviewPeriod, TrendBucket } from '@/server/admin/submissions/submissions.metrics.types';
 
 function toDayLabel(date: Date): string {
-  return toIsoDate(date).slice(5);
+  return toIsoDate(date).slice(8);
 }
 
 export function resolveSubmissionsPeriodBuckets(
@@ -19,28 +24,13 @@ export function resolveSubmissionsPeriodBuckets(
   funnelRange: DateRange;
   buckets: TrendBucket[];
 } {
-  const tomorrowStart = addDays(todayStart, 1);
-
   if (period === 'week') {
-    const dayRanges = getDayRanges(todayStart, 7);
-    return {
-      funnelRange: getRangeFromDays(todayStart, 7, 0),
-      buckets: dayRanges.map((range) => ({
-        label: toDayLabel(range.start),
-        range,
-      })),
-    };
-  }
-
-  if (period === 'month') {
-    const daysInCurrentMonth = todayStart.getUTCDate();
-    const dayRanges = getDayRanges(todayStart, daysInCurrentMonth);
-    const monthStart = new Date(Date.UTC(todayStart.getUTCFullYear(), todayStart.getUTCMonth(), 1));
-
+    const weekStart = startOfAdminWeek(todayStart);
+    const dayRanges = getDayRangesFrom(weekStart, 7);
     return {
       funnelRange: {
-        start: monthStart,
-        end: tomorrowStart,
+        start: weekStart,
+        end: addDays(weekStart, 7),
       },
       buckets: dayRanges.map((range) => ({
         label: toDayLabel(range.start),
@@ -49,23 +39,31 @@ export function resolveSubmissionsPeriodBuckets(
     };
   }
 
-  const monthRanges = getCurrentYearMonthRanges(todayStart)
-    .filter(({ range }) => range.start < tomorrowStart)
-    .map(({ month, range }) => {
-      const end = range.end < tomorrowStart ? range.end : tomorrowStart;
-      return {
-        label: month,
-        range: {
-          start: range.start,
-          end,
-        },
-      };
-    });
+  if (period === 'month') {
+    const dayRanges = getDayRangesFrom(startOfAdminMonth(todayStart), getAdminDaysInMonth(todayStart));
+    const monthStart = startOfAdminMonth(todayStart);
+
+    return {
+      funnelRange: {
+        start: monthStart,
+        end: addDays(dayRanges[dayRanges.length - 1]!.start, 1),
+      },
+      buckets: dayRanges.map((range) => ({
+        label: toDayLabel(range.start),
+        range,
+      })),
+    };
+  }
+
+  const monthRanges = getCurrentYearMonthRanges(todayStart).map(({ month, range }) => ({
+    label: month,
+    range,
+  }));
 
   return {
     funnelRange: {
-      start: new Date(Date.UTC(todayStart.getUTCFullYear(), 0, 1)),
-      end: tomorrowStart,
+      start: startOfAdminYear(todayStart),
+      end: monthRanges[monthRanges.length - 1]!.range.end,
     },
     buckets: monthRanges,
   };

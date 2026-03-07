@@ -4,7 +4,20 @@ import AdminToast from '@/components/admin/ui/AdminToast';
 import ClientSubmissionsPagination from '@/components/admin/client-submissions/table/ClientSubmissionsPagination';
 import EmailSubmissionsFilters from '@/components/admin/email-submissions/table/EmailSubmissionsFilters';
 import EmailSubmissionsTableRows from '@/components/admin/email-submissions/table/EmailSubmissionsTableRows';
+import {
+  AdminDataTable,
+  type AdminDataTableColumn,
+} from '@/components/admin/shared/table/AdminDataTable';
 import { useEmailSubmissionsTable } from '@/components/admin/email-submissions/table/useEmailSubmissionsTable';
+
+const emailSubmissionColumns: AdminDataTableColumn[] = [
+  { key: 'email', label: 'Email' },
+  { key: 'source', label: 'Source' },
+  { key: 'date', label: 'Date' },
+  { key: 'status', label: 'Status' },
+  { key: 'comments', label: 'Comments' },
+  { key: 'actions', label: 'Actions' },
+];
 
 export default function EmailSubmissionsTable() {
   const { tableState, actions } = useEmailSubmissionsTable();
@@ -21,45 +34,32 @@ export default function EmailSubmissionsTable() {
         onDateFromChange={actions.setDateFrom}
         onDateToChange={actions.setDateTo}
         onApply={actions.applyFilters}
+        onClear={actions.clearFilters}
       />
 
-      <article className="overflow-x-auto rounded-(--radius-base) border border-gray16 bg-base-gray p-4">
-        <table className="min-w-full border-separate border-spacing-y-2">
-          <thead>
-            <tr className="text-left font-main text-main-xs uppercase tracking-[0.12em] text-gray60">
-              <th className="px-2 py-1">Email</th>
-              <th className="px-2 py-1">Source</th>
-              <th className="px-2 py-1">Date</th>
-              <th className="px-2 py-1">Status</th>
-              <th className="px-2 py-1">Comments</th>
-              <th className="px-2 py-1">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <EmailSubmissionsTableRows
-              state={tableState.state}
-              rows={tableState.rows}
-              isApplyingStatus={tableState.isApplyingStatus}
-              isDeletingSubmission={tableState.isDeletingSubmission}
-              onMarkViewedLocally={actions.markRowViewedLocally}
-              onUpdateStatus={actions.updateStatus}
-              onSoftDelete={actions.softDelete}
-              getAllowedStatusOptions={actions.getAllowedStatusOptions}
-            />
-          </tbody>
-        </table>
-
-        {tableState.state === 'error' ? (
-          <p className="mt-3 font-main text-main-sm text-[#ff6d7a]">Unable to load email submissions.</p>
-        ) : null}
-
-        <ClientSubmissionsPagination
-          canGoPrev={tableState.canGoPrev}
-          canGoNext={tableState.canGoNext}
-          onPrev={actions.goPrev}
-          onNext={actions.goNext}
+      <AdminDataTable
+        columns={emailSubmissionColumns}
+        errorMessage={tableState.state === 'error' ? 'Unable to load email submissions.' : null}
+        pagination={(
+          <ClientSubmissionsPagination
+            canGoPrev={tableState.canGoPrev}
+            canGoNext={tableState.canGoNext}
+            onPrev={actions.goPrev}
+            onNext={actions.goNext}
+          />
+        )}
+      >
+        <EmailSubmissionsTableRows
+          state={tableState.state}
+          rows={tableState.rows}
+          isApplyingStatus={tableState.isApplyingStatus}
+          isDeletingSubmission={tableState.isDeletingSubmission}
+          onMarkViewedLocally={actions.markRowViewedLocally}
+          onUpdateStatus={actions.updateStatus}
+          onSoftDelete={actions.softDelete}
+          getAllowedStatusOptions={actions.getAllowedStatusOptions}
         />
-      </article>
+      </AdminDataTable>
     </section>
   );
 }

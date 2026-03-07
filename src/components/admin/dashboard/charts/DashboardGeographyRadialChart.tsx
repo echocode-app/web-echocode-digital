@@ -10,6 +10,11 @@ import {
   type ChartOptions,
 } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
+import {
+  ADMIN_CHART_TOOLTIP_BASE,
+  formatTooltipCount,
+  formatTooltipPercent,
+} from '@/components/admin/charts/chartTooltip';
 import type { GeographyChartRow } from '@/components/admin/dashboard/geography/geography.utils';
 
 ChartJS.register(DoughnutController, ArcElement, Tooltip, Legend);
@@ -31,22 +36,7 @@ const options: ChartOptions<'doughnut'> = {
       display: false,
     },
     tooltip: {
-      backgroundColor: 'rgba(20,20,20,0.92)',
-      borderColor: 'rgba(255,255,255,0.16)',
-      borderWidth: 1,
-      titleColor: '#fff',
-      bodyColor: 'rgba(255,255,255,0.75)',
-      callbacks: {
-        label: (ctx) => {
-          const value = Number(ctx.parsed ?? 0);
-          const total = ctx.dataset.data.reduce((acc, point) => {
-            const parsed = typeof point === 'number' ? point : 0;
-            return acc + parsed;
-          }, 0);
-          const share = total > 0 ? ((value / total) * 100).toFixed(2) : '0.00';
-          return `${ctx.label}: ${value} (${share}%)`;
-        },
-      },
+      ...ADMIN_CHART_TOOLTIP_BASE,
     },
   },
 };
@@ -70,6 +60,27 @@ function DashboardGeographyRadialChart({ rows, emptyLabel }: DashboardGeographyR
     [rows],
   );
 
+  const tooltipOptions = useMemo<ChartOptions<'doughnut'>>(
+    () => ({
+      ...options,
+      plugins: {
+        ...options.plugins,
+        tooltip: {
+          ...ADMIN_CHART_TOOLTIP_BASE,
+          callbacks: {
+            title: (items) => rows[items[0]?.dataIndex ?? 0]?.label ?? '',
+            label: (ctx) => `Page views: ${formatTooltipCount(Number(ctx.parsed ?? 0))}`,
+            footer: (items) => {
+              const row = rows[items[0]?.dataIndex ?? 0];
+              return row ? `Share of period traffic: ${formatTooltipPercent(row.sharePct)}` : '';
+            },
+          },
+        },
+      },
+    }),
+    [rows],
+  );
+
   if (isEmpty) {
     return (
       <div className="flex h-full min-h-0 items-center justify-center rounded-(--radius-secondary) border border-dashed border-gray16 bg-black/20 p-3 text-center">
@@ -78,7 +89,7 @@ function DashboardGeographyRadialChart({ rows, emptyLabel }: DashboardGeographyR
     );
   }
 
-  return <Doughnut options={options} data={chartData} />;
+  return <Doughnut options={tooltipOptions} data={chartData} />;
 }
 
 export default memo(DashboardGeographyRadialChart);

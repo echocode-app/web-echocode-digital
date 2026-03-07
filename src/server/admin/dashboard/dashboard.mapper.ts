@@ -140,7 +140,9 @@ export function mapDashboardOverview(raw: DashboardRawAggregates): DashboardOver
       direction: raw.derived.leadVelocity.direction,
     },
     trafficQualityInsight: {
-      conversionTrendSlope7d: sanitizeNumber(raw.derived.trafficQualityInsight.conversionTrendSlope7d),
+      conversionTrendSlope7d: sanitizeNumber(
+        raw.derived.trafficQualityInsight.conversionTrendSlope7d,
+      ),
       trafficTrendPct7d: sanitizeNumber(raw.derived.trafficQualityInsight.trafficTrendPct7d),
       conversionTrendPct7d: sanitizeNumber(raw.derived.trafficQualityInsight.conversionTrendPct7d),
       warning: raw.derived.trafficQualityInsight.warning,

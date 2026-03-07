@@ -37,7 +37,9 @@ export default function EmailSubmissionDetails({ submissionId }: { submissionId:
   if (state === 'error' || !details) {
     return (
       <article className="rounded-(--radius-base) border border-[#ff6d7a]/40 bg-base-gray p-4">
-        <p className="font-main text-main-sm text-[#ff6d7a]">Unable to load email submission details.</p>
+        <p className="font-main text-main-sm text-[#ff6d7a]">
+          Unable to load email submission details.
+        </p>
       </article>
     );
   }
@@ -49,7 +51,11 @@ export default function EmailSubmissionDetails({ submissionId }: { submissionId:
       <div>
         <Link
           href="/admin/submissions/emails"
-          className="inline-flex items-center gap-2 rounded-(--radius-secondary) border border-gray16 px-2 py-1 font-main text-main-xs text-gray75 transition duration-main hover:text-white"
+          className="inline-flex items-center gap-2 
+          rounded-(--radius-secondary) border border-gray16 
+          px-2 py-1 
+          font-main text-main-xs text-gray75 
+          transition duration-main hover:text-white"
         >
           <span aria-hidden="true">←</span>
           Back to all email submissions
@@ -58,7 +64,9 @@ export default function EmailSubmissionDetails({ submissionId }: { submissionId:
 
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <p className="font-main text-main-xs uppercase tracking-[0.15em] text-gray60">Email submission</p>
+          <p className="font-main text-main-xs uppercase tracking-[0.15em] text-gray60">
+            Email submission
+          </p>
           <h2 className="font-title text-title-xl text-white break-all">{title}</h2>
           <div className="mt-2 flex items-center gap-2">
             <p className="font-main text-main-xs text-gray60">Current status</p>

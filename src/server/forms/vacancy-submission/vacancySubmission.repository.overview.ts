@@ -16,7 +16,9 @@ import type {
   VacancySubmissionsOverviewDto,
 } from '@/server/forms/vacancy-submission/vacancySubmission.types';
 
-async function listAllActiveVacancySubmissionsInYear(year: number): Promise<FirebaseFirestore.QueryDocumentSnapshot[]> {
+async function listAllActiveVacancySubmissionsInYear(
+  year: number,
+): Promise<FirebaseFirestore.QueryDocumentSnapshot[]> {
   const firestore = getFirestoreDb();
   const yearStart = new Date(Date.UTC(year, 0, 1));
   const yearEnd = new Date(Date.UTC(year + 1, 0, 1));
@@ -29,24 +31,32 @@ async function listAllActiveVacancySubmissionsInYear(year: number): Promise<Fire
       .where('createdAt', '<', Timestamp.fromDate(yearEnd))
       .get();
   } catch (cause) {
-    throw ApiError.fromCode('FIREBASE_UNAVAILABLE', 'Failed to load vacancy submissions overview', { cause });
+    throw ApiError.fromCode('FIREBASE_UNAVAILABLE', 'Failed to load vacancy submissions overview', {
+      cause,
+    });
   }
 
   return snapshot.docs.filter((doc) => !isSoftDeleted(doc.data()));
 }
 
-async function listAllActiveVacancySubmissions(): Promise<FirebaseFirestore.QueryDocumentSnapshot[]> {
+async function listAllActiveVacancySubmissions(): Promise<
+  FirebaseFirestore.QueryDocumentSnapshot[]
+> {
   const firestore = getFirestoreDb();
 
   try {
     const snapshot = await firestore.collection(VACANCY_SUBMISSIONS_COLLECTION).get();
     return snapshot.docs.filter((doc) => !isSoftDeleted(doc.data()));
   } catch (cause) {
-    throw ApiError.fromCode('FIREBASE_UNAVAILABLE', 'Failed to load vacancy submissions overview', { cause });
+    throw ApiError.fromCode('FIREBASE_UNAVAILABLE', 'Failed to load vacancy submissions overview', {
+      cause,
+    });
   }
 }
 
-function buildVacancyGroups(docs: FirebaseFirestore.QueryDocumentSnapshot[]): VacancySubmissionVacancyGroupDto[] {
+function buildVacancyGroups(
+  docs: FirebaseFirestore.QueryDocumentSnapshot[],
+): VacancySubmissionVacancyGroupDto[] {
   const groups = new Map<string, VacancySubmissionVacancyGroupDto>();
 
   docs.forEach((doc) => {
@@ -54,7 +64,8 @@ function buildVacancyGroups(docs: FirebaseFirestore.QueryDocumentSnapshot[]): Va
     const vacancy = mapVacancySnapshot(data);
     const key = typeof data.vacancyKey === 'string' ? data.vacancyKey : toVacancyKey(vacancy);
     const status = toModerationStatus(data.status);
-    const createdAt = data.createdAt instanceof Timestamp ? data.createdAt.toDate().toISOString() : null;
+    const createdAt =
+      data.createdAt instanceof Timestamp ? data.createdAt.toDate().toISOString() : null;
 
     const existing = groups.get(key);
     if (!existing) {
@@ -94,14 +105,17 @@ export async function getVacancySubmissionsOverview(): Promise<VacancySubmission
   const docsAllTime = await listAllActiveVacancySubmissions();
   const byStatus = emptyModerationStatusCounts();
 
-  const statusesByMonthMap = new Map<string, {
-    month: string;
-    new: number;
-    viewed: number;
-    processed: number;
-    rejected: number;
-    deferred: number;
-  }>();
+  const statusesByMonthMap = new Map<
+    string,
+    {
+      month: string;
+      new: number;
+      viewed: number;
+      processed: number;
+      rejected: number;
+      deferred: number;
+    }
+  >();
 
   Array.from({ length: 12 }, (_, monthIndex) => {
     const month = String(monthIndex + 1).padStart(2, '0');

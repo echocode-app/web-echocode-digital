@@ -1,6 +1,12 @@
 import { Timestamp } from 'firebase-admin/firestore';
 import { getFirestoreDb } from '@/server/firebase/firestore';
 import { ApiError } from '@/server/lib/errors';
+import {
+  addAdminDays,
+  getAdminDateIso,
+  getAdminYearMonthRanges,
+  startOfAdminDay,
+} from '@/shared/time/europeKiev';
 import type {
   DashboardRawAggregates,
   TrafficVsLeadsPointDto,
@@ -11,19 +17,18 @@ export type DateRange = {
   end: Date;
 };
 
-const DAY_IN_MS = 24 * 60 * 60 * 1000;
 const EVENT_PAGE_SIZE = 500;
 
 export function startOfUtcDay(input: Date): Date {
-  return new Date(Date.UTC(input.getUTCFullYear(), input.getUTCMonth(), input.getUTCDate()));
+  return startOfAdminDay(input);
 }
 
 export function addDays(input: Date, days: number): Date {
-  return new Date(input.getTime() + days * DAY_IN_MS);
+  return addAdminDays(input, days);
 }
 
 export function toIsoDate(input: Date): string {
-  return input.toISOString().slice(0, 10);
+  return getAdminDateIso(input);
 }
 
 export function getRangeFromDays(todayStart: Date, days: number, offsetDays = 0): DateRange {
@@ -43,20 +48,20 @@ export function getDayRanges(todayStart: Date, days: number): DateRange[] {
   });
 }
 
-export function getCurrentYearMonthRanges(todayStart: Date): Array<{ month: string; range: DateRange }> {
-  const year = todayStart.getUTCFullYear();
-
-  return Array.from({ length: 12 }, (_, monthIndex) => {
-    const start = new Date(Date.UTC(year, monthIndex, 1));
-    const end = monthIndex === 11
-      ? new Date(Date.UTC(year + 1, 0, 1))
-      : new Date(Date.UTC(year, monthIndex + 1, 1));
-
+export function getDayRangesFrom(startDate: Date, days: number): DateRange[] {
+  return Array.from({ length: days }, (_, index) => {
+    const dayStart = addDays(startDate, index);
     return {
-      month: String(monthIndex + 1).padStart(2, '0'),
-      range: { start, end },
+      start: dayStart,
+      end: addDays(dayStart, 1),
     };
   });
+}
+
+export function getCurrentYearMonthRanges(
+  todayStart: Date,
+): Array<{ month: string; range: DateRange }> {
+  return getAdminYearMonthRanges(todayStart);
 }
 
 export function normalizeSafeNumber(value: number): number {
@@ -82,7 +87,10 @@ export function pctChange(current: number, previous: number): number {
 }
 
 // Unified guarded count() accessor for all dashboard aggregates.
-export async function readCount(query: FirebaseFirestore.Query, fallbackMessage: string): Promise<number> {
+export async function readCount(
+  query: FirebaseFirestore.Query,
+  fallbackMessage: string,
+): Promise<number> {
   try {
     const snapshot = await query.count().get();
     const count = snapshot.data().count;
@@ -99,7 +107,10 @@ export async function readCount(query: FirebaseFirestore.Query, fallbackMessage:
 }
 
 // Narrow helper for eventType + timestamp range count queries.
-export async function countAnalyticsEventInRange(eventType: string, range: DateRange): Promise<number> {
+export async function countAnalyticsEventInRange(
+  eventType: string,
+  range: DateRange,
+): Promise<number> {
   const firestore = getFirestoreDb();
 
   const query = firestore
@@ -120,7 +131,9 @@ export async function countVacancyLeadsInRange(range: DateRange): Promise<number
   return normalizeSafeNumber(submitCount + applyCount);
 }
 
-export async function getSubmissionsTrend(dayRanges: DateRange[]): Promise<DashboardRawAggregates['charts']['submissionsTrend']> {
+export async function getSubmissionsTrend(
+  dayRanges: DateRange[],
+): Promise<DashboardRawAggregates['charts']['submissionsTrend']> {
   const firestore = getFirestoreDb();
 
   const countPromises = dayRanges.map((range) => {
@@ -140,7 +153,9 @@ export async function getSubmissionsTrend(dayRanges: DateRange[]): Promise<Dashb
   }));
 }
 
-export async function getTrafficAndLeadsSeries(dayRanges: DateRange[]): Promise<TrafficVsLeadsPointDto[]> {
+export async function getTrafficAndLeadsSeries(
+  dayRanges: DateRange[],
+): Promise<TrafficVsLeadsPointDto[]> {
   const requests = dayRanges.map(async (range) => {
     const [pageViews, projectLeads, vacancyLeads] = await Promise.all([
       countAnalyticsEventInRange('page_view', range),
@@ -159,7 +174,9 @@ export async function getTrafficAndLeadsSeries(dayRanges: DateRange[]): Promise<
 }
 
 export async function getProjectLeadsByDay(dayRanges: DateRange[]): Promise<number[]> {
-  const counts = await Promise.all(dayRanges.map((range) => countAnalyticsEventInRange('submit_project', range)));
+  const counts = await Promise.all(
+    dayRanges.map((range) => countAnalyticsEventInRange('submit_project', range)),
+  );
   return counts.map((count) => normalizeSafeNumber(count));
 }
 
@@ -211,9 +228,13 @@ export async function scanAnalyticsEventsByTypeInRange(
     try {
       snapshot = await query.get();
     } catch (cause) {
-      throw ApiError.fromCode('FIREBASE_UNAVAILABLE', `Failed to load analytics events (${eventType})`, {
-        cause,
-      });
+      throw ApiError.fromCode(
+        'FIREBASE_UNAVAILABLE',
+        `Failed to load analytics events (${eventType})`,
+        {
+          cause,
+        },
+      );
     }
 
     if (snapshot.empty) break;

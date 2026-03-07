@@ -2,13 +2,9 @@ import { normalizeSafeNumber, percentage } from '@/server/admin/dashboard/dashbo
 import type { FunnelRaw } from '@/server/admin/submissions/submissions.metrics.types';
 
 export function buildFunnelSnapshot(modalOpen: number, submitAttempt: number, submitSuccess: number): FunnelRaw {
+  const normalizedModalOpen = normalizeSafeNumber(modalOpen);
+  const normalizedSubmitAttempt = normalizeSafeNumber(submitAttempt);
   const normalizedSubmitSuccess = normalizeSafeNumber(submitSuccess);
-  const normalizedSubmitAttempt = submitAttempt > 0
-    ? normalizeSafeNumber(submitAttempt)
-    : normalizedSubmitSuccess;
-  const normalizedModalOpen = modalOpen > 0
-    ? normalizeSafeNumber(modalOpen)
-    : normalizedSubmitAttempt;
   const baseline = normalizedModalOpen > 0 ? normalizedModalOpen : normalizedSubmitAttempt;
 
   const conversionRate = percentage(normalizedSubmitSuccess, baseline);

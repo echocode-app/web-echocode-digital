@@ -11,17 +11,25 @@ import {
   type ChartOptions,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
+import {
+  ADMIN_CHART_TOOLTIP_BASE,
+  formatTooltipCount,
+  formatTooltipIsoDate,
+  formatTooltipMonthLabel,
+} from '@/components/admin/charts/chartTooltip';
 import type { SubmissionsOverviewDto } from '@/server/admin/submissions/submissions.metrics.service';
+import type { SubmissionsPeriod } from '@/server/admin/submissions/submissions.metrics.service';
 import { ADMIN_MONTH_SHORT_LABELS_EN } from '@/shared/admin/constants';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
 type SubmissionsDailyTrendChartProps = {
   data: SubmissionsOverviewDto['charts']['submissionsTrend'];
+  period: SubmissionsPeriod;
 };
 
-function formatBucketLabel(label: string): string {
-  if (/^\d{2}$/.test(label)) {
+function formatBucketLabel(label: string, period: SubmissionsPeriod): string {
+  if (period === 'year' && /^\d{2}$/.test(label)) {
     return ADMIN_MONTH_SHORT_LABELS_EN[label] ?? label;
   }
   return label;
@@ -41,11 +49,7 @@ const options: ChartOptions<'bar'> = {
     tooltip: {
       mode: 'index',
       intersect: false,
-      backgroundColor: 'rgba(20,20,20,0.92)',
-      borderColor: 'rgba(255,255,255,0.16)',
-      borderWidth: 1,
-      titleColor: '#fff',
-      bodyColor: 'rgba(255,255,255,0.75)',
+      ...ADMIN_CHART_TOOLTIP_BASE,
     },
   },
   scales: {
@@ -70,10 +74,36 @@ const options: ChartOptions<'bar'> = {
   },
 };
 
-function SubmissionsDailyTrendChart({ data }: SubmissionsDailyTrendChartProps) {
+function SubmissionsDailyTrendChart({ data, period }: SubmissionsDailyTrendChartProps) {
+  const optionsWithCallbacks = useMemo<ChartOptions<'bar'>>(
+    () => ({
+      ...options,
+      plugins: {
+        ...options.plugins,
+        tooltip: {
+          ...ADMIN_CHART_TOOLTIP_BASE,
+          mode: 'index',
+          intersect: false,
+          callbacks: {
+            title: (items) => {
+              const point = data[items[0]?.dataIndex ?? 0];
+              if (!point) return '';
+              return period === 'year'
+                ? formatTooltipMonthLabel(point.date.slice(5, 7), Number(point.date.slice(0, 4)))
+                : formatTooltipIsoDate(point.date);
+            },
+            label: (ctx) =>
+              `Tracked submissions: ${formatTooltipCount(Number(ctx.parsed.x ?? ctx.parsed ?? 0))}`,
+          },
+        },
+      },
+    }),
+    [data, period],
+  );
+
   const chartData = useMemo(
     () => ({
-      labels: data.map((item) => formatBucketLabel(item.label)),
+      labels: data.map((item) => formatBucketLabel(item.label, period)),
       datasets: [
         {
           label: 'Submissions',
@@ -83,10 +113,10 @@ function SubmissionsDailyTrendChart({ data }: SubmissionsDailyTrendChartProps) {
         },
       ],
     }),
-    [data],
+    [data, period],
   );
 
-  return <Bar options={options} data={chartData} />;
+  return <Bar options={optionsWithCallbacks} data={chartData} />;
 }
 
 export default memo(SubmissionsDailyTrendChart);

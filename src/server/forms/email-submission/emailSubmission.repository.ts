@@ -77,7 +77,10 @@ export async function createEmailSubmissionRecord(input: {
   }
 }
 
-function buildListQuery(firestore: FirebaseFirestore.Firestore, input: ListQueryInput): FirebaseFirestore.Query {
+function buildListQuery(
+  firestore: FirebaseFirestore.Firestore,
+  input: ListQueryInput,
+): FirebaseFirestore.Query {
   let query: FirebaseFirestore.Query = firestore.collection(EMAIL_SUBMISSIONS_COLLECTION);
 
   if (input.status) {
@@ -106,7 +109,11 @@ function buildListQuery(firestore: FirebaseFirestore.Firestore, input: ListQuery
 async function listWithStatusFallback(
   firestore: FirebaseFirestore.Firestore,
   input: ListQueryInput,
-): Promise<{ items: EmailSubmissionListItemDto[]; nextCursor: EmailSubmissionCursor | null; hasNextPage: boolean }> {
+): Promise<{
+  items: EmailSubmissionListItemDto[];
+  nextCursor: EmailSubmissionCursor | null;
+  hasNextPage: boolean;
+}> {
   let baseQuery: FirebaseFirestore.Query = firestore.collection(EMAIL_SUBMISSIONS_COLLECTION);
 
   if (input.dateFrom) {
@@ -121,7 +128,10 @@ async function listWithStatusFallback(
 
   baseQuery = baseQuery.orderBy('createdAt', 'desc').orderBy(FieldPath.documentId(), 'desc');
   if (input.cursor) {
-    baseQuery = baseQuery.startAfter(Timestamp.fromMillis(input.cursor.createdAtMs), input.cursor.id);
+    baseQuery = baseQuery.startAfter(
+      Timestamp.fromMillis(input.cursor.createdAtMs),
+      input.cursor.id,
+    );
   }
 
   const filtered: FirebaseFirestore.QueryDocumentSnapshot[] = [];
@@ -139,7 +149,9 @@ async function listWithStatusFallback(
     try {
       batchSnapshot = await batchQuery.get();
     } catch (scanCause) {
-      throw ApiError.fromCode('FIREBASE_UNAVAILABLE', 'Failed to list email submissions', { cause: scanCause });
+      throw ApiError.fromCode('FIREBASE_UNAVAILABLE', 'Failed to list email submissions', {
+        cause: scanCause,
+      });
     }
 
     if (batchSnapshot.empty) {
@@ -164,9 +176,10 @@ async function listWithStatusFallback(
   const hasNextPage = filtered.length > input.limit;
   const pageDocs = hasNextPage ? filtered.slice(0, input.limit) : filtered;
   const items = pageDocs.map(mapEmailSubmissionDocToListItem);
-  const nextCursor = hasNextPage && pageDocs.length > 0
-    ? mapEmailSubmissionDocToCursor(pageDocs[pageDocs.length - 1])
-    : null;
+  const nextCursor =
+    hasNextPage && pageDocs.length > 0
+      ? mapEmailSubmissionDocToCursor(pageDocs[pageDocs.length - 1])
+      : null;
 
   return { items, nextCursor, hasNextPage };
 }
@@ -213,17 +226,21 @@ export async function listEmailSubmissions(input: ListQueryInput): Promise<{
     const hasNextPage = filtered.length > input.limit;
     const pageDocs = hasNextPage ? filtered.slice(0, input.limit) : filtered;
     const items = pageDocs.map(mapEmailSubmissionDocToListItem);
-    const nextCursor = hasNextPage && pageDocs.length > 0
-      ? mapEmailSubmissionDocToCursor(pageDocs[pageDocs.length - 1])
-      : null;
+    const nextCursor =
+      hasNextPage && pageDocs.length > 0
+        ? mapEmailSubmissionDocToCursor(pageDocs[pageDocs.length - 1])
+        : null;
 
     return { items, nextCursor, hasNextPage };
   } catch (cause) {
     const message = cause instanceof Error ? cause.message : String(cause);
-    const requiresIndex = message.includes('FAILED_PRECONDITION') && message.includes('requires an index');
+    const requiresIndex =
+      message.includes('FAILED_PRECONDITION') && message.includes('requires an index');
 
     if (!requiresIndex || !input.status) {
-      throw ApiError.fromCode('FIREBASE_UNAVAILABLE', 'Failed to list email submissions', { cause });
+      throw ApiError.fromCode('FIREBASE_UNAVAILABLE', 'Failed to list email submissions', {
+        cause,
+      });
     }
 
     return listWithStatusFallback(firestore, input);
@@ -249,7 +266,10 @@ export async function getEmailSubmissionById(
 
   const data = snapshot.data();
   if (!data) {
-    throw ApiError.fromCode('INTERNAL_ERROR', `Email submission "${submissionId}" payload is missing`);
+    throw ApiError.fromCode(
+      'INTERNAL_ERROR',
+      `Email submission "${submissionId}" payload is missing`,
+    );
   }
 
   if (!options?.includeDeleted && isEmailSubmissionSoftDeleted(data)) {
@@ -263,7 +283,10 @@ export async function updateEmailSubmissionStatus(input: {
   submissionId: string;
   status: EmailSubmissionStatus;
   adminUid: string;
-}): Promise<{ previousStatus: EmailSubmissionStatus; updated: UpdateEmailSubmissionStatusResponseDto }> {
+}): Promise<{
+  previousStatus: EmailSubmissionStatus;
+  updated: UpdateEmailSubmissionStatusResponseDto;
+}> {
   const firestore = getFirestoreDb();
   const docRef = firestore.collection(EMAIL_SUBMISSIONS_COLLECTION).doc(input.submissionId);
 
@@ -271,12 +294,18 @@ export async function updateEmailSubmissionStatus(input: {
     return await firestore.runTransaction(async (tx) => {
       const snapshot = await tx.get(docRef);
       if (!snapshot.exists) {
-        throw ApiError.fromCode('BAD_REQUEST', `Email submission "${input.submissionId}" not found`);
+        throw ApiError.fromCode(
+          'BAD_REQUEST',
+          `Email submission "${input.submissionId}" not found`,
+        );
       }
 
       const data = snapshot.data();
       if (!data || isEmailSubmissionSoftDeleted(data)) {
-        throw ApiError.fromCode('BAD_REQUEST', `Email submission "${input.submissionId}" not found`);
+        throw ApiError.fromCode(
+          'BAD_REQUEST',
+          `Email submission "${input.submissionId}" not found`,
+        );
       }
 
       const previousStatus = toModerationStatus(data.status);
@@ -302,7 +331,9 @@ export async function updateEmailSubmissionStatus(input: {
     });
   } catch (cause) {
     if (cause instanceof ApiError) throw cause;
-    throw ApiError.fromCode('FIREBASE_UNAVAILABLE', 'Failed to update email submission status', { cause });
+    throw ApiError.fromCode('FIREBASE_UNAVAILABLE', 'Failed to update email submission status', {
+      cause,
+    });
   }
 }
 
@@ -317,12 +348,18 @@ export async function addEmailSubmissionComment(
     return await firestore.runTransaction(async (tx) => {
       const snapshot = await tx.get(docRef);
       if (!snapshot.exists) {
-        throw ApiError.fromCode('BAD_REQUEST', `Email submission "${input.submissionId}" not found`);
+        throw ApiError.fromCode(
+          'BAD_REQUEST',
+          `Email submission "${input.submissionId}" not found`,
+        );
       }
 
       const data = snapshot.data();
       if (!data || isEmailSubmissionSoftDeleted(data)) {
-        throw ApiError.fromCode('BAD_REQUEST', `Email submission "${input.submissionId}" not found`);
+        throw ApiError.fromCode(
+          'BAD_REQUEST',
+          `Email submission "${input.submissionId}" not found`,
+        );
       }
 
       const createdAt = Timestamp.now();
@@ -353,7 +390,9 @@ export async function addEmailSubmissionComment(
     });
   } catch (cause) {
     if (cause instanceof ApiError) throw cause;
-    throw ApiError.fromCode('FIREBASE_UNAVAILABLE', 'Failed to add email submission comment', { cause });
+    throw ApiError.fromCode('FIREBASE_UNAVAILABLE', 'Failed to add email submission comment', {
+      cause,
+    });
   }
 }
 
@@ -368,12 +407,18 @@ export async function softDeleteEmailSubmission(input: {
     return await firestore.runTransaction(async (tx) => {
       const snapshot = await tx.get(docRef);
       if (!snapshot.exists) {
-        throw ApiError.fromCode('BAD_REQUEST', `Email submission "${input.submissionId}" not found`);
+        throw ApiError.fromCode(
+          'BAD_REQUEST',
+          `Email submission "${input.submissionId}" not found`,
+        );
       }
 
       const data = snapshot.data();
       if (!data || isEmailSubmissionSoftDeleted(data)) {
-        throw ApiError.fromCode('BAD_REQUEST', `Email submission "${input.submissionId}" not found`);
+        throw ApiError.fromCode(
+          'BAD_REQUEST',
+          `Email submission "${input.submissionId}" not found`,
+        );
       }
 
       const now = Timestamp.now();

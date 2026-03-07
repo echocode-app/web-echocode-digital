@@ -47,7 +47,8 @@ export default function SubmissionsClientModerationSection() {
           Client modal submissions moderation
         </h2>
         <p className="mt-2 font-main text-main-sm text-gray75">
-          Status distribution for client modal submissions with monthly operations focus first, then yearly trend context.
+          Status distribution for client modal submissions with monthly operations focus first, then
+          yearly trend context.
         </p>
       </div>
 
@@ -70,7 +71,7 @@ export default function SubmissionsClientModerationSection() {
 
       <ChartPanel
         title="Client submission statuses (YTD)"
-        info="Monthly stacked distribution for the current year to track moderation flow over time."
+        info="Monthly stacked distribution for the current year to track moderation status flow for client modal submissions over time."
         mobileScrollable
       >
         {overview ? (

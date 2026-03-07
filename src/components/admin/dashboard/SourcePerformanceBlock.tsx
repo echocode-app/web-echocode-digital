@@ -19,11 +19,15 @@ export default function SourcePerformanceBlock({ sources }: SourcePerformanceBlo
           {sources.map((source) => (
             <div
               key={source.source}
-              className="grid min-w-0 grid-cols-[minmax(0,1.2fr)_0.6fr_0.7fr] items-center gap-2 rounded-(--radius-secondary) border border-gray16 bg-black/20 px-2 py-1"
+              className="grid min-w-0 
+              grid-cols-[minmax(0,1fr)_auto] items-center gap-x-2 gap-y-1 
+              rounded-(--radius-secondary) 
+              border border-gray16 bg-black/20 
+              px-2 py-1 sm:grid-cols-[minmax(0,1.2fr)_0.6fr_0.7fr] sm:gap-y-2"
             >
               <p className="min-w-0 truncate font-main text-main-xs text-gray75">{source.source}</p>
               <p className="text-right font-main text-main-xs text-white">{source.leads}</p>
-              <p className="text-right font-main text-main-xs text-accent-hover">
+              <p className="col-span-2 text-left font-main text-main-xs text-accent-hover sm:col-span-1 sm:text-right">
                 <SymbolSafeText
                   text={
                     typeof source.conversionRate === 'number'

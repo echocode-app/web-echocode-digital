@@ -14,7 +14,9 @@ import {
 } from '@/server/admin/dashboard/dashboard.repository.core';
 
 function weekdayName(day: number): string {
-  return ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][day] ?? 'N/A';
+  return (
+    ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][day] ?? 'N/A'
+  );
 }
 
 // Weekday insight based on project leads concentration and traffic delta.
@@ -57,9 +59,10 @@ export function getWeekdayInsights(
   const bestDayTrafficDays = weekdayTrafficDays.get(bestWeekday) ?? 0;
   const bestDayTrafficAvg = bestDayTrafficDays > 0 ? bestDayTrafficTotal / bestDayTrafficDays : 0;
 
-  const bestDayTrafficDeltaPct = avgDailyTraffic <= 0
-    ? 0
-    : normalizeSafeRate(((bestDayTrafficAvg - avgDailyTraffic) / avgDailyTraffic) * 100);
+  const bestDayTrafficDeltaPct =
+    avgDailyTraffic <= 0
+      ? 0
+      : normalizeSafeRate(((bestDayTrafficAvg - avgDailyTraffic) / avgDailyTraffic) * 100);
 
   return {
     bestDay: weekdayName(bestWeekday),
@@ -69,11 +72,16 @@ export function getWeekdayInsights(
 }
 
 // Funnel snapshot keeps a compact executive ratio view.
-export function buildFunnel(pageViews: number, projectLeads: number, vacancyLeads: number): FunnelDto {
+export function buildFunnel(
+  pageViews: number,
+  projectLeads: number,
+  vacancyLeads: number,
+): FunnelDto {
   const totalLeads = normalizeSafeNumber(projectLeads + vacancyLeads);
   const conversionPct = percentage(totalLeads, pageViews);
   const leadToTrafficRatio = conversionPct;
-  const dropOffPct = pageViews <= 0 ? 0 : normalizeSafeRate(((pageViews - totalLeads) / pageViews) * 100);
+  const dropOffPct =
+    pageViews <= 0 ? 0 : normalizeSafeRate(((pageViews - totalLeads) / pageViews) * 100);
 
   return {
     pageViews: normalizeSafeNumber(pageViews),
@@ -99,11 +107,12 @@ export function buildLeadVelocity(
   const averageDaily7d = normalizeSafeRate(leadsLast7Days / 7);
   const averageDaily30d = normalizeSafeRate(leadsLast30Days / 30);
 
-  const velocityRatio = averageDaily30d > 0
-    ? normalizeSafeRate(averageDaily7d / averageDaily30d)
-    : averageDaily7d > 0
-      ? 2
-      : 1;
+  const velocityRatio =
+    averageDaily30d > 0
+      ? normalizeSafeRate(averageDaily7d / averageDaily30d)
+      : averageDaily7d > 0
+        ? 2
+        : 1;
 
   let direction: LeadVelocityDto['direction'] = 'stable';
   if (velocityRatio > 1.15) direction = 'accelerating';
@@ -145,7 +154,9 @@ function computeSlope(values: number[]): number {
   return numerator / denominator;
 }
 
-export function buildTrafficQualityInsight(trafficVsLeads: TrafficVsLeadsPointDto[]): TrafficQualityInsightDto {
+export function buildTrafficQualityInsight(
+  trafficVsLeads: TrafficVsLeadsPointDto[],
+): TrafficQualityInsightDto {
   if (trafficVsLeads.length < 14) {
     return {
       conversionTrendSlope7d: 0,
@@ -172,7 +183,9 @@ export function buildTrafficQualityInsight(trafficVsLeads: TrafficVsLeadsPointDt
   const trafficTrendPct7d = pctChange(currentTraffic, previousTraffic);
   const conversionTrendPct7d = pctChange(currentConversion, previousConversion);
 
-  const conversionSeriesLast7 = current7.map((point) => dailyConversion(point.leads, point.traffic));
+  const conversionSeriesLast7 = current7.map((point) =>
+    dailyConversion(point.leads, point.traffic),
+  );
   const conversionTrendSlope7d = normalizeSafeRate(computeSlope(conversionSeriesLast7) * 100);
 
   const warning = trafficTrendPct7d > 0 && conversionTrendPct7d < 0;

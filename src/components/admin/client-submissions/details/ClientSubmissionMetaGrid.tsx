@@ -16,12 +16,18 @@ function MetaCard({ label, value, subValue }: { label: string; value: string; su
 }
 
 export default function ClientSubmissionMetaGrid({ details }: ClientSubmissionMetaGridProps) {
+  const reviewedByValue = details.reviewedByProfile?.displayName || details.reviewedBy || '—';
+  const reviewedByMeta = details.reviewedByProfile
+    ? [details.reviewedByProfile.roleLabel, details.reviewedByProfile.uid].filter(Boolean).join(' · ')
+    : undefined;
+
   return (
     <div className="grid gap-3 md:grid-cols-2">
       <MetaCard label="Email" value={details.email} />
       <MetaCard label="Created" value={formatDate(details.createdAt)} subValue={formatTime(details.createdAt)} />
       <MetaCard label="Updated" value={formatDate(details.updatedAt)} subValue={formatTime(details.updatedAt)} />
       <MetaCard label="Reviewed at" value={formatDate(details.reviewedAt)} subValue={formatTime(details.reviewedAt)} />
+      <MetaCard label="Reviewed by" value={reviewedByValue} subValue={reviewedByMeta} />
     </div>
   );
 }

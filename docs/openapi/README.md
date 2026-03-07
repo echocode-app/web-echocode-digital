@@ -18,3 +18,4 @@ This validates the spec with Redocly CLI.
 - The spec documents all active API routes from `src/app/api/*`.
 - Admin endpoints require `Authorization: Bearer <Firebase ID token>`.
 - Public form endpoints are open and protected by server-side rate limiting/validation.
+- Public analytics includes `POST /api/analytics/page-view` for page-view tracking.

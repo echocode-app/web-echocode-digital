@@ -7,7 +7,9 @@ import type {
 } from '@/server/forms/shared/moderation.types';
 import { MODERATION_STATUSES } from '@/server/forms/shared/moderation.types';
 
-export const moderationStatusSchema = z.enum(MODERATION_STATUSES as [ModerationStatus, ...ModerationStatus[]]);
+export const moderationStatusSchema = z.enum(
+  MODERATION_STATUSES as [ModerationStatus, ...ModerationStatus[]],
+);
 
 export const moderationListQuerySchema = z.object({
   limit: z.coerce.number().int().min(1).max(20).default(20),
@@ -37,7 +39,11 @@ export function decodeModerationCursor(raw: string): ModerationCursor {
   const json = Buffer.from(raw, 'base64').toString('utf8');
   const parsed = JSON.parse(json) as { createdAtMs?: unknown; id?: unknown };
 
-  if (!Number.isSafeInteger(parsed.createdAtMs) || typeof parsed.id !== 'string' || parsed.id.trim().length === 0) {
+  if (
+    !Number.isSafeInteger(parsed.createdAtMs) ||
+    typeof parsed.id !== 'string' ||
+    parsed.id.trim().length === 0
+  ) {
     throw new Error('Invalid cursor');
   }
 
