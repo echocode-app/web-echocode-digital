@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Platform",
+    "desc": "Swift"
+  },
+  {
+    "title": "Utilities",
+    "desc": "QR scanning SDK"
+  },
+  {
+    "title": "Backend",
+    "desc": "Integration via Loyalty Platform API"
+  },
+  {
+    "title": "CMS",
+    "desc": "Custom solution for menu & campaign management"
+  },
+  {
+    "title": "Project Management",
+    "desc": "Scrum methodology with 2-week sprints"
+  },
+  {
+    "title": "Notifications",
+    "desc": "Firebase Cloud Messaging, Twilio"
+  }
+]

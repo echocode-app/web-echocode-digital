@@ -4,12 +4,14 @@ import { ImplementationSection } from '@/components/sections/portfolio/project/I
 import PlanningSection from '@/components/sections/portfolio/project/PlanningSection/PlanningSection';
 import FeaturesSection from '@/components/sections/portfolio/project/FeaturesSection';
 import ScreensSection from '@/components/sections/portfolio/project/ScreensSection';
+import ProptotypeSection from '@/components/sections/portfolio/project/PrototypeSection';
+import TechnologySection from '@/components/sections/portfolio/project/TechnologySection';
 
 import implementations from '@/data/portfolio/projects/implementations/food.json';
 import challenges from '@/data/portfolio/projects/challenges/food.json';
 import planning from '@/data/portfolio/projects/planning/food.json';
 import features from '@/data/portfolio/projects/features/food.json';
-import ProptotypeSection from '@/components/sections/portfolio/project/PrototypeSection';
+import technologies from '@/data/portfolio/projects/technologies/food.json';
 
 const Food = () => {
   return (
@@ -48,6 +50,7 @@ const Food = () => {
           height="697px"
         />
       </ProptotypeSection>
+      <TechnologySection list={technologies} />
     </>
   );
 };

@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Platform",
+    "desc": "Swift"
+  },
+  {
+    "title": "Backend",
+    "desc": "FedEx API, DPD API"
+  },
+  {
+    "title": "User Auth ＆ Database",
+    "desc": "Firebase"
+  },
+  {
+    "title": "Payment Integration",
+    "desc": "Stripe PayPal"
+  },
+  {
+    "title": "Analytics",
+    "desc": "Google Analytics"
+  },
+  {
+    "title": "Project Management",
+    "desc": "Scrum methodology with 2-week"
+  }
+]

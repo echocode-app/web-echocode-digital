@@ -5,9 +5,11 @@ import { ImplementationCleaningSection } from '@/components/sections/portfolio/p
 import PlanningSection from '@/components/sections/portfolio/project/PlanningSection/PlanningSection';
 import ProptotypeSection from '@/components/sections/portfolio/project/PrototypeSection';
 import ScreensSection from '@/components/sections/portfolio/project/ScreensSection';
+import TechnologySection from '@/components/sections/portfolio/project/TechnologySection';
 
 import challenges from '@/data/portfolio/projects/challenges/cleaning.json';
 import planning from '@/data/portfolio/projects/planning/cleaning.json';
+import technologies from '@/data/portfolio/projects/technologies/cleaning.json';
 
 const Cleaning = () => {
   return (
@@ -43,6 +45,7 @@ const Cleaning = () => {
           height="697px"
         />
       </ProptotypeSection>
+      <TechnologySection list={technologies} />
     </>
   );
 };
