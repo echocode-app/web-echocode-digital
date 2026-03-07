@@ -20,7 +20,15 @@ export type ModerationCommentDto = {
   text: string;
   authorUid: string;
   authorEmail: string | null;
+  authorProfile?: ModerationActorProfileDto | null;
   createdAt: string;
+};
+
+export type ModerationActorProfileDto = {
+  uid: string;
+  displayName: string | null;
+  roleLabel: string | null;
+  email: string | null;
 };
 
 export type ModerationStatusCountsDto = {

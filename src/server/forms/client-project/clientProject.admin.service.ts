@@ -1,7 +1,14 @@
 import { Timestamp } from 'firebase-admin/firestore';
 import { ApiError } from '@/server/lib/errors';
 import { logAdminAction } from '@/server/admin/admin-logs.service';
-import { decodeClientSubmissionCursor, encodeClientSubmissionCursor } from '@/server/forms/client-project/clientProject.validation';
+import {
+  attachAdminProfilesToComments,
+  getAdminUserProfileByUid,
+} from '@/server/admin/admin-users.service';
+import {
+  decodeClientSubmissionCursor,
+  encodeClientSubmissionCursor,
+} from '@/server/forms/client-project/clientProject.validation';
 import {
   addClientSubmissionComment,
   getClientSubmissionById,
@@ -23,7 +30,9 @@ import { CLIENT_SUBMISSION_STATUS_VALUES } from '@/shared/admin/constants';
 
 const STATUS_OPTIONS = [...CLIENT_SUBMISSION_STATUS_VALUES] as const;
 
-function assertSupportedStatus(status: string): asserts status is UpdateClientSubmissionStatusResponseDto['status'] {
+function assertSupportedStatus(
+  status: string,
+): asserts status is UpdateClientSubmissionStatusResponseDto['status'] {
   if (!STATUS_OPTIONS.includes(status as (typeof STATUS_OPTIONS)[number])) {
     throw ApiError.fromCode('BAD_REQUEST', `Unsupported status: ${status}`);
   }
@@ -64,6 +73,18 @@ export async function getAdminClientSubmissionsOverview(): Promise<ClientSubmiss
   return getClientSubmissionsOverview();
 }
 
+async function attachClientSubmissionReviewerProfile(
+  item: ClientSubmissionDetailsDto['item'],
+): Promise<ClientSubmissionDetailsDto> {
+  return {
+    item: {
+      ...item,
+      comments: await attachAdminProfilesToComments(item.comments ?? []),
+      reviewedByProfile: await getAdminUserProfileByUid(item.reviewedBy),
+    },
+  };
+}
+
 export async function getAdminClientSubmissionDetails(input: {
   submissionId: string;
   adminUid: string;
@@ -96,13 +117,16 @@ export async function getAdminClientSubmissionDetails(input: {
 
     const refreshed = await getClientSubmissionById(input.submissionId);
     if (!refreshed) {
-      throw ApiError.fromCode('INTERNAL_ERROR', 'Failed to reload client submission after auto-view update');
+      throw ApiError.fromCode(
+        'INTERNAL_ERROR',
+        'Failed to reload client submission after auto-view update',
+      );
     }
 
-    return { item: refreshed };
+    return attachClientSubmissionReviewerProfile(refreshed);
   }
 
-  return { item };
+  return attachClientSubmissionReviewerProfile(item);
 }
 
 export async function setAdminClientSubmissionStatus(input: {
@@ -199,9 +223,14 @@ export async function softDeleteAdminClientSubmission(input: {
 }
 
 export const clientSubmissionDateRange = {
-  toTimestampBounds(input: { dateFrom?: string; dateTo?: string }): { from?: Timestamp; to?: Timestamp } {
+  toTimestampBounds(input: { dateFrom?: string; dateTo?: string }): {
+    from?: Timestamp;
+    to?: Timestamp;
+  } {
     return {
-      from: input.dateFrom ? Timestamp.fromDate(new Date(`${input.dateFrom}T00:00:00.000Z`)) : undefined,
+      from: input.dateFrom
+        ? Timestamp.fromDate(new Date(`${input.dateFrom}T00:00:00.000Z`))
+        : undefined,
       to: input.dateTo ? Timestamp.fromDate(new Date(`${input.dateTo}T23:59:59.999Z`)) : undefined,
     };
   },

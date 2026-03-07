@@ -85,7 +85,10 @@ export default function ClientSubmissionDetails({ submissionId }: { submissionId
       <div className="rounded-(--radius-secondary) border border-gray16 bg-black/20 p-3">
         <p className="font-main text-main-xs text-gray60">Files</p>
         {details.imageUrl ? (
-          <div className="mt-2 rounded-(--radius-secondary) border border-[#ffd38e] bg-[linear-gradient(90deg,#fff3cf,#ffe9f2)] p-2.5">
+          <div className="mt-2 rounded-(--radius-secondary) border border-[#ffd38e] 
+          transition-all hover:border-[#ffe9f2]
+          bg-[linear-gradient(90deg,#b7a56f,#ffe9f2)]
+          p-2.5 duration-main">
             <a
               href={details.imageUrl}
               target="_blank"

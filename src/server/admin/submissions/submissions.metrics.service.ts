@@ -20,12 +20,14 @@ export type SubmissionsOverviewDto = {
     dropOffRate: number;
   };
   charts: {
-    submissionsTrend: { label: string; value: number }[];
-    errorsTrend: { label: string; success: number; error: number }[];
+    submissionsTrend: { date: string; label: string; value: number }[];
+    errorsTrend: { date: string; label: string; success: number; error: number }[];
   };
 };
 
-export async function getAdminSubmissionsOverview(period: SubmissionsPeriod = 'week'): Promise<SubmissionsOverviewDto> {
+export async function getAdminSubmissionsOverview(
+  period: SubmissionsPeriod = 'week',
+): Promise<SubmissionsOverviewDto> {
   const raw = await getSubmissionsOverviewRawAggregates(period);
   return mapSubmissionsOverview(raw);
 }

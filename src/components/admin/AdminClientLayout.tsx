@@ -41,7 +41,7 @@ async function verifyAdmin(user: User): Promise<Response> {
 function LoadingScreen() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-black px-6">
-      <div className="rounded-[var(--radius-base)] border border-gray16 bg-base-gray/90 px-5 py-4 shadow-[0_12px_36px_rgba(0,0,0,0.5)]">
+      <div className="rounded-(--radius-base) border border-gray16 bg-base-gray/90 px-5 py-4 shadow-[0_12px_36px_rgba(0,0,0,0.5)]">
         <p className="font-main text-main-sm text-gray75">Authorizing admin access...</p>
       </div>
     </div>

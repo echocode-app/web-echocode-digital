@@ -73,7 +73,7 @@ export default function DashboardGeographySection({ enabled }: DashboardGeograph
         ) : (
           <div className="grid min-w-0 gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
             <div className="min-w-0">
-              <div className="h-72 min-w-0">
+              <div className="h-60 min-w-0 sm:h-72">
                 <DashboardGeographyRadialChart rows={chartRows} emptyLabel={emptyLabel} />
               </div>
 
@@ -99,7 +99,7 @@ export default function DashboardGeographySection({ enabled }: DashboardGeograph
 
             <div className="min-w-0">
               <p className="mb-2 font-main text-main-xs uppercase tracking-[0.12em] text-gray60">All countries</p>
-              <div className="max-h-96 space-y-2 overflow-auto pr-1">
+              <div className="max-h-80 space-y-2 overflow-auto pr-1 sm:max-h-96">
                 {(geography?.countries ?? []).map((country) => (
                   <div
                     key={country.country}

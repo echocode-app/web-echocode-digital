@@ -1,5 +1,6 @@
 import type { FieldValue, Timestamp } from 'firebase-admin/firestore';
 import { CLIENT_SUBMISSION_STATUS_VALUES } from '@/shared/admin/constants';
+import type { ModerationActorProfileDto } from '@/server/forms/shared/moderation.types';
 
 export type ClientSubmissionStatus = (typeof CLIENT_SUBMISSION_STATUS_VALUES)[number];
 
@@ -54,6 +55,7 @@ export type ClientSubmissionCommentDto = {
   text: string;
   authorUid: string;
   authorEmail: string | null;
+  authorProfile?: ModerationActorProfileDto | null;
   createdAt: string;
 };
 
@@ -69,6 +71,7 @@ export type ClientSubmissionRecordDto = {
   createdAt: string;
   updatedAt: string;
   reviewedBy: string | null;
+  reviewedByProfile: ModerationActorProfileDto | null;
   reviewedAt: string | null;
   comments: ClientSubmissionCommentDto[];
 };

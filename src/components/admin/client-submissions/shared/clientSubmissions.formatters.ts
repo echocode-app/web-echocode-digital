@@ -1,5 +1,10 @@
 import type { ClientSubmissionStatus } from '@/server/forms/client-project/clientProject.types';
 import { CLIENT_SUBMISSION_STATUS_SORT_PRIORITY } from './clientSubmissions.constants';
+import {
+  getAdminDateIso,
+  getAdminDateTimeLabel,
+  getAdminTimeIso,
+} from '@/shared/time/europeKiev';
 
 type ModerationListRow = {
   status: ClientSubmissionStatus;
@@ -20,22 +25,19 @@ export function formatDateTime(iso: string): { date: string; time: string } {
     return { date: iso, time: '—' };
   }
 
-  return {
-    date: date.toISOString().slice(0, 10),
-    time: date.toISOString().slice(11, 16),
-  };
+  return getAdminDateTimeLabel(date);
 }
 
 export function formatDate(value: string | null): string {
   if (!value) return '—';
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return value;
-  return date.toISOString().slice(0, 10);
+  return getAdminDateIso(date);
 }
 
 export function formatTime(value: string | null): string {
   if (!value) return '—';
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return '—';
-  return date.toISOString().slice(11, 16);
+  return getAdminTimeIso(date);
 }

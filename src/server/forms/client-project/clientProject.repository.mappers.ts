@@ -7,9 +7,15 @@ import type {
   ClientSubmissionRecordDto,
   ClientSubmissionStatus,
 } from '@/server/forms/client-project/clientProject.types';
-import { assertTimestamp, toIso } from '@/server/forms/client-project/clientProject.repository.shared';
+import {
+  assertTimestamp,
+  toIso,
+} from '@/server/forms/client-project/clientProject.repository.shared';
 
-export function mapDocToRecord(id: string, data: Record<string, unknown>): ClientSubmissionRecordDto {
+export function mapDocToRecord(
+  id: string,
+  data: Record<string, unknown>,
+): ClientSubmissionRecordDto {
   assertTimestamp(data.createdAt, `client_submissions/${id}.createdAt`);
   assertTimestamp(data.updatedAt, `client_submissions/${id}.updatedAt`);
 
@@ -21,7 +27,11 @@ export function mapDocToRecord(id: string, data: Record<string, unknown>): Clien
     .map((entry): ClientSubmissionCommentDto | null => {
       if (!entry || typeof entry !== 'object' || Array.isArray(entry)) return null;
       const comment = entry as Partial<ClientSubmissionCommentStored>;
-      if (!(comment.createdAt instanceof Timestamp) || typeof comment.id !== 'string' || typeof comment.text !== 'string') {
+      if (
+        !(comment.createdAt instanceof Timestamp) ||
+        typeof comment.id !== 'string' ||
+        typeof comment.text !== 'string'
+      ) {
         return null;
       }
 
@@ -30,6 +40,7 @@ export function mapDocToRecord(id: string, data: Record<string, unknown>): Clien
         text: comment.text,
         authorUid: typeof comment.authorUid === 'string' ? comment.authorUid : 'unknown',
         authorEmail: typeof comment.authorEmail === 'string' ? comment.authorEmail : null,
+        authorProfile: null,
         createdAt: toIso(comment.createdAt),
       };
     })
@@ -48,12 +59,15 @@ export function mapDocToRecord(id: string, data: Record<string, unknown>): Clien
     createdAt: toIso(data.createdAt),
     updatedAt: toIso(data.updatedAt),
     reviewedBy: typeof data.reviewedBy === 'string' ? data.reviewedBy : null,
+    reviewedByProfile: null,
     reviewedAt: reviewedAtIso,
     comments,
   };
 }
 
-export function mapDocToListItem(doc: FirebaseFirestore.QueryDocumentSnapshot): ClientSubmissionListItemDto {
+export function mapDocToListItem(
+  doc: FirebaseFirestore.QueryDocumentSnapshot,
+): ClientSubmissionListItemDto {
   const data = doc.data();
   assertTimestamp(data.createdAt, `client_submissions/${doc.id}.createdAt`);
 
@@ -68,11 +82,14 @@ export function mapDocToListItem(doc: FirebaseFirestore.QueryDocumentSnapshot): 
     date: toIso(data.createdAt),
     status: typeof data.status === 'string' ? (data.status as ClientSubmissionStatus) : 'new',
     hasImage: typeof data.imageUrl === 'string' && data.imageUrl.length > 0,
-    commentsCount: Number.isFinite(commentsCount) && commentsCount > 0 ? Math.trunc(commentsCount) : 0,
+    commentsCount:
+      Number.isFinite(commentsCount) && commentsCount > 0 ? Math.trunc(commentsCount) : 0,
   };
 }
 
-export function mapDocToCursor(doc: FirebaseFirestore.QueryDocumentSnapshot): ClientSubmissionCursor {
+export function mapDocToCursor(
+  doc: FirebaseFirestore.QueryDocumentSnapshot,
+): ClientSubmissionCursor {
   const createdAt = doc.data().createdAt;
   assertTimestamp(createdAt, `client_submissions/${doc.id}.createdAt`);
   return { createdAtMs: createdAt.toMillis(), id: doc.id };

@@ -6,13 +6,8 @@ function toReadSignedUrlExpiry(): Date {
 }
 
 export async function getVacancySubmissionCvReadUrl(path: string): Promise<string> {
-  const normalizedPath = path.trim();
-  if (!normalizedPath) {
-    throw ApiError.fromCode('BAD_REQUEST', 'Vacancy CV path is missing');
-  }
-
   const bucket = getFirebaseStorageBucket();
-  const file = bucket.file(normalizedPath);
+  const file = bucket.file(path);
 
   try {
     const [url] = await file.getSignedUrl({
@@ -23,6 +18,8 @@ export async function getVacancySubmissionCvReadUrl(path: string): Promise<strin
 
     return url;
   } catch (cause) {
-    throw ApiError.fromCode('FIREBASE_UNAVAILABLE', 'Failed to generate vacancy CV access URL', { cause });
+    throw ApiError.fromCode('FIREBASE_UNAVAILABLE', 'Failed to generate CV access URL', {
+      cause,
+    });
   }
 }

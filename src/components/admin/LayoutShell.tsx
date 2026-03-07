@@ -20,9 +20,17 @@ export default function LayoutShell({ role, email, children }: LayoutShellProps)
 
   return (
     <div className="admin-ui-shell min-h-screen bg-black text-white md:flex">
-      <Sidebar role={role} isMobileOpen={isMobileSidebarOpen} onCloseMobile={() => setIsMobileSidebarOpen(false)} />
+      <Sidebar
+        role={role}
+        isMobileOpen={isMobileSidebarOpen}
+        onCloseMobile={() => setIsMobileSidebarOpen(false)}
+      />
       <div className="flex min-h-screen flex-1 flex-col">
-        <Header email={email} role={role} onOpenMobileSidebar={() => setIsMobileSidebarOpen(true)} />
+        <Header
+          email={email}
+          role={role}
+          onOpenMobileSidebar={() => setIsMobileSidebarOpen(true)}
+        />
         <main className="flex-1 p-4 md:p-6">{children}</main>
         <footer className="border-t border-gray16 bg-black px-4 py-4 md:px-6 md:py-5">
           <ActionsPanel />

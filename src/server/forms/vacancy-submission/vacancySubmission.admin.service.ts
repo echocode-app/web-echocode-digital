@@ -1,5 +1,9 @@
 import { ApiError } from '@/server/lib/errors';
 import {
+  attachAdminProfilesToComments,
+  getAdminUserProfileByUid,
+} from '@/server/admin/admin-users.service';
+import {
   addVacancySubmissionComment,
   getVacancySubmissionById,
   getVacancySubmissionsOverview,
@@ -82,6 +86,8 @@ async function attachVacancySubmissionCvUrl(
     item: {
       ...item,
       cvUrl,
+      comments: await attachAdminProfilesToComments(item.comments ?? []),
+      reviewedByProfile: await getAdminUserProfileByUid(item.reviewedBy),
     },
   };
 }
@@ -107,7 +113,10 @@ async function autoMarkVacancySubmissionViewed(input: {
 
   const refreshed = await getVacancySubmissionById(input.submissionId);
   if (!refreshed) {
-    throw ApiError.fromCode('INTERNAL_ERROR', 'Failed to reload vacancy submission after auto-view update');
+    throw ApiError.fromCode(
+      'INTERNAL_ERROR',
+      'Failed to reload vacancy submission after auto-view update',
+    );
   }
 
   return attachVacancySubmissionCvUrl(refreshed);
@@ -145,7 +154,10 @@ export async function setAdminVacancySubmissionStatus(input: {
   }
 
   if (existing.status !== 'new' && input.status === 'new') {
-    throw ApiError.fromCode('BAD_REQUEST', 'Status cannot be changed back to "new" after initial processing');
+    throw ApiError.fromCode(
+      'BAD_REQUEST',
+      'Status cannot be changed back to "new" after initial processing',
+    );
   }
 
   const update = await updateVacancySubmissionStatus({

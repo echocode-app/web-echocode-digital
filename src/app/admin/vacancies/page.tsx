@@ -12,7 +12,9 @@ export default function AdminVacanciesPage() {
           bg-[linear-gradient(90deg,#fff3cf,#ffe9f2)] 
           px-4 py-2 font-title text-title-xs uppercase 
           tracking-[0.12em] text-black 
-          transition duration-main hover:border-[#ffc978] hover:shadow-[0_0_0_1px_#ffd38e,0_10px_30px_rgba(255,211,142,0.25)]"
+          transition duration-main h
+          over:border-[#ffc978] 
+          hover:shadow-[0_0_0_1px_#ffd38e,0_10px_30px_rgba(255,211,142,0.25)]"
           aria-label="Open candidate submissions moderation list"
           title="Open candidate submissions moderation list"
         >

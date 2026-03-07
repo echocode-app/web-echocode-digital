@@ -1,7 +1,5 @@
 import { z } from 'zod';
-import {
-  candidateCvFileSchema,
-} from '@/shared/validation/submissions';
+import { candidateCvFileSchema } from '@/shared/validation/submissions';
 import { profileUrlSchema } from '@/shared/validation/submissions.common';
 import { SUBMISSIONS_TMP_UPLOAD_PATH_PATTERN } from '@/shared/forms/submissionsUpload.constants';
 import { validate } from '@/server/lib';

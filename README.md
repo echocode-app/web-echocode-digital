@@ -17,32 +17,11 @@ Dev Vercel: https://echocode-newsite.vercel.app/
 - `npm run check` - required pre-commit check (`typecheck + lint + openapi:lint + build`)
 - `npm run test:firestore:rules` - Firestore Rules tests
 - `npm run test:storage:rules` - Storage Rules tests
-- `BASE_URL=http://127.0.0.1:3000 npm run seed:mock:submissions` - mock email/candidate submissions for admin smoke test
 
 ## API documentation
 
 - Swagger UI locally and in production: `/docs/api`
 - Raw OpenAPI spec: `/api/docs/openapi/openapi.yaml`
-- Source files:
-- `docs/openapi/openapi.yaml`
-- `docs/openapi/SCENARIOS.md`
-- `src/app/docs/SUBMISSIONS_INTEGRATION_HANDOFF.md`
-
-## Admin moderation queues
-
-- Client submissions: `/admin/submissions/clients`
-- Email submissions: `/admin/submissions/emails`
-- Vacancy candidates: `/admin/vacancies/candidates`
-
-Canonical admin API namespaces:
-
-- `/api/admin/submissions/clients/*`
-- `/api/admin/submissions/emails/*`
-- `/api/admin/vacancies/candidates/*`
-
-Legacy compatibility alias remains available:
-
-- `/api/admin/submissions/vacancies/*`
 
 ## Commit checklist
 

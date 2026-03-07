@@ -4,6 +4,8 @@ import type { ClientSubmissionStatus } from '@/server/forms/client-project/clien
 import ClientSubmissionStatusBadge from '@/components/admin/client-submissions/shared/ClientSubmissionStatusBadge';
 import { formatDateTime } from '@/components/admin/client-submissions/shared/clientSubmissions.formatters';
 import { EyeIcon, SelectChevron } from '@/components/admin/client-submissions/shared/clientSubmissions.icons';
+import { AdminTableEmptyRow } from '@/components/admin/shared/table/AdminTableEmptyRow';
+import { AdminTableLoadingRows } from '@/components/admin/shared/table/AdminTableLoadingRows';
 import type {
   ClientSubmissionListItemDto,
   LoadState,
@@ -31,31 +33,11 @@ export default function ClientSubmissionsTableRows({
   getAllowedStatusOptions,
 }: ClientSubmissionsTableRowsProps) {
   if (state === 'loading') {
-    return (
-      <>
-        {Array.from({ length: 4 }, (_, index) => (
-          <tr key={`loading-${index}`}>
-            <td className="px-2 py-2"><div className="h-4 w-24 animate-pulse rounded bg-gray16" /></td>
-            <td className="px-2 py-2"><div className="h-4 w-30 animate-pulse rounded bg-gray16" /></td>
-            <td className="px-2 py-2"><div className="h-4 w-16 animate-pulse rounded bg-gray16" /></td>
-            <td className="px-2 py-2"><div className="h-4 w-20 animate-pulse rounded bg-gray16" /></td>
-            <td className="px-2 py-2"><div className="h-4 w-8 animate-pulse rounded bg-gray16" /></td>
-            <td className="px-2 py-2"><div className="h-4 w-8 animate-pulse rounded bg-gray16" /></td>
-            <td className="px-2 py-2"><div className="h-4 w-24 animate-pulse rounded bg-gray16" /></td>
-          </tr>
-        ))}
-      </>
-    );
+    return <AdminTableLoadingRows cellWidths={['w-24', 'w-30', 'w-16', 'w-20', 'w-8', 'w-8', 'w-24']} />;
   }
 
   if (rows.length === 0) {
-    return (
-      <tr>
-        <td colSpan={7} className="px-2 py-6 text-center font-main text-main-sm text-gray75">
-          No client submissions found.
-        </td>
-      </tr>
-    );
+    return <AdminTableEmptyRow colSpan={7} message="No client submissions found." />;
   }
 
   return (

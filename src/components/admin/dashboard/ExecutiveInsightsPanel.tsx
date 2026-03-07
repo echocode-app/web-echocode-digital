@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import WidgetHeader from '@/components/admin/dashboard/ui/WidgetHeader';
 import SymbolSafeText from '@/components/admin/dashboard/ui/SymbolSafeText';
 
@@ -19,6 +20,32 @@ function pct(value: number): string {
   return `${prefix}${value.toFixed(2)}%`;
 }
 
+const panelClassName = 'min-w-0 rounded-(--radius-base) border border-gray16 bg-base-gray p-4';
+const insightCardClassName = 'min-w-0 rounded-(--radius-secondary) border border-gray16 bg-black/25 p-2';
+const insightLabelClassName = 'font-main text-main-xs text-gray60';
+const insightValueClassName = 'mt-1 font-title text-title-base text-white';
+const insightMetaClassName = 'font-main text-main-xs text-gray75';
+
+function InsightCard({
+  title,
+  value,
+  meta,
+  truncateValue = false,
+}: {
+  title: string;
+  value: ReactNode;
+  meta: ReactNode;
+  truncateValue?: boolean;
+}) {
+  return (
+    <div className={insightCardClassName}>
+      <h4 className={insightLabelClassName}>{title}</h4>
+      <div className={`${insightValueClassName} ${truncateValue ? 'truncate' : ''}`}>{value}</div>
+      <p className={insightMetaClassName}>{meta}</p>
+    </div>
+  );
+}
+
 export default function ExecutiveInsightsPanel({
   leadQualityRatio,
   bestDay,
@@ -32,59 +59,55 @@ export default function ExecutiveInsightsPanel({
   conversionDropOffPct,
 }: ExecutiveInsightsPanelProps) {
   return (
-    <article className="min-w-0 rounded-(--radius-base) border border-gray16 bg-base-gray p-4">
+    <article className={panelClassName}>
       <WidgetHeader
         title="Executive insights"
         info="High-signal indicators for lead quality, timing, entity performance, growth pace and conversion pressure."
       />
 
       <div className="mt-3 grid min-w-0 gap-2 sm:grid-cols-2 xl:grid-cols-3">
-        <div className="min-w-0 rounded-(--radius-secondary) border border-gray16 bg-black/25 p-2">
-          <h4 className="font-main text-main-xs text-gray60">Lead quality ratio</h4>
-          <p className="mt-1 font-title text-title-base text-white">
-            <SymbolSafeText text={`${leadQualityRatio.toFixed(2)}%`} />
-          </p>
-          <p className="font-main text-main-xs text-gray75">Project leads of total leads</p>
-        </div>
+        <InsightCard
+          title="Lead quality ratio"
+          value={<SymbolSafeText text={`${leadQualityRatio.toFixed(2)}%`} />}
+          meta="Project leads of total leads"
+        />
 
-        <div className="min-w-0 rounded-(--radius-secondary) border border-gray16 bg-black/25 p-2">
-          <h4 className="font-main text-main-xs text-gray60">Best performing day</h4>
-          <p className="mt-1 font-title text-title-base text-white">{bestDay}</p>
-          <p className="font-main text-main-xs text-gray75">
+        <InsightCard
+          title="Best performing day"
+          value={bestDay}
+          meta={(
             <SymbolSafeText
               text={`${bestDayShare.toFixed(2)}% of project leads, traffic delta ${pct(bestDayTrafficDeltaPct)}`}
               className="wrap-break-word"
             />
-          </p>
-        </div>
+          )}
+        />
 
-        <div className="min-w-0 rounded-(--radius-secondary) border border-gray16 bg-black/25 p-2">
-          <h4 className="font-main text-main-xs text-gray60">Best portfolio item</h4>
-          <p className="mt-1 truncate font-title text-title-base text-white">{topPortfolioItem}</p>
-          <p className="font-main text-main-xs text-gray75">{topPortfolioViews} views (30d)</p>
-        </div>
+        <InsightCard
+          title="Best portfolio item"
+          value={topPortfolioItem}
+          meta={`${topPortfolioViews} views (30d)`}
+          truncateValue
+        />
 
-        <div className="min-w-0 rounded-(--radius-secondary) border border-gray16 bg-black/25 p-2">
-          <h4 className="font-main text-main-xs text-gray60">Most applied vacancy</h4>
-          <p className="mt-1 truncate font-title text-title-base text-white">{topVacancyItem}</p>
-          <p className="font-main text-main-xs text-gray75">{topVacancyApplications} applications (30d)</p>
-        </div>
+        <InsightCard
+          title="Most applied vacancy"
+          value={topVacancyItem}
+          meta={`${topVacancyApplications} applications (30d)`}
+          truncateValue
+        />
 
-        <div className="min-w-0 rounded-(--radius-secondary) border border-gray16 bg-black/25 p-2">
-          <h4 className="font-main text-main-xs text-gray60">Growth velocity (MoM)</h4>
-          <p className="mt-1 font-title text-title-base text-white">
-            <SymbolSafeText text={pct(growthVelocityMoM)} />
-          </p>
-          <p className="font-main text-main-xs text-gray75">Total leads month-over-month</p>
-        </div>
+        <InsightCard
+          title="Growth velocity (MoM)"
+          value={<SymbolSafeText text={pct(growthVelocityMoM)} />}
+          meta="Total leads month-over-month"
+        />
 
-        <div className="min-w-0 rounded-(--radius-secondary) border border-gray16 bg-black/25 p-2">
-          <h4 className="font-main text-main-xs text-gray60">Conversion drop-off</h4>
-          <p className="mt-1 font-title text-title-base text-white">
-            <SymbolSafeText text={`${conversionDropOffPct.toFixed(2)}%`} />
-          </p>
-          <p className="font-main text-main-xs text-gray75">30d conversion decrease vs previous 30d</p>
-        </div>
+        <InsightCard
+          title="Conversion drop-off"
+          value={<SymbolSafeText text={`${conversionDropOffPct.toFixed(2)}%`} />}
+          meta="30d conversion decrease vs previous 30d"
+        />
       </div>
     </article>
   );

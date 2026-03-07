@@ -109,7 +109,8 @@ export default function LoginButton() {
       const errorMessage =
         typeof normalizedError.message === 'string' ? normalizedError.message : 'unknown';
       const errorName = typeof normalizedError.name === 'string' ? normalizedError.name : 'unknown';
-      const errorStack = typeof normalizedError.stack === 'string' ? normalizedError.stack : undefined;
+      const errorStack =
+        typeof normalizedError.stack === 'string' ? normalizedError.stack : undefined;
 
       console.error('[admin-login] client login failed', {
         name: errorName,
@@ -144,7 +145,9 @@ export default function LoginButton() {
           bg-main-gradient opacity-0 transition-opacity duration-500 ease-in-out 
           group-hover:opacity-100 group-focus-visible:opacity-100"
         />
-        <span className="relative z-10">{isLoading ? 'Checking access...' : 'Continue with Google'}</span>
+        <span className="relative z-10">
+          {isLoading ? 'Checking access...' : 'Continue with Google'}
+        </span>
       </button>
 
       <div className="min-h-6 px-1 py-0.5">

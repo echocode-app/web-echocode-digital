@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useMemo } from 'react';
+import { formatAdminDateTime } from '@/shared/time/europeKiev';
 
 type QueueModerationAlertProps = {
   href: string;
@@ -16,13 +17,7 @@ type QueueModerationAlertProps = {
 
 function formatUpdatedTime(timestamp: number | null): string {
   if (!timestamp) return 'just now';
-  return new Date(timestamp).toLocaleString('en-GB', {
-    day: '2-digit',
-    month: '2-digit',
-    year: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
-  });
+  return formatAdminDateTime(timestamp);
 }
 
 function resolveVariantClasses(variant: QueueModerationAlertProps['variant']) {

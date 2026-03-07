@@ -84,11 +84,16 @@ export async function createClientSubmissionRecord(input: {
     };
   } catch (cause) {
     if (cause instanceof ApiError) throw cause;
-    throw ApiError.fromCode('FIREBASE_UNAVAILABLE', 'Failed to create client submission', { cause });
+    throw ApiError.fromCode('FIREBASE_UNAVAILABLE', 'Failed to create client submission', {
+      cause,
+    });
   }
 }
 
-function buildListQuery(firestore: FirebaseFirestore.Firestore, input: ListQueryInput): FirebaseFirestore.Query {
+function buildListQuery(
+  firestore: FirebaseFirestore.Firestore,
+  input: ListQueryInput,
+): FirebaseFirestore.Query {
   let query: FirebaseFirestore.Query = firestore.collection(CLIENT_SUBMISSIONS_COLLECTION);
 
   if (input.status) {
@@ -117,7 +122,11 @@ function buildListQuery(firestore: FirebaseFirestore.Firestore, input: ListQuery
 async function listClientSubmissionsWithStatusFallback(
   firestore: FirebaseFirestore.Firestore,
   input: ListQueryInput,
-): Promise<{ items: ClientSubmissionListItemDto[]; nextCursor: ClientSubmissionCursor | null; hasNextPage: boolean }> {
+): Promise<{
+  items: ClientSubmissionListItemDto[];
+  nextCursor: ClientSubmissionCursor | null;
+  hasNextPage: boolean;
+}> {
   let baseQuery: FirebaseFirestore.Query = firestore.collection(CLIENT_SUBMISSIONS_COLLECTION);
 
   if (input.dateFrom) {
@@ -132,7 +141,10 @@ async function listClientSubmissionsWithStatusFallback(
 
   baseQuery = baseQuery.orderBy('createdAt', 'desc').orderBy(FieldPath.documentId(), 'desc');
   if (input.cursor) {
-    baseQuery = baseQuery.startAfter(Timestamp.fromMillis(input.cursor.createdAtMs), input.cursor.id);
+    baseQuery = baseQuery.startAfter(
+      Timestamp.fromMillis(input.cursor.createdAtMs),
+      input.cursor.id,
+    );
   }
 
   const filtered: FirebaseFirestore.QueryDocumentSnapshot[] = [];
@@ -149,7 +161,9 @@ async function listClientSubmissionsWithStatusFallback(
     try {
       batchSnapshot = await batchQuery.get();
     } catch (scanCause) {
-      throw ApiError.fromCode('FIREBASE_UNAVAILABLE', 'Failed to list client submissions', { cause: scanCause });
+      throw ApiError.fromCode('FIREBASE_UNAVAILABLE', 'Failed to list client submissions', {
+        cause: scanCause,
+      });
     }
 
     if (batchSnapshot.empty) {
@@ -175,9 +189,8 @@ async function listClientSubmissionsWithStatusFallback(
   const hasNextPage = filtered.length > input.limit;
   const pageDocs = hasNextPage ? filtered.slice(0, input.limit) : filtered;
   const items = pageDocs.map(mapDocToListItem);
-  const nextCursor = hasNextPage && pageDocs.length > 0
-    ? mapDocToCursor(pageDocs[pageDocs.length - 1])
-    : null;
+  const nextCursor =
+    hasNextPage && pageDocs.length > 0 ? mapDocToCursor(pageDocs[pageDocs.length - 1]) : null;
 
   return { items, nextCursor, hasNextPage };
 }
@@ -224,17 +237,19 @@ export async function listClientSubmissions(input: ListQueryInput): Promise<{
     const hasNextPage = filtered.length > input.limit;
     const pageDocs = hasNextPage ? filtered.slice(0, input.limit) : filtered;
     const items = pageDocs.map(mapDocToListItem);
-    const nextCursor = hasNextPage && pageDocs.length > 0
-      ? mapDocToCursor(pageDocs[pageDocs.length - 1])
-      : null;
+    const nextCursor =
+      hasNextPage && pageDocs.length > 0 ? mapDocToCursor(pageDocs[pageDocs.length - 1]) : null;
 
     return { items, nextCursor, hasNextPage };
   } catch (cause) {
     const message = cause instanceof Error ? cause.message : String(cause);
-    const requiresIndex = message.includes('FAILED_PRECONDITION') && message.includes('requires an index');
+    const requiresIndex =
+      message.includes('FAILED_PRECONDITION') && message.includes('requires an index');
 
     if (!requiresIndex || !input.status) {
-      throw ApiError.fromCode('FIREBASE_UNAVAILABLE', 'Failed to list client submissions', { cause });
+      throw ApiError.fromCode('FIREBASE_UNAVAILABLE', 'Failed to list client submissions', {
+        cause,
+      });
     }
 
     return listClientSubmissionsWithStatusFallback(firestore, input);
@@ -274,7 +289,10 @@ export async function updateClientSubmissionStatus(input: {
   submissionId: string;
   status: ClientSubmissionStatus;
   adminUid: string;
-}): Promise<{ updated: UpdateClientSubmissionStatusResponseDto; previousStatus: ClientSubmissionStatus }> {
+}): Promise<{
+  updated: UpdateClientSubmissionStatusResponseDto;
+  previousStatus: ClientSubmissionStatus;
+}> {
   const firestore = getFirestoreDb();
   const docRef = firestore.collection(CLIENT_SUBMISSIONS_COLLECTION).doc(input.submissionId);
 
@@ -321,7 +339,9 @@ export async function updateClientSubmissionStatus(input: {
     };
   } catch (cause) {
     if (cause instanceof ApiError) throw cause;
-    throw ApiError.fromCode('FIREBASE_UNAVAILABLE', 'Failed to update client submission status', { cause });
+    throw ApiError.fromCode('FIREBASE_UNAVAILABLE', 'Failed to update client submission status', {
+      cause,
+    });
   }
 }
 
@@ -371,7 +391,9 @@ export async function softDeleteClientSubmission(input: {
     };
   } catch (cause) {
     if (cause instanceof ApiError) throw cause;
-    throw ApiError.fromCode('FIREBASE_UNAVAILABLE', 'Failed to soft-delete client submission', { cause });
+    throw ApiError.fromCode('FIREBASE_UNAVAILABLE', 'Failed to soft-delete client submission', {
+      cause,
+    });
   }
 }
 
@@ -424,7 +446,9 @@ export async function addClientSubmissionComment(
     };
   } catch (cause) {
     if (cause instanceof ApiError) throw cause;
-    throw ApiError.fromCode('FIREBASE_UNAVAILABLE', 'Failed to add client submission comment', { cause });
+    throw ApiError.fromCode('FIREBASE_UNAVAILABLE', 'Failed to add client submission comment', {
+      cause,
+    });
   }
 }
 

@@ -53,20 +53,23 @@ export function useVacancyCandidateDetails(submissionId: string) {
     [details],
   );
 
-  const onStatusChange = useCallback(async (nextStatus: VacancySubmissionStatus) => {
-    if (!details) return;
-    setIsStatusSaving(true);
+  const onStatusChange = useCallback(
+    async (nextStatus: VacancySubmissionStatus) => {
+      if (!details) return;
+      setIsStatusSaving(true);
 
-    try {
-      await updateVacancyCandidateStatus({ submissionId: details.id, status: nextStatus });
-      setDetails((prev) => (prev ? { ...prev, status: nextStatus } : prev));
-      showToast('success', `Status updated to "${nextStatus}".`);
-    } catch (error) {
-      showToast('error', error instanceof Error ? error.message : 'Unable to update status.');
-    } finally {
-      setIsStatusSaving(false);
-    }
-  }, [details, showToast]);
+      try {
+        await updateVacancyCandidateStatus({ submissionId: details.id, status: nextStatus });
+        setDetails((prev) => (prev ? { ...prev, status: nextStatus } : prev));
+        showToast('success', `Status updated to "${nextStatus}".`);
+      } catch (error) {
+        showToast('error', error instanceof Error ? error.message : 'Unable to update status.');
+      } finally {
+        setIsStatusSaving(false);
+      }
+    },
+    [details, showToast],
+  );
 
   const onAddComment = useCallback(async () => {
     if (!details) return;

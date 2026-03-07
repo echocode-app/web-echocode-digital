@@ -3,7 +3,10 @@
 import { useEffect, useMemo, useState } from 'react';
 import { fetchAdminData } from '@/components/admin/api/fetchAdminData';
 import { buildReadyOverview } from '@/components/admin/submissions/submissions.overview.utils';
-import type { SubmissionsOverviewDto, SubmissionsPeriod } from '@/server/admin/submissions/submissions.metrics.service';
+import type {
+  SubmissionsOverviewDto,
+  SubmissionsPeriod,
+} from '@/server/admin/submissions/submissions.metrics.service';
 
 export type LoadState = 'loading' | 'ready' | 'error';
 

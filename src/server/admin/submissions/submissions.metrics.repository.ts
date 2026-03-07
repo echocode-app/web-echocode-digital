@@ -65,15 +65,21 @@ export async function getSubmissionsOverviewRawAggregates(
     countAnyAnalyticsEventInRange(SUBMIT_ATTEMPT_EVENT_TYPES, periodConfig.funnelRange),
     countSubmissionsInRange(periodConfig.funnelRange),
     Promise.all(periodConfig.buckets.map(({ range }) => countSubmissionsInRange(range))),
-    Promise.all(periodConfig.buckets.map(({ range }) => countAnyAnalyticsEventInRange(SUBMIT_ERROR_EVENT_TYPES, range))),
+    Promise.all(
+      periodConfig.buckets.map(({ range }) =>
+        countAnyAnalyticsEventInRange(SUBMIT_ERROR_EVENT_TYPES, range),
+      ),
+    ),
   ]);
 
   const submissionsTrend: SubmissionsTrendPointRaw[] = periodConfig.buckets.map((entry, index) => ({
+    date: entry.range.start.toISOString().slice(0, 10),
     label: entry.label,
     value: normalizeSafeNumber(submissionsTrendCounts[index] ?? 0),
   }));
 
   const errorsTrend: ErrorsTrendPointRaw[] = periodConfig.buckets.map((entry, index) => ({
+    date: entry.range.start.toISOString().slice(0, 10),
     label: entry.label,
     success: normalizeSafeNumber(submissionsTrendCounts[index] ?? 0),
     error: normalizeSafeNumber(errorsTrendCounts[index] ?? 0),
@@ -83,7 +89,10 @@ export async function getSubmissionsOverviewRawAggregates(
   const conversionPrevious7 = percentage(submissionsPrevious7, pageViewsPrevious7);
 
   const hasErrorRateTracking =
-    submitErrorCurrent7 > 0 || submitErrorPrevious7 > 0 || submitAttemptCurrent7 > 0 || submitAttemptPrevious7 > 0;
+    submitErrorCurrent7 > 0 ||
+    submitErrorPrevious7 > 0 ||
+    submitAttemptCurrent7 > 0 ||
+    submitAttemptPrevious7 > 0;
 
   const funnel = buildFunnelSnapshot(
     normalizeSafeNumber(modalOpenForPeriod),

@@ -35,7 +35,9 @@ export default function AdminToast({
 
   return (
     <div className="pointer-events-none fixed right-5 top-5 z-300">
-      <div className={`pointer-events-auto rounded-(--radius-secondary) border bg-base-gray px-3 py-2 font-main text-main-xs shadow-button ${TONE_CLASS[toast.tone]}`}>
+      <div
+        className={`pointer-events-auto rounded-(--radius-secondary) border bg-base-gray px-3 py-2 font-main text-main-xs shadow-button ${TONE_CLASS[toast.tone]}`}
+      >
         {toast.message}
       </div>
     </div>

@@ -10,6 +10,8 @@ export type AnalyticsEventType =
   | 'apply_vacancy'
   | 'page_view'
   | 'contact_modal_open'
+  | 'contact_modal_close'
+  | 'contact_modal_cta_click'
   | 'submit_project_attempt'
   | 'submit_project_error';
 
@@ -33,9 +35,7 @@ export type TrackEventInput = {
   metadata?: Record<string, unknown>;
 };
 
-function toSafeMetadata(
-  metadata: Record<string, unknown> | undefined,
-): AnalyticsMetadataMap {
+function toSafeMetadata(metadata: Record<string, unknown> | undefined): AnalyticsMetadataMap {
   if (!metadata) return {};
 
   const safe: AnalyticsMetadataMap = {};

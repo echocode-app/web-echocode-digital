@@ -34,7 +34,9 @@ export default function VacanciesOverviewGrid() {
     return (
       <section className="min-w-0 space-y-4">
         <div className="rounded-(--radius-base) border border-[#ff6d7a]/40 bg-base-gray p-4">
-          <p className="font-main text-main-sm text-[#ff6d7a]">Unable to load vacancies overview.</p>
+          <p className="font-main text-main-sm text-[#ff6d7a]">
+            Unable to load vacancies overview.
+          </p>
         </div>
       </section>
     );
@@ -50,11 +52,23 @@ export default function VacanciesOverviewGrid() {
         <div className="grid min-w-0 gap-4 md:grid-cols-2 xl:grid-cols-3">
           {overview ? (
             <>
-              <KpiCard metricKey="vacancyLeads" title="Vacancy candidate leads (7d)" metric={overview.kpis.vacancyLeads} />
-              <KpiCard metricKey="activeVacancies" title="Active vacancies" metric={overview.kpis.activeVacancies} />
+              <KpiCard
+                metricKey="vacancyLeads"
+                title="Vacancy candidate leads (7d)"
+                metric={overview.kpis.vacancyLeads}
+              />
+              <KpiCard
+                metricKey="activeVacancies"
+                title="Active vacancies"
+                metric={overview.kpis.activeVacancies}
+              />
               <article className="min-w-0 rounded-(--radius-base) border border-gray16 bg-base-gray p-4 shadow-main">
-                <p className="font-main text-title-xs uppercase tracking-[0.14em] text-gray60">Top vacancy by candidate applications (month)</p>
-                <p className="mt-2 truncate font-title text-title-lg text-white">{overview.topVacancyItem}</p>
+                <p className="font-main text-title-xs uppercase tracking-[0.14em] text-gray60">
+                  Top vacancy by candidate applications (month)
+                </p>
+                <p className="mt-2 truncate font-title text-title-lg text-white">
+                  {overview.topVacancyItem}
+                </p>
                 <p className="mt-2 font-main text-main-sm text-gray75">
                   {overview.topVacancyApplications} applications
                 </p>
@@ -65,13 +79,21 @@ export default function VacanciesOverviewGrid() {
               <KpiCard
                 metricKey="vacancyLeads"
                 title="Vacancy candidate leads (7d)"
-                metric={{ value: 0, trend: { current: 0, previous: 0, changePct: 0, direction: 'flat' }, momChangePct: 0 }}
+                metric={{
+                  value: 0,
+                  trend: { current: 0, previous: 0, changePct: 0, direction: 'flat' },
+                  momChangePct: 0,
+                }}
                 loading
               />
               <KpiCard
                 metricKey="activeVacancies"
                 title="Active vacancies"
-                metric={{ value: 0, trend: { current: 0, previous: 0, changePct: 0, direction: 'flat' }, momChangePct: 0 }}
+                metric={{
+                  value: 0,
+                  trend: { current: 0, previous: 0, changePct: 0, direction: 'flat' },
+                  momChangePct: 0,
+                }}
                 loading
               />
               <ChartSkeleton />
@@ -82,8 +104,16 @@ export default function VacanciesOverviewGrid() {
 
       {showSection(2) ? (
         <div className="grid min-w-0 gap-4">
-          <ChartPanel title="Top vacancies by candidate applications" info={PANEL_INFO_TEXT.topVacancies} mobileScrollable>
-            {overview ? <BarTopVacanciesChart data={overview.charts.topVacancies} /> : <ChartSkeleton />}
+          <ChartPanel
+            title="Top vacancies by candidate applications"
+            info={PANEL_INFO_TEXT.topVacancies}
+            mobileScrollable
+          >
+            {overview ? (
+              <BarTopVacanciesChart data={overview.charts.topVacancies} />
+            ) : (
+              <ChartSkeleton />
+            )}
           </ChartPanel>
 
           <ChartPanel
@@ -91,7 +121,11 @@ export default function VacanciesOverviewGrid() {
             info="Monthly vacancy candidate leads for the current year from vacancy submit and apply analytics events (submit_vacancy + apply_vacancy)."
             mobileScrollable
           >
-            {overview ? <VacancyLeadsByMonthChart data={overview.charts.leadDistributionYearMonthly} /> : <ChartSkeleton />}
+            {overview ? (
+              <VacancyLeadsByMonthChart data={overview.charts.leadDistributionYearMonthly} />
+            ) : (
+              <ChartSkeleton />
+            )}
           </ChartPanel>
         </div>
       ) : null}
@@ -99,7 +133,9 @@ export default function VacanciesOverviewGrid() {
       {canLoadMore ? (
         <button
           type="button"
-          onClick={() => setVisibleSections((prev) => Math.min(prev + SECTION_PORTION_SIZE, sectionCount))}
+          onClick={() =>
+            setVisibleSections((prev) => Math.min(prev + SECTION_PORTION_SIZE, sectionCount))
+          }
           className="block mx-auto rounded-base border-2 border-accent px-6 py-2 font-title text-title-sm uppercase shadow-button transition duration-main hover:bg-accent"
         >
           Load more

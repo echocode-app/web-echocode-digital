@@ -26,6 +26,9 @@ export default function DashboardGrid() {
   const [period, setPeriod] = useState<DashboardPeriod>('week');
   const { overview, state } = useDashboardOverview(period);
   const [isGeographyVisible, setIsGeographyVisible] = useState(false);
+  const trafficChartMobileMinWidthClass = period === 'month'
+    ? 'min-w-[44rem] sm:min-w-[48rem] md:min-w-0'
+    : 'min-w-[22rem] sm:min-w-[26rem] md:min-w-0';
 
   if (state === 'error') {
     return (
@@ -60,7 +63,12 @@ export default function DashboardGrid() {
         {overview ? <SourcePerformanceBlock sources={overview.sources ?? []} /> : <ChartSkeleton />}
       </div>
 
-      <ChartPanel title={`Traffic vs tracked leads (${ADMIN_PERIOD_LABEL[period]})`} info={PANEL_INFO_TEXT.trafficVsLeads} mobileScrollable>
+      <ChartPanel
+        title={`Traffic vs tracked leads (${ADMIN_PERIOD_LABEL[period]})`}
+        info={PANEL_INFO_TEXT.trafficVsLeads}
+        mobileScrollable
+        mobileMinWidthClass={trafficChartMobileMinWidthClass}
+      >
         {overview ? (
           <div className="flex h-full min-w-0 flex-col">
             <div className="mb-2 flex justify-start lg:justify-end">
@@ -84,7 +92,12 @@ export default function DashboardGrid() {
           <button
             type="button"
             onClick={() => setIsGeographyVisible(true)}
-            className="block mx-auto rounded-base border-2 border-accent px-6 py-2 font-title text-title-sm uppercase shadow-button transition duration-main hover:bg-accent"
+            className="block mx-auto rounded-base 
+            border-2 border-accent px-6 py-2 
+            font-title text-title-sm uppercase 
+            shadow-button 
+            transition duration-main 
+            hover:bg-accent"
           >
             Load more
           </button>

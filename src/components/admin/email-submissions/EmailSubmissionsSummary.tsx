@@ -27,10 +27,12 @@ export default function EmailSubmissionsSummary() {
       <article className="rounded-(--radius-base) border border-gray16 bg-base-gray p-4">
         <div className="flex items-start justify-between gap-3">
           <div>
-            <h2 className="font-main text-title-xs uppercase tracking-[0.14em] text-gray60">Workflow guide</h2>
+            <h2 className="font-main text-title-xs uppercase tracking-[0.14em] text-gray60">
+              Workflow guide
+            </h2>
             <p className="mt-2 font-main text-main-sm text-gray75">
-              Review new email leads quickly, set the status after the first pass, and keep the queue aligned with the
-              real outreach state so the dashboard counts stay meaningful.
+              Review new email leads quickly, set the status after the first pass, and keep the
+              queue aligned with the real outreach state so the dashboard counts stay meaningful.
             </p>
           </div>
           <InfoTooltip
@@ -51,7 +53,9 @@ export default function EmailSubmissionsSummary() {
           <MetricTile label="Deferred" value={values.byStatus.deferred} />
         </div>
         {state === 'error' ? (
-          <p className="mt-2 font-main text-main-xs text-[#ff6d7a]">Unable to load summary metrics.</p>
+          <p className="mt-2 font-main text-main-xs text-[#ff6d7a]">
+            Unable to load summary metrics.
+          </p>
         ) : null}
       </article>
     </section>

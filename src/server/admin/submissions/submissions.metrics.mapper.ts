@@ -86,10 +86,12 @@ export function mapSubmissionsOverview(
     },
     charts: {
       submissionsTrend: raw.charts.submissionsTrend.map((point) => ({
+        date: point.date,
         label: point.label,
         value: sanitizeNumber(point.value),
       })),
       errorsTrend: raw.charts.errorsTrend.map((point) => ({
+        date: point.date,
         label: point.label,
         success: sanitizeNumber(point.success),
         error: sanitizeNumber(point.error),

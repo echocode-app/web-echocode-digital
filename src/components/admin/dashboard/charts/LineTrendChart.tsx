@@ -13,6 +13,11 @@ import {
   type ChartOptions,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
+import {
+  ADMIN_CHART_TOOLTIP_BASE,
+  formatTooltipCount,
+  formatTooltipIsoDate,
+} from '@/components/admin/charts/chartTooltip';
 import type { SubmissionsTrendPointDto } from '@/server/admin/dashboard/dashboard.types';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Legend, Filler);
@@ -35,11 +40,7 @@ const options: ChartOptions<'line'> = {
     tooltip: {
       mode: 'index',
       intersect: false,
-      backgroundColor: 'rgba(20,20,20,0.92)',
-      borderColor: 'rgba(255,255,255,0.16)',
-      borderWidth: 1,
-      titleColor: '#fff',
-      bodyColor: 'rgba(255,255,255,0.75)',
+      ...ADMIN_CHART_TOOLTIP_BASE,
     },
   },
   interaction: {
@@ -70,9 +71,28 @@ const options: ChartOptions<'line'> = {
 };
 
 function LineTrendChart({ data }: LineTrendChartProps) {
+  const optionsWithCallbacks = useMemo<ChartOptions<'line'>>(
+    () => ({
+      ...options,
+      plugins: {
+        ...options.plugins,
+        tooltip: {
+          ...ADMIN_CHART_TOOLTIP_BASE,
+          mode: 'index',
+          intersect: false,
+          callbacks: {
+            title: (items) => formatTooltipIsoDate(data[items[0]?.dataIndex ?? 0]?.date ?? ''),
+            label: (ctx) => `Tracked submissions: ${formatTooltipCount(Number(ctx.parsed.y ?? ctx.parsed ?? 0))}`,
+          },
+        },
+      },
+    }),
+    [data],
+  );
+
   const chartData = useMemo(
     () => ({
-      labels: data.map((item) => item.date.slice(5)),
+      labels: data.map((item) => item.date.slice(8)),
       datasets: [
         {
           label: 'Submissions',
@@ -90,7 +110,7 @@ function LineTrendChart({ data }: LineTrendChartProps) {
     [data],
   );
 
-  return <Line options={options} data={chartData} />;
+  return <Line options={optionsWithCallbacks} data={chartData} />;
 }
 
 export default memo(LineTrendChart);

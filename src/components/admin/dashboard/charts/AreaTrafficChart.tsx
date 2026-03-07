@@ -13,6 +13,12 @@ import {
   type ChartOptions,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
+import {
+  ADMIN_CHART_TOOLTIP_BASE,
+  formatTooltipCount,
+  formatTooltipIsoDate,
+  formatTooltipMonthLabel,
+} from '@/components/admin/charts/chartTooltip';
 import type { DashboardPeriod, TrafficVsLeadsPointDto } from '@/server/admin/dashboard/dashboard.types';
 import { ADMIN_MONTH_SHORT_LABELS_EN } from '@/shared/admin/constants';
 
@@ -50,11 +56,7 @@ const baseOptions: ChartOptions<'line'> = {
       position: 'bottom',
     },
     tooltip: {
-      backgroundColor: 'rgba(20,20,20,0.92)',
-      borderColor: 'rgba(255,255,255,0.16)',
-      borderWidth: 1,
-      titleColor: '#fff',
-      bodyColor: 'rgba(255,255,255,0.75)',
+      ...ADMIN_CHART_TOOLTIP_BASE,
     },
   },
   scales: {
@@ -64,7 +66,6 @@ const baseOptions: ChartOptions<'line'> = {
       },
       ticks: {
         color: 'rgba(255,255,255,0.6)',
-        maxTicksLimit: 6,
       },
     },
     y: {
@@ -83,12 +84,26 @@ const baseOptions: ChartOptions<'line'> = {
 function AreaTrafficChart({ data, period }: AreaTrafficChartProps) {
   const isAllZero = data.every((item) => item.traffic === 0 && item.leads === 0);
   const maxValue = data.reduce((acc, item) => Math.max(acc, item.traffic, item.leads), 0);
+  const xTickFontSize = period === 'month' ? 10 : 11;
 
   const options = useMemo<ChartOptions<'line'>>(
     () => ({
       ...baseOptions,
       scales: {
         ...baseOptions.scales,
+        x: {
+          ...baseOptions.scales?.x,
+          ticks: {
+            ...(baseOptions.scales?.x && 'ticks' in baseOptions.scales.x ? baseOptions.scales.x.ticks : {}),
+            color: 'rgba(255,255,255,0.6)',
+            autoSkip: false,
+            maxRotation: 0,
+            minRotation: 0,
+            font: {
+              size: xTickFontSize,
+            },
+          },
+        },
         y: {
           ...baseOptions.scales?.y,
           beginAtZero: true,
@@ -102,8 +117,31 @@ function AreaTrafficChart({ data, period }: AreaTrafficChartProps) {
           },
         },
       },
+      plugins: {
+        ...baseOptions.plugins,
+        tooltip: {
+          ...ADMIN_CHART_TOOLTIP_BASE,
+          callbacks: {
+            title: (items) => {
+              const index = items[0]?.dataIndex ?? 0;
+              const point = data[index];
+              if (!point) return '';
+              return period === 'year'
+                ? formatTooltipMonthLabel(point.date.slice(5, 7), Number(point.date.slice(0, 4)))
+                : formatTooltipIsoDate(point.date);
+            },
+            label: (ctx) => `${ctx.dataset.label}: ${formatTooltipCount(Number(ctx.parsed.y ?? ctx.parsed ?? 0))}`,
+            footer: (items) => {
+              const index = items[0]?.dataIndex ?? 0;
+              const point = data[index];
+              if (!point) return '';
+              return `Total tracked activity: ${formatTooltipCount(point.traffic + point.leads)}`;
+            },
+          },
+        },
+      },
     }),
-    [isAllZero, maxValue],
+    [data, isAllZero, maxValue, period, xTickFontSize],
   );
 
   const chartData = useMemo(

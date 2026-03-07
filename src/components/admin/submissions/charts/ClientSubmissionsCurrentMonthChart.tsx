@@ -1,14 +1,13 @@
 'use client';
 
 import { memo, useMemo } from 'react';
-import {
-  ArcElement,
-  Chart as ChartJS,
-  Legend,
-  Tooltip,
-  type ChartOptions,
-} from 'chart.js';
+import { ArcElement, Chart as ChartJS, Legend, Tooltip, type ChartOptions } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
+import {
+  ADMIN_CHART_TOOLTIP_BASE,
+  formatTooltipCount,
+  formatTooltipPercent,
+} from '@/components/admin/charts/chartTooltip';
 import type { ClientSubmissionStatusCountsDto } from '@/server/forms/client-project/clientProject.types';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -29,11 +28,7 @@ const options: ChartOptions<'doughnut'> = {
       display: false,
     },
     tooltip: {
-      backgroundColor: 'rgba(20,20,20,0.92)',
-      borderColor: 'rgba(255,255,255,0.16)',
-      borderWidth: 1,
-      titleColor: '#fff',
-      bodyColor: 'rgba(255,255,255,0.75)',
+      ...ADMIN_CHART_TOOLTIP_BASE,
     },
   },
 };
@@ -65,10 +60,33 @@ function ClientSubmissionsCurrentMonthChart({ data }: ClientSubmissionsCurrentMo
     [segments],
   );
 
+  const total = segments.reduce((sum, segment) => sum + segment.value, 0);
+  const optionsWithCallbacks = useMemo<ChartOptions<'doughnut'>>(
+    () => ({
+      ...options,
+      plugins: {
+        ...options.plugins,
+        tooltip: {
+          ...ADMIN_CHART_TOOLTIP_BASE,
+          callbacks: {
+            title: (items) => String(items[0]?.label ?? ''),
+            label: (ctx) => `Submissions: ${formatTooltipCount(Number(ctx.parsed ?? 0))}`,
+            footer: (items) => {
+              const value = Number(items[0]?.parsed ?? 0);
+              const share = total > 0 ? (value / total) * 100 : 0;
+              return `Share of current-month queue: ${formatTooltipPercent(share)}`;
+            },
+          },
+        },
+      },
+    }),
+    [total],
+  );
+
   return (
     <div className="grid h-full min-h-64 gap-4 md:grid-cols-[minmax(220px,1fr)_minmax(180px,240px)] md:items-center">
       <div className="relative h-64 md:h-full">
-        <Doughnut options={options} data={chartData} />
+        <Doughnut options={optionsWithCallbacks} data={chartData} />
       </div>
 
       <div className="space-y-2">

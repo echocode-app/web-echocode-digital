@@ -66,11 +66,26 @@ export default function Sidebar({ role, isMobileOpen = false, onCloseMobile }: S
   const items: NavItem[] = [
     { href: '/admin/dashboard', label: 'Dashboard', visible: true },
     { href: '/admin/submissions', label: 'Submissions metrics', visible: true },
-    { href: '/admin/submissions/clients', label: 'Clients', visible: true, parentHref: '/admin/submissions' },
-    { href: '/admin/submissions/emails', label: 'Emails', visible: true, parentHref: '/admin/submissions' },
+    {
+      href: '/admin/submissions/clients',
+      label: 'Clients',
+      visible: true,
+      parentHref: '/admin/submissions',
+    },
+    {
+      href: '/admin/submissions/emails',
+      label: 'Emails',
+      visible: true,
+      parentHref: '/admin/submissions',
+    },
     { href: '/admin/portfolio', label: 'Portfolio', visible: true },
     { href: '/admin/vacancies', label: 'Vacancies', visible: true },
-    { href: '/admin/vacancies/candidates', label: 'Candidates', visible: true, parentHref: '/admin/vacancies' },
+    {
+      href: '/admin/vacancies/candidates',
+      label: 'Candidates',
+      visible: true,
+      parentHref: '/admin/vacancies',
+    },
     { href: '/admin/logs', label: 'Logs', visible: role === 'developer' },
     { href: '/admin/info', label: 'Info', visible: true },
   ];
@@ -90,8 +105,15 @@ export default function Sidebar({ role, isMobileOpen = false, onCloseMobile }: S
 
   return (
     <>
-      <aside className="hidden border-b border-gray16 bg-base-gray/90 p-4 md:sticky md:top-0 md:flex md:h-screen md:w-60 md:flex-col md:self-start md:border-b-0 md:border-r md:p-5">
-        <p className="mb-4 font-main text-title-xs uppercase tracking-[0.2em] text-gray60">Navigation</p>
+      <aside
+        className="hidden border-b border-gray16 
+      bg-base-gray/90 
+      p-4 md:sticky md:top-0 md:flex md:h-screen md:w-60 
+      md:flex-col md:self-start md:border-b-0 md:border-r md:p-5"
+      >
+        <p className="mb-4 font-main text-title-xs uppercase tracking-[0.2em] text-gray60">
+          Navigation
+        </p>
         <SidebarNav items={items} pathname={pathname} />
 
         <div className="mt-4 md:mt-auto">
@@ -99,7 +121,13 @@ export default function Sidebar({ role, isMobileOpen = false, onCloseMobile }: S
             type="button"
             onClick={handleLogout}
             disabled={isSigningOut}
-            className="block w-full rounded-(--radius-secondary) border border-gray16 px-3 py-2.5 text-center font-main text-main-sm text-gray75 transition duration-main hover:border-accent-hover hover:text-white disabled:cursor-not-allowed disabled:opacity-60"
+            className="block w-full rounded-(--radius-secondary) 
+            border border-gray16 
+            px-3 py-2.5 
+            text-center font-main text-main-sm text-gray75 
+            transition duration-main 
+            hover:border-accent-hover hover:text-white 
+            disabled:cursor-not-allowed disabled:opacity-60"
           >
             {isSigningOut ? 'Logging out...' : 'Logout'}
           </button>
@@ -116,15 +144,23 @@ export default function Sidebar({ role, isMobileOpen = false, onCloseMobile }: S
             title="Close navigation"
           />
 
-          <aside className="absolute left-0 top-0 h-full w-[86vw] max-w-80 border-r border-gray16 bg-base-gray p-4 transition-transform duration-main translate-x-0">
+          <aside
+            className="absolute left-0 top-0 h-full w-[86vw] 
+          max-w-80 border-r border-gray16 bg-base-gray 
+          p-4 transition-transform duration-main translate-x-0"
+          >
             <div className="mb-4 flex items-center justify-between">
-              <p className="font-main text-title-xs uppercase tracking-[0.2em] text-gray60">Navigation</p>
+              <p className="font-main text-title-xs uppercase tracking-[0.2em] text-gray60">
+                Navigation
+              </p>
               <button
                 type="button"
                 onClick={onCloseMobile}
                 aria-label="Close navigation"
                 title="Close navigation"
-                className="inline-flex h-9 w-9 items-center justify-center rounded-(--radius-secondary) border border-gray16 text-gray75 transition duration-main hover:text-white"
+                className="inline-flex h-9 w-9 items-center justify-center 
+                rounded-(--radius-secondary) border border-gray16 
+                text-gray75 transition duration-main hover:text-white"
               >
                 <Image src="/UI/close.svg" width={18} height={18} alt="" aria-hidden="true" />
               </button>
@@ -137,7 +173,13 @@ export default function Sidebar({ role, isMobileOpen = false, onCloseMobile }: S
                 type="button"
                 onClick={handleLogout}
                 disabled={isSigningOut}
-                className="block w-full rounded-(--radius-secondary) border border-gray16 px-3 py-2.5 text-center font-main text-main-sm text-gray75 transition duration-main hover:border-accent-hover hover:text-white disabled:cursor-not-allowed disabled:opacity-60"
+                className="block w-full rounded-(--radius-secondary) 
+                border border-gray16 
+                px-3 py-2.5 
+                text-center font-main text-main-sm text-gray75 
+                transition duration-main 
+                hover:border-accent-hover hover:text-white 
+                disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {isSigningOut ? 'Logging out...' : 'Logout'}
               </button>

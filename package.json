@@ -21,7 +21,8 @@
     "test:storage:rules": "firebase emulators:exec --only storage \"npm run test:storage:rules:run\"",
     "test:storage:rules:run": "node tests/storage.rules.test.mjs",
     "prepare": "husky",
-    "seed:mock:submissions": "node ./scripts/seed_mock_admin_submissions.mjs"
+    "seed:mock:submissions": "node ./scripts/seed_mock_admin_submissions.mjs",
+    "seed:admin-users": "node ./scripts/seed_admin_users.mjs"
   },
   "dependencies": {
     "@swc/helpers": "^0.5.19",

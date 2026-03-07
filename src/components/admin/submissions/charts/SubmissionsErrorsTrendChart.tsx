@@ -11,18 +11,26 @@ import {
   type ChartOptions,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
+import {
+  ADMIN_CHART_TOOLTIP_BASE,
+  formatTooltipCount,
+  formatTooltipIsoDate,
+  formatTooltipMonthLabel,
+} from '@/components/admin/charts/chartTooltip';
 import type { SubmissionsOverviewDto } from '@/server/admin/submissions/submissions.metrics.service';
+import type { SubmissionsPeriod } from '@/server/admin/submissions/submissions.metrics.service';
 import { ADMIN_MONTH_SHORT_LABELS_EN } from '@/shared/admin/constants';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
 type SubmissionsErrorsTrendChartProps = {
   data: SubmissionsOverviewDto['charts']['errorsTrend'];
+  period: SubmissionsPeriod;
   periodLabel: string;
 };
 
-function formatBucketLabel(label: string): string {
-  if (/^\d{2}$/.test(label)) {
+function formatBucketLabel(label: string, period: SubmissionsPeriod): string {
+  if (period === 'year' && /^\d{2}$/.test(label)) {
     return ADMIN_MONTH_SHORT_LABELS_EN[label] ?? label;
   }
   return label;
@@ -44,11 +52,7 @@ const options: ChartOptions<'bar'> = {
       position: 'bottom',
     },
     tooltip: {
-      backgroundColor: 'rgba(20,20,20,0.92)',
-      borderColor: 'rgba(255,255,255,0.16)',
-      borderWidth: 1,
-      titleColor: '#fff',
-      bodyColor: 'rgba(255,255,255,0.75)',
+      ...ADMIN_CHART_TOOLTIP_BASE,
     },
   },
   scales: {
@@ -80,12 +84,45 @@ const options: ChartOptions<'bar'> = {
   },
 };
 
-function SubmissionsErrorsTrendChart({ data, periodLabel }: SubmissionsErrorsTrendChartProps) {
+function SubmissionsErrorsTrendChart({
+  data,
+  period,
+  periodLabel,
+}: SubmissionsErrorsTrendChartProps) {
   const isAllZero = data.every((item) => item.success === 0 && item.error === 0);
+  const optionsWithCallbacks = useMemo<ChartOptions<'bar'>>(
+    () => ({
+      ...options,
+      plugins: {
+        ...options.plugins,
+        tooltip: {
+          ...ADMIN_CHART_TOOLTIP_BASE,
+          callbacks: {
+            title: (items) => {
+              const point = data[items[0]?.dataIndex ?? 0];
+              if (!point) return '';
+              return period === 'year'
+                ? formatTooltipMonthLabel(point.date.slice(5, 7), Number(point.date.slice(0, 4)))
+                : formatTooltipIsoDate(point.date);
+            },
+            label: (ctx) =>
+              `${ctx.dataset.label}: ${formatTooltipCount(Number(ctx.parsed.y ?? ctx.parsed ?? 0))}`,
+            footer: (items) => {
+              const point = data[items[0]?.dataIndex ?? 0];
+              return point
+                ? `Success rate: ${point.success + point.error > 0 ? ((point.success / (point.success + point.error)) * 100).toFixed(2) : '0.00'}%`
+                : '';
+            },
+          },
+        },
+      },
+    }),
+    [data, period],
+  );
 
   const chartData = useMemo(
     () => ({
-      labels: data.map((item) => formatBucketLabel(item.label)),
+      labels: data.map((item) => formatBucketLabel(item.label, period)),
       datasets: [
         {
           label: 'Success',
@@ -113,7 +150,7 @@ function SubmissionsErrorsTrendChart({ data, periodLabel }: SubmissionsErrorsTre
         },
       ],
     }),
-    [data],
+    [data, period],
   );
 
   if (isAllZero) {
@@ -126,7 +163,7 @@ function SubmissionsErrorsTrendChart({ data, periodLabel }: SubmissionsErrorsTre
     );
   }
 
-  return <Bar options={options} data={chartData} />;
+  return <Bar options={optionsWithCallbacks} data={chartData} />;
 }
 
 export default memo(SubmissionsErrorsTrendChart);

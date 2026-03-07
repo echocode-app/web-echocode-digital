@@ -11,6 +11,11 @@ import {
   type ChartOptions,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
+import {
+  ADMIN_CHART_TOOLTIP_BASE,
+  formatTooltipCount,
+  formatTooltipMonthLabel,
+} from '@/components/admin/charts/chartTooltip';
 import type { LeadDistributionMonthPointDto } from '@/server/admin/dashboard/dashboard.types';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
@@ -36,11 +41,7 @@ const options: ChartOptions<'bar'> = {
       },
     },
     tooltip: {
-      backgroundColor: 'rgba(20,20,20,0.92)',
-      borderColor: 'rgba(255,255,255,0.16)',
-      borderWidth: 1,
-      titleColor: '#fff',
-      bodyColor: 'rgba(255,255,255,0.75)',
+      ...ADMIN_CHART_TOOLTIP_BASE,
     },
   },
   scales: {
@@ -67,6 +68,27 @@ const options: ChartOptions<'bar'> = {
 };
 
 function LeadDistributionSegmentedChart({ data }: LeadDistributionSegmentedChartProps) {
+  const optionsWithCallbacks = useMemo<ChartOptions<'bar'>>(
+    () => ({
+      ...options,
+      plugins: {
+        ...options.plugins,
+        tooltip: {
+          ...ADMIN_CHART_TOOLTIP_BASE,
+          callbacks: {
+            title: (items) => formatTooltipMonthLabel(data[items[0]?.dataIndex ?? 0]?.month ?? '01'),
+            label: (ctx) => `${ctx.dataset.label}: ${formatTooltipCount(Number(ctx.parsed.y ?? ctx.parsed ?? 0))}`,
+            footer: (items) => {
+              const point = data[items[0]?.dataIndex ?? 0];
+              return point ? `Total leads: ${formatTooltipCount(point.project + point.vacancy)}` : '';
+            },
+          },
+        },
+      },
+    }),
+    [data],
+  );
+
   const chartData = useMemo(
     () => ({
       labels: data.map((item) => item.month),
@@ -92,7 +114,7 @@ function LeadDistributionSegmentedChart({ data }: LeadDistributionSegmentedChart
     [data],
   );
 
-  return <Bar options={options} data={chartData} />;
+  return <Bar options={optionsWithCallbacks} data={chartData} />;
 }
 
 export default memo(LeadDistributionSegmentedChart);

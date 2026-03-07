@@ -4,6 +4,7 @@ import { ApiError } from '@/server/lib/errors';
 export type PublicRateLimitInput = {
   request: NextRequest;
   scope:
+    | 'analytics.page-view'
     | 'forms.uploads.init'
     | 'forms.client-project.submit'
     | 'forms.client-project.image.init'
@@ -17,6 +18,7 @@ type ScopePolicy = {
 };
 
 const RATE_LIMIT_POLICIES: Record<PublicRateLimitInput['scope'], ScopePolicy> = {
+  'analytics.page-view': { limit: 120, windowMs: 60_000 },
   'forms.uploads.init': { limit: 20, windowMs: 60_000 },
   'forms.client-project.image.init': { limit: 12, windowMs: 60_000 },
   'forms.client-project.submit': { limit: 8, windowMs: 60_000 },

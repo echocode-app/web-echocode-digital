@@ -10,7 +10,9 @@ export function zeroMetric(): MetricLike {
   };
 }
 
-export function buildReadyOverview(activeOverview: SubmissionsOverviewDto | null): SubmissionsOverviewDto | null {
+export function buildReadyOverview(
+  activeOverview: SubmissionsOverviewDto | null,
+): SubmissionsOverviewDto | null {
   if (!activeOverview) return null;
 
   return {

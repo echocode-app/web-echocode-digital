@@ -11,13 +11,10 @@
 
 - `curl http://localhost:3000/api/health`
 - `curl http://localhost:3000/api/internal/firebase-check`
-- `curl http://localhost:3000/api/admin/me`
 
 - `curl -i -H "Authorization: Bearer invalid-token" http://localhost:3000/api/admin/me`
 - `curl -i -H "Authorization: Bearer valid-token" http://localhost:3000/api/admin/me`
 
-- `npm run test:firestore:rules`
-- `npm run test:storage:rules`
 - `npm run check`
 
 7. Оновити документацію, якщо змінився контракт API або серверна поведінка
@@ -41,6 +38,7 @@
 - canonical vacancy candidates moderation namespace: `/api/admin/vacancies/candidates/*`
 - legacy compatibility alias remains available: `/api/admin/submissions/vacancies/*` (deprecated)
 - local/open-app documentation route: `/docs/api`
+- public page-view analytics route: `/api/analytics/page-view`
 
 - `client_submissions`:
 - додано `soft delete` (поля `isDeleted`, `deletedAt`, `deletedBy`) без фізичного видалення документа.
@@ -56,7 +54,8 @@
 
 - Dashboard/Submissions aggregates:
 - `totalSubmissions` у dashboard враховує обидва джерела: `submissions` + `client_submissions`.
-- метрики `Success vs errors`/funnel працюють на `analytics_events` і поточних UTC-діапазонах.
+- метрики `Success vs errors`/funnel працюють на `analytics_events` і поточних діапазонах `Europe/Kiev`.
+- backend groundwork для `page_view` tracking вже додано; пряме монтування tracker-а в public layout можна виконати окремим комітом.
 
 ## Що вже реалізовано у серверному фундаменті
 

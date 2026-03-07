@@ -1,6 +1,7 @@
 import type { FieldValue } from 'firebase-admin/firestore';
 import type {
   ModerationCommentDto,
+  ModerationActorProfileDto,
   ModerationCommentStored,
   ModerationCursor,
   ModerationListQueryInput,
@@ -56,6 +57,7 @@ export type VacancySubmissionRecordDto = {
   createdAt: string;
   updatedAt: string;
   reviewedBy: string | null;
+  reviewedByProfile: ModerationActorProfileDto | null;
   reviewedAt: string | null;
   comments: ModerationCommentDto[];
 };

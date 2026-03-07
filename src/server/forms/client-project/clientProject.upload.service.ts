@@ -1,7 +1,10 @@
 import { randomUUID } from 'node:crypto';
 import { getFirebaseStorageBucket } from '@/server/firebase/storage';
 import { ApiError } from '@/server/lib/errors';
-import { assertSafeAttachmentName, parseClientProjectUploadInitPayload } from '@/server/forms/client-project/clientProject.validation';
+import {
+  assertSafeAttachmentName,
+  parseClientProjectUploadInitPayload,
+} from '@/server/forms/client-project/clientProject.validation';
 import {
   ALLOWED_CLIENT_PROJECT_ATTACHMENT_MIME_TYPES,
   MAX_CLIENT_PROJECT_ATTACHMENT_SIZE_BYTES,
@@ -19,9 +22,16 @@ function isAllowedAttachmentMimeType(mimeType: string): boolean {
   );
 }
 
-function assertAttachmentPolicy(input: { mimeType: string; sizeBytes: number; originalName: string }): void {
+function assertAttachmentPolicy(input: {
+  mimeType: string;
+  sizeBytes: number;
+  originalName: string;
+}): void {
   if (!isAllowedAttachmentMimeType(input.mimeType)) {
-    throw ApiError.fromCode('ATTACHMENT_VERIFICATION_FAILED', `Unsupported attachment MIME type: ${input.mimeType}`);
+    throw ApiError.fromCode(
+      'ATTACHMENT_VERIFICATION_FAILED',
+      `Unsupported attachment MIME type: ${input.mimeType}`,
+    );
   }
 
   if (input.sizeBytes <= 0 || input.sizeBytes > MAX_CLIENT_PROJECT_ATTACHMENT_SIZE_BYTES) {
@@ -52,7 +62,9 @@ async function getSignedReadUrl(path: string): Promise<string> {
 
     return url;
   } catch (cause) {
-    throw ApiError.fromCode('FIREBASE_UNAVAILABLE', 'Failed to generate image access URL', { cause });
+    throw ApiError.fromCode('FIREBASE_UNAVAILABLE', 'Failed to generate image access URL', {
+      cause,
+    });
   }
 }
 
@@ -67,11 +79,18 @@ async function verifyUploadedImageMeta(input: ClientProjectImageMetaInput): Prom
     const [raw] = await file.getMetadata();
     metadata = raw;
   } catch (cause) {
-    throw ApiError.fromCode('ATTACHMENT_VERIFICATION_FAILED', 'Uploaded attachment object was not found', { cause });
+    throw ApiError.fromCode(
+      'ATTACHMENT_VERIFICATION_FAILED',
+      'Uploaded attachment object was not found',
+      { cause },
+    );
   }
 
   if (metadata.contentType !== input.mimeType) {
-    throw ApiError.fromCode('ATTACHMENT_VERIFICATION_FAILED', 'Uploaded attachment MIME type mismatch');
+    throw ApiError.fromCode(
+      'ATTACHMENT_VERIFICATION_FAILED',
+      'Uploaded attachment MIME type mismatch',
+    );
   }
 
   const sizeRaw = metadata.size;

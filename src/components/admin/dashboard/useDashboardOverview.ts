@@ -2,7 +2,10 @@
 
 import { useEffect, useState } from 'react';
 import { fetchAdminData } from '@/components/admin/api/fetchAdminData';
-import type { DashboardOverviewDto, DashboardPeriod } from '@/server/admin/dashboard/dashboard.types';
+import type {
+  DashboardOverviewDto,
+  DashboardPeriod,
+} from '@/server/admin/dashboard/dashboard.types';
 
 export type DashboardOverviewLoadState = 'loading' | 'ready' | 'error';
 

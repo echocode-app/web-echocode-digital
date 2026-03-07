@@ -16,15 +16,17 @@ type KpiCardProps = {
 
 const KPI_INFO_TEXT: Record<DashboardKpiKey, string> = {
   totalSubmissions:
-    'Total number of all submissions received through the website forms. Includes both project and vacancy-related leads.',
+    'Tracked submission volume across the moderation-backed queues: legacy submissions plus client project submissions. Trend compares the last 7 days against the previous 7 days.',
   projectLeads:
-    'Number of project inquiry submissions submitted in the last 7 days. Used to track demand for custom development services.',
+    'Client project leads created in the last 7 days from the public project inquiry flow. Trend compares the last 7 days against the previous 7 days.',
   vacancyLeads:
-    'Total number of job applications and vacancy submissions in the last 7 days. Indicates hiring demand and candidate activity.',
-  activeVacancies: 'Currently published job openings visible on the public website.',
-  portfolioItems: 'Total number of portfolio entries published on the website.',
+    'Vacancy candidate leads created in the last 7 days from vacancy submit and apply analytics events. Trend compares the last 7 days against the previous 7 days.',
+  activeVacancies:
+    'Currently published vacancies visible on the public website. Trend is intentionally neutral until historical published-state snapshots are modeled.',
+  portfolioItems:
+    'Currently published portfolio entries visible on the public website. Trend is intentionally neutral until historical published-state snapshots are modeled.',
   conversionRate7d:
-    'Percentage of visitors who submitted a project inquiry in the last 7 days. Calculated as project submissions divided by page views.',
+    'Project lead conversion for the last 7 days: submit_project divided by tracked page_view events. Trend compares the last 7 days against the previous 7 days.',
 };
 
 function formatValue(metricKey: DashboardKpiKey, value: number): string {

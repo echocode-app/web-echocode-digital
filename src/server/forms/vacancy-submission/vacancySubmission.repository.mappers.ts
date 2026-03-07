@@ -21,9 +21,10 @@ function mapCvFile(data: Record<string, unknown>): VacancySubmissionCvInput {
     path: typeof data.cvPath === 'string' ? data.cvPath : '',
     originalName: typeof data.cvName === 'string' ? data.cvName : '',
     mimeType: typeof data.cvMimeType === 'string' ? data.cvMimeType : '',
-    sizeBytes: typeof data.cvSizeBytes === 'number' && Number.isFinite(data.cvSizeBytes)
-      ? data.cvSizeBytes
-      : 0,
+    sizeBytes:
+      typeof data.cvSizeBytes === 'number' && Number.isFinite(data.cvSizeBytes)
+        ? data.cvSizeBytes
+        : 0,
   };
 }
 
@@ -53,7 +54,8 @@ export function mapVacancySubmissionDocToListItem(
     vacancyKey: typeof data.vacancyKey === 'string' ? data.vacancyKey : toVacancyKey(vacancy),
     date: toIso(data.createdAt),
     status: toModerationStatus(data.status),
-    commentsCount: Number.isFinite(commentsCount) && commentsCount > 0 ? Math.trunc(commentsCount) : 0,
+    commentsCount:
+      Number.isFinite(commentsCount) && commentsCount > 0 ? Math.trunc(commentsCount) : 0,
   };
 }
 
@@ -79,6 +81,7 @@ export function mapVacancySubmissionDocToRecord(
     createdAt: toIso(data.createdAt),
     updatedAt: toIso(data.updatedAt),
     reviewedBy: typeof data.reviewedBy === 'string' ? data.reviewedBy : null,
+    reviewedByProfile: null,
     reviewedAt: reviewedAtIso,
     comments: mapComments(data.comments),
   };

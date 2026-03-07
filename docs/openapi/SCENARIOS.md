@@ -25,3 +25,9 @@
    - `GET /api/admin/submissions/emails/overview`
    - `GET /api/admin/vacancies/candidates/overview`
 2. Use `byStatus.new` as badge/bannner counters.
+
+## 5) Public page-view tracking for geography/source widgets
+1. Send `POST /api/analytics/page-view` on public page load and route change.
+2. Include `path`, `url`, optional `title`, optional `referrer`, and `source`.
+3. Pass a stable `x-client-session-id` header from the browser.
+4. On live Vercel/Cloudflare traffic, country is resolved on the server from proxy geo headers.
