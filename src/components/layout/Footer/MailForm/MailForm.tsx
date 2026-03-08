@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -22,12 +22,10 @@ const MailForm = () => {
   const [showSuccess, setShowSuccess] = useState(false);
 
   const formRef = useRef<HTMLFormElement>(null);
-
   const t = useTranslations('Layout.Footer');
 
   const handleLocalValidate = (e: React.FocusEvent<HTMLInputElement>) => {
     const value = e.target.value;
-
     const result = emailSchema.safeParse({ email: value });
 
     setLocalError(result.success ? null : result.error.flatten().fieldErrors.email?.[0] || null);
@@ -37,25 +35,25 @@ const MailForm = () => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
+    const email = formData.get('email');
+    const result = emailSchema.safeParse({ email });
+    if (!result.success) {
+      setLocalError(result.error.flatten().fieldErrors.email?.[0] || null);
+      return;
+    }
 
-    const result = await submitEmail(formData);
+    setLocalError(null);
 
-    setState(result);
+    const response = await submitEmail(formData);
+    setState(response);
 
-    if (result.success) {
-      setShowSuccess(true);
+    if (response.success) {
       formRef.current?.reset();
-      setLocalError(null);
+      setShowSuccess(true);
 
-      setTimeout(() => {
-        setShowSuccess(false);
-      }, 2000);
+      setTimeout(() => setShowSuccess(false), 2000);
     }
   };
-
-  useEffect(() => {
-    if (state?.success) return;
-  }, [state]);
 
   const errorMessage = localError || state.fieldErrors?.email?.[0] || state.error;
 
