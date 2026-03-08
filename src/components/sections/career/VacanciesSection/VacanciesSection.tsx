@@ -2,39 +2,11 @@ import SectionContainer from '@/components/UI/section/SectionContainer';
 import SectionGradientLine from '@/components/UI/section/SectionGradientLine';
 import SectionTitle from '@/components/UI/section/SectionTitle';
 import VacanciesList from './VacanciesList';
-import { Vacancy } from './types/vacancies';
 import NotFound from './NotFound';
+import { listPublicVacancies } from '@/server/vacancies';
 
-const vacancies: Vacancy[] = [
-  {
-    hotPosition: true,
-    vacancyTitle: 'iOS Developer ',
-    level: '(Trainee)',
-    conditions: ['Engineering', 'Remote'],
-    vacancyId: 'iosdev',
-    vacancySlug: 'iosdev',
-    employmentType: 'Remote / Full-time',
-  },
-  {
-    vacancyTitle: 'QA Engineer ',
-    level: '(Middle)',
-    conditions: ['Quality Assurance', 'Remote'],
-    vacancyId: 'qaengineer',
-    vacancySlug: 'qaengineer',
-    employmentType: 'Remote / Full-time',
-  },
-  {
-    vacancyTitle: 'UI／UX Designer',
-    conditions: ['Design', 'Remote'],
-    vacancyId: 'designer',
-    vacancySlug: 'designer',
-    employmentType: 'Remote / Full-time',
-  },
-];
-
-// const vacancies: Vacancy[] = [];
-
-const VacanciesSection = () => {
+const VacanciesSection = async () => {
+  const vacancies = await listPublicVacancies();
   const isEmpty = !vacancies || !vacancies?.length;
 
   return (

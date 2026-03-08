@@ -6,7 +6,7 @@ import { VacancyHeroSection } from './types/vacancy';
 
 interface HeroSectionProps extends VacancyHeroSection {
   title?: string;
-  level?: string;
+  level?: string | null;
   employmentType?: string;
 }
 
@@ -21,7 +21,7 @@ const HeroSection = ({ title, level, employmentType, image }: HeroSectionProps) 
             </h2>
             {level && (
               <p className="text-title-3xl md:text-title-4xl lg:text-title-6xl font-title text-center md:text-left">
-                {level}
+                ({level})
               </p>
             )}
             {employmentType && (

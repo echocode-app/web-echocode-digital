@@ -20,7 +20,7 @@ const VacanciesItem = ({
           <strong className="block font-wadik text-title-xs text-accent mb-3">Hot position</strong>
         )}
         <h3 className="font-wadik mb-3">
-          {vacancyTitle} {level && level}
+          {vacancyTitle} {level ? `(${level})` : null}
         </h3>
         <ul className="flex gap-2">
           {conditions &&

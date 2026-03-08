@@ -6,36 +6,8 @@ import HeroSection from '@/components/sections/career/vacancy/HeroSection';
 import ValueSection from '@/components/sections/career/vacancy/ValueSection';
 import DescriptionSections from '@/components/sections/career/vacancy/DescriptionSection';
 import SelectionSection from '@/components/sections/career/vacancy/SelectionSection';
-
-import { Vacancy } from '@/components/sections/career/VacanciesSection/types/vacancies';
 import CandidateSection from '@/components/sections/career/vacancy/CandidateSection';
-
-const vacancies: Vacancy[] = [
-  {
-    hotPosition: true,
-    vacancyTitle: 'iOS Developer ',
-    level: '(Trainee)',
-    conditions: ['Engineering', 'Remote'],
-    vacancyId: 'iosdev',
-    vacancySlug: 'iosdev',
-    employmentType: 'Remote ／ Full-time',
-  },
-  {
-    vacancyTitle: 'QA Engineer ',
-    level: '(Middle)',
-    conditions: ['Quality Assurance', 'Remote'],
-    vacancyId: 'qaengineer',
-    vacancySlug: 'qaengineer',
-    employmentType: 'Remote ／ Full-time',
-  },
-  {
-    vacancyTitle: 'UI／UX Designer',
-    conditions: ['Design', 'Remote'],
-    vacancyId: 'designer',
-    vacancySlug: 'designer',
-    employmentType: 'Remote ／ Full-time',
-  },
-];
+import { getPublicVacancyBySlug } from '@/server/vacancies';
 
 interface VacancyPageProps {
   params: Promise<{ slug: string }>;
@@ -43,9 +15,7 @@ interface VacancyPageProps {
 
 const VacancyPage = async ({ params }: VacancyPageProps) => {
   const { slug } = await params;
-  const vacancy = vacancies.find(
-    ({ vacancySlug, vacancyId }) => vacancySlug === slug || vacancyId === slug,
-  );
+  const vacancy = await getPublicVacancyBySlug(slug);
   const careerData = handleStaticVacancy(slug);
 
   if (!vacancy || !careerData || !slug) {

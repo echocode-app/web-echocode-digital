@@ -1,9 +1,3 @@
-export interface Vacancy {
-  hotPosition?: boolean;
-  vacancyId: string; // iosdev
-  vacancySlug?: string; // /career/[slug] - iosdev
-  vacancyTitle?: string; // card title - iOS Developer
-  level?: string; // Level - Trainee
-  conditions?: string[]; // ["Engineering", "Remote"]
-  employmentType?: string; // Hero sublabel - Full-time
-}
+import type { PublicVacancyListItem } from '@/server/vacancies';
+
+export type Vacancy = PublicVacancyListItem;
