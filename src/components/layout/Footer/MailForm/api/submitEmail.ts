@@ -1,5 +1,3 @@
-'use server';
-
 import { emailSchema } from '../shemas/emailSchema';
 
 type FormState = {
@@ -10,7 +8,7 @@ type FormState = {
   };
 };
 
-const submitEmail = async (prevState: FormState, formData: FormData): Promise<FormState> => {
+const submitEmail = async (formData: FormData): Promise<FormState> => {
   const rawData = {
     email: formData.get('email'),
   };
@@ -23,11 +21,8 @@ const submitEmail = async (prevState: FormState, formData: FormData): Promise<Fo
     };
   }
 
-  const API_URL = process.env.API_URL;
-  if (!API_URL) throw new Error('API_URL is not defined');
-
   try {
-    const res = await fetch(`${API_URL}/api/forms/email-submissions`, {
+    const res = await fetch('/api/forms/email-submissions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

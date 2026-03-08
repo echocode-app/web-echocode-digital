@@ -3,7 +3,7 @@ import { useTranslations } from 'next-intl';
 import FooterNavigation from './FooterNavigation';
 
 import License from './License';
-import MailForm from './FooterNavigation/MailForm';
+import MailForm from './MailForm';
 
 const Footer = () => {
   const t = useTranslations('Layout.Footer');

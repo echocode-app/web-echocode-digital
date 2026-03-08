@@ -1,49 +1,60 @@
 'use client';
 
-import { startTransition, useActionState, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import SubmitArrow from './SubmitArrow';
-
-import { submitEmail } from './action/submitEmail';
-
+import { submitEmail } from './api/submitEmail';
 import { emailSchema } from './shemas/emailSchema';
 
-const initialState = {
-  success: false,
-  fieldErrors: {},
+type FormState = {
+  success?: boolean;
+  error?: string;
+  fieldErrors?: {
+    email?: string[];
+  };
 };
 
 const MailForm = () => {
-  const [state, formAction] = useActionState(submitEmail, initialState);
-
+  const [state, setState] = useState<FormState>({});
   const [localError, setLocalError] = useState<string | null>(null);
   const [showSuccess, setShowSuccess] = useState(false);
+
   const formRef = useRef<HTMLFormElement>(null);
 
   const t = useTranslations('Layout.Footer');
 
   const handleLocalValidate = (e: React.FocusEvent<HTMLInputElement>) => {
     const value = e.target.value;
+
     const result = emailSchema.safeParse({ email: value });
+
     setLocalError(result.success ? null : result.error.flatten().fieldErrors.email?.[0] || null);
   };
 
-  useEffect(() => {
-    if (!state?.success) return;
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-    startTransition(() => {
+    const formData = new FormData(e.currentTarget);
+
+    const result = await submitEmail(formData);
+
+    setState(result);
+
+    if (result.success) {
       setShowSuccess(true);
       formRef.current?.reset();
       setLocalError(null);
-    });
 
-    const timer = setTimeout(() => {
-      startTransition(() => setShowSuccess(false));
-    }, 2000);
+      setTimeout(() => {
+        setShowSuccess(false);
+      }, 2000);
+    }
+  };
 
-    return () => clearTimeout(timer);
+  useEffect(() => {
+    if (state?.success) return;
   }, [state]);
 
   const errorMessage = localError || state.fieldErrors?.email?.[0] || state.error;
@@ -51,10 +62,10 @@ const MailForm = () => {
   return (
     <form
       ref={formRef}
-      action={formAction}
+      onSubmit={handleSubmit}
       className="relative md:hidden flex justify-between items-center gap-4 w-full mb-12 pl-3.5 pr-6 py-2
-    hover:border-accent focus-within:border-accent duration-main transition-colors
-    rounded-secondary border-gray60 border"
+      hover:border-accent focus-within:border-accent duration-main transition-colors
+      rounded-secondary border-gray60 border"
     >
       <div className="relative flex flex-col gap-1 w-full no-autofill-bg">
         <label
@@ -63,19 +74,21 @@ const MailForm = () => {
         >
           {t('mailSubtitle')}
         </label>
+
         <input
           className="block text-main-xs w-full outline-none"
           id="email"
           name="email"
-          type="text"
-          defaultValue=""
+          type="email"
           placeholder="your@email.com"
           onBlur={handleLocalValidate}
         />
+
         {errorMessage && (
           <p className="absolute top-12 text-main-xs text-red-500">{errorMessage}</p>
         )}
       </div>
+
       <AnimatePresence>
         {showSuccess && (
           <motion.div
@@ -89,6 +102,7 @@ const MailForm = () => {
           </motion.div>
         )}
       </AnimatePresence>
+
       <SubmitArrow islocalError={!!localError} />
     </form>
   );
