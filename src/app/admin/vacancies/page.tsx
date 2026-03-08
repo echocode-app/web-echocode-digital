@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import VacancyManagementPanel from '@/components/admin/vacancies/VacancyManagementPanel';
 import VacanciesOverviewGrid from '@/components/admin/vacancies/VacanciesOverviewGrid';
 
 export default function AdminVacanciesPage() {
@@ -22,6 +23,7 @@ export default function AdminVacanciesPage() {
         </Link>
       </div>
       <VacanciesOverviewGrid />
+      <VacancyManagementPanel />
     </section>
   );
 }

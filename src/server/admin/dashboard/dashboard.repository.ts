@@ -23,6 +23,7 @@ import {
   getTopPortfolioItem,
   getTopVacancies,
 } from '@/server/admin/dashboard/dashboard.repository.entities';
+import { countEffectiveActiveVacancies } from '@/server/vacancies';
 import {
   buildAlerts,
   buildFunnel,
@@ -75,7 +76,7 @@ export async function getDashboardRawAggregates(
   ] = await Promise.all([
     readCount(queries.submissionsTotalQuery, 'Failed to count total submissions'),
     readCount(queries.clientSubmissionsTotalQuery, 'Failed to count total client submissions'),
-    readCount(queries.activeVacanciesQuery, 'Failed to count active vacancies'),
+    countEffectiveActiveVacancies(),
     readCount(queries.portfolioTotalQuery, 'Failed to count portfolio items'),
     readCount(queries.submissionsLast7Query, 'Failed to count submissions for last 7 days'),
     readCount(

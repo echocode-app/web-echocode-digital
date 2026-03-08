@@ -6,6 +6,17 @@ export const VACANCY_PUBLICATION_STATUS_VALUES: readonly VacancyPublicationStatu
   'archived', // history only
 ] as const;
 
+export const VACANCY_LEVEL_VALUES = [
+  'Intern',
+  'Trainee',
+  'Junior',
+  'Middle',
+  'Senior',
+  'Lead',
+  'Principal',
+  'Head',
+] as const;
+
 export const VACANCY_ANALYTICS_ID_KEYS = [
   'vacancyId', // canonical id
   'vacancySlug', // route slug

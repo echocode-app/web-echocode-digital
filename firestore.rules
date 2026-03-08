@@ -90,7 +90,10 @@ service cloud.firestore {
           'summary',
           'description',
           'tags',
-          'language'
+          'language',
+          'level',
+          'isHot',
+          'updatedBy'
         ]) &&
         data.title is string &&
         data.slug is string &&
@@ -102,7 +105,10 @@ service cloud.firestore {
         optionalString(data, 'summary') &&
         optionalString(data, 'description') &&
         optionalList(data, 'tags') &&
-        optionalString(data, 'language');
+        optionalString(data, 'language') &&
+        optionalString(data, 'level') &&
+        optionalBool(data, 'isHot') &&
+        optionalString(data, 'updatedBy');
     }
 
     function isValidPortfolioShape(data) {

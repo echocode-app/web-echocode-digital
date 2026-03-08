@@ -24,6 +24,7 @@ async function fetchDashboardOverview(
 export function useDashboardOverview(period: DashboardPeriod = 'week') {
   const [overview, setOverview] = useState<DashboardOverviewDto | null>(null);
   const [state, setState] = useState<DashboardOverviewLoadState>('loading');
+  const [refreshTick, setRefreshTick] = useState(0);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -41,7 +42,14 @@ export function useDashboardOverview(period: DashboardPeriod = 'week') {
       });
 
     return () => controller.abort();
-  }, [period]);
+  }, [period, refreshTick]);
+
+  useEffect(() => {
+    const refresh = () => setRefreshTick((prev) => prev + 1);
+
+    window.addEventListener('admin-dashboard-refresh', refresh);
+    return () => window.removeEventListener('admin-dashboard-refresh', refresh);
+  }, []);
 
   return { overview, state };
 }
