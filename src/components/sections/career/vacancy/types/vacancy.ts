@@ -29,3 +29,12 @@ export interface SelectionStep {
   subTitle: string;
   desc: string;
 }
+
+export interface VacancyData {
+  vacancyId: string;
+  vacancySlug?: string;
+  vacancyTitle?: string;
+  level?: string;
+  conditions?: string[];
+  employmentType?: string;
+}

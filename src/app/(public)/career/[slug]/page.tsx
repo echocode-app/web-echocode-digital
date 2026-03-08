@@ -6,9 +6,9 @@ import HeroSection from '@/components/sections/career/vacancy/HeroSection';
 import ValueSection from '@/components/sections/career/vacancy/ValueSection';
 import DescriptionSections from '@/components/sections/career/vacancy/DescriptionSection';
 import SelectionSection from '@/components/sections/career/vacancy/SelectionSection';
-import VacancyForm from '@/components/sections/career/vacancy/VacancyForm';
 
 import { Vacancy } from '@/components/sections/career/VacanciesSection/types/vacancies';
+import CandidateSection from '@/components/sections/career/vacancy/CandidateSection';
 
 const vacancies: Vacancy[] = [
   {
@@ -55,7 +55,7 @@ const VacancyPage = async ({ params }: VacancyPageProps) => {
   const { vacancyTitle, level, employmentType, vacancyId, vacancySlug, conditions } = vacancy;
   const { heroSection, valueSection, descriptionSections, selectionSection } = careerData;
 
-  const formData = {
+  const vacancyData = {
     vacancyId,
     vacancySlug,
     vacancyTitle,
@@ -77,7 +77,7 @@ const VacancyPage = async ({ params }: VacancyPageProps) => {
         <DescriptionSections key={i} title={title} values={values} />
       ))}
       <SelectionSection selectionList={selectionSection} />
-      <VacancyForm vacancyData={formData} />
+      <CandidateSection vacancyData={vacancyData} />
     </>
   );
 };

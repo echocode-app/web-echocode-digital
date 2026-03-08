@@ -1,8 +1,9 @@
 import { useTranslations } from 'next-intl';
 
 import FooterNavigation from './FooterNavigation';
-import Arrow from './Arrow';
+
 import License from './License';
+import MailForm from './FooterNavigation/MailForm';
 
 const Footer = () => {
   const t = useTranslations('Layout.Footer');
@@ -26,19 +27,8 @@ const Footer = () => {
         <strong className="md:hidden block mb-2 font-medium leading-none text-[12px]">
           {t('mailTitle')}
         </strong>
-        <button
-          className="md:hidden flex justify-between items-center w-full mb-12 pl-3.5 pr-6 py-2 
-           hover:border-accent focus:border-accent duration-main transition-colors
-        rounded-secondary border-gray60 border cursor-pointer"
-        >
-          <div>
-            <p className="font-title text-[10px] text-left leading-[1.4] tracking-[0.4px]">
-              {t('mailSubtitle')}
-            </p>
-            <span className="text-main-xs  text-primary-gray">tamplate@mail.com</span>
-          </div>
-          <Arrow />
-        </button>
+
+        <MailForm />
         <FooterNavigation />
         <License />
       </div>

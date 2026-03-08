@@ -11,7 +11,11 @@ type ContactUsFormProps = {
   onSubmitStateChange?: (state: SubmitState) => void;
 };
 
-const ContactUsForm = ({ onSuccessNavigate, onAutoClose, onSubmitStateChange }: ContactUsFormProps) => {
+const ContactUsForm = ({
+  onSuccessNavigate,
+  onAutoClose,
+  onSubmitStateChange,
+}: ContactUsFormProps) => {
   const {
     values,
     errors,
@@ -80,13 +84,17 @@ const ContactUsForm = ({ onSuccessNavigate, onAutoClose, onSubmitStateChange }: 
         />
       </div>
       <div className="min-h-5 mb-1" aria-live="polite">
-        <p className={`text-main-xs text-[#ff8d8d] transition-opacity duration-main ${errors.form ? 'opacity-100' : 'opacity-0'}`}>
+        <p
+          className={`text-main-xs text-[#ff8d8d] transition-opacity duration-main ${errors.form ? 'opacity-100' : 'opacity-0'}`}
+        >
           {errors.form ?? ' '}
         </p>
       </div>
       <SubmitButton state={submitState} />
       <div className="min-h-7 pt-4 lg:pt-8 text-center" aria-live="polite">
-        <p className={`font-title text-title-sm text-accent transition-opacity duration-main ${submitState === 'success' ? 'opacity-100' : 'opacity-0'}`}>
+        <p
+          className={`font-title text-title-sm text-accent transition-opacity duration-main ${submitState === 'success' ? 'opacity-100' : 'opacity-0'}`}
+        >
           THANK YOU!
         </p>
       </div>
