@@ -1,3 +1,5 @@
+'use client';
+
 import ErrorLayout from '@/components/errors/ErrorLayout';
 import ErrorPage from '@/components/errors/ErrorPage';
 
