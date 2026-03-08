@@ -1,5 +1,3 @@
-import { emailSchema } from '../shemas/emailSchema';
-
 type FormState = {
   success?: boolean;
   error?: string;
@@ -9,28 +7,12 @@ type FormState = {
 };
 
 const submitEmail = async (formData: FormData): Promise<FormState> => {
-  const rawData = {
-    email: formData.get('email'),
-  };
-
-  const result = emailSchema.safeParse(rawData);
-
-  if (!result.success) {
-    return {
-      fieldErrors: result.error.flatten().fieldErrors,
-    };
-  }
-
   try {
+    const email = formData.get('email');
     const res = await fetch('/api/forms/email-submissions', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: result.data.email,
-        source: 'footer-mobile',
-      }),
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, source: 'footer-mobile' }),
     });
 
     if (!res.ok) throw new Error('Request failed');
