@@ -30,6 +30,8 @@ tags:
     description: Footer email moderation queue.
   - name: Admin Vacancy Candidates
     description: Canonical vacancy candidates moderation queue.
+  - name: Admin Vacancies
+    description: Manage public vacancy visibility and metadata.
   - name: Admin Vacancy Submissions
     description: Legacy compatibility alias for vacancy candidates queue.
 security:
@@ -102,6 +104,10 @@ paths:
 
   /api/admin/vacancies/candidates:
     $ref: './paths/admin-vacancies-candidates.yaml#/~1api~1admin~1vacancies~1candidates'
+  /api/admin/vacancies:
+    $ref: './paths/admin-vacancies.yaml#/~1api~1admin~1vacancies'
+  /api/admin/vacancies/{vacancyId}:
+    $ref: './paths/admin-vacancies.yaml#/~1api~1admin~1vacancies~1{vacancyId}'
   /api/admin/vacancies/candidates/overview:
     $ref: './paths/admin-vacancies-candidates.yaml#/~1api~1admin~1vacancies~1candidates~1overview'
   /api/admin/vacancies/candidates/{submissionId}:

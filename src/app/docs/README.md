@@ -260,6 +260,7 @@ Environment policy:
 - `read` для `admin` або публічно лише якщо `isPublished == true`
 - `write` тільки для `admin`
 - immutable поле: `slug`
+- керовані business-поля: `level`, `isHot`
 - `portfolio/{id}`:
 - `read` для `admin` або публічно лише якщо `isPublished == true`
 - `write` тільки для `admin`
