@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-const VacancyImage = () => {
+const CandidateImage = () => {
   return (
     <div className="absolute left-1/2 -translate-x-1/2 translate-y-15 xl:translate-0 xl:left-84 xl:top-2">
       <div className="relative w-74 h-49.5">
@@ -16,4 +16,4 @@ const VacancyImage = () => {
   );
 };
 
-export default VacancyImage;
+export default CandidateImage;
