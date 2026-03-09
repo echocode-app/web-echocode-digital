@@ -14,9 +14,7 @@ const PortfolioSection = () => {
     <section className="pb-10 md:pb-25">
       <SectionGradientLine height="1" />
       <SectionContainer>
-        <div className="mb-2">
-          <SectionTitle>{t('title')}</SectionTitle>
-        </div>
+        <SectionTitle marginBottom="8px">{t('title')}</SectionTitle>
         <p className="max-w-146.5 mb-10 text-main-sm">{t('subtitle')}</p>
         <PortfolioList list={projects} />
       </SectionContainer>

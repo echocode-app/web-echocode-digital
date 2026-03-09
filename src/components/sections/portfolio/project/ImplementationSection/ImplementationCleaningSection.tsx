@@ -10,9 +10,7 @@ const ImplementationCleaningSection = () => {
     <section className="pb-10 md:pb-31">
       <SectionGradientLine height="1" />
       <SectionContainer>
-        <div className="mb-10">
-          <SectionTitle>Implementation</SectionTitle>
-        </div>
+        <SectionTitle marginBottom="40px">Implementation</SectionTitle>
         <div className="flex gap-10 lg:gap-0 flex-col lg:flex-row items-center lg:justify-between">
           <div className="relative aspect-426/324 w-full min-[458px]:w-106.5 min-[458px]:h-81">
             <Image

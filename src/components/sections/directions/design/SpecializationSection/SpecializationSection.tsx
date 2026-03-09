@@ -8,9 +8,7 @@ const SpecializationSection = () => {
     <section className="pb-10 md:pb-25">
       <SectionGradientLine height="1" />
       <SectionContainer>
-        <div className="mb-8">
-          <SectionTitle>Specialization</SectionTitle>
-        </div>
+        <SectionTitle marginBottom="32px">Specialization</SectionTitle>
         <SpecializationList />
       </SectionContainer>
     </section>

@@ -17,9 +17,7 @@ const ChallengesSection = ({ list, image, position }: ChallengesSectionProps) =>
       <SectionContainer>
         <div className="flex justify-center lg:justify-between">
           <div className="max-w-141.5">
-            <div className="mb-6">
-              <SectionTitle>Challenges We Solved</SectionTitle>
-            </div>
+            <SectionTitle marginBottom="24px">Challenges We Solved</SectionTitle>
             <ChallengesList list={list} />
           </div>
           <div className="hidden lg:block relative aspect-394/504 w-full min-[458px]:w-98.5 min-[458px]:h-126">

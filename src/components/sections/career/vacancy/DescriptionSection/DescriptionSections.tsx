@@ -10,9 +10,7 @@ const DescriptionSections = ({ title, values }: DescriptionSection) => {
     <section className="pb-10 md:pb-25">
       <SectionGradientLine height="1" />
       <SectionContainer>
-        <div className="mb-10">
-          <SectionTitle>{title}</SectionTitle>
-        </div>
+        <SectionTitle marginBottom="40px">{title}</SectionTitle>
         <DescriptionList list={values} />
       </SectionContainer>
     </section>

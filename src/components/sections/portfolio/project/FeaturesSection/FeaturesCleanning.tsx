@@ -7,8 +7,8 @@ const FeaturesCleanning = () => {
     <section className="pb-10 md:pb-25">
       <SectionGradientLine height="1" />
       <SectionContainer>
-        <div className="mb-10 text-[#E3E4E6]">
-          <SectionTitle>Main Features of the Project</SectionTitle>
+        <div className="text-[#E3E4E6]">
+          <SectionTitle marginBottom="40px">Main Features of the Project</SectionTitle>
         </div>
         <div className="flex flex-wrap justify-center  items-end gap-6">
           <div className="flex flex-col gap-3 max-w-122 w-full">

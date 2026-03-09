@@ -17,9 +17,7 @@ const ImplementationSection = ({ subtitle, list }: ImplementationSectionProps) =
     <section className="pb-10 md:pb-31">
       <SectionGradientLine height="1" />
       <SectionContainer>
-        <div className="mb-2.5">
-          <SectionTitle>Implementation</SectionTitle>
-        </div>
+        <SectionTitle marginBottom="10px">Implementation</SectionTitle>
         <p className="text-main-sm mb-10">{subtitle}</p>
         <ImplementationList list={list} />
       </SectionContainer>

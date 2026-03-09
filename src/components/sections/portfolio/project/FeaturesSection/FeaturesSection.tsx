@@ -12,8 +12,8 @@ const FeaturesSection = ({ list }: FeaturesSectionProps) => {
     <section className="pb-10 md:pb-25">
       <SectionGradientLine height="1" />
       <SectionContainer>
-        <div className="mb-10 text-[#E3E4E6]">
-          <SectionTitle>Main Features of the Project</SectionTitle>
+        <div className="text-[#E3E4E6]">
+          <SectionTitle marginBottom="40px">Main Features of the Project</SectionTitle>
         </div>
         <FeaturesList list={list} />
       </SectionContainer>

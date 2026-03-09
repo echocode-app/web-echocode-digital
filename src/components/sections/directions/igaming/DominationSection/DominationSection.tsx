@@ -7,9 +7,7 @@ const DominationSection = () => {
   return (
     <section className="pb-10">
       <SectionContainer>
-        <div className="mb-2.5">
-          <SectionTitle>ASO: Dominate the Search Results</SectionTitle>
-        </div>
+        <SectionTitle marginBottom="10px">ASO: Dominate the Search Results</SectionTitle>
         <p className="text-main-sm mb-12">
           We transform visibility into real installs. Our ASO strategy is a blend of precise data,
           user psychology, and a deep understanding of App Store and Google Play algorithms.

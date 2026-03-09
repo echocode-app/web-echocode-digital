@@ -9,9 +9,7 @@ const ModerationSection = () => {
     <section className="pb-10 md:pb-25">
       <SectionGradientLine height="1" />
       <SectionContainer>
-        <div className="mb-2.5">
-          <SectionTitle>Pass moderation fast</SectionTitle>
-        </div>
+        <SectionTitle marginBottom="10px">Pass moderation fast</SectionTitle>
         <p className="mb-10 text-main-sm">
           App Store or Google Play rejection means weeks of downtime and lost budget. We know the
           pitfalls of Apple and Google guidelines, preparing your product for approval in advance.

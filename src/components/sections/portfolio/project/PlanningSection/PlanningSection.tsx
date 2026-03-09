@@ -20,9 +20,7 @@ const PlanningSection = ({ list, image, imageStyle }: PlanningSectionProps) => {
             <Image src={image} alt="Planning" fill className="object-cover rounded-secondary" />
           </div>
           <div>
-            <div className="mb-6">
-              <SectionTitle>Planning</SectionTitle>
-            </div>
+            <SectionTitle marginBottom="24px">Planning</SectionTitle>
             <PlanningList list={list} />
           </div>
         </div>

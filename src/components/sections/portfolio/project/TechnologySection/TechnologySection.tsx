@@ -12,9 +12,7 @@ const TechnologySection = ({ list }: TechnologySectionProps) => {
     <section className="pb-10 md:pb-0">
       <SectionGradientLine height="1" />
       <SectionContainer>
-        <div className="mb-10">
-          <SectionTitle>Technology Stack</SectionTitle>
-        </div>
+        <SectionTitle marginBottom="40px">Technology Stack</SectionTitle>
         <TechnologyList list={list} />
       </SectionContainer>
     </section>

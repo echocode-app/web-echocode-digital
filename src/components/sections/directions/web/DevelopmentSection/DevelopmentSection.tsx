@@ -8,9 +8,7 @@ const DevelopmentSection = () => {
     <section className="pb-10 md:pb-6">
       <SectionGradientLine height="1" />
       <SectionContainer>
-        <div className="mb-10">
-          <SectionTitle>DEVELOPMENT CYCLE</SectionTitle>
-        </div>
+        <SectionTitle marginBottom="40px">DEVELOPMENT CYCLE</SectionTitle>
         <DevelopmentList />
       </SectionContainer>
     </section>

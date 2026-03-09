@@ -8,9 +8,7 @@ const TransparencySection = () => {
     <section className="pb-10 md:pb-0">
       <SectionGradientLine height="1" />
       <SectionContainer>
-        <div className="mb-1">
-          <SectionTitle>Transparency</SectionTitle>
-        </div>
+        <SectionTitle marginBottom="4px">Transparency</SectionTitle>
         <p className="mb-8 text-[20px]">NO BLACK BOX.</p>
         <TransparencyList />
       </SectionContainer>

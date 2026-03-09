@@ -7,9 +7,7 @@ const PhilosophySection = () => {
       <SectionContainer>
         <div className="flex flex-wrap gap-10 lg:gap-3 justify-center">
           <div className="max-w-127">
-            <div className="mb-2.5">
-              <SectionTitle>Team Philosophy</SectionTitle>
-            </div>
+            <SectionTitle marginBottom="10px">Team Philosophy</SectionTitle>
             <p className="max-w-105 text-main-sm mb-5">
               Great products are not created by isolated developers. They are built by small,
               focused, cross-functional teams.

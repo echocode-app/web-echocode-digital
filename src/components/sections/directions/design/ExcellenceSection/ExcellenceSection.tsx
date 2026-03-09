@@ -13,9 +13,7 @@ const ExcellenceSection = () => {
         <SectionGradientLine height="1" />
       </div>
       <SectionContainer>
-        <div className="mb-2.5">
-          <SectionTitle>Our path to excellence</SectionTitle>
-        </div>
+        <SectionTitle marginBottom="10px">Our path to excellence</SectionTitle>
         <p className="text-main-sm mb-10">
           Every stage is backed by data and analytics, ensuring a predictable and scalable result
           for your product

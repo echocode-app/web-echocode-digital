@@ -9,9 +9,7 @@ const MetricsSection = () => {
     <section className="pb-10 md:pb-2.5">
       <SectionGradientLine height="1" />
       <SectionContainer>
-        <div className="mb-10">
-          <SectionTitle>We Measure Success with Metrics</SectionTitle>
-        </div>
+        <SectionTitle marginBottom="40px">We Measure Success with Metrics</SectionTitle>
         <div className="flex flex-col lg:flex-row gap-10 lg:gap-0 items-center justify-between">
           <MetricsList />
           <MetricsImage />

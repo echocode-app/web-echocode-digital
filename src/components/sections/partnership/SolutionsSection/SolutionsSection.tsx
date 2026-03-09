@@ -8,9 +8,7 @@ const SolutionsSection = () => {
     <section className="pb-10 md:pb-4.5">
       <SectionGradientLine height="1" />
       <SectionContainer>
-        <div className="mb-10">
-          <SectionTitle>Data-Driven Solutions</SectionTitle>
-        </div>
+        <SectionTitle marginBottom="40px">Data-Driven Solutions</SectionTitle>
         <SolutionsList />
       </SectionContainer>
     </section>

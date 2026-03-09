@@ -14,9 +14,7 @@ const LocationSection = () => {
     <section className="pb-18.5 md:pb-4">
       <SectionGradientLine height="1" />
       <SectionContainer>
-        <div className="mb-2">
-          <SectionTitle>{t('title')}</SectionTitle>
-        </div>
+        <SectionTitle marginBottom="8px">{t('title')}</SectionTitle>
         <p className={`mb-10 ${enStyle} text-main-sm`}>{t('subtitle')}</p>
         <LocationList />
       </SectionContainer>

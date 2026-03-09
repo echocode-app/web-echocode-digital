@@ -8,9 +8,7 @@ const CoreSection = () => {
     <section className="pb-10 md:pb-25">
       <SectionGradientLine height="1" />
       <SectionContainer>
-        <div className="mb-10">
-          <SectionTitle>CORE SOLUTIONS</SectionTitle>
-        </div>
+        <SectionTitle marginBottom="40px">CORE SOLUTIONS</SectionTitle>
         <ul className="flex gap-6 justify-center flex-wrap">
           <CoreItem
             title={'ENTERPRISE SYSTEMS'}

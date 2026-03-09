@@ -12,9 +12,7 @@ const EngineeringSection = () => {
     <section className="mb-9">
       <SectionGradientLine height="1" />
       <SectionContainer>
-        <div className="mb-2.5">
-          <SectionTitle>ENGINEERING STANDARDS</SectionTitle>
-        </div>
+        <SectionTitle marginBottom="10px">ENGINEERING STANDARDS</SectionTitle>
         <p className="mb-10 text-main-sm">
           {"WE DON'T JUST BUILD APPLICATIONS; WE BUILD DIGITAL FORTRESSES."}
         </p>

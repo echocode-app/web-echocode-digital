@@ -12,9 +12,7 @@ const FoundationSection = () => {
         <div className="flex flex-col lg:flex-row items-center lg:justify-between">
           <FoundationImage />
           <div className="max-w-120">
-            <div className="mb-8">
-              <SectionTitle>The Foundation of Our Confidence</SectionTitle>
-            </div>
+            <SectionTitle marginBottom="32px">The Foundation of Our Confidence</SectionTitle>
             <FoundationList />
           </div>
         </div>

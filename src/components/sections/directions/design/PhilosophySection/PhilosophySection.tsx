@@ -6,9 +6,7 @@ const PhilosophySection = () => {
   return (
     <section className="pt-16 pb-20 md:pb-25">
       <SectionContainer>
-        <div className="mb-10">
-          <SectionTitle>PHILOSOPHY</SectionTitle>
-        </div>
+        <SectionTitle marginBottom="40px">PHILOSOPHY</SectionTitle>
         <PhilosophyList />
       </SectionContainer>
     </section>

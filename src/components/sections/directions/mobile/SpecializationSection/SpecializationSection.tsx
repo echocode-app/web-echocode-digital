@@ -15,9 +15,7 @@ const SpecializationSection = () => {
         <div className="flex flex-wrap justify-center lg:justify-between">
           <div className="lg:w-120">
             <div className="max-w-120">
-              <div className="mb-2.5">
-                <SectionTitle>PROFESSIONAL SPECIALIZATION</SectionTitle>
-              </div>
+              <SectionTitle marginBottom="10px">PROFESSIONAL SPECIALIZATION</SectionTitle>
               <p className=" md:mb-10 text-main-xs sm:text-main-sm">
                 We are focused on building products that deliver predictable results. Our expertise
                 spans complex technical solutions and efficient monetization models.

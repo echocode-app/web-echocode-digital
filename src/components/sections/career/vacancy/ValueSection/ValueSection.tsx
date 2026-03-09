@@ -10,9 +10,7 @@ const ValueSection = ({ title, subtitle }: ValueSectionProps) => {
   return (
     <section className="pt-10 pb-10 md:pb-27">
       <SectionContainer>
-        <div className="mb-2.5">
-          <SectionTitle>{title}</SectionTitle>
-        </div>
+        <SectionTitle marginBottom="10px">{title}</SectionTitle>
         <p className="text-main-sm">{subtitle}</p>
       </SectionContainer>
     </section>

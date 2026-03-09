@@ -13,9 +13,7 @@ const SelectionSection = ({ selectionList }: SelectionSectionProps) => {
     <section className="pb-10 md:pb-30.5">
       <SectionGradientLine height="1" />
       <SectionContainer>
-        <div className="mb-18">
-          <SectionTitle>Selection stages</SectionTitle>
-        </div>
+        <SectionTitle marginBottom="72px">Selection stages</SectionTitle>
         <SelectionList list={selectionList} />
       </SectionContainer>
     </section>
