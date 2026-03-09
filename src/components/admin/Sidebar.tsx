@@ -78,7 +78,6 @@ export default function Sidebar({ role, isMobileOpen = false, onCloseMobile }: S
       visible: true,
       parentHref: '/admin/submissions',
     },
-    { href: '/admin/portfolio', label: 'Portfolio', visible: true },
     { href: '/admin/vacancies', label: 'Vacancies', visible: true },
     {
       href: '/admin/vacancies/candidates',
@@ -86,6 +85,7 @@ export default function Sidebar({ role, isMobileOpen = false, onCloseMobile }: S
       visible: true,
       parentHref: '/admin/vacancies',
     },
+    { href: '/admin/portfolio', label: 'Portfolio', visible: true },
     { href: '/admin/logs', label: 'Logs', visible: role === 'developer' },
     { href: '/admin/info', label: 'Info', visible: true },
   ];

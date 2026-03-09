@@ -108,6 +108,12 @@ paths:
     $ref: './paths/admin-vacancies.yaml#/~1api~1admin~1vacancies'
   /api/admin/vacancies/{vacancyId}:
     $ref: './paths/admin-vacancies.yaml#/~1api~1admin~1vacancies~1{vacancyId}'
+  /api/admin/portfolio:
+    $ref: './paths/admin-portfolio.yaml#/~1api~1admin~1portfolio'
+  /api/admin/portfolio/image/init:
+    $ref: './paths/admin-portfolio.yaml#/~1api~1admin~1portfolio~1image~1init'
+  /api/admin/portfolio/{projectId}:
+    $ref: './paths/admin-portfolio.yaml#/~1api~1admin~1portfolio~1{projectId}'
   /api/admin/vacancies/candidates/overview:
     $ref: './paths/admin-vacancies-candidates.yaml#/~1api~1admin~1vacancies~1candidates~1overview'
   /api/admin/vacancies/candidates/{submissionId}:

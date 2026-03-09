@@ -124,7 +124,13 @@ service cloud.firestore {
           'stack',
           'industry',
           'coverImage',
-          'gallery'
+          'gallery',
+          'image',
+          'imagePath',
+          'platforms',
+          'categories',
+          'entryType',
+          'updatedBy'
         ]) &&
         data.title is string &&
         data.slug is string &&
@@ -136,7 +142,13 @@ service cloud.firestore {
         optionalList(data, 'stack') &&
         optionalString(data, 'industry') &&
         optionalString(data, 'coverImage') &&
-        optionalList(data, 'gallery');
+        optionalList(data, 'gallery') &&
+        optionalString(data, 'image') &&
+        optionalString(data, 'imagePath') &&
+        optionalList(data, 'platforms') &&
+        optionalList(data, 'categories') &&
+        optionalString(data, 'entryType') &&
+        optionalString(data, 'updatedBy');
     }
 
     function isPubliclyReadableContent(data) {

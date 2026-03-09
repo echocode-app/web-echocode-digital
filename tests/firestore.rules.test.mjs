@@ -184,6 +184,11 @@ async function run() {
         title: 'Project Alpha',
         slug: 'project-alpha',
         createdAt: now,
+        image: '/images/portfolio/projects/dummy.png',
+        platforms: ['ios', 'android'],
+        categories: ['utility'],
+        entryType: 'preview_card',
+        updatedBy: 'admin-uid',
       }),
     );
     await assertFails(
@@ -195,6 +200,10 @@ async function run() {
     await assertSucceeds(
       updateDoc(doc(adminDb, 'portfolio/p1'), {
         summary: 'Cross-platform cleaning marketplace',
+        image: '/images/portfolio/projects/food.png',
+        platforms: ['ios', 'android', 'web'],
+        categories: ['utility', 'health'],
+        updatedBy: 'admin-uid',
         updatedAt: new Date(),
       }),
     );

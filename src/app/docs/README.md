@@ -35,6 +35,12 @@
 - `docs/openapi/openapi.yaml` - OpenAPI contract for all active API routes.
 - `docs/openapi/SCENARIOS.md` - most common frontend/backend integration scenarios.
 - `src/app/docs/SUBMISSIONS_INTEGRATION_HANDOFF.md` - practical integration checklist for frontend.
+- admin portfolio preview flow:
+- `GET /api/admin/portfolio` - list dynamic preview cards
+- `POST /api/admin/portfolio/image/init` - init signed upload URL for portfolio image
+- `POST /api/admin/portfolio` - create dynamic preview card using uploaded image metadata
+- `DELETE /api/admin/portfolio/{projectId}` - delete dynamic preview card
+- `slug`/internal id for dynamic preview cards is generated automatically from the title on the server
 - canonical vacancy candidates moderation namespace: `/api/admin/vacancies/candidates/*`
 - legacy compatibility alias remains available: `/api/admin/submissions/vacancies/*` (deprecated)
 - local/open-app documentation route: `/docs/api`
@@ -265,6 +271,7 @@ Environment policy:
 - `read` для `admin` або публічно лише якщо `isPublished == true`
 - `write` тільки для `admin`
 - immutable поле: `slug`
+- dynamic preview cards may additionally store: `image`, `imagePath`, `platforms`, `categories`, `entryType`, `updatedBy`
 - `_internal_firebase_checks/{id}`: повний deny для client SDK
 - fallback `/{document=**}`: deny all
 
@@ -288,6 +295,7 @@ Environment policy:
 - `create`: `admin` / `developer` / `manager`
 - `replace/delete`: тільки `admin` / `developer`
 - тільки зображення, максимум `5MB`
+- current admin portfolio preview implementation initializes uploads under `uploads/portfolio/drafts/{generatedId}` and stores the resulting public image URL + storage path in Firestore
 
 - `uploads/vacancies/{vacancyId}/{fileName}`
 - `read`: публічний

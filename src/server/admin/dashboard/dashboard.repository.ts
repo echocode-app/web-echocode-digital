@@ -23,6 +23,7 @@ import {
   getTopPortfolioItem,
   getTopVacancies,
 } from '@/server/admin/dashboard/dashboard.repository.entities';
+import { countEffectivePortfolioItems } from '@/server/portfolio';
 import { countEffectiveActiveVacancies } from '@/server/vacancies';
 import {
   buildAlerts,
@@ -77,7 +78,7 @@ export async function getDashboardRawAggregates(
     readCount(queries.submissionsTotalQuery, 'Failed to count total submissions'),
     readCount(queries.clientSubmissionsTotalQuery, 'Failed to count total client submissions'),
     countEffectiveActiveVacancies(),
-    readCount(queries.portfolioTotalQuery, 'Failed to count portfolio items'),
+    countEffectivePortfolioItems(),
     readCount(queries.submissionsLast7Query, 'Failed to count submissions for last 7 days'),
     readCount(
       queries.clientSubmissionsLast7Query,
