@@ -1,0 +1,86 @@
+{
+  "VacancyIOSPage": {
+    "valueSection": {
+      "title": "Coding that grows with you",
+      "subtitle": "Echocode.app is looking for an ambitious Trainee iOS Developer ready to ditch \"code for the sake of code\" in favor of building profit-generating products. We work in the mobile app niche for the global market, so millions will see your code."
+    },
+    "descriptionSections": {
+      "section01": {
+        "title": "What will you be working on?",
+        "val01": {
+          "title": "Real-world Experience:",
+          "desc": "Working on live products, not academic or dummy tasks."
+        },
+        "val02": {
+          "title": "Mentorship:",
+          "desc": "Direct access to Senior engineers who will help you grow to Junior in months."
+        },
+        "val03": {
+          "title": "Product Mindset:",
+          "desc": "We will teach you to understand metrics, Retention, and monetization."
+        },
+        "val04": {
+          "title": "Full Remote ＆ Flexibility:",
+          "desc": "Work from wherever you are, result is what matters."
+        }
+      },
+      "section02": {
+        "title": "Requirements (The Essentials)",
+        "val01": {
+          "title": "Swift ＆ OOP Fundamentals",
+          "desc": "Basic proficiency in Swift and understanding of OOP principles."
+        },
+        "val02": {
+          "title": "UIKit Knowledge (SwiftUI Plus)",
+          "desc": "Knowledge of UIKit basics (SwiftUI is a big plus)."
+        },
+        "val03": {
+          "title": "Mobile App Architecture Basics",
+          "desc": "Understanding of how a mobile app works (View lifecycle, API interaction)."
+        },
+        "val04": {
+          "title": "Product Mindset",
+          "desc": "Desire to understand \"why\" we build a feature, not just \"how\" to code it."
+        }
+      },
+      "section03": {
+        "title": "Your Skills Stack",
+        "val01": {
+          "title": "Pet Projects ／ Xcode Practice",
+          "desc": "Personal pet-projects or Xcode experience."
+        },
+        "val02": {
+          "title": "Architecture Basics (MVVM)",
+          "desc": "Basic knowledge of architectures (MVVM)."
+        },
+        "val03": {
+          "title": "Git Fundamentals",
+          "desc": "Understanding of Git."
+        }
+      }
+    },
+    "selectionSection": {
+      "title": "Selection stages",
+      "step01": {
+        "title": "Step 01",
+        "subTitle": "Review (CV ＆ GitHub)",
+        "desc": "Evaluating your experience, stack, and code quality for perfect role alignment."
+      },
+      "step02": {
+        "title": "Step 02",
+        "subTitle": "Test Task",
+        "desc": "A practical challenge designed to showcase your logic, problem-solving skills, and architectural thinking."
+      },
+      "step03": {
+        "title": "Step 03",
+        "subTitle": "Technical Interview",
+        "desc": "A deep dive into your expertise, decisions, and experience with systems."
+      },
+      "step04": {
+        "title": "Step 04",
+        "subTitle": "Offer",
+        "desc": "Finalizing terms and presenting a clear, transparent proposal for our future collaboration."
+      }
+    }
+  }
+}

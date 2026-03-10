@@ -1,92 +1,93 @@
 {
+  "translateKey": "VacancyQAPage",
   "heroSection": {
     "image": { "path": "/images/rabbits/hero/vacancy/qa.png" }
   },
   "valueSection": {
-    "title": "QA that proves its value",
-    "subtitle": "Design at Echocode is not just about visuals, it's about hypotheses that turn into revenue. We are looking for a designer with a strong analytical approach who can defend their decisions based on data and user experience."
+    "title": "valueSection.title",
+    "subtitle": "valueSection.subtitle"
   },
   "descriptionSections": [
     {
-      "title": "What will you be working on?",
+      "title": "descriptionSections.section01.title",
       "values": [
         {
-          "title": "End-to-end Quality:",
-          "desc": "Full cycle testing of complex mobile and web products."
+          "title": "descriptionSections.section01.val01.title",
+          "desc": "descriptionSections.section01.val01.desc"
         },
         {
-          "title": "Process Ownership:",
-          "desc": "Building and optimizing QA processes within product squads."
+          "title": "descriptionSections.section01.val02.title",
+          "desc": "descriptionSections.section01.val02.desc"
         },
         {
-          "title": "Data-Driven QA:",
-          "desc": "Working with stability metrics and analyzing root causes of production defects."
+          "title": "descriptionSections.section01.val03.title",
+          "desc": "descriptionSections.section01.val03.desc"
         },
         {
-          "title": "Automation Advocacy:",
-          "desc": "Opportunity to implement automated tests to speed up CI/CD."
+          "title": "descriptionSections.section01.val04.title",
+          "desc": "descriptionSections.section01.val04.desc"
         }
       ]
     },
     {
-      "title": "Expertise Requirements",
+      "title": "descriptionSections.section02.title",
       "values": [
         {
-          "title": "Cross-Platform Testing Experience",
-          "desc": "2+ years of experience in Mobile (iOS/Android) and Web testing."
+          "title": "descriptionSections.section02.val01.title",
+          "desc": "descriptionSections.section02.val01.desc"
         },
         {
-          "title": "Client–Server ＆ API Knowledge",
-          "desc": "Deep understanding of client-server architecture and API interaction (Postman/Charles)."
+          "title": "descriptionSections.section02.val02.title",
+          "desc": "descriptionSections.section02.val02.desc"
         },
         {
-          "title": "Crash ＆ Analytics Tools",
-          "desc": "Experience with Crashlytics, Firebase, and analytics tools."
+          "title": "descriptionSections.section02.val03.title",
+          "desc": "descriptionSections.section02.val03.desc"
         },
         {
-          "title": "SDLC ＆ Agile Process Understanding",
-          "desc": "Understanding of SDLC and Agile methodologies."
+          "title": "descriptionSections.section02.val04.title",
+          "desc": "descriptionSections.section02.val04.desc"
         }
       ]
     },
     {
-      "title": "We Value",
+      "title": "descriptionSections.section03.title",
       "values": [
         {
-          "title": "Detail-Oriented ＆ Analytical",
-          "desc": "Attention to detail and critical thinking."
+          "title": "descriptionSections.section03.val01.title",
+          "desc": "descriptionSections.section03.val01.desc"
         },
         {
-          "title": "Clear Communication ＆ Problem Solving",
-          "desc": "Ability to clearly communicate problems and propose solutions."
+          "title": "descriptionSections.section03.val02.title",
+          "desc": "descriptionSections.section03.val02.desc"
         },
         {
-          "title": "Fintech ／ High-Load Product Experience",
-          "desc": "Experience in Fintech or high-load products."
+          "title": "descriptionSections.section03.val03.title",
+          "desc": "descriptionSections.section03.val03.desc"
         }
       ]
     }
   ],
   "selectionSection": [
     {
-      "title": "Step 01",
-      "subTitle": "Screening call",
-      "desc": "We assess your SDLC knowledge, prioritization, and ability to identify product vulnerabilities."
+      "title": "selectionSection.step01.title",
+      "subTitle": "selectionSection.step01.subTitle",
+      "desc": "selectionSection.step01.desc"
     },
     {
-      "title": "Step 02",
-      "subTitle": "Practical test case analysis",
-      "desc": "Evaluating tests, hypotheses, and constraints."
+      "title": "selectionSection.step02.title",
+      "subTitle": "selectionSection.step02.subTitle",
+      "desc": "selectionSection.step02.desc"
     },
     {
-      "title": "Step 03",
-      "subTitle": "Tech Interview",
-      "desc": "Deep dive into testing methodologies, toolsets, and Agile integration experience."
+      "title": "selectionSection.step03.title",
+      "subTitle": "selectionSection.step03.subTitle",
+      "desc": "selectionSection.step03.desc"
     },
     {
-      "title": "Step 04",
-      "subTitle": "Offer",
-      "desc": "Clear partnership proposal focused on your growth and impact on product quality."
+      "title": "selectionSection.step04.title",
+      "subTitle": "selectionSection.step04.subTitle",
+      "desc": "selectionSection.step04.desc"
     }
   ]
 }

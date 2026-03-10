@@ -1,22 +1,22 @@
 [
   {
-    "title": "FIXED PRICE",
-    "desc": "Clear deadlines and a fixed budget. Perfect for projects with specific technical requirements.",
-    "priority": "Predictability"
+    "title": "enga01.title",
+    "desc": "enga01.description",
+    "priority": "enga01.priority"
   },
   {
-    "title": "Time ＆ Material",
-    "desc": "Hourly-based billing for maximum agility. Ideal for projects with shifting requirements.",
-    "priority": "FLEXIBILITY"
+    "title": "enga02.title",
+    "desc": "enga02.description",
+    "priority": "enga02.priority"
   },
   {
-    "title": "HYBRID",
-    "desc": "Base cost + performance bonuses. We share the risks and success together with you.",
-    "priority": "Scalability"
+    "title": "enga03.title",
+    "desc": "enga03.description",
+    "priority": "enga03.priority"
   },
   {
-    "title": "REV. SHARE",
-    "desc": "Full product immersion. We invest our time and expertise in exchange for a share of the profit.",
-    "priority": "Long-term Growth"
+    "title": "enga04.title",
+    "desc": "enga04.description",
+    "priority": "enga04.priority"
   }
 ]

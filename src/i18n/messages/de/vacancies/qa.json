@@ -1,0 +1,86 @@
+{
+  "VacancyQAPage": {
+    "valueSection": {
+      "title": "QA, das seinen Wert beweist",
+      "subtitle": "QA bei Echocode bedeutet nicht nur Bugs zu finden, sondern Hypothesen zu testen, die Produkte verbessern. Wir suchen einen QA-Engineer mit starkem analytischem Ansatz, der Entscheidungen auf Basis von Daten und Nutzererfahrung begründen kann."
+    },
+    "descriptionSections": {
+      "section01": {
+        "title": "Woran werden Sie arbeiten?",
+        "val01": {
+          "title": "End-to-End-Qualität:",
+          "desc": "Vollständiger Testzyklus komplexer Mobile- und Web-Produkte."
+        },
+        "val02": {
+          "title": "Prozessverantwortung:",
+          "desc": "Aufbau und Optimierung von QA-Prozessen in Produktteams."
+        },
+        "val03": {
+          "title": "Data-Driven QA:",
+          "desc": "Arbeit mit Stabilitätsmetriken und Analyse der Ursachen von Produktionsfehlern."
+        },
+        "val04": {
+          "title": "Automatisierungs-Initiativen:",
+          "desc": "Möglichkeit automatisierte Tests einzuführen, um CI/CD zu beschleunigen."
+        }
+      },
+      "section02": {
+        "title": "Anforderungen",
+        "val01": {
+          "title": "Erfahrung im Cross-Platform-Testing",
+          "desc": "2+ Jahre Erfahrung im Testen von Mobile (iOS/Android) und Web."
+        },
+        "val02": {
+          "title": "Client-Server- und API-Kenntnisse",
+          "desc": "Tiefes Verständnis der Client-Server-Architektur und API-Interaktion (Postman/Charles)."
+        },
+        "val03": {
+          "title": "Crash- und Analytics-Tools",
+          "desc": "Erfahrung mit Crashlytics, Firebase und Analytics-Tools."
+        },
+        "val04": {
+          "title": "SDLC- und Agile-Verständnis",
+          "desc": "Verständnis des Software-Development-Lifecycle und von Agile-Methoden."
+        }
+      },
+      "section03": {
+        "title": "Wir schätzen",
+        "val01": {
+          "title": "Detailorientierung und analytisches Denken",
+          "desc": "Hohe Aufmerksamkeit für Details und kritisches Denken."
+        },
+        "val02": {
+          "title": "Klare Kommunikation und Problemlösung",
+          "desc": "Fähigkeit Probleme klar zu kommunizieren und Lösungen vorzuschlagen."
+        },
+        "val03": {
+          "title": "Fintech- oder High-Load-Erfahrung",
+          "desc": "Erfahrung mit Fintech- oder hochbelasteten Produkten."
+        }
+      }
+    },
+    "selectionSection": {
+      "title": "Auswahlprozess",
+      "step01": {
+        "title": "Schritt 01",
+        "subTitle": "Screening-Call",
+        "desc": "Wir bewerten Ihr SDLC-Wissen, Priorisierung und Fähigkeit Produktschwächen zu erkennen."
+      },
+      "step02": {
+        "title": "Schritt 02",
+        "subTitle": "Analyse eines Testfalls",
+        "desc": "Bewertung von Tests, Hypothesen und Einschränkungen."
+      },
+      "step03": {
+        "title": "Schritt 03",
+        "subTitle": "Technisches Interview",
+        "desc": "Vertiefung in Testmethoden, Tools und Agile-Integration."
+      },
+      "step04": {
+        "title": "Schritt 04",
+        "subTitle": "Angebot",
+        "desc": "Klare Zusammenarbeit mit Fokus auf Wachstum und Produktqualität."
+      }
+    }
+  }
+}

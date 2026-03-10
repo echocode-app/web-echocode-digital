@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl';
 import { VacancyData } from '../types/vacancy';
 import VacancyForm from './CandidateForm';
 import VacancyImage from './CandidateImage';
@@ -7,6 +8,8 @@ interface CandidateSectionProps {
 }
 
 const CandidateSection = ({ vacancyData }: CandidateSectionProps) => {
+  const t = useTranslations('VacancyCommon.vacancyForm');
+
   return (
     <section className="pb-10 md:pb-4.5">
       <div className="mb-10 bg-main-gradient w-full max-w-305 mx-auto h-px" />
@@ -15,7 +18,7 @@ const CandidateSection = ({ vacancyData }: CandidateSectionProps) => {
       items-center xl:items-start gap-58 xl:gap-40"
       >
         <h2 className=" text-[26px] min-[490px]:text-[40px] text-left max-w-149.5 w-full font-extra uppercase font-extrabold tracking-[-0.8px]">
-          Are you the one?
+          {t('title')}
         </h2>
         <VacancyImage />
         <VacancyForm vacancyData={vacancyData} />

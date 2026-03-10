@@ -16,16 +16,16 @@ const HeroSection = ({ title, level, employmentType, image }: HeroSectionProps) 
       <SectionContainer>
         <div className="flex flex-col md:flex-row items-center justify-between">
           <div className="max-w-170">
-            <h2 className="text-title-3xl md:text-title-4xl lg:text-title-6xl font-title text-center md:text-left">
+            <h2 className="text-title-3xl md:text-title-4xl lg:text-title-6xl font-wadik text-center md:text-left">
               {title ? title : 'Vacancy'}
             </h2>
             {level && (
-              <p className="text-title-3xl md:text-title-4xl lg:text-title-6xl font-title text-center md:text-left">
+              <p className="text-title-3xl md:text-title-4xl lg:text-title-6xl font-wadik text-center md:text-left">
                 ({level})
               </p>
             )}
             {employmentType && (
-              <p className="text-center md:text-left font-title mt-4 text-title-sm">
+              <p className="text-center md:text-left font-wadik mt-4 text-title-sm">
                 {employmentType}
               </p>
             )}

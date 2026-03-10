@@ -1,0 +1,54 @@
+{
+  "PartnershipPage": {
+    "HeroSection": {
+      "title": "INVESTIEREN IN IHR WACHSTUM"
+    },
+    "EngagementSection": {
+      "title": "ENGAGEMENT-MODELLE",
+      "engagementList": {
+        "subtitle": "PRIORITÄT",
+        "enga01": {
+          "title": "FESTPREIS",
+          "description": "Klare Fristen und ein festes Budget. Perfekt für Projekte mit spezifischen technischen Anforderungen.",
+          "priority": "Planbarkeit"
+        },
+        "enga02": {
+          "title": "Zeit & Material",
+          "description": "Abrechnung auf Stundenbasis für maximale Flexibilität. Ideal für Projekte mit sich ändernden Anforderungen.",
+          "priority": "Flexibilität"
+        },
+        "enga03": {
+          "title": "HYBRID",
+          "description": "Basispreis + Leistungsboni. Wir teilen Risiken und Erfolg gemeinsam mit Ihnen.",
+          "priority": "Skalierbarkeit"
+        },
+        "enga04": {
+          "title": "Umsatzbeteiligung",
+          "description": "Volle Produktintegration. Wir investieren unsere Zeit und Expertise im Austausch für einen Gewinnanteil.",
+          "priority": "Langfristiges Wachstum"
+        }
+      }
+    },
+    "SolutionsSection": {
+      "title": "Datengetriebene Lösungen",
+      "solutionsList": {
+        "sol01": {
+          "title": "ANALYTIK",
+          "desc": "Volle Funnel-Transparenz. Amplitude und AppsFlyer für ein tiefes Verständnis des Nutzerverhaltens."
+        },
+        "sol02": {
+          "title": "ATTRIBUTION",
+          "desc": "Exaktes Tracking von Traffic-Quellen und Optimierung des Werbebudgets auf Basis von ROAS."
+        },
+        "sol03": {
+          "title": "MONETARISIERUNG",
+          "desc": "Integration von Zahlungssystemen und Paywall-Optimierung über RevenueCat, Adapty und Stripe für Web & App."
+        },
+        "sol04": {
+          "title": "OPTIMIERUNG",
+          "desc": "Kontinuierliche Steigerung der Konversionsraten durch systematisches A/B-Testing und Feedback-Analyse."
+        }
+      }
+    }
+  }
+}

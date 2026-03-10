@@ -27,7 +27,13 @@ export default getRequestConfig(async (params) => {
     await import(`./messages/${locale}/service-directions/design-page.json`)
   ).default;
   const teamPage = (await import(`./messages/${locale}/team-page.json`)).default;
+  const portfolioPage = (await import(`./messages/${locale}/portfolio-page.json`)).default;
   const careerPage = (await import(`./messages/${locale}/career-page.json`)).default;
+  const partnershipPage = (await import(`./messages/${locale}/partnership-page.json`)).default;
+  const vacancyIosDev = (await import(`./messages/${locale}/vacancies/ios-dev.json`)).default;
+  const vacancyCommon = (await import(`./messages/${locale}/vacancies/common.json`)).default;
+  const vacancyQA = (await import(`./messages/${locale}/vacancies/qa.json`)).default;
+  const vacancyDesign = (await import(`./messages/${locale}/vacancies/design.json`)).default;
 
   const messages = {
     ...homePage,
@@ -40,6 +46,12 @@ export default getRequestConfig(async (params) => {
     ...serviceDirectionDesign,
     ...teamPage,
     ...careerPage,
+    ...partnershipPage,
+    ...portfolioPage,
+    ...vacancyIosDev,
+    ...vacancyCommon,
+    ...vacancyQA,
+    ...vacancyDesign,
   };
 
   return {

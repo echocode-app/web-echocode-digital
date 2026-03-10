@@ -17,13 +17,6 @@ const CoreSection = () => {
           <CoreItem title={t('solutions.sol01.title')} desc={t('solutions.sol01.desc')} />
           <CoreItem title={t('solutions.sol02.title')} desc={t('solutions.sol02.desc')} />
           <CoreItem title={t('solutions.sol03.title')} desc={t('solutions.sol03.desc')} />
-
-          <CoreItem
-            title={'Web2App Conversion'}
-            desc={
-              'Transform your web resource into a full-fledged mobile application (PWA/WebView) for iOS and Android in a matter of days'
-            }
-          />
         </ul>
       </SectionContainer>
     </section>
