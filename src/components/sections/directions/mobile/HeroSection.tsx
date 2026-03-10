@@ -1,18 +1,26 @@
 import Image from 'next/image';
+import { useLocale, useTranslations } from 'next-intl';
 
-import PageTitle from '@/components/UI/PageTitle';
 import SectionContainer from '@/components/UI/section/SectionContainer';
 
 const HeroSection = () => {
+  const t = useTranslations('MobilePage.HeroSection');
+  const locale = useLocale();
+  const enStyle = locale === 'en' ? '' : 'leading-[30px] md:leading-[66px]';
+
   return (
-    <section className="pt-31 pb-2">
+    <section className="pt-33 pb-2">
       <SectionContainer>
         <div className="flex flex-col md:flex-row items-center justify-between">
           <div>
-            <div className="max-w-152.5">
-              <PageTitle>BUILD. SCALE. DOMINATE</PageTitle>
+            <div className="max-w-165">
+              <h2
+                className={`${enStyle} text-title-3xl md:text-title-5xl min-[1040px]:text-title-6xl font-title text-center md:text-left`}
+              >
+                {t('title')}
+              </h2>
             </div>
-            <p className="font-title text-title-sm text-center md:text-start mt-4">
+            <p className="font-wadik text-title-sm text-center md:text-start mt-4">
               Mobile Development
             </p>
           </div>

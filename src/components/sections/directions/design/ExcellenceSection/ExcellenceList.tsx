@@ -8,9 +8,9 @@ const ExcellenceList = () => {
       {excellenceList.map((item, i) => (
         <li
           key={i}
-          className="p-3 max-w-141.5 border border-[#343434] rounded-secondary hover:border-accent duration-main"
+          className="p-3 max-w-141.5 border border-main-border rounded-secondary hover:border-accent duration-main"
         >
-          <CycleCard {...item} />
+          <CycleCard {...item} translateKey="DesignPage.ExcellensSection.list" />
         </li>
       ))}
     </ul>

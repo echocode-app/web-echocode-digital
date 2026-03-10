@@ -1,0 +1,52 @@
+{
+  "IGamingPage": {
+    "HeroSection": { "title": "ESCALA. RENTABILIDAD. DOMINIO" },
+    "SolutionsSection": {
+      "title": "Ecosistema de soluciones",
+      "solutionsList": {
+        "sol01": {
+          "title": "Stack tecnológico",
+          "desc": "Desarrollo y mantenimiento de sistemas de cualquier complejidad. Creamos infraestructuras capaces de soportar picos de carga y garantizar el funcionamiento continuo de tus productos a nivel global."
+        },
+        "sol02": {
+          "title": "Crecimiento orgánico",
+          "desc": "Optimización profunda de la presencia en redes y tiendas globales. Llevamos los productos al TOP utilizando nuestra propia metodología de promoción ASO y SEO."
+        },
+        "sol03": {
+          "title": "Gestión de tráfico",
+          "desc": "Gestión sistemática del flujo de usuarios. Adquisición estable de tráfico de alta calidad y gestión de la reputación de la marca a nivel internacional."
+        }
+      }
+    },
+    "FoundationSection": {
+      "title": "La base de nuestra confianza",
+      "list": {
+        "found01": "Escalado global",
+        "found02": "Resiliencia 24/7",
+        "found03": "Centrado en datos",
+        "found04": "Crecimiento de activos"
+      }
+    },
+    "DominateSection": {
+      "title": "ASO: Dominar los resultados de búsqueda",
+      "desc": "Transformamos la visibilidad en instalaciones reales. Nuestra estrategia ASO combina datos precisos, psicología del usuario y un profundo conocimiento de los algoritmos de App Store y Google Play.",
+      "list": {
+        "dom01": {
+          "title": "01. ANÁLISIS",
+          "subtitle": "Investigación de palabras clave",
+          "desc": "Búsqueda de consultas relevantes con el mayor volumen de tráfico y la menor competencia. Encontramos puntos de entrada donde otros no los ven."
+        },
+        "dom02": {
+          "title": "02. VISIÓN",
+          "subtitle": "Optimización visual ASO",
+          "desc": "Creación de iconos y capturas que aumentan el CTR en un 25% o más. Comunicación visual que impulsa al usuario a pulsar «Get»."
+        },
+        "dom03": {
+          "title": "03. BUILD",
+          "subtitle": "Localización profunda",
+          "desc": "Adaptación de metadatos a los matices culturales de GEOs específicos: Brasil, India, Europa. Hablamos al mercado en su propio idioma."
+        }
+      }
+    }
+  }
+}

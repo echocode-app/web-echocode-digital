@@ -1,0 +1,28 @@
+{
+  "CareerPage": {
+    "HeroSection": {
+      "title": "Großartige Produkte entwickeln"
+    },
+    "BusinessSection": {
+      "title": "Nicht nur Code schreiben. Unternehmen aufbauen",
+      "subtitle": "Hier werden Sie Produktentwickler, nicht nur Aufgabenbearbeiter. Ihr Code beeinflusst direkt den Umsatz und die Erfahrung von Millionen Nutzern.",
+      "businessList": {
+        "bus01": {
+          "title": "Produktkultur",
+          "description": "Wir kümmern uns um Stabilität, Nutzerbindung und Conversions genauso wie um sauberen Code."
+        },
+        "bus02": {
+          "title": "Kein Mikromanagement",
+          "description": "Sie erhalten die volle Verantwortung für Funktionen und direkten Zugang zu Produktentscheidungen."
+        },
+        "bus03": {
+          "title": "Wachsen Sie mit uns",
+          "description": "Wir entwickeln Menschen wie Produkte: durch Mentoring, Verantwortung und echten Einfluss."
+        }
+      }
+    },
+    "VacanciesSection": {
+      "title": "Offene Stellen"
+    }
+  }
+}

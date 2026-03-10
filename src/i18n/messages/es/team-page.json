@@ -1,0 +1,46 @@
+{
+  "TeamPage": {
+    "HeroSection": { "title": "Personas reales de producto" },
+    "philosophySection": {
+      "title": "Filosofía del equipo",
+      "subtitle": "Los grandes productos no son creados por desarrolladores aislados. Se construyen con equipos pequeños, enfocados y multidisciplinarios.",
+      "desc": "Todos alineados con un objetivo: hacer que tu producto tenga éxito."
+    },
+    "WorkSection": {
+      "title": "Cómo trabajamos",
+      "workList": {
+        "work01": {
+          "title": "Dedicados",
+          "description": "Cada equipo está completamente comprometido con tu proyecto. Sin cambios de contexto ni distracciones."
+        },
+        "work02": {
+          "title": "Responsables",
+          "description": "Asumimos la plena responsabilidad del resultado, no solo de completar tareas."
+        },
+        "work03": {
+          "title": "Optimizados",
+          "description": "Equilibrio entre velocidad, estabilidad y rentabilidad para asegurar el crecimiento del negocio."
+        }
+      }
+    },
+    "StepsSection": {
+      "subtitle": "Tu producto es creado por personas que ya han lanzado — y fallado — antes.",
+      "stepsList": {
+        "step01": { "title": "Lanzaron apps con millones de usuarios" },
+        "step02": { "title": "Superaron rechazos de App Store y cumplimiento complejo" },
+        "step03": { "title": "Escalaron sistemas bajo tráfico masivo real" },
+        "step04": { "title": "Construyeron y mantuvieron productos altamente monetizados" }
+      }
+    },
+    "TransparencySection": {
+      "title": "Transparencia",
+      "subtitle": "SIN CAJA NEGRA.",
+      "transparencyList": {
+        "trans01": { "title": "Progreso real del sprint" },
+        "trans02": { "title": "Métricas reales del producto" },
+        "trans03": { "title": "Informes reales de QA" },
+        "trans04": { "title": "Preparación real para el lanzamiento" }
+      }
+    }
+  }
+}

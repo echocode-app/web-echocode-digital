@@ -1,0 +1,75 @@
+{
+  "MobilePage": {
+    "HeroSection": { "title": "BUILD. SCALE. DOMINATE" },
+    "FullCycleSection": {
+      "title": "FULL CYCLE DEVELOPMENT",
+      "steps": {
+        "step01": {
+          "title": "01. STRATEGY",
+          "subTitle": "Analysis",
+          "desc": "Technical audit, competitor research, and product Roadmap development."
+        },
+        "step02": {
+          "title": "02. UX／UI",
+          "subTitle": "Design",
+          "desc": "Creating interfaces focused on Retention and seamless user interaction."
+        },
+        "step03": {
+          "title": "03. CODE",
+          "subTitle": "Development",
+          "desc": "Native code (Swift/Kotlin) using modern clean architecture patterns."
+        },
+        "step04": {
+          "title": "04. DEVOPS",
+          "subTitle": "Integration",
+          "desc": "Seamless deployment and system integration ensuring reliability and speed."
+        },
+        "step05": {
+          "title": "05. GROWTH",
+          "subTitle": "Release ＆ ASO",
+          "desc": "Optimizing releases, App Store presence, and retention-focused features."
+        }
+      }
+    },
+    "SpecializationsSection": {
+      "title": "PROFESSIONAL SPECIALIZATION",
+      "subtitle": "We are focused on building products that deliver predictable results. Our expertise spans complex technical solutions and efficient monetization models.",
+      "specializations": {
+        "spec01": {
+          "title": "ECOSYSTEMS",
+          "subTitle": "Subscription SaaS",
+          "desc": "Building subscription-based systems. From Paywall optimization to LTV analytical service integration."
+        },
+        "spec02": {
+          "title": "OPTIMIZATION",
+          "subTitle": "Utilities ＆ High-Load",
+          "desc": "Tools built for speed. Memory optimization, offline modes, and real-time big data processing."
+        },
+        "spec03": {
+          "title": "SERVICES",
+          "subTitle": "Super-Apps",
+          "desc": "Multi-module solutions with complex logic that maintain interface speed and intuitiveness."
+        },
+        "spec04": {
+          "title": "INTELLIGENCE",
+          "subTitle": "AI ＆ Data Intelligence",
+          "desc": "Implementing ML models and real-time data processing for hyper-personalized user experiences."
+        }
+      }
+    },
+    "MarketingSection": {
+      "title": "GROWTH ＆ MARKETING",
+      "subtitle": "Professional development is only half of the story. We help products become visible in stores using proven optimization methods and strategic promotion.",
+      "list": {
+        "list01": {
+          "title": "ASO Optimization",
+          "desc": "Scaling to the TOP for targeted keywords in the App Store and Google Play to gain stable organic traffic and lower acquisition costs."
+        },
+        "list02": {
+          "title": "Algorithmic Promotion",
+          "desc": "Leveraging recommendation algorithms and trending mechanics for explosive user base growth through viral loops and social proof."
+        }
+      }
+    }
+  }
+}

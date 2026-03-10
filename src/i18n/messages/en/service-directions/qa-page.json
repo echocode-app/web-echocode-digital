@@ -1,0 +1,88 @@
+{
+  "QAPage": {
+    "HeroSection": { "title": "Your Stability Is Your Profit" },
+    "BussinessSection": {
+      "title": "We don׳t just test features. We protect business nodes",
+      "subtitle": "We transform visibility into real installs. Our ASO strategy is a blend of precise data, user psychology, and a deep understanding of App Store and Google Play algorithms.",
+      "list": {
+        "bus01": {
+          "title": "Checkout ＆ Payments"
+        },
+        "bus02": {
+          "title": "User Onboarding"
+        },
+        "bus03": {
+          "title": "Data Integrity"
+        },
+        "bus04": {
+          "title": "Edge Case Guarding"
+        }
+      }
+    },
+    "ModerationSection": {
+      "title": "Pass moderation fast",
+      "subtitle": "App Store or Google Play rejection means weeks of downtime and lost budget. We know the pitfalls of Apple and Google guidelines, preparing your product for approval in advance.",
+      "list": {
+        "mod01": {
+          "title": "Guideline Compliance Checks",
+          "desc": "Ensure your app meets all App Store and Google Play requirements submission"
+        },
+        "mod02": {
+          "title": "Real Device Testing",
+          "desc": "Test on actual devices across different OS versions and screen sizes"
+        },
+        "mod03": {
+          "title": "Crash-Free Rate Control",
+          "desc": "Monitor and maintain high stability scores required for store approval"
+        }
+      }
+    },
+    "ArmorSection": {
+      "title": "Multi-layered Armor for Your Product",
+      "steps": {
+        "step01": {
+          "title": "LEVEL 01",
+          "subTitle": "Functional",
+          "desc": "Deep manual logic testing. Your users get exactly what you promised in the specs."
+        },
+        "step02": {
+          "title": "LEVEL 02",
+          "subTitle": "Automation",
+          "desc": "Writing regression auto-tests (CI/CD). Fast releases without the fear of \"breaking things\"."
+        },
+        "step03": {
+          "title": "LEVEL 03",
+          "subTitle": "Security",
+          "desc": "Vulnerability scanning and penetration testing. Protection against data leaks and loss."
+        },
+        "step04": {
+          "title": "LEVEL 04",
+          "subTitle": "Load ＆ Stress",
+          "desc": "Simulating peak loads. Your product stays stable during massive user traffic surges."
+        }
+      }
+    },
+    "MetricsSection": {
+      "titlePart1": "How Quality Converts",
+      "titlePart2": "into Key Metrics",
+      "list": {
+        "met01": {
+          "title": "Less Churn",
+          "desc": "Users stay with you because of the product's flawless reliability."
+        },
+        "met02": {
+          "title": "Fewer Refunds",
+          "desc": "Minimal complaints regarding the behavior of paid features."
+        },
+        "met03": {
+          "title": "Better Ratings",
+          "desc": "High 4.8+ ratings driven by smooth and crash-free app performance."
+        },
+        "met04": {
+          "title": "Monetization",
+          "desc": "Transactions process without failure during critical high-traffic windows."
+        }
+      }
+    }
+  }
+}

@@ -4,8 +4,11 @@ import ExcellenceList from './ExcellenceList';
 import SectionTitle from '@/components/UI/section/SectionTitle';
 import ExcellenceImage from './ExcellenceImage';
 import ExcellenceRabbitImage from './ExcellenceRabbitImage';
+import { useTranslations } from 'next-intl';
 
 const ExcellenceSection = () => {
+  const t = useTranslations('DesignPage.ExcellensSection');
+
   return (
     <section className="pb-10 md:pb-25">
       <div className="relative">
@@ -13,11 +16,8 @@ const ExcellenceSection = () => {
         <SectionGradientLine height="1" />
       </div>
       <SectionContainer>
-        <SectionTitle marginBottom="10px">Our path to excellence</SectionTitle>
-        <p className="text-main-sm mb-10">
-          Every stage is backed by data and analytics, ensuring a predictable and scalable result
-          for your product
-        </p>
+        <SectionTitle marginBottom="10px">{t('title')}</SectionTitle>
+        <p className="text-main-sm mb-10">{t('desc')}</p>
         <div className="flex justify-center lg:justify-between">
           <ExcellenceImage />
           <ExcellenceList />

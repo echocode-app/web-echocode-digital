@@ -1,0 +1,52 @@
+{
+  "IGamingPage": {
+    "HeroSection": { "title": "Scale. Yield. Dominance" },
+    "SolutionsSection": {
+      "title": "Solutions Ecosystem",
+      "solutionsList": {
+        "sol01": {
+          "title": "Technology Stack",
+          "desc": "Development and maintenance of systems of any complexity. We create infrastructure that withstands peak loads and ensures seamless operation of your assets globally."
+        },
+        "sol02": {
+          "title": "Organic Growth",
+          "desc": "Deep optimization of presence in global networks and stores. We drive products to the top using our proprietary ASO and SEO promotion methodology."
+        },
+        "sol03": {
+          "title": "Traffic Management",
+          "desc": "Systematic user flow management. Stable acquisition of high-quality traffic and brand reputation management on the international stage."
+        }
+      }
+    },
+    "FoundationSection": {
+      "title": "The Foundation of Our Confidence",
+      "list": {
+        "found01": "Global Scaling",
+        "found02": "24／7 Resilience",
+        "found03": "Data-Centric",
+        "found04": "Asset Growth"
+      }
+    },
+    "DominateSection": {
+      "title": "ASO: Dominate the Search Results",
+      "desc": "We transform visibility into real installs. Our ASO strategy is a blend of precise data, user psychology, and a deep understanding of App Store and Google Play algorithms.",
+      "list": {
+        "dom01": {
+          "title": "01. ANALYSIS",
+          "subtitle": "Keyword Research",
+          "desc": "Searching for relevant queries with the highest traffic volume and lowest competition. We find entry points where others don't see them."
+        },
+        "dom02": {
+          "title": "02. VISION",
+          "subtitle": "Visual ASO Optimization",
+          "desc": "Creating icons and screenshots that boost CTR by 25% or more. Visual communication that compels the user to tap 'Get'."
+        },
+        "dom03": {
+          "title": "03. BUILD",
+          "subtitle": "Deep Localization",
+          "desc": "Adapting metadata for the cultural nuances of specific GEOs: Brazil, India, Europe. We speak to the market in its own language."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "QAPage": {
+    "HeroSection": { "title": "Ihre Stabilität ist Ihr Gewinn" },
+    "BussinessSection": {
+      "title": "Wir testen nicht nur Funktionen. Wir schützen Geschäftsknotenpunkte",
+      "subtitle": "Wir verwandeln Sichtbarkeit in echte Installationen. Unsere ASO-Strategie kombiniert präzise Daten, Nutzerpsychologie und tiefes Verständnis der App Store- und Google Play-Algorithmen.",
+      "list": {
+        "bus01": { "title": "Checkout & Zahlungen" },
+        "bus02": { "title": "Benutzer-Onboarding" },
+        "bus03": { "title": "Datenintegrität" },
+        "bus04": { "title": "Edge-Case-Schutz" }
+      }
+    },
+    "ModerationSection": {
+      "title": "Bestehen Sie die Moderation schnell",
+      "subtitle": "App Store- oder Google Play-Ablehnung bedeutet Wochen Stillstand und Budgetverlust. Wir kennen die Fallstricke der Apple- und Google-Richtlinien und bereiten Ihr Produkt im Voraus auf die Freigabe vor.",
+      "list": {
+        "mod01": {
+          "title": "Überprüfung der Richtlinienkonformität",
+          "desc": "Stellen Sie sicher, dass Ihre App alle Anforderungen von App Store und Google Play erfüllt"
+        },
+        "mod02": {
+          "title": "Testen auf echten Geräten",
+          "desc": "Testen Sie auf echten Geräten mit unterschiedlichen OS-Versionen und Bildschirmgrößen"
+        },
+        "mod03": {
+          "title": "Crash-Free Rate Kontrolle",
+          "desc": "Überwachen und Aufrechterhalten hoher Stabilitätswerte für die Store-Freigabe"
+        }
+      }
+    },
+    "ArmorSection": {
+      "title": "Mehrschichtiger Schutz für Ihr Produkt",
+      "steps": {
+        "step01": {
+          "title": "LEVEL 01",
+          "subTitle": "Funktional",
+          "desc": "Tiefgehende manuelle Logiktests. Ihre Benutzer erhalten genau das, was Sie in den Specs versprochen haben."
+        },
+        "step02": {
+          "title": "LEVEL 02",
+          "subTitle": "Automatisierung",
+          "desc": "Schreiben von Regressions-Autotests (CI/CD). Schnelle Releases ohne Angst, etwas zu 'brechen'."
+        },
+        "step03": {
+          "title": "LEVEL 03",
+          "subTitle": "Sicherheit",
+          "desc": "Vulnerability-Scanning und Penetration-Tests. Schutz vor Datenverlust und -lecks."
+        },
+        "step04": {
+          "title": "LEVEL 04",
+          "subTitle": "Last & Stresstest",
+          "desc": "Simulation von Spitzenlasten. Ihr Produkt bleibt stabil bei massivem Benutzeraufkommen."
+        }
+      }
+    },
+    "MetricsSection": {
+      "title": "Wie Qualität in Schlüsselmetriken umgewandelt wird",
+      "list": {
+        "met01": {
+          "title": "Weniger Churn",
+          "desc": "Benutzer bleiben aufgrund der fehlerfreien Produktstabilität."
+        },
+        "met02": {
+          "title": "Weniger Rückerstattungen",
+          "desc": "Minimale Beschwerden über bezahlte Funktionen."
+        },
+        "met03": {
+          "title": "Bessere Bewertungen",
+          "desc": "Hohe Bewertungen 4,8+ dank reibungsloser und fehlerfreier App-Leistung."
+        },
+        "met04": {
+          "title": "Monetarisierung",
+          "desc": "Transaktionen laufen fehlerfrei während kritischer Hochlastzeiten."
+        }
+      }
+    }
+  }
+}

@@ -1,17 +1,17 @@
 [
   {
-    "title": "LEVEL 01",
-    "subTitle": "ONBOARDING",
-    "desc": "Accelerating the journey to the \"Aha-moment\" — the exact point where product value becomes undeniable for the user"
+    "title": "met01.title",
+    "subTitle": "met01.subtitle",
+    "desc": "met01.desc"
   },
   {
-    "title": "LEVEL 02",
-    "subTitle": "CONVERSION",
-    "desc": "Deep optimization of paywalls, checkout flows, and CTAs to turn visitors into recurring customers."
+    "title": "met02.title",
+    "subTitle": "met02.subtitle",
+    "desc": "met02.desc"
   },
   {
-    "title": "LEVEL 03",
-    "subTitle": "CHURN RATE",
-    "desc": "Reducing churn through superior usability, emotional design, and frictionless user experiences."
+    "title": "met03.title",
+    "subTitle": "met03.subtitle",
+    "desc": "met03.desc"
   }
 ]

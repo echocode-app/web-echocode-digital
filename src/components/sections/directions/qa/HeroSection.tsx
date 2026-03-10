@@ -1,18 +1,21 @@
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 
 import PageTitle from '@/components/UI/PageTitle';
 import SectionContainer from '@/components/UI/section/SectionContainer';
 
 const HeroSection = () => {
+  const t = useTranslations('QAPage.HeroSection');
+
   return (
-    <section className="pt-31 md:pb-1.5">
+    <section className="pt-33 md:pb-1.5">
       <SectionContainer>
         <div className="flex flex-col md:flex-row items-center justify-between">
           <div>
             <div className="max-w-170">
-              <PageTitle>Your Stability Is Your Profit</PageTitle>
+              <PageTitle>{t('title')}</PageTitle>
             </div>
-            <p className="font-title text-title-sm text-center md:text-start mt-4 mb-2 md:md-0">
+            <p className="font-wadik text-title-sm text-center md:text-start mt-4 mb-2 md:md-0">
               quality assurance
             </p>
           </div>

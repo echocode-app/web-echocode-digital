@@ -3,7 +3,12 @@
 import { useEffect, useState } from 'react';
 import SpecializationItem from './SpecializationItem';
 
-const items = ['Mobile Apps', 'iGaming', 'Dashboards', 'Subscription'];
+const items = [
+  'specializationList.spec01',
+  'specializationList.spec02',
+  'specializationList.spec03',
+  'specializationList.spec04',
+];
 
 const SpecializationList = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -17,7 +22,7 @@ const SpecializationList = () => {
   }, []);
 
   return (
-    <ul className="flex flex-wrap  sm:justify-center gap-8">
+    <ul className="flex flex-wrap gap-8">
       {items.map((title, index) => (
         <SpecializationItem key={index} title={title} active={index === activeIndex} />
       ))}

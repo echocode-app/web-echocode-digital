@@ -1,0 +1,28 @@
+{
+  "CareerPage": {
+    "HeroSection": {
+      "title": "Construye productos excelentes"
+    },
+    "BusinessSection": {
+      "title": "No solo escribas código. Construye negocios",
+      "subtitle": "Aquí te conviertes en ingeniero de producto, no solo en ejecutor de tareas. Tu código impacta directamente en los ingresos y la experiencia de millones de usuarios.",
+      "businessList": {
+        "bus01": {
+          "title": "Cultura de producto",
+          "description": "Nos preocupamos por la estabilidad, retención y conversiones tanto como por la calidad del código."
+        },
+        "bus02": {
+          "title": "Sin micromanagement",
+          "description": "Tienes propiedad total sobre las funciones y acceso directo a la toma de decisiones del producto."
+        },
+        "bus03": {
+          "title": "Crece con nosotros",
+          "description": "Desarrollamos personas como desarrollamos productos: mediante mentoría, responsabilidad e impacto real."
+        }
+      }
+    },
+    "VacanciesSection": {
+      "title": "Vacantes abiertas"
+    }
+  }
+}

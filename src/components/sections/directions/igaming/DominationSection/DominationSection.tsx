@@ -1,17 +1,18 @@
+import { useTranslations } from 'next-intl';
+
 import SectionContainer from '@/components/UI/section/SectionContainer';
 import SectionTitle from '@/components/UI/section/SectionTitle';
 import DominationImage from './DominationImage';
 import DominateList from './DominateList';
 
 const DominationSection = () => {
+  const t = useTranslations('IGamingPage.DominateSection');
+
   return (
     <section className="pb-10">
       <SectionContainer>
-        <SectionTitle marginBottom="10px">ASO: Dominate the Search Results</SectionTitle>
-        <p className="text-main-sm mb-12">
-          We transform visibility into real installs. Our ASO strategy is a blend of precise data,
-          user psychology, and a deep understanding of App Store and Google Play algorithms.
-        </p>
+        <SectionTitle marginBottom="10px">{t('title')}</SectionTitle>
+        <p className="text-main-sm mb-12">{t('desc')} </p>
         <ul className="w-full flex flex-col lg:flex-row items-center gap-10 lg:gap-0 justify-between mb-17.5">
           <li className="w-full max-w-120">
             <DominationImage image="/images/directions/igaming/before.png" desc="Before" />

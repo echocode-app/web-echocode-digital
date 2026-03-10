@@ -11,7 +11,7 @@ const ModerationItem = ({ children, title, desc }: ModerationItemProps) => {
     <li className="flex items-center gap-4 max-w-103 py-2">
       {children}
       <div>
-        <h3 className="font-title text-title-sm mb-1">{title}</h3>
+        <h3 className="font-title text-title-sm mb-1 uppercase">{title}</h3>
         <p className="text-main-sm text-[#90A1B9]">{desc}</p>
       </div>
     </li>

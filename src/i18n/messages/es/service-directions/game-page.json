@@ -1,0 +1,42 @@
+{
+  "GamePage": {
+    "HeroSection": {
+      "title": "SUBE LA REALIDAD DE NIVEL"
+    },
+    "SolutionsSection": {
+      "title": "Ecosistema de soluciones",
+      "solutionsList": {
+        "sol01": {
+          "title": "MOTORES DE JUEGO AVANZADOS",
+          "desc": "Aprovechamos motores de última generación para crear gráficos fotorrealistas y físicas complejas. La optimización para hardware garantiza el máximo FPS y una jugabilidad fluida."
+        },
+        "sol02": {
+          "title": "CONCEPTO Y ARTE 3D",
+          "desc": "Desde los primeros bocetos hasta el render final. Creamos mundos, personajes y entornos únicos que definen la identidad visual de tu proyecto."
+        },
+        "sol03": {
+          "title": "ECONOMÍA DEL JUEGO Y OPERACIONES",
+          "desc": "Diseñamos economías internas sostenibles y sistemas de monetización. Garantizamos la retención de jugadores a largo plazo mediante actualizaciones regulares y eventos en vivo."
+        }
+      }
+    },
+    "UniversesSection": {
+      "title": "NO SOLO DESARROLLES JUEGOS. CREA UNIVERSOS",
+      "desc": "Conviértete en arquitecto de experiencias de juego. En nuestro equipo no solo escribes scripts: das forma a las emociones de millones de jugadores en todo el mundo.",
+      "list": {
+        "uni01": {
+          "title": "CULTURA CENTRADA EN EL JUGADOR",
+          "desc": "Nos enfocamos en la experiencia del jugador. Cada mecánica y cada píxel debe servir a un objetivo: ofrecer pura satisfacción al jugar."
+        },
+        "uni02": {
+          "title": "LIBERTAD CREATIVA",
+          "desc": "Sin límites rígidos. Fomentamos la experimentación con el gameplay y las nuevas tecnologías para impulsar la innovación."
+        },
+        "uni03": {
+          "title": "RESPONSABILIDAD TOTAL",
+          "desc": "Tienes voz en el diseño de niveles, el balance y la narrativa. Tu contribución individual define el destino de todo el proyecto."
+        }
+      }
+    }
+  }
+}

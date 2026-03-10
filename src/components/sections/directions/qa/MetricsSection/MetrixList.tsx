@@ -2,20 +2,20 @@ import MetricsItem from './MetricsItem';
 
 const metrics = [
   {
-    title: 'Less Churn',
-    desc: "Users stay with you because of the product's flawless reliability.",
+    title: 'met01.title',
+    desc: 'met01.desc',
   },
   {
-    title: 'Fewer Refunds',
-    desc: 'Minimal complaints regarding the behavior of paid features.',
+    title: 'met02.title',
+    desc: 'met02.desc',
   },
   {
-    title: 'Better Ratings',
-    desc: 'High 4.8+ ratings driven by smooth and crash-free app performance.',
+    title: 'met03.title',
+    desc: 'met03.desc',
   },
   {
-    title: 'Monetization',
-    desc: 'Transactions process without failure during critical high-traffic windows.',
+    title: 'met04.title',
+    desc: 'met04.desc',
   },
 ];
 

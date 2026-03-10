@@ -1,22 +1,22 @@
 [
   {
-    "title": "LEVEL 01",
-    "subTitle": "UX Research",
-    "desc": "Deep niche analysis, competitor benchmarking, and identifying real user pain points"
+    "title": "exce01.title",
+    "subTitle": "exce01.subtitle",
+    "desc": "exce01.desc"
   },
   {
-    "title": "LEVEL 02",
-    "subTitle": "Flow Architecture",
-    "desc": "Building optimal User Flows that lead to the target action via the shortest, most efficient path"
+    "title": "exce02.title",
+    "subTitle": "exce02.subtitle",
+    "desc": "exce02.desc"
   },
   {
-    "title": "LEVEL 03",
-    "subTitle": "UI System",
-    "desc": "Crafting a unique visual language and a scalable design system tailored to your brand identity"
+    "title": "exce03.title",
+    "subTitle": "exce03.subtitle",
+    "desc": "exce03.desc"
   },
   {
-    "title": "LEVEL 04",
-    "subTitle": "Motion",
-    "desc": "Strategic animations that capture attention, improve retention, and guide the user through the experience."
+    "title": "exce04.title",
+    "subTitle": "exce04.subtitle",
+    "desc": "exce04.desc"
   }
 ]

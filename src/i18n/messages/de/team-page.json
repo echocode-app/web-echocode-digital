@@ -1,0 +1,46 @@
+{
+  "TeamPage": {
+    "HeroSection": { "title": "Echte Produktmenschen" },
+    "philosophySection": {
+      "title": "Team-Philosophie",
+      "subtitle": "Große Produkte entstehen nicht durch isolierte Entwickler. Sie werden von kleinen, fokussierten, funktionsübergreifenden Teams gebaut.",
+      "desc": "Alle vereint durch ein Ziel — Ihren Produkt-Erfolg sicherzustellen."
+    },
+    "WorkSection": {
+      "title": "Wie wir arbeiten",
+      "workList": {
+        "work01": {
+          "title": "Engagiert",
+          "description": "Jedes Team ist vollständig Ihrem Projekt gewidmet. Keine Kontextwechsel, keine Ablenkungen."
+        },
+        "work02": {
+          "title": "Verantwortlich",
+          "description": "Wir übernehmen die volle Verantwortung für das Ergebnis, nicht nur für das Erledigen von Aufgaben."
+        },
+        "work03": {
+          "title": "Optimiert",
+          "description": "Ausbalancierung von Geschwindigkeit, Stabilität und Umsatz zur Sicherung des Geschäftswachstums."
+        }
+      }
+    },
+    "StepsSection": {
+      "subtitle": "Ihr Produkt wird von Menschen gebaut, die bereits gestartet — und gescheitert — sind.",
+      "stepsList": {
+        "step01": { "title": "Apps mit Millionen von Nutzern gestartet" },
+        "step02": { "title": "App Store Ablehnungen und komplexe Compliance überstanden" },
+        "step03": { "title": "Systeme unter realem, massivem Traffic skaliert" },
+        "step04": { "title": "Hoch monetarisierte Produkte gebaut und gewartet" }
+      }
+    },
+    "TransparencySection": {
+      "title": "Transparenz",
+      "subtitle": "KEINE BLACK BOX.",
+      "transparencyList": {
+        "trans01": { "title": "Echter Sprint-Fortschritt" },
+        "trans02": { "title": "Echte Produktmetriken" },
+        "trans03": { "title": "Echte QA-Berichte" },
+        "trans04": { "title": "Echte Release-Bereitschaft" }
+      }
+    }
+  }
+}

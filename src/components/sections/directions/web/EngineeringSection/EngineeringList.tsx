@@ -1,43 +1,73 @@
+import { useTranslations } from 'next-intl';
+
 const EngineeringList = () => {
+  const t = useTranslations('WebPage.EngineeringSection.engineeringList');
+
   return (
     <ul className="flex flex-col md:flex-row lg:flex-col gap-6">
       <li
-        className="p-3 max-w-87.5 rounded-secondary border border-[#343434] 
+        className="p-3 max-w-87.5 rounded-secondary border border-main-border 
       hover:border-accent duration-main"
       >
-        <h3 className="mb-3 font-title text-white pointer-events-none">HARDENED SECURITY</h3>
+        <h3 className="mb-3 font-title text-white font-bold pointer-events-none">
+          {t('list01.title')}
+        </h3>
         <ul className="px-2 text-main-sm text-gray75 pointer-events-none">
           <li className="flex gap-2 items-center">
             <div className="w-0.75 h-0.75 bg-gray75 rounded-full" />
-            <p>OWASP Top 10 Compliance</p>
+            <p>{t('list01.eng01')}</p>
           </li>
           <li className="flex gap-2 items-center">
             <div className="w-0.75 h-0.75 bg-gray75 rounded-full" />
-            <p>Data Encryption (AES-256 standard)</p>
+            <p>{t('list01.eng02')}</p>
           </li>
           <li className="flex gap-2 items-center">
             <div className="w-0.75 h-0.75 bg-gray75 rounded-full" />
-            <p>Advanced Identity Management (OIDC)</p>
+            <p>{t('list01.eng03')}</p>
           </li>
         </ul>
       </li>
       <li
-        className="p-3 max-w-87.5 lg:w-87.5 rounded-secondary border border-[#343434] 
+        className="p-3 max-w-87.5 lg:w-87.5 rounded-secondary border border-main-border 
         hover:border-accent duration-main"
       >
-        <h3 className="mb-3 font-title text-white pointer-events-none">INFINITE SCALABILITY</h3>
+        <h3 className="mb-3 font-title font-bold text-white pointer-events-none">
+          {t('list02.title')}
+        </h3>
         <ul className="px-2 text-main-sm text-gray75 pointer-events-none">
           <li className="flex gap-2 items-center">
             <div className="w-0.75 h-0.75 bg-gray75 rounded-full" />
-            <p>Microservices Architecture (Service Mesh)</p>
+            <p>{t('list02.eng01')}</p>
           </li>
           <li className="flex gap-2 items-center">
             <div className="w-0.75 h-0.75 bg-gray75 rounded-full" />
-            <p>Auto-scaling Kubernetes Clusters</p>
+            <p>{t('list02.eng02')}</p>
           </li>
           <li className="flex gap-2 items-center">
             <div className="w-0.75 h-0.75 bg-gray75 rounded-full" />
-            <p>Multi-region Database Replication</p>
+            <p>{t('list02.eng03')}</p>
+          </li>
+        </ul>
+      </li>
+      <li
+        className="p-3 max-w-87.5 lg:w-87.5 rounded-secondary border border-main-border 
+        hover:border-accent duration-main"
+      >
+        <h3 className="mb-3 font-title font-bold text-white pointer-events-none">
+          HYBRID MOBILITY
+        </h3>
+        <ul className="px-2 text-main-sm text-gray75 pointer-events-none">
+          <li className="flex gap-2 items-center">
+            <div className="w-0.75 h-0.75 bg-gray75 rounded-full" />
+            <p>App Store & Google Play</p>
+          </li>
+          <li className="flex gap-2 items-center">
+            <div className="w-0.75 h-0.75 bg-gray75 rounded-full" />
+            <p>Smart Push Notifications</p>
+          </li>
+          <li className="flex gap-2 items-center">
+            <div className="w-0.75 h-0.75 bg-gray75 rounded-full" />
+            <p>PWA & Offline Access</p>
           </li>
         </ul>
       </li>

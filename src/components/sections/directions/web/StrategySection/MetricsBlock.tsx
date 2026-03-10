@@ -10,12 +10,12 @@ const MetricsBlock = () => {
       </ul>
       <ul className="flex flex-wrap justify-center gap-6">
         <li className="w-57 p-3 text-title-xs rounded-secondary border-2 border-accent">
-          <h3 className="mb-3 font-title text-accent">SUCCESSFUL RELEASES</h3>
+          <h3 className="mb-3 font-wadik text-accent">SUCCESSFUL RELEASES</h3>
           <div className="flex items-center">
             <div className="w-14.5">
               <Counter to={250} />
             </div>
-            <span className="font-title text-[20px] leading-7.5">+</span>
+            <span className="font-wadik text-[20px] leading-7.5">+</span>
           </div>
         </li>
         <li className="w-57 p-3 text-title-xs rounded-secondary border-2 border-accent">

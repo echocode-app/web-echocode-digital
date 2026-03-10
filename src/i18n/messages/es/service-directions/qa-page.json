@@ -1,0 +1,79 @@
+{
+  "QAPage": {
+    "HeroSection": { "title": "Tu estabilidad es tu beneficio" },
+    "BussinessSection": {
+      "title": "No solo probamos funciones. Protegemos los nodos del negocio",
+      "subtitle": "Transformamos la visibilidad en instalaciones reales. Nuestra estrategia ASO combina datos precisos, psicología del usuario y un profundo entendimiento de los algoritmos de App Store y Google Play.",
+      "list": {
+        "bus01": { "title": "Checkout y Pagos" },
+        "bus02": { "title": "Incorporación de usuarios" },
+        "bus03": { "title": "Integridad de datos" },
+        "bus04": { "title": "Protección de casos extremos" }
+      }
+    },
+    "ModerationSection": {
+      "title": "Pasa la moderación rápidamente",
+      "subtitle": "El rechazo de App Store o Google Play significa semanas de inactividad y presupuesto perdido. Conocemos las trampas de las directrices de Apple y Google y preparamos tu producto para su aprobación con antelación.",
+      "list": {
+        "mod01": {
+          "title": "Verificación de cumplimiento de directrices",
+          "desc": "Asegúrese de que su app cumpla todos los requisitos de App Store y Google Play"
+        },
+        "mod02": {
+          "title": "Pruebas en dispositivos reales",
+          "desc": "Prueba en dispositivos reales con diferentes versiones de SO y tamaños de pantalla"
+        },
+        "mod03": {
+          "title": "Control de tasa libre de fallos",
+          "desc": "Monitoreo y mantenimiento de alta estabilidad requerida para la aprobación en la tienda"
+        }
+      }
+    },
+    "ArmorSection": {
+      "title": "Armadura de múltiples capas para tu producto",
+      "steps": {
+        "step01": {
+          "title": "NIVEL 01",
+          "subTitle": "Funcional",
+          "desc": "Pruebas manuales profundas de la lógica. Tus usuarios obtienen exactamente lo prometido en las especificaciones."
+        },
+        "step02": {
+          "title": "NIVEL 02",
+          "subTitle": "Automatización",
+          "desc": "Escritura de pruebas de regresión automáticas (CI/CD). Lanzamientos rápidos sin miedo a 'romper algo'."
+        },
+        "step03": {
+          "title": "NIVEL 03",
+          "subTitle": "Seguridad",
+          "desc": "Escaneo de vulnerabilidades y pruebas de penetración. Protección contra fugas y pérdidas de datos."
+        },
+        "step04": {
+          "title": "NIVEL 04",
+          "subTitle": "Carga y estrés",
+          "desc": "Simulación de cargas máximas. Tu producto se mantiene estable durante picos masivos de tráfico."
+        }
+      }
+    },
+    "MetricsSection": {
+      "title": "Cómo la calidad se convierte en métricas clave",
+      "list": {
+        "met01": {
+          "title": "Menos abandono",
+          "desc": "Los usuarios permanecen debido a la perfecta confiabilidad del producto."
+        },
+        "met02": {
+          "title": "Menos reembolsos",
+          "desc": "Quejas mínimas sobre el comportamiento de funciones de pago."
+        },
+        "met03": {
+          "title": "Mejores valoraciones",
+          "desc": "Altas calificaciones 4.8+ gracias al rendimiento fluido y sin fallos de la app."
+        },
+        "met04": {
+          "title": "Monetización",
+          "desc": "Las transacciones se procesan sin fallos durante ventanas críticas de alto tráfico."
+        }
+      }
+    }
+  }
+}

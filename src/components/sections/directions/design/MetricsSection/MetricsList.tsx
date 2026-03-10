@@ -8,10 +8,10 @@ const MetricsList = () => {
       {designMetrics.map((item, i) => (
         <li
           key={i}
-          className="p-3 max-w-141.5 border border-[#343434] rounded-secondary
+          className="p-3 max-w-141.5 border border-main-border rounded-secondary
         duration-main hover:border-accent"
         >
-          <CycleCard {...item} />
+          <CycleCard {...item} translateKey="DesignPage.MetricsSection.metricslist" />
         </li>
       ))}
     </ul>
