@@ -9,7 +9,7 @@ const SpecializationList = ({ list }: SpecializationListProps) => {
     <ul className="flex flex-wrap justify-center gap-6 md:min-w-120 max-w-120">
       {list.map((item, i) => (
         <li key={i} className="max-w-57 p-3">
-          <CycleCard {...item} />
+          <CycleCard {...item} translateKey="MobilePage.SpecializationsSection.specializations" />
         </li>
       ))}
     </ul>

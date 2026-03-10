@@ -1,17 +1,17 @@
 [
   {
-    "title": "01. ANALYSIS",
-    "subTitle": "Keyword Research",
-    "desc": "Searching for relevant queries with the highest traffic volume and lowest competition. We find entry points where others don't see them."
+    "title": "dom01.title",
+    "subTitle": "dom01.subtitle",
+    "desc": "dom01.desc"
   },
   {
-    "title": "02. VISION",
-    "subTitle": "Visual ASO Optimization",
-    "desc": "Creating icons and screenshots that boost CTR by 25% or more. Visual communication that compels the user to tap 'Get'."
+    "title": "dom02.title",
+    "subTitle": "dom02.subtitle",
+    "desc": "dom02.desc"
   },
   {
-    "title": "03. BUILD",
-    "subTitle": "Deep Localization",
-    "desc": "Adapting metadata for the cultural nuances of specific GEOs: Brazil, India, Europe. We speak to the market in its own language."
+    "title": "dom03.title",
+    "subTitle": "dom03.subtitle",
+    "desc": "dom03.desc"
   }
 ]

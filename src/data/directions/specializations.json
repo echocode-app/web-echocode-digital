@@ -1,22 +1,22 @@
 [
   {
-    "title": "ECOSYSTEMS",
-    "subTitle": "Subscription SaaS",
-    "desc": "Building subscription-based systems. From Paywall optimization to LTV analytical service integration."
+    "title": "spec01.title",
+    "subTitle": "spec01.subTitle",
+    "desc": "spec01.desc"
   },
   {
-    "title": "OPTIMIZATION",
-    "subTitle": "Design",
-    "desc": "Tools built for speed. Memory optimization, offline modes, and real-time big data processing."
+    "title": "spec02.title",
+    "subTitle": "spec02.subTitle",
+    "desc": "spec02.desc"
   },
   {
-    "title": "SERVICES",
-    "subTitle": "Super-Apps",
-    "desc": "Multi-module solutions with complex logic that maintain interface speed and intuitiveness."
+    "title": "spec03.title",
+    "subTitle": "spec03.subTitle",
+    "desc": "spec03.desc"
   },
   {
-    "title": "INTELLIGENCE",
-    "subTitle": "AI ＆ Data Intelligence",
-    "desc": "Implementing ML models and real-time data processing for hyper-personalized user experiences."
+    "title": "spec04.title",
+    "subTitle": "spec04.subTitle",
+    "desc": "spec04.desc"
   }
 ]

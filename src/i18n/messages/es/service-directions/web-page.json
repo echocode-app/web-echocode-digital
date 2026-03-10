@@ -1,0 +1,74 @@
+{
+  "WebPage": {
+    "HeroSection": { "title": "CONSTRUIMOS EL FUTURO DIGITAL" },
+
+    "StrategySection": {
+      "title": "EXPERTISE Y ESTRATEGIA",
+      "subtitle": "Cada línea de código es un activo empresarial. Nos enfocamos en la integridad arquitectónica para minimizar la deuda técnica y maximizar el ROI.",
+      "list": {
+        "list01": "LANZAMIENTOS EXITOSOS",
+        "list02": "UPTIME PROMEDIO"
+      }
+    },
+    "SolutionsSection": {
+      "title": "SOLUCIONES PRINCIPALES",
+      "solutions": {
+        "sol01": {
+          "title": "SISTEMAS EMPRESARIALES",
+          "desc": "Arquitecturas ERP/CRM personalizadas diseñadas para la automatización completa del negocio y la armonía de datos."
+        },
+        "sol02": {
+          "title": "PLATAFORMAS DE ALTA CARGA",
+          "desc": "Ingeniería para millones de usuarios con arquitectura sin interrupciones y rendimiento global."
+        },
+        "sol03": {
+          "title": "SOLUCIONES E-COMMERCE",
+          "desc": "Tiendas escalables enfocadas en la conversión y en integraciones fluidas con múltiples vendedores."
+        }
+      }
+    },
+    "EngineeringSection": {
+      "title": "ESTÁNDARES DE INGENIERÍA",
+      "subtitle": "NO SOLO CONSTRUIMOS APLICACIONES, CONSTRUIMOS FORTALEZAS DIGITALES.",
+      "engineeringList": {
+        "list01": {
+          "title": "SEGURIDAD REFORZADA",
+          "eng01": "Cumplimiento OWASP Top 10",
+          "eng02": "Cifrado de datos (estándar AES-256)",
+          "eng03": "Gestión avanzada de identidad (OIDC)"
+        },
+        "list02": {
+          "title": "ESCALABILIDAD INFINITA",
+          "eng01": "Arquitectura de microservicios (Service Mesh)",
+          "eng02": "Clusters de Kubernetes con auto-scaling",
+          "eng03": "Replicación de bases de datos multi-región"
+        }
+      }
+    },
+    "DevelopmentSection": {
+      "title": "CICLO DE DESARROLLO",
+      "developments": {
+        "dev01": {
+          "title": "01. ANÁLISIS",
+          "subTitle": "DESCUBRIMIENTO",
+          "desc": "Análisis profundo de la lógica de negocio, el mercado y la viabilidad técnica."
+        },
+        "dev02": {
+          "title": "02. VISIÓN",
+          "subTitle": "DISEÑO",
+          "desc": "Diseño arquitectónico, documentación técnica y prototipado UX."
+        },
+        "dev03": {
+          "title": "03. CONSTRUCCIÓN",
+          "subTitle": "CODIFICACIÓN",
+          "desc": "Desarrollo modular utilizando buenas prácticas y pruebas automatizadas."
+        },
+        "dev04": {
+          "title": "04. OPTIMIZACIÓN",
+          "subTitle": "ESCALADO",
+          "desc": "Despliegue, monitoreo de carga y ajuste continuo del rendimiento."
+        }
+      }
+    }
+  }
+}

@@ -6,7 +6,7 @@ interface PortfolioListProps {
 
 const PortfolioList = ({ list }: PortfolioListProps) => {
   return (
-    <ul className="flex items-center flex-col md:flex-row flex-wrap  gap-10">
+    <ul className="flex items-center flex-col md:flex-row flex-wrap gap-10">
       {list.map((item, i) => (
         <PortfolioItem key={i} {...item} />
       ))}

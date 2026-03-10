@@ -6,7 +6,7 @@ const SolutionList = () => {
   return (
     <ul className="max-w-153.5 flex flex-col gap-6">
       {gameSolutions.map((items, i) => (
-        <SolutionItem key={i} {...items} />
+        <SolutionItem key={i} {...items} translateKey="GamePage.SolutionsSection.solutionsList" />
       ))}
     </ul>
   );

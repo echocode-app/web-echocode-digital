@@ -1,27 +1,27 @@
 [
   {
-    "title": "01. STRATEGY",
-    "subTitle": "Analysis",
-    "desc": "Technical audit, competitor research, and product Roadmap development."
+    "title": "step01.title",
+    "subTitle": "step01.subTitle",
+    "desc": "step01.desc"
   },
   {
-    "title": "02. UX／UI",
-    "subTitle": "Design",
-    "desc": "Creating interfaces focused on Retention and seamless user interaction."
+    "title": "step02.title",
+    "subTitle": "step02.subTitle",
+    "desc": "step02.desc"
   },
   {
-    "title": "03. CODE",
-    "subTitle": "Development",
-    "desc": "Native code (Swift/Kotlin) using modern clean architecture patterns."
+    "title": "step03.title",
+    "subTitle": "step03.subTitle",
+    "desc": "step03.desc"
   },
   {
-    "title": "04. DEVOPS",
-    "subTitle": "Integration",
-    "desc": "Seamless deployment and system integration ensuring reliability and speed."
+    "title": "step04.title",
+    "subTitle": "step04.subTitle",
+    "desc": "step04.desc"
   },
   {
-    "title": "05. GROWTH",
-    "subTitle": "Release ＆ ASO",
-    "desc": "Optimizing releases, App Store presence, and retention-focused features."
+    "title": "step05.title",
+    "subTitle": "step05.subTitle",
+    "desc": "step05.desc"
   }
 ]

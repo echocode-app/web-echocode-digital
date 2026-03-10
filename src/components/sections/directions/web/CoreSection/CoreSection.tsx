@@ -1,31 +1,27 @@
+import { useTranslations } from 'next-intl';
+
 import SectionContainer from '@/components/UI/section/SectionContainer';
 import SectionGradientLine from '@/components/UI/section/SectionGradientLine';
 import SectionTitle from '@/components/UI/section/SectionTitle';
 import CoreItem from './CoreItem';
 
 const CoreSection = () => {
+  const t = useTranslations('WebPage.SolutionsSection');
+
   return (
     <section className="pb-10 md:pb-25">
       <SectionGradientLine height="1" />
       <SectionContainer>
-        <SectionTitle marginBottom="40px">CORE SOLUTIONS</SectionTitle>
+        <SectionTitle marginBottom="40px">{t('title')}</SectionTitle>
         <ul className="flex gap-6 justify-center flex-wrap">
+          <CoreItem title={t('solutions.sol01.title')} desc={t('solutions.sol01.desc')} />
+          <CoreItem title={t('solutions.sol02.title')} desc={t('solutions.sol02.desc')} />
+          <CoreItem title={t('solutions.sol03.title')} desc={t('solutions.sol03.desc')} />
+
           <CoreItem
-            title={'ENTERPRISE SYSTEMS'}
+            title={'Web2App Conversion'}
             desc={
-              'Bespoke ERP／CRM architectures designed for full business automation and data harmony.'
-            }
-          />
-          <CoreItem
-            title={'HIGH-LOAD PLATFORMS'}
-            desc={
-              'Engineering for millions of users with zero-downtime architecture and global performance.'
-            }
-          />
-          <CoreItem
-            title={'E-COMMERCE SOLUTIONS'}
-            desc={
-              'Scalable storefronts focusing on conversion rates and seamless multi-vendor integrations.'
+              'Transform your web resource into a full-fledged mobile application (PWA/WebView) for iOS and Android in a matter of days'
             }
           />
         </ul>

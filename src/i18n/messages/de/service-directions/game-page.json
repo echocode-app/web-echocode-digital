@@ -1,0 +1,42 @@
+{
+  "GamePage": {
+    "HeroSection": {
+      "title": "BRING DIE REALITÄT AUF DAS NÄCHSTE LEVEL"
+    },
+    "SolutionsSection": {
+      "title": "Ökosystem der Lösungen",
+      "solutionsList": {
+        "sol01": {
+          "title": "FORTSCHRITTLICHE GAME-ENGINES",
+          "desc": "Wir nutzen modernste Engines, um fotorealistische Grafik und komplexe Physik zu erschaffen. Hardware-Optimierung sorgt für maximale FPS und ein nahtloses Gameplay."
+        },
+        "sol02": {
+          "title": "KONZEPT & 3D-ART",
+          "desc": "Von den ersten Skizzen bis zum finalen Render. Wir erschaffen einzigartige Spielwelten, Charaktere und Umgebungen, die die visuelle Identität Ihres Projekts definieren."
+        },
+        "sol03": {
+          "title": "SPIELÖKONOMIE & OPERATIONS",
+          "desc": "Entwicklung nachhaltiger In-Game-Ökonomien und Monetarisierungssysteme. Wir sichern langfristige Spielerbindung durch regelmäßige Updates und Live-Events."
+        }
+      }
+    },
+    "UniversesSection": {
+      "title": "ENTWICKLE NICHT NUR SPIELE. ERSCHAFFE UNIVERSEN",
+      "desc": "Werde Architekt von Spielerlebnissen. In unserem Team schreibst du nicht nur Skripte — du formst die Emotionen von Millionen Gamern weltweit.",
+      "list": {
+        "uni01": {
+          "title": "SPIELERZENTRIERTE KULTUR",
+          "desc": "Wir konzentrieren uns auf das Spielerlebnis. Jede Mechanik und jeder Pixel dient einem Ziel: pure Freude am Spielen."
+        },
+        "uni02": {
+          "title": "KREATIVE FREIHEIT",
+          "desc": "Keine starren Grenzen. Wir fördern Experimente mit Gameplay und neuen Technologien, um Innovation voranzutreiben."
+        },
+        "uni03": {
+          "title": "VOLLE VERANTWORTUNG",
+          "desc": "Du hast Mitspracherecht bei Leveldesign, Balancing und Story. Dein persönlicher Beitrag bestimmt das Schicksal des gesamten Projekts."
+        }
+      }
+    }
+  }
+}

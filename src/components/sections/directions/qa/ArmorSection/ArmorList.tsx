@@ -7,7 +7,7 @@ const ArmorList = () => {
     <ul className="flex gap-6 flex-wrap justify-center">
       {armorList.map((item, i) => (
         <li key={i} className="max-w-58">
-          <CycleCard {...item} />
+          <CycleCard {...item} translateKey="QAPage.ArmorSection.steps" />
         </li>
       ))}
     </ul>

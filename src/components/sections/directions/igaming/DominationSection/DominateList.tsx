@@ -7,7 +7,7 @@ const DominateList = () => {
     <ul className="flex flex-wrap gap-6 justify-center">
       {dominate.map((item, i) => (
         <li key={i} className="max-w-79">
-          <CycleCard {...item} />
+          <CycleCard {...item} translateKey="IGamingPage.DominateSection.list" />
         </li>
       ))}
     </ul>

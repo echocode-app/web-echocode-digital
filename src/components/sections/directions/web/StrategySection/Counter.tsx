@@ -31,7 +31,7 @@ const Counter = ({ to, decimals = 0 }: CounterProps) => {
   }, [isInView, count, to]);
 
   return (
-    <motion.span ref={ref} viewport={{ once: true }} className="block font-title text-[20px]">
+    <motion.span ref={ref} viewport={{ once: true }} className="block font-wadik text-[20px]">
       {formatted}
     </motion.span>
   );

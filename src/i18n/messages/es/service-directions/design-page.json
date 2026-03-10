@@ -1,0 +1,77 @@
+{
+  "DesignPage": {
+    "HeroSection": { "title": "Diseño. Crecimiento. Ingresos" },
+    "PhilosophySection": {
+      "title": "FILOSOFÍA",
+      "philosophyList": {
+        "phi01": {
+          "title": "Confianza",
+          "desc": "Construimos autoridad visual que elimina barreras antes del pago. Tu marca se ve premium y confiable desde el primer segundo."
+        },
+        "phi02": {
+          "title": "Claridad",
+          "desc": "Interfaces intuitivas que no requieren instrucciones. Reducimos la carga cognitiva para que los usuarios se centren en sus objetivos y en tu valor."
+        },
+        "phi03": {
+          "title": "Monetización",
+          "desc": "Uso de la psicología del comportamiento para aumentar el LTV y el valor medio de compra mediante patrones de interacción calculados."
+        }
+      }
+    },
+    "ExcellensSection": {
+      "title": "Nuestro camino hacia la excelencia",
+      "desc": "Cada etapa está respaldada por datos y análisis, lo que garantiza un resultado predecible y escalable para tu producto",
+      "list": {
+        "exce01": {
+          "title": "NIVEL 01",
+          "subtitle": "Investigación UX",
+          "desc": "Análisis profundo del nicho, estudio de competidores e identificación de los verdaderos puntos de dolor de los usuarios."
+        },
+        "exce02": {
+          "title": "NIVEL 02",
+          "subtitle": "Arquitectura de Flujos",
+          "desc": "Construcción de User Flows óptimos que conducen a la acción objetivo por el camino más corto y eficiente."
+        },
+        "exce03": {
+          "title": "NIVEL 03",
+          "subtitle": "Sistema UI",
+          "desc": "Creación de un lenguaje visual único y un sistema de diseño escalable adaptado a la identidad de tu marca."
+        },
+        "exce04": {
+          "title": "NIVEL 04",
+          "subtitle": "Motion",
+          "desc": "Animaciones estratégicas que captan la atención, mejoran la retención y guían al usuario a través de la experiencia."
+        }
+      }
+    },
+    "SpecializationSection": {
+      "title": "Especialización",
+      "specializationList": {
+        "spec01": "Aplicaciones móviles",
+        "spec02": "iGaming",
+        "spec03": "Dashboards",
+        "spec04": "Suscripciones"
+      }
+    },
+    "MetricsSection": {
+      "title": "Medimos el éxito con métricas",
+      "metricslist": {
+        "met01": {
+          "title": "NIVEL 01",
+          "subtitle": "ONBOARDING",
+          "desc": "Aceleramos el camino hacia el \"momento Aha\", el punto exacto en el que el valor del producto se vuelve evidente para el usuario."
+        },
+        "met02": {
+          "title": "NIVEL 02",
+          "subtitle": "CONVERSIÓN",
+          "desc": "Optimización profunda de paywalls, flujos de checkout y CTAs para convertir visitantes en clientes recurrentes."
+        },
+        "met03": {
+          "title": "NIVEL 03",
+          "subtitle": "CHURN RATE",
+          "desc": "Reducimos el abandono mediante una excelente usabilidad, diseño emocional y experiencias de usuario sin fricción."
+        }
+      }
+    }
+  }
+}

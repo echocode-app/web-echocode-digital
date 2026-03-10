@@ -1,0 +1,28 @@
+{
+  "CareerPage": {
+    "HeroSection": {
+      "title": "Build great products"
+    },
+    "BusinessSection": {
+      "title": "Don׳t just write code. Build businesses",
+      "subtitle": "Here you become a product engineer, not just a task executor. Your code directly impacts the revenue and experience of millions of users.",
+      "businessList": {
+        "bus01": {
+          "title": "Product Culture",
+          "description": "We care about stability, retention, and conversions just as much as clean code quality."
+        },
+        "bus02": {
+          "title": "No Micromanagement",
+          "description": "You get full ownership of features and direct access to product decision-making."
+        },
+        "bus03": {
+          "title": "Grow with us",
+          "description": "We grow people just like products: through mentorship, responsibility, and real impact."
+        }
+      }
+    },
+    "VacanciesSection": {
+      "title": "Open Vacancies"
+    }
+  }
+}

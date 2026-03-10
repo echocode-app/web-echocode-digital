@@ -41,7 +41,7 @@ const VacanciesItem = ({
       </div>
       <Link
         href={`/career/${vacancySlug ? vacancySlug : vacancyId}`}
-        className="mx-auto min-[490px]:mx-0 h-fit w-fit font-title text-[10px] bg-main-gradient px-5.5 py-2 rounded-base"
+        className="mx-auto min-[490px]:mx-0 h-fit w-fit font-wadik text-[10px] bg-main-gradient px-5.5 py-2 rounded-base uppercase"
       >
         apply now
       </Link>

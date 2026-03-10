@@ -1,14 +1,14 @@
 [
   {
-    "title": "PLAYER-CENTRIC CULTURE",
-    "desc": "We focus on the player experience. Every mechanic and every pixel must serve one goal: providing pure gaming satisfaction."
+    "title": "uni01.title",
+    "desc": "uni01.desc"
   },
   {
-    "title": "CREATIVE FREEDOM",
-    "desc": "No rigid boundaries. We encourage experimentation with gameplay and emerging technologies to drive innovation."
+    "title": "uni02.title",
+    "desc": "uni02.desc"
   },
   {
-    "title": "FULL OWNERSHIP",
-    "desc": "You have a voice in level design, balancing, and narrative. Your individual contribution determines the fate of the entire project."
+    "title": "uni03.title",
+    "desc": "uni03.desc"
   }
 ]

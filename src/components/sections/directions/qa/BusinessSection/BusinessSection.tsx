@@ -1,18 +1,19 @@
+import { useTranslations } from 'next-intl';
+
 import SectionContainer from '@/components/UI/section/SectionContainer';
 import SectionTitle from '@/components/UI/section/SectionTitle';
 import BusinessList from './BusinessList';
 
 const BusinessSection = () => {
+  const t = useTranslations('QAPage.BussinessSection');
+
   return (
     <section className="pt-16 pb-10 md:pb-25">
       <SectionContainer>
         <div className="mb-8 max-w-205">
-          <SectionTitle>{'We don׳t just test features. We protect business nodes'}</SectionTitle>
+          <SectionTitle>{t('title')}</SectionTitle>
         </div>
-        <p className="text-main-sm mb-8">
-          We transform visibility into real installs. Our ASO strategy is a blend of precise data,
-          user psychology, and a deep understanding of App Store and Google Play algorithms.
-        </p>
+        <p className="text-main-sm mb-8">{t('subtitle')}</p>
         <BusinessList />
       </SectionContainer>
     </section>

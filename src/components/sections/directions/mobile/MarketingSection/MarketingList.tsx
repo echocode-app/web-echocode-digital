@@ -1,19 +1,17 @@
+import { useTranslations } from 'next-intl';
+
 const MarketingList = () => {
+  const t = useTranslations('MobilePage.MarketingSection.list');
+
   return (
     <ul className="flex flex-wrap justify-center gap-6">
       <li className="p-3 max-w-122 rounded-lg border-l-2 border-accent">
-        <h3 className="font-title mb-3">ASO Optimization</h3>
-        <p className="text-main-sm text-gray75">
-          Scaling to the TOP for targeted keywords in the App Store and Google Play to gain stable
-          organic traffic and lower acquisition costs.
-        </p>
+        <h3 className="font-title mb-3 uppercase font-bold">{t('list01.title')}</h3>
+        <p className="text-main-sm text-gray75">{t('list01.desc')} </p>
       </li>
       <li className="p-3 max-w-122 rounded-lg border-l-2 border-accent">
-        <h3 className="font-title mb-3">Algorithmic Promotion</h3>
-        <p className="text-main-sm text-gray75">
-          Leveraging recommendation algorithms and trending mechanics for explosive user base growth
-          through viral loops and social proof.
-        </p>
+        <h3 className="font-title mb-3 uppercase font-bold">{t('list02.title')}</h3>
+        <p className="text-main-sm text-gray75">{t('list02.desc')} </p>
       </li>
     </ul>
   );

@@ -1,0 +1,75 @@
+{
+  "MobilePage": {
+    "HeroSection": { "title": "AUFBAUEN. SKALIEREN. DOMINIEREN" },
+    "FullCycleSection": {
+      "title": "FULL CYCLE ENTWICKLUNG",
+      "steps": {
+        "step01": {
+          "title": "01. STRATEGIE",
+          "subTitle": "Analyse",
+          "desc": "Technisches Audit, Wettbewerbsanalyse und Entwicklung des Produkt-Roadmaps."
+        },
+        "step02": {
+          "title": "02. UX／UI",
+          "subTitle": "Design",
+          "desc": "Erstellung von Interfaces mit Fokus auf Nutzerbindung und nahtlose Interaktion."
+        },
+        "step03": {
+          "title": "03. CODE",
+          "subTitle": "Entwicklung",
+          "desc": "Native Code (Swift/Kotlin) unter Verwendung moderner Clean-Architecture-Pattern."
+        },
+        "step04": {
+          "title": "04. DEVOPS",
+          "subTitle": "Integration",
+          "desc": "Nahtlose Bereitstellung und Systemintegration für Zuverlässigkeit und Geschwindigkeit."
+        },
+        "step05": {
+          "title": "05. WACHSTUM",
+          "subTitle": "Release & ASO",
+          "desc": "Optimierung von Releases, App Store-Präsenz und Funktionen zur Nutzerbindung."
+        }
+      }
+    },
+    "SpecializationsSection": {
+      "title": "PROFESSIONELLE SPEZIALISIERUNG",
+      "subtitle": "Wir konzentrieren uns auf die Entwicklung von Produkten, die vorhersehbare Ergebnisse liefern. Unsere Expertise umfasst komplexe technische Lösungen und effiziente Monetarisierungsmodelle.",
+      "specializations": {
+        "spec01": {
+          "title": "ÖKOSYSTEME",
+          "subTitle": "Subscription SaaS",
+          "desc": "Aufbau abonnementbasierter Systeme. Von der Paywall-Optimierung bis zur Integration von LTV-Analyseservices."
+        },
+        "spec02": {
+          "title": "OPTIMIERUNG",
+          "subTitle": "Utilities & Hochlastsysteme",
+          "desc": "Tools, die auf Geschwindigkeit ausgelegt sind. Speicheroptimierung, Offline-Modi und Echtzeit-Verarbeitung großer Datenmengen."
+        },
+        "spec03": {
+          "title": "SERVICES",
+          "subTitle": "Super-Apps",
+          "desc": "Multi-Modul-Lösungen mit komplexer Logik, die gleichzeitig schnelle und intuitive Benutzeroberflächen gewährleisten."
+        },
+        "spec04": {
+          "title": "INTELLIGENZ",
+          "subTitle": "AI & Data Intelligence",
+          "desc": "Implementierung von ML-Modellen und Echtzeit-Datenverarbeitung für hyperpersonalisierte Nutzererlebnisse."
+        }
+      }
+    },
+    "MarketingSection": {
+      "title": "WACHSTUM & MARKETING",
+      "subtitle": "Professionelle Entwicklung ist nur die halbe Geschichte. Wir helfen Produkten, in Stores sichtbar zu werden – durch bewährte Optimierungsmethoden und strategische Promotion.",
+      "list": {
+        "list01": {
+          "title": "ASO-Optimierung",
+          "desc": "Skalierung in die TOP-Ergebnisse für gezielte Keywords im App Store und Google Play, um stabilen organischen Traffic zu gewinnen und die Akquisitionskosten zu senken."
+        },
+        "list02": {
+          "title": "Algorithmische Promotion",
+          "desc": "Nutzung von Empfehlungsalgorithmen und Trend-Mechaniken für explosives Nutzerwachstum durch virale Loops und Social Proof."
+        }
+      }
+    }
+  }
+}
