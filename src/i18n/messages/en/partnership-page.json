@@ -13,7 +13,7 @@
           "priority": "Predictability"
         },
         "enga02": {
-          "title": "Time & Material",
+          "title": "Time ＆ Material",
           "description": "Hourly-based billing for maximum agility. Ideal for projects with shifting requirements.",
           "priority": "FLEXIBILITY"
         },
@@ -30,6 +30,7 @@
       }
     },
     "SolutionsSection": {
+      "title": "Data-Driven Solutions",
       "solutionsList": {
         "sol01": {
           "title": "ANALYTICS",

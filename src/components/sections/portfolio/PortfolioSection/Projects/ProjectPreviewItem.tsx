@@ -19,7 +19,7 @@ const ProjectPreviewItem = ({ image, title, platforms }: ProjectPreviewItemProps
             will-change-transform"
         />
       </div>
-      <h3 className="mb-1 font-title text-title-sm  pointer-events-none">{title}</h3>
+      <h3 className="mb-1 font-wadik text-title-sm  pointer-events-none">{title}</h3>
       {platforms && (
         <ul className="flex gap-2">
           {platforms.map((item, i) => (

@@ -1,0 +1,13 @@
+{
+  "VacancyCommon": {
+    "vacancyForm": {
+      "title": "Are you the one?",
+      "subtitle": "Send your CV and a link to LinkedIn or GitHub.",
+      "cvLabel": "Your CV",
+      "cvPlaceholder": "your cv",
+      "linkLabel": "Link LinkedIn／GitHub",
+      "linkPlaceholder": "paste your link",
+      "submitBtn": "Apply For this poition"
+    }
+  }
+}

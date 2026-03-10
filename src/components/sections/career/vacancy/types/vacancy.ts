@@ -1,4 +1,5 @@
 export interface CareerData {
+  translateKey: string;
   heroSection: VacancyHeroSection;
   valueSection: ValueSection;
   descriptionSections: DescriptionSection[];

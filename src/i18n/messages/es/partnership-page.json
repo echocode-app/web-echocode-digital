@@ -1,0 +1,54 @@
+{
+  "PartnershipPage": {
+    "HeroSection": {
+      "title": "INVERTIMOS EN TU CRECIMIENTO"
+    },
+    "EngagementSection": {
+      "title": "MODELOS DE COMPROMISO",
+      "engagementList": {
+        "subtitle": "PRIORIDAD",
+        "enga01": {
+          "title": "PRECIO FIJO",
+          "description": "Plazos claros y presupuesto fijo. Perfecto para proyectos con requisitos técnicos específicos.",
+          "priority": "Previsibilidad"
+        },
+        "enga02": {
+          "title": "Tiempo y Material",
+          "description": "Facturación por hora para máxima agilidad. Ideal para proyectos con requisitos cambiantes.",
+          "priority": "Flexibilidad"
+        },
+        "enga03": {
+          "title": "HÍBRIDO",
+          "description": "Costo base + bonos por desempeño. Compartimos riesgos y éxito contigo.",
+          "priority": "Escalabilidad"
+        },
+        "enga04": {
+          "title": "PARTICIPACIÓN EN INGRESOS",
+          "description": "Inmersión total en el producto. Invertimos nuestro tiempo y experiencia a cambio de una parte de las ganancias.",
+          "priority": "Crecimiento a largo plazo"
+        }
+      }
+    },
+    "SolutionsSection": {
+      "title": "Soluciones basadas en datos",
+      "solutionsList": {
+        "sol01": {
+          "title": "ANALÍTICA",
+          "desc": "Transparencia total del embudo. Amplitude y AppsFlyer para comprender profundamente el comportamiento del usuario."
+        },
+        "sol02": {
+          "title": "ATRIBUCIÓN",
+          "desc": "Seguimiento preciso de las fuentes de tráfico y optimización de presupuestos publicitarios basado en ROAS."
+        },
+        "sol03": {
+          "title": "MONETIZACIÓN",
+          "desc": "Integración de sistemas de pago y optimización de paywalls mediante RevenueCat, Adapty y Stripe para Web y App."
+        },
+        "sol04": {
+          "title": "OPTIMIZACIÓN",
+          "desc": "Mejora constante de las tasas de conversión mediante pruebas A/B sistemáticas y análisis de feedback."
+        }
+      }
+    }
+  }
+}

@@ -1,92 +1,93 @@
 {
+  "translateKey": "VacancyDesignerPage",
   "heroSection": {
     "image": { "path": "/images/rabbits/hero/vacancy/designer.png" }
   },
   "valueSection": {
-    "title": "Design that proves its value",
-    "subtitle": "At Echocode, we don’t just find bugs. Our QA department is the guardian of product quality. We are looking for a specialist who understands the business value of a stable release and isn’t afraid to take responsibility for the final result."
+    "title": "valueSection.title",
+    "subtitle": "valueSection.subtitle"
   },
   "descriptionSections": [
     {
-      "title": "What will you be working on?",
+      "title": "descriptionSections.section01.title",
       "values": [
         {
-          "title": "End-to-end Quality:",
-          "desc": "Participation in the formation of product strategy together with CEO and engineers."
+          "title": "descriptionSections.section01.val01.title",
+          "desc": "descriptionSections.section01.val01.desc"
         },
         {
-          "title": "Conversion Design:",
-          "desc": "Creating and testing interfaces that increase LTV and conversions."
+          "title": "descriptionSections.section01.val02.title",
+          "desc": "descriptionSections.section01.val02.desc"
         },
         {
-          "title": "RATEDesign System:",
-          "desc": "Support and development of a scalable design system in Figma."
+          "title": "descriptionSections.section01.val03.title",
+          "desc": "descriptionSections.section01.val03.desc"
         },
         {
-          "title": "RATEUser Feedback:",
-          "desc": "Feedback analysis and iterative UX improvement."
+          "title": "descriptionSections.section01.val04.title",
+          "desc": "descriptionSections.section01.val04.desc"
         }
       ]
     },
     {
-      "title": "Our expectations",
+      "title": "descriptionSections.section02.title",
       "values": [
         {
-          "title": "Strong portfolio",
-          "desc": "Mobile products (iOS/Android)."
+          "title": "descriptionSections.section02.val01.title",
+          "desc": "descriptionSections.section02.val01.desc"
         },
         {
-          "title": "Figma Expert Level",
-          "desc": "Auto Layout, Variables, Prototyping."
+          "title": "descriptionSections.section02.val02.title",
+          "desc": "descriptionSections.section02.val02.desc"
         },
         {
-          "title": "Understanding psychology",
-          "desc": "User and the principles of behavioral economics."
+          "title": "descriptionSections.section02.val03.title",
+          "desc": "descriptionSections.section02.val03.desc"
         },
         {
-          "title": "Knowledge of technical limitations of platforms",
-          "desc": "What is easy for a developer to implement and what is not."
+          "title": "descriptionSections.section02.val04.title",
+          "desc": "descriptionSections.section02.val04.desc"
         }
       ]
     },
     {
-      "title": "Your Soft Skills Stack",
+      "title": "descriptionSections.section03.title",
       "values": [
         {
-          "title": "Ability to justify design decisions",
-          "desc": "Every decision has a hypothesis, data, and a clear impact on the user and the business."
+          "title": "descriptionSections.section03.val01.title",
+          "desc": "descriptionSections.section03.val01.desc"
         },
         {
-          "title": "Willingness to delve into numbers and product metrics",
-          "desc": "We work with conversions, flows, and funnels, not just aesthetics."
+          "title": "descriptionSections.section03.val02.title",
+          "desc": "descriptionSections.section03.val02.desc"
         },
         {
-          "title": "High level of autonomy",
-          "desc": "The ability to independently lead a task from idea to measurable result."
+          "title": "descriptionSections.section03.val03.title",
+          "desc": "descriptionSections.section03.val03.desc"
         }
       ]
     }
   ],
   "selectionSection": [
     {
-      "title": "Step 01",
-      "subTitle": "Portfolio Review",
-      "desc": "We evaluate thinking, decision logic, and the real impact of design."
+      "title": "selectionSection.step01.title",
+      "subTitle": "selectionSection.step01.subTitle",
+      "desc": "selectionSection.step01.desc"
     },
     {
-      "title": "Step 02",
-      "subTitle": "Design Challenge",
-      "desc": "We check how you formulate hypotheses and work with constraints."
+      "title": "selectionSection.step02.title",
+      "subTitle": "selectionSection.step02.subTitle",
+      "desc": "selectionSection.step02.desc"
     },
     {
-      "title": "Step 03",
-      "subTitle": "Interview",
-      "desc": "A conversation with the product team about approach, process, and collaboration."
+      "title": "selectionSection.step03.title",
+      "subTitle": "selectionSection.step03.subTitle",
+      "desc": "selectionSection.step03.desc"
     },
     {
-      "title": "Step 04",
-      "subTitle": "Offer",
-      "desc": "Transparent offer and start of cooperation without unnecessary steps."
+      "title": "selectionSection.step04.title",
+      "subTitle": "selectionSection.step04.subTitle",
+      "desc": "selectionSection.step04.desc"
     }
   ]
 }

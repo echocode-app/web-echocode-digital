@@ -10,6 +10,7 @@ import initUpload, { InitUploadResult } from './actions/initUpload';
 // import { uploadFile } from './actions/uploadFile';
 
 import { VacancyData } from '../../types/vacancy';
+import { useLocale, useTranslations } from 'next-intl';
 
 // const initialState = {
 //   success: false,
@@ -21,6 +22,10 @@ interface CandidateFormProps {
 }
 
 const CandidateForm = ({ vacancyData }: CandidateFormProps) => {
+  const t = useTranslations('VacancyCommon.vacancyForm');
+  const locale = useLocale();
+  const uaStyle = locale === 'ua' ? 'text-main-xs' : 'text-main-sm';
+
   console.log(vacancyData);
   // const { vacancyId, vacancySlug, vacancyTitle, level, conditions, employmentType } = vacancyData;
 
@@ -57,9 +62,7 @@ const CandidateForm = ({ vacancyData }: CandidateFormProps) => {
       {/* <input type="hidden" name="cvFile" value={JSON.stringify(cvFileObject)} /> */}
       <input type="hidden" name="vacancy" value={JSON.stringify(vacancyData)} />
       {/* <input type="text" name="profileUrl" value={profileUrl} /> */}
-      <strong className="block mb-2 text-main-sm font-medium">
-        Send your CV and a link to LinkedIn or GitHub.
-      </strong>
+      <strong className="block mb-2 text-main-sm font-medium">{t('subtitle')}</strong>
       <div className="mb-4">
         <input type="file" ref={inputRef} className="hidden" onChange={handleFileChange} />
 
@@ -73,11 +76,11 @@ const CandidateForm = ({ vacancyData }: CandidateFormProps) => {
                   border-white cursor-pointer
                   "
         >
-          <p className="font-title">your cv</p>
+          <p className="font-title uppercase font-bold">{t('cvLabel')}</p>
           <div className="flex gap-1">
             <Image src={'/UI/clip.svg'} alt="Clip" width={12} height={16} />
-            <span className="block text-primary-gray text-main-sm leading-4">
-              {uploading ? 'Uploading...' : cvFile?.originalName || 'your cv'}
+            <span className={`block text-primary-gray text-main-sm leading-4 ${uaStyle}`}>
+              {uploading ? 'Uploading...' : cvFile?.originalName || t('cvPlaceholder')}
             </span>
           </div>
         </button>
@@ -93,14 +96,14 @@ const CandidateForm = ({ vacancyData }: CandidateFormProps) => {
         <label
           htmlFor="profileUrl"
           className=" absolute top-2 left-4
-               pointer-events-none text-[10px] font-title text-white border-white"
+               pointer-events-none text-[10px] font-title text-white border-white uppercase font-bold"
         >
-          Link LinkedIn／GitHub
+          {t('linkLabel')}
         </label>
         <input
           type="text"
           name="profileUrl"
-          placeholder="paste your link"
+          placeholder={t('linkPlaceholder')}
           className="indent-4 block pt-6.5 pb-2 pl-4 pr-6 border rounded-secondary leading-4 w-full
          hover:border-accent focus:border-accent duration-main transition-colors
        outline-0 text-main-xs font-main text-white placeholder:text-primary-gray border-white"

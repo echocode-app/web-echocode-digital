@@ -1,0 +1,86 @@
+{
+  "VacancyIOSPage": {
+    "valueSection": {
+      "title": "Code, der mit dir wächst",
+      "subtitle": "Echocode.app sucht einen ambitionierten Trainee iOS Developer, der bereit ist, \"Code um des Codes willen\" hinter sich zu lassen und stattdessen Produkte zu entwickeln, die Umsatz generieren. Wir arbeiten im Bereich mobiler Apps für den globalen Markt, sodass Millionen Menschen deinen Code sehen werden."
+    },
+    "descriptionSections": {
+      "section01": {
+        "title": "Woran wirst du arbeiten?",
+        "val01": {
+          "title": "Praxisnahe Erfahrung:",
+          "desc": "Arbeit an echten Produkten, nicht an akademischen oder Dummy-Aufgaben."
+        },
+        "val02": {
+          "title": "Mentoring:",
+          "desc": "Direkter Zugang zu Senior Engineers, die dir helfen, innerhalb weniger Monate zum Junior zu wachsen."
+        },
+        "val03": {
+          "title": "Produkt-Mindset:",
+          "desc": "Wir zeigen dir, wie man Metriken, Retention und Monetarisierung versteht."
+        },
+        "val04": {
+          "title": "100% Remote & Flexibilität:",
+          "desc": "Arbeite von überall – entscheidend ist das Ergebnis."
+        }
+      },
+      "section02": {
+        "title": "Anforderungen (Das Wesentliche)",
+        "val01": {
+          "title": "Swift & OOP Grundlagen",
+          "desc": "Grundkenntnisse in Swift und Verständnis der OOP-Prinzipien."
+        },
+        "val02": {
+          "title": "UIKit Kenntnisse (SwiftUI Plus)",
+          "desc": "Grundkenntnisse in UIKit (SwiftUI ist ein großer Vorteil)."
+        },
+        "val03": {
+          "title": "Grundlagen der mobilen Architektur",
+          "desc": "Verständnis, wie eine mobile App funktioniert (View-Lifecycle, API-Interaktion)."
+        },
+        "val04": {
+          "title": "Produktdenken",
+          "desc": "Der Wunsch zu verstehen, warum eine Funktion gebaut wird, nicht nur wie."
+        }
+      },
+      "section03": {
+        "title": "Dein Skill-Stack",
+        "val01": {
+          "title": "Pet-Projekte / Xcode Praxis",
+          "desc": "Eigene Projekte oder Erfahrung mit Xcode."
+        },
+        "val02": {
+          "title": "Architektur Grundlagen (MVVM)",
+          "desc": "Grundkenntnisse von Architekturen wie MVVM."
+        },
+        "val03": {
+          "title": "Git Grundlagen",
+          "desc": "Verständnis von Git."
+        }
+      }
+    },
+    "selectionSection": {
+      "title": "Auswahlphasen",
+      "step01": {
+        "title": "Schritt 01",
+        "subTitle": "Review (CV & GitHub)",
+        "desc": "Bewertung deiner Erfahrung, deines Stacks und deiner Codequalität."
+      },
+      "step02": {
+        "title": "Schritt 02",
+        "subTitle": "Testaufgabe",
+        "desc": "Eine praktische Aufgabe, um Logik, Problemlösung und Architekturdenken zu zeigen."
+      },
+      "step03": {
+        "title": "Schritt 03",
+        "subTitle": "Technisches Interview",
+        "desc": "Ein tiefgehendes Gespräch über deine Erfahrung, Entscheidungen und Systeme."
+      },
+      "step04": {
+        "title": "Schritt 04",
+        "subTitle": "Angebot",
+        "desc": "Festlegung der Bedingungen und Präsentation unseres Angebots für die Zusammenarbeit."
+      }
+    }
+  }
+}

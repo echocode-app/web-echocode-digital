@@ -41,6 +41,12 @@
           "eng01": "Microservices-Architektur (Service Mesh)",
           "eng02": "Auto-Scaling Kubernetes-Cluster",
           "eng03": "Multi-Region Datenbank-Replikation"
+        },
+        "list03": {
+          "title": "WEB2APP LÖSUNGEN",
+          "eng01": "App Store & Google Play",
+          "eng02": "Intelligente Push-Benachrichtigungen",
+          "eng03": "PWA & Offline-Zugriff"
         }
       }
     },

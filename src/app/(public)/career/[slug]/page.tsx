@@ -23,7 +23,8 @@ const VacancyPage = async ({ params }: VacancyPageProps) => {
   }
 
   const { vacancyTitle, level, employmentType, vacancyId, vacancySlug, conditions } = vacancy;
-  const { heroSection, valueSection, descriptionSections, selectionSection } = careerData;
+  const { heroSection, valueSection, descriptionSections, selectionSection, translateKey } =
+    careerData;
 
   const vacancyData = {
     vacancyId,
@@ -42,11 +43,15 @@ const VacancyPage = async ({ params }: VacancyPageProps) => {
         employmentType={employmentType}
       />
       <StaticGradientLine />
-      <ValueSection title={valueSection.title} subtitle={valueSection.subtitle} />
+      <ValueSection
+        title={valueSection.title}
+        subtitle={valueSection.subtitle}
+        translateKey={translateKey}
+      />
       {descriptionSections.map(({ title, values }, i) => (
-        <DescriptionSections key={i} title={title} values={values} />
+        <DescriptionSections key={i} title={title} values={values} translateKey={translateKey} />
       ))}
-      <SelectionSection selectionList={selectionSection} />
+      <SelectionSection selectionList={selectionSection} translateKey={translateKey} />
       <CandidateSection vacancyData={vacancyData} />
     </>
   );

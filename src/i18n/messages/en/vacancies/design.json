@@ -1,0 +1,90 @@
+{
+  "VacancyDesignerPage": {
+    "valueSection": {
+      "title": "Design that proves its value",
+      "subtitle": "At Echocode, design is not just about visuals. It’s about creating hypotheses that turn into measurable product growth. We are looking for a designer who understands the business value of product decisions and can justify them with data and user behavior."
+    },
+
+    "descriptionSections": {
+      "section01": {
+        "title": "What will you be working on?",
+        "val01": {
+          "title": "End-to-end Product Design:",
+          "desc": "Participation in product strategy formation together with the CEO and engineering team."
+        },
+        "val02": {
+          "title": "Conversion Design:",
+          "desc": "Designing and testing interfaces that increase LTV and conversion rates."
+        },
+        "val03": {
+          "title": "RATEDesign System:",
+          "desc": "Maintaining and evolving a scalable design system in Figma."
+        },
+        "val04": {
+          "title": "RATEUser Feedback:",
+          "desc": "Analyzing feedback and iterating UX improvements."
+        }
+      },
+
+      "section02": {
+        "title": "Our expectations",
+        "val01": {
+          "title": "Strong portfolio",
+          "desc": "Experience with mobile products (iOS / Android)."
+        },
+        "val02": {
+          "title": "Figma Expert Level",
+          "desc": "Deep knowledge of Auto Layout, Variables and Prototyping."
+        },
+        "val03": {
+          "title": "Understanding user psychology",
+          "desc": "Knowledge of user behavior principles and behavioral economics."
+        },
+        "val04": {
+          "title": "Understanding technical platform limitations",
+          "desc": "Knowing what is easy for developers to implement and what is not."
+        }
+      },
+
+      "section03": {
+        "title": "Your Soft Skills Stack",
+        "val01": {
+          "title": "Ability to justify design decisions",
+          "desc": "Every decision is based on a hypothesis, data, and measurable product impact."
+        },
+        "val02": {
+          "title": "Willingness to work with product metrics",
+          "desc": "We work with conversions, funnels, and flows — not only aesthetics."
+        },
+        "val03": {
+          "title": "High level of autonomy",
+          "desc": "Ability to independently drive a task from idea to measurable result."
+        }
+      }
+    },
+
+    "selectionSection": {
+      "title": "Selection stages",
+      "step01": {
+        "title": "Step 01",
+        "subTitle": "Portfolio Review",
+        "desc": "We evaluate design thinking, decision logic, and real product impact."
+      },
+      "step02": {
+        "title": "Step 02",
+        "subTitle": "Design Challenge",
+        "desc": "We evaluate how you formulate hypotheses and work with constraints."
+      },
+      "step03": {
+        "title": "Step 03",
+        "subTitle": "Interview",
+        "desc": "Conversation with the product team about approach, process, and collaboration."
+      },
+      "step04": {
+        "title": "Step 04",
+        "subTitle": "Offer",
+        "desc": "Transparent offer and start of cooperation without unnecessary steps."
+      }
+    }
+  }
+}

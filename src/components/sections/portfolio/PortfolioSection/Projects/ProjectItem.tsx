@@ -24,7 +24,7 @@ const ProjectItem = ({ image, title, id, platforms }: ProjectItemProps) => {
           />
         </div>
         <div className="flex justify-between mb-1">
-          <h3 className="font-title text-title-sm group-hover:text-accent duration-main">
+          <h3 className="font-wadik text-title-sm group-hover:text-accent duration-main">
             {title}
           </h3>
           <LinkIcon />

@@ -1,0 +1,13 @@
+{
+  "VacancyCommon": {
+    "vacancyForm": {
+      "title": "Чи це ти?",
+      "subtitle": "Надішліть своє резюме та посилання на LinkedIn або GitHub.",
+      "cvLabel": "Ваше резюме",
+      "cvPlaceholder": "ваше резюме",
+      "linkLabel": "Посилання LinkedIn/GitHub",
+      "linkPlaceholder": "вставте посилання",
+      "submitBtn": "Подати заявку"
+    }
+  }
+}

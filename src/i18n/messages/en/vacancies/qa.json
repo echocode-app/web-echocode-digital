@@ -1,0 +1,90 @@
+{
+  "VacancyQAPage": {
+    "valueSection": {
+      "title": "QA that proves its value",
+      "subtitle": "Design at Echocode is not just about visuals, it's about hypotheses that turn into revenue. We are looking for a designer with a strong analytical approach who can defend their decisions based on data and user experience."
+    },
+
+    "descriptionSections": {
+      "section01": {
+        "title": "What will you be working on?",
+        "val01": {
+          "title": "End-to-end Quality:",
+          "desc": "Full cycle testing of complex mobile and web products."
+        },
+        "val02": {
+          "title": "Process Ownership:",
+          "desc": "Building and optimizing QA processes within product squads."
+        },
+        "val03": {
+          "title": "Data-Driven QA:",
+          "desc": "Working with stability metrics and analyzing root causes of production defects."
+        },
+        "val04": {
+          "title": "Automation Advocacy:",
+          "desc": "Opportunity to implement automated tests to speed up CI/CD."
+        }
+      },
+
+      "section02": {
+        "title": "Expertise Requirements",
+        "val01": {
+          "title": "Cross-Platform Testing Experience",
+          "desc": "2+ years of experience in Mobile (iOS/Android) and Web testing."
+        },
+        "val02": {
+          "title": "Client–Server ＆ API Knowledge",
+          "desc": "Deep understanding of client-server architecture and API interaction (Postman/Charles)."
+        },
+        "val03": {
+          "title": "Crash ＆ Analytics Tools",
+          "desc": "Experience with Crashlytics, Firebase, and analytics tools."
+        },
+        "val04": {
+          "title": "SDLC ＆ Agile Process Understanding",
+          "desc": "Understanding of SDLC and Agile methodologies."
+        }
+      },
+
+      "section03": {
+        "title": "We Value",
+        "val01": {
+          "title": "Detail-Oriented ＆ Analytical",
+          "desc": "Attention to detail and critical thinking."
+        },
+        "val02": {
+          "title": "Clear Communication ＆ Problem Solving",
+          "desc": "Ability to clearly communicate problems and propose solutions."
+        },
+        "val03": {
+          "title": "Fintech ／ High-Load Product Experience",
+          "desc": "Experience in Fintech or high-load products."
+        }
+      }
+    },
+
+    "selectionSection": {
+      "title": "Selection stages",
+      "step01": {
+        "title": "Step 01",
+        "subTitle": "Screening call",
+        "desc": "We assess your SDLC knowledge, prioritization, and ability to identify product vulnerabilities."
+      },
+      "step02": {
+        "title": "Step 02",
+        "subTitle": "Practical test case analysis",
+        "desc": "Evaluating tests, hypotheses, and constraints."
+      },
+      "step03": {
+        "title": "Step 03",
+        "subTitle": "Tech Interview",
+        "desc": "Deep dive into testing methodologies, toolsets, and Agile integration experience."
+      },
+      "step04": {
+        "title": "Step 04",
+        "subTitle": "Offer",
+        "desc": "Clear partnership proposal focused on your growth and impact on product quality."
+      }
+    }
+  }
+}

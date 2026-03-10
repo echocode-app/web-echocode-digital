@@ -1,92 +1,93 @@
 {
+  "translateKey": "VacancyIOSPage",
   "heroSection": {
     "image": { "path": "/images/rabbits/hero/vacancy/ios.png" }
   },
   "valueSection": {
-    "title": "Coding that grows with you",
-    "subtitle": "Echocode.app is looking for an ambitious Trainee iOS Developer ready to ditch \"code for the sake of code\" in favor of building profit-generating products. We work in the mobile app niche for the global market, so millions will see your code."
+    "title": "valueSection.title",
+    "subtitle": "valueSection.subtitle"
   },
   "descriptionSections": [
     {
-      "title": "What will you be working on?",
+      "title": "descriptionSections.section01.title",
       "values": [
         {
-          "title": "Real-world Experience:",
-          "desc": "Working on live products, not academic or dummy tasks."
+          "title": "descriptionSections.section01.val01.title",
+          "desc": "descriptionSections.section01.val01.desc"
         },
         {
-          "title": "Mentorship:",
-          "desc": "Direct access to Senior engineers who will help you grow to Junior in months."
+          "title": "descriptionSections.section01.val02.title",
+          "desc": "descriptionSections.section01.val02.desc"
         },
         {
-          "title": "Product Mindset:",
-          "desc": "We will teach you to understand metrics, Retention, and monetization."
+          "title": "descriptionSections.section01.val03.title",
+          "desc": "descriptionSections.section01.val03.desc"
         },
         {
-          "title": "Full Remote ＆ Flexibility:",
-          "desc": "Work from wherever you are, result is what matters."
+          "title": "descriptionSections.section01.val04.title",
+          "desc": "descriptionSections.section01.val04.desc"
         }
       ]
     },
     {
-      "title": "Requirements (The Essentials)",
+      "title": "descriptionSections.section02.title",
       "values": [
         {
-          "title": "Swift ＆ OOP Fundamentals",
-          "desc": "Basic proficiency in Swift and understanding of OOP principles."
+          "title": "descriptionSections.section02.val01.title",
+          "desc": "descriptionSections.section02.val01.desc"
         },
         {
-          "title": "UIKit Knowledge (SwiftUI Plus)",
-          "desc": "Knowledge of UIKit basics (SwiftUI is a big plus)."
+          "title": "descriptionSections.section02.val02.title",
+          "desc": "descriptionSections.section02.val02.desc"
         },
         {
-          "title": "Mobile App Architecture Basics",
-          "desc": "Understanding of how a mobile app works (View lifecycle, API interaction)."
+          "title": "descriptionSections.section02.val03.title",
+          "desc": "descriptionSections.section02.val03.desc"
         },
         {
-          "title": "Product Mindset",
-          "desc": "Desire to understand \"why\" we build a feature, not just \"how\" to code it."
+          "title": "descriptionSections.section02.val04.title",
+          "desc": "descriptionSections.section02.val04.desc"
         }
       ]
     },
     {
-      "title": "Your Skills Stack",
+      "title": "descriptionSections.section03.title",
       "values": [
         {
-          "title": "Pet Projects ／ Xcode Practice",
-          "desc": "Personal pet-projects or Xcode experience."
+          "title": "descriptionSections.section03.val01.title",
+          "desc": "descriptionSections.section03.val01.desc"
         },
         {
-          "title": "Architecture Basics (MVVM)",
-          "desc": "Basic knowledge of architectures (MVVM)."
+          "title": "descriptionSections.section03.val02.title",
+          "desc": "descriptionSections.section03.val02.desc"
         },
         {
-          "title": "Git Fundamentals",
-          "desc": "Understanding of Git."
+          "title": "descriptionSections.section03.val03.title",
+          "desc": "descriptionSections.section03.val03.desc"
         }
       ]
     }
   ],
   "selectionSection": [
     {
-      "title": "Step 01",
-      "subTitle": "Review (CV ＆ GitHub)",
-      "desc": "Evaluating your experience, stack, and code quality for perfect role alignment."
+      "title": "selectionSection.step01.title",
+      "subTitle": "selectionSection.step01.subTitle",
+      "desc": "selectionSection.step01.desc"
     },
     {
-      "title": "Step 02",
-      "subTitle": "Test Task",
-      "desc": "A practical challenge designed to showcase your logic, problem-solving skills, and architectural thinking."
+      "title": "selectionSection.step02.title",
+      "subTitle": "selectionSection.step02.subTitle",
+      "desc": "selectionSection.step02.desc"
     },
     {
-      "title": "Step 03",
-      "subTitle": "Technical Interview",
-      "desc": "A deep dive into your expertise, decisions, and experience with systems."
+      "title": "selectionSection.step03.title",
+      "subTitle": "selectionSection.step03.subTitle",
+      "desc": "selectionSection.step03.desc"
     },
     {
-      "title": "Step 04",
-      "subTitle": "Offer",
-      "desc": "Finalizing terms and presenting a clear, transparent proposal for our future collaboration."
+      "title": "selectionSection.step04.title",
+      "subTitle": "selectionSection.step04.subTitle",
+      "desc": "selectionSection.step04.desc"
     }
   ]
 }
