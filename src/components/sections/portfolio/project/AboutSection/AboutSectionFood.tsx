@@ -21,37 +21,39 @@ const AboutSectionFood = () => {
             </p>
           </div>
           <div className="flex justify-center w-36.5 md:w-98.5 lg:pl-15.5 lg:pr-16">
-            <div className="relative w-36.5 h-86.5 overflow-visible">
+            <div className="relative w-36.5 h-86.5 overflow-visible transform-3d">
               <Image
                 src="/images/projects/right-phone.png"
                 alt="right-phone"
                 fill
-                className="object-contain rotate-22"
+                className="object-contain rotate-22 transform-gpu translate-z-0"
               />
 
               <Image
                 src="/images/projects/food/right-screen.png"
                 alt="screen"
                 fill
-                className="absolute z-10 object-cover scale-104 -translate-x-1 -translate-y-0.5 overflow-visible"
+                className="absolute z-10 object-cover scale-104 -translate-x-1 -translate-y-0.5 overflow-visible 
+                transform-gpu translate-z-10"
               />
             </div>
           </div>
         </div>
         <div className="flex flex-col lg:flex-row items-center lg:items-start justify-between gap-4 lg:gap-0">
           <div className="flex justify-center w-36.5 md:w-98.5 lg:h-59 lg:pl-12.5 lg:pr-19.5 order-1 lg:order-0">
-            <div className="relative w-36.5 h-86.5 overflow-visible">
+            <div className="relative w-36.5 h-86.5 overflow-visible transform-3d">
               <Image
                 src={'/images/projects/left-phone.png'}
                 alt="left-phone"
                 fill
-                className="-rotate-22 absolute lg:-translate-y-30"
+                className="-rotate-22 absolute lg:-translate-y-30  transform-gpu translate-z-0"
               />
               <Image
                 src="/images/projects/food/left-screen.png"
                 alt="screen"
                 fill
-                className="absolute z-10 object-cover scale-104 translate-x-1 -translate-y-0.5 lg:-translate-y-30.5 overflow-visible"
+                className="absolute z-10 object-cover scale-104 translate-x-1 -translate-y-0.5 lg:-translate-y-30.5 overflow-visible 
+                 transform-gpu translate-z-10"
               />
             </div>
           </div>
