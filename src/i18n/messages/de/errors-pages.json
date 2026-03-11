@@ -1,0 +1,14 @@
+{
+  "Error404Page": {
+    "title": "Seite nicht gefunden",
+    "description": "Ihre Suche ist über das bekannte Universum hinaus gegangen."
+  },
+  "Error503Page": {
+    "title": "Dienst vorübergehend nicht verfügbar",
+    "description": "Der Server kann die Anfrage derzeit nicht verarbeiten. Bitte versuchen Sie es in ein paar Minuten erneut."
+  },
+  "Error500Page": {
+    "title": "Interner Serverfehler",
+    "description": "Auf unserer Seite ist etwas schiefgelaufen. Wir arbeiten bereits an der Lösung."
+  }
+}

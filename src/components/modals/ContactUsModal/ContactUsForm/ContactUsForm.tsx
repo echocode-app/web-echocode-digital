@@ -1,3 +1,5 @@
+import { useTranslations } from 'next-intl';
+
 import ContactFile from './ContactFile';
 import ContactInput from './ContactInput';
 import SubmitButton from './SubmitBtn';
@@ -16,6 +18,8 @@ const ContactUsForm = ({
   onAutoClose,
   onSubmitStateChange,
 }: ContactUsFormProps) => {
+  const t = useTranslations('ProjectModal.projectForm');
+
   const {
     values,
     errors,
@@ -32,7 +36,7 @@ const ContactUsForm = ({
       <div className="flex flex-col md:flex-row gap-4 mb-4 md:mb-8">
         <ContactInput
           name="firstName"
-          label="First name*"
+          label={t('firstNamePlaceholder')}
           value={values.firstName}
           error={errors.firstName}
           autoComplete="given-name"
@@ -43,7 +47,7 @@ const ContactUsForm = ({
         />
         <ContactInput
           name="lastName"
-          label="Last name*"
+          label={t('lastNamePlaceholder')}
           value={values.lastName}
           error={errors.lastName}
           autoComplete="family-name"
@@ -56,7 +60,7 @@ const ContactUsForm = ({
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4 md:mb-8">
         <ContactInput
           name="email"
-          label="Email*"
+          label={t('emailPlaceholder')}
           type="email"
           value={values.email}
           error={errors.email}
@@ -95,7 +99,7 @@ const ContactUsForm = ({
         <p
           className={`font-title text-title-sm text-accent transition-opacity duration-main ${submitState === 'success' ? 'opacity-100' : 'opacity-0'}`}
         >
-          THANK YOU!
+          {t('submitMessage')}
         </p>
       </div>
     </form>

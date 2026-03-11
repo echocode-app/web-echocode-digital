@@ -21,11 +21,11 @@ const ScreensSection = ({ imagePath }: ScreensSection) => {
         <Image
           src={imagePath}
           alt="Screens"
-          sizes="1290px"
+          sizes="(max-width: 768px) 1000px, 1290px"
           width={1290}
           height={986}
           className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 
-                 min-w-322.5 min-h-246.5 max-w-none object-cover"
+                 min-w-322.5 min-h-246.5 max-w-none object-contain"
         />
       </div>
     </section>

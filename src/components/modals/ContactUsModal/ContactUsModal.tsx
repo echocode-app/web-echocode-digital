@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 import { useCallback, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
@@ -13,30 +14,35 @@ import SectionTitle from '@/components/UI/section/SectionTitle';
 import type { SubmitState } from '@/components/modals/ContactUsModal/ContactUsForm/useClientProjectForm';
 
 const ContactUsModal = () => {
+  const t = useTranslations('ProjectModal');
+
   const router = useRouter();
   const [submitState, setSubmitState] = useState<SubmitState>('idle');
   const isClosingBlocked = submitState === 'loading';
 
-  const navigateWithRestore = useCallback((target: string, scrollY = 0) => {
-    const restoreScroll = () => {
-      window.requestAnimationFrame(() => {
-        window.scrollTo({ top: scrollY, behavior: 'auto' });
-      });
-    };
+  const navigateWithRestore = useCallback(
+    (target: string, scrollY = 0) => {
+      const restoreScroll = () => {
+        window.requestAnimationFrame(() => {
+          window.scrollTo({ top: scrollY, behavior: 'auto' });
+        });
+      };
 
-    router.replace(target, { scroll: false });
-    router.refresh();
-    window.setTimeout(restoreScroll, 0);
+      router.replace(target, { scroll: false });
+      router.refresh();
+      window.setTimeout(restoreScroll, 0);
 
-    // Fallback for intercepted-route edge cases where modal slot may stay mounted.
-    window.setTimeout(() => {
-      const currentPath = `${window.location.pathname}${window.location.search}${window.location.hash}`;
-      if (currentPath !== target) {
-        router.replace(target, { scroll: false });
-        window.setTimeout(restoreScroll, 50);
-      }
-    }, 220);
-  }, [router]);
+      // Fallback for intercepted-route edge cases where modal slot may stay mounted.
+      window.setTimeout(() => {
+        const currentPath = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+        if (currentPath !== target) {
+          router.replace(target, { scroll: false });
+          window.setTimeout(restoreScroll, 50);
+        }
+      }, 220);
+    },
+    [router],
+  );
 
   const resolveCloseTarget = useCallback(() => consumeContactModalReturnPath(), []);
 
@@ -127,12 +133,10 @@ const ContactUsModal = () => {
             <CloseBtn onClose={closeModal} disabled={isClosingBlocked} />
           </div>
           <div className=" md:mb-2.5">
-            <SectionTitle>GOT A PROJECT IN MIND?</SectionTitle>
+            <SectionTitle>{t('title')}</SectionTitle>
           </div>
           <div className="flex flex-wrap md:gap-1 text-main-sm mb-2 md:mb-8">
-            <p className="text-white">
-              Get professional advice. Use the form or write us an email:
-            </p>
+            <p className="text-white">{t('subtitle')}</p>
             <Link href={'mailto:hello@echocode.app'} className="font-semibold text-accent">
               hello@echocode.app
             </Link>

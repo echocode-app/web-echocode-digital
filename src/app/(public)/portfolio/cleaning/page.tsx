@@ -42,7 +42,8 @@ const Cleaning = () => {
           allowFullScreen
           title="Interactive prototype of the Cleaning App"
           width="354px"
-          height="697px"
+          height="797px"
+          className="scale-70 xl:scale-100"
         />
       </ProptotypeSection>
       <TechnologySection list={technologies} />

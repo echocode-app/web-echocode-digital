@@ -32,7 +32,8 @@ const AboutSectionECommerse = () => {
                 src="/images/projects/e-commers/right-screen.png"
                 alt="screen"
                 fill
-                className="absolute z-10 object-cover scale-104 -translate-x-1 -translate-y-0.5 overflow-visible"
+                className="absolute z-10 object-cover scale-104 -translate-x-1 -translate-y-0.5 
+               overflow-visible will-change-transform"
               />
             </div>
           </div>
@@ -50,7 +51,8 @@ const AboutSectionECommerse = () => {
                 src="/images/projects/e-commers/left-screen.png"
                 alt="screen"
                 fill
-                className="absolute z-10 object-cover scale-104 translate-x-1 -translate-y-0.5 lg:-translate-y-30.5 overflow-visible"
+                className="absolute z-10 object-cover scale-104 translate-x-1 -translate-y-0.5 lg:-translate-y-30.5
+               overflow-visible will-change-transform"
               />
             </div>
           </div>
