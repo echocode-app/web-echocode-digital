@@ -3,12 +3,13 @@ import PortfolioFilter from './Filter/PlatformFilter';
 import ProjectList from './Projects/ProjectList';
 
 import staticProjects from '@/data/portfolio/static-project-list.json';
-import projects from '@/data/portfolio/project-list.json';
 
 import { categoriesFilter, listQueries, platformFilter } from './utils/filters';
-import SectionTitle from '@/components/UI/section/SectionTitle';
+
 import ProjectPreviewList from './Projects/ProjectPreviewList';
 import NotFound from './NotFound';
+
+import { listPublicPortfolioProjects, PortfolioPreviewProjectItem } from '@/server/portfolio';
 
 interface PortfolioSectionProps {
   projectsFilter: { categories?: string; platform?: string };
@@ -16,9 +17,11 @@ interface PortfolioSectionProps {
 
 const PortfolioSection = async ({ projectsFilter }: PortfolioSectionProps) => {
   const { platform, categories } = projectsFilter;
+  const previewProjects = await listPublicPortfolioProjects();
 
-  let filteredStaticProjects = staticProjects;
-  let filteredProjects = projects;
+  let filteredStaticProjects: PortfolioPreviewProjectItem[] =
+    staticProjects as PortfolioPreviewProjectItem[];
+  let filteredProjects: PortfolioPreviewProjectItem[] = previewProjects;
 
   filteredStaticProjects = platformFilter(filteredStaticProjects, platform);
   filteredStaticProjects = categoriesFilter(filteredStaticProjects, listQueries(categories));
@@ -39,7 +42,6 @@ const PortfolioSection = async ({ projectsFilter }: PortfolioSectionProps) => {
             {filteredProjects.length > 0 && (
               <div className="pt-5">
                 <div className="bg-main-gradient w-full h-px max-w-250 mx-auto mb-6" />
-                <SectionTitle>Preview Projects?</SectionTitle>
                 <ProjectPreviewList list={filteredProjects} />
               </div>
             )}
