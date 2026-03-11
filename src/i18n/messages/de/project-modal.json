@@ -1,0 +1,18 @@
+{
+  "ProjectModal": {
+    "title": "HABEN SIE EIN PROJEKT IM KOPF?",
+    "subtitle": "Erhalten Sie professionelle Beratung. Nutzen Sie das Formular oder schreiben Sie uns eine E-Mail:",
+    "projectForm": {
+      "firstNamePlaceholder": "Vorname*",
+      "lastNamePlaceholder": "Nachname*",
+      "emailPlaceholder": "E-Mail*",
+      "filePlaceholder": "Datei anhängen",
+      "needsLabel": "Über Ihre Anforderungen...",
+      "needsPlaceholder": "z. B. Mobile App Design für ein Fintech-Startup",
+      "submitBtn": "Nachricht senden",
+      "submitSending": "Wird gesendet...",
+      "successBtn": "Anfrage erhalten. Wir melden uns bald.",
+      "submitMessage": "DANKE!"
+    }
+  }
+}

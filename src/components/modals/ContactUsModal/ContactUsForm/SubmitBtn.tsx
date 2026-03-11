@@ -1,3 +1,5 @@
+import { useTranslations } from 'next-intl';
+
 import type { SubmitState } from '@/components/modals/ContactUsModal/ContactUsForm/useClientProjectForm';
 
 type SubmitBtnProps = {
@@ -5,6 +7,8 @@ type SubmitBtnProps = {
 };
 
 const SubmitBtn = ({ state }: SubmitBtnProps) => {
+  const t = useTranslations('ProjectModal.projectForm');
+
   const isLoading = state === 'loading';
   const isSuccess = state === 'success';
   const isDisabled = isLoading || isSuccess;
@@ -20,12 +24,14 @@ const SubmitBtn = ({ state }: SubmitBtnProps) => {
             : 'cursor-pointer bg-main-gradient disabled:cursor-not-allowed disabled:opacity-90'
         }`}
       >
-        <span className={`items-center justify-center gap-2 ${isLoading ? 'inline-flex' : 'hidden'}`}>
-          <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/35 border-t-white" />
-          Sending...
+        <span
+          className={`items-center justify-center gap-2 ${isLoading ? 'inline-flex' : 'hidden'} uppercase`}
+        >
+          <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/35 border-t-white uppercase" />
+          {t('submitSending')}
         </span>
-        <span className={`${isLoading ? 'hidden' : 'inline'}`}>
-          {isSuccess ? "REQUEST RECEIVED. WE'LL TALK SOON." : 'Send message'}
+        <span className={`${isLoading ? 'hidden' : 'inline'} uppercase`}>
+          {isSuccess ? t('successBtn') : t('submitBtn')}
         </span>
       </button>
     </div>

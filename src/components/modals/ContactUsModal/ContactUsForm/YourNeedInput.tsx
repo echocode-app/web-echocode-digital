@@ -1,3 +1,5 @@
+import { useTranslations } from 'next-intl';
+
 type YourNeedsInputProps = {
   value: string;
   error?: string;
@@ -7,20 +9,22 @@ type YourNeedsInputProps = {
 };
 
 const YourNeedsInput = ({ value, error, disabled, onBlur, onChange }: YourNeedsInputProps) => {
+  const t = useTranslations('ProjectModal.projectForm');
+
   return (
     <div className="relative">
       <label
         htmlFor="needs"
         className=" absolute top-2 left-4
-       text-[10px] font-title text-white border-white"
+       text-[10px] font-title text-white border-white font-bold"
       >
-        About your needs...
+        {t('needsLabel')}
       </label>
       <input
         type="text"
         id="needs"
         name="needs"
-        placeholder="e.g. Mobile app design for a fintech startup"
+        placeholder={t('needsPlaceholder')}
         value={value}
         onChange={(event) => onChange(event.target.value)}
         onBlur={onBlur}

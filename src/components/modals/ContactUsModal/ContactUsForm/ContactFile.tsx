@@ -2,6 +2,8 @@
 
 import Image from 'next/image';
 import { useRef } from 'react';
+import { useTranslations } from 'next-intl';
+
 import { ATTACHMENT_ACCEPT } from '@/components/modals/ContactUsModal/ContactUsForm/clientProjectForm.constants';
 
 type ContactFileProps = {
@@ -13,6 +15,8 @@ type ContactFileProps = {
 };
 
 const ContactFile = ({ file, error, disabled, onBlur, onChange }: ContactFileProps) => {
+  const t = useTranslations('ProjectModal.projectForm');
+
   const inputRef = useRef<HTMLInputElement>(null);
 
   return (
@@ -22,7 +26,7 @@ const ContactFile = ({ file, error, disabled, onBlur, onChange }: ContactFilePro
         ref={inputRef}
         type="file"
         accept={ATTACHMENT_ACCEPT}
-        className="hidden"
+        className="hidden no-autofill-bg"
         aria-label="Attach file"
         title="Attach file"
         onBlur={onBlur}
@@ -39,7 +43,7 @@ const ContactFile = ({ file, error, disabled, onBlur, onChange }: ContactFilePro
         onClick={() => inputRef.current?.click()}
         aria-label="Attach file"
         title="Attach file"
-        className="
+        className=" 
          flex items-center gap-1 py-4 pl-4 pr-6 w-full text-left border rounded-secondary leading-3.5 
          hover:border-accent focus:border-accent duration-main transition-colors
        outline-0 text-[10px] font-title text-white placeholder:text-white 
@@ -49,7 +53,9 @@ const ContactFile = ({ file, error, disabled, onBlur, onChange }: ContactFilePro
         <div className="relative w-4.5 h-4.5">
           <Image src={'/UI/clip.svg'} alt="Clip" fill />
         </div>
-        <span className="text-white truncate">{file?.name ?? 'Attach file (optional)'}</span>
+        <span className="text-white truncate uppercase font-bold">
+          {file?.name ?? t('filePlaceholder')}
+        </span>
       </button>
       <div className="pointer-events-none absolute left-1 top-[calc(100%+4px)] h-4 overflow-hidden">
         <p
