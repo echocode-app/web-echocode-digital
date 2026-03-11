@@ -47,7 +47,8 @@ const Food = () => {
           allowFullScreen
           title="Interactive prototype of the Food App"
           width="354px"
-          height="697px"
+          height="797px"
+          className="scale-70 xl:scale-100"
         />
       </ProptotypeSection>
       <TechnologySection list={technologies} />

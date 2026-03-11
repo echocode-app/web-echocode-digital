@@ -35,6 +35,7 @@ export default getRequestConfig(async (params) => {
   const vacancyQA = (await import(`./messages/${locale}/vacancies/qa.json`)).default;
   const vacancyDesign = (await import(`./messages/${locale}/vacancies/design.json`)).default;
   const projectModal = (await import(`./messages/${locale}/project-modal.json`)).default;
+  const errorsPages = (await import(`./messages/${locale}/errors-pages.json`)).default;
 
   const messages = {
     ...homePage,
@@ -54,6 +55,7 @@ export default getRequestConfig(async (params) => {
     ...vacancyQA,
     ...vacancyDesign,
     ...projectModal,
+    ...errorsPages,
   };
 
   return {
