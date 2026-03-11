@@ -1,6 +1,9 @@
-import { Project } from '../types/projects';
+import { PortfolioPreviewProjectItem } from '@/server/portfolio';
 
-const platformFilter = (list: Project[], platform?: string) => {
+const platformFilter = (
+  list: PortfolioPreviewProjectItem[],
+  platform?: string,
+): PortfolioPreviewProjectItem[] => {
   if (!platform) return list;
 
   const lowerPlatform = platform.toLowerCase();
@@ -12,7 +15,10 @@ const listQueries = (str: string | undefined) => {
   return str ? str?.split(',').filter(Boolean) : [];
 };
 
-const categoriesFilter = (list: Project[], selectedCategories: string[]) => {
+const categoriesFilter = (
+  list: PortfolioPreviewProjectItem[],
+  selectedCategories: string[],
+): PortfolioPreviewProjectItem[] => {
   if (!selectedCategories?.length) return list;
 
   const lowerSelected = selectedCategories.map((c) => c.toLowerCase());
