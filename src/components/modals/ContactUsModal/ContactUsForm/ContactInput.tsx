@@ -32,22 +32,12 @@ export default function ContactInput({
       <label htmlFor={inputId} className="sr-only">
         {label}
       </label>
-      {!value && (
-        <span
-          className="
-            pointer-events-none
-            absolute left-4 top-1/2 -translate-y-1/2  text-white text-[10px] font-title
-          "
-        >
-          {label}
-        </span>
-      )}
-
       <input
         id={inputId}
         name={name}
         type={type}
         value={value}
+        placeholder={label}
         onChange={(e) => onChange(e.target.value)}
         onBlur={onBlur}
         autoComplete={autoComplete}
@@ -62,8 +52,8 @@ export default function ContactInput({
            hover:border-accent focus:border-accent duration-main transition-colors
           border border-white rounded-secondary
           bg-transparent
-          text-white text-[10px] font-title
-          outline-none
+          text-white text-[10px] font-rubik font-bold uppercase
+          outline-none no-autofill-bg placeholder:text-white
         "
       />
       <div className="pointer-events-none absolute left-1 top-[calc(100%+4px)] h-4 overflow-hidden">

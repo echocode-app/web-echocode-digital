@@ -13,7 +13,9 @@ const CloseBtn = ({ onClose, disabled = false }: CloseBtnProps) => {
       disabled={disabled}
       aria-label="Close modal"
       title="Close modal"
-      className="relative flex h-11 w-8.5 items-center justify-center rounded-secondary transition-[color,opacity] duration-main hover:opacity-60 focus-visible:opacity-60 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-35"
+      className="relative flex h-11 w-8.5 items-center justify-center rounded-secondary
+       transition-[color,opacity] duration-main hover:opacity-60 focus-visible:opacity-60 
+       focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-35 cursor-pointer"
     >
       <Image src={'/UI/close.svg'} alt="Close" fill />
     </button>

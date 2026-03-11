@@ -1,0 +1,18 @@
+{
+  "ProjectModal": {
+    "title": "GOT A PROJECT IN MIND?",
+    "subtitle": "Get professional advice. Use the form or write us an email:",
+    "projectForm": {
+      "firstNamePlaceholder": "First name*",
+      "lastNamePlaceholder": "last name*",
+      "emailPlaceholder": "Email*",
+      "filePlaceholder": "attach your file",
+      "needsLabel": "About your needs...",
+      "needsPlaceholder": "e.g. Mobile app design for a fintech startup",
+      "submitBtn": "Send message",
+      "submitSending": "Sending...",
+      "successBtn": "Request received. We’ll talk soon.",
+      "submitMessage": "THANK YOU!"
+    }
+  }
+}
