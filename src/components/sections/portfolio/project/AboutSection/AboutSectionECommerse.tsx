@@ -28,13 +28,14 @@ const AboutSectionECommerse = () => {
                 className="object-contain rotate-[22.4deg]"
               />
 
-              <Image
-                src="/images/projects/e-commers/right-screen.png"
-                alt="screen"
-                fill
-                className="absolute z-10 object-cover scale-104 -translate-x-1 -translate-y-0.5 
-               overflow-visible will-change-transform"
-              />
+              <div className="absolute -top-2.25 -left-16 w-66.5 h-90">
+                <Image
+                  src="/images/projects/e-commers/right-screen.png"
+                  alt="screen"
+                  fill
+                  className="object-contain"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -47,13 +48,14 @@ const AboutSectionECommerse = () => {
                 fill
                 className="-rotate-22 absolute lg:-translate-y-30"
               />
-              <Image
-                src="/images/projects/e-commers/left-screen.png"
-                alt="screen"
-                fill
-                className="absolute z-10 object-cover scale-104 translate-x-1 -translate-y-0.5 lg:-translate-y-30.5
-               overflow-visible will-change-transform"
-              />
+              <div className="absolute -top-2.25 -left-14 lg:-top-32.25 lg:-left-14 w-66.5 h-90">
+                <Image
+                  src="/images/projects/e-commers/left-screen.png"
+                  alt="screen"
+                  fill
+                  className="object-contain"
+                />
+              </div>
             </div>
           </div>
           <div className="p-3 max-w-141.5">
