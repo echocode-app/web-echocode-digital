@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { getFirestoreDb } from '@/server/firebase/firestore';
 import { ApiError } from '@/server/lib/errors';
+import { SITE_IDS } from '@/server/sites/siteContext';
 import { toSubmissionListItemDto } from '@/server/submissions/submissions.mapper';
 import { SUBMISSION_LIST_STATUSES } from '@/server/submissions/submissions.types';
 import type {
@@ -22,6 +23,7 @@ export const listSubmissionsQuerySchema = z.object({
   sortBy: z.literal('createdAt').default('createdAt'),
   sortOrder: z.enum(['asc', 'desc']).default('desc'),
   status: submissionStatusSchema.optional(),
+  siteId: z.enum(SITE_IDS).optional(),
 });
 
 type ListSubmissionsParams = {
@@ -37,13 +39,17 @@ function ensureValidTotalCount(value: unknown): number {
   );
 }
 
-function buildSubmissionsBaseQuery(status?: SubmissionListStatus) {
+function buildSubmissionsBaseQuery(status?: SubmissionListStatus, siteId?: string) {
   const firestore = getFirestoreDb();
   let query: FirebaseFirestore.Query = firestore.collection('submissions');
 
   // Keep filter set minimal and index-backed for admin table reads.
   if (status) {
     query = query.where('status', '==', status);
+  }
+
+  if (siteId) {
+    query = query.where('siteId', '==', siteId);
   }
 
   return query;
@@ -61,7 +67,7 @@ export async function listSubmissions(
   const query = params.query;
   const offset = (query.page - 1) * query.limit;
 
-  const baseQuery = buildSubmissionsBaseQuery(query.status);
+  const baseQuery = buildSubmissionsBaseQuery(query.status, query.siteId);
 
   let total: number;
   try {

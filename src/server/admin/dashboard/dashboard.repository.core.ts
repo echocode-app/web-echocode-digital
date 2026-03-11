@@ -7,6 +7,7 @@ import {
   getAdminYearMonthRanges,
   startOfAdminDay,
 } from '@/shared/time/europeKiev';
+import type { SiteId } from '@/server/sites/siteContext';
 import type {
   DashboardRawAggregates,
   TrafficVsLeadsPointDto,
@@ -110,22 +111,30 @@ export async function readCount(
 export async function countAnalyticsEventInRange(
   eventType: string,
   range: DateRange,
+  options: { siteId?: SiteId } = {},
 ): Promise<number> {
   const firestore = getFirestoreDb();
 
-  const query = firestore
+  let query: FirebaseFirestore.Query = firestore
     .collection('analytics_events')
     .where('eventType', '==', eventType)
     .where('timestamp', '>=', Timestamp.fromDate(range.start))
     .where('timestamp', '<', Timestamp.fromDate(range.end));
 
+  if (options.siteId) {
+    query = query.where('siteId', '==', options.siteId);
+  }
+
   return readCount(query, `Failed to count analytics event (${eventType})`);
 }
 
-export async function countVacancyLeadsInRange(range: DateRange): Promise<number> {
+export async function countVacancyLeadsInRange(
+  range: DateRange,
+  options: { siteId?: SiteId } = {},
+): Promise<number> {
   const [submitCount, applyCount] = await Promise.all([
-    countAnalyticsEventInRange('submit_vacancy', range),
-    countAnalyticsEventInRange('apply_vacancy', range),
+    countAnalyticsEventInRange('submit_vacancy', range, options),
+    countAnalyticsEventInRange('apply_vacancy', range, options),
   ]);
 
   return normalizeSafeNumber(submitCount + applyCount);
@@ -205,6 +214,7 @@ export async function scanAnalyticsEventsByTypeInRange(
   eventType: 'page_view' | 'submit_project' | 'submit_vacancy' | 'apply_vacancy',
   range: DateRange,
   onDoc: (data: Record<string, unknown>) => void,
+  options: { siteId?: SiteId } = {},
 ): Promise<void> {
   const firestore = getFirestoreDb();
   const startTs = Timestamp.fromDate(range.start);
@@ -212,13 +222,17 @@ export async function scanAnalyticsEventsByTypeInRange(
   let cursor: FirebaseFirestore.QueryDocumentSnapshot | null = null;
 
   while (true) {
-    let query = firestore
+    let query: FirebaseFirestore.Query = firestore
       .collection('analytics_events')
       .where('eventType', '==', eventType)
       .where('timestamp', '>=', startTs)
       .where('timestamp', '<', endTs)
       .orderBy('timestamp', 'desc')
       .limit(EVENT_PAGE_SIZE);
+
+    if (options.siteId) {
+      query = query.where('siteId', '==', options.siteId);
+    }
 
     if (cursor) {
       query = query.startAfter(cursor);

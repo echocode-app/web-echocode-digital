@@ -1,0 +1,72 @@
+/api/admin/echocode-app/overview:
+  get:
+    tags: [Admin Echocode App]
+    operationId: getAdminEchocodeAppOverview
+    summary: Get echocode.app analytics overview
+    description: |
+      Returns isolated analytics aggregates for the external `echocode.app` site slice.
+      Metrics are scoped to records persisted with `siteId = echocode_app`.
+    parameters:
+      - $ref: '../openapi.yaml#/components/parameters/Period'
+    responses:
+      '200':
+        description: Echocode.app analytics overview payload
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/SuccessEnvelope'
+      '401':
+        $ref: '../openapi.yaml#/components/responses/Unauthorized'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/Forbidden'
+
+/api/admin/echocode-app/submissions:
+  get:
+    tags: [Admin Echocode App]
+    operationId: listAdminEchocodeAppSubmissions
+    summary: List echocode.app legacy submissions
+    description: |
+      Returns the moderation list for legacy `submissions` records created from `echocode.app`.
+      The backend always scopes the result set to `siteId = echocode_app`.
+    parameters:
+      - name: page
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 20
+      - name: sortBy
+        in: query
+        schema:
+          type: string
+          enum: [createdAt]
+          default: createdAt
+      - name: sortOrder
+        in: query
+        schema:
+          type: string
+          enum: [asc, desc]
+          default: desc
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum: [new, in_review, contacted, rejected, closed]
+    responses:
+      '200':
+        description: Echocode.app submissions page
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/SuccessEnvelope'
+      '401':
+        $ref: '../openapi.yaml#/components/responses/Unauthorized'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/Forbidden'

@@ -2,6 +2,7 @@ import { FieldValue } from 'firebase-admin/firestore';
 import { getFirestoreDb } from '@/server/firebase/firestore';
 import { logger } from '@/server/lib/logger';
 import { resolveEventAttribution } from '@/server/analytics/attribution';
+import { resolveRequestSiteContext, type SiteId } from '@/server/sites/siteContext';
 
 export type AnalyticsEventType =
   | 'submit_project'
@@ -18,6 +19,8 @@ export type AnalyticsEventType =
 type AnalyticsEventDoc = {
   eventType: AnalyticsEventType;
   source: string | null;
+  siteId: SiteId;
+  siteHost: string;
   country: string | null;
   metadata: AnalyticsMetadataMap;
   timestamp: FieldValue;
@@ -32,6 +35,8 @@ export type TrackEventInput = {
   eventType: AnalyticsEventType;
   headers?: Headers;
   source?: string;
+  siteId?: string;
+  siteHost?: string;
   metadata?: Record<string, unknown>;
 };
 
@@ -130,10 +135,17 @@ function withPageViewAttribution(
 
 export async function trackEvent(input: TrackEventInput): Promise<void> {
   const safeMetadata = toSafeMetadata(input.metadata);
+  const siteContext = resolveRequestSiteContext({
+    headers: input.headers,
+    explicitSiteId: input.siteId,
+    explicitSiteHost: input.siteHost,
+  });
 
   const payload: AnalyticsEventDoc = {
     eventType: input.eventType,
-    source: extractSource(input.headers, input.source),
+    source: extractSource(input.headers, input.source ?? siteContext.defaultSource),
+    siteId: siteContext.siteId,
+    siteHost: siteContext.siteHost,
     country: extractCountry(input.headers),
     metadata: withPageViewAttribution(input.eventType, safeMetadata, input),
     timestamp: FieldValue.serverTimestamp(),

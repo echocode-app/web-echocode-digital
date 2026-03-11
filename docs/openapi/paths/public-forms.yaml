@@ -12,20 +12,7 @@
       content:
         application/json:
           schema:
-            type: object
-            required: [path, url]
-            properties:
-              path:
-                type: string
-              url:
-                type: string
-              title:
-                type: [string, 'null']
-              referrer:
-                type: [string, 'null']
-              source:
-                type: string
-                example: website
+            $ref: '../openapi.yaml#/components/schemas/PageViewTrackRequest'
     responses:
       '200':
         description: Event accepted
@@ -35,6 +22,9 @@
               $ref: '../openapi.yaml#/components/schemas/SuccessEnvelope'
       '400':
         $ref: '../openapi.yaml#/components/responses/BadRequest'
+    x-notes:
+      - Supports approved cross-origin browser calls from external frontend sites.
+      - The backend resolves country from proxy headers and persists site-aware metadata.
 
 /api/forms/uploads/init:
   post:
@@ -70,8 +60,7 @@
       content:
         application/json:
           schema:
-            type: object
-            additionalProperties: true
+            $ref: '../openapi.yaml#/components/schemas/LegacyProjectSubmissionRequest'
     responses:
       '200':
         description: Submission created
@@ -81,6 +70,9 @@
               $ref: '../openapi.yaml#/components/schemas/CreateEntityEnvelope'
       '400':
         $ref: '../openapi.yaml#/components/responses/BadRequest'
+    x-notes:
+      - Supports approved cross-origin browser calls from external frontend sites.
+      - Cross-site integrations should send `siteId` and `siteHost` explicitly.
 
 /api/forms/client-project:
   post:

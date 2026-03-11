@@ -7,6 +7,7 @@ import {
 import { verifyUploadedProjectAttachment } from '@/server/submissions/submissions.upload.service';
 import { createSubmissionRecord } from '@/server/submissions/submissions.repository';
 import { toCreateSubmissionResponseDto } from '@/server/submissions/submissions.mapper';
+import { resolveRequestSiteContext } from '@/server/sites/siteContext';
 import type {
   CreateProjectSubmissionParams,
   CreateSubmissionRecordInput,
@@ -61,6 +62,7 @@ function assertPreParseSubmissionGuards(
 
 function toCreateRecordInputFromProjectDraft(
   draft: ReturnType<typeof buildSubmissionDraft>,
+  siteContext: ReturnType<typeof resolveRequestSiteContext>,
 ): CreateSubmissionRecordInput {
   if (draft.formType !== 'project') {
     throw ApiError.fromCode(
@@ -85,6 +87,9 @@ function toCreateRecordInputFromProjectDraft(
 
   return {
     formType: 'project',
+    siteId: siteContext.siteId,
+    siteHost: siteContext.siteHost,
+    source: siteContext.defaultSource,
     contact: {
       email: draft.email,
       name: draft.name,
@@ -115,6 +120,17 @@ function withAttributionMetadata(
 export async function createProjectSubmission(
   params: CreateProjectSubmissionParams,
 ): Promise<CreateSubmissionResponseDto> {
+  const siteContext = resolveRequestSiteContext({
+    headers: params.requestHeaders,
+    explicitSiteId:
+      isObjectRecord(params.rawBody) && typeof params.rawBody.siteId === 'string'
+        ? params.rawBody.siteId
+        : null,
+    explicitSiteHost:
+      isObjectRecord(params.rawBody) && typeof params.rawBody.siteHost === 'string'
+        ? params.rawBody.siteHost
+        : null,
+  });
   const eventAttribution = resolveEventAttribution({
     rawBody: params.rawBody,
     headers: params.requestHeaders,
@@ -160,17 +176,21 @@ export async function createProjectSubmission(
     );
   }
 
-  const recordInput = toCreateRecordInputFromProjectDraft(draft);
+  const recordInput = toCreateRecordInputFromProjectDraft(draft, siteContext);
   const createdRecord = await createSubmissionRecord(recordInput);
 
   await trackEventBestEffort({
     eventType: 'submit_project',
     headers: params.requestHeaders,
-    source: 'website',
+    source: siteContext.defaultSource,
+    siteId: siteContext.siteId,
+    siteHost: siteContext.siteHost,
     metadata: withAttributionMetadata(
       {
         submissionId: createdRecord.id,
         hasAttachment: recordInput.attachments.length > 0,
+        siteId: siteContext.siteId,
+        siteHost: siteContext.siteHost,
       },
       eventAttribution,
     ),

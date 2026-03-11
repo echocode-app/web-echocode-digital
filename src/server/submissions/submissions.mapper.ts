@@ -5,6 +5,7 @@ import {
   type DocumentSnapshot,
 } from 'firebase-admin/firestore';
 import { ApiError } from '@/server/lib/errors';
+import { SITE_IDS, type SiteId } from '@/server/sites/siteContext';
 import { SUBMISSION_LIST_STATUSES } from '@/server/submissions/submissions.types';
 import type {
   CreateSubmissionRecordInput,
@@ -22,6 +23,9 @@ export function toSubmissionFirestoreCreateDoc(
   return {
     formType: input.formType,
     status: 'new',
+    siteId: input.siteId,
+    siteHost: input.siteHost,
+    source: input.source,
     contact: input.contact,
     content: input.content,
     attachments: input.attachments,
@@ -107,6 +111,14 @@ function toNullableString(value: unknown): string | null {
   return typeof value === 'string' ? value : null;
 }
 
+function toNullableSiteId(value: unknown): SiteId | null {
+  if (typeof value !== 'string') {
+    return null;
+  }
+
+  return SITE_IDS.includes(value as SiteId) ? (value as SiteId) : null;
+}
+
 function toIsoTimestamp(value: unknown, fallbackLabel: string): string {
   if (!(value instanceof Timestamp)) {
     throw ApiError.fromCode(
@@ -157,6 +169,9 @@ export function toSubmissionListItemDto(
     id: snapshot.id,
     formType: data.formType,
     status: data.status,
+    siteId: toNullableSiteId(data.siteId),
+    siteHost: toNullableString(data.siteHost),
+    source: toNullableString(data.source),
     contact: {
       name: contact ? toNullableString(contact.name) : null,
       email: contact ? toNullableString(contact.email) : null,

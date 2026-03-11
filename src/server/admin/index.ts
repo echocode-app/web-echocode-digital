@@ -15,6 +15,12 @@ export {
   type DashboardOverviewDto,
 } from '@/server/admin/dashboard';
 export {
+  getAdminEchocodeAppOverview,
+  listAdminEchocodeAppSubmissions,
+  type EchocodeAppOverviewDto,
+  type EchocodeAppSubmissionsDto,
+} from '@/server/admin/echocode-app';
+export {
   getAdminSubmissionsOverview,
   type SubmissionsOverviewDto,
 } from '@/server/admin/submissions/submissions.metrics.service';

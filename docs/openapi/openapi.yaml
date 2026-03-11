@@ -22,6 +22,8 @@ tags:
     description: Authenticated admin account and audit endpoints.
   - name: Admin Dashboard
     description: Dashboard and geography analytics.
+  - name: Admin Echocode App
+    description: Dedicated analytics and legacy submissions slice for the external echocode.app site.
   - name: Admin Submissions Legacy
     description: Legacy submissions moderation endpoints.
   - name: Admin Client Submissions
@@ -68,6 +70,10 @@ paths:
     $ref: './paths/admin-dashboard.yaml#/~1api~1admin~1dashboard~1overview'
   /api/admin/dashboard/geography:
     $ref: './paths/admin-dashboard.yaml#/~1api~1admin~1dashboard~1geography'
+  /api/admin/echocode-app/overview:
+    $ref: './paths/admin-echocode-app.yaml#/~1api~1admin~1echocode-app~1overview'
+  /api/admin/echocode-app/submissions:
+    $ref: './paths/admin-echocode-app.yaml#/~1api~1admin~1echocode-app~1submissions'
 
   /api/admin/submissions:
     $ref: './paths/admin-submissions-legacy.yaml#/~1api~1admin~1submissions'
@@ -290,6 +296,47 @@ components:
         sizeBytes:
           type: integer
           minimum: 1
+
+    SiteContextInput:
+      type: object
+      properties:
+        siteId:
+          type: string
+          description: |
+            Optional explicit site identifier for cross-site ingestion.
+            `echocode_app` is used for the external static app site.
+          example: echocode_app
+        siteHost:
+          type: string
+          description: Canonical host of the originating site.
+          example: echocode.app
+
+    PageViewTrackRequest:
+      allOf:
+        - $ref: '#/components/schemas/SiteContextInput'
+        - type: object
+          required: [path, url]
+          properties:
+            path:
+              type: string
+            url:
+              type: string
+            title:
+              type: [string, 'null']
+            referrer:
+              type: [string, 'null']
+            source:
+              type: string
+              example: echocode_app
+
+    LegacyProjectSubmissionRequest:
+      allOf:
+        - $ref: '#/components/schemas/SiteContextInput'
+        - type: object
+          additionalProperties: true
+          description: |
+            Legacy project submission payload. The backend still accepts the existing flexible body,
+            but cross-site integrations should send `siteId` and `siteHost` explicitly.
 
     ClientProjectCreateRequest:
       type: object

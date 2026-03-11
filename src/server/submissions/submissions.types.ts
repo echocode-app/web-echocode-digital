@@ -1,4 +1,5 @@
 import type { FieldValue, Timestamp } from 'firebase-admin/firestore';
+import type { SiteId } from '@/server/sites/siteContext';
 
 export type SubmissionWorkflowStatus =
   | 'new'
@@ -29,6 +30,9 @@ export type SubmissionContentMvp = {
 export type SubmissionFirestoreDocMvp = {
   formType: SubmissionFormTypeMvp;
   status: SubmissionWorkflowStatus;
+  siteId: SiteId;
+  siteHost: string;
+  source: string;
   contact: SubmissionContactMvp;
   content: SubmissionContentMvp;
   attachments: SubmissionAttachmentMvp[];
@@ -39,6 +43,9 @@ export type SubmissionFirestoreDocMvp = {
 
 export type CreateSubmissionRecordInput = {
   formType: SubmissionFormTypeMvp;
+  siteId: SiteId;
+  siteHost: string;
+  source: string;
   contact: SubmissionContactMvp;
   content: SubmissionContentMvp;
   attachments: SubmissionAttachmentMvp[];
@@ -82,12 +89,16 @@ export type ListSubmissionsQueryInput = {
   sortBy: SubmissionListSortBy;
   sortOrder: SubmissionListSortOrder;
   status?: SubmissionListStatus;
+  siteId?: SiteId;
 };
 
 export type SubmissionListItemDto = {
   id: string;
   formType: string;
   status: SubmissionListStatus;
+  siteId: SiteId | null;
+  siteHost: string | null;
+  source: string | null;
   contact: {
     name: string | null;
     email: string | null;

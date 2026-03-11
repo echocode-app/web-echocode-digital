@@ -16,6 +16,12 @@ export {
 export { fail, ok } from '@/server/lib/response';
 export type { ApiFailure, ApiResponse, ApiSuccess } from '@/server/lib/response';
 export { validate } from '@/server/lib/validate';
+export {
+  appendCorsHeaders,
+  buildPublicIngestCorsPolicy,
+  createCorsPreflightHandler,
+  type CorsPolicy,
+} from '@/server/lib/cors';
 export { withApi } from '@/server/lib/withApi';
 export { withProtectedApi } from '@/server/lib/withApi';
 export { withAdminApi } from '@/server/lib/withApi';
@@ -28,3 +34,10 @@ export type {
 } from '@/server/lib/withApi';
 export type { ApiErrorCode } from '@/server/lib/errors';
 export { ApiError, isApiError, toApiError } from '@/server/lib/errors';
+export {
+  getPublicIngestAllowedOriginPatterns,
+  getPublicIngestAllowedOrigins,
+  resolveRequestSiteContext,
+  SITE_IDS,
+  type SiteId,
+} from '@/server/sites/siteContext';

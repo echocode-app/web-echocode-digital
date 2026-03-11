@@ -1,6 +1,7 @@
 import { Timestamp } from 'firebase-admin/firestore';
 import { getFirestoreDb } from '@/server/firebase/firestore';
 import type { DateRange } from '@/server/admin/dashboard/dashboard.repository.core';
+import type { SiteId } from '@/server/sites/siteContext';
 import {
   countAnalyticsEventInRange,
   normalizeSafeNumber,
@@ -81,11 +82,46 @@ export async function countSubmissionsInRange(range: DateRange): Promise<number>
   return normalizeSafeNumber(legacyCount + clientCount);
 }
 
+export async function countScopedSubmissionsInRange(
+  range: DateRange,
+  options: { siteId?: SiteId; includeClientSubmissions?: boolean } = {},
+): Promise<number> {
+  const firestore = getFirestoreDb();
+  let legacySubmissionsQuery: FirebaseFirestore.Query = firestore
+    .collection('submissions')
+    .where('createdAt', '>=', Timestamp.fromDate(range.start))
+    .where('createdAt', '<', Timestamp.fromDate(range.end));
+
+  if (options.siteId) {
+    legacySubmissionsQuery = legacySubmissionsQuery.where('siteId', '==', options.siteId);
+  }
+
+  const requests: Promise<number>[] = [
+    readCount(legacySubmissionsQuery, 'Failed to count scoped legacy submissions in date range'),
+  ];
+
+  if (options.includeClientSubmissions !== false && !options.siteId) {
+    const clientSubmissionsQuery = firestore
+      .collection('client_submissions')
+      .where('createdAt', '>=', Timestamp.fromDate(range.start))
+      .where('createdAt', '<', Timestamp.fromDate(range.end));
+
+    requests.push(
+      readCount(clientSubmissionsQuery, 'Failed to count client submissions in date range'),
+    );
+  }
+
+  const counts = await Promise.all(requests);
+  return normalizeSafeNumber(counts.reduce((sum, value) => sum + value, 0));
+}
+
 export async function countAnyAnalyticsEventInRange(
   eventTypes: readonly string[],
   range: DateRange,
 ): Promise<number> {
-  const counts = await Promise.all(eventTypes.map((eventType) => countAnalyticsEventInRange(eventType, range)));
+  const counts = await Promise.all(
+    eventTypes.map((eventType) => countAnalyticsEventInRange(eventType, range)),
+  );
   return normalizeSafeNumber(counts.reduce((acc, value) => acc + value, 0));
 }
 

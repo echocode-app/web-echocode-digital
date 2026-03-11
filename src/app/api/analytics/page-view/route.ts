@@ -1,10 +1,21 @@
 import { pageViewBodySchema, trackPageView } from '@/server/analytics';
-import { withApi } from '@/server/lib';
+import {
+  appendCorsHeaders,
+  buildPublicIngestCorsPolicy,
+  createCorsPreflightHandler,
+  getPublicIngestAllowedOriginPatterns,
+  getPublicIngestAllowedOrigins,
+  withApi,
+} from '@/server/lib';
 import { applyPublicRateLimitStub } from '@/server/lib/rateLimit';
 
 export const runtime = 'nodejs';
 
-export const POST = withApi(
+const corsPolicy = buildPublicIngestCorsPolicy({
+  allowedOrigins: getPublicIngestAllowedOrigins(),
+  allowedOriginPatterns: getPublicIngestAllowedOriginPatterns(),
+});
+const handlePost = withApi(
   async ({ req, body }) => {
     await applyPublicRateLimitStub({
       request: req,
@@ -21,3 +32,10 @@ export const POST = withApi(
     bodySchema: pageViewBodySchema,
   },
 );
+
+export const OPTIONS = createCorsPreflightHandler(corsPolicy);
+
+export async function POST(req: Parameters<typeof handlePost>[0]) {
+  const response = await handlePost(req);
+  return appendCorsHeaders(req, response, corsPolicy);
+}

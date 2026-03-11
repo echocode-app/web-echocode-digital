@@ -45,6 +45,15 @@
 - legacy compatibility alias remains available: `/api/admin/submissions/vacancies/*` (deprecated)
 - local/open-app documentation route: `/docs/api`
 - public page-view analytics route: `/api/analytics/page-view`
+- `/api/analytics/page-view` now supports cross-origin ingestion for approved external frontends via `OPTIONS` + `POST` CORS headers
+- `/api/forms/submissions` now supports the same cross-origin public ingestion flow for external frontend sites
+- dedicated admin slice for `echocode.app`:
+- `/admin/echocode-app`
+- `/admin/echocode-app/submissions`
+- dedicated admin APIs:
+- `/api/admin/echocode-app/overview`
+- `/api/admin/echocode-app/submissions`
+- analytics and legacy submissions persistence are now site-aware via `siteId` / `siteHost`
 
 - `client_submissions`:
 - додано `soft delete` (поля `isDeleted`, `deletedAt`, `deletedBy`) без фізичного видалення документа.

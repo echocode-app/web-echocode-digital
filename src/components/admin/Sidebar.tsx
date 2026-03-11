@@ -37,6 +37,7 @@ function SidebarNav({
           const isNested = Boolean(item.parentHref);
           const isSubmissionsSubitem = item.parentHref === '/admin/submissions';
           const isVacanciesSubitem = item.parentHref === '/admin/vacancies';
+          const isEchocodeAppSubitem = item.parentHref === '/admin/echocode-app';
           const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
 
           return (
@@ -48,7 +49,7 @@ function SidebarNav({
                 isActive
                   ? 'bg-gray16 text-white shadow-[0_6px_20px_rgba(0,0,0,0.35)]'
                   : 'text-gray75 hover:bg-gray10 hover:text-white'
-              } ${isNested ? `ml-3 border-l pl-4 text-main-xs ${isSubmissionsSubitem ? 'border-accent' : isVacanciesSubitem ? 'border-[#ffd38e]' : 'border-gray16'}` : ''}`}
+              } ${isNested ? `ml-3 border-l pl-4 text-main-xs ${isSubmissionsSubitem ? 'border-accent' : isVacanciesSubitem ? 'border-[#ffd38e]' : isEchocodeAppSubitem ? 'border-[#5aa9ff]' : 'border-gray16'}` : ''}`}
             >
               {item.label}
             </Link>
@@ -86,6 +87,13 @@ export default function Sidebar({ role, isMobileOpen = false, onCloseMobile }: S
       parentHref: '/admin/vacancies',
     },
     { href: '/admin/portfolio', label: 'Portfolio', visible: true },
+    { href: '/admin/echocode-app', label: 'Echocode.app', visible: true },
+    {
+      href: '/admin/echocode-app/submissions',
+      label: 'App submissions',
+      visible: true,
+      parentHref: '/admin/echocode-app',
+    },
     { href: '/admin/logs', label: 'Logs', visible: role === 'developer' },
     { href: '/admin/info', label: 'Info', visible: true },
   ];
