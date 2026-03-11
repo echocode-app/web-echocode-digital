@@ -6,6 +6,7 @@ export type CorsPolicy = {
   allowedOriginPatterns?: readonly RegExp[];
   allowedMethods: readonly string[];
   allowedHeaders: readonly string[];
+  allowCredentials?: boolean;
   exposeHeaders?: readonly string[];
   maxAgeSeconds?: number;
 };
@@ -17,6 +18,10 @@ function getRequestHeaders(origin: string, policy: CorsPolicy): Headers {
     'Access-Control-Allow-Headers': policy.allowedHeaders.join(', '),
     Vary: 'Origin',
   });
+
+  if (policy.allowCredentials) {
+    headers.set('Access-Control-Allow-Credentials', 'true');
+  }
 
   if (policy.exposeHeaders?.length) {
     headers.set('Access-Control-Expose-Headers', policy.exposeHeaders.join(', '));
@@ -83,8 +88,9 @@ export function buildPublicIngestCorsPolicy(input: {
   return {
     allowedOrigins: input.allowedOrigins,
     allowedOriginPatterns: input.allowedOriginPatterns,
-    allowedMethods: ['OPTIONS', 'POST'],
+    allowedMethods: ['POST', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'x-client-session-id', getRequestIdHeaderName()],
+    allowCredentials: true,
     exposeHeaders: [getRequestIdHeaderName(), 'x-api-version'],
     maxAgeSeconds: 86400,
   };

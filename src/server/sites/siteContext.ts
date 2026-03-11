@@ -33,6 +33,7 @@ const SITE_REGISTRY: readonly SiteDescriptor[] = [
     siteHost: 'echocode.app',
     defaultSource: 'echocode_app',
     allowedOrigins: [
+      'http://localhost:3000',
       'https://echocode.app',
       'https://www.echocode.app',
       'https://web-echocode-app.vercel.app',
