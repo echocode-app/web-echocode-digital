@@ -20,7 +20,7 @@ const AboutSectionCleaning = () => {
             </p>
           </div>
           <div className="flex justify-center w-36.5 md:w-98.5 lg:pl-15.5 lg:pr-16">
-            <div className="relative w-36.5 h-86.5">
+            <div className="relative w-36.5 h-86.5 overflow-visible">
               <Image
                 src="/images/projects/right-phone.png"
                 alt="right-phone"
@@ -39,7 +39,7 @@ const AboutSectionCleaning = () => {
         </div>
         <div className="flex flex-col lg:flex-row items-center lg:items-start justify-between gap-4 lg:gap-0">
           <div className="flex justify-center w-36.5 md:w-98.5 lg:h-59 lg:pl-12.5 lg:pr-19.5 order-1 lg:order-0">
-            <div className="relative w-36.5 h-86.5">
+            <div className="relative w-36.5 h-86.5 overflow-visible">
               <Image
                 src={'/images/projects/left-phone.png'}
                 alt="left-phone"

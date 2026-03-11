@@ -1,13 +1,11 @@
+import { useTranslations } from 'next-intl';
+
 import ErrorPage from '@/components/errors/ErrorPage';
 
 const VacancyError = () => {
-  return (
-    <ErrorPage
-      code={'404'}
-      title="Page Not Found"
-      description="Your search has ventured beyond the known universe."
-    />
-  );
+  const t = useTranslations('Error404Page');
+
+  return <ErrorPage code={'404'} title={t('title')} description={t('description')} />;
 };
 
 export default VacancyError;

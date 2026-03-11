@@ -1,3 +1,4 @@
+import { useLocale } from 'next-intl';
 import Image from 'next/image';
 
 interface ErrorPageProps {
@@ -7,6 +8,12 @@ interface ErrorPageProps {
 }
 
 const ErrorPage = ({ code, title, description }: ErrorPageProps) => {
+  const locale = useLocale();
+  const uaStyle =
+    locale === 'ua'
+      ? ' text-[16px] sm:text-[18px] md:text-[32px]'
+      : ' text-[18px] sm:text-[22px] md:text-[40px]';
+
   return (
     <section className="relative pt-57 pb-25 lg:pt-27.5 lg:pb-0 overflow-hidden">
       <div className="max-w-270.5 w-full mx-auto px-8 flex items-center ">
@@ -18,8 +25,8 @@ const ErrorPage = ({ code, title, description }: ErrorPageProps) => {
             {code}-error
           </h1>
           <p
-            className="mb-6 max-w-[320px] md:max-w-137.5 lg:max-w-full
-             text-[18px] sm:text-[22px] md:text-[40px] font-semibold tracking-[2px] uppercase"
+            className={`mb-6 max-w-[320px] md:max-w-137.5 lg:max-w-full
+           ${uaStyle} font-semibold tracking-[2px] uppercase`}
           >
             {title}
           </p>
