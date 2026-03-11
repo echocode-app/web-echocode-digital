@@ -19,7 +19,7 @@ const AboutSectionCleaning = () => {
               metrics.
             </p>
           </div>
-          <div className="flex justify-center w-36.5 md:w-98.5 lg:pl-15.5 lg:pr-16">
+          <div className="relative flex justify-center w-36.5 md:w-98.5 lg:pl-15.5 lg:pr-16">
             <div className="relative w-36.5 h-86.5">
               <Image
                 src="/images/projects/right-phone.png"
@@ -27,12 +27,14 @@ const AboutSectionCleaning = () => {
                 fill
                 className="object-contain rotate-22"
               />
-              <Image
-                src="/images/projects/cleaning/right-screen.png"
-                alt="screen"
-                fill
-                className="absolute z-10 object-cover scale-104 -translate-x-1 -translate-y-0.5 overflow-visible will-change-transform"
-              />
+              <div className="absolute -top-2.25 -left-16 w-66.5 h-90">
+                <Image
+                  src="/images/projects/cleaning/right-screen.png"
+                  alt="screen"
+                  fill
+                  className="object-contain"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -45,13 +47,14 @@ const AboutSectionCleaning = () => {
                 fill
                 className="-rotate-22 absolute lg:-translate-y-30"
               />
-              <Image
-                src="/images/projects/cleaning/left-screen.png"
-                alt="screen"
-                fill
-                className="absolute z-10 object-cover scale-104 translate-x-1 -translate-y-0.5 lg:-translate-y-30.5
-                 overflow-visible will-change-transform"
-              />
+              <div className="absolute -top-2.25 -left-14 lg:-top-32.25 lg:-left-14 w-66.5 h-90">
+                <Image
+                  src="/images/projects/cleaning/left-screen.png"
+                  alt="screen"
+                  fill
+                  className="object-contain"
+                />
+              </div>
             </div>
           </div>
           <div className="p-3 max-w-141.5">
