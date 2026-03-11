@@ -53,7 +53,9 @@
 - dedicated admin APIs:
 - `/api/admin/echocode-app/overview`
 - `/api/admin/echocode-app/submissions`
+- `/api/admin/echocode-app/submissions/overview`
 - analytics and legacy submissions persistence are now site-aware via `siteId` / `siteHost`
+- `.digital` dashboard/metrics are explicitly scoped to the main site slice, while `/admin/echocode-app` stays isolated to `siteId = echocode_app`
 
 - `client_submissions`:
 - додано `soft delete` (поля `isDeleted`, `deletedAt`, `deletedBy`) без фізичного видалення документа.

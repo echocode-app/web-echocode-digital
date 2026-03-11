@@ -74,6 +74,8 @@ paths:
     $ref: './paths/admin-echocode-app.yaml#/~1api~1admin~1echocode-app~1overview'
   /api/admin/echocode-app/submissions:
     $ref: './paths/admin-echocode-app.yaml#/~1api~1admin~1echocode-app~1submissions'
+  /api/admin/echocode-app/submissions/overview:
+    $ref: './paths/admin-echocode-app.yaml#/~1api~1admin~1echocode-app~1submissions~1overview'
 
   /api/admin/submissions:
     $ref: './paths/admin-submissions-legacy.yaml#/~1api~1admin~1submissions'

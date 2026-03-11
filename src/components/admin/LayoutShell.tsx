@@ -33,7 +33,7 @@ export default function LayoutShell({ role, email, children }: LayoutShellProps)
         />
         <main className="flex-1 p-4 md:p-6">{children}</main>
         <footer className="border-t border-gray16 bg-black px-4 py-4 md:px-6 md:py-5">
-          <ActionsPanel />
+          <ActionsPanel role={role} />
         </footer>
       </div>
     </div>

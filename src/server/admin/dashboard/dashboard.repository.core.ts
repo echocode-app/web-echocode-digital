@@ -142,14 +142,19 @@ export async function countVacancyLeadsInRange(
 
 export async function getSubmissionsTrend(
   dayRanges: DateRange[],
+  options: { siteId?: SiteId } = {},
 ): Promise<DashboardRawAggregates['charts']['submissionsTrend']> {
   const firestore = getFirestoreDb();
 
   const countPromises = dayRanges.map((range) => {
-    const query = firestore
+    let query: FirebaseFirestore.Query = firestore
       .collection('submissions')
       .where('createdAt', '>=', Timestamp.fromDate(range.start))
       .where('createdAt', '<', Timestamp.fromDate(range.end));
+
+    if (options.siteId) {
+      query = query.where('siteId', '==', options.siteId);
+    }
 
     return readCount(query, 'Failed to count submissions trend');
   });
@@ -164,12 +169,13 @@ export async function getSubmissionsTrend(
 
 export async function getTrafficAndLeadsSeries(
   dayRanges: DateRange[],
+  options: { siteId?: SiteId } = {},
 ): Promise<TrafficVsLeadsPointDto[]> {
   const requests = dayRanges.map(async (range) => {
     const [pageViews, projectLeads, vacancyLeads] = await Promise.all([
-      countAnalyticsEventInRange('page_view', range),
-      countAnalyticsEventInRange('submit_project', range),
-      countVacancyLeadsInRange(range),
+      countAnalyticsEventInRange('page_view', range, options),
+      countAnalyticsEventInRange('submit_project', range, options),
+      countVacancyLeadsInRange(range, options),
     ]);
 
     return {
@@ -182,21 +188,25 @@ export async function getTrafficAndLeadsSeries(
   return Promise.all(requests);
 }
 
-export async function getProjectLeadsByDay(dayRanges: DateRange[]): Promise<number[]> {
+export async function getProjectLeadsByDay(
+  dayRanges: DateRange[],
+  options: { siteId?: SiteId } = {},
+): Promise<number[]> {
   const counts = await Promise.all(
-    dayRanges.map((range) => countAnalyticsEventInRange('submit_project', range)),
+    dayRanges.map((range) => countAnalyticsEventInRange('submit_project', range, options)),
   );
   return counts.map((count) => normalizeSafeNumber(count));
 }
 
 export async function getLeadDistributionYearMonthly(
   monthRanges: Array<{ month: string; range: DateRange }>,
+  options: { siteId?: SiteId } = {},
 ): Promise<DashboardRawAggregates['charts']['leadDistributionYearMonthly']> {
   const rows = await Promise.all(
     monthRanges.map(async ({ month, range }) => {
       const [project, vacancy] = await Promise.all([
-        countAnalyticsEventInRange('submit_project', range),
-        countVacancyLeadsInRange(range),
+        countAnalyticsEventInRange('submit_project', range, options),
+        countVacancyLeadsInRange(range, options),
       ]);
 
       return {

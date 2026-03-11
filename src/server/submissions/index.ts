@@ -11,10 +11,14 @@ export {
 } from '@/server/submissions/submissions.list.service';
 export {
   createSubmissionRecord,
+  getSubmissionById,
+  addSubmissionCommentRecord,
+  softDeleteSubmissionRecord,
   updateSubmissionStatusRecord,
 } from '@/server/submissions/submissions.repository';
 export {
   createProjectUploadInit,
+  getSignedProjectAttachmentReadUrl,
   verifyUploadedProjectAttachment,
 } from '@/server/submissions/submissions.upload.service';
 export {
@@ -27,14 +31,24 @@ export type {
   CreateSubmissionRecordInput,
   CreateSubmissionResponseDto,
   CreatedSubmissionRecord,
+  EchocodeAppSubmissionsListResponseDto,
+  EchocodeAppSubmissionListQueryInput,
   ListSubmissionsQueryInput,
   ListSubmissionsResponseDto,
+  SubmissionCommentDto,
+  SubmissionCursor,
+  SubmissionDetailsDto,
+  SubmissionRecordDto,
   SubmissionListItemDto,
   SubmissionListSortBy,
   SubmissionListSortOrder,
   SubmissionListStatus,
   SubmissionWorkflowStatus,
   SubmissionFirestoreDocMvp,
+  AddSubmissionCommentInput,
+  AddSubmissionCommentResponseDto,
+  SoftDeleteSubmissionInput,
+  SoftDeleteSubmissionResponseDto,
   UpdateSubmissionStatusInput,
   UpdateSubmissionStatusResponseDto,
 } from '@/server/submissions/submissions.types';

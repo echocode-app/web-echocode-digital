@@ -1,5 +1,6 @@
 import { addDays, getRangeFromDays, scanAnalyticsEventsByTypeInRange, startOfUtcDay } from '@/server/admin/dashboard/dashboard.repository.core';
 import type { DashboardPeriod, DashboardGeographyRaw, DashboardGeographyRawCountry } from '@/server/admin/dashboard/dashboard.types';
+import type { SiteId } from '@/server/sites/siteContext';
 import { startOfAdminMonth, startOfAdminYear } from '@/shared/time/europeKiev';
 
 function normalizeCountry(input: unknown): string {
@@ -48,16 +49,24 @@ function toCountries(counts: Map<string, number>, total: number): DashboardGeogr
 }
 
 // Aggregates page-view geography for the selected UTC period.
-export async function getDashboardGeographyRaw(period: DashboardPeriod): Promise<DashboardGeographyRaw> {
+export async function getDashboardGeographyRaw(
+  period: DashboardPeriod,
+  options: { siteId?: SiteId } = {},
+): Promise<DashboardGeographyRaw> {
   const range = resolveRange(period);
   const counts = new Map<string, number>();
   let totalPageViews = 0;
 
-  await scanAnalyticsEventsByTypeInRange('page_view', range, (data) => {
-    totalPageViews += 1;
-    const country = normalizeCountry(data.country);
-    counts.set(country, (counts.get(country) ?? 0) + 1);
-  });
+  await scanAnalyticsEventsByTypeInRange(
+    'page_view',
+    range,
+    (data) => {
+      totalPageViews += 1;
+      const country = normalizeCountry(data.country);
+      counts.set(country, (counts.get(country) ?? 0) + 1);
+    },
+    options,
+  );
 
   return {
     period,

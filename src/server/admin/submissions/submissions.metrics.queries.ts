@@ -100,7 +100,10 @@ export async function countScopedSubmissionsInRange(
     readCount(legacySubmissionsQuery, 'Failed to count scoped legacy submissions in date range'),
   ];
 
-  if (options.includeClientSubmissions !== false && !options.siteId) {
+  if (
+    options.includeClientSubmissions !== false &&
+    (!options.siteId || options.siteId === 'echocode_digital')
+  ) {
     const clientSubmissionsQuery = firestore
       .collection('client_submissions')
       .where('createdAt', '>=', Timestamp.fromDate(range.start))
@@ -118,53 +121,67 @@ export async function countScopedSubmissionsInRange(
 export async function countAnyAnalyticsEventInRange(
   eventTypes: readonly string[],
   range: DateRange,
+  options: { siteId?: SiteId } = {},
 ): Promise<number> {
   const counts = await Promise.all(
-    eventTypes.map((eventType) => countAnalyticsEventInRange(eventType, range)),
+    eventTypes.map((eventType) => countAnalyticsEventInRange(eventType, range, options)),
   );
   return normalizeSafeNumber(counts.reduce((acc, value) => acc + value, 0));
 }
 
-export async function computeAverageSubmitTimeMinutes(range: DateRange): Promise<number | null> {
+export async function computeAverageSubmitTimeMinutes(
+  range: DateRange,
+  options: { siteId?: SiteId } = {},
+): Promise<number | null> {
   const firstPageViewByKey = new Map<string, number>();
   const durations: number[] = [];
 
-  await scanAnalyticsEventsByTypeInRange('page_view', range, (data) => {
-    const key = extractJoinKey(data.metadata);
-    const timestampMs = toSafeTimestampMs(data.timestamp);
+  await scanAnalyticsEventsByTypeInRange(
+    'page_view',
+    range,
+    (data) => {
+      const key = extractJoinKey(data.metadata);
+      const timestampMs = toSafeTimestampMs(data.timestamp);
 
-    if (!key || timestampMs === null) {
-      return;
-    }
+      if (!key || timestampMs === null) {
+        return;
+      }
 
-    const existing = firstPageViewByKey.get(key);
-    if (existing === undefined || timestampMs < existing) {
-      firstPageViewByKey.set(key, timestampMs);
-    }
-  });
+      const existing = firstPageViewByKey.get(key);
+      if (existing === undefined || timestampMs < existing) {
+        firstPageViewByKey.set(key, timestampMs);
+      }
+    },
+    options,
+  );
 
-  await scanAnalyticsEventsByTypeInRange('submit_project', range, (data) => {
-    if (isUploadInitStage(data.metadata)) {
-      return;
-    }
+  await scanAnalyticsEventsByTypeInRange(
+    'submit_project',
+    range,
+    (data) => {
+      if (isUploadInitStage(data.metadata)) {
+        return;
+      }
 
-    const key = extractJoinKey(data.metadata);
-    const submitTimestampMs = toSafeTimestampMs(data.timestamp);
+      const key = extractJoinKey(data.metadata);
+      const submitTimestampMs = toSafeTimestampMs(data.timestamp);
 
-    if (!key || submitTimestampMs === null) {
-      return;
-    }
+      if (!key || submitTimestampMs === null) {
+        return;
+      }
 
-    const firstPageViewMs = firstPageViewByKey.get(key);
-    if (firstPageViewMs === undefined || submitTimestampMs <= firstPageViewMs) {
-      return;
-    }
+      const firstPageViewMs = firstPageViewByKey.get(key);
+      if (firstPageViewMs === undefined || submitTimestampMs <= firstPageViewMs) {
+        return;
+      }
 
-    const durationMinutes = (submitTimestampMs - firstPageViewMs) / (1000 * 60);
-    if (Number.isFinite(durationMinutes) && durationMinutes >= 0) {
-      durations.push(durationMinutes);
-    }
-  });
+      const durationMinutes = (submitTimestampMs - firstPageViewMs) / (1000 * 60);
+      if (Number.isFinite(durationMinutes) && durationMinutes >= 0) {
+        durations.push(durationMinutes);
+      }
+    },
+    options,
+  );
 
   if (durations.length === 0) {
     return null;

@@ -3,9 +3,9 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import AdminToast from '@/components/admin/ui/AdminToast';
-import ClientSubmissionCommentsPanel from '@/components/admin/client-submissions/details/ClientSubmissionCommentsPanel';
-import ClientSubmissionStatusSelect from '@/components/admin/client-submissions/details/ClientSubmissionStatusSelect';
 import ClientSubmissionStatusBadge from '@/components/admin/client-submissions/shared/ClientSubmissionStatusBadge';
+import ModerationCommentsPanel from '@/components/admin/shared/moderation/ModerationCommentsPanel';
+import ModerationStatusSelect from '@/components/admin/shared/moderation/ModerationStatusSelect';
 import VacancyCandidateMetaGrid from '@/components/admin/vacancy-candidates/details/VacancyCandidateMetaGrid';
 import { useVacancyCandidateDetails } from '@/components/admin/vacancy-candidates/details/useVacancyCandidateDetails';
 
@@ -38,7 +38,9 @@ export default function VacancyCandidateDetails({ submissionId }: { submissionId
   if (state === 'error' || !details) {
     return (
       <article className="rounded-(--radius-base) border border-[#ff6d7a]/40 bg-base-gray p-4">
-        <p className="font-main text-main-sm text-[#ff6d7a]">Unable to load candidate submission details.</p>
+        <p className="font-main text-main-sm text-[#ff6d7a]">
+          Unable to load candidate submission details.
+        </p>
       </article>
     );
   }
@@ -64,7 +66,9 @@ export default function VacancyCandidateDetails({ submissionId }: { submissionId
 
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <p className="font-main text-main-xs uppercase tracking-[0.15em] text-gray60">Candidate submission</p>
+          <p className="font-main text-main-xs uppercase tracking-[0.15em] text-gray60">
+            Candidate submission
+          </p>
           <h2 className="font-title text-title-xl text-white">{title}</h2>
           <div className="mt-2 flex items-center gap-2">
             <p className="font-main text-main-xs text-gray60">Current status</p>
@@ -72,7 +76,9 @@ export default function VacancyCandidateDetails({ submissionId }: { submissionId
           </div>
         </div>
 
-        <ClientSubmissionStatusSelect
+        <ModerationStatusSelect
+          id="vacancy-submission-details-status"
+          ariaLabel="Update candidate submission status"
           value={details.status}
           disabled={isStatusSaving}
           options={getAllowedStatusOptions(details.status)}
@@ -91,15 +97,18 @@ export default function VacancyCandidateDetails({ submissionId }: { submissionId
             className="w-full rounded-(--radius-secondary) 
             border border-[#8f6bff]/35 
             p-2.5 
-            flex items-center justify-center">
+            flex items-center justify-center"
+          >
             Open LinkedIn / GitHub profile
           </a>
           {details.cvUrl ? (
-            <div className="w-full rounded-(--radius-secondary) 
+            <div
+              className="w-full rounded-(--radius-secondary) 
             border border-[#8f6bff]/35 
             bg-[linear-gradient(90deg,rgba(115,89,255,0.14),rgba(170,128,255,0.12))] 
             p-2.5 
-            flex items-center justify-center">
+            flex items-center justify-center"
+            >
               <a
                 href={details.cvUrl}
                 target="_blank"
@@ -107,7 +116,13 @@ export default function VacancyCandidateDetails({ submissionId }: { submissionId
                 className="group flex items-center gap-2 lg:gap-4"
               >
                 <span className="relative mt-0.5 block h-4.5 w-4.5 shrink-0">
-                  <Image src="/UI/clip.svg" alt="" fill aria-hidden="true" className="h-auto w-auto" />
+                  <Image
+                    src="/UI/clip.svg"
+                    alt=""
+                    fill
+                    aria-hidden="true"
+                    className="h-auto w-auto"
+                  />
                 </span>
                 <span className="min-w-0">
                   <span className="block break-all font-main text-main-sm text-white group-hover:text-white/85">
@@ -120,18 +135,30 @@ export default function VacancyCandidateDetails({ submissionId }: { submissionId
               </a>
             </div>
           ) : (
-            <div className="rounded-(--radius-secondary) 
+            <div
+              className="rounded-(--radius-secondary) 
             border border-[#8f6bff]/35 
             bg-[linear-gradient(90deg,rgba(115,89,255,0.14),rgba(170,128,255,0.12))] 
             px-3 py-2 
-            font-main text-main-sm text-white">
+            font-main text-main-sm text-white"
+            >
               <div className="flex items-start gap-2">
                 <span className="relative mt-0.5 block h-4.5 w-4.5 shrink-0">
-                  <Image src="/UI/clip.svg" alt="" fill aria-hidden="true" className="h-auto w-auto" />
+                  <Image
+                    src="/UI/clip.svg"
+                    alt=""
+                    fill
+                    aria-hidden="true"
+                    className="h-auto w-auto"
+                  />
                 </span>
                 <span className="min-w-0">
-                  <span className="block break-all">{details.cvFile.originalName || 'Candidate CV'}</span>
-                  <span className="mt-0.5 block text-main-xs text-[#d7cbff]/70">Stored file path: {details.cvFile.path}</span>
+                  <span className="block break-all">
+                    {details.cvFile.originalName || 'Candidate CV'}
+                  </span>
+                  <span className="mt-0.5 block text-main-xs text-[#d7cbff]/70">
+                    Stored file path: {details.cvFile.path}
+                  </span>
                 </span>
               </div>
             </div>
@@ -139,7 +166,7 @@ export default function VacancyCandidateDetails({ submissionId }: { submissionId
         </div>
       </div>
 
-      <ClientSubmissionCommentsPanel
+      <ModerationCommentsPanel
         comments={details.comments ?? []}
         commentText={commentText}
         commentError={commentError}

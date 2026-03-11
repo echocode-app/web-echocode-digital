@@ -6,6 +6,8 @@ import { ApiError } from '@/server/lib/errors';
 
 export type AdminActionType =
   | 'submissions.status.update'
+  | 'submissions.comment.add'
+  | 'submissions.soft_delete'
   | 'client_submission.status_update'
   | 'client_submission.comment_add'
   | 'client_submission.soft_delete'

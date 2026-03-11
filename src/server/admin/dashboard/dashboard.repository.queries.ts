@@ -2,6 +2,8 @@ import { Timestamp } from 'firebase-admin/firestore';
 import type { DashboardRepositoryRanges } from '@/server/admin/dashboard/dashboard.repository.ranges';
 import { readCount, type DateRange } from '@/server/admin/dashboard/dashboard.repository.core';
 
+const MAIN_SITE_ID = 'echocode_digital' as const;
+
 type AdminActionType = 'vacancies.manage' | 'portfolio.manage';
 
 type DashboardCountQueries = {
@@ -46,12 +48,13 @@ export function buildDashboardCountQueries(
   ranges: DashboardRepositoryRanges,
 ): DashboardCountQueries {
   return {
-    submissionsTotalQuery: firestore.collection('submissions'),
+    submissionsTotalQuery: firestore.collection('submissions').where('siteId', '==', MAIN_SITE_ID),
     clientSubmissionsTotalQuery: firestore.collection('client_submissions'),
     activeVacanciesQuery: firestore.collection('vacancies').where('isPublished', '==', true),
     portfolioTotalQuery: firestore.collection('portfolio'),
     submissionsLast7Query: firestore
       .collection('submissions')
+      .where('siteId', '==', MAIN_SITE_ID)
       .where('createdAt', '>=', Timestamp.fromDate(ranges.last7Days.start))
       .where('createdAt', '<', Timestamp.fromDate(ranges.last7Days.end)),
     clientSubmissionsLast7Query: firestore
@@ -60,6 +63,7 @@ export function buildDashboardCountQueries(
       .where('createdAt', '<', Timestamp.fromDate(ranges.last7Days.end)),
     submissionsPrev7Query: firestore
       .collection('submissions')
+      .where('siteId', '==', MAIN_SITE_ID)
       .where('createdAt', '>=', Timestamp.fromDate(ranges.previous7Days.start))
       .where('createdAt', '<', Timestamp.fromDate(ranges.previous7Days.end)),
     clientSubmissionsPrev7Query: firestore
@@ -68,6 +72,7 @@ export function buildDashboardCountQueries(
       .where('createdAt', '<', Timestamp.fromDate(ranges.previous7Days.end)),
     submissionsLast30Query: firestore
       .collection('submissions')
+      .where('siteId', '==', MAIN_SITE_ID)
       .where('createdAt', '>=', Timestamp.fromDate(ranges.last30Days.start))
       .where('createdAt', '<', Timestamp.fromDate(ranges.last30Days.end)),
     clientSubmissionsLast30Query: firestore
@@ -76,6 +81,7 @@ export function buildDashboardCountQueries(
       .where('createdAt', '<', Timestamp.fromDate(ranges.last30Days.end)),
     submissionsPrev30Query: firestore
       .collection('submissions')
+      .where('siteId', '==', MAIN_SITE_ID)
       .where('createdAt', '>=', Timestamp.fromDate(ranges.previous30Days.start))
       .where('createdAt', '<', Timestamp.fromDate(ranges.previous30Days.end)),
     clientSubmissionsPrev30Query: firestore

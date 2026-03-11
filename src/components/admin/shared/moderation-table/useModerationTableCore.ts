@@ -42,6 +42,7 @@ type ModerationTableCoreOptions<TRow extends ModerationRowLike<TStatus>, TStatus
   updateErrorMessage: string;
   getUpdateSuccessMessage: (status: TStatus) => string;
   onOverviewRefresh: () => void;
+  getOpenStateStatus?: (currentStatus: TStatus) => TStatus | null;
 };
 
 type ModerationTableCoreState<TRow> = {
@@ -97,6 +98,7 @@ export function useModerationTableCore<
     updateErrorMessage,
     getUpdateSuccessMessage,
     onOverviewRefresh,
+    getOpenStateStatus,
   } = options;
 
   const [state, setState] = useState<ModerationLoadState>('loading');
@@ -225,14 +227,22 @@ export function useModerationTableCore<
       setRows((prev) =>
         sortRows(
           prev.map((row) =>
-            row.id === submissionId && row.status === 'new'
-              ? { ...row, status: 'viewed' as TStatus }
+            row.id === submissionId
+              ? (() => {
+                  const nextStatus = getOpenStateStatus
+                    ? getOpenStateStatus(row.status)
+                    : row.status === 'new'
+                      ? ('viewed' as TStatus)
+                      : null;
+
+                  return nextStatus ? { ...row, status: nextStatus } : row;
+                })()
               : row,
           ),
         ),
       );
     },
-    [sortRows],
+    [getOpenStateStatus, sortRows],
   );
 
   const updateStatus = useCallback(

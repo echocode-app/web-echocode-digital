@@ -33,6 +33,8 @@ import {
   getWeekdayInsights,
 } from '@/server/admin/dashboard/dashboard.repository.insights';
 
+const MAIN_SITE_ID = 'echocode_digital' as const;
+
 export async function getDashboardRawAggregates(
   period: DashboardPeriod = 'week',
 ): Promise<DashboardRawAggregates> {
@@ -99,27 +101,27 @@ export async function getDashboardRawAggregates(
       queries.clientSubmissionsPrev30Query,
       'Failed to count client submissions for previous 30 days',
     ),
-    countAnalyticsEventInRange('submit_project', ranges.last7Days),
-    countAnalyticsEventInRange('submit_project', ranges.previous7Days),
-    countAnalyticsEventInRange('submit_project', ranges.last30Days),
-    countAnalyticsEventInRange('submit_project', ranges.previous30Days),
-    countVacancyLeadsInRange(ranges.last7Days),
-    countVacancyLeadsInRange(ranges.previous7Days),
-    countVacancyLeadsInRange(ranges.last30Days),
-    countVacancyLeadsInRange(ranges.previous30Days),
-    countAnalyticsEventInRange('submit_project', ranges.currentYearRange),
-    countVacancyLeadsInRange(ranges.currentYearRange),
-    countAnalyticsEventInRange('page_view', ranges.last7Days),
-    countAnalyticsEventInRange('page_view', ranges.previous7Days),
-    countAnalyticsEventInRange('page_view', ranges.last30Days),
-    countAnalyticsEventInRange('page_view', ranges.previous30Days),
-    getSubmissionsTrend(ranges.dayRangesCurrentMonth),
-    getTrafficAndLeadsSeries(ranges.trafficVsLeadsRanges),
-    getProjectLeadsByDay(ranges.dayRangesCurrentMonthToDate),
-    getLeadDistributionYearMonthly(ranges.monthRangesYear),
+    countAnalyticsEventInRange('submit_project', ranges.last7Days, { siteId: MAIN_SITE_ID }),
+    countAnalyticsEventInRange('submit_project', ranges.previous7Days, { siteId: MAIN_SITE_ID }),
+    countAnalyticsEventInRange('submit_project', ranges.last30Days, { siteId: MAIN_SITE_ID }),
+    countAnalyticsEventInRange('submit_project', ranges.previous30Days, { siteId: MAIN_SITE_ID }),
+    countVacancyLeadsInRange(ranges.last7Days, { siteId: MAIN_SITE_ID }),
+    countVacancyLeadsInRange(ranges.previous7Days, { siteId: MAIN_SITE_ID }),
+    countVacancyLeadsInRange(ranges.last30Days, { siteId: MAIN_SITE_ID }),
+    countVacancyLeadsInRange(ranges.previous30Days, { siteId: MAIN_SITE_ID }),
+    countAnalyticsEventInRange('submit_project', ranges.currentYearRange, { siteId: MAIN_SITE_ID }),
+    countVacancyLeadsInRange(ranges.currentYearRange, { siteId: MAIN_SITE_ID }),
+    countAnalyticsEventInRange('page_view', ranges.last7Days, { siteId: MAIN_SITE_ID }),
+    countAnalyticsEventInRange('page_view', ranges.previous7Days, { siteId: MAIN_SITE_ID }),
+    countAnalyticsEventInRange('page_view', ranges.last30Days, { siteId: MAIN_SITE_ID }),
+    countAnalyticsEventInRange('page_view', ranges.previous30Days, { siteId: MAIN_SITE_ID }),
+    getSubmissionsTrend(ranges.dayRangesCurrentMonth, { siteId: MAIN_SITE_ID }),
+    getTrafficAndLeadsSeries(ranges.trafficVsLeadsRanges, { siteId: MAIN_SITE_ID }),
+    getProjectLeadsByDay(ranges.dayRangesCurrentMonthToDate, { siteId: MAIN_SITE_ID }),
+    getLeadDistributionYearMonthly(ranges.monthRangesYear, { siteId: MAIN_SITE_ID }),
     getTopVacancies(ranges.currentMonthRange),
-    getSourcePerformance(ranges.last30Days),
-    getTopPortfolioItem(ranges.last30Days),
+    getSourcePerformance(ranges.last30Days, { siteId: MAIN_SITE_ID }),
+    getTopPortfolioItem(ranges.last30Days, { siteId: MAIN_SITE_ID }),
   ]);
 
   const leadDistribution: LeadDistributionDto = {

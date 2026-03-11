@@ -57,7 +57,12 @@ export function ChartPanel({
   );
 }
 
-export function ActionsPanel() {
+export function ActionsPanel({ role }: { role: string }) {
+  const quickLinks =
+    role === 'manager'
+      ? internalQuickLinks.filter((link) => link.href !== '/admin/logs')
+      : internalQuickLinks;
+
   return (
     <article className="min-w-0">
       <div className="flex flex-wrap items-center justify-between gap-2">
@@ -66,7 +71,7 @@ export function ActionsPanel() {
       </div>
 
       <div className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
-        {internalQuickLinks.map((link) => (
+        {quickLinks.map((link) => (
           <Link key={link.href} href={link.href} className={quickLinkClassName}>
             {link.label}
           </Link>

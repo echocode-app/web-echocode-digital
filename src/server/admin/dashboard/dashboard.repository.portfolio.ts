@@ -1,4 +1,5 @@
 import type { DateRange } from '@/server/admin/dashboard/dashboard.repository.core';
+import type { SiteId } from '@/server/sites/siteContext';
 import {
   normalizeSafeNumber,
   scanAnalyticsEventsByTypeInRange,
@@ -12,24 +13,30 @@ import {
 // Computes top portfolio item by scanning all page_view events within the 30d window.
 export async function getTopPortfolioItem(
   last30Days: DateRange,
+  options: { siteId?: SiteId } = {},
 ): Promise<{ title: string; views: number }> {
   const portfolioViews = new Map<string, { views: number; title: string | null }>();
 
-  await scanAnalyticsEventsByTypeInRange('page_view', last30Days, (data) => {
-    const slug = extractPortfolioSlug(data.metadata);
-    if (!slug) return;
+  await scanAnalyticsEventsByTypeInRange(
+    'page_view',
+    last30Days,
+    (data) => {
+      const slug = extractPortfolioSlug(data.metadata);
+      if (!slug) return;
 
-    const existing = portfolioViews.get(slug);
-    if (existing) {
-      existing.views += 1;
-      return;
-    }
+      const existing = portfolioViews.get(slug);
+      if (existing) {
+        existing.views += 1;
+        return;
+      }
 
-    portfolioViews.set(slug, {
-      views: 1,
-      title: extractPortfolioTitle(data.metadata),
-    });
-  });
+      portfolioViews.set(slug, {
+        views: 1,
+        title: extractPortfolioTitle(data.metadata),
+      });
+    },
+    options,
+  );
 
   const top = Array.from(portfolioViews.entries())
     .map(([slug, value]) => ({

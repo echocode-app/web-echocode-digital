@@ -2,9 +2,11 @@
 
 import { useState } from 'react';
 import InfoTooltip from '@/components/admin/dashboard/ui/InfoTooltip';
+import { resolveCountryLabel } from '@/components/admin/dashboard/geography/geography.utils';
 import SkeletonCard from '@/components/admin/SkeletonCard';
 import SubmissionsKpiCard from '@/components/admin/submissions/SubmissionsKpiCard';
 import CompactPeriodSwitch from '@/components/admin/ui/CompactPeriodSwitch';
+import EchocodeAppChartsSection from '@/components/admin/echocode-app/EchocodeAppChartsSection';
 import EchocodeAppMetricList from '@/components/admin/echocode-app/EchocodeAppMetricList';
 import { useEchocodeAppOverview } from '@/components/admin/echocode-app/useEchocodeAppOverview';
 import type { DashboardPeriod } from '@/server/admin/dashboard/dashboard.types';
@@ -12,6 +14,7 @@ import type { EchocodeAppReferrerDto, EchocodeAppTopPageDto } from '@/server/adm
 
 export default function EchocodeAppOverview() {
   const [period, setPeriod] = useState<DashboardPeriod>('week');
+  const [visibleInsightBatches, setVisibleInsightBatches] = useState(0);
   const { overview, state } = useEchocodeAppOverview(period);
 
   const handlePeriodChange = (nextPeriod: DashboardPeriod) => {
@@ -31,6 +34,7 @@ export default function EchocodeAppOverview() {
   const topPages: EchocodeAppTopPageDto[] = overview?.topPages ?? [];
   const referrers: EchocodeAppReferrerDto[] = overview?.referrers ?? [];
   const countries = overview?.geography.countries ?? [];
+  const canLoadMoreInsights = visibleInsightBatches < 1;
 
   return (
     <section className="space-y-4">
@@ -85,7 +89,7 @@ export default function EchocodeAppOverview() {
         )}
       </div>
 
-      <div className="grid gap-4">
+      <div className="grid gap-4 lg:grid-cols-2">
         <EchocodeAppMetricList
           title="Top pages"
           info="Highest-traffic page paths for the selected period, ranked by tracked page-view count."
@@ -100,14 +104,38 @@ export default function EchocodeAppOverview() {
           emptyMessage="No attribution or referrer data recorded yet."
           renderLabel={(item) => item.label}
         />
+      </div>
+
+      <div className="grid gap-4">
         <EchocodeAppMetricList
           title="Geography"
           info="Country distribution detected server-side from proxy headers on incoming page-view requests."
           items={countries}
           emptyMessage="No country data recorded yet."
-          renderLabel={(item) => item.country}
+          renderLabel={(item) => resolveCountryLabel(item.country)}
+          itemsClassName="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4"
         />
       </div>
+
+      {visibleInsightBatches >= 1 ? <EchocodeAppChartsSection /> : null}
+
+      {canLoadMoreInsights ? (
+        <div className="space-y-4">
+          <div className="h-px w-full bg-gray16" />
+          <button
+            type="button"
+            onClick={() => setVisibleInsightBatches(1)}
+            className="block mx-auto rounded-base 
+            border-2 border-accent px-6 py-2 
+            font-title text-title-sm uppercase 
+            shadow-button 
+            transition duration-main 
+            hover:bg-accent"
+          >
+            Load more
+          </button>
+        </div>
+      ) : null}
     </section>
   );
 }

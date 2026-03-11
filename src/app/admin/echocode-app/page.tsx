@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import InfoTooltip from '@/components/admin/dashboard/ui/InfoTooltip';
 import EchocodeAppOverview from '@/components/admin/echocode-app/EchocodeAppOverview';
+import NewEchocodeAppSubmissionsAlert from '@/components/admin/echocode-app/NewEchocodeAppSubmissionsAlert';
 
 const OPEN_SUBMISSIONS_LINK_CLASS_NAME =
   'inline-flex items-center rounded-(--radius-base) ' +
@@ -23,6 +24,7 @@ export default function AdminEchocodeAppPage() {
           Open submissions
         </Link>
       </div>
+      <NewEchocodeAppSubmissionsAlert />
       <EchocodeAppOverview />
     </section>
   );

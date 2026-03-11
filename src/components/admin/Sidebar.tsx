@@ -6,6 +6,7 @@ import { signOut } from 'firebase/auth';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { getFirebaseClientAuth } from '@/lib/firebase/client';
+import { useAdminSidebarBadges } from '@/components/admin/useAdminSidebarBadges';
 
 type SidebarProps = {
   role: string;
@@ -18,7 +19,31 @@ type NavItem = {
   label: string;
   visible: boolean;
   parentHref?: string;
+  badgeCount?: number;
 };
+
+function resolveNestedAccent(parentHref?: string): string {
+  if (parentHref === '/admin/submissions') return 'border-accent';
+  if (parentHref === '/admin/vacancies') return 'border-[#ffd38e]';
+  if (parentHref === '/admin/echocode-app') return 'border-[#5aa9ff]';
+  return 'border-gray16';
+}
+
+function resolveBadgeClasses(parentHref?: string): string {
+  if (parentHref === '/admin/submissions') {
+    return 'border-accent/50 bg-accent/12 text-accent';
+  }
+
+  if (parentHref === '/admin/vacancies') {
+    return 'border-[#ffd38e]/45 bg-[#ffd38e]/12 text-[#ffd38e]';
+  }
+
+  if (parentHref === '/admin/echocode-app') {
+    return 'border-[#5aa9ff]/45 bg-[#5aa9ff]/12 text-[#9cc9ff]';
+  }
+
+  return 'border-gray16 bg-gray10 text-gray75';
+}
 
 function SidebarNav({
   items,
@@ -35,10 +60,8 @@ function SidebarNav({
         .filter((item) => item.visible)
         .map((item) => {
           const isNested = Boolean(item.parentHref);
-          const isSubmissionsSubitem = item.parentHref === '/admin/submissions';
-          const isVacanciesSubitem = item.parentHref === '/admin/vacancies';
-          const isEchocodeAppSubitem = item.parentHref === '/admin/echocode-app';
           const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
+          const shouldShowBadge = isNested && (item.badgeCount ?? 0) > 0;
 
           return (
             <Link
@@ -49,9 +72,19 @@ function SidebarNav({
                 isActive
                   ? 'bg-gray16 text-white shadow-[0_6px_20px_rgba(0,0,0,0.35)]'
                   : 'text-gray75 hover:bg-gray10 hover:text-white'
-              } ${isNested ? `ml-3 border-l pl-4 text-main-xs ${isSubmissionsSubitem ? 'border-accent' : isVacanciesSubitem ? 'border-[#ffd38e]' : isEchocodeAppSubitem ? 'border-[#5aa9ff]' : 'border-gray16'}` : ''}`}
+              } ${isNested ? `ml-3 border-l pl-4 text-main-xs ${resolveNestedAccent(item.parentHref)}` : ''}`}
             >
-              {item.label}
+              <span className="flex items-center justify-between gap-3">
+                <span>{item.label}</span>
+                {shouldShowBadge ? (
+                  <span
+                    className={`inline-flex min-w-6 items-center justify-center rounded-full border px-2 py-0.5 
+                    font-main text-[10px] font-semibold leading-none ${resolveBadgeClasses(item.parentHref)}`}
+                  >
+                    {item.badgeCount}
+                  </span>
+                ) : null}
+              </span>
             </Link>
           );
         })}
@@ -63,21 +96,25 @@ export default function Sidebar({ role, isMobileOpen = false, onCloseMobile }: S
   const pathname = usePathname();
   const router = useRouter();
   const [isSigningOut, setIsSigningOut] = useState(false);
+  const canViewLogs = role !== 'manager';
+  const sidebarBadges = useAdminSidebarBadges();
 
   const items: NavItem[] = [
-    { href: '/admin/dashboard', label: 'Dashboard', visible: true },
+    { href: '/admin/dashboard', label: '.digital Dashboard', visible: true },
     { href: '/admin/submissions', label: 'Submissions metrics', visible: true },
     {
       href: '/admin/submissions/clients',
       label: 'Clients',
       visible: true,
       parentHref: '/admin/submissions',
+      badgeCount: sidebarBadges['/admin/submissions/clients'],
     },
     {
       href: '/admin/submissions/emails',
       label: 'Emails',
       visible: true,
       parentHref: '/admin/submissions',
+      badgeCount: sidebarBadges['/admin/submissions/emails'],
     },
     { href: '/admin/vacancies', label: 'Vacancies', visible: true },
     {
@@ -85,16 +122,18 @@ export default function Sidebar({ role, isMobileOpen = false, onCloseMobile }: S
       label: 'Candidates',
       visible: true,
       parentHref: '/admin/vacancies',
+      badgeCount: sidebarBadges['/admin/vacancies/candidates'],
     },
     { href: '/admin/portfolio', label: 'Portfolio', visible: true },
-    { href: '/admin/echocode-app', label: 'Echocode.app', visible: true },
+    { href: '/admin/echocode-app', label: '.app Dashboard', visible: true },
     {
       href: '/admin/echocode-app/submissions',
-      label: 'App submissions',
+      label: 'Clients',
       visible: true,
       parentHref: '/admin/echocode-app',
+      badgeCount: sidebarBadges['/admin/echocode-app/submissions'],
     },
-    { href: '/admin/logs', label: 'Logs', visible: role === 'developer' },
+    { href: '/admin/logs', label: 'Logs', visible: canViewLogs },
     { href: '/admin/info', label: 'Info', visible: true },
   ];
 

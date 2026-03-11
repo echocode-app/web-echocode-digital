@@ -11,6 +11,7 @@ type EchocodeAppMetricListProps<TItem extends EchocodeAppMetricListItem> = {
   items: readonly TItem[];
   emptyMessage: string;
   renderLabel: (item: TItem) => string;
+  itemsClassName?: string;
 };
 
 export default function EchocodeAppMetricList<TItem extends EchocodeAppMetricListItem>({
@@ -19,6 +20,7 @@ export default function EchocodeAppMetricList<TItem extends EchocodeAppMetricLis
   items,
   emptyMessage,
   renderLabel,
+  itemsClassName,
 }: EchocodeAppMetricListProps<TItem>) {
   return (
     <article
@@ -30,7 +32,7 @@ export default function EchocodeAppMetricList<TItem extends EchocodeAppMetricLis
       {items.length === 0 ? (
         <p className="mt-4 font-main text-main-sm text-gray60">{emptyMessage}</p>
       ) : (
-        <div className="mt-4 space-y-3">
+        <div className={itemsClassName ?? 'mt-4 space-y-3'}>
           {items.map((item) => (
             <div
               key={`${renderLabel(item)}-${item.views}`}

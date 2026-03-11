@@ -1,5 +1,6 @@
 import type { SourcePerformanceDto } from '@/server/admin/dashboard/dashboard.types';
 import type { DateRange } from '@/server/admin/dashboard/dashboard.repository.core';
+import type { SiteId } from '@/server/sites/siteContext';
 import {
   normalizeSafeNumber,
   percentage,
@@ -47,7 +48,10 @@ function addSourceStats(
 }
 
 // Source block is derived from first-touch metadata.attribution.source values.
-export async function getSourcePerformance(last30Days: DateRange): Promise<SourcePerformanceDto[]> {
+export async function getSourcePerformance(
+  last30Days: DateRange,
+  options: { siteId?: SiteId } = {},
+): Promise<SourcePerformanceDto[]> {
   const sourceStats = new Map<string, SourceStats>();
 
   await Promise.all([
@@ -55,22 +59,22 @@ export async function getSourcePerformance(last30Days: DateRange): Promise<Sourc
       const source = extractAttributionSource(data.metadata);
       if (!source) return;
       addSourceStats(sourceStats, source, { pageViews: 1 });
-    }),
+    }, options),
     scanAnalyticsEventsByTypeInRange('submit_project', last30Days, (data) => {
       const source = extractAttributionSource(data.metadata);
       if (!source) return;
       addSourceStats(sourceStats, source, { projectLeads: 1 });
-    }),
+    }, options),
     scanAnalyticsEventsByTypeInRange('submit_vacancy', last30Days, (data) => {
       const source = extractAttributionSource(data.metadata);
       if (!source) return;
       addSourceStats(sourceStats, source, { vacancyLeads: 1 });
-    }),
+    }, options),
     scanAnalyticsEventsByTypeInRange('apply_vacancy', last30Days, (data) => {
       const source = extractAttributionSource(data.metadata);
       if (!source) return;
       addSourceStats(sourceStats, source, { vacancyLeads: 1 });
-    }),
+    }, options),
   ]);
 
   return sortTopSources(sourceStats);

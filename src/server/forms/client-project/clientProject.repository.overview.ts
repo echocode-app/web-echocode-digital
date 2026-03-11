@@ -2,10 +2,10 @@ import { Timestamp } from 'firebase-admin/firestore';
 import {
   getCurrentYearMonthRanges,
   normalizeSafeNumber,
-  readCount,
   startOfUtcDay,
 } from '@/server/admin/dashboard/dashboard.repository.core';
 import { getFirestoreDb } from '@/server/firebase/firestore';
+import { ApiError } from '@/server/lib/errors';
 import type {
   ClientSubmissionStatus,
   ClientSubmissionStatusCountsDto,
@@ -17,6 +17,10 @@ import {
   CLIENT_SUBMISSION_STATUS_ORDER,
 } from '@/server/forms/client-project/clientProject.repository.shared';
 import { EMPTY_CLIENT_SUBMISSION_STATUS_COUNTS } from '@/shared/admin/constants';
+
+function isSoftDeleted(data: Record<string, unknown>): boolean {
+  return data.isDeleted === true;
+}
 
 async function countClientSubmissions(input?: {
   status?: ClientSubmissionStatus;
@@ -35,7 +39,18 @@ async function countClientSubmissions(input?: {
       .where('createdAt', '<', Timestamp.fromDate(input.range.end));
   }
 
-  return readCount(query, 'Failed to count client submissions');
+  let snapshot: FirebaseFirestore.QuerySnapshot;
+  try {
+    snapshot = await query.get();
+  } catch (cause) {
+    throw ApiError.fromCode('FIREBASE_UNAVAILABLE', 'Failed to count client submissions', {
+      cause,
+    });
+  }
+
+  return snapshot.docs.reduce((count, doc) => {
+    return isSoftDeleted(doc.data()) ? count : count + 1;
+  }, 0);
 }
 
 function emptyStatusCounts(): ClientSubmissionStatusCountsDto {
@@ -81,6 +96,7 @@ async function buildStatusesByMonthFromYearScan(year: number): Promise<ClientSub
 
   snapshot.docs.forEach((doc) => {
     const data = doc.data();
+    if (isSoftDeleted(data)) return;
     const createdAt = data.createdAt;
     const status = typeof data.status === 'string' ? data.status : 'new';
     if (!(createdAt instanceof Timestamp)) return;

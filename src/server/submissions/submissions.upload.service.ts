@@ -131,6 +131,10 @@ function toIsoString(date: Date): string {
   return date.toISOString();
 }
 
+function toReadSignedUrlExpiry(): Date {
+  return new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+}
+
 export async function createProjectUploadInit(
   params: CreateProjectUploadInitParams,
 ): Promise<CreateProjectUploadInitResponseDto> {
@@ -270,6 +274,27 @@ export async function verifyUploadedProjectAttachment(
     throw ApiError.fromCode(
       'ATTACHMENT_VERIFICATION_FAILED',
       'Uploaded attachment size does not match submitted metadata',
+    );
+  }
+}
+
+export async function getSignedProjectAttachmentReadUrl(path: string): Promise<string> {
+  const bucket = getFirebaseStorageBucket();
+  const file = bucket.file(path);
+
+  try {
+    const [url] = await file.getSignedUrl({
+      version: 'v4',
+      action: 'read',
+      expires: toReadSignedUrlExpiry(),
+    });
+
+    return url;
+  } catch (cause) {
+    throw ApiError.fromCode(
+      'FIREBASE_UNAVAILABLE',
+      'Failed to generate submission attachment access URL',
+      { cause },
     );
   }
 }

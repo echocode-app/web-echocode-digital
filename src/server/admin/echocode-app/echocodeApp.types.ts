@@ -3,7 +3,14 @@ import type {
   DashboardPeriod,
   DashboardGeographyCountryDto,
 } from '@/server/admin/dashboard/dashboard.types';
-import type { ListSubmissionsResponseDto } from '@/server/submissions/submissions.types';
+import type {
+  AddSubmissionCommentResponseDto,
+  EchocodeAppSubmissionsListResponseDto,
+  SubmissionDetailsDto,
+  SubmissionWorkflowStatus,
+  UpdateSubmissionStatusResponseDto,
+  SoftDeleteSubmissionResponseDto,
+} from '@/server/submissions/submissions.types';
 
 export type EchocodeAppTopPageDto = {
   path: string;
@@ -35,4 +42,16 @@ export type EchocodeAppOverviewDto = {
   referrers: EchocodeAppReferrerDto[];
 };
 
-export type EchocodeAppSubmissionsDto = ListSubmissionsResponseDto;
+export type EchocodeAppSubmissionsOverviewDto = {
+  totals: {
+    currentMonth: number;
+    allTime: number;
+  };
+  byStatus: Record<SubmissionWorkflowStatus, number>;
+};
+
+export type EchocodeAppSubmissionsDto = EchocodeAppSubmissionsListResponseDto;
+export type EchocodeAppSubmissionDetailsDto = SubmissionDetailsDto;
+export type EchocodeAppSubmissionStatusUpdateDto = UpdateSubmissionStatusResponseDto;
+export type EchocodeAppSubmissionCommentDto = AddSubmissionCommentResponseDto;
+export type EchocodeAppSubmissionDeleteDto = SoftDeleteSubmissionResponseDto;

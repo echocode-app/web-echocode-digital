@@ -69,7 +69,7 @@
 Додатково для candidates:
 - `vacancyKey`
 
-## Що ще треба фронтендеру
+## Що ще треба фронтенду
 1. Підключити `emails` за аналогією з `clients`.
 2. Підключити `vacancy candidates` за аналогією з `clients`.
 3. Для `vacancy submit` передавати в payload snapshot вакансії.

@@ -15,9 +15,17 @@ export {
   type DashboardOverviewDto,
 } from '@/server/admin/dashboard';
 export {
+  addAdminEchocodeAppSubmissionComment,
+  getAdminEchocodeAppSubmissionDetails,
   getAdminEchocodeAppOverview,
   listAdminEchocodeAppSubmissions,
+  setAdminEchocodeAppSubmissionStatus,
+  softDeleteAdminEchocodeAppSubmission,
   type EchocodeAppOverviewDto,
+  type EchocodeAppSubmissionCommentDto,
+  type EchocodeAppSubmissionDeleteDto,
+  type EchocodeAppSubmissionDetailsDto,
+  type EchocodeAppSubmissionStatusUpdateDto,
   type EchocodeAppSubmissionsDto,
 } from '@/server/admin/echocode-app';
 export {

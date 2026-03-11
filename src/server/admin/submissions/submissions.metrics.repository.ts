@@ -14,7 +14,7 @@ import { buildFunnelSnapshot } from '@/server/admin/submissions/submissions.metr
 import {
   computeAverageSubmitTimeMinutes,
   countAnyAnalyticsEventInRange,
-  countSubmissionsInRange,
+  countScopedSubmissionsInRange,
 } from '@/server/admin/submissions/submissions.metrics.queries';
 import { resolveSubmissionsPeriodBuckets } from '@/server/admin/submissions/submissions.metrics.ranges';
 import type {
@@ -25,6 +25,8 @@ import type {
 } from '@/server/admin/submissions/submissions.metrics.types';
 
 export type { SubmissionsOverviewRawAggregates } from '@/server/admin/submissions/submissions.metrics.types';
+
+const MAIN_SITE_ID = 'echocode_digital' as const;
 
 export async function getSubmissionsOverviewRawAggregates(
   period: SubmissionsOverviewPeriod = 'week',
@@ -51,23 +53,23 @@ export async function getSubmissionsOverviewRawAggregates(
     submissionsTrendCounts,
     errorsTrendCounts,
   ] = await Promise.all([
-    countSubmissionsInRange(last7Days),
-    countSubmissionsInRange(previous7Days),
-    countAnalyticsEventInRange('page_view', last7Days),
-    countAnalyticsEventInRange('page_view', previous7Days),
-    countAnyAnalyticsEventInRange(SUBMIT_ERROR_EVENT_TYPES, last7Days),
-    countAnyAnalyticsEventInRange(SUBMIT_ERROR_EVENT_TYPES, previous7Days),
-    countAnyAnalyticsEventInRange(SUBMIT_ATTEMPT_EVENT_TYPES, last7Days),
-    countAnyAnalyticsEventInRange(SUBMIT_ATTEMPT_EVENT_TYPES, previous7Days),
-    computeAverageSubmitTimeMinutes(last7Days),
-    computeAverageSubmitTimeMinutes(previous7Days),
-    countAnyAnalyticsEventInRange(MODAL_OPEN_EVENT_TYPES, periodConfig.funnelRange),
-    countAnyAnalyticsEventInRange(SUBMIT_ATTEMPT_EVENT_TYPES, periodConfig.funnelRange),
-    countSubmissionsInRange(periodConfig.funnelRange),
-    Promise.all(periodConfig.buckets.map(({ range }) => countSubmissionsInRange(range))),
+    countScopedSubmissionsInRange(last7Days, { siteId: MAIN_SITE_ID }),
+    countScopedSubmissionsInRange(previous7Days, { siteId: MAIN_SITE_ID }),
+    countAnalyticsEventInRange('page_view', last7Days, { siteId: MAIN_SITE_ID }),
+    countAnalyticsEventInRange('page_view', previous7Days, { siteId: MAIN_SITE_ID }),
+    countAnyAnalyticsEventInRange(SUBMIT_ERROR_EVENT_TYPES, last7Days, { siteId: MAIN_SITE_ID }),
+    countAnyAnalyticsEventInRange(SUBMIT_ERROR_EVENT_TYPES, previous7Days, { siteId: MAIN_SITE_ID }),
+    countAnyAnalyticsEventInRange(SUBMIT_ATTEMPT_EVENT_TYPES, last7Days, { siteId: MAIN_SITE_ID }),
+    countAnyAnalyticsEventInRange(SUBMIT_ATTEMPT_EVENT_TYPES, previous7Days, { siteId: MAIN_SITE_ID }),
+    computeAverageSubmitTimeMinutes(last7Days, { siteId: MAIN_SITE_ID }),
+    computeAverageSubmitTimeMinutes(previous7Days, { siteId: MAIN_SITE_ID }),
+    countAnyAnalyticsEventInRange(MODAL_OPEN_EVENT_TYPES, periodConfig.funnelRange, { siteId: MAIN_SITE_ID }),
+    countAnyAnalyticsEventInRange(SUBMIT_ATTEMPT_EVENT_TYPES, periodConfig.funnelRange, { siteId: MAIN_SITE_ID }),
+    countScopedSubmissionsInRange(periodConfig.funnelRange, { siteId: MAIN_SITE_ID }),
+    Promise.all(periodConfig.buckets.map(({ range }) => countScopedSubmissionsInRange(range, { siteId: MAIN_SITE_ID }))),
     Promise.all(
       periodConfig.buckets.map(({ range }) =>
-        countAnyAnalyticsEventInRange(SUBMIT_ERROR_EVENT_TYPES, range),
+        countAnyAnalyticsEventInRange(SUBMIT_ERROR_EVENT_TYPES, range, { siteId: MAIN_SITE_ID }),
       ),
     ),
   ]);

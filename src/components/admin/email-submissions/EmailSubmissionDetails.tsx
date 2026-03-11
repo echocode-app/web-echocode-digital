@@ -3,9 +3,9 @@
 import Link from 'next/link';
 import AdminToast from '@/components/admin/ui/AdminToast';
 import ClientSubmissionStatusBadge from '@/components/admin/client-submissions/shared/ClientSubmissionStatusBadge';
-import ClientSubmissionCommentsPanel from '@/components/admin/client-submissions/details/ClientSubmissionCommentsPanel';
-import ClientSubmissionStatusSelect from '@/components/admin/client-submissions/details/ClientSubmissionStatusSelect';
 import EmailSubmissionMetaGrid from '@/components/admin/email-submissions/details/EmailSubmissionMetaGrid';
+import ModerationCommentsPanel from '@/components/admin/shared/moderation/ModerationCommentsPanel';
+import ModerationStatusSelect from '@/components/admin/shared/moderation/ModerationStatusSelect';
 import { useEmailSubmissionDetails } from '@/components/admin/email-submissions/details/useEmailSubmissionDetails';
 
 export default function EmailSubmissionDetails({ submissionId }: { submissionId: string }) {
@@ -74,7 +74,9 @@ export default function EmailSubmissionDetails({ submissionId }: { submissionId:
           </div>
         </div>
 
-        <ClientSubmissionStatusSelect
+        <ModerationStatusSelect
+          id="email-submission-details-status"
+          ariaLabel="Update email submission status"
           value={details.status}
           disabled={isStatusSaving}
           options={getAllowedStatusOptions(details.status)}
@@ -84,7 +86,7 @@ export default function EmailSubmissionDetails({ submissionId }: { submissionId:
 
       <EmailSubmissionMetaGrid details={details} />
 
-      <ClientSubmissionCommentsPanel
+      <ModerationCommentsPanel
         comments={details.comments ?? []}
         commentText={commentText}
         commentError={commentError}

@@ -19,11 +19,15 @@ async function fetchOverview(
   });
 }
 
-export function useEchocodeAppOverview(period: DashboardPeriod) {
+export function useEchocodeAppOverview(period: DashboardPeriod, enabled = true) {
   const [overview, setOverview] = useState<EchocodeAppOverviewDto | null>(null);
   const [state, setState] = useState<EchocodeAppOverviewState>('loading');
 
   useEffect(() => {
+    if (!enabled) {
+      return undefined;
+    }
+
     const controller = new AbortController();
 
     fetchOverview(period, controller.signal)
@@ -39,7 +43,7 @@ export function useEchocodeAppOverview(period: DashboardPeriod) {
       });
 
     return () => controller.abort();
-  }, [period]);
+  }, [enabled, period]);
 
   return { overview, state };
 }

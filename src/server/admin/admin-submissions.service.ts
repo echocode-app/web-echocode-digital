@@ -33,11 +33,11 @@ export async function setAdminSubmissionStatus(input: {
     adminUid: input.adminUid,
     actionType: 'submissions.status.update',
     entityType: 'submission',
-    entityId: updated.id,
+    entityId: updated.updated.id,
     metadata: {
-      status: updated.status,
+      status: updated.updated.status,
     },
   });
 
-  return updated;
+  return updated.updated;
 }
