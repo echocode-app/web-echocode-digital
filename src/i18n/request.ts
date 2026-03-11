@@ -36,6 +36,9 @@ export default getRequestConfig(async (params) => {
   const vacancyDesign = (await import(`./messages/${locale}/vacancies/design.json`)).default;
   const projectModal = (await import(`./messages/${locale}/project-modal.json`)).default;
   const errorsPages = (await import(`./messages/${locale}/errors-pages.json`)).default;
+  const projectECommerce = (await import(`./messages/${locale}/projects/e-commerce.json`)).default;
+  const projectFood = (await import(`./messages/${locale}/projects/food.json`)).default;
+  const projectCleaning = (await import(`./messages/${locale}/projects/cleaning.json`)).default;
 
   const messages = {
     ...homePage,
@@ -56,6 +59,9 @@ export default getRequestConfig(async (params) => {
     ...vacancyDesign,
     ...projectModal,
     ...errorsPages,
+    ...projectECommerce,
+    ...projectFood,
+    ...projectCleaning,
   };
 
   return {

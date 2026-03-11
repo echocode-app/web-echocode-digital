@@ -15,7 +15,7 @@ const Cleaning = () => {
   return (
     <>
       <section className="pt-42 pb-37.5">
-        <h1 className="text-title-3xl md:text-title-5xl lg:text-title-6xl font-title text-center">
+        <h1 className="text-title-3xl md:text-title-5xl lg:text-title-6xl font-wadik text-center">
           CLEANING-APP
         </h1>
       </section>
@@ -25,15 +25,18 @@ const Cleaning = () => {
         list={challenges}
         image="/images/projects/cleaning/challenges.png"
         position="50% 50%"
+        translateKey="ChallengesCleaning"
       />
       <PlanningSection
         list={planning}
+        translateKey="PlanningCleaning"
         image={'/images/projects/cleaning/planning.png'}
         imageStyle="relative w-full max-w-[570px] aspect-570/600"
       />
       <FeaturesCleanning />
       <ScreensSection imagePath="/images/projects/cleaning/screens.png" />
       <ProptotypeSection
+        translateKey="PrototypeCleaning"
         leftBgImage={'/images/projects/cleaning/left-bg.png'}
         rightBgImage={'/images/projects/cleaning/right-bg.png'}
       >
@@ -46,7 +49,7 @@ const Cleaning = () => {
           className="scale-70 xl:scale-100"
         />
       </ProptotypeSection>
-      <TechnologySection list={technologies} />
+      <TechnologySection list={technologies} translateKey="TechnologyCleaning" />
     </>
   );
 };

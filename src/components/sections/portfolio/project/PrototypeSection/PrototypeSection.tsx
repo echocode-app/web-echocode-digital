@@ -1,22 +1,31 @@
 import { ReactNode } from 'react';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 
 interface ProptotypeSectionProps {
   leftBgImage: string;
   rightBgImage: string;
+  translateKey: string;
   children: ReactNode;
 }
 
-const ProptotypeSection = ({ leftBgImage, rightBgImage, children }: ProptotypeSectionProps) => {
+const ProptotypeSection = ({
+  leftBgImage,
+  rightBgImage,
+  translateKey,
+  children,
+}: ProptotypeSectionProps) => {
+  const t = useTranslations(translateKey);
+
   return (
     <section className="pb-10">
       <div className="mb-6 mx-auto max-w-172.5">
         <h2 className="px-4 text-center block text-title-2xl md:text-title-4xl font-title uppercase">
-          Interactive Prototype
+          {t('title')}
         </h2>
       </div>
-      <p className="px-4 text-center font-title text-title-sm">
-        Explore the design in action — click through to experience how it works
+      <p className="px-4 text-center font-title text-title-sm uppercase font-bold">
+        {t('subtitle')}
       </p>
       <div className="pt-20 relative flex justify-between gap-80 items-center min-h-160">
         <div className="absolute top-0 left-0 w-full h-24 md:h-40 bg-linear-to-b from-black to-transparent z-20" />

@@ -1,26 +1,26 @@
 [
   {
-    "title": "Favorites",
-    "desc": "Allows users to save items and return to them later"
+    "title": "feature01.title",
+    "desc": "feature01.desc"
   },
   {
-    "title": "Cart ＆ Checkout",
-    "desc": "Smooth and secure payment flow via Stripe and PayPal"
+    "title": "feature02.title",
+    "desc": "feature02.desc"
   },
   {
-    "title": "Order History",
-    "desc": "View previous purchases and order statuses"
+    "title": "feature03.title",
+    "desc": "feature03.desc"
   },
   {
-    "title": "Category-based catalog",
-    "desc": "Filtered by gender, age, brand, size, and price"
+    "title": "feature04.title",
+    "desc": "feature04.desc"
   },
   {
-    "title": "Personal User Account",
-    "desc": "Track orders, update info, manage preferences"
+    "title": "feature05.title",
+    "desc": "feature05.desc"
   },
   {
-    "title": "Real-time Shipping",
-    "desc": "FedEx (US) and DPD (EU) \nintegration"
+    "title": "feature06.title",
+    "desc": "feature06.desc"
   }
 ]
