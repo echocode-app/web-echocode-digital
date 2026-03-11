@@ -1,31 +1,26 @@
 [
   {
-    "title": "Input",
+    "title": "block01.title",
     "desc": [
-      "Two-sided platform for clients and cleaners",
-      "Flexible scheduling with transparent pricing",
-      "Stripe integration for payments",
-      "Clear admin dashboard & simple UX",
-      "In-app messaging & reviews"
+      "block01.desc01",
+      "block01.desc02",
+      "block01.desc03",
+      "block01.desc04",
+      "block01.desc05"
     ]
   },
   {
-    "title": "Analysis",
-    "desc": [
-      "Defined user personas and mapped journeys",
-      "Modeled all feature modules",
-      "Created wireframes and prototypes",
-      "Planned timeline and phased rollout"
-    ]
+    "title": "block02.title",
+    "desc": ["block02.desc01", "block02.desc02", "block02.desc03", "block02.desc04"]
   },
   {
-    "title": "Outcomes",
+    "title": "block03.title",
     "desc": [
-      "Native iOS app with intuitive interface",
-      "Secure Stripe payments",
-      "Role-based access for clients, cleaners, admins",
-      "Admin dashboard with stats & controls",
-      "Integrated feedback and review system"
+      "block03.desc01",
+      "block03.desc02",
+      "block03.desc03",
+      "block03.desc04",
+      "block03.desc05"
     ]
   }
 ]

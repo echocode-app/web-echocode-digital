@@ -1,23 +1,20 @@
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 
 import SectionContainer from '@/components/UI/section/SectionContainer';
 import SectionGradientLine from '@/components/UI/section/SectionGradientLine';
 
 const AboutSectionCleaning = () => {
+  const t = useTranslations('AboutSectionCleaning');
+
   return (
     <section className="pb-10 md:pb-25">
       <SectionGradientLine height="1" />
       <SectionContainer>
         <div className="flex flex-col lg:flex-row items-center lg:items-start justify-between gap-4 lg:gap-0 mb-3">
           <div className="p-3 max-w-141.5">
-            <h3 className="mb-3 font-title">About a Project</h3>
-            <p className="text-main-sm text-gray75">
-              Cleaning Service is a native iOS application developed for a cleaning company that
-              connects customers with professional cleaners. The app allows clients to schedule
-              cleaning services, manage payments securely, and communicate directly with cleaners.
-              An admin panel supports full management of users, services, orders, and performance
-              metrics.
-            </p>
+            <h3 className="mb-3 font-title uppercase font-bold">{t('aboutProject.title')}</h3>
+            <p className="text-main-sm text-gray75">{t('aboutProject.description')}</p>
           </div>
           <div className="relative flex justify-center w-36.5 md:w-98.5 lg:pl-15.5 lg:pr-16">
             <div className="relative w-36.5 h-86.5">
@@ -58,21 +55,12 @@ const AboutSectionCleaning = () => {
             </div>
           </div>
           <div className="p-3 max-w-141.5">
-            <h3 className="mb-3 font-title">Project Idea</h3>
+            <h3 className="mb-3 font-title uppercase font-bold">{t('projectIdea.title')}</h3>
 
             <ul className="flex flex-col gap-0.5 text-main-sm text-gray75">
-              <li className="mb-px">
-                The goal was to create a two-sided platform simplifying the booking process for
-                customers and workload management for cleaners.
-              </li>
-              <li className="mb-6">
-                From the customer perspective, the app enables quick service requests with
-                transparent pricing and reliable reviews.
-              </li>
-              <li>
-                From the cleaner’s side, it offers a steady flow of orders, flexible scheduling, and
-                direct communication with clients.
-              </li>
+              <li className="mb-px">{t('projectIdea.list.item1')}</li>
+              <li className="mb-6">{t('projectIdea.list.item2')} </li>
+              <li>{t('projectIdea.list.item3')} </li>
             </ul>
           </div>
         </div>

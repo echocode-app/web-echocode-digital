@@ -1,0 +1,133 @@
+{
+  "AboutSectionCleaning": {
+    "aboutProject": {
+      "title": "About a Project",
+      "description": "Cleaning Service is a native iOS application developed for a cleaning company that connects customers with professional cleaners. The app allows clients to schedule cleaning services, manage payments securely, and communicate directly with cleaners. An admin panel supports full management of users, services, orders, and performance metrics."
+    },
+    "projectIdea": {
+      "title": "Project Idea",
+      "list": {
+        "item1": "The goal was to create a two-sided platform simplifying the booking process for customers and workload management for cleaners.",
+        "item2": "From the customer perspective, the app enables quick service requests with transparent pricing and reliable reviews.",
+        "item3": "From the cleaner’s side, it offers a steady flow of orders, flexible scheduling, and direct communication with clients."
+      }
+    }
+  },
+  "ImplementationCleaning": {
+    "title": "Implementation",
+    "subtitle": "The development phase involved:",
+    "step01": {
+      "desc": "Building the backend and database"
+    },
+    "step02": {
+      "desc": "Designing native iOS interfaces tailored for both user roles"
+    },
+    "step03": {
+      "desc": "Integrating Stripe for secure payments"
+    },
+    "step04": {
+      "desc": "Implementing a two-way messaging system"
+    },
+    "step05": {
+      "desc": "Developing an admin panel for comprehensive user and service management"
+    },
+    "step06": {
+      "desc": "Thorough testing across multiple iPhone models and iOS versions to ensure performance and compatibility"
+    }
+  },
+  "ChallengesCleaning": {
+    "title": "Challenges We Solved",
+    "feature01": {
+      "title": "Dual Roles UI:",
+      "subtitle": "Designing a clean, scalable interface supporting clients and cleaners"
+    },
+    "feature02": {
+      "title": "Dynamic Matching:",
+      "subtitle": "Creating a system for cleaners to respond and customers to select"
+    },
+    "feature03": {
+      "title": "Secure Payments:",
+      "subtitle": "Integrating payment and refund workflows via Stripe"
+    },
+    "feature04": {
+      "title": "Role-based Access:",
+      "subtitle": "Managing user data and permissions in the admin panel"
+    }
+  },
+  "PlanningCleaning": {
+    "title": "Planning",
+    "block01": {
+      "title": "Input",
+      "desc01": "Two-sided platform for clients and cleaners",
+      "desc02": "Flexible scheduling with transparent pricing",
+      "desc03": "Stripe integration for payments",
+      "desc04": "Clear admin dashboard & simple UX",
+      "desc05": "In-app messaging & reviews"
+    },
+    "block02": {
+      "title": "Analysis",
+      "desc01": "Defined user personas and mapped journeys",
+      "desc02": "Modeled all feature modules",
+      "desc03": "Created wireframes and prototypes",
+      "desc04": "Planned timeline and phased rollout"
+    },
+    "block03": {
+      "title": "Outcomes",
+      "desc01": "Native iOS app with intuitive interface",
+      "desc02": "Secure Stripe payments",
+      "desc03": "Role-based access for clients, cleaners, admins",
+      "desc04": "Admin dashboard with stats & controls",
+      "desc05": "Integrated feedback and review system"
+    }
+  },
+  "FeaturesCleaning": {
+    "title": "Main Features of the Project",
+    "subtitle": "Admin Panel:",
+    "feature01": {
+      "title": "Manage orders and user data"
+    },
+    "feature02": {
+      "title": "Track key metrics and dashboards"
+    },
+    "feature03": {
+      "title": "Edit pricing and services"
+    },
+    "feature04": {
+      "title": "Moderate reviews"
+    }
+  },
+  "ScreensCleaning": {
+    "title": "SCREENS"
+  },
+  "PrototypeCleaning": {
+    "title": "Interactive Prototype",
+    "subtitle": "Explore the design in action — click through to experience how it works"
+  },
+  "TechnologyCleaning": {
+    "title": "Technology Stack",
+    "block01": {
+      "title": "Admin Panel",
+      "desc": "Next.js"
+    },
+    "block02": {
+      "title": "Backend",
+      "desc": "Node.js"
+    },
+    "block03": {
+      "title": "Notifications",
+      "desc": "Firebase or custom WebSocket"
+    },
+    "block04": {
+      "title": "Database",
+      "desc": "Custom solution for menu & campaign management"
+    },
+    "block05": {
+      "title": "Project Management",
+      "desc": "Scrum methodology with 2-week sprints"
+    },
+    "block06": {
+      "title": "Payment Integration",
+      "desc": "Stripe API"
+    }
+  }
+}

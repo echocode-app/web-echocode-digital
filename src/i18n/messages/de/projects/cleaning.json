@@ -1,0 +1,100 @@
+{
+  "AboutSectionCleaning": {
+    "aboutProject": {
+      "title": "Über das Projekt",
+      "description": "Cleaning Service ist eine native iOS-App für ein Reinigungsunternehmen, die Kunden mit professionellen Reinigungskräften verbindet. Die App ermöglicht es Kunden, Reinigungsdienste zu planen, Zahlungen sicher zu verwalten und direkt mit Reinigungskräften zu kommunizieren. Ein Admin-Panel unterstützt die vollständige Verwaltung von Benutzern, Dienstleistungen, Aufträgen und Leistungskennzahlen."
+    },
+    "projectIdea": {
+      "title": "Projektidee",
+      "list": {
+        "item1": "Ziel war die Erstellung einer zweiseitigen Plattform, die den Buchungsprozess für Kunden und das Arbeitslastmanagement für Reinigungskräfte vereinfacht.",
+        "item2": "Aus Kundensicht ermöglicht die App schnelle Serviceanfragen mit transparenten Preisen und verlässlichen Bewertungen.",
+        "item3": "Aus Sicht der Reinigungskraft bietet sie einen stetigen Auftragsfluss, flexible Terminplanung und direkte Kommunikation mit Kunden."
+      }
+    }
+  },
+  "ImplementationCleaning": {
+    "title": "Implementierung",
+    "subtitle": "Die Entwicklungsphase umfasste:",
+    "step01": { "desc": "Aufbau von Backend und Datenbank" },
+    "step02": { "desc": "Design nativer iOS-Oberflächen für beide Benutzerrollen" },
+    "step03": { "desc": "Integration von Stripe für sichere Zahlungen" },
+    "step04": { "desc": "Implementierung eines bidirektionalen Nachrichtensystems" },
+    "step05": {
+      "desc": "Entwicklung eines Admin-Panels für umfassendes Benutzer- und Dienstleistungsmanagement"
+    },
+    "step06": {
+      "desc": "Umfassende Tests auf mehreren iPhone-Modellen und iOS-Versionen zur Sicherstellung von Leistung und Kompatibilität"
+    }
+  },
+  "ChallengesCleaning": {
+    "title": "Herausforderungen, die wir gelöst haben",
+    "feature01": {
+      "title": "UI für zwei Rollen:",
+      "subtitle": "Erstellung einer sauberen, skalierbaren Oberfläche für Kunden und Reinigungskräfte"
+    },
+    "feature02": {
+      "title": "Dynamisches Matching:",
+      "subtitle": "System für Reinigungsaufträge, bei dem Reinigungskräfte reagieren und Kunden auswählen können"
+    },
+    "feature03": {
+      "title": "Sichere Zahlungen:",
+      "subtitle": "Integration von Zahlungs- und Rückerstattungsprozessen über Stripe"
+    },
+    "feature04": {
+      "title": "Rollenbasierter Zugriff:",
+      "subtitle": "Verwaltung von Benutzerdaten und Berechtigungen im Admin-Panel"
+    }
+  },
+  "PlanningCleaning": {
+    "title": "Planung",
+    "block01": {
+      "title": "Eingaben",
+      "desc01": "Zweiseitige Plattform für Kunden und Reinigungskräfte",
+      "desc02": "Flexible Terminplanung mit transparenten Preisen",
+      "desc03": "Stripe-Integration für Zahlungen",
+      "desc04": "Klares Admin-Dashboard & einfache UX",
+      "desc05": "In-App-Messaging & Bewertungen"
+    },
+    "block02": {
+      "title": "Analyse",
+      "desc01": "Definierte Benutzer-Personas und User Journeys gemappt",
+      "desc02": "Alle Feature-Module modelliert",
+      "desc03": "Wireframes und Prototypen erstellt",
+      "desc04": "Zeitplan und schrittweise Einführung geplant"
+    },
+    "block03": {
+      "title": "Ergebnisse",
+      "desc01": "Native iOS-App mit intuitiver Benutzeroberfläche",
+      "desc02": "Sichere Stripe-Zahlungen",
+      "desc03": "Rollenbasierter Zugriff für Kunden, Reinigungskräfte und Admins",
+      "desc04": "Admin-Dashboard mit Statistiken und Steuerungen",
+      "desc05": "Integriertes Feedback- und Bewertungssystem"
+    }
+  },
+  "FeaturesCleaning": {
+    "title": "Hauptfunktionen des Projekts",
+    "subtitle": "Admin-Panel:",
+    "feature01": { "title": "Verwaltung von Aufträgen und Benutzerdaten" },
+    "feature02": { "title": "Verfolgung wichtiger Kennzahlen und Dashboards" },
+    "feature03": { "title": "Preis- und Dienstleistungsbearbeitung" },
+    "feature04": { "title": "Moderation von Bewertungen" }
+  },
+  "ScreensCleaning": { "title": "BILDSCHIRME" },
+  "PrototypeCleaning": {
+    "title": "Interaktiver Prototyp",
+    "subtitle": "Entdecken Sie das Design in Aktion – klicken Sie, um die Funktionsweise zu erleben"
+  },
+  "TechnologyCleaning": {
+    "title": "Technologie-Stack",
+    "block01": { "title": "Admin-Panel", "desc": "Next.js" },
+    "block02": { "title": "Backend", "desc": "Node.js" },
+    "block03": {
+      "title": "Benachrichtigungen",
+      "desc": "Firebase oder benutzerdefiniertes WebSocket"
+    },
+    "block04": { "title": "Datenbank", "desc": "Custom-Lösung für Menü- und Kampagnenmanagement" },
+    "block05": { "title": "Projektmanagement", "desc": "Scrum-Methodik mit zweiwöchigen Sprints" },
+    "block06": { "title": "Zahlungsintegration", "desc": "Stripe API" }
+  }
+}

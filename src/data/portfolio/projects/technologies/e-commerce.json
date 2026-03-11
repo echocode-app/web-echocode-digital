@@ -1,26 +1,26 @@
 [
   {
-    "title": "Platform",
-    "desc": "Swift"
+    "title": "block01.title",
+    "desc": "block01.desc"
   },
   {
-    "title": "Backend",
-    "desc": "FedEx API, DPD API"
+    "title": "block02.title",
+    "desc": "block02.desc"
   },
   {
-    "title": "User Auth ＆ Database",
-    "desc": "Firebase"
+    "title": "block03.title",
+    "desc": "block03.desc"
   },
   {
-    "title": "Payment Integration",
-    "desc": "Stripe PayPal"
+    "title": "block04.title",
+    "desc": "block04.desc"
   },
   {
-    "title": "Analytics",
-    "desc": "Google Analytics"
+    "title": "block05.title",
+    "desc": "block05.desc"
   },
   {
-    "title": "Project Management",
-    "desc": "Scrum methodology with 2-week"
+    "title": "block06.title",
+    "desc": "block06.desc"
   }
 ]

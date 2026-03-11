@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 
 import SectionContainer from '@/components/UI/section/SectionContainer';
 import SectionGradientLine from '@/components/UI/section/SectionGradientLine';
@@ -6,11 +7,13 @@ import SectionTitle from '@/components/UI/section/SectionTitle';
 import ImplementationCleaningList from './ImplementationCleaningList';
 
 const ImplementationCleaningSection = () => {
+  const t = useTranslations('ImplementationCleaning');
+
   return (
     <section className="pb-10 md:pb-31">
       <SectionGradientLine height="1" />
       <SectionContainer>
-        <SectionTitle marginBottom="40px">Implementation</SectionTitle>
+        <SectionTitle marginBottom="40px">{t('title')}</SectionTitle>
         <div className="flex gap-10 lg:gap-0 flex-col lg:flex-row items-center lg:justify-between">
           <div className="relative aspect-426/324 w-full min-[458px]:w-106.5 min-[458px]:h-81">
             <Image
@@ -22,7 +25,7 @@ const ImplementationCleaningSection = () => {
             />
           </div>
           <div>
-            <h3 className="font-title text-[#E3E4E6] mb-6">The development phase involved:</h3>
+            <h3 className="font-title text-[#E3E4E6] mb-6 uppercase font-bold">{t('subtitle')}</h3>
             <ImplementationCleaningList />
           </div>
         </div>

@@ -1,26 +1,26 @@
 [
   {
-    "title": "Platform",
-    "desc": "Swift"
+    "title": "block01.title",
+    "desc": "block01.desc"
   },
   {
-    "title": "Utilities",
-    "desc": "QR scanning SDK"
+    "title": "block02.title",
+    "desc": "block02.desc"
   },
   {
-    "title": "Backend",
-    "desc": "Integration via Loyalty Platform API"
+    "title": "block03.title",
+    "desc": "block03.desc"
   },
   {
-    "title": "CMS",
-    "desc": "Custom solution for menu & campaign management"
+    "title": "block04.title",
+    "desc": "block04.desc"
   },
   {
-    "title": "Project Management",
-    "desc": "Scrum methodology with 2-week sprints"
+    "title": "block05.title",
+    "desc": "block05.desc"
   },
   {
-    "title": "Notifications",
-    "desc": "Firebase Cloud Messaging, Twilio"
+    "title": "block06.title",
+    "desc": "block06.desc"
   }
 ]

@@ -1,23 +1,20 @@
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 
 import SectionContainer from '@/components/UI/section/SectionContainer';
 import SectionGradientLine from '@/components/UI/section/SectionGradientLine';
 
 const AboutSectionECommerse = () => {
+  const t = useTranslations('AboutSectionECommerce');
+
   return (
     <section className="pb-10 md:pb-25">
       <SectionGradientLine height="1" />
       <SectionContainer>
         <div className="flex flex-col lg:flex-row items-center lg:items-start justify-between gap-4 lg:gap-0 mb-3">
           <div className="p-3 max-w-141.5">
-            <h3 className="mb-3 font-title">About a Project</h3>
-            <p className="text-main-sm text-gray75">
-              E-commerce is a mobile shopping application designed for a multi-brand fashion
-              retailer targeting women, men, and kids. The app delivers a modern, streamlined
-              shopping experience — from browsing categories to placing secure orders — with an
-              emphasis on speed, simplicity, and visual clarity. It includes user accounts,
-              favorites, dynamic filtering, real-time shipping options, and analytics.
-            </p>
+            <h3 className="mb-3 font-title uppercase font-bold">{t('aboutProject.title')}</h3>
+            <p className="text-main-sm text-gray75">{t('aboutProject.description')} </p>
           </div>
           <div className="flex justify-center w-36.5 md:w-98.5 lg:pl-15.5 lg:pr-16">
             <div className="relative w-36.5 h-86.5">
@@ -59,28 +56,21 @@ const AboutSectionECommerse = () => {
             </div>
           </div>
           <div className="p-3 max-w-141.5">
-            <h3 className="mb-3 font-title">Project Idea</h3>
-            <p className="mb-0.5  text-main-sm text-gray75">
-              The client aimed to create a flexible and scalable mobile platform where customers
-              could:
-            </p>
+            <h3 className="mb-3 font-title uppercase font-bold">{t('projectIdea.title')}</h3>
+            <p className="mb-0.5  text-main-sm text-gray75">{t('projectIdea.intro')}</p>
             <ul className="flex flex-col gap-0.5 text-main-sm text-gray75">
               <li className="flex gap-2 items-center">
-                <div className="w-1 h-1 bg-gray75 rounded-full" /> Discover new fashion collections
-                for all age groups
+                <div className="w-1 h-1 bg-gray75 rounded-full" /> {t('projectIdea.list.item1')}
               </li>
               <li className="flex gap-2 items-center">
-                <div className="w-1 h-1 bg-gray75 rounded-full" /> Easily search, filter, and
-                explore across brands and sizes
+                <div className="w-1 h-1 bg-gray75 rounded-full" /> {t('projectIdea.list.item2')}
               </li>
               <li className="flex gap-2 items-center">
-                <div className="w-1 h-1 bg-gray75 rounded-full" /> Save favorite items and manage
-                purchases in a few taps
+                <div className="w-1 h-1 bg-gray75 rounded-full" /> {t('projectIdea.list.item3')}
               </li>
               <li className="flex gap-2 items-start">
                 <div className="w-1 h-1 bg-gray75 rounded-full shrink-0 mt-2" />
-                Enjoy a minimalistic, mobile-first interface that feels intuitive and engaging. The
-                primary goal was to improve user engagement and drive mobile conversions.
+                {t('projectIdea.list.item4')}
               </li>
             </ul>
           </div>

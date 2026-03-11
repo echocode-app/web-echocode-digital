@@ -1,0 +1,151 @@
+{
+  "AboutSectionECommerce": {
+    "aboutProject": {
+      "title": "About a Project",
+      "description": "E-commerce is a mobile shopping application designed for a multi-brand fashion retailer targeting women, men, and kids. The app delivers a modern, streamlined shopping experience — from browsing categories to placing secure orders — with an emphasis on speed, simplicity, and visual clarity. It includes user accounts, favorites, dynamic filtering, real-time shipping options, and analytics."
+    },
+    "projectIdea": {
+      "title": "Project Idea",
+      "intro": "The client aimed to create a flexible and scalable mobile platform where customers could:",
+      "list": {
+        "item1": "Discover new fashion collections for all age groups",
+        "item2": "Easily search, filter, and explore across brands and sizes",
+        "item3": "Save favorite items and manage purchases in a few taps",
+        "item4": "Enjoy a minimalistic, mobile-first interface that feels intuitive and engaging. The primary goal was to improve user engagement and drive mobile conversions."
+      }
+    }
+  },
+  "ImplementationECommerce": {
+    "title": "Implementation",
+    "subtitle": "We began with in-depth market research and UI analysis of top-tier fashion apps.",
+    "step01": {
+      "title": "01. STRATEGY",
+      "subTitle": "Analysis",
+      "desc": "Competitor research User journey mapping"
+    },
+    "step02": {
+      "title": "02. UX／UI",
+      "subTitle": "Design",
+      "desc": "UX flows & wireframes Clean, modular UI design"
+    },
+    "step03": {
+      "title": "03. CODE",
+      "subTitle": "Development",
+      "desc": "Agile iOS development E-commerce features"
+    },
+    "step04": {
+      "title": "04. DEVOPS",
+      "subTitle": "Integration",
+      "desc": "Payments & shipping APIs Third-party services"
+    },
+    "step05": {
+      "title": "05. GROWTH",
+      "subTitle": "Release ＆ ASO",
+      "desc": "Testing & QA assurance Product launch"
+    }
+  },
+  "ChallengesECommerce": {
+    "title": "Challenges We Solved",
+    "feature01": {
+      "title": "Complex Catalog:",
+      "subtitle": "Scalable multi-level structure (Women, Men, Kids)"
+    },
+    "feature02": {
+      "title": "UX Optimization:",
+      "subtitle": "Optimized interface for fast browsing, filtering, and ordering"
+    },
+    "feature03": {
+      "title": "Flexible Products:",
+      "subtitle": "Designed the system to handle new brands, SKUs, and seasonal campaigns"
+    },
+    "feature04": {
+      "title": "Mobile-first UI:",
+      "subtitle": "Delivered a clean, adaptive layout that remains intuitive across devices"
+    }
+  },
+  "PlanningECommerce": {
+    "title": "Planning",
+    "block01": {
+      "title": "Input",
+      "desc01": "Diverse catalog for all age groups",
+      "desc02": "Clear navigation & streamlined catalog",
+      "desc03": "Mobile-first, trend-driven UI",
+      "desc04": "Secure, seamless checkout"
+    },
+    "block02": {
+      "title": "Analysis",
+      "desc01": "Stakeholder workshops & scope definition",
+      "desc02": "User journey and edge-case mapping",
+      "desc03": "Key UI states and screens defined",
+      "desc04": "Interactive prototype"
+    },
+    "block03": {
+      "title": "Outcomes",
+      "desc01": "Production-ready mobile app design",
+      "desc02": "Modular UI system for scaling",
+      "desc03": "Full dev handoff (assets & specs)",
+      "desc04": "Third-party & analytics integration plan"
+    }
+  },
+  "FeaturesECommerce": {
+    "title": "Main Features of the Project",
+    "feature01": {
+      "title": "Favorites",
+      "desc": "Allows users to save items and return to them later"
+    },
+    "feature02": {
+      "title": "Cart ＆ Checkout",
+      "desc": "Smooth and secure payment flow via Stripe and PayPal"
+    },
+    "feature03": {
+      "title": "Order History",
+      "desc": "View previous purchases and order statuses"
+    },
+    "feature04": {
+      "title": "Category-Based Catalog",
+      "desc": "Filtered by gender, age, brand, size, and price"
+    },
+    "feature05": {
+      "title": "Personal User Account",
+      "desc": "Track orders, update info, manage preferences"
+    },
+    "feature06": {
+      "title": "Real-Time Shipping",
+      "desc": "FedEx (US) and DPD (EU)\nintegration"
+    }
+  },
+  "ScreensECommerce": {
+    "title": "SCREENS"
+  },
+  "PrototypeECommerce": {
+    "title": "Interactive Prototype",
+    "subtitle": "Explore the design in action — click through to experience how it works"
+  },
+  "TechnologyECommerce": {
+    "title": "Technology Stack",
+    "block01": {
+      "title": "Platform",
+      "desc": "Swift"
+    },
+    "block02": {
+      "title": "Backend",
+      "desc": "FedEx API, DPD API"
+    },
+    "block03": {
+      "title": "User Auth ＆ Database",
+      "desc": "Firebase"
+    },
+    "block04": {
+      "title": "Payment Integration",
+      "desc": "Stripe, PayPal"
+    },
+    "block05": {
+      "title": "Analytics",
+      "desc": "Google Analytics"
+    },
+    "block06": {
+      "title": "Project Management",
+      "desc": "Scrum methodology with 2-week"
+    }
+  }
+}

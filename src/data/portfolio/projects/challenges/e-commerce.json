@@ -1,15 +1,18 @@
 [
-  { "title": "Complex Catalog:", "subtitle": "Scalable multi-level structure (Women, Men, Kids)" },
   {
-    "title": "UX Optimization:",
-    "subtitle": "Optimized interface for fast browsing, filtering, and ordering"
+    "title": "feature01.title",
+    "subtitle": "feature01.subtitle"
   },
   {
-    "title": "Flexible Products:",
-    "subtitle": "Designed the system to handle new brands, SKUs, and seasonal campaigns"
+    "title": "feature02.title",
+    "subtitle": "feature02.subtitle"
   },
   {
-    "title": "Mobile-first UI:",
-    "subtitle": "Delivered a clean, adaptive layout that remains intuitive across devices"
+    "title": "feature03.title",
+    "subtitle": "feature03.subtitle"
+  },
+  {
+    "title": "feature04.title",
+    "subtitle": "feature04.subtitle"
   }
 ]

@@ -1,0 +1,151 @@
+{
+  "AboutSectionECommerce": {
+    "aboutProject": {
+      "title": "Sobre el proyecto",
+      "description": "E-commerce es una aplicación móvil de compras diseñada para un minorista de moda multimarca dirigido a mujeres, hombres y niños. La aplicación ofrece una experiencia de compra moderna y optimizada, desde la navegación por categorías hasta la realización de pedidos seguros, con énfasis en la velocidad, la simplicidad y la claridad visual. Incluye cuentas de usuario, favoritos, filtros dinámicos, opciones de envío en tiempo real y analítica."
+    },
+    "projectIdea": {
+      "title": "Idea del proyecto",
+      "intro": "El cliente buscaba crear una plataforma móvil flexible y escalable donde los usuarios pudieran:",
+      "list": {
+        "item1": "Descubrir nuevas colecciones de moda para todas las edades",
+        "item2": "Buscar, filtrar y explorar fácilmente entre diferentes marcas y tallas",
+        "item3": "Guardar artículos favoritos y gestionar compras con solo unos toques",
+        "item4": "Disfrutar de una interfaz minimalista y mobile-first que resulte intuitiva y atractiva. El objetivo principal era mejorar la interacción de los usuarios y aumentar las conversiones móviles."
+      }
+    }
+  },
+  "ImplementationECommerce": {
+    "title": "Implementación",
+    "subtitle": "Comenzamos con una investigación profunda del mercado y un análisis de la UI de las principales aplicaciones de moda.",
+    "step01": {
+      "title": "01. STRATEGY",
+      "subTitle": "Análisis",
+      "desc": "Investigación de competidores y mapeo del recorrido del usuario"
+    },
+    "step02": {
+      "title": "02. UX／UI",
+      "subTitle": "Diseño",
+      "desc": "Flujos UX y wireframes, diseño de interfaz limpio y modular"
+    },
+    "step03": {
+      "title": "03. CODE",
+      "subTitle": "Desarrollo",
+      "desc": "Desarrollo ágil para iOS y funcionalidades de comercio electrónico"
+    },
+    "step04": {
+      "title": "04. DEVOPS",
+      "subTitle": "Integración",
+      "desc": "Integración de APIs de pagos y envíos y servicios de terceros"
+    },
+    "step05": {
+      "title": "05. GROWTH",
+      "subTitle": "Lanzamiento y ASO",
+      "desc": "Pruebas y aseguramiento de calidad, lanzamiento del producto"
+    }
+  },
+  "ChallengesECommerce": {
+    "title": "Desafíos que resolvimos",
+    "feature01": {
+      "title": "Catálogo complejo:",
+      "subtitle": "Estructura multinivel escalable (Mujer, Hombre, Niños)"
+    },
+    "feature02": {
+      "title": "Optimización UX:",
+      "subtitle": "Interfaz optimizada para una navegación, filtrado y compra rápidos"
+    },
+    "feature03": {
+      "title": "Sistema de productos flexible:",
+      "subtitle": "El sistema fue diseñado para gestionar nuevas marcas, SKU y campañas estacionales"
+    },
+    "feature04": {
+      "title": "UI mobile-first:",
+      "subtitle": "Diseño limpio y adaptable que se mantiene intuitivo en todos los dispositivos"
+    }
+  },
+  "PlanningECommerce": {
+    "title": "Planificación",
+    "block01": {
+      "title": "Entrada",
+      "desc01": "Catálogo diverso para todos los grupos de edad",
+      "desc02": "Navegación clara y catálogo optimizado",
+      "desc03": "UI móvil primero, orientado a tendencias",
+      "desc04": "Proceso de pago seguro y sin interrupciones"
+    },
+    "block02": {
+      "title": "Análisis",
+      "desc01": "Talleres con stakeholders y definición del alcance",
+      "desc02": "Mapeo del recorrido del usuario y casos límite",
+      "desc03": "Definición de estados clave de UI y pantallas",
+      "desc04": "Prototipo interactivo"
+    },
+    "block03": {
+      "title": "Resultados",
+      "desc01": "Diseño de app móvil listo para producción",
+      "desc02": "Sistema UI modular para escalabilidad",
+      "desc03": "Entrega completa a desarrollo (activos y especificaciones)",
+      "desc04": "Plan de integración con servicios de terceros y analítica"
+    }
+  },
+  "FeaturesECommerce": {
+    "title": "Características principales del proyecto",
+    "feature01": {
+      "title": "Favoritos",
+      "desc": "Permite a los usuarios guardar artículos y volver a ellos más tarde"
+    },
+    "feature02": {
+      "title": "Carrito y Pago",
+      "desc": "Flujo de pago fluido y seguro a través de Stripe y PayPal"
+    },
+    "feature03": {
+      "title": "Historial de pedidos",
+      "desc": "Ver compras anteriores y estados de pedidos"
+    },
+    "feature04": {
+      "title": "Catálogo por categoría",
+      "desc": "Filtrado por género, edad, marca, talla y precio"
+    },
+    "feature05": {
+      "title": "Cuenta personal del usuario",
+      "desc": "Rastrear pedidos, actualizar información, gestionar preferencias"
+    },
+    "feature06": {
+      "title": "Envío en tiempo real",
+      "desc": "Integración FedEx (US)\n y DPD (EU)"
+    }
+  },
+  "ScreensECommerce": {
+    "title": "PANTALLAS"
+  },
+  "PrototypeECommerce": {
+    "title": "Prototipo interactivo",
+    "subtitle": "Explora el diseño en acción: haz clic para ver cómo funciona"
+  },
+  "TechnologyECommerce": {
+    "title": "Stack Tecnológico",
+    "block01": {
+      "title": "Plataforma",
+      "desc": "Swift"
+    },
+    "block02": {
+      "title": "Backend",
+      "desc": "FedEx API, DPD API"
+    },
+    "block03": {
+      "title": "Auth Usuario y DB",
+      "desc": "Firebase"
+    },
+    "block04": {
+      "title": "Integración de pagos",
+      "desc": "Stripe, PayPal"
+    },
+    "block05": {
+      "title": "Analítica",
+      "desc": "Google Analytics"
+    },
+    "block06": {
+      "title": "Gestión de proyectos",
+      "desc": "Metodología Scrum con sprints de 2 semanas"
+    }
+  }
+}

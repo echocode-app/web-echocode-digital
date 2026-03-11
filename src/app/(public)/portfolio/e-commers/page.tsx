@@ -1,3 +1,5 @@
+import { useTranslations } from 'next-intl';
+
 import { AboutSectionECommerse } from '@/components/sections/portfolio/project/AboutSection';
 import { ImplementationSection } from '@/components/sections/portfolio/project/ImplementationSection';
 import ChallengesSection from '@/components/sections/portfolio/project/ChallengesSection';
@@ -14,31 +16,37 @@ import features from '@/data/portfolio/projects/features/e-commerce.json';
 import technologies from '@/data/portfolio/projects/technologies/e-commerce.json';
 
 const ECommers = () => {
+  const t = useTranslations('ImplementationECommerce');
+
   return (
     <>
       <section className="pt-42 pb-37.5">
-        <h1 className="text-title-3xl md:text-title-5xl lg:text-title-6xl font-title text-center">
+        <h1 className="text-title-3xl md:text-title-5xl lg:text-title-6xl font-wadik text-center uppercase">
           E-commerce
         </h1>
       </section>
       <AboutSectionECommerse />
       <ImplementationSection
         list={implementations}
-        subtitle="We began with in-depth market research and UI analysis of top-tier fashion apps."
+        subtitle={t('subtitle')}
+        translateKey="ImplementationECommerce"
       />
       <ChallengesSection
         list={challenges}
         image="/images/projects/e-commers/challenges.jpg"
         position="0% 50%"
+        translateKey="ChallengesECommerce"
       />
       <PlanningSection
         list={planning}
+        translateKey="PlanningECommerce"
         image={'/images/projects/e-commers/planning.png'}
         imageStyle="relative w-full max-w-157.5 aspect-157.5/139"
       />
-      <FeaturesSection list={features} />
+      <FeaturesSection list={features} translateKey="FeaturesECommerce" />
       <ScreensSection imagePath="/images/projects/e-commers/screens.png" />
       <ProptotypeSection
+        translateKey="PrototypeECommerce"
         leftBgImage={'/images/projects/e-commers/left-bg.png'}
         rightBgImage={'/images/projects/e-commers/right-bg.png'}
       >
@@ -51,7 +59,7 @@ const ECommers = () => {
           className="scale-70 xl:scale-100"
         />
       </ProptotypeSection>
-      <TechnologySection list={technologies} />
+      <TechnologySection list={technologies} translateKey="TechnologyECommerce" />
     </>
   );
 };
