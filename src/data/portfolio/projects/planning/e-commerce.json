@@ -1,29 +1,14 @@
 [
   {
-    "title": "Input",
-    "desc": [
-      "Diverse catalog for all age groups",
-      "Clear navigation & streamlined catalog",
-      "Mobile-first, trend-driven UI",
-      "Secure, seamless checkout"
-    ]
+    "title": "block01.title",
+    "desc": ["block01.desc01", "block01.desc02", "block01.desc03", "block01.desc04"]
   },
   {
-    "title": "Analysis",
-    "desc": [
-      "Stakeholder workshops & scope definition",
-      "User journey and edge-case mapping",
-      "Key UI states and screens defined",
-      "Interactive prototype"
-    ]
+    "title": "block02.title",
+    "desc": ["block02.desc01", "block02.desc02", "block02.desc03", "block02.desc04"]
   },
   {
-    "title": "Outcomes",
-    "desc": [
-      "Production-ready mobile app design",
-      "Modular UI system for scaling",
-      "Full dev handoff (assets & specs)",
-      "Third-party & analytics integration plan"
-    ]
+    "title": "block03.title",
+    "desc": ["block03.desc01", "block03.desc02", "block03.desc03", "block03.desc04"]
   }
 ]

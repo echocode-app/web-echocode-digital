@@ -1,26 +1,26 @@
 [
   {
-    "title": "Visual Menu Browsing",
-    "desc": "Categorized dishes with rich visuals and details"
+    "title": "feature01.title",
+    "desc": "feature01.desc"
   },
   {
-    "title": "Favorites",
-    "desc": "Users can save favorite items for quick reordering"
+    "title": "feature02.title",
+    "desc": "feature02.desc"
   },
   {
-    "title": "Geolocation",
-    "desc": "Detects nearby restaurants and filters results by distance"
+    "title": "feature03.title",
+    "desc": "feature03.desc"
   },
   {
-    "title": "Loyalty Program",
-    "desc": "Users track point balance, history, and rewards"
+    "title": "feature04.title",
+    "desc": "feature04.desc"
   },
   {
-    "title": "Promotions ＆ News",
-    "desc": "Live feed of seasonal offers and announcements"
+    "title": "feature05.title",
+    "desc": "feature05.desc"
   },
   {
-    "title": "QR Scanner",
-    "desc": "Enables users to unlock offers or earn rewards in-store"
+    "title": "feature06.title",
+    "desc": "feature06.desc"
   }
 ]

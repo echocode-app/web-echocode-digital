@@ -1,20 +1,27 @@
+import { useLocale, useTranslations } from 'next-intl';
+
 interface PlanningItemProps {
   title: string;
   desc: string[];
+  translateKey: string;
 }
 
-const PlanningItem = ({ title, desc }: PlanningItemProps) => {
+const PlanningItem = ({ title, desc, translateKey }: PlanningItemProps) => {
+  const t = useTranslations(translateKey);
+  const locale = useLocale();
+  const enStyle = locale === 'en' ? 'text-main-sm' : 'text-main-xs';
+
   return (
     <li
-      className="w-full p-3 border border-main-border rounded-secondary 
+      className="w-full max-w-93 p-3 border border-main-border rounded-secondary 
     hover:border-accent duration-main"
     >
-      <h3 className="mb-3 font-title pointer-events-none">{title}</h3>
+      <h3 className="mb-3 font-title pointer-events-none uppercase font-bold">{t(title)}</h3>
       <ul className="flex flex-col gap-px pointer-events-none">
         {desc.map((item, i) => (
           <li key={i} className="flex items-center gap-2">
             <div className="w-1 h-1 rounded-full bg-gray75" />
-            <p className="text-gray75 text-main-sm">{item}</p>
+            <p className={`text-gray75 ${enStyle}`}>{t(item)}</p>
           </li>
         ))}
       </ul>

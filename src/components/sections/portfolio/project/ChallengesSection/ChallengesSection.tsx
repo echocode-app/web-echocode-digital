@@ -3,22 +3,26 @@ import SectionGradientLine from '@/components/UI/section/SectionGradientLine';
 import ChallengesList from './ChallengesList';
 import SectionTitle from '@/components/UI/section/SectionTitle';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 
 interface ChallengesSectionProps {
   list: { title: string; subtitle: string }[];
   image: string;
   position: string;
+  translateKey: string;
 }
 
-const ChallengesSection = ({ list, image, position }: ChallengesSectionProps) => {
+const ChallengesSection = ({ list, image, position, translateKey }: ChallengesSectionProps) => {
+  const t = useTranslations(translateKey);
+
   return (
     <section className="pb-10 md:pb-25">
       <SectionGradientLine height="1" />
       <SectionContainer>
         <div className="flex justify-center lg:justify-between">
           <div className="max-w-141.5">
-            <SectionTitle marginBottom="24px">Challenges We Solved</SectionTitle>
-            <ChallengesList list={list} />
+            <SectionTitle marginBottom="24px">{t('title')}</SectionTitle>
+            <ChallengesList list={list} translateKey={translateKey} />
           </div>
           <div className="hidden lg:block relative aspect-394/504 w-full min-[458px]:w-98.5 min-[458px]:h-126">
             <Image

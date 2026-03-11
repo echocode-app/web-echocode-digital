@@ -1,31 +1,21 @@
 [
   {
-    "title": "Input",
+    "title": "block01.title",
     "desc": [
-      "Visual and intuitive mobile menu",
-      "Loyalty program integration",
-      "Real-time promotions",
-      "Geolocation-based filtering",
-      "In-store engagement via QR",
-      "Personalized notifications"
+      "block01.desc01",
+      "block01.desc02",
+      "block01.desc03",
+      "block01.desc04",
+      "block01.desc05",
+      "block01.desc06"
     ]
   },
   {
-    "title": "Analysis",
-    "desc": [
-      "Market and competitor research",
-      "Stakeholder interviews & scoping workshops",
-      "User journey mapping based on in-store behavior",
-      "Persona creation for key user groups"
-    ]
+    "title": "block02.title",
+    "desc": ["block02.desc01", "block02.desc02", "block02.desc03", "block02.desc04"]
   },
   {
-    "title": "Outcomes",
-    "desc": [
-      "High-fidelity UI prototypes",
-      "Scalable and documented app architecture",
-      "CRM & loyalty system integration plan",
-      "Feature roadmap with engagement mechanics"
-    ]
+    "title": "block03.title",
+    "desc": ["block03.desc01", "block03.desc02", "block03.desc03", "block03.desc04"]
   }
 ]

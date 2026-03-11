@@ -1,27 +1,27 @@
 [
   {
-    "title": "01. STRATEGY",
-    "subTitle": "Analysis",
-    "desc": "Сompetitor research User journey mapping"
+    "title": "step01.title",
+    "subTitle": "step01.subTitle",
+    "desc": "step01.desc"
   },
   {
-    "title": "02. UX／UI",
-    "subTitle": "Design",
-    "desc": "Clean interface focused on accessibility and promotion visibility"
+    "title": "step02.title",
+    "subTitle": "step02.subTitle",
+    "desc": "step02.desc"
   },
   {
-    "title": "03. CODE",
-    "subTitle": "Development",
-    "desc": "Two-week sprints with continuous feature delivery and feedback"
+    "title": "step03.title",
+    "subTitle": "step03.subTitle",
+    "desc": "step03.desc"
   },
   {
-    "title": "04. DEVOPS",
-    "subTitle": "Integration",
-    "desc": "CRM, loyalty systems, and internal platform connections"
+    "title": "step04.title",
+    "subTitle": "step04.subTitle",
+    "desc": "step04.desc"
   },
   {
-    "title": "05. GROWTH",
-    "subTitle": "Release ＆ ASO",
-    "desc": "Functional, UI, and load testing across devices and OS versions"
+    "title": "step05.title",
+    "subTitle": "step05.subTitle",
+    "desc": "step05.desc"
   }
 ]

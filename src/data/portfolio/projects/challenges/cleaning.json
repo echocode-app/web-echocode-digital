@@ -1,18 +1,18 @@
 [
   {
-    "title": "Dual Roles UI:",
-    "subtitle": "Designing a clean, scalable interface supporting clients and cleaners"
+    "title": "feature01.title",
+    "subtitle": "feature01.subtitle"
   },
   {
-    "title": "Dynamic Matching:",
-    "subtitle": "Creating a system for cleaners to respond and customers to select"
+    "title": "feature02.title",
+    "subtitle": "feature02.subtitle"
   },
   {
-    "title": "Secure Payments:",
-    "subtitle": "Integrating payment and refund workflows via Stripe"
+    "title": "feature03.title",
+    "subtitle": "feature03.subtitle"
   },
   {
-    "title": "Role-based Access:",
-    "subtitle": "Managing user data and permissions in the admin panel"
+    "title": "feature04.title",
+    "subtitle": "feature04.subtitle"
   }
 ]

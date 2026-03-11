@@ -1,0 +1,154 @@
+{
+  "AboutSectionFood": {
+    "aboutProject": {
+      "title": "Über das Projekt",
+      "description": "Food & Drinks ist eine mobile Anwendung für eine landesweite Restaurantkette, entwickelt, um die Kundenbindung zu verbessern und den Bestellprozess zu optimieren. Die App bietet den Nutzern eine visuell ansprechende und intuitive Oberfläche zum Durchstöbern des Menüs, Entdecken saisonaler Angebote und Teilnehmen am Treueprogramm der Marke – alles über das Smartphone. Sie integriert Geolocation, Multichannel-Benachrichtigungen (Push, E-Mail, SMS) und QR-Code-Scanning für nahtlose Interaktion vor Ort und digital."
+    },
+    "projectIdea": {
+      "title": "Projektidee",
+      "intro": "Die Vision des Kunden war die Schaffung einer modernen, skalierbaren Lösung für Essensbestellungen, die:",
+      "list": {
+        "item1": "Ein vollständiges digitales Menü mit intuitiver Navigation bereitstellt",
+        "item2": "Treuepunkteverfolgung und personalisierte Angebote unterstützt",
+        "item3": "Saisonale Aktionen und Kampagnenupdates ermöglicht",
+        "item4": "QR-Funktionalität für Interaktion vor Ort integriert",
+        "item5": "Rechtzeitige Benachrichtigungen über mehrere Kanäle liefert"
+      }
+    }
+  },
+  "ImplementationFood": {
+    "title": "Implementierung",
+    "subtitle": "Wir gingen von der Planung zur Umsetzung über strukturierte Produktentwicklungsphasen.",
+    "step01": {
+      "title": "01. STRATEGIE",
+      "subTitle": "Analyse",
+      "desc": "Wettbewerbsanalyse, User Journey Mapping"
+    },
+    "step02": {
+      "title": "02. UX／UI",
+      "subTitle": "Design",
+      "desc": "Sauberes Interface mit Fokus auf Zugänglichkeit und Promotion-Sichtbarkeit"
+    },
+    "step03": {
+      "title": "03. CODE",
+      "subTitle": "Entwicklung",
+      "desc": "Zwei-Wochen-Sprints mit kontinuierlicher Feature-Auslieferung und Feedback"
+    },
+    "step04": {
+      "title": "04. DEVOPS",
+      "subTitle": "Integration",
+      "desc": "Integration von CRM, Treueprogrammen und internen Plattformen"
+    },
+    "step05": {
+      "title": "05. WACHSTUM",
+      "subTitle": "Release ＆ ASO",
+      "desc": "Funktionale, UI- und Lasttests auf verschiedenen Geräten und OS-Versionen"
+    }
+  },
+  "ChallengesFood": {
+    "title": "Herausforderungen, die wir gelöst haben",
+    "feature01": {
+      "title": "Komplexer Katalog:",
+      "subtitle": "Skalierbare mehrstufige Struktur (Damen, Herren, Kinder)"
+    },
+    "feature02": {
+      "title": "UX-Optimierung:",
+      "subtitle": "Optimierte Benutzeroberfläche für schnelles Browsen, Filtern und Bestellen"
+    },
+    "feature03": {
+      "title": "Flexible Produkte:",
+      "subtitle": "System für neue Marken, SKUs und saisonale Kampagnen ausgelegt"
+    },
+    "feature04": {
+      "title": "Mobile-first UI:",
+      "subtitle": "Sauberes, adaptives Layout, intuitiv auf allen Geräten"
+    }
+  },
+  "PlanningFood": {
+    "title": "Planung",
+    "block01": {
+      "title": "Input",
+      "desc01": "Visuelles und intuitives mobiles Menü",
+      "desc02": "Integration des Treueprogramms",
+      "desc03": "Echtzeit-Promotions",
+      "desc04": "Geolokalisierungsbasierte Filterung",
+      "desc05": "Interaktion vor Ort über QR",
+      "desc06": "Personalisierte Benachrichtigungen"
+    },
+    "block02": {
+      "title": "Analyse",
+      "desc01": "Markt- und Wettbewerbsforschung",
+      "desc02": "Stakeholder-Interviews & Scoping-Workshops",
+      "desc03": "User Journey Mapping basierend auf Verhalten vor Ort",
+      "desc04": "Erstellung von Personas für wichtige Nutzergruppen"
+    },
+    "block03": {
+      "title": "Ergebnisse",
+      "desc01": "Hochwertige UI-Prototypen",
+      "desc02": "Skalierbare und dokumentierte App-Architektur",
+      "desc03": "Integrationsplan für CRM & Treueprogramm",
+      "desc04": "Feature-Roadmap mit Engagement-Mechaniken"
+    }
+  },
+  "FeaturesFood": {
+    "title": "Hauptfunktionen des Projekts",
+    "feature01": {
+      "title": "Visuelles Menü-Browsing",
+      "desc": "Kategorisierte Gerichte mit reichhaltigen Bildern und Details"
+    },
+    "feature02": {
+      "title": "Favoriten",
+      "desc": "Benutzer können Lieblingsartikel für schnelle Nachbestellungen speichern"
+    },
+    "feature03": {
+      "title": "Geolocation",
+      "desc": "Erkennt nahegelegene Restaurants und filtert nach Entfernung"
+    },
+    "feature04": {
+      "title": "Treueprogramm",
+      "desc": "Benutzer verfolgen Punktestand, Historie und Belohnungen"
+    },
+    "feature05": {
+      "title": "Promotionen ＆ News",
+      "desc": "Live-Feed von saisonalen Angeboten und Ankündigungen"
+    },
+    "feature06": {
+      "title": "QR-Scanner",
+      "desc": "Ermöglicht Benutzern, Angebote freizuschalten oder Belohnungen vor Ort zu erhalten"
+    }
+  },
+  "ScreensFood": {
+    "title": "BILDSCHIRME"
+  },
+  "PrototypeFood": {
+    "title": "Interaktiver Prototyp",
+    "subtitle": "Entdecken Sie das Design in Aktion – klicken Sie durch, um die Funktionsweise zu erleben"
+  },
+  "TechnologyFood": {
+    "title": "Technologie-Stack",
+    "block01": {
+      "title": "Plattform",
+      "desc": "Swift"
+    },
+    "block02": {
+      "title": "Utilities",
+      "desc": "QR-Scanning-SDK"
+    },
+    "block03": {
+      "title": "Backend",
+      "desc": "Integration über Loyalty Platform API"
+    },
+    "block04": {
+      "title": "CMS",
+      "desc": "Custom-Lösung für Menü- & Kampagnenmanagement"
+    },
+    "block05": {
+      "title": "Projektmanagement",
+      "desc": "Scrum-Methodik mit Zwei-Wochen-Sprints"
+    },
+    "block06": {
+      "title": "Benachrichtigungen",
+      "desc": "Firebase Cloud Messaging, Twilio"
+    }
+  }
+}
