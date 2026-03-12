@@ -22,6 +22,11 @@ type NavItem = {
   badgeCount?: number;
 };
 
+type NavSection = {
+  title: string;
+  items: NavItem[];
+};
+
 function resolveNestedAccent(parentHref?: string): string {
   if (parentHref === '/admin/submissions') return 'border-accent';
   if (parentHref === '/admin/vacancies') return 'border-[#ffd38e]';
@@ -46,48 +51,62 @@ function resolveBadgeClasses(parentHref?: string): string {
 }
 
 function SidebarNav({
-  items,
+  sections,
   pathname,
   onNavigate,
 }: {
-  items: NavItem[];
+  sections: NavSection[];
   pathname: string;
   onNavigate?: () => void;
 }) {
   return (
-    <nav className="space-y-3 md:overflow-y-auto">
-      {items
-        .filter((item) => item.visible)
-        .map((item) => {
-          const isNested = Boolean(item.parentHref);
-          const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
-          const shouldShowBadge = isNested && (item.badgeCount ?? 0) > 0;
+    <nav className="min-h-0 flex-1 space-y-2 overflow-y-auto pr-1">
+      {sections.map((section) => {
+        const visibleItems = section.items.filter((item) => item.visible);
+        if (visibleItems.length === 0) return null;
 
-          return (
-            <Link
-              key={item.href}
-              href={item.href}
-              onClick={onNavigate}
-              className={`block rounded-(--radius-secondary) px-3 py-2.5 font-main text-main-sm transition duration-main ${
-                isActive
-                  ? 'bg-gray16 text-white shadow-[0_6px_20px_rgba(0,0,0,0.35)]'
-                  : 'text-gray75 hover:bg-gray10 hover:text-white'
-              } ${isNested ? `ml-3 border-l pl-4 text-main-xs ${resolveNestedAccent(item.parentHref)}` : ''}`}
-            >
-              <span className="flex items-center justify-between gap-3">
-                <span>{item.label}</span>
-                {shouldShowBadge ? (
-                  <span
-                    className={`inline-flex min-w-6 items-center justify-center rounded-full border px-2 py-0.5 
-                    font-main text-[10px] font-semibold leading-none ${resolveBadgeClasses(item.parentHref)}`}
+        return (
+          <div key={section.title} className="space-y-1.5">
+            <div className="h-px w-full bg-gray16" />
+            <p className="px-1 font-main text-[10px] uppercase tracking-[0.18em] text-gray60">
+              {section.title}
+            </p>
+
+            <div className="space-y-2">
+              {visibleItems.map((item) => {
+                const isNested = Boolean(item.parentHref);
+                const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
+                const shouldShowBadge = isNested && (item.badgeCount ?? 0) > 0;
+
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={onNavigate}
+                    className={`block rounded-(--radius-secondary) px-3 py-2.5 font-main text-main-sm transition duration-main ${
+                      isActive
+                        ? 'bg-gray16 text-white shadow-[0_6px_20px_rgba(0,0,0,0.35)]'
+                        : 'text-gray75 hover:bg-gray10 hover:text-white'
+                    } ${isNested ? `ml-3 border-l pl-4 text-main-xs ${resolveNestedAccent(item.parentHref)}` : ''}`}
                   >
-                    {item.badgeCount}
-                  </span>
-                ) : null}
-              </span>
-            </Link>
-          );
-        })}
+                    <span className="flex items-center justify-between gap-3">
+                      <span>{item.label}</span>
+                      {shouldShowBadge ? (
+                        <span
+                          className={`inline-flex min-w-6 items-center justify-center rounded-full border px-2 py-0.5 
+                          font-main text-[10px] font-semibold leading-none ${resolveBadgeClasses(item.parentHref)}`}
+                        >
+                          {item.badgeCount}
+                        </span>
+                      ) : null}
+                    </span>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        );
+      })}
     </nav>
   );
 }
@@ -99,42 +118,57 @@ export default function Sidebar({ role, isMobileOpen = false, onCloseMobile }: S
   const canViewLogs = role !== 'manager';
   const sidebarBadges = useAdminSidebarBadges();
 
-  const items: NavItem[] = [
-    { href: '/admin/dashboard', label: '.digital Dashboard', visible: true },
-    { href: '/admin/submissions', label: 'Submissions metrics', visible: true },
+  const sections: NavSection[] = [
     {
-      href: '/admin/submissions/clients',
-      label: 'Clients',
-      visible: true,
-      parentHref: '/admin/submissions',
-      badgeCount: sidebarBadges['/admin/submissions/clients'],
+      title: 'Echocode.digital',
+      items: [
+        { href: '/admin/dashboard', label: '.digital Dashboard', visible: true },
+        { href: '/admin/submissions', label: 'Submissions metrics', visible: true },
+        {
+          href: '/admin/submissions/clients',
+          label: 'Clients',
+          visible: true,
+          parentHref: '/admin/submissions',
+          badgeCount: sidebarBadges['/admin/submissions/clients'],
+        },
+        {
+          href: '/admin/submissions/emails',
+          label: 'Emails',
+          visible: true,
+          parentHref: '/admin/submissions',
+          badgeCount: sidebarBadges['/admin/submissions/emails'],
+        },
+        { href: '/admin/vacancies', label: 'Vacancies', visible: true },
+        {
+          href: '/admin/vacancies/candidates',
+          label: 'Candidates',
+          visible: true,
+          parentHref: '/admin/vacancies',
+          badgeCount: sidebarBadges['/admin/vacancies/candidates'],
+        },
+        { href: '/admin/portfolio', label: 'Portfolio', visible: true },
+      ],
     },
     {
-      href: '/admin/submissions/emails',
-      label: 'Emails',
-      visible: true,
-      parentHref: '/admin/submissions',
-      badgeCount: sidebarBadges['/admin/submissions/emails'],
+      title: 'Echocode.app',
+      items: [
+        { href: '/admin/echocode-app', label: '.app Dashboard', visible: true },
+        {
+          href: '/admin/echocode-app/submissions',
+          label: 'Clients',
+          visible: true,
+          parentHref: '/admin/echocode-app',
+          badgeCount: sidebarBadges['/admin/echocode-app/submissions'],
+        },
+      ],
     },
-    { href: '/admin/vacancies', label: 'Vacancies', visible: true },
     {
-      href: '/admin/vacancies/candidates',
-      label: 'Candidates',
-      visible: true,
-      parentHref: '/admin/vacancies',
-      badgeCount: sidebarBadges['/admin/vacancies/candidates'],
+      title: 'Shared',
+      items: [
+        { href: '/admin/logs', label: 'Logs', visible: canViewLogs },
+        { href: '/admin/info', label: 'Info', visible: true },
+      ],
     },
-    { href: '/admin/portfolio', label: 'Portfolio', visible: true },
-    { href: '/admin/echocode-app', label: '.app Dashboard', visible: true },
-    {
-      href: '/admin/echocode-app/submissions',
-      label: 'Clients',
-      visible: true,
-      parentHref: '/admin/echocode-app',
-      badgeCount: sidebarBadges['/admin/echocode-app/submissions'],
-    },
-    { href: '/admin/logs', label: 'Logs', visible: canViewLogs },
-    { href: '/admin/info', label: 'Info', visible: true },
   ];
 
   const handleLogout = async () => {
@@ -161,7 +195,9 @@ export default function Sidebar({ role, isMobileOpen = false, onCloseMobile }: S
         <p className="mb-4 font-main text-title-xs uppercase tracking-[0.2em] text-gray60">
           Navigation
         </p>
-        <SidebarNav items={items} pathname={pathname} />
+        <div className="min-h-0 flex-1">
+          <SidebarNav sections={sections} pathname={pathname} />
+        </div>
 
         <div className="mt-4 md:mt-auto">
           <button
@@ -213,7 +249,9 @@ export default function Sidebar({ role, isMobileOpen = false, onCloseMobile }: S
               </button>
             </div>
 
-            <SidebarNav items={items} pathname={pathname} onNavigate={onCloseMobile} />
+            <div className="min-h-0 max-h-[calc(100vh-9rem)]">
+              <SidebarNav sections={sections} pathname={pathname} onNavigate={onCloseMobile} />
+            </div>
 
             <div className="mt-4">
               <button

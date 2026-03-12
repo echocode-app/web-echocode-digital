@@ -11,7 +11,7 @@ export default async function AdminEmailSubmissionDetailsPage({ params }: AdminE
 
   return (
     <section className="min-w-0 space-y-4 overflow-x-clip">
-      <h1 className="font-title text-title-2xl text-white">Email submission details</h1>
+      <h1 className="font-title text-title-2xl text-white">.digital Email submission details</h1>
       <EmailSubmissionDetails submissionId={submissionId} />
     </section>
   );

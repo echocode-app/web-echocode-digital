@@ -9,11 +9,17 @@ const quickLinkClassName =
 const externalLinkBaseClassName =
   'rounded-(--radius-secondary) px-2.5 py-1.5 text-center font-main text-main-xs transition duration-main sm:px-3 sm:py-2 sm:text-main-sm';
 
-const internalQuickLinks = [
+const DIGITAL_QUICK_LINKS = [
   { href: '/admin/dashboard', label: 'Dashboard' },
-  { href: '/admin/submissions', label: 'Submissions metrics' },
-  { href: '/admin/portfolio', label: 'Portfolio' },
   { href: '/admin/vacancies', label: 'Vacancies' },
+  { href: '/admin/portfolio', label: 'Portfolio' },
+] as const;
+
+const APP_QUICK_LINKS = [
+  { href: '/admin/echocode-app', label: 'Dashboard' },
+] as const;
+
+const SHARED_QUICK_LINKS = [
   { href: '/admin/logs', label: 'Logs' },
   { href: '/admin/info', label: 'Info' },
 ] as const;
@@ -58,10 +64,10 @@ export function ChartPanel({
 }
 
 export function ActionsPanel({ role }: { role: string }) {
-  const quickLinks =
+  const sharedQuickLinks =
     role === 'manager'
-      ? internalQuickLinks.filter((link) => link.href !== '/admin/logs')
-      : internalQuickLinks;
+      ? SHARED_QUICK_LINKS.filter((link) => link.href !== '/admin/logs')
+      : SHARED_QUICK_LINKS;
 
   return (
     <article className="min-w-0">
@@ -70,12 +76,45 @@ export function ActionsPanel({ role }: { role: string }) {
         <p className="font-main text-main-xs text-gray60">Internal admin quick links</p>
       </div>
 
-      <div className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
-        {quickLinks.map((link) => (
-          <Link key={link.href} href={link.href} className={quickLinkClassName}>
-            {link.label}
-          </Link>
-        ))}
+      <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
+        <section className="space-y-2">
+          <p className="font-main text-main-xs uppercase tracking-[0.16em] text-gray60">
+            echocode.digital
+          </p>
+          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 xl:grid-cols-1">
+            {DIGITAL_QUICK_LINKS.map((link) => (
+              <Link key={link.href} href={link.href} className={quickLinkClassName}>
+                {link.label}
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        <section className="space-y-2">
+          <p className="font-main text-main-xs uppercase tracking-[0.16em] text-gray60">
+            echocode.app
+          </p>
+          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 xl:grid-cols-1">
+            {APP_QUICK_LINKS.map((link) => (
+              <Link key={link.href} href={link.href} className={quickLinkClassName}>
+                {link.label}
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        <section className="space-y-2">
+          <p className="font-main text-main-xs uppercase tracking-[0.16em] text-gray60">
+            shared
+          </p>
+          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 xl:grid-cols-1">
+            {sharedQuickLinks.map((link) => (
+              <Link key={link.href} href={link.href} className={quickLinkClassName}>
+                {link.label}
+              </Link>
+            ))}
+          </div>
+        </section>
       </div>
 
       <div className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2">

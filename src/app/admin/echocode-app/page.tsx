@@ -14,7 +14,7 @@ export default function AdminEchocodeAppPage() {
     <section className="min-w-0 space-y-4 overflow-x-clip">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="flex items-start gap-3">
-          <h1 className="font-title text-title-2xl text-white">Echocode.app</h1>
+          <h1 className="font-title text-title-2xl text-white">.app Dashboard</h1>
           <InfoTooltip
             label="Echocode.app admin slice info"
             text="Separate admin slice for the external static site integration, including isolated analytics and submissions."

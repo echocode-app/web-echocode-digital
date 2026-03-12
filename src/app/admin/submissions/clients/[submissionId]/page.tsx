@@ -11,7 +11,7 @@ export default async function AdminClientSubmissionDetailsPage({ params }: Admin
 
   return (
     <section className="min-w-0 space-y-4 overflow-x-clip">
-      <h1 className="font-title text-title-2xl text-white">Client submission details</h1>
+      <h1 className="font-title text-title-2xl text-white">.digital Client submission details</h1>
       <ClientSubmissionDetails submissionId={submissionId} />
     </section>
   );

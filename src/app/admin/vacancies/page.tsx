@@ -6,7 +6,7 @@ export default function AdminVacanciesPage() {
   return (
     <section className="min-w-0 space-y-4 overflow-x-clip">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <h1 className="font-title text-title-2xl text-white">Vacancies metrics</h1>
+        <h1 className="font-title text-title-2xl text-white">.digital Vacancies metrics</h1>
         <Link
           href="/admin/vacancies/candidates"
           className="inline-flex items-center rounded-(--radius-base) border border-[#ffd38e] 

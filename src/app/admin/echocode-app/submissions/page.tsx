@@ -13,7 +13,7 @@ export default function AdminEchocodeAppSubmissionsPage() {
     <section className="min-w-0 space-y-4 overflow-x-clip">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="flex items-start gap-3">
-          <h1 className="font-title text-title-2xl text-white">Echocode.app submissions</h1>
+          <h1 className="font-title text-title-2xl text-white">.app Client submissions</h1>
           <InfoTooltip
             label="Echocode.app submissions page info"
             text="Dedicated moderation page for project form submissions received from the external static app site."

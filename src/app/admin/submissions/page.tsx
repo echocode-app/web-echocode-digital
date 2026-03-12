@@ -6,7 +6,7 @@ export default function AdminSubmissionsPage() {
     <section className="min-w-0 space-y-4 overflow-x-clip">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <h1 className="font-title text-title-2xl text-white">Submissions metrics</h1>
+          <h1 className="font-title text-title-2xl text-white">.digital Submissions metrics</h1>
           <p className="mt-1 font-main text-main-sm text-gray75">
             Metrics for the client contact modal flow, without the separate email-only submissions
             queue.
