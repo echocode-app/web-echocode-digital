@@ -1,11 +1,13 @@
-'use client';
+import { InitUploadResult } from '../types/candidate';
 
-export async function uploadFile(file: File, uploadUrl: string) {
-  const res = await fetch(uploadUrl, {
-    method: 'PUT',
-    headers: { 'Content-Type': file.type },
+export async function uploadFile(file: File, uploadData: InitUploadResult) {
+  const res = await fetch(uploadData.uploadUrl, {
+    method: uploadData.method,
+    headers: uploadData.headers,
     body: file,
   });
 
-  if (!res.ok) throw new Error('S3 upload failed');
+  if (!res.ok) {
+    throw new Error(`Upload failed: ${res.statusText}`);
+  }
 }

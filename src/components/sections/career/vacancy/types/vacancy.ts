@@ -35,7 +35,16 @@ export interface VacancyData {
   vacancyId: string;
   vacancySlug?: string;
   vacancyTitle?: string;
-  level?: string | null;
+  level?:
+    | 'Intern'
+    | 'Trainee'
+    | 'Junior'
+    | 'Middle'
+    | 'Senior'
+    | 'Lead'
+    | 'Principal'
+    | 'Head'
+    | null;
   conditions?: string[];
   employmentType?: string;
 }

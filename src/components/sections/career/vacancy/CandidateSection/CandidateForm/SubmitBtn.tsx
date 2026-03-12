@@ -1,17 +1,46 @@
 import { useTranslations } from 'next-intl';
-import { useFormStatus } from 'react-dom';
 
-const SubmitBtn = () => {
+import { SubmitStatus } from './types/candidate';
+import Image from 'next/image';
+
+interface SubmitBtnProps {
+  isDisable: boolean;
+  status: SubmitStatus;
+}
+
+const SubmitBtn = ({ isDisable, status }: SubmitBtnProps) => {
   const t = useTranslations('VacancyCommon.vacancyForm');
-  const { pending } = useFormStatus();
+
+  const buttonText =
+    status === 'pending'
+      ? 'Submitting...'
+      : status === 'success'
+        ? t('submitBtn')
+        : status === 'error'
+          ? 'Try again'
+          : t('submitBtn');
+  console.log(status);
+  const buttonColor = status === 'success' ? 'bg-[#34C759]' : 'bg-main-gradient';
+  const isDisabled = isDisable ? 'cursor-not-allowed' : 'cursor-pointer';
 
   return (
     <button
-      disabled={pending}
+      disabled={isDisable}
       type="submit"
-      className="w-full py-2.5 px-6 font-title bg-main-gradient rounded-base text-[10px] cursor-pointer uppercase font-bold"
+      className={`${buttonColor} ${isDisabled}
+     relative  w-full py-2.5 px-6 font-title rounded-base text-[10px] uppercase font-bold 
+       transition-colors duration-500`}
     >
-      {pending ? 'Pending' : t('submitBtn')}
+      {status === 'success' && (
+        <Image
+          src={'/UI/check.svg'}
+          alt="Check"
+          width={16}
+          height={18}
+          className="absolute top-1/2 left-[calc(50%-110px)] -translate-y-1/2"
+        />
+      )}
+      {buttonText}
     </button>
   );
 };
