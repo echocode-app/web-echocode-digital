@@ -1,20 +1,4 @@
-interface CandidateSubmissionPayload {
-  profileUrl: string;
-  cvFile: {
-    path: string;
-    originalName: string;
-    mimeType: string;
-    sizeBytes: number;
-  };
-  vacancy: {
-    vacancyId: string;
-    vacancySlug?: string;
-    vacancyTitle?: string;
-    level?: string;
-    conditions?: string[];
-    employmentType?: string;
-  };
-}
+import { CandidateSubmissionPayload } from '../types/candidate';
 
 export async function submitCandidate(payload: CandidateSubmissionPayload) {
   const res = await fetch('/api/forms/vacancy-submissions', {

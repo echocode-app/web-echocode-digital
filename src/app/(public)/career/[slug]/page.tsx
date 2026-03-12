@@ -8,6 +8,7 @@ import DescriptionSections from '@/components/sections/career/vacancy/Descriptio
 import SelectionSection from '@/components/sections/career/vacancy/SelectionSection';
 import CandidateSection from '@/components/sections/career/vacancy/CandidateSection';
 import { getPublicVacancyBySlug } from '@/server/vacancies';
+import { VacancyData } from '@/components/sections/career/vacancy/types/vacancy';
 
 interface VacancyPageProps {
   params: Promise<{ slug: string }>;
@@ -26,7 +27,7 @@ const VacancyPage = async ({ params }: VacancyPageProps) => {
   const { heroSection, valueSection, descriptionSections, selectionSection, translateKey } =
     careerData;
 
-  const vacancyData = {
+  const vacancyData: VacancyData = {
     vacancyId,
     vacancySlug,
     vacancyTitle,

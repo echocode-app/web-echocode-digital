@@ -1,5 +1,4 @@
-import { InitUploadApiResponse, UploadedFile } from '../types/candidate';
-import { InitUploadResult } from './uploadFile';
+import { InitUploadApiResponse, InitUploadResult, UploadedFile } from '../types/candidate';
 
 const initUpload = async (file: File): Promise<InitUploadResult> => {
   const payload: UploadedFile = {
