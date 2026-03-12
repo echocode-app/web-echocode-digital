@@ -11,17 +11,20 @@ interface SubmitBtnProps {
 const SubmitBtn = ({ isDisable, status }: SubmitBtnProps) => {
   const t = useTranslations('VacancyCommon.vacancyForm');
 
-  const buttonText =
-    status === 'pending'
-      ? 'Submitting...'
-      : status === 'success'
-        ? t('submitBtn')
-        : status === 'error'
-          ? 'Try again'
-          : t('submitBtn');
-  console.log(status);
+  const pending = status === 'pending';
+  const success = status === 'success';
+  const error = status === 'error';
+
+  const buttonText = pending
+    ? 'Submitting...'
+    : success
+      ? t('submitBtn')
+      : error
+        ? 'Try again'
+        : t('submitBtn');
+
   const buttonColor = status === 'success' ? 'bg-[#34C759]' : 'bg-main-gradient';
-  const isDisabled = isDisable ? 'cursor-not-allowed' : 'cursor-pointer';
+  const isDisabled = isDisable || pending || success ? 'cursor-not-allowed' : 'cursor-pointer';
 
   return (
     <button
