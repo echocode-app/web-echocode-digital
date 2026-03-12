@@ -108,12 +108,13 @@ const CandidateForm = ({ vacancyData }: CandidateFormProps) => {
       profileUrl,
       cvFile: parsed.data.cvFile!,
       vacancy: {
-        vacancyId: vacancyData.vacancyId || 'unknown',
-        vacancySlug: vacancyData.vacancySlug,
-        vacancyTitle: vacancyData.vacancyTitle,
-        level: vacancyData.level,
-        conditions: vacancyData.conditions,
-        employmentType: vacancyData.employmentType,
+        vacancyId: vacancyData.vacancyId || vacancyData.vacancySlug || 'unknown',
+        ...(vacancyData.vacancySlug && { vacancySlug: vacancyData.vacancySlug }),
+        ...(vacancyData.vacancyTitle && { vacancyTitle: vacancyData.vacancyTitle }),
+        ...(vacancyData.level && { level: vacancyData.level }),
+        ...(vacancyData.conditions &&
+          vacancyData.conditions.length > 0 && { conditions: vacancyData.conditions }),
+        ...(vacancyData.employmentType && { employmentType: vacancyData.employmentType }),
       },
     };
 
@@ -222,7 +223,7 @@ const CandidateForm = ({ vacancyData }: CandidateFormProps) => {
           </p>
         )}
       </div>
-      <SubmitBtn status={submitStatus} isDisable={uploadingFile || submitStatus === 'pending'} />
+      <SubmitBtn status={submitStatus} isDisable={uploadingFile} />
     </form>
   );
 };
