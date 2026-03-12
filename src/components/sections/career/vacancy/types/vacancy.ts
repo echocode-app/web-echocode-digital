@@ -35,7 +35,7 @@ export interface VacancyData {
   vacancyId: string;
   vacancySlug?: string;
   vacancyTitle?: string;
-  level?: string | null;
+  level?: string;
   conditions?: string[];
   employmentType?: string;
 }
