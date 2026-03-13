@@ -18,7 +18,10 @@ const ContactUsForm = ({
   onAutoClose,
   onSubmitStateChange,
 }: ContactUsFormProps) => {
+  const formErrorT = useTranslations('ProjectValidation');
   const t = useTranslations('ProjectModal.projectForm');
+
+  const translateError = (key?: string) => (key ? formErrorT(key) : undefined);
 
   const {
     values,
@@ -38,7 +41,7 @@ const ContactUsForm = ({
           name="firstName"
           label={t('firstNamePlaceholder')}
           value={values.firstName}
-          error={errors.firstName}
+          error={translateError(errors.firstName)}
           autoComplete="given-name"
           required
           disabled={isLocked}
@@ -49,7 +52,7 @@ const ContactUsForm = ({
           name="lastName"
           label={t('lastNamePlaceholder')}
           value={values.lastName}
-          error={errors.lastName}
+          error={translateError(errors.lastName)}
           autoComplete="family-name"
           required
           disabled={isLocked}
@@ -63,7 +66,7 @@ const ContactUsForm = ({
           label={t('emailPlaceholder')}
           type="email"
           value={values.email}
-          error={errors.email}
+          error={translateError(errors.email)}
           autoComplete="email"
           required
           disabled={isLocked}
@@ -72,7 +75,7 @@ const ContactUsForm = ({
         />
         <ContactFile
           file={values.image}
-          error={errors.image}
+          error={translateError(errors.image)}
           disabled={isLocked}
           onBlur={() => onBlurField('image')}
           onChange={onChangeImage}
@@ -81,7 +84,7 @@ const ContactUsForm = ({
       <div className="mb-4 md:mb-8">
         <YourNeedsInput
           value={values.description}
-          error={errors.description}
+          error={translateError(errors.description)}
           disabled={isLocked}
           onBlur={() => onBlurField('description')}
           onChange={(value) => onChangeText('description', value)}

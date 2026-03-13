@@ -12,12 +12,13 @@ import type {
 const nameSchema = z
   .string()
   .trim()
-  .min(2, 'Must contain at least 2 characters')
-  .max(40, 'Must contain at most 40 characters')
-  .regex(/^[\p{L}\p{M}' -]+$/u, 'Only letters, spaces, apostrophes and hyphens are allowed');
+  .min(2, 'name.min')
+  .max(40, 'name.max')
+  .regex(/^[\p{L}\p{M}' -]+$/u, 'name.pattern');
 
-const emailSchema = z.string().trim().email('Must be a valid email').max(120, 'Email is too long');
-const descriptionSchema = z.string().trim().max(2000, 'Description is too long');
+const emailSchema = z.string().trim().email('email.invalid').max(120, 'email.max');
+
+const descriptionSchema = z.string().trim().max(2000, 'description.max');
 
 export function normalize(values: FormValues) {
   return {
@@ -32,12 +33,16 @@ export function normalize(values: FormValues) {
 export function validateAttachmentFile(file: File | null): string | undefined {
   if (!file) return undefined;
 
-  if (!ALLOWED_ATTACHMENT_MIME_TYPES.includes(file.type as (typeof ALLOWED_ATTACHMENT_MIME_TYPES)[number])) {
-    return 'Unsupported file type. Use image, PDF, Office, TXT, CSV, RTF or ZIP.';
+  if (
+    !ALLOWED_ATTACHMENT_MIME_TYPES.includes(
+      file.type as (typeof ALLOWED_ATTACHMENT_MIME_TYPES)[number],
+    )
+  ) {
+    return 'attachment.invalidType';
   }
 
   if (file.size <= 0 || file.size > MAX_ATTACHMENT_SIZE_BYTES) {
-    return 'File must be smaller than 10MB';
+    return 'attachment.size';
   }
 
   return undefined;
