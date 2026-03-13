@@ -29,7 +29,7 @@ export default function ContactInput({
 
   return (
     <div className="relative w-full">
-      <label htmlFor={inputId} className="sr-only">
+      <label htmlFor={inputId} className="sr-only font-main">
         {label}
       </label>
       <input
@@ -46,15 +46,13 @@ export default function ContactInput({
         aria-label={label}
         title={label}
         aria-invalid={error ? 'true' : 'false'}
-        className="
-          w-full h-14
-          px-4
+        className={`w-full h-14 px-4
            hover:border-accent focus:border-accent duration-main transition-colors
-          border border-white rounded-secondary
+          border border-white text-[10px] rounded-secondary
           bg-transparent
-          text-white text-[10px] font-rubik font-bold uppercase
+          text-white font-main font-bold uppercase
           outline-none no-autofill-bg placeholder:text-white
-        "
+        `}
       />
       <div className="pointer-events-none absolute left-1 top-[calc(100%+4px)] h-4 overflow-hidden">
         <p

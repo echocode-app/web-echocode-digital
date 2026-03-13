@@ -23,6 +23,7 @@ const MailForm = () => {
 
   const formRef = useRef<HTMLFormElement>(null);
   const t = useTranslations('Layout.Footer');
+  const errorsT = useTranslations('EmailSubmitValidation');
 
   const handleLocalValidate = (e: React.FocusEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -55,7 +56,11 @@ const MailForm = () => {
     }
   };
 
-  const errorMessage = localError || state.fieldErrors?.email?.[0] || state.error;
+  const errorMessage = localError
+    ? errorsT(localError)
+    : state.fieldErrors?.email?.[0]
+      ? errorsT(state.fieldErrors.email[0])
+      : state.error;
 
   return (
     <form
@@ -72,7 +77,6 @@ const MailForm = () => {
         >
           {t('mailSubtitle')}
         </label>
-
         <input
           className="block text-main-xs w-full outline-none"
           id="email"
@@ -80,13 +84,20 @@ const MailForm = () => {
           type="email"
           placeholder="your@email.com"
           onBlur={handleLocalValidate}
+          onChange={() => {
+            setLocalError(null);
+            if (state.fieldErrors?.email) {
+              setState((prev) => ({
+                ...prev,
+                fieldErrors: { ...prev.fieldErrors, email: undefined },
+              }));
+            }
+          }}
         />
-
         {errorMessage && (
           <p className="absolute top-12 text-main-xs text-red-500">{errorMessage}</p>
         )}
       </div>
-
       <AnimatePresence>
         {showSuccess && (
           <motion.div
@@ -100,7 +111,6 @@ const MailForm = () => {
           </motion.div>
         )}
       </AnimatePresence>
-
       <SubmitArrow islocalError={!!localError} />
     </form>
   );

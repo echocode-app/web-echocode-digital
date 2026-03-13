@@ -4,8 +4,8 @@ export const emailSchema = z.object({
   email: z
     .string()
     .trim()
-    .min(3, 'Email is too short!')
-    .max(30, 'Email is too long!')
-    .email('Enter a valid email!')
-    .regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, 'Domain must contain a dot and be valid!'),
+    .min(3, 'email.min')
+    .max(30, 'email.max')
+    .email('email.invalid')
+    .regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, 'email.domain'),
 });

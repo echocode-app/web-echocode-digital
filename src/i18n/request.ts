@@ -39,6 +39,7 @@ export default getRequestConfig(async (params) => {
   const projectECommerce = (await import(`./messages/${locale}/projects/e-commerce.json`)).default;
   const projectFood = (await import(`./messages/${locale}/projects/food.json`)).default;
   const projectCleaning = (await import(`./messages/${locale}/projects/cleaning.json`)).default;
+  const validations = (await import(`./messages/${locale}/validation.json`)).default;
 
   const messages = {
     ...homePage,
@@ -62,6 +63,7 @@ export default getRequestConfig(async (params) => {
     ...projectECommerce,
     ...projectFood,
     ...projectCleaning,
+    ...validations,
   };
 
   return {

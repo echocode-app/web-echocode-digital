@@ -26,7 +26,7 @@ const ContactFile = ({ file, error, disabled, onBlur, onChange }: ContactFilePro
         ref={inputRef}
         type="file"
         accept={ATTACHMENT_ACCEPT}
-        className="hidden no-autofill-bg"
+        className="hidden no-autofill-bg "
         aria-label="Attach file"
         title="Attach file"
         onBlur={onBlur}
@@ -46,7 +46,7 @@ const ContactFile = ({ file, error, disabled, onBlur, onChange }: ContactFilePro
         className=" 
          flex items-center gap-1 py-4 pl-4 pr-6 w-full text-left border rounded-secondary leading-3.5 
          hover:border-accent focus:border-accent duration-main transition-colors
-       outline-0 text-[10px] font-title text-white placeholder:text-white 
+       outline-0 text-[10px] font-main text-white placeholder:text-white 
         border-white cursor-pointer disabled:cursor-not-allowed disabled:opacity-70
         "
       >

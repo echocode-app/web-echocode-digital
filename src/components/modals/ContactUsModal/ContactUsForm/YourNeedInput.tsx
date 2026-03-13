@@ -16,7 +16,7 @@ const YourNeedsInput = ({ value, error, disabled, onBlur, onChange }: YourNeedsI
       <label
         htmlFor="needs"
         className=" absolute top-2 left-4
-       text-[10px] font-title text-white border-white font-bold"
+       text-[10px] font-main text-white border-white font-bold uppercase"
       >
         {t('needsLabel')}
       </label>
