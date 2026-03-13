@@ -4,9 +4,9 @@ const EngineeringList = () => {
   const t = useTranslations('WebPage.EngineeringSection.engineeringList');
 
   return (
-    <ul className="flex flex-wrap justify-center flex-col md:flex-row lg:flex-col gap-6">
+    <ul className="flex flex-wrap justify-center items-center flex-col md:flex-row lg:flex-col gap-6 w-full lg:w-fit">
       <li
-        className="p-3 w-full max-w-87.5 rounded-secondary border border-main-border 
+        className="p-3 w-full max-w-120 md:max-w-87.5 rounded-secondary border border-main-border 
       hover:border-accent duration-main"
       >
         <h3 className="mb-3 font-title text-white font-bold pointer-events-none">
@@ -28,7 +28,7 @@ const EngineeringList = () => {
         </ul>
       </li>
       <li
-        className="p-3 w-full max-w-87.5 lg:w-87.5 rounded-secondary border border-main-border 
+        className="p-3 w-full max-w-120 md:max-w-87.5 lg:w-87.5 rounded-secondary border border-main-border 
         hover:border-accent duration-main"
       >
         <h3 className="mb-3 font-title font-bold text-white pointer-events-none">
@@ -50,7 +50,7 @@ const EngineeringList = () => {
         </ul>
       </li>
       <li
-        className="p-3 w-full max-w-87.5 lg:w-87.5 rounded-secondary border border-main-border 
+        className="p-3 w-full max-w-120 md:max-w-87.5 lg:w-87.5 rounded-secondary border border-main-border 
         hover:border-accent duration-main"
       >
         <h3 className="mb-3 font-title font-bold text-white pointer-events-none">

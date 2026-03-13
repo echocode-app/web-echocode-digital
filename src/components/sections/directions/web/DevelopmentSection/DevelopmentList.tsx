@@ -2,8 +2,8 @@ import CycleCard from '../../components/CycleCard';
 
 const DevelopmentList = () => {
   return (
-    <ul className="flex justify-center flex-wrap gap-6">
-      <li className="max-w-58">
+    <ul className="flex flex-wrap gap-6">
+      <li className="w-full min-[520px]:max-w-58">
         <CycleCard
           translateKey="WebPage.DevelopmentSection.developments"
           title="dev01.title"
@@ -11,7 +11,7 @@ const DevelopmentList = () => {
           desc="dev01.desc"
         />
       </li>
-      <li className="max-w-58">
+      <li className="w-full min-[520px]:max-w-58">
         <CycleCard
           translateKey="WebPage.DevelopmentSection.developments"
           title="dev02.title"
@@ -19,7 +19,7 @@ const DevelopmentList = () => {
           desc="dev02.desc"
         />
       </li>
-      <li className="max-w-58">
+      <li className="w-full min-[520px]:max-w-58">
         <CycleCard
           translateKey="WebPage.DevelopmentSection.developments"
           title="dev03.title"
@@ -27,7 +27,7 @@ const DevelopmentList = () => {
           desc="dev03.desc"
         />
       </li>
-      <li className="max-w-58">
+      <li className="w-full min-[520px]:max-w-58">
         <CycleCard
           translateKey="WebPage.DevelopmentSection.developments"
           title="dev04.title"
