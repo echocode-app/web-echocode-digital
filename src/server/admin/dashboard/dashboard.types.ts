@@ -62,6 +62,32 @@ export type DashboardGeographyDto = {
   countries: DashboardGeographyCountryDto[];
 };
 
+export type DashboardTopPageDto = {
+  path: string;
+  views: number;
+  sharePct: number;
+};
+
+export type DashboardReferrerDto = {
+  label: string;
+  views: number;
+  sharePct: number;
+};
+
+export type DashboardSiteSliceOverviewDto = {
+  period: DashboardPeriod;
+  siteId: 'echocode_digital';
+  kpis: {
+    pageViews: DashboardKpiDto;
+    countries: DashboardKpiDto;
+    topPageShare: DashboardKpiDto;
+    referrerSources: DashboardKpiDto;
+  };
+  geography: DashboardGeographyDto;
+  topPages: DashboardTopPageDto[];
+  referrers: DashboardReferrerDto[];
+};
+
 export type AlertDto = {
   id: string;
   level: 'warning' | 'alert' | 'anomaly' | 'volatility';
@@ -158,10 +184,7 @@ export type DashboardRawAggregates = {
     portfolioItems: Pick<TrendStats, 'current' | 'previous'>;
     conversionRate7d: Pick<TrendStats, 'current' | 'previous'>;
   };
-  derived: Omit<
-    DashboardOverviewDto,
-    'trafficVsLeadsPeriod' | 'kpis' | 'charts'
-  >;
+  derived: Omit<DashboardOverviewDto, 'trafficVsLeadsPeriod' | 'kpis' | 'charts'>;
   charts: DashboardOverviewDto['charts'];
 };
 

@@ -12,6 +12,7 @@ export {
 export {
   getAdminDashboardOverview,
   getAdminDashboardGeography,
+  getAdminDashboardSiteSliceOverview,
   type DashboardOverviewDto,
 } from '@/server/admin/dashboard';
 export {

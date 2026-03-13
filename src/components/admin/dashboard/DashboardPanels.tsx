@@ -15,9 +15,7 @@ const DIGITAL_QUICK_LINKS = [
   { href: '/admin/portfolio', label: 'Portfolio' },
 ] as const;
 
-const APP_QUICK_LINKS = [
-  { href: '/admin/echocode-app', label: 'Dashboard' },
-] as const;
+const APP_QUICK_LINKS = [{ href: '/admin/echocode-app', label: 'Dashboard' }] as const;
 
 const SHARED_QUICK_LINKS = [
   { href: '/admin/logs', label: 'Logs' },
@@ -76,12 +74,12 @@ export function ActionsPanel({ role }: { role: string }) {
         <p className="font-main text-main-xs text-gray60">Internal admin quick links</p>
       </div>
 
-      <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
+      <div className="mt-3 grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
         <section className="space-y-2">
           <p className="font-main text-main-xs uppercase tracking-[0.16em] text-gray60">
             echocode.digital
           </p>
-          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 xl:grid-cols-1">
+          <div className="grid grid-cols-1 gap-2">
             {DIGITAL_QUICK_LINKS.map((link) => (
               <Link key={link.href} href={link.href} className={quickLinkClassName}>
                 {link.label}
@@ -94,7 +92,7 @@ export function ActionsPanel({ role }: { role: string }) {
           <p className="font-main text-main-xs uppercase tracking-[0.16em] text-gray60">
             echocode.app
           </p>
-          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 xl:grid-cols-1">
+          <div className="grid grid-cols-1 gap-2">
             {APP_QUICK_LINKS.map((link) => (
               <Link key={link.href} href={link.href} className={quickLinkClassName}>
                 {link.label}
@@ -104,10 +102,8 @@ export function ActionsPanel({ role }: { role: string }) {
         </section>
 
         <section className="space-y-2">
-          <p className="font-main text-main-xs uppercase tracking-[0.16em] text-gray60">
-            shared
-          </p>
-          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 xl:grid-cols-1">
+          <p className="font-main text-main-xs uppercase tracking-[0.16em] text-gray60">shared</p>
+          <div className="grid grid-cols-1 gap-2">
             {sharedQuickLinks.map((link) => (
               <Link key={link.href} href={link.href} className={quickLinkClassName}>
                 {link.label}

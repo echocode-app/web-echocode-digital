@@ -38,7 +38,7 @@ export default function EchocodeAppOverview() {
 
   return (
     <section className="space-y-4">
-      <div className="flex flex-wrap items-start justify-between gap-3">
+      <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-start sm:justify-between">
         <div className="flex items-start gap-3">
           <div>
             <p className="font-main text-main-xs uppercase tracking-[0.16em] text-gray60">
@@ -51,7 +51,9 @@ export default function EchocodeAppOverview() {
             text="Dedicated traffic and conversion view for the external static app site, isolated from the main echocode.digital dashboard."
           />
         </div>
-        <CompactPeriodSwitch value={period} onChange={handlePeriodChange} />
+        <div className="self-start overflow-x-auto">
+          <CompactPeriodSwitch value={period} onChange={handlePeriodChange} />
+        </div>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">

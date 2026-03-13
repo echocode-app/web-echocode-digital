@@ -70,6 +70,8 @@ paths:
     $ref: './paths/admin-dashboard.yaml#/~1api~1admin~1dashboard~1overview'
   /api/admin/dashboard/geography:
     $ref: './paths/admin-dashboard.yaml#/~1api~1admin~1dashboard~1geography'
+  /api/admin/dashboard/site-slice:
+    $ref: './paths/admin-dashboard.yaml#/~1api~1admin~1dashboard~1site-slice'
   /api/admin/echocode-app/overview:
     $ref: './paths/admin-echocode-app.yaml#/~1api~1admin~1echocode-app~1overview'
   /api/admin/echocode-app/submissions:

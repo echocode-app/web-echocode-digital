@@ -47,6 +47,9 @@
 - public page-view analytics route: `/api/analytics/page-view`
 - `/api/analytics/page-view` now supports cross-origin ingestion for approved external frontends via `OPTIONS` + `POST` CORS headers
 - `/api/forms/submissions` now supports the same cross-origin public ingestion flow for external frontend sites
+- `.digital` dashboard now also has a dedicated page-view site slice API:
+- `/api/admin/dashboard/site-slice`
+- it powers page views / countries KPIs, top pages, geography list, and referrer/UTM widgets scoped to `siteId = echocode_digital`
 - dedicated admin slice for `echocode.app`:
 - `/admin/echocode-app`
 - `/admin/echocode-app/submissions`

@@ -3,14 +3,16 @@
 import dynamic from 'next/dynamic';
 import { useMemo, useState } from 'react';
 import { ChartPanel } from '@/components/admin/dashboard/DashboardPanels';
-import type { GeographyChartRow } from '@/components/admin/dashboard/geography/geography.utils';
-import CompactPeriodSwitch from '@/components/admin/ui/CompactPeriodSwitch';
-import { useEchocodeAppOverview } from '@/components/admin/echocode-app/useEchocodeAppOverview';
 import {
-  buildMetricChartRows,
-  toCountryLabel,
-} from '@/components/admin/echocode-app/echocodeAppCharts.utils';
-import type { DashboardPeriod } from '@/server/admin/dashboard/dashboard.types';
+  buildGeographyChartRows,
+  type GeographyChartRow,
+} from '@/components/admin/dashboard/geography/geography.utils';
+import CompactPeriodSwitch from '@/components/admin/ui/CompactPeriodSwitch';
+import { useDashboardSiteSliceOverview } from '@/components/admin/dashboard/useDashboardSiteSliceOverview';
+import type {
+  DashboardPeriod,
+  DashboardReferrerDto,
+} from '@/server/admin/dashboard/dashboard.types';
 import styles from '@/components/admin/dashboard/geography/DashboardGeographySection.module.css';
 
 const DashboardGeographyRadialChart = dynamic(
@@ -37,10 +39,43 @@ function formatInt(value: number): string {
   return new Intl.NumberFormat('en-US').format(Math.round(value));
 }
 
+function buildReferrerChartRows(items: DashboardReferrerDto[], topLimit = 6): GeographyChartRow[] {
+  const topRows = items.slice(0, topLimit);
+  const restRows = items.slice(topLimit);
+  const restViews = restRows.reduce((acc, item) => acc + item.views, 0);
+  const restPct = restRows.reduce((acc, item) => acc + item.sharePct, 0);
+
+  const rows = topRows.map((item, index) => ({
+    key: `${item.label}-${index}`,
+    label: item.label,
+    views: item.views,
+    sharePct: item.sharePct,
+    color: '',
+    colorIndex: index % DOT_COLOR_CLASS.length,
+  }));
+
+  if (restViews > 0) {
+    rows.push({
+      key: 'other',
+      label: 'Other',
+      views: restViews,
+      sharePct: Number(restPct.toFixed(2)),
+      color: '',
+      colorIndex: DOT_COLOR_CLASS.length - 1,
+    });
+  }
+
+  return rows;
+}
+
 function ChartLegend({ rows, emptyMessage }: { rows: GeographyChartRow[]; emptyMessage: string }) {
   if (rows.length === 0) {
     return (
-      <div className="flex h-full min-h-0 items-center justify-center rounded-(--radius-secondary) border border-dashed border-gray16 bg-black/20 p-3 text-center">
+      <div
+        className="flex h-full min-h-0 items-center justify-center 
+      rounded-(--radius-secondary) border border-dashed border-gray16 bg-black/20 
+      p-3 text-center"
+      >
         <p className="font-main text-main-xs text-gray60">{emptyMessage}</p>
       </div>
     );
@@ -51,7 +86,10 @@ function ChartLegend({ rows, emptyMessage }: { rows: GeographyChartRow[]; emptyM
       {rows.map((row) => (
         <div
           key={row.key}
-          className="flex items-center justify-between gap-2 rounded-(--radius-secondary) border border-gray16 bg-black/20 px-2 py-1.5"
+          className="flex items-center justify-between gap-2 
+          rounded-(--radius-secondary) border border-gray16 
+          bg-black/20 
+          px-2 py-1.5"
         >
           <div className="flex min-w-0 items-center gap-2">
             <span
@@ -68,7 +106,7 @@ function ChartLegend({ rows, emptyMessage }: { rows: GeographyChartRow[]; emptyM
   );
 }
 
-function EchocodeAppRadialWidget({
+function DashboardSiteSliceRadialWidget({
   title,
   info,
   emptyMessage,
@@ -101,45 +139,46 @@ function EchocodeAppRadialWidget({
   );
 }
 
-export default function EchocodeAppChartsSection() {
-  const [countryPeriod, setCountryPeriod] = useState<DashboardPeriod>('week');
+export default function DashboardSiteSliceChartsSection({ enabled }: { enabled: boolean }) {
+  const [geographyPeriod, setGeographyPeriod] = useState<DashboardPeriod>('week');
   const [utmPeriod, setUtmPeriod] = useState<DashboardPeriod>('week');
-  const { overview: countryOverview, state: countryState } = useEchocodeAppOverview(countryPeriod);
-  const { overview: utmOverview, state: utmState } = useEchocodeAppOverview(utmPeriod);
-
-  const geographyRows = useMemo(
-    () =>
-      buildMetricChartRows(countryOverview?.geography.countries ?? [], {
-        key: (item) => item.country,
-        label: (item) => toCountryLabel(item.country),
-      }),
-    [countryOverview?.geography.countries],
+  const { overview: geographyOverview, state: geographyState } = useDashboardSiteSliceOverview(
+    geographyPeriod,
+    enabled,
+  );
+  const { overview: utmOverview, state: utmState } = useDashboardSiteSliceOverview(
+    utmPeriod,
+    enabled,
   );
 
+  const geographyRows = useMemo(
+    () => buildGeographyChartRows(geographyOverview?.geography.countries ?? []),
+    [geographyOverview?.geography.countries],
+  );
   const referrerRows = useMemo(
-    () =>
-      buildMetricChartRows(utmOverview?.referrers ?? [], {
-        key: (item, index) => `${item.label}-${index}`,
-        label: (item) => item.label,
-      }),
+    () => buildReferrerChartRows(utmOverview?.referrers ?? []),
     [utmOverview?.referrers],
   );
 
+  if (!enabled) {
+    return null;
+  }
+
   return (
     <section className="space-y-4">
-      {countryState === 'error' ? (
+      {geographyState === 'error' ? (
         <div className="rounded-(--radius-base) border border-[#ff6d7a]/40 bg-base-gray p-4">
           <p className="font-main text-main-sm text-[#ff6d7a]">
             Unable to load geography chart data.
           </p>
         </div>
       ) : (
-        <EchocodeAppRadialWidget
+        <DashboardSiteSliceRadialWidget
           title="Geography share"
-          info="Country mix of echocode.app page views for the selected period. Use the switch to compare weekly, monthly, and yearly distribution without changing the rest of the page."
+          info="Country mix of echocode.digital page views for the selected period."
           emptyMessage="No geography data recorded for this period."
-          period={countryPeriod}
-          onPeriodChange={setCountryPeriod}
+          period={geographyPeriod}
+          onPeriodChange={setGeographyPeriod}
           rows={geographyRows}
         />
       )}
@@ -151,9 +190,9 @@ export default function EchocodeAppChartsSection() {
           </p>
         </div>
       ) : (
-        <EchocodeAppRadialWidget
+        <DashboardSiteSliceRadialWidget
           title="UTM / referrer share"
-          info="Traffic attribution mix for echocode.app. UTM source/medium is used when available, otherwise the raw referrer host is grouped into the chart."
+          info="Traffic attribution mix for echocode.digital. UTM source/medium is used when available, otherwise the raw referrer host is grouped into the chart."
           emptyMessage="No UTM or referrer data recorded for this period."
           period={utmPeriod}
           onPeriodChange={setUtmPeriod}
