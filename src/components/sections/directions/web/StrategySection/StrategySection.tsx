@@ -11,9 +11,9 @@ const StrategySection = () => {
     <section className="pt-10 pb-10 md:pb-27.5">
       <SectionContainer>
         <div className="flex items-start justify-between flex-col lg:flex-row">
-          <div className="max-w-100 md:max-w-150 lg:max-w-120 mb-10 lg:mb-0">
+          <div className="lg:max-w-120 mb-10 lg:mb-0">
             <SectionTitle marginBottom="10px">{t('title')}</SectionTitle>
-            <p className=" text-main-xs md:text-main-sm">{t('subtitle')}</p>
+            <p className="text-main-xs md:text-main-sm">{t('subtitle')}</p>
           </div>
           <MetricsBlock />
         </div>

@@ -12,16 +12,16 @@ const LocationList = () => {
   const t = useTranslations('HomePage.LocationsSection');
 
   return (
-    <ul className="flex flex-col sm:flex-row flex-wrap  justify-center gap-10">
-      <li>
+    <ul className="flex flex-col md:flex-row flex-wrap items-center justify-center md:justify-start gap-10">
+      <li className="w-full max-w-76.5 h-50">
         <LocationImage image="/images/locations/kyiv.png" title="ПривIт" gradient={kyiv} />
         <h3 className="font-title text-title-sm uppercase">{t('locations.kyiv')}</h3>
       </li>
-      <li>
+      <li className="w-full max-w-76.5 h-50">
         <LocationImage image="/images/locations/berlin.png" title="Guten Tag" gradient={berlin} />
         <h3 className="font-title text-title-sm uppercase">{t('locations.berlin')}</h3>
       </li>
-      <li>
+      <li className="w-full max-w-76.5 h-50">
         <LocationImage image="/images/locations/remote.jpg" title="global" gradient={global} />
         <h3 className="font-title text-title-sm uppercase">{t('locations.remote')}</h3>
       </li>

@@ -8,7 +8,7 @@ interface LocationImageProps {
 
 const LocationImage = ({ image, title, gradient }: LocationImageProps) => {
   return (
-    <div className="relative w-full sm:w-76.5 h-50 mb-4 overflow-hidden">
+    <div className="relative w-full max-w-76.5 h-50 mb-4 overflow-hidden">
       <div
         className={`absolute top-0 right-0 rotate-90 translate-y-20 translate-x-21 
   flex items-center w-51 h-9.25 z-1 overflow-hidden
@@ -24,7 +24,7 @@ const LocationImage = ({ image, title, gradient }: LocationImageProps) => {
         alt={title}
         fill
         sizes="306px"
-        className="object-cover rounded-l-secondary"
+        className="object-cover rounded-l-secondary w-full"
       />
     </div>
   );

@@ -13,7 +13,7 @@ const CoreSection = () => {
       <SectionGradientLine height="1" />
       <SectionContainer>
         <SectionTitle marginBottom="40px">{t('title')}</SectionTitle>
-        <ul className="flex gap-6 justify-center flex-wrap">
+        <ul className="flex gap-6 justify-center flex-col md:flex-row items-center">
           <CoreItem title={t('solutions.sol01.title')} desc={t('solutions.sol01.desc')} />
           <CoreItem title={t('solutions.sol02.title')} desc={t('solutions.sol02.desc')} />
           <CoreItem title={t('solutions.sol03.title')} desc={t('solutions.sol03.desc')} />

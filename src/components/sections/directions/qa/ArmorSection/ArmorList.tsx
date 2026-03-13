@@ -4,9 +4,9 @@ import armorList from '@/data/directions/armor.json';
 
 const ArmorList = () => {
   return (
-    <ul className="flex gap-6 flex-wrap justify-center">
+    <ul className="flex flex-col items-center md:flex-row  gap-6 flex-wrap">
       {armorList.map((item, i) => (
-        <li key={i} className="max-w-58">
+        <li key={i} className="w-full max-w-120 md:max-w-58">
           <CycleCard {...item} translateKey="QAPage.ArmorSection.steps" />
         </li>
       ))}

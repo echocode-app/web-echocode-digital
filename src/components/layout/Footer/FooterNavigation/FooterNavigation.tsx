@@ -1,10 +1,10 @@
-import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 
 import FooterNavLink from './FooterNavLink';
 import FooterSocialLink from './FooterSocialLink';
 import EmailLink from '../EmailLink';
 import SocailLinks from './SocialLinks';
+import FooterNavLogo from './FooterNavLogo';
 
 const FooterNavigation = () => {
   const t = useTranslations('Layout.Footer');
@@ -13,9 +13,7 @@ const FooterNavigation = () => {
     <div className="mb-12 py-8 px-4 lg:px-10 lg:flex lg:justify-between bg-white rounded-base">
       <div className="md:flex md:justify-between md:mb-8 lg:mb-0 lg:w-185.5">
         <div>
-          <Link href={'/'} className="block mb-2.5 font-wadik text-title-xs text-accent">
-            Echocode.app
-          </Link>
+          <FooterNavLogo />
           <p className="w-66 mb-8 md:mb-0 text-main-xs leading-[1.2] text-secondary-gray">
             {t('subtitle')}
           </p>

@@ -13,7 +13,7 @@ const CycleCard = ({ title, subTitle, desc, translateKey }: CycleCardProps) => {
   return (
     <article className="group flex flex-col gap-3 ">
       <p
-        className="font-title text-title-xs leading-2.5 text-accent text-center sm:text-left
+        className="font-title text-title-xs leading-2.5 text-accent text-left
       group-hover:text-accent-hover duration-main pointer-events-none uppercase"
       >
         {t(title)}

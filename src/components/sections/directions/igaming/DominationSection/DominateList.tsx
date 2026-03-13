@@ -4,9 +4,9 @@ import CycleCard from '../../components/CycleCard';
 
 const DominateList = () => {
   return (
-    <ul className="flex flex-wrap gap-6 justify-center">
+    <ul className="flex flex-col md:flex-row items-center gap-6 ">
       {dominate.map((item, i) => (
-        <li key={i} className="max-w-79">
+        <li key={i} className="max-w-120 md:max-w-79">
           <CycleCard {...item} translateKey="IGamingPage.DominateSection.list" />
         </li>
       ))}

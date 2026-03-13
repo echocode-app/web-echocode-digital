@@ -27,6 +27,10 @@ interface FormErrors {
 
 const CandidateForm = ({ vacancyData }: CandidateFormProps) => {
   const t = useTranslations('VacancyCommon.vacancyForm');
+  const errorsT = useTranslations('VacancyValidation');
+
+  const translateError = (key?: string) => (key ? errorsT(key) : undefined);
+
   const locale = useLocale();
   const uaStyle = locale === 'ua' ? 'text-main-xs' : 'text-main-sm';
 
@@ -163,8 +167,8 @@ const CandidateForm = ({ vacancyData }: CandidateFormProps) => {
             </span>
           </div>
           {(fileErrors.length > 0 || errors.cvFile) && (
-            <p className="absolute top-12.5 left-4 text-red-500 text-[10px]">
-              {fileErrors[0] || errors.cvFile}
+            <p className="absolute top-12.75 left-4 text-red-500 text-[10px]">
+              {translateError(fileErrors[0]) || translateError(errors.cvFile)}
             </p>
           )}
         </button>
@@ -218,8 +222,8 @@ const CandidateForm = ({ vacancyData }: CandidateFormProps) => {
           }}
         />
         {errors.profileUrl && (
-          <p className="absolute top-11.75 left-4 text-red-500 text-[10px] mt-1">
-            {errors.profileUrl}
+          <p className="absolute top-12 left-4 text-red-500 text-[10px] mt-1">
+            {translateError(errors.profileUrl)}
           </p>
         )}
       </div>

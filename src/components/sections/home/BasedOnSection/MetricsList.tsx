@@ -6,7 +6,7 @@ const MetricsList = () => {
   const t = useTranslations('HomePage.BasedOnSection.metrics');
 
   return (
-    <ul className="hidden md:flex justify-center md:flex-col lg:flex-row gap-16 lg:gap-4 xl:gap-8">
+    <ul className="hidden md:flex justify-center md:flex-col lg:flex-row gap-8 lg:gap-4 xl:gap-8">
       <div className="flex justify-center items-center gap-16  lg:gap-4 xl:gap-8 ">
         <MetricsItem>
           <div className="flex items-end gap-0.5 font-wadik text-title-2xl text-white">
