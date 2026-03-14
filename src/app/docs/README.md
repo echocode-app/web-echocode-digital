@@ -29,6 +29,32 @@
 - кілька `/api/forms/vacancy-submissions` для `iosdev`, `qaengineer`, `designer`
 - для vacancy flow скрипт проходить повний сценарій `uploads/init -> signed PUT -> vacancy-submissions`
 
+## `.digital` End-to-End Smoke Test
+
+- команда:
+- `BASE_URL=http://127.0.0.1:3000 npm run test:smoke:digital`
+- що перевіряє:
+- `GET /api/internal/firebase-check`
+- `POST /api/analytics/page-view`
+- `POST /api/forms/email-submissions`
+- `POST /api/forms/client-project`
+- `POST /api/forms/uploads/init` + signed `PUT` + `POST /api/forms/vacancy-submissions`
+- скрипт верифікує результат напряму в Firestore / Storage
+- усі створені mock-дані автоматично видаляються в кінці
+- якщо cleanup був перерваний:
+- `npm run test:smoke:digital:cleanup -- --run-id <run-id>`
+
+## QA Manual Checklist
+
+- окремий manual QA guide:
+- `src/app/docs/QA_CHECKLIST.md`
+- там зібрано:
+- короткий опис проєкту
+- localization / responsive / breakpoints
+- checklist по public UI
+- checklist по admin
+- мінімальний DevTools flow для QA без Postman/API-first підходу
+
 ## Останні зміни серверної логіки (лаконічно)
 
 - API handoff docs for frontend integration:
