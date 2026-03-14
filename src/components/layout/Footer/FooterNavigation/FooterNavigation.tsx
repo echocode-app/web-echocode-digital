@@ -38,16 +38,16 @@ const FooterNavigation = () => {
             </h3>
             <ul className="flex flex-col gap-1 w-36.5 lg:w-34.5">
               <FooterSocialLink link="http://linkedin.com/company/echocode">
-                LinkedIn →
+                LinkedIn
               </FooterSocialLink>
-              <FooterSocialLink link="http://linkedin.com/company/echocode">
-                Upwork →
+              <FooterSocialLink link="https://www.upwork.com/freelancers/~013b73c2c5c053c170">
+                Upwork
               </FooterSocialLink>
-              <FooterSocialLink link="http://linkedin.com/company/echocode">
-                Freelancehunt →
+              <FooterSocialLink link="https://freelancehunt.com/freelancer/echocode.html">
+                Freelancehunt
               </FooterSocialLink>
-              <FooterSocialLink link="http://linkedin.com/company/echocode">
-                Behance →
+              <FooterSocialLink link="https://www.behance.net/valeriimelnikov">
+                Behance
               </FooterSocialLink>
             </ul>
           </div>

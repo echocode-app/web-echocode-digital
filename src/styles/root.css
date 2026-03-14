@@ -111,6 +111,18 @@
   --duration-main: 400ms;
 }
 
+@keyframes section-gradient-drift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 @layer utilities {
   .font-title {
     font-family: var(--font-wadik), sans-serif;
@@ -148,6 +160,20 @@
 
   .border-gradient {
     background-image: var(--background-image-main-gradient);
+  }
+
+  .bg-section-gradient-animated {
+    background-image: var(--background-image-main-gradient);
+    background-size: 200% 200%;
+    background-position: 0% 50%;
+    animation: section-gradient-drift 10s ease-in-out infinite;
+    will-change: background-position;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bg-section-gradient-animated {
+      animation: none;
+    }
   }
 
   .no-autofill-bg input:-webkit-autofill {

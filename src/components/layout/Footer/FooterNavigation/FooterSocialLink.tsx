@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import Link from 'next/link';
+import FooterLinkArrow from './FooterLinkArrow';
 
 interface FooterSocialLinkProps {
   children: ReactNode;
@@ -11,9 +12,11 @@ const FooterSocialLink = ({ children, link }: FooterSocialLinkProps) => {
     <Link
       href={link}
       target="blank"
-      className="block w-full text-main-base text-base-gray hover:text-accent duration-main"
+      className="group inline-flex w-full items-center gap-1 text-main-base text-base-gray 
+      duration-main hover:text-accent focus-visible:text-accent"
     >
-      {children}
+      <span>{children}</span>
+      <FooterLinkArrow />
     </Link>
   );
 };
