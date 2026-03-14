@@ -8,7 +8,7 @@ const HeroSection = () => {
   const t = useTranslations('DesignPage.HeroSection');
 
   return (
-    <section className="pt-33 md:pt-43.5  md:pb-14">
+    <section className="pt-33 md:pt-45.5  md:pb-14">
       <SectionContainer>
         <div className="flex flex-col md:flex-row items-center justify-between">
           <div>

@@ -9,9 +9,9 @@ interface PortfolioItemProps {
 
 const PortfolioItem = ({ link, image, title }: PortfolioItemProps) => {
   return (
-    <li className="group w-full sm:w-76.5">
+    <li className="group w-full sm:max-w-76.5">
       <Link href={link}>
-        <div className="relative w-full min-h-50 sm:w-76.5 sm:h-50  mb-4 overflow-hidden rounded-secondary">
+        <div className="relative w-full sm:max-w-76.5 aspect-306/200 mb-4 overflow-hidden rounded-secondary">
           <Image
             src={image}
             alt={title}

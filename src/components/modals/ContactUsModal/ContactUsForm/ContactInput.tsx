@@ -54,7 +54,7 @@ export default function ContactInput({
           outline-none no-autofill-bg placeholder:text-white
         `}
       />
-      <div className="pointer-events-none absolute left-1 top-[calc(100%+4px)] h-4 overflow-hidden">
+      <div className="pointer-events-none absolute left-1 top-[calc(100%)] md:top-[calc(100%+4px)] h-4 overflow-hidden">
         <p
           className={`text-[10px] text-[#ff8d8d] transition-opacity duration-main ${
             error ? 'opacity-100' : 'opacity-0'

@@ -13,7 +13,7 @@ const EngagementItem = ({ title, desc, priority }: EngagementItemProps) => {
 
   return (
     <li
-      className="group relative flex flex-col gap-3 p-5 max-w-120  rounded-secondary
+      className="group relative flex flex-col gap-3 p-5 w-full md:max-w-120  rounded-secondary
        overflow-hidden duration-main"
     >
       <div className="absolute inset-0 bg-main-border transition-opacity duration-main" />

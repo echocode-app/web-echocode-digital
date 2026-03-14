@@ -14,7 +14,7 @@ const ToggleBarBtn = ({ setOpenCategories, isOpen }: ToggleBarBtnProps) => {
   return (
     <button
       onClick={() => setOpenCategories(!isOpen)}
-      className="flex items-center px-3 justify-between max-w-51 w-full h-9.5 border border-white
+      className="flex items-center px-3 justify-between max-w-51 min-[560px]:max-w-40 md:max-w-51 w-full h-9.5 border border-white
        rounded-secondary text-main-sm hover:border-accent duration-main cursor-pointer"
     >
       <p>{t('niche')}</p>

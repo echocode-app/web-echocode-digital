@@ -1,13 +1,18 @@
+'use client';
+
+import { useAutoIndex } from '@/hooks/useAutoIndex';
 import { useTranslations } from 'next-intl';
 
 const EngineeringList = () => {
   const t = useTranslations('WebPage.EngineeringSection.engineeringList');
 
+  const activeIndex = useAutoIndex(3);
+
   return (
     <ul className="flex flex-wrap justify-center items-center flex-col md:flex-row lg:flex-col gap-6 w-full lg:w-fit">
       <li
-        className="p-3 w-full max-w-120 md:max-w-87.5 rounded-secondary border border-main-border 
-      hover:border-accent duration-main"
+        className={`p-3 w-full max-w-120 md:max-w-87.5 rounded-secondary border  
+       duration-main ${activeIndex === 0 ? 'border-accent' : 'border-main-border'}`}
       >
         <h3 className="mb-3 font-title text-white font-bold pointer-events-none">
           {t('list01.title')}
@@ -28,8 +33,8 @@ const EngineeringList = () => {
         </ul>
       </li>
       <li
-        className="p-3 w-full max-w-120 md:max-w-87.5 lg:w-87.5 rounded-secondary border border-main-border 
-        hover:border-accent duration-main"
+        className={`p-3 w-full max-w-120 md:max-w-87.5 lg:w-87.5 rounded-secondary border 
+         duration-main ${activeIndex === 1 ? 'border-accent' : 'border-main-border'}`}
       >
         <h3 className="mb-3 font-title font-bold text-white pointer-events-none">
           {t('list02.title')}
@@ -50,8 +55,8 @@ const EngineeringList = () => {
         </ul>
       </li>
       <li
-        className="p-3 w-full max-w-120 md:max-w-87.5 lg:w-87.5 rounded-secondary border border-main-border 
-        hover:border-accent duration-main"
+        className={`p-3 w-full max-w-120 md:max-w-87.5 lg:w-87.5 rounded-secondary border 
+        duration-main ${activeIndex === 2 ? 'border-accent' : 'border-main-border'}`}
       >
         <h3 className="mb-3 font-title font-bold text-white pointer-events-none">
           {t('list03.title')}

@@ -3,15 +3,6 @@ import { ALLOWED_DOCUMENT_MIME_TYPES, MAX_DOCUMENT_SIZE_BYTES } from '@/shared/v
 
 const HTTP_URL_PATTERN = /^https?:\/\//i;
 
-// const MIME_TYPE_LABELS: Record<string, string> = {
-//   'application/pdf': 'PDF',
-//   'application/msword': 'DOC',
-//   'application/vnd.openxmlformats-officedocument.wordprocessingml.document': 'DOCX',
-//   'application/rtf': 'RTF',
-//   'application/vnd.oasis.opendocument.text': 'ODT',
-//   'text/plain': 'TXT',
-// };
-
 export const uploadFileBaseSchema = z
   .object({
     originalName: z.string().trim().min(1, 'file.nameRequired').max(255, 'file.nameTooLong'),
@@ -63,6 +54,6 @@ export const candidateSubmitSchema = z
     cvFile: uploadFileSubmitSchema.optional(),
   })
   .refine((data) => !!data.cvFile, {
-    message: 'VacancyValidation.cv.required',
+    message: 'cv.required',
     path: ['cvFile'],
   });

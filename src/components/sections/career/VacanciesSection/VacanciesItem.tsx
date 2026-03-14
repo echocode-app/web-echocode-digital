@@ -41,9 +41,14 @@ const VacanciesItem = ({
       </div>
       <Link
         href={`/career/${vacancySlug ? vacancySlug : vacancyId}`}
-        className="mx-auto min-[490px]:mx-0 h-fit w-fit font-wadik text-[10px] bg-main-gradient px-5.5 py-2 rounded-base uppercase"
+        className="relative z-0 overflow-hidden mx-auto min-[490px]:mx-0 h-fit w-fit
+         font-wadik text-[10px] bg-main-gradient px-5.5 py-2 rounded-base uppercase duration-main hover:shadow-[0_2.688px_25.061px_0_rgba(253,38,108,0.55)]"
       >
-        apply now
+        <span className="relative z-10 pointer-events-none">apply now</span>
+        <div
+          className="absolute inset-0 z-0 bg-accent opacity-0 
+        hover:opacity-100 transition-opacity duration-main"
+        />
       </Link>
     </li>
   );
