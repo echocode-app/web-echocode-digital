@@ -20,6 +20,8 @@
     "storage:emulators": "firebase emulators:start --only storage",
     "test:storage:rules": "firebase emulators:exec --only storage \"npm run test:storage:rules:run\"",
     "test:storage:rules:run": "node tests/storage.rules.test.mjs",
+    "test:smoke:digital": "node ./scripts/test_smoke_digital.mjs",
+    "test:smoke:digital:cleanup": "node ./scripts/test_smoke_digital_cleanup.mjs",
     "prepare": "husky",
     "seed:mock:submissions": "node ./scripts/seed_mock_admin_submissions.mjs",
     "seed:admin-users": "node ./scripts/seed_admin_users.mjs"
