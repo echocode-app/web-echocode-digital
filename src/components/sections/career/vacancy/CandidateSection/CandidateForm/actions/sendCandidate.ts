@@ -1,10 +1,18 @@
+import {
+  getClientAnalyticsContextPayload,
+  getClientAnalyticsHeaders,
+} from '@/components/analytics/clientAnalytics';
 import { CandidateSubmissionPayload } from '../types/candidate';
 
 export async function submitCandidate(payload: CandidateSubmissionPayload) {
+  const analyticsContext = getClientAnalyticsContextPayload();
   const res = await fetch('/api/forms/vacancy-submissions', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload),
+    headers: getClientAnalyticsHeaders(),
+    body: JSON.stringify({
+      ...payload,
+      ...analyticsContext,
+    }),
   });
 
   if (!res.ok) {

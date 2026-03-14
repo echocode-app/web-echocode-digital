@@ -1,6 +1,11 @@
+import {
+  getClientAnalyticsContextPayload,
+  getClientAnalyticsHeaders,
+} from '@/components/analytics/clientAnalytics';
 import { InitUploadApiResponse, InitUploadResult, UploadedFile } from '../types/candidate';
 
 const initUpload = async (file: File): Promise<InitUploadResult> => {
+  const analyticsContext = getClientAnalyticsContextPayload();
   const payload: UploadedFile = {
     formType: 'vacancy',
     file: {
@@ -9,13 +14,12 @@ const initUpload = async (file: File): Promise<InitUploadResult> => {
       mimeType: file.type,
       sizeBytes: file.size,
     },
+    ...analyticsContext,
   };
 
   const res = await fetch('/api/forms/uploads/init', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
+    headers: getClientAnalyticsHeaders(),
     body: JSON.stringify(payload),
   });
 

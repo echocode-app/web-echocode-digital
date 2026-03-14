@@ -1,5 +1,7 @@
 const WEB_ECHOCODE_APP_PREVIEW_ORIGIN_PATTERN =
   /^https:\/\/web-echocode-app(?:-[a-z0-9-]+)?\.vercel\.app$/i;
+const ECHOCODE_NEWSITE_PREVIEW_ORIGIN_PATTERN =
+  /^https:\/\/echocode-newsite(?:-[a-z0-9-]+)*\.vercel\.app$/i;
 
 export const SITE_IDS = ['echocode_digital', 'echocode_app'] as const;
 
@@ -12,6 +14,7 @@ type SiteDescriptor = {
   allowedOrigins: readonly string[];
   allowedOriginPatterns?: readonly RegExp[];
   acceptedHosts: readonly string[];
+  acceptedHostPatterns?: readonly RegExp[];
 };
 
 export type ResolvedSiteContext = {
@@ -25,8 +28,19 @@ const SITE_REGISTRY: readonly SiteDescriptor[] = [
     siteId: 'echocode_digital',
     siteHost: 'www.echocode.digital',
     defaultSource: 'website',
-    allowedOrigins: ['https://www.echocode.digital'],
-    acceptedHosts: ['www.echocode.digital', 'echocode.digital'],
+    allowedOrigins: [
+      'http://localhost:3000',
+      'https://echocode-newsite.vercel.app',
+      'https://www.echocode.digital',
+    ],
+    allowedOriginPatterns: [ECHOCODE_NEWSITE_PREVIEW_ORIGIN_PATTERN],
+    acceptedHosts: [
+      'localhost:3000',
+      'echocode-newsite.vercel.app',
+      'www.echocode.digital',
+      'echocode.digital',
+    ],
+    acceptedHostPatterns: [/^echocode-newsite(?:-[a-z0-9-]+)*\.vercel\.app$/i],
   },
   {
     siteId: 'echocode_app',
@@ -39,7 +53,13 @@ const SITE_REGISTRY: readonly SiteDescriptor[] = [
       'https://web-echocode-app.vercel.app',
     ],
     allowedOriginPatterns: [WEB_ECHOCODE_APP_PREVIEW_ORIGIN_PATTERN],
-    acceptedHosts: ['echocode.app', 'www.echocode.app', 'web-echocode-app.vercel.app'],
+    acceptedHosts: [
+      'localhost:3000',
+      'echocode.app',
+      'www.echocode.app',
+      'web-echocode-app.vercel.app',
+    ],
+    acceptedHostPatterns: [/^web-echocode-app(?:-[a-z0-9-]+)?\.vercel\.app$/i],
   },
 ] as const;
 
@@ -72,7 +92,15 @@ function matchSiteById(siteId: string | null): SiteDescriptor | null {
 
 function matchSiteByHost(host: string | null): SiteDescriptor | null {
   if (!host) return null;
-  return SITE_REGISTRY.find((site) => site.acceptedHosts.includes(host)) ?? null;
+  return (
+    SITE_REGISTRY.find((site) => {
+      if (site.acceptedHosts.includes(host)) {
+        return true;
+      }
+
+      return site.acceptedHostPatterns?.some((pattern) => pattern.test(host)) ?? false;
+    }) ?? null
+  );
 }
 
 function matchSiteByOrigin(origin: string | null): SiteDescriptor | null {

@@ -1,5 +1,8 @@
 import { normalize } from '@/components/modals/ContactUsModal/ContactUsForm/clientProjectForm.validation';
-import { getClientAnalyticsSessionId } from '@/components/modals/ContactUsModal/ContactUsForm/clientProjectForm.analytics';
+import {
+  getClientAnalyticsContextPayload,
+  getClientAnalyticsHeaders,
+} from '@/components/analytics/clientAnalytics';
 import type {
   FormValues,
   UploadedImagePayload,
@@ -37,25 +40,25 @@ async function getApiErrorMessage(response: Response, fallback: string): Promise
 }
 
 export async function initAttachmentUpload(file: File): Promise<UploadedImagePayload> {
-  const sessionId = getClientAnalyticsSessionId();
+  const analyticsContext = getClientAnalyticsContextPayload();
   const initResponse = await fetch('/api/forms/client-project/image/init', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-client-session-id': sessionId,
-    },
+    headers: getClientAnalyticsHeaders(),
     body: JSON.stringify({
       file: {
         originalName: file.name,
         mimeType: file.type,
         sizeBytes: file.size,
       },
+      ...analyticsContext,
     }),
   });
 
   if (!initResponse.ok) {
     if (initResponse.status === 503) {
-      throw new Error('File upload is temporarily unavailable. Please submit the form without a file.');
+      throw new Error(
+        'File upload is temporarily unavailable. Please submit the form without a file.',
+      );
     }
     throw new Error(await getApiErrorMessage(initResponse, 'Failed to initialize file upload'));
   }
@@ -89,21 +92,19 @@ export async function submitClientProject(
   values: FormValues,
   imagePayload?: UploadedImagePayload,
 ): Promise<{ ok: boolean; status: number }> {
-  const sessionId = getClientAnalyticsSessionId();
   const normalized = normalize(values);
+  const analyticsContext = getClientAnalyticsContextPayload();
 
   const response = await fetch('/api/forms/client-project', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-client-session-id': sessionId,
-    },
+    headers: getClientAnalyticsHeaders(),
     body: JSON.stringify({
       firstName: normalized.firstName,
       lastName: normalized.lastName,
       email: normalized.email,
       ...(normalized.description ? { description: normalized.description } : {}),
       ...(imagePayload ? { image: imagePayload } : {}),
+      ...analyticsContext,
     }),
   });
 

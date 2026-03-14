@@ -1,6 +1,7 @@
 const CONTACT_MODAL_OPEN_DEDUP_KEY = 'echocode_contact_modal_open_last_at';
 const CONTACT_MODAL_OPEN_DEDUP_MS = 1500;
 import {
+  getClientAnalyticsContextPayload,
   getClientAnalyticsSessionId as getSharedClientAnalyticsSessionId,
   postClientAnalyticsEvent,
 } from '@/components/analytics/clientAnalytics';
@@ -30,8 +31,15 @@ export async function trackClientProjectModalEvent(
     window.sessionStorage.setItem(CONTACT_MODAL_OPEN_DEDUP_KEY, String(now));
   }
 
+  const analyticsContext = getClientAnalyticsContextPayload();
+
   await postClientAnalyticsEvent('/api/forms/client-project/analytics', {
     eventType,
-    ...(metadata ? { metadata } : {}),
+    metadata: {
+      ...(metadata ?? {}),
+      ...(analyticsContext.attribution ? { attribution: analyticsContext.attribution } : {}),
+      siteId: analyticsContext.siteId,
+      siteHost: analyticsContext.siteHost,
+    },
   });
 }

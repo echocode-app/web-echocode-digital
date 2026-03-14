@@ -43,6 +43,15 @@ export async function trackPageView(input: {
       source,
       siteId: siteContext.siteId,
       siteHost: siteContext.siteHost,
+      ...(input.body.attribution
+        ? {
+            attribution: {
+              source: input.body.attribution.source,
+              medium: input.body.attribution.medium ?? null,
+              campaign: input.body.attribution.campaign ?? null,
+            },
+          }
+        : {}),
       ...(sessionId ? { sessionId } : {}),
     },
   });

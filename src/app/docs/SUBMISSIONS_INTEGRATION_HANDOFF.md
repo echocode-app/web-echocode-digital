@@ -68,15 +68,3 @@
 
 Додатково для candidates:
 - `vacancyKey`
-
-## Що ще треба фронтенду
-1. Підключити `emails` за аналогією з `clients`.
-2. Підключити `vacancy candidates` за аналогією з `clients`.
-3. Для `vacancy submit` передавати в payload snapshot вакансії.
-4. Для dashboard банерів брати `byStatus.new` з overview endpoint-ів.
-5. Для geography/source/page-view метрик змонтувати public `PageViewTracker` у публічний layout окремим комітом.
-
-## Важливо
-Для `vacancy candidates` grouping по вакансіях приходить з:
-- `GET /api/admin/vacancies/candidates/overview`
-- поле `byVacancy[]`

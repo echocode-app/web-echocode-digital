@@ -47,6 +47,8 @@
 - public page-view analytics route: `/api/analytics/page-view`
 - `/api/analytics/page-view` now supports cross-origin ingestion for approved external frontends via `OPTIONS` + `POST` CORS headers
 - `/api/forms/submissions` now supports the same cross-origin public ingestion flow for external frontend sites
+- public `.digital` frontend now mounts `PageViewTracker` in the public layout, so page views, geography, top pages, and referrer/UTM widgets are fed automatically on page load and route changes
+- public `.digital` form clients now send shared client analytics context (`siteId`, `siteHost`, first-touch attribution, client session header) across email, vacancy, and client-project flows
 - `.digital` dashboard now also has a dedicated page-view site slice API:
 - `/api/admin/dashboard/site-slice`
 - it powers page views / countries KPIs, top pages, geography list, and referrer/UTM widgets scoped to `siteId = echocode_digital`
@@ -75,7 +77,7 @@
 - Dashboard/Submissions aggregates:
 - `totalSubmissions` у dashboard враховує обидва джерела: `submissions` + `client_submissions`.
 - метрики `Success vs errors`/funnel працюють на `analytics_events` і поточних діапазонах `Europe/Kiev`.
-- backend groundwork для `page_view` tracking вже додано; пряме монтування tracker-а в public layout можна виконати окремим комітом.
+- backend groundwork для `page_view` tracking вже задіяно і змонтовано в public layout.
 
 ## Що вже реалізовано у серверному фундаменті
 

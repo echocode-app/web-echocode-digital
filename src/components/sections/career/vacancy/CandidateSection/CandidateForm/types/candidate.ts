@@ -1,5 +1,11 @@
 import { VacancyData } from '../../../types/vacancy';
 
+type CandidateAttribution = {
+  source: string;
+  medium?: string;
+  campaign?: string;
+};
+
 export interface CandidateSubmissionPayload {
   profileUrl: string;
   cvFile: {
@@ -9,6 +15,9 @@ export interface CandidateSubmissionPayload {
     sizeBytes: number;
   };
   vacancy: VacancyData;
+  siteId?: string;
+  siteHost?: string;
+  attribution?: CandidateAttribution;
 }
 
 export interface UploadedFile {
@@ -19,6 +28,9 @@ export interface UploadedFile {
     mimeType: string;
     sizeBytes: number;
   };
+  siteId?: string;
+  siteHost?: string;
+  attribution?: CandidateAttribution;
 }
 
 export interface InitUploadApiResponse {

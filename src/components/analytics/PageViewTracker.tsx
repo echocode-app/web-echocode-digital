@@ -2,7 +2,10 @@
 
 import { useEffect } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { postClientAnalyticsEvent } from '@/components/analytics/clientAnalytics';
+import {
+  getClientAnalyticsContextPayload,
+  postClientAnalyticsEvent,
+} from '@/components/analytics/clientAnalytics';
 
 function buildRelativeUrl(pathname: string, searchParams: URLSearchParams): string {
   const query = searchParams.toString();
@@ -14,17 +17,19 @@ export default function PageViewTracker() {
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    // Mount this tracker in the public layout when the page-view rollout is enabled.
     if (!pathname) return;
 
     const relativeUrl = buildRelativeUrl(pathname, new URLSearchParams(searchParams.toString()));
+    const absoluteUrl = typeof window !== 'undefined' ? window.location.href : relativeUrl;
+    const analyticsContext = getClientAnalyticsContextPayload();
 
     void postClientAnalyticsEvent('/api/analytics/page-view', {
       path: pathname,
-      url: relativeUrl,
+      url: absoluteUrl,
       title: typeof document !== 'undefined' ? document.title : null,
       referrer: typeof document !== 'undefined' ? document.referrer || null : null,
       source: 'website',
+      ...analyticsContext,
     });
   }, [pathname, searchParams]);
 

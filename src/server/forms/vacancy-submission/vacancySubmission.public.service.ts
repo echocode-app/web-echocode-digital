@@ -1,6 +1,9 @@
-import { trackEventBestEffort } from '@/server/analytics';
+import { resolveEventAttribution, trackEventBestEffort } from '@/server/analytics';
 import { verifyUploadedProjectAttachment } from '@/server/submissions/submissions.upload.service';
-import { createVacancySubmissionRecord, toVacancyKey } from '@/server/forms/vacancy-submission/vacancySubmission.repository';
+import {
+  createVacancySubmissionRecord,
+  toVacancyKey,
+} from '@/server/forms/vacancy-submission/vacancySubmission.repository';
 import {
   assertSafeCvFileName,
   parseVacancySubmissionCreatePayload,
@@ -11,6 +14,10 @@ export async function createVacancySubmission(input: {
   rawBody: unknown;
   requestHeaders?: Headers;
 }): Promise<CreateVacancySubmissionResponseDto> {
+  const eventAttribution = resolveEventAttribution({
+    rawBody: input.rawBody,
+    headers: input.requestHeaders,
+  });
   const parsed = parseVacancySubmissionCreatePayload(input.rawBody);
 
   assertSafeCvFileName(parsed.cvFile.originalName);
@@ -40,6 +47,15 @@ export async function createVacancySubmission(input: {
       employmentType: parsed.vacancy.employmentType ?? null,
       hasCv: true,
       hasProfileUrl: true,
+      ...(eventAttribution
+        ? {
+            attribution: {
+              source: eventAttribution.source,
+              medium: eventAttribution.medium ?? null,
+              campaign: eventAttribution.campaign ?? null,
+            },
+          }
+        : {}),
     },
   });
 

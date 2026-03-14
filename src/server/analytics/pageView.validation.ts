@@ -8,6 +8,13 @@ export const pageViewBodySchema = z.object({
   source: z.string().trim().min(1).max(64).optional(),
   siteId: z.string().trim().min(1).max(64).optional(),
   siteHost: z.string().trim().min(1).max(255).optional(),
+  attribution: z
+    .object({
+      source: z.string().trim().min(1).max(120),
+      medium: z.string().trim().min(1).max(120).optional(),
+      campaign: z.string().trim().min(1).max(160).optional(),
+    })
+    .optional(),
 });
 
 export type PageViewBodyInput = z.infer<typeof pageViewBodySchema>;

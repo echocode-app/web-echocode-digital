@@ -1,3 +1,8 @@
+import {
+  getClientAnalyticsContextPayload,
+  getClientAnalyticsHeaders,
+} from '@/components/analytics/clientAnalytics';
+
 type FormState = {
   success?: boolean;
   error?: string;
@@ -9,10 +14,15 @@ type FormState = {
 const submitEmail = async (formData: FormData): Promise<FormState> => {
   try {
     const email = formData.get('email');
+    const analyticsContext = getClientAnalyticsContextPayload();
     const res = await fetch('/api/forms/email-submissions', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, source: 'footer-mobile' }),
+      headers: getClientAnalyticsHeaders(),
+      body: JSON.stringify({
+        email,
+        source: 'footer-mobile',
+        ...analyticsContext,
+      }),
     });
 
     if (!res.ok) throw new Error('Request failed');

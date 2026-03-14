@@ -315,6 +315,17 @@ components:
           description: Canonical host of the originating site.
           example: echocode.app
 
+    AttributionInput:
+      type: object
+      required: [source]
+      properties:
+        source:
+          type: string
+        medium:
+          type: string
+        campaign:
+          type: string
+
     PageViewTrackRequest:
       allOf:
         - $ref: '#/components/schemas/SiteContextInput'
@@ -332,6 +343,8 @@ components:
             source:
               type: string
               example: echocode_app
+            attribution:
+              $ref: '#/components/schemas/AttributionInput'
 
     LegacyProjectSubmissionRequest:
       allOf:
@@ -343,27 +356,35 @@ components:
             but cross-site integrations should send `siteId` and `siteHost` explicitly.
 
     ClientProjectCreateRequest:
-      type: object
-      required: [firstName, lastName, email]
-      properties:
-        firstName: { type: string }
-        lastName: { type: string }
-        email:
-          type: string
-          format: email
-        description: { type: string }
-        image:
-          $ref: '#/components/schemas/FileMetaInput'
+      allOf:
+        - $ref: '#/components/schemas/SiteContextInput'
+        - type: object
+          required: [firstName, lastName, email]
+          properties:
+            firstName: { type: string }
+            lastName: { type: string }
+            email:
+              type: string
+              format: email
+            description: { type: string }
+            image:
+              $ref: '#/components/schemas/FileMetaInput'
+            attribution:
+              $ref: '#/components/schemas/AttributionInput'
 
     EmailSubmissionCreateRequest:
-      type: object
-      required: [email]
-      properties:
-        email:
-          type: string
-          format: email
-        source:
-          type: string
+      allOf:
+        - $ref: '#/components/schemas/SiteContextInput'
+        - type: object
+          required: [email]
+          properties:
+            email:
+              type: string
+              format: email
+            source:
+              type: string
+            attribution:
+              $ref: '#/components/schemas/AttributionInput'
 
     VacancySnapshotInput:
       type: object
@@ -379,16 +400,20 @@ components:
         employmentType: { type: string }
 
     VacancySubmissionCreateRequest:
-      type: object
-      required: [profileUrl, cvFile, vacancy]
-      properties:
-        profileUrl:
-          type: string
-          format: uri
-        cvFile:
-          $ref: '#/components/schemas/FileMetaInput'
-        vacancy:
-          $ref: '#/components/schemas/VacancySnapshotInput'
+      allOf:
+        - $ref: '#/components/schemas/SiteContextInput'
+        - type: object
+          required: [profileUrl, cvFile, vacancy]
+          properties:
+            profileUrl:
+              type: string
+              format: uri
+            cvFile:
+              $ref: '#/components/schemas/FileMetaInput'
+            vacancy:
+              $ref: '#/components/schemas/VacancySnapshotInput'
+            attribution:
+              $ref: '#/components/schemas/AttributionInput'
 
     CreateEntityResponse:
       type: object
