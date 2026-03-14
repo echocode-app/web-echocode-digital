@@ -10,8 +10,8 @@ export default function SourcePerformanceBlock({ sources }: SourcePerformanceBlo
   return (
     <article className="min-w-0 rounded-(--radius-base) border border-gray16 bg-base-gray p-4 shadow-main">
       <WidgetHeader
-        title="Source performance"
-        info="Top attributed sources by lead volume for the last 30 days with conversion and share context."
+        title="Traffic source performance"
+        info="Top traffic sources for the last 30 days by lead volume. UTM source / medium is used first, then referrer host, then Direct / unknown."
       />
 
       {sources.length > 0 ? (
@@ -41,7 +41,7 @@ export default function SourcePerformanceBlock({ sources }: SourcePerformanceBlo
         </div>
       ) : (
         <div className="mt-3 rounded-(--radius-secondary) border border-gray16 bg-black/20 px-3 py-2 font-main text-main-xs text-gray75">
-          No attributed UTM sources found for the last 30 days.
+          No traffic sources found for the last 30 days.
         </div>
       )}
     </article>

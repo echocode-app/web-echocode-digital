@@ -12,6 +12,11 @@ function isMetadataMap(metadata: unknown): metadata is Record<string, unknown> {
   return Boolean(metadata) && typeof metadata === 'object' && !Array.isArray(metadata);
 }
 
+function readString(record: Record<string, unknown>, key: string): string | null {
+  const value = record[key];
+  return typeof value === 'string' && value.trim().length > 0 ? value.trim() : null;
+}
+
 export function normalizeSourceValue(value: unknown): string | null {
   if (typeof value !== 'string') return null;
   const normalized = value.trim().toLowerCase();
@@ -19,13 +24,33 @@ export function normalizeSourceValue(value: unknown): string | null {
   return normalized.slice(0, 64);
 }
 
-export function extractAttributionSource(metadata: unknown): string | null {
-  if (!isMetadataMap(metadata)) return null;
+function extractReferrerHost(metadata: Record<string, unknown>): string | null {
+  const rawReferrer = readString(metadata, 'referrer');
+  if (!rawReferrer) return null;
+
+  try {
+    return new URL(rawReferrer).host.toLowerCase();
+  } catch {
+    return normalizeSourceValue(rawReferrer);
+  }
+}
+
+export function extractTrafficSourceLabel(metadata: unknown): string {
+  if (!isMetadataMap(metadata)) return 'Direct / unknown';
 
   const attribution = metadata.attribution;
-  if (!isMetadataMap(attribution)) return null;
+  if (isMetadataMap(attribution)) {
+    const source = normalizeSourceValue(attribution.source);
+    const medium = normalizeSourceValue(attribution.medium);
 
-  return normalizeSourceValue(attribution.source);
+    if (source && medium) return `${source} / ${medium}`;
+    if (source) return source;
+  }
+
+  const referrerHost = extractReferrerHost(metadata);
+  if (referrerHost) return referrerHost;
+
+  return 'Direct / unknown';
 }
 
 // Extracts vacancy identity from known analytics metadata variants.

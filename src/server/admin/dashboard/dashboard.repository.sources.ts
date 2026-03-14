@@ -6,7 +6,7 @@ import {
   percentage,
   scanAnalyticsEventsByTypeInRange,
 } from '@/server/admin/dashboard/dashboard.repository.core';
-import { extractAttributionSource } from '@/server/admin/dashboard/dashboard.repository.entities.shared';
+import { extractTrafficSourceLabel } from '@/server/admin/dashboard/dashboard.repository.entities.shared';
 
 type SourceStats = {
   pageViews: number;
@@ -47,7 +47,7 @@ function addSourceStats(
   statsMap.set(source, current);
 }
 
-// Source block is derived from first-touch metadata.attribution.source values.
+// Source block combines UTM attribution, referrer host fallback and direct traffic.
 export async function getSourcePerformance(
   last30Days: DateRange,
   options: { siteId?: SiteId } = {},
@@ -56,23 +56,19 @@ export async function getSourcePerformance(
 
   await Promise.all([
     scanAnalyticsEventsByTypeInRange('page_view', last30Days, (data) => {
-      const source = extractAttributionSource(data.metadata);
-      if (!source) return;
+      const source = extractTrafficSourceLabel(data.metadata);
       addSourceStats(sourceStats, source, { pageViews: 1 });
     }, options),
     scanAnalyticsEventsByTypeInRange('submit_project', last30Days, (data) => {
-      const source = extractAttributionSource(data.metadata);
-      if (!source) return;
+      const source = extractTrafficSourceLabel(data.metadata);
       addSourceStats(sourceStats, source, { projectLeads: 1 });
     }, options),
     scanAnalyticsEventsByTypeInRange('submit_vacancy', last30Days, (data) => {
-      const source = extractAttributionSource(data.metadata);
-      if (!source) return;
+      const source = extractTrafficSourceLabel(data.metadata);
       addSourceStats(sourceStats, source, { vacancyLeads: 1 });
     }, options),
     scanAnalyticsEventsByTypeInRange('apply_vacancy', last30Days, (data) => {
-      const source = extractAttributionSource(data.metadata);
-      if (!source) return;
+      const source = extractTrafficSourceLabel(data.metadata);
       addSourceStats(sourceStats, source, { vacancyLeads: 1 });
     }, options),
   ]);
