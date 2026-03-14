@@ -22,7 +22,8 @@
       }
     },
     "VacanciesSection": {
-      "title": "Offene Stellen"
+      "title": "Offene Stellen",
+      "applyBtn": "Jetzt bewerben"
     }
   }
 }

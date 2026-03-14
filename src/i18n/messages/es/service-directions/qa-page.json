@@ -56,6 +56,8 @@
     },
     "MetricsSection": {
       "title": "Cómo la calidad se convierte en métricas clave",
+      "titlePart1": "Cómo la calidad se convierte",
+      "titlePart2": "en métricas clave",
       "list": {
         "met01": {
           "title": "Menos abandono",

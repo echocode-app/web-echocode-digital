@@ -20,7 +20,8 @@
       },
       "contactUsBtn": "Contacto",
       "mailTitle": "Simplemente envíanos tu correo electrónico de contacto y nos pondremos en contacto contigo.",
-      "mailSubtitle": "Tu correo electrónico"
+      "mailSubtitle": "Tu correo electrónico",
+      "license": "ECHOCODE. TODOS LOS DERECHOS RESERVADOS."
     }
   }
 }

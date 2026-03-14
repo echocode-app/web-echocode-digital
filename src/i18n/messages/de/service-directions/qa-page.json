@@ -56,6 +56,8 @@
     },
     "MetricsSection": {
       "title": "Wie Qualität in Schlüsselmetriken umgewandelt wird",
+      "titlePart1": "Wie Qualität sich",
+      "titlePart2": "in Schlüsselmetriken verwandelt",
       "list": {
         "met01": {
           "title": "Weniger Churn",

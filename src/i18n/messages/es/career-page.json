@@ -22,7 +22,8 @@
       }
     },
     "VacanciesSection": {
-      "title": "Vacantes abiertas"
+      "title": "Vacantes abiertas",
+      "applyBtn": "Postular ahora"
     }
   }
 }

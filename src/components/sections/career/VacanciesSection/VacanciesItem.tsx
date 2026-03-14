@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import { Vacancy } from './types/vacancies';
 
 const VacanciesItem = ({
@@ -9,6 +10,8 @@ const VacanciesItem = ({
   vacancySlug,
   vacancyId,
 }: Vacancy) => {
+  const t = useTranslations('CareerPage.VacanciesSection');
+
   return (
     <li
       className="flex flex-col gap-3 min-[490px]:flex-row 
@@ -44,7 +47,7 @@ const VacanciesItem = ({
         className="relative z-0 overflow-hidden mx-auto min-[490px]:mx-0 h-fit w-fit
          font-wadik text-[10px] bg-main-gradient px-5.5 py-2 rounded-base uppercase duration-main hover:shadow-[0_2.688px_25.061px_0_rgba(253,38,108,0.55)]"
       >
-        <span className="relative z-10 pointer-events-none">apply now</span>
+        <span className="relative z-10 pointer-events-none">{t('applyBtn')}</span>
         <div
           className="absolute inset-0 z-0 bg-accent opacity-0 
         hover:opacity-100 transition-opacity duration-main"
