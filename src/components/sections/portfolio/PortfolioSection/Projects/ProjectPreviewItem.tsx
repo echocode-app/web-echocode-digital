@@ -8,8 +8,8 @@ interface ProjectPreviewItemProps {
 
 const ProjectPreviewItem = ({ image, title, platforms }: ProjectPreviewItemProps) => {
   return (
-    <li className="group w-full max-w-[320px]">
-      <div className="relative mb-4 w-full sm:w-[320px] aspect-video h-50 overflow-hidden rounded-secondary">
+    <li className="group w-full sm:max-w-[320px]">
+      <div className="relative mb-4 w-full sm:max-w-[320px] aspect-video h-50 md:h-auto lg:h-50 overflow-hidden rounded-secondary">
         <Image
           src={image}
           alt={title}

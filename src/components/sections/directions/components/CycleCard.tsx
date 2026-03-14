@@ -5,16 +5,18 @@ interface CycleCardProps {
   subTitle: string;
   desc: string;
   translateKey: string;
+  active: boolean;
 }
 
-const CycleCard = ({ title, subTitle, desc, translateKey }: CycleCardProps) => {
+const CycleCard = ({ title, subTitle, desc, translateKey, active }: CycleCardProps) => {
   const t = useTranslations(translateKey);
 
   return (
     <article className="group flex flex-col gap-3 ">
       <p
-        className="font-title text-title-xs leading-2.5 text-accent text-left
-      group-hover:text-accent-hover duration-main pointer-events-none uppercase"
+        className={`font-title text-title-xs leading-2.5 text-accent text-left
+      duration-main pointer-events-none uppercase 
+      ${active ? 'text-accent-hover' : 'text-accent'} `}
       >
         {t(title)}
       </p>

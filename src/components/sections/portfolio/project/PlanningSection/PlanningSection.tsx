@@ -23,7 +23,7 @@ const PlanningSection = ({ list, image, imageStyle, translateKey }: PlanningSect
           <div className={imageStyle}>
             <Image src={image} alt="Planning" fill className="object-cover rounded-secondary" />
           </div>
-          <div>
+          <div className="w-full min-[900px]:w-fit">
             <SectionTitle marginBottom="24px">{t('title')}</SectionTitle>
             <PlanningList list={list} translateKey={translateKey} />
           </div>

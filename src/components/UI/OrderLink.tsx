@@ -12,11 +12,20 @@ const OrderLink = () => {
       href="/contact"
       scroll={false}
       onClick={rememberContactModalReturnPath}
-      className="block mx-auto w-fit px-4 py-2 
-     font-title text-[8px] font-bold rounded-lg bg-accent cursor-pointer
-     md:text-title-xs md:px-6 md:rounded-base uppercase"
+      className="
+    block mx-auto w-fit px-4 py-2 md:px-6 
+    font-title text-[8px] md:text-title-xs font-bold uppercase
+    rounded-lg md:rounded-base 
+    bg-accent cursor-pointer
+    relative overflow-hidden z-0 transition-all duration-500
+    after:content-[''] after:absolute after:inset-0 
+    after:bg-main-gradient after:opacity-0 
+    after:transition-opacity after:duration-500 after:-z-10
+    hover:after:opacity-100 
+    shadow-[0_2.688px_25.061px_0_rgba(253,38,108,0.55)]
+  "
     >
-      {t('orderButton')}
+      <span className="relative z-10">{t('orderButton')}</span>
     </Link>
   );
 };

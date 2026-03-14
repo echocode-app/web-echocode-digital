@@ -1,23 +1,15 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-
 import FoundationItem from './FoundationItem';
 import { useTranslations } from 'next-intl';
+import { useAutoIndex } from '@/hooks/useAutoIndex';
 
 const items = ['list.found01', 'list.found02', 'list.found03', 'list.found04'];
 
 const FoundationList = () => {
   const t = useTranslations('IGamingPage.FoundationSection');
-  const [activeIndex, setActiveIndex] = useState(0);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % items.length);
-    }, 1500);
-
-    return () => clearInterval(interval);
-  }, []);
+  const activeIndex = useAutoIndex(items.length);
 
   return (
     <ul className="flex flex-wrap justify-between gap-y-7 gap-x-6">
