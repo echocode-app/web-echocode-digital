@@ -10,6 +10,7 @@
       "metrics": {
         "delivered": "Maßgeschneiderte Produkte weltweit geliefert",
         "experts": "IT-Experten auf Senior-und Middle-Level",
+        "prototypeTimeUnit": "Tage",
         "prototypeTime": "Durchschnittliche Zeit von der Idee bis zum klickbaren Prototyp",
         "returningClients": "Wiederkehrende Kunden mit neuen großen Ideen"
       }

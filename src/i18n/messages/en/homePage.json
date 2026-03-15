@@ -10,6 +10,7 @@
       "metrics": {
         "delivered": "Custom products delivered worldwide",
         "experts": "Senior and Middle Level IT Experts",
+        "prototypeTimeUnit": "days",
         "prototypeTime": "Average time from idea to a clickable prototype",
         "returningClients": "Client return bringing next big ideas to life"
       }

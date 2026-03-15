@@ -27,7 +27,7 @@ const MobileNavList = ({ onClose, isOpenDropdown, setIsOpenDropdown }: MobileNav
             ${textSize}`}
         >
           {t('services')}
-          <div className="relative w-5 h-5">
+          <span className="relative h-5 w-5">
             <Image
               src={'/UI/dropdown.svg'}
               alt="Dropdown"
@@ -35,7 +35,7 @@ const MobileNavList = ({ onClose, isOpenDropdown, setIsOpenDropdown }: MobileNav
               className={`${isOpenDropdown ? 'rotate-x-180' : 'rotate-x-0'} 
               transition-all duration-main`}
             />
-          </div>
+          </span>
         </button>
 
         <MobileDropdownList

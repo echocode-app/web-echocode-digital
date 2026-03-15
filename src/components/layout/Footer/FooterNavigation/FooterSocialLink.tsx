@@ -9,15 +9,18 @@ interface FooterSocialLinkProps {
 
 const FooterSocialLink = ({ children, link }: FooterSocialLinkProps) => {
   return (
-    <Link
-      href={link}
-      target="blank"
-      className="group inline-flex w-full items-center gap-1 text-main-base text-base-gray 
-      duration-main hover:text-accent focus-visible:text-accent"
-    >
-      <span>{children}</span>
-      <FooterLinkArrow />
-    </Link>
+    <li>
+      <Link
+        href={link}
+        target="_blank"
+        rel="noreferrer"
+        className="group inline-flex w-full items-center gap-1 text-main-base text-base-gray 
+        duration-main hover:text-accent focus-visible:text-accent"
+      >
+        <span>{children}</span>
+        <FooterLinkArrow />
+      </Link>
+    </li>
   );
 };
 

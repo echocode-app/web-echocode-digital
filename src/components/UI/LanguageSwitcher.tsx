@@ -14,16 +14,17 @@ const LanguageSwitcher = () => {
 
   return (
     <button
+      type="button"
       onClick={() => changeLocaleAction(nextLocale as Locale)}
       className="
       flex items-center gap-2 xl:ml-14.25 px-3 py-1.5 shadow-main
    border-accent border-2 rounded-primary cursor-pointer hover:bg-accent duration-main
       "
     >
-      <div className="relative w-6 h-5">
+      <span className="relative h-5 w-6">
         <Image src="/UI/globe.svg" alt="Globe" fill />
-      </div>
-      <p className="font-wadik text-[10px] sm:text-title-xs uppercase">{locale}</p>
+      </span>
+      <span className="font-wadik text-[10px] sm:text-title-xs uppercase">{locale}</span>
     </button>
   );
 };

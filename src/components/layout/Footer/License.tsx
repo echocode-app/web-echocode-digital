@@ -8,9 +8,7 @@ const License = () => {
     <div className="flex flex-col md:flex-row md:justify-between  font-extra text-[10px] ">
       <p className="mb-3 md:mb-0 text-center">
         ©{' '}
-        <time dateTime={`${START_YEAR}-${CURRENT_YEAR}`}>
-          {START_YEAR}-{CURRENT_YEAR}
-        </time>{' '}
+        <time dateTime={String(START_YEAR)}>{START_YEAR}</time>-<time dateTime={CURRENT_YEAR}>{CURRENT_YEAR}</time>{' '}
         ECHOCODE. ALL RIGHTS RESERVED.
       </p>
       <p className="text-center">
