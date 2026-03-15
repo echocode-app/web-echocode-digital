@@ -1,37 +1,52 @@
 'use client';
 
 import Image from 'next/image';
-import { motion } from 'framer-motion';
-import { useMobile } from '@/hooks/useMobile';
 
 interface PartnerItemProps {
   image: string;
   desc: string;
   scale: string;
+  dynamicScale?: number;
+  slotWidth?: number;
+  opacity?: number;
+  yOffset?: number;
 }
 
-const PartnerItem = ({ image, desc, scale }: PartnerItemProps) => {
-  const isMobile = useMobile();
-
+const PartnerItem = ({
+  image,
+  desc,
+  scale,
+  dynamicScale = 1,
+  slotWidth = 132,
+  opacity = 1,
+  yOffset = 0,
+}: PartnerItemProps) => {
   return (
-    <motion.li
-      initial={{ scale: 1 }}
-      whileInView={{ scale: isMobile ? 1.2 : 1.4 }}
-      viewport={{ once: false, margin: '0px -51% 0px -49%' }}
-      transition={{ duration: 1, ease: 'easeOut' }}
-      className="shrink-0 w-33  md:w-33 h-20 mr-6 md:mr-10 rounded-secondary flex items-center justify-center
-             bg-gray7 backdrop-blur-[6px] relative"
+    <li
+      className="flex h-20 shrink-0 items-center justify-center"
+      style={{ width: `${slotWidth}px` }}
     >
-      <div className="relative h-6 w-30">
-        <Image
-          src={image}
-          alt={desc}
-          fill
-          className="object-contain"
-          style={{ transform: `scale(${scale})` }}
-        />
+      <div
+        className="flex h-20 w-33 items-center justify-center rounded-secondary 
+        bg-gray7/90 backdrop-blur-[6px] 
+        transition-transform duration-200 ease-out will-change-transform"
+        style={{
+          transform: `translateY(${yOffset}px) scale(${dynamicScale})`,
+          opacity,
+          zIndex: Math.round(dynamicScale * 100),
+        }}
+      >
+        <div className="relative h-6 w-30">
+          <Image
+            src={image}
+            alt={desc}
+            fill
+            className="object-contain"
+            style={{ transform: `scale(${scale})` }}
+          />
+        </div>
       </div>
-    </motion.li>
+    </li>
   );
 };
 

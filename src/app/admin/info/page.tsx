@@ -247,7 +247,7 @@ export default function AdminInfoPage() {
                       <p className="break-all">{link}</p>
                     </div>
 
-                    <div className="mt-3 grid gap-2 font-main text-main-xs text-gray75 sm:grid-cols-3">
+                    <div className="mt-3 grid gap-2 font-main text-main-xs text-gray75 lg:grid-cols-3">
                       <p>
                         <span className="text-gray60">source:</span> {preset.source}
                       </p>

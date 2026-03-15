@@ -24,7 +24,7 @@ export default function SiteAnalyticsMetricList<TItem extends SiteAnalyticsMetri
 }: SiteAnalyticsMetricListProps<TItem>) {
   return (
     <article
-      className="min-w-0 overflow-hidden rounded-(--radius-base) 
+      className="min-w-0 rounded-(--radius-base) 
       border border-gray16 bg-base-gray p-4 shadow-main"
     >
       <WidgetHeader title={title} info={info} />

@@ -32,6 +32,7 @@ const DOT_COLOR_CLASS = [
   styles.dotColor5,
   styles.dotColor6,
 ] as const;
+const FULL_LIST_PAGE_SIZE = 7;
 
 function formatInt(value: number): string {
   return new Intl.NumberFormat('en-US').format(Math.round(value));
@@ -68,6 +69,84 @@ function ChartLegend({ rows, emptyMessage }: { rows: GeographyChartRow[]; emptyM
   );
 }
 
+function FullBreakdownList({
+  rows,
+  emptyMessage,
+}: {
+  rows: GeographyChartRow[];
+  emptyMessage: string;
+}) {
+  const [page, setPage] = useState(0);
+
+  if (rows.length === 0) {
+    return (
+      <div className="rounded-(--radius-secondary) border border-dashed border-gray16 bg-black/20 p-3 text-center">
+        <p className="font-main text-main-xs text-gray60">{emptyMessage}</p>
+      </div>
+    );
+  }
+
+  const totalPages = Math.max(1, Math.ceil(rows.length / FULL_LIST_PAGE_SIZE));
+  const safePage = Math.min(page, totalPages - 1);
+  const start = safePage * FULL_LIST_PAGE_SIZE;
+  const visibleRows = rows.slice(start, start + FULL_LIST_PAGE_SIZE);
+
+  return (
+    <div className="space-y-3">
+      <div className="flex items-center justify-between gap-3">
+        <div>
+          <p className="font-title text-title-2xs text-white">Full breakdown</p>
+          <p className="font-main text-main-xs text-gray60">
+            All sources for the selected period, 7 rows per page.
+          </p>
+        </div>
+        {totalPages > 1 ? (
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => setPage((current) => Math.max(0, current - 1))}
+              disabled={safePage === 0}
+              className="rounded-(--radius-secondary) border border-gray16 px-2.5 py-1 font-main text-main-xs text-gray75 transition duration-main hover:border-gray60 hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
+            >
+              Prev
+            </button>
+            <p className="font-main text-main-xs text-gray60">
+              {safePage + 1} / {totalPages}
+            </p>
+            <button
+              type="button"
+              onClick={() => setPage((current) => Math.min(totalPages - 1, current + 1))}
+              disabled={safePage === totalPages - 1}
+              className="rounded-(--radius-secondary) border border-gray16 px-2.5 py-1 font-main text-main-xs text-gray75 transition duration-main hover:border-gray60 hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
+            >
+              Next
+            </button>
+          </div>
+        ) : null}
+      </div>
+
+      <div className="grid min-w-0 gap-2">
+        {visibleRows.map((row) => (
+          <div
+            key={row.key}
+            className="flex items-center justify-between gap-2 rounded-(--radius-secondary) border border-gray16 bg-black/20 px-2 py-1.5"
+          >
+            <div className="flex min-w-0 items-center gap-2">
+              <span
+                className={`inline-block h-2.5 w-2.5 rounded-full ${DOT_COLOR_CLASS[row.colorIndex] ?? DOT_COLOR_CLASS[0]}`}
+              />
+              <p className="truncate font-main text-main-xs text-gray75">{row.label}</p>
+            </div>
+            <p className="shrink-0 font-main text-main-xs text-gray60">
+              {formatInt(row.views)} ({row.sharePct.toFixed(2)}%)
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function EchocodeAppRadialWidget({
   title,
   info,
@@ -75,6 +154,7 @@ function EchocodeAppRadialWidget({
   period,
   onPeriodChange,
   rows,
+  fullRows,
 }: {
   title: string;
   info: string;
@@ -82,9 +162,10 @@ function EchocodeAppRadialWidget({
   period: DashboardPeriod;
   onPeriodChange: (next: DashboardPeriod) => void;
   rows: GeographyChartRow[];
+  fullRows?: GeographyChartRow[];
 }) {
   return (
-    <div className="min-w-0 overflow-hidden">
+    <div className="min-w-0">
       <ChartPanel title={title} info={info} contentHeightClass="h-auto">
         <div className="mb-3 flex justify-start overflow-x-auto lg:justify-end">
           <CompactPeriodSwitch value={period} onChange={onPeriodChange} />
@@ -96,6 +177,16 @@ function EchocodeAppRadialWidget({
           </div>
           <ChartLegend rows={rows} emptyMessage={emptyMessage} />
         </div>
+
+        {fullRows ? (
+          <div className="mt-4">
+            <FullBreakdownList
+              key={`${period}-${fullRows.length}-${fullRows[0]?.key ?? 'empty'}`}
+              rows={fullRows}
+              emptyMessage={emptyMessage}
+            />
+          </div>
+        ) : null}
       </ChartPanel>
     </div>
   );
@@ -122,6 +213,18 @@ export default function EchocodeAppChartsSection() {
         key: (item, index) => `${item.label}-${index}`,
         label: (item) => item.label,
       }),
+    [utmOverview?.referrers],
+  );
+  const referrerFullRows = useMemo(
+    () =>
+      (utmOverview?.referrers ?? []).map((item, index) => ({
+        key: `${item.label}-${index}`,
+        label: item.label,
+        views: item.views,
+        sharePct: item.sharePct,
+        color: '',
+        colorIndex: index % DOT_COLOR_CLASS.length,
+      })),
     [utmOverview?.referrers],
   );
 
@@ -158,6 +261,7 @@ export default function EchocodeAppChartsSection() {
           period={utmPeriod}
           onPeriodChange={setUtmPeriod}
           rows={referrerRows}
+          fullRows={referrerFullRows}
         />
       )}
     </section>

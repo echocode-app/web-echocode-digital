@@ -11,7 +11,7 @@ const OPEN_SUBMISSIONS_LINK_CLASS_NAME =
 
 export default function AdminEchocodeAppPage() {
   return (
-    <section className="min-w-0 space-y-4 overflow-x-clip">
+    <section className="min-w-0 space-y-4">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="flex items-start gap-3">
           <h1 className="font-title text-title-2xl text-white">.app Dashboard</h1>
