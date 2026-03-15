@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { useTranslations } from 'next-intl';
 
 import { AboutSectionECommerse } from '@/components/sections/portfolio/project/AboutSection';
@@ -8,12 +9,23 @@ import FeaturesSection from '@/components/sections/portfolio/project/FeaturesSec
 import ScreensSection from '@/components/sections/portfolio/project/ScreensSection';
 import ProptotypeSection from '@/components/sections/portfolio/project/PrototypeSection';
 import TechnologySection from '@/components/sections/portfolio/project/TechnologySection';
+import { buildPageMetadata } from '@/lib/seo/metadata';
 
 import implementations from '@/data/portfolio/projects/implementations/e-commerce.json';
 import challenges from '@/data/portfolio/projects/challenges/e-commerce.json';
 import planning from '@/data/portfolio/projects/planning/e-commerce.json';
 import features from '@/data/portfolio/projects/features/e-commerce.json';
 import technologies from '@/data/portfolio/projects/technologies/e-commerce.json';
+
+export async function generateMetadata(): Promise<Metadata> {
+  return buildPageMetadata({
+    title: 'E-commerce Case Study',
+    description:
+      'Review Echocode’s e-commerce case study with product strategy, implementation, prototype flows and technology choices.',
+    path: '/portfolio/e-commers',
+    image: '/images/projects/e-commers/screens.png',
+  });
+}
 
 const ECommers = () => {
   const t = useTranslations('ImplementationECommerce');

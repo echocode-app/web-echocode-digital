@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
 import StaticGradientLine from '@/components/UI/StaticGradientLine';
@@ -9,9 +10,31 @@ import SelectionSection from '@/components/sections/career/vacancy/SelectionSect
 import CandidateSection from '@/components/sections/career/vacancy/CandidateSection';
 import { getPublicVacancyBySlug } from '@/server/vacancies';
 import { VacancyData } from '@/components/sections/career/vacancy/types/vacancy';
+import { buildPageMetadata } from '@/lib/seo/metadata';
 
 interface VacancyPageProps {
   params: Promise<{ slug: string }>;
+}
+
+export async function generateMetadata({ params }: VacancyPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const vacancy = await getPublicVacancyBySlug(slug);
+
+  if (!vacancy) {
+    return buildPageMetadata({
+      title: 'Career Opportunity',
+      description: 'Explore career opportunities at Echocode.',
+      path: `/career/${slug}`,
+      image: '/images/rabbits/hero/career.png',
+    });
+  }
+
+  return buildPageMetadata({
+    title: `${vacancy.vacancyTitle} ${vacancy.level}`.trim(),
+    description: `Apply for the ${vacancy.vacancyTitle} role at Echocode and join a product-focused team building high-impact digital products.`,
+    path: `/career/${slug}`,
+    image: '/images/rabbits/hero/career.png',
+  });
 }
 
 const VacancyPage = async ({ params }: VacancyPageProps) => {

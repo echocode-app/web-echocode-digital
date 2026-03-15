@@ -1,3 +1,5 @@
+import type { Metadata } from 'next';
+
 import AboutSectionCleaning from '@/components/sections/portfolio/project/AboutSection/AboutSectionCleaning';
 import ChallengesSection from '@/components/sections/portfolio/project/ChallengesSection';
 import FeaturesCleanning from '@/components/sections/portfolio/project/FeaturesSection/FeaturesCleanning';
@@ -6,10 +8,21 @@ import PlanningSection from '@/components/sections/portfolio/project/PlanningSec
 import ProptotypeSection from '@/components/sections/portfolio/project/PrototypeSection';
 import ScreensSection from '@/components/sections/portfolio/project/ScreensSection';
 import TechnologySection from '@/components/sections/portfolio/project/TechnologySection';
+import { buildPageMetadata } from '@/lib/seo/metadata';
 
 import challenges from '@/data/portfolio/projects/challenges/cleaning.json';
 import planning from '@/data/portfolio/projects/planning/cleaning.json';
 import technologies from '@/data/portfolio/projects/technologies/cleaning.json';
+
+export async function generateMetadata(): Promise<Metadata> {
+  return buildPageMetadata({
+    title: 'Cleaning App Case Study',
+    description:
+      'Explore Echocode’s cleaning app case study covering product design, implementation, interactive prototype and delivery details.',
+    path: '/portfolio/cleaning',
+    image: '/images/projects/cleaning/screens.png',
+  });
+}
 
 const Cleaning = () => {
   return (

@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { useTranslations } from 'next-intl';
 
 import { AboutSectionFood } from '@/components/sections/portfolio/project/AboutSection';
@@ -8,12 +9,23 @@ import FeaturesSection from '@/components/sections/portfolio/project/FeaturesSec
 import ScreensSection from '@/components/sections/portfolio/project/ScreensSection';
 import ProptotypeSection from '@/components/sections/portfolio/project/PrototypeSection';
 import TechnologySection from '@/components/sections/portfolio/project/TechnologySection';
+import { buildPageMetadata } from '@/lib/seo/metadata';
 
 import implementations from '@/data/portfolio/projects/implementations/food.json';
 import challenges from '@/data/portfolio/projects/challenges/food.json';
 import planning from '@/data/portfolio/projects/planning/food.json';
 import features from '@/data/portfolio/projects/features/food.json';
 import technologies from '@/data/portfolio/projects/technologies/food.json';
+
+export async function generateMetadata(): Promise<Metadata> {
+  return buildPageMetadata({
+    title: 'Food & Drink Case Study',
+    description:
+      'See how Echocode designed and delivered a food and drink product experience, from product planning to prototype and implementation.',
+    path: '/portfolio/food',
+    image: '/images/projects/food/screens.png',
+  });
+}
 
 const Food = () => {
   const t = useTranslations('ImplementationFood');
