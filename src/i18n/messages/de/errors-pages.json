@@ -10,5 +10,14 @@
   "Error500Page": {
     "title": "Interner Serverfehler",
     "description": "Auf unserer Seite ist etwas schiefgelaufen. Wir arbeiten bereits an der Lösung."
+  },
+  "PortfolioError": {
+    "title": "Keine Projekte gefunden",
+    "description": "Versuchen Sie, Ihre Filter zu ändern.",
+    "resetButton": "Filter zurücksetzen"
+  },
+  "VacancyError": {
+    "title": "Keine offenen Stellen",
+    "description": "Wir stellen derzeit nicht ein, aber bald könnten neue Möglichkeiten verfügbar sein."
   }
 }

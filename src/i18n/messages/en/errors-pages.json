@@ -10,5 +10,14 @@
   "Error500Page": {
     "title": "Internal Server Error",
     "description": "Something went wrong on our end. We're already working to fix the issue."
+  },
+  "PortfolioError": {
+    "title": "No projects found",
+    "description": "Try changing your filters.",
+    "resetButton": "Reset Filters"
+  },
+  "VacancyError": {
+    "title": "No open positions",
+    "description": "We’re not hiring right now, but new opportunities may open soon."
   }
 }
