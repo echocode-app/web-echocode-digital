@@ -10,9 +10,9 @@ interface UseInfiniteSliceOptions {
 }
 
 const DEFAULT_PAGE_SIZE = 6;
-const DEFAULT_ROOT_MARGIN = '100px 0px';
+const DEFAULT_ROOT_MARGIN = '520px 0px';
 const DEFAULT_THRESHOLD = 0.01;
-const DEFAULT_DELAY_MS = 700;
+const DEFAULT_DELAY_MS = 0;
 
 export function useInfiniteSlice<T>(
   items: T[],

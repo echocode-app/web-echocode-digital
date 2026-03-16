@@ -11,8 +11,6 @@ interface ProjectPreviewListProps {
 const ProjectPreviewList = ({ list }: ProjectPreviewListProps) => {
   const { visibleItems, hasMore, sentinelRef } = useInfiniteSlice(list, {
     pageSize: 6,
-    rootMargin: '80px 0px',
-    delayMs: 140,
   });
 
   return (
@@ -28,7 +26,7 @@ const ProjectPreviewList = ({ list }: ProjectPreviewListProps) => {
         ))}
       </ul>
 
-      {hasMore && <div ref={sentinelRef} aria-hidden className="h-6 w-full" />}
+      {hasMore && <div ref={sentinelRef} aria-hidden className="h-px w-full" />}
     </div>
   );
 };
