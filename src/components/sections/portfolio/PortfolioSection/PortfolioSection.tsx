@@ -41,7 +41,7 @@ const PortfolioSection = async ({ projectsFilter }: PortfolioSectionProps) => {
 
             {filteredProjects.length > 0 && (
               <div className="pt-5">
-                <div className="bg-main-gradient w-full h-px max-w-250 mx-auto mb-6" />
+                <div className="bg-section-gradient-animated w-full h-px max-w-250 mx-auto mb-6" />
                 <ProjectPreviewList list={filteredProjects} />
               </div>
             )}

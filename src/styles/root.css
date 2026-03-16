@@ -123,6 +123,17 @@
   }
 }
 
+@keyframes portfolio-reveal {
+  0% {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @layer utilities {
   .font-title {
     font-family: var(--font-wadik), sans-serif;
@@ -170,8 +181,16 @@
     will-change: background-position;
   }
 
+  .animate-portfolio-reveal {
+    animation: portfolio-reveal 800ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .bg-section-gradient-animated {
+      animation: none;
+    }
+
+    .animate-portfolio-reveal {
       animation: none;
     }
   }

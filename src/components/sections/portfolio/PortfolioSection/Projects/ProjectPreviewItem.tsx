@@ -5,21 +5,22 @@ interface ProjectPreviewItemProps {
   image: string;
   title: string;
   platforms: string[];
+  className?: string;
 }
 
-const ProjectPreviewItem = ({ image, title, platforms }: ProjectPreviewItemProps) => {
+const ProjectPreviewItem = ({ image, title, platforms, className = '' }: ProjectPreviewItemProps) => {
   return (
-    <li className="group w-full max-w-[320px]">
+    <li className={`group w-full max-w-[320px] ${className}`}>
       <div
-        className="relative mb-4 w-full aspect-square overflow-hidden
-        rounded-secondary"
+        className="relative mb-4 w-full aspect-square overflow-hidden rounded-secondary
+        bg-gray7/60 p-2 md:p-3"
       >
         <Image
           src={image}
           alt={title}
           sizes="320px"
           fill
-          className="object-contain rounded-secondary group-hover:scale-105 duration-main
+          className="object-contain object-center rounded-secondary p-2 group-hover:scale-[1.03] duration-main
             will-change-transform"
         />
       </div>
