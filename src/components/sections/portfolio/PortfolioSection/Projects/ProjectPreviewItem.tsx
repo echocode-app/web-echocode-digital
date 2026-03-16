@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { normalizeTitle } from '../utils/normalize-title';
 
 interface ProjectPreviewItemProps {
   image: string;
@@ -19,7 +20,9 @@ const ProjectPreviewItem = ({ image, title, platforms }: ProjectPreviewItemProps
             will-change-transform"
         />
       </div>
-      <h3 className="mb-1 font-wadik text-title-sm  pointer-events-none">{title}</h3>
+      <h3 className="mb-1 font-wadik text-title-sm  pointer-events-none">
+        {normalizeTitle(title)}
+      </h3>
       {platforms && (
         <ul className="flex gap-2">
           {platforms.map((item, i) => (
