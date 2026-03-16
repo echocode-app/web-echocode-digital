@@ -24,7 +24,7 @@ export const PORTFOLIO_CATEGORY_OPTIONS = [
   { value: 'igaming', label: 'iGaming' },
   { value: 'health', label: 'Health & Well-being' },
   { value: 'education', label: 'Education' },
-  { value: 'everyday', label: 'Everyday Use' },
+  { value: 'everyday', label: 'Lifestyle' },
   { value: 'creative', label: 'Creative' },
   { value: 'travel', label: 'Travel' },
 ] as const;
