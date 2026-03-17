@@ -52,7 +52,7 @@ const LanguageSwitcher = () => {
       </button>
 
       <div
-        className={`absolute top-full right-2 pt-2 w-15 z-10 transition-all duration-main
+        className={`relative md:absolute  top-0 md:top-full -right-2.5 md:right-2.5 pt-2 w-15 z-10 transition-all duration-main
     ${open ? 'translate-y-0 pointer-events-auto' : '-translate-y-2 pointer-events-none'}
     xl:group-hover:translate-y-0 xl:group-hover:pointer-events-auto`}
       >
@@ -67,7 +67,7 @@ const LanguageSwitcher = () => {
               key={lng}
               type="button"
               onClick={() => handleChangeLocale(lng as Locale)}
-              className={`w-full py-2 text-center uppercase font-wadik text-main-xs
+              className={`w-full py-2 text-center uppercase font-wadik text-[10px] sm:text-title-xs
                 cursor-pointer rounded-secondary duration-main
                 hover:bg-accent
                 ${lng === locale ? 'bg-accent' : ''}`}
