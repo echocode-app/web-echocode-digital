@@ -20,6 +20,11 @@ const VISUAL_GAP = 18;
 const roundStyleValue = (value: number) => Number(value.toFixed(3));
 const gaussianFalloff = (distance: number, sigma: number) =>
   Math.exp(-((distance * distance) / (2 * sigma * sigma)));
+const isSafariUserAgent = (userAgent: string) =>
+  /Safari/i.test(userAgent) &&
+  !/Chrome|Chromium|CriOS|Edg|EdgiOS|OPR|Opera|FxiOS|Firefox|SamsungBrowser|Android/i.test(
+    userAgent,
+  );
 
 export function usePartnersCarousel(list: Partner[]) {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -27,7 +32,16 @@ export function usePartnersCarousel(list: Partner[]) {
   const [offset, setOffset] = useState(0);
   const [singleTrackWidth, setSingleTrackWidth] = useState(0);
   const [containerWidth, setContainerWidth] = useState(0);
+  const [isSafari, setIsSafari] = useState(false);
   const tripledList = useMemo(() => [...list, ...list, ...list], [list]);
+
+  useEffect(() => {
+    const frameId = window.requestAnimationFrame(() => {
+      setIsSafari(isSafariUserAgent(window.navigator.userAgent));
+    });
+
+    return () => window.cancelAnimationFrame(frameId);
+  }, []);
 
   useEffect(() => {
     const track = trackRef.current;
@@ -85,6 +99,7 @@ export function usePartnersCarousel(list: Partner[]) {
   const isDesktop = containerWidth >= 1024;
   const isTablet = containerWidth >= 768;
   const isMobile = containerWidth < 768;
+  const isFlatCarousel = isMobile || isSafari;
   // Slot spacing between cards per breakpoint
   const gap = isDesktop ? 20 : isTablet ? 14 : 10;
   const slotWidth = ITEM_WIDTH + gap;
@@ -108,12 +123,12 @@ export function usePartnersCarousel(list: Partner[]) {
     const distance = Math.abs(centerX - itemCenter);
     // Gaussian falloff gives a smoother carousel arc than a hard local ramp.
     const easedEmphasis = gaussianFalloff(distance, sigma);
-    const dynamicScale = isMobile ? 1 : BASE_SCALE + easedEmphasis * scaleBoost;
-    const computedSlotWidth = isMobile
+    const dynamicScale = isFlatCarousel ? 1 : BASE_SCALE + easedEmphasis * scaleBoost;
+    const computedSlotWidth = isFlatCarousel
       ? ITEM_WIDTH + VISUAL_GAP
       : ITEM_WIDTH + ITEM_WIDTH * (dynamicScale - 1) + VISUAL_GAP;
-    const computedOpacity = isMobile ? 1 : BASE_OPACITY + easedEmphasis * opacityBoost;
-    const computedYOffset = isMobile ? 0 : (1 - easedEmphasis) * arcLift;
+    const computedOpacity = isFlatCarousel ? 1 : BASE_OPACITY + easedEmphasis * opacityBoost;
+    const computedYOffset = isFlatCarousel ? 0 : (1 - easedEmphasis) * arcLift;
 
     return {
       ...item,
