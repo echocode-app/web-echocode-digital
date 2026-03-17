@@ -2,6 +2,7 @@ import type { SourcePerformanceDto } from '@/server/admin/dashboard/dashboard.ty
 import type { DateRange } from '@/server/admin/dashboard/dashboard.repository.core';
 import type { SiteId } from '@/server/sites/siteContext';
 import {
+  isUploadInitAnalyticsEvent,
   normalizeSafeNumber,
   percentage,
   scanAnalyticsEventsByTypeInRange,
@@ -55,22 +56,44 @@ export async function getSourcePerformance(
   const sourceStats = new Map<string, SourceStats>();
 
   await Promise.all([
-    scanAnalyticsEventsByTypeInRange('page_view', last30Days, (data) => {
-      const source = extractTrafficSourceLabel(data.metadata);
-      addSourceStats(sourceStats, source, { pageViews: 1 });
-    }, options),
-    scanAnalyticsEventsByTypeInRange('submit_project', last30Days, (data) => {
-      const source = extractTrafficSourceLabel(data.metadata);
-      addSourceStats(sourceStats, source, { projectLeads: 1 });
-    }, options),
-    scanAnalyticsEventsByTypeInRange('submit_vacancy', last30Days, (data) => {
-      const source = extractTrafficSourceLabel(data.metadata);
-      addSourceStats(sourceStats, source, { vacancyLeads: 1 });
-    }, options),
-    scanAnalyticsEventsByTypeInRange('apply_vacancy', last30Days, (data) => {
-      const source = extractTrafficSourceLabel(data.metadata);
-      addSourceStats(sourceStats, source, { vacancyLeads: 1 });
-    }, options),
+    scanAnalyticsEventsByTypeInRange(
+      'page_view',
+      last30Days,
+      (data) => {
+        const source = extractTrafficSourceLabel(data.metadata);
+        addSourceStats(sourceStats, source, { pageViews: 1 });
+      },
+      options,
+    ),
+    scanAnalyticsEventsByTypeInRange(
+      'submit_project',
+      last30Days,
+      (data) => {
+        if (isUploadInitAnalyticsEvent(data)) return;
+        const source = extractTrafficSourceLabel(data.metadata);
+        addSourceStats(sourceStats, source, { projectLeads: 1 });
+      },
+      options,
+    ),
+    scanAnalyticsEventsByTypeInRange(
+      'submit_vacancy',
+      last30Days,
+      (data) => {
+        if (isUploadInitAnalyticsEvent(data)) return;
+        const source = extractTrafficSourceLabel(data.metadata);
+        addSourceStats(sourceStats, source, { vacancyLeads: 1 });
+      },
+      options,
+    ),
+    scanAnalyticsEventsByTypeInRange(
+      'apply_vacancy',
+      last30Days,
+      (data) => {
+        const source = extractTrafficSourceLabel(data.metadata);
+        addSourceStats(sourceStats, source, { vacancyLeads: 1 });
+      },
+      options,
+    ),
   ]);
 
   return sortTopSources(sourceStats);

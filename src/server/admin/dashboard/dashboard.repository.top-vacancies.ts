@@ -4,7 +4,10 @@ import { isLocalhostAnalyticsEvent } from '@/server/analytics/analytics.localhos
 import { ApiError } from '@/server/lib/errors';
 import type { TopVacancyPointDto } from '@/server/admin/dashboard/dashboard.types';
 import type { DateRange } from '@/server/admin/dashboard/dashboard.repository.core';
-import { normalizeSafeNumber } from '@/server/admin/dashboard/dashboard.repository.core';
+import {
+  isUploadInitAnalyticsEvent,
+  normalizeSafeNumber,
+} from '@/server/admin/dashboard/dashboard.repository.core';
 import {
   DashboardEntityEventDoc,
   extractVacancyKey,
@@ -44,6 +47,7 @@ export async function getTopVacancies(last30DaysRange: DateRange): Promise<TopVa
     for (const doc of snapshot.docs) {
       const data = doc.data() as DashboardEntityEventDoc;
       if (isLocalhostAnalyticsEvent(data)) continue;
+      if (isUploadInitAnalyticsEvent(data)) continue;
       const vacancyKey = extractVacancyKey(data.metadata);
       if (!vacancyKey) continue;
 

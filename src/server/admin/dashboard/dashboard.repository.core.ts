@@ -77,6 +77,15 @@ export function normalizeSafeRate(value: number): number {
   return Number(value.toFixed(2));
 }
 
+export function isUploadInitAnalyticsEvent(record: Record<string, unknown>): boolean {
+  const metadata = record.metadata;
+  if (!metadata || typeof metadata !== 'object' || Array.isArray(metadata)) {
+    return false;
+  }
+
+  return (metadata as Record<string, unknown>).stage === 'upload_init';
+}
+
 export function percentage(numerator: number, denominator: number): number {
   if (denominator <= 0 || numerator <= 0) return 0;
   return normalizeSafeRate((numerator / denominator) * 100);
@@ -114,13 +123,24 @@ export async function countAnalyticsEventInRange(
   range: DateRange,
   options: { siteId?: SiteId } = {},
 ): Promise<number> {
-  if (eventType === 'page_view') {
+  if (
+    eventType === 'page_view' ||
+    eventType === 'submit_project' ||
+    eventType === 'submit_vacancy' ||
+    eventType === 'apply_vacancy'
+  ) {
     let count = 0;
 
     await scanAnalyticsEventsByTypeInRange(
-      'page_view',
+      eventType,
       range,
-      () => {
+      (data) => {
+        if (
+          (eventType === 'submit_project' || eventType === 'submit_vacancy') &&
+          isUploadInitAnalyticsEvent(data)
+        ) {
+          return;
+        }
         count += 1;
       },
       options,
