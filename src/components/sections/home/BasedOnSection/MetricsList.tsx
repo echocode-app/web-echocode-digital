@@ -35,7 +35,7 @@ const MetricsList = () => {
             <div className="w-8.75">
               <Counter to={14} />
             </div>
-            <span className={`block text-title-2xl text-white ${unitFontClass}`}>
+            <span className={`block text-title-2xl text-white uppercase ${unitFontClass}`}>
               {t('prototypeTimeUnit')}
             </span>
           </div>
