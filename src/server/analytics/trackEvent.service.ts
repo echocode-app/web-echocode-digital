@@ -2,6 +2,10 @@ import { FieldValue } from 'firebase-admin/firestore';
 import { getFirestoreDb } from '@/server/firebase/firestore';
 import { logger } from '@/server/lib/logger';
 import { resolveEventAttribution } from '@/server/analytics/attribution';
+import {
+  resolveAnalyticsRuntimeHost,
+  shouldSkipLocalhostAnalytics,
+} from '@/server/analytics/analytics.localhost';
 import { resolveRequestSiteContext, type SiteId } from '@/server/sites/siteContext';
 
 export type AnalyticsEventType =
@@ -134,6 +138,21 @@ function withPageViewAttribution(
 }
 
 export async function trackEvent(input: TrackEventInput): Promise<void> {
+  if (
+    shouldSkipLocalhostAnalytics({
+      headers: input.headers,
+      explicitSiteHost: input.siteHost,
+      metadata: input.metadata,
+    })
+  ) {
+    return;
+  }
+
+  const runtimeHost = resolveAnalyticsRuntimeHost({
+    headers: input.headers,
+    explicitSiteHost: input.siteHost,
+    metadata: input.metadata,
+  });
   const safeMetadata = toSafeMetadata(input.metadata);
   const siteContext = resolveRequestSiteContext({
     headers: input.headers,
@@ -147,7 +166,15 @@ export async function trackEvent(input: TrackEventInput): Promise<void> {
     siteId: siteContext.siteId,
     siteHost: siteContext.siteHost,
     country: extractCountry(input.headers),
-    metadata: withPageViewAttribution(input.eventType, safeMetadata, input),
+    metadata: withPageViewAttribution(
+      input.eventType,
+      {
+        ...safeMetadata,
+        ...(runtimeHost ? { runtimeHost } : {}),
+        isLocalhost: false,
+      },
+      input,
+    ),
     timestamp: FieldValue.serverTimestamp(),
   };
 

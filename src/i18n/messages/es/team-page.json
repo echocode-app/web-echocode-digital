@@ -24,7 +24,7 @@
       }
     },
     "StepsSection": {
-      "subtitle": "Tu producto es creado por personas que ya han lanzado — y fallado — antes.",
+      "subtitle": "Tu producto es desarrollado por un equipo con experiencia comprobada en entregas end-to-end.",
       "stepsList": {
         "step01": { "title": "Lanzaron apps con millones de usuarios" },
         "step02": { "title": "Superaron rechazos de App Store y cumplimiento complejo" },

@@ -26,7 +26,7 @@
       }
     },
     "StepsSection": {
-      "subtitle": "Your product is built by people who have already shipped — and failed — before.",
+      "subtitle": "Your product is built by a team with a proven track record of end-to-end delivery.",
       "stepsList": {
         "step01": { "title": "Launched apps with millions of users" },
         "step02": { "title": "Survived App Store rejections and complex compliance" },

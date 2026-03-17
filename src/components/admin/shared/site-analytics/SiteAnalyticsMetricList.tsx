@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import WidgetHeader from '@/components/admin/dashboard/ui/WidgetHeader';
 
 type SiteAnalyticsMetricListItem = {
@@ -10,7 +11,8 @@ type SiteAnalyticsMetricListProps<TItem extends SiteAnalyticsMetricListItem> = {
   info: string;
   items: readonly TItem[];
   emptyMessage: string;
-  renderLabel: (item: TItem) => string;
+  renderLabel: (item: TItem) => ReactNode;
+  getItemKey?: (item: TItem, index: number) => string;
   itemsClassName?: string;
 };
 
@@ -20,6 +22,7 @@ export default function SiteAnalyticsMetricList<TItem extends SiteAnalyticsMetri
   items,
   emptyMessage,
   renderLabel,
+  getItemKey,
   itemsClassName,
 }: SiteAnalyticsMetricListProps<TItem>) {
   return (
@@ -33,9 +36,9 @@ export default function SiteAnalyticsMetricList<TItem extends SiteAnalyticsMetri
         <p className="mt-4 font-main text-main-sm text-gray60">{emptyMessage}</p>
       ) : (
         <div className={itemsClassName ?? 'mt-4 space-y-3'}>
-          {items.map((item) => (
+          {items.map((item, index) => (
             <div
-              key={`${renderLabel(item)}-${item.views}`}
+              key={getItemKey?.(item, index) ?? `${index}-${item.views}-${item.sharePct}`}
               className="flex flex-col gap-2 rounded-(--radius-secondary) 
               border border-gray16 bg-gray7/60 px-3 py-3 
               sm:flex-row sm:items-start sm:justify-between sm:gap-4"

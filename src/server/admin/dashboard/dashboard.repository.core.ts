@@ -1,5 +1,6 @@
 import { Timestamp } from 'firebase-admin/firestore';
 import { getFirestoreDb } from '@/server/firebase/firestore';
+import { isLocalhostAnalyticsEvent } from '@/server/analytics/analytics.localhost';
 import { ApiError } from '@/server/lib/errors';
 import {
   addAdminDays,
@@ -113,6 +114,21 @@ export async function countAnalyticsEventInRange(
   range: DateRange,
   options: { siteId?: SiteId } = {},
 ): Promise<number> {
+  if (eventType === 'page_view') {
+    let count = 0;
+
+    await scanAnalyticsEventsByTypeInRange(
+      'page_view',
+      range,
+      () => {
+        count += 1;
+      },
+      options,
+    );
+
+    return normalizeSafeNumber(count);
+  }
+
   const firestore = getFirestoreDb();
 
   let query: FirebaseFirestore.Query = firestore
@@ -263,7 +279,11 @@ export async function scanAnalyticsEventsByTypeInRange(
 
     if (snapshot.empty) break;
 
-    snapshot.docs.forEach((doc) => onDoc(doc.data() as Record<string, unknown>));
+    snapshot.docs.forEach((doc) => {
+      const data = doc.data() as Record<string, unknown>;
+      if (isLocalhostAnalyticsEvent(data)) return;
+      onDoc(data);
+    });
     cursor = snapshot.docs[snapshot.docs.length - 1] ?? null;
 
     if (snapshot.size < EVENT_PAGE_SIZE) break;

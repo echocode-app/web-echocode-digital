@@ -24,6 +24,8 @@ export type GeographyChartRow = {
   colorIndex: number;
 };
 
+const SENSITIVE_COUNTRY_LABELS = new Set(['russia', 'belarus']);
+
 export function resolveCountryLabel(countryCode: string): string {
   if (countryCode === 'Unknown') {
     return 'Unknown';
@@ -34,6 +36,10 @@ export function resolveCountryLabel(countryCode: string): string {
   }
 
   return countryCode;
+}
+
+export function isSensitiveCountryLabel(label: string): boolean {
+  return SENSITIVE_COUNTRY_LABELS.has(label.trim().toLowerCase());
 }
 
 export function buildGeographyChartRows(
@@ -50,7 +56,8 @@ export function buildGeographyChartRows(
     label: resolveCountryLabel(item.country),
     views: item.views,
     sharePct: item.sharePct,
-    color: GEOGRAPHY_CHART_COLORS[index % GEOGRAPHY_CHART_COLORS.length] ?? GEOGRAPHY_CHART_COLORS[0],
+    color:
+      GEOGRAPHY_CHART_COLORS[index % GEOGRAPHY_CHART_COLORS.length] ?? GEOGRAPHY_CHART_COLORS[0],
     colorIndex: index % GEOGRAPHY_CHART_COLORS.length,
   }));
 
@@ -60,7 +67,8 @@ export function buildGeographyChartRows(
       label: 'Other',
       views: restViews,
       sharePct: Number(restPct.toFixed(2)),
-      color: GEOGRAPHY_CHART_COLORS[GEOGRAPHY_CHART_COLORS.length - 1] ?? 'rgba(148, 163, 184, 0.9)',
+      color:
+        GEOGRAPHY_CHART_COLORS[GEOGRAPHY_CHART_COLORS.length - 1] ?? 'rgba(148, 163, 184, 0.9)',
       colorIndex: GEOGRAPHY_CHART_COLORS.length - 1,
     });
   }

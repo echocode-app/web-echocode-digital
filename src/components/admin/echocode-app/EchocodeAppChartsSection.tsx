@@ -2,6 +2,7 @@
 
 import dynamic from 'next/dynamic';
 import { useMemo, useState } from 'react';
+import AdminCountryLabel from '@/components/admin/dashboard/geography/AdminCountryLabel';
 import { ChartPanel } from '@/components/admin/dashboard/DashboardPanels';
 import type { GeographyChartRow } from '@/components/admin/dashboard/geography/geography.utils';
 import CompactPeriodSwitch from '@/components/admin/ui/CompactPeriodSwitch';
@@ -58,7 +59,9 @@ function ChartLegend({ rows, emptyMessage }: { rows: GeographyChartRow[]; emptyM
             <span
               className={`inline-block h-2.5 w-2.5 rounded-full ${DOT_COLOR_CLASS[row.colorIndex] ?? DOT_COLOR_CLASS[0]}`}
             />
-            <p className="truncate font-main text-main-xs text-gray75">{row.label}</p>
+            <p className="truncate font-main text-main-xs text-gray75">
+              <AdminCountryLabel label={row.label} />
+            </p>
           </div>
           <p className="font-main text-main-xs text-gray60">
             {formatInt(row.views)} ({row.sharePct.toFixed(2)}%)
@@ -135,7 +138,9 @@ function FullBreakdownList({
               <span
                 className={`inline-block h-2.5 w-2.5 rounded-full ${DOT_COLOR_CLASS[row.colorIndex] ?? DOT_COLOR_CLASS[0]}`}
               />
-              <p className="truncate font-main text-main-xs text-gray75">{row.label}</p>
+              <p className="truncate font-main text-main-xs text-gray75">
+                <AdminCountryLabel label={row.label} />
+              </p>
             </div>
             <p className="shrink-0 font-main text-main-xs text-gray60">
               {formatInt(row.views)} ({row.sharePct.toFixed(2)}%)

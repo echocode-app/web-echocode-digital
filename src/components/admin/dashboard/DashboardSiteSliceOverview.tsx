@@ -1,12 +1,14 @@
 'use client';
 
+'use client';
+
+import AdminCountryLabel from '@/components/admin/dashboard/geography/AdminCountryLabel';
 import { resolveCountryLabel } from '@/components/admin/dashboard/geography/geography.utils';
 import SkeletonCard from '@/components/admin/SkeletonCard';
 import SubmissionsKpiCard from '@/components/admin/submissions/SubmissionsKpiCard';
 import SiteAnalyticsMetricList from '@/components/admin/shared/site-analytics/SiteAnalyticsMetricList';
 import { useDashboardSiteSliceOverview } from '@/components/admin/dashboard/useDashboardSiteSliceOverview';
 import type { DashboardPeriod } from '@/server/admin/dashboard/dashboard.types';
-
 export default function DashboardSiteSliceOverview({
   period,
   enabled,
@@ -77,13 +79,15 @@ export default function DashboardSiteSliceOverview({
           items={topPages}
           emptyMessage="No page views recorded for this period."
           renderLabel={(item) => item.path}
+          getItemKey={(item) => item.path}
         />
         <SiteAnalyticsMetricList
           title="Geography"
           info="Country distribution detected server-side from proxy headers on incoming page-view requests."
           items={countries}
           emptyMessage="No country data recorded yet."
-          renderLabel={(item) => resolveCountryLabel(item.country)}
+          renderLabel={(item) => <AdminCountryLabel label={resolveCountryLabel(item.country)} />}
+          getItemKey={(item) => item.country}
           itemsClassName="mt-4 grid gap-3 sm:grid-cols-2"
         />
       </div>

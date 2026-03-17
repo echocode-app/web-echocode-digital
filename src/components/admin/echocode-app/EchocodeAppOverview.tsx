@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import AdminCountryLabel from '@/components/admin/dashboard/geography/AdminCountryLabel';
 import InfoTooltip from '@/components/admin/dashboard/ui/InfoTooltip';
 import { resolveCountryLabel } from '@/components/admin/dashboard/geography/geography.utils';
 import SkeletonCard from '@/components/admin/SkeletonCard';
@@ -98,6 +99,7 @@ export default function EchocodeAppOverview() {
           items={topPages}
           emptyMessage="No page views recorded for this period."
           renderLabel={(item) => item.path}
+          getItemKey={(item) => item.path}
         />
         <EchocodeAppMetricList
           title="Referrers / UTM"
@@ -105,6 +107,7 @@ export default function EchocodeAppOverview() {
           items={referrers}
           emptyMessage="No attribution or referrer data recorded yet."
           renderLabel={(item) => item.label}
+          getItemKey={(item, index) => `${item.label}-${index}`}
         />
       </div>
 
@@ -114,7 +117,8 @@ export default function EchocodeAppOverview() {
           info="Country distribution detected server-side from proxy headers on incoming page-view requests."
           items={countries}
           emptyMessage="No country data recorded yet."
-          renderLabel={(item) => resolveCountryLabel(item.country)}
+          renderLabel={(item) => <AdminCountryLabel label={resolveCountryLabel(item.country)} />}
+          getItemKey={(item) => item.country}
           itemsClassName="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4"
         />
       </div>
