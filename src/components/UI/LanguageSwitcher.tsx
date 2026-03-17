@@ -5,11 +5,14 @@ import { Locale, useLocale } from 'next-intl';
 import { useTransition, useState } from 'react';
 import { changeLocaleAction } from '@/i18n/set-locale';
 import { locales } from '@/i18n/config';
+import { useLockBodyScroll } from '@/hooks/useLockBodyScroll';
 
 const LanguageSwitcher = () => {
   const locale = useLocale() as Locale;
   const [isPending, startTransition] = useTransition();
   const [open, setOpen] = useState(false);
+
+  useLockBodyScroll(open);
 
   const handleChangeLocale = (nextLocale: Locale) => {
     if (nextLocale === locale) {
@@ -31,7 +34,7 @@ const LanguageSwitcher = () => {
         disabled={isPending}
         className={`flex items-center gap-2 px-3 py-1.5 w-20 shadow-main
           border-accent border-2 rounded-primary cursor-pointer
-          duration-main disabled:opacity-50 z-20 relative group-hover:bg-accent
+          duration-main z-20 relative group-hover:bg-accent
           ${open ? 'bg-accent' : ''}
           `}
       >
@@ -40,7 +43,8 @@ const LanguageSwitcher = () => {
         </span>
         <span className="relative w-6 h-4 flex items-center justify-center">
           <span
-            className={`absolute transition-opacity duration-200 font-wadik text-[10px] sm:text-title-xs uppercase ${isPending ? 'opacity-0' : 'opacity-100'}`}
+            className={`absolute transition-opacity duration-200 font-wadik text-[10px] sm:text-title-xs uppercase 
+              ${isPending ? 'opacity-0' : 'opacity-100'}`}
           >
             {locale}
           </span>
