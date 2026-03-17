@@ -84,6 +84,7 @@ export function usePartnersCarousel(list: Partner[]) {
 
   const isDesktop = containerWidth >= 1024;
   const isTablet = containerWidth >= 768;
+  const isMobile = containerWidth < 768;
   // Slot spacing between cards per breakpoint
   const gap = isDesktop ? 20 : isTablet ? 14 : 10;
   const slotWidth = ITEM_WIDTH + gap;
@@ -107,16 +108,20 @@ export function usePartnersCarousel(list: Partner[]) {
     const distance = Math.abs(centerX - itemCenter);
     // Gaussian falloff gives a smoother carousel arc than a hard local ramp.
     const easedEmphasis = gaussianFalloff(distance, sigma);
+    const dynamicScale = isMobile ? 1 : BASE_SCALE + easedEmphasis * scaleBoost;
+    const computedSlotWidth = isMobile
+      ? ITEM_WIDTH + VISUAL_GAP
+      : ITEM_WIDTH + ITEM_WIDTH * (dynamicScale - 1) + VISUAL_GAP;
+    const computedOpacity = isMobile ? 1 : BASE_OPACITY + easedEmphasis * opacityBoost;
+    const computedYOffset = isMobile ? 0 : (1 - easedEmphasis) * arcLift;
 
     return {
       ...item,
       key: `${item.desc}-${index}`,
-      dynamicScale: roundStyleValue(BASE_SCALE + easedEmphasis * scaleBoost),
-      slotWidth: roundStyleValue(
-        ITEM_WIDTH + ITEM_WIDTH * (BASE_SCALE + easedEmphasis * scaleBoost - 1) + VISUAL_GAP,
-      ),
-      opacity: roundStyleValue(BASE_OPACITY + easedEmphasis * opacityBoost),
-      yOffset: roundStyleValue((1 - easedEmphasis) * arcLift),
+      dynamicScale: roundStyleValue(dynamicScale),
+      slotWidth: roundStyleValue(computedSlotWidth),
+      opacity: roundStyleValue(computedOpacity),
+      yOffset: roundStyleValue(computedYOffset),
     };
   });
 
