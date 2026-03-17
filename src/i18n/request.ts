@@ -1,12 +1,10 @@
 import { cookies } from 'next/headers';
 import { getRequestConfig } from 'next-intl/server';
+import { cache } from 'react';
 
 import { defaultLocale } from './config';
 
-export default getRequestConfig(async (params) => {
-  const store = await cookies();
-  const locale = params.locale || store.get('locale')?.value || defaultLocale;
-
+const loadMessages = cache(async (locale: string) => {
   const paths = [
     'homePage.json',
     'layout.json',
@@ -34,17 +32,23 @@ export default getRequestConfig(async (params) => {
 
   const results = await Promise.allSettled(
     paths.map((path) =>
-      import(`./messages/${locale}/${path}`).catch(() => {
-        // console.warn(`⚠️ Missing locale "${locale}" → fallback to "${defaultLocale}" for ${path}`);
-        return import(`./messages/${defaultLocale}/${path}`);
-      }),
+      import(`./messages/${locale}/${path}`).catch(
+        () => import(`./messages/${defaultLocale}/${path}`),
+      ),
     ),
   );
 
-  const messages = Object.assign(
+  return Object.assign(
     {},
     ...results.filter((r) => r.status === 'fulfilled').map((r) => r.value.default),
   );
+});
+
+export default getRequestConfig(async (params) => {
+  const store = await cookies();
+  const locale = params.locale || store.get('locale')?.value || defaultLocale;
+
+  const messages = await loadMessages(locale);
 
   return {
     locale,
