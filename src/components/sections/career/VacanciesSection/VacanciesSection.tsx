@@ -1,9 +1,13 @@
+import { Suspense } from 'react';
+
 import SectionContainer from '@/components/UI/section/SectionContainer';
 import SectionGradientLine from '@/components/UI/section/SectionGradientLine';
+import VacanciesLoader from '@/components/UI/loaders/VacanciesLoader';
 import VacanciesList from './VacanciesList';
-import NotFound from './NotFound';
-import { listPublicVacancies } from '@/server/vacancies';
 import VacanciesTitle from './VacanciesTitle';
+import NotFound from './NotFound';
+
+import { listPublicVacancies } from '@/server/vacancies';
 
 const VacanciesSection = async () => {
   const vacancies = await listPublicVacancies();
@@ -16,7 +20,9 @@ const VacanciesSection = async () => {
         <div className="mx-auto w-fit mb-10">
           <VacanciesTitle />
         </div>
-        {isEmpty ? <NotFound /> : <VacanciesList list={vacancies} />}
+        <Suspense fallback={<VacanciesLoader />}>
+          {isEmpty ? <NotFound /> : <VacanciesList list={vacancies} />}
+        </Suspense>
       </SectionContainer>
     </section>
   );

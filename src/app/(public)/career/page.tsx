@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import { Suspense } from 'react';
 
 import BasedOnCareerSection from '@/components/sections/career/BasedOnCareerSection';
 import HeroSection from '@/components/sections/career/HeroSection';
@@ -23,9 +22,7 @@ const Career = () => {
       <HeroSection />
       <StaticGradientLine />
       <BasedOnCareerSection />
-      <Suspense fallback={null}>
-        <VacanciesSection />
-      </Suspense>
+      <VacanciesSection />
     </>
   );
 };
