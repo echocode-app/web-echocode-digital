@@ -43,7 +43,7 @@ const LanguageSwitcher = () => {
         </span>
         <span className="relative w-6 h-4 flex items-center justify-center">
           <span
-            className={`absolute transition-opacity duration-200 font-wadik text-[10px] sm:text-title-xs uppercase 
+            className={`absolute transition-opacity duration-main font-wadik text-[10px] sm:text-title-xs uppercase 
               ${isPending ? 'opacity-0' : 'opacity-100'}`}
           >
             {locale}
@@ -55,7 +55,7 @@ const LanguageSwitcher = () => {
       </button>
 
       <div
-        className={`absolute top-full right-2 pt-2 w-15 transition-all duration-200 z-10
+        className={`absolute top-full right-2 pt-2 w-15 transition-all duration-main z-10
           ${open ? 'opacity-100 pointer-events-auto translate-y-0' : 'opacity-0 pointer-events-none -translate-y-2'}
           xl:group-hover:opacity-100 xl:group-hover:pointer-events-auto xl:group-hover:translate-y-0`}
       >
