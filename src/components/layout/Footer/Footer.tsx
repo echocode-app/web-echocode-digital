@@ -3,9 +3,9 @@ import { useTranslations } from 'next-intl';
 import FooterNavigation from './FooterNavigation';
 
 import License from './License';
-import MailForm from './MailForm';
 
 import ContactUsFullBtn from './ContactUsFullBtn';
+import MailFormWrapper from './MailForm/MailFormWrapper.';
 
 const Footer = () => {
   const t = useTranslations('Layout.Footer');
@@ -23,7 +23,7 @@ const Footer = () => {
           {t('mailTitle')}
         </strong>
 
-        <MailForm />
+        <MailFormWrapper />
         <FooterNavigation />
         <License />
       </div>
