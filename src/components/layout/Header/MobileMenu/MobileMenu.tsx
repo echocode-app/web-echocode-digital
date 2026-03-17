@@ -72,7 +72,7 @@ const MobileMenu = () => {
           isOpenDropdown={isOpenDropdown}
           setIsOpenDropdown={setIsOpenDropdown}
         />
-        <div className="mt-8 flex justify-end">
+        <div className="mt-8 flex justify-start">
           <LanguageSwitcher />
         </div>
       </div>
