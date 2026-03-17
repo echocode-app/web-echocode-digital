@@ -16,14 +16,14 @@ const YourNeedsInput = ({ value, error, disabled, onBlur, onChange }: YourNeedsI
       <label
         htmlFor="needs"
         className=" absolute top-2 left-4
-       text-[10px] font-main text-white border-white font-bold uppercase"
+       text-[10px] font-title text-white border-white font-bold uppercase"
       >
         {t('needsLabel')}
       </label>
-      <input
-        type="text"
+      <textarea
         id="needs"
         name="needs"
+        rows={2}
         placeholder={t('needsPlaceholder')}
         value={value}
         onChange={(event) => onChange(event.target.value)}
@@ -31,10 +31,10 @@ const YourNeedsInput = ({ value, error, disabled, onBlur, onChange }: YourNeedsI
         disabled={disabled}
         aria-label="About your needs"
         title="About your needs"
-        aria-invalid={error ? 'true' : 'false'}
-        className="block pt-6.5 pb-2 pl-4 pr-6 border rounded-secondary leading-3.5 w-full
+        aria-invalid={error ? true : undefined}
+        className="block min-h-2 max-h-56 resize-y overflow-y-auto pt-6.5 pb-1 pl-4 pr-6 border rounded-secondary leading-3.5 w-full
          hover:border-accent focus:border-accent duration-main transition-colors
-       outline-0 text-main-xs font-main text-white placeholder:text-primary-gray  border-white"
+       outline-0 text-main-xs font-main text-white placeholder:text-primary-gray border-white"
       />
       <div className="pointer-events-none absolute left-1 top-[calc(100%+4px)] h-4 overflow-hidden">
         <p

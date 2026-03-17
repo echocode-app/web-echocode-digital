@@ -4,6 +4,22 @@
 
 Це marketing website + admin panel для Echocode.
 
+## 1.1. Корисні посилання
+
+### Основний новий `.digital` сайт
+
+- Vercel preview: [https://echocode-newsite.vercel.app/](https://echocode-newsite.vercel.app/)
+- Figma макет: [Corporate IT Website Design](https://www.figma.com/design/y75RM6CagqVYqzYPk39VFz/Corporate-IT-Website-Design?node-id=30-2&p=f&t=Y49XD9iLiNuS3adk-0)
+
+### Admin panel
+
+- Admin dashboard: [https://echocode-newsite.vercel.app/admin/dashboard](https://echocode-newsite.vercel.app/admin/dashboard)
+
+### Для довідки: старий `.app` сайт
+
+- Production: [https://www.echocode.app/](https://www.echocode.app/)
+- Figma макет: [Website UI Redesign](https://www.figma.com/design/ZBhqMLTAkyzeAveZziiPV9/Website-UI-Redesign?node-id=0-1&p=f&t=XtP6EtA5qxBqtvzE-0)
+
 У проєкті є 2 великі частини:
 
 - public website:
@@ -13,7 +29,7 @@
     - Web Development
     - Game Development
     - iGaming
-    - Design 
+    - Design
     - QA
   - portfolio
   - team
@@ -61,6 +77,7 @@
 - мова перемикається через `LanguageSwitcher`
 - частина typography / text sizing адаптується під locale
 - `html lang` змінюється відповідно до активної мови
+- там, де `Wadik` не підтримує потрібні символи або конкретну мову, за домовленістю з командою використовується `Rubik`
 
 ### Що перевіряти QA
 
@@ -140,6 +157,73 @@
 - success submit
 - error handling
 
+## 5.1. Реалізовані validation rules для submit forms
+
+Нижче коротко описано те, що вже реалізовано в коді. QA варто перевіряти саме ці сценарії.
+
+### Contact modal / client project form
+
+- `firstName`
+  - required
+  - trim
+  - мінімум `2` символи
+  - максимум `40` символів
+  - дозволені тільки:
+    - літери
+    - пробіли
+    - апостроф
+    - дефіс
+- `lastName`
+  - required
+  - ті самі правила, що і для `firstName`
+- `email`
+  - required
+  - trim
+  - валідний email format
+  - максимум `120` символів
+- `description / about your needs`
+  - optional
+  - trim
+  - максимум `2000` символів
+- attachment file
+  - optional
+  - перевіряється MIME type
+  - перевіряється size
+  - файл не може бути порожнім
+
+### Footer email form
+
+- email required
+- trim
+- мінімум `3` символи
+- максимум `30` символів
+- має бути валідний email format
+- має проходити basic domain pattern check
+
+### Vacancy candidate form
+
+- `profileUrl`
+  - required
+  - trim
+  - валідний URL
+  - максимум `2048` символів
+  - URL має починатися з `http://` або `https://`
+- `cvFile`
+  - required
+  - перевіряється file name
+  - перевіряється MIME type
+  - перевіряється file size
+  - перевіряється safe storage path
+
+### Що QA варто перевіряти по validation behavior
+
+- помилка показується для порожнього required field
+- помилка зникає після вводу валідного значення
+- trim працює коректно
+- submit не проходить з invalid даними
+- submit проходить з valid даними
+- loading / success / error states не ламають форму
+
 ## 6. Принцип фільтрації в проєкті
 
 ### Public website
@@ -206,7 +290,35 @@ QA не обов'язково тестувати API через Postman. Для 
 - form fields не вилазять за контейнер
 - footer layout
 
-## 8. Що перевіряти на public website
+## 8. Зовнішні сервіси для перевірки
+
+### Основний
+
+- [PageSpeed Insights](https://pagespeed.web.dev/)
+
+Очікування:
+
+- бажано `80+` по основних score
+- без критичних важливих помилок
+- особливо звертати увагу на:
+  - performance
+  - accessibility
+  - best practices
+  - SEO
+
+### Додатково
+
+- [W3C HTML Validator](https://validator.w3.org/)
+- [W3C CSS Validator](https://jigsaw.w3.org/css-validator/)
+- [WAVE Accessibility Checker](https://wave.webaim.org/)
+- [Broken Link Checker](https://www.brokenlinkcheck.com/broken-links.php)
+
+Примітка:
+
+- modern CSS tooling може давати noise у CSS validator
+- критичніше звертати увагу на реальні HTML structure issues, accessibility issues, broken links та performance problems
+
+## 9. Що перевіряти на public website
 
 ### Загальна manual перевірка
 
@@ -232,7 +344,7 @@ QA не обов'язково тестувати API через Postman. Для 
 - vacancy candidate submit
 - not-found / error states якщо доступні
 
-## 9. Що перевіряти в admin, якщо є доступ
+## 10. Що перевіряти в admin, якщо є доступ
 
 ### Dashboard
 
@@ -271,7 +383,99 @@ QA не обов'язково тестувати API через Postman. Для 
 - submissions list відкривається
 - status flow та details працюють
 
-## 10. Мінімальний алгоритм тестування для QA
+## 11. Базовий ручний QA checklist
+
+### Cross-browser
+
+Перевірити хоча б:
+
+- Chrome
+- Safari
+- Firefox
+
+Особливо звертати увагу на:
+
+- video autoplay / fallback
+- hover / focus states
+- modal behavior
+- sticky / fixed elements
+- form submit states
+
+### Adaptive / responsive
+
+Перевірити:
+
+- mobile
+- tablet
+- desktop
+
+Що дивитися:
+
+- нічого не виїжджає за контейнер
+- немає горизонтального скролу без причини
+- картки / гріди / таблиці не ламаються
+- кнопки і поля доступні для тапу
+- sticky / fixed кнопки не перекривають важливий контент
+
+### Форми / submits
+
+Перевірити:
+
+- contact modal form
+- footer email form
+- vacancy candidate form
+
+Сценарії:
+
+- empty submit
+- invalid data
+- valid data
+- loading state
+- success state
+- error state
+- повторний submit / повторне відкриття форми
+
+### Контент і локалізація
+
+Перевірити:
+
+- localization на `en / ua / de / es`
+- відсутність змішування мов
+- відсутність grammar / typo mistakes
+- відсутність дивних машинних формулювань
+- правильні CTA тексти
+- відсутність обрізаних заголовків і кнопок
+
+### Console / runtime
+
+Перевірити:
+
+- відсутність runtime errors у console
+- відсутність hydration errors
+- відсутність масових warnings, які ламають UX
+
+### Навігація і посилання
+
+Перевірити:
+
+- header links
+- footer links
+- social links
+- CTA buttons
+- portfolio item links
+- prototype links
+- admin navigation
+
+### Accessibility basics
+
+Перевірити:
+
+- видимість focus states
+- логічний tab order
+- достатню контрастність
+- наявність alt / label там, де це критично
+
+## 12. Мінімальний алгоритм тестування для QA
 
 ### Раунд 1. Smoke check
 
@@ -312,7 +516,7 @@ QA не обов'язково тестувати API через Postman. Для 
 4. Перевірити status changes.
 5. Перевірити comments.
 
-## 11. Що важливо зафіксувати в bug report
+## 13. Що важливо зафіксувати в bug report
 
 - сторінка / URL
 - locale
@@ -323,15 +527,18 @@ QA не обов'язково тестувати API через Postman. Для 
 - screenshot / screen recording
 - якщо є: request URL, response status, console error
 
-## 12. Optional: що можна перевіряти через API
+## 14. Не обов'язково:
 
-За можливості можна перевірити API:
+- вручну тестувати API через Postman
+- аналізувати складні network payloads
+- перевіряти backend business logic на рівні запитів
+- дебажити Firebase / DB / server internals
 
-- `GET /api/health`
-- `POST /api/analytics/page-view`
-- `POST /api/forms/email-submissions`
-- `POST /api/forms/client-project`
-- `POST /api/forms/uploads/init`
-- `POST /api/forms/vacancy-submissions`
+Достатньо:
+
+- перевірити, що UI flow працює
+- submit реально проходить
+- немає visible errors
+- у DevTools немає явних `4xx / 5xx` або runtime crashes
 
 вдалого тестування ✊🏻
