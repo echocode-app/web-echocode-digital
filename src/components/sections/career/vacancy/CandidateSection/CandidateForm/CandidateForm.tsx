@@ -147,7 +147,7 @@ const CandidateForm = ({ vacancyData }: CandidateFormProps) => {
   return (
     <form onSubmit={handleSubmit} className="max-w-149.5 w-full">
       <strong className="block mb-2 text-main-sm font-medium">{t('subtitle')}</strong>
-      <div className="mb-4">
+      <div className="mb-5">
         <input type="file" ref={fileRef} className="hidden" onChange={handleFileChange} />
         <button
           type="button"
@@ -167,13 +167,13 @@ const CandidateForm = ({ vacancyData }: CandidateFormProps) => {
             </span>
           </div>
           {(fileErrors.length > 0 || errors.cvFile) && (
-            <p className="absolute top-12.75 left-4 text-red-500 text-[10px]">
+            <p className="absolute top-13 left-4 text-red-500 text-[10px]">
               {translateError(fileErrors[0]) || translateError(errors.cvFile)}
             </p>
           )}
         </button>
       </div>
-      <div className="relative mb-4">
+      <div className="relative mb-5">
         <Image
           src="/UI/chain.svg"
           alt="Link"
@@ -222,7 +222,7 @@ const CandidateForm = ({ vacancyData }: CandidateFormProps) => {
           }}
         />
         {errors.profileUrl && (
-          <p className="absolute top-12 left-4 text-red-500 text-[10px] mt-1">
+          <p className="absolute top-12.5 left-4 text-red-500 text-[10px] mt-1">
             {translateError(errors.profileUrl)}
           </p>
         )}
