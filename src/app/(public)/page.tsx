@@ -1,4 +1,5 @@
 import AnimationLine from '@/components/UI/AnimationLine';
+import SectionFirstReveal from '@/components/UI/section/SectionFirstReveal';
 import BasedOnSection from '@/components/sections/home/BasedOnSection';
 import DirectionSection from '@/components/sections/home/DirectionsSection';
 import HeroSection from '@/components/sections/home/HeroSection';
@@ -10,14 +11,28 @@ import ServicesSection from '@/components/sections/home/ServicesSection';
 const HomePage = () => {
   return (
     <>
-      <HeroSection />
+      <SectionFirstReveal>
+        <HeroSection />
+      </SectionFirstReveal>
       <AnimationLine />
-      <BasedOnSection />
-      <DirectionSection />
-      <ServicesSection />
-      <PortfolioSection />
-      <PartnersSection />
-      <LocationSection />
+      <SectionFirstReveal>
+        <BasedOnSection />
+      </SectionFirstReveal>
+      <SectionFirstReveal>
+        <DirectionSection />
+      </SectionFirstReveal>
+      <SectionFirstReveal>
+        <ServicesSection />
+      </SectionFirstReveal>
+      <SectionFirstReveal>
+        <PortfolioSection />
+      </SectionFirstReveal>
+      <SectionFirstReveal>
+        <PartnersSection />
+      </SectionFirstReveal>
+      <SectionFirstReveal>
+        <LocationSection />
+      </SectionFirstReveal>
     </>
   );
 };

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import SectionFirstReveal from '@/components/UI/section/SectionFirstReveal';
 import HeroSection from '@/components/sections/portfolio/HeroSection';
 import PortfolioSection from '@/components/sections/portfolio/PortfolioSection';
 import StaticGradientLine from '@/components/UI/StaticGradientLine';
@@ -22,9 +23,13 @@ const Portfolio = async ({ searchParams }: SearchParamsProps) => {
   const projectsFilter = await searchParams;
   return (
     <>
-      <HeroSection />
+      <SectionFirstReveal>
+        <HeroSection />
+      </SectionFirstReveal>
       <StaticGradientLine />
-      <PortfolioSection projectsFilter={projectsFilter} />
+      <SectionFirstReveal>
+        <PortfolioSection projectsFilter={projectsFilter} />
+      </SectionFirstReveal>
     </>
   );
 };

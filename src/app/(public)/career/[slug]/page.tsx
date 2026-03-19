@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
+import SectionFirstReveal from '@/components/UI/section/SectionFirstReveal';
 import StaticGradientLine from '@/components/UI/StaticGradientLine';
 import handleStaticVacancy from '@/components/sections/career/vacancy/utils/handleStaticVacancy';
 import HeroSection from '@/components/sections/career/vacancy/HeroSection';
@@ -60,23 +61,33 @@ const VacancyPage = async ({ params }: VacancyPageProps) => {
 
   return (
     <>
-      <HeroSection
-        image={heroSection.image}
-        title={vacancyTitle}
-        level={level}
-        employmentType={employmentType}
-      />
+      <SectionFirstReveal>
+        <HeroSection
+          image={heroSection.image}
+          title={vacancyTitle}
+          level={level}
+          employmentType={employmentType}
+        />
+      </SectionFirstReveal>
       <StaticGradientLine />
-      <ValueSection
-        title={valueSection.title}
-        subtitle={valueSection.subtitle}
-        translateKey={translateKey}
-      />
+      <SectionFirstReveal>
+        <ValueSection
+          title={valueSection.title}
+          subtitle={valueSection.subtitle}
+          translateKey={translateKey}
+        />
+      </SectionFirstReveal>
       {descriptionSections.map(({ title, values }, i) => (
-        <DescriptionSections key={i} title={title} values={values} translateKey={translateKey} />
+        <SectionFirstReveal key={i}>
+          <DescriptionSections title={title} values={values} translateKey={translateKey} />
+        </SectionFirstReveal>
       ))}
-      <SelectionSection selectionList={selectionSection} translateKey={translateKey} />
-      <CandidateSection vacancyData={vacancyData} />
+      <SectionFirstReveal>
+        <SelectionSection selectionList={selectionSection} translateKey={translateKey} />
+      </SectionFirstReveal>
+      <SectionFirstReveal>
+        <CandidateSection vacancyData={vacancyData} />
+      </SectionFirstReveal>
     </>
   );
 };

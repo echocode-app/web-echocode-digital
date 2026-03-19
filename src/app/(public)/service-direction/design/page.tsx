@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import SectionFirstReveal from '@/components/UI/section/SectionFirstReveal';
 import ExcellenceSection from '@/components/sections/directions/design/ExcellenceSection';
 import HeroSection from '@/components/sections/directions/design/HeroSection';
 import MetricsSection from '@/components/sections/directions/design/MetricsSection';
@@ -20,12 +21,22 @@ export async function generateMetadata(): Promise<Metadata> {
 const Design = () => {
   return (
     <>
-      <HeroSection />
+      <SectionFirstReveal>
+        <HeroSection />
+      </SectionFirstReveal>
       <StaticGradientLine />
-      <PhilosophySection />
-      <ExcellenceSection />
-      <SpecializationSection />
-      <MetricsSection />
+      <SectionFirstReveal>
+        <PhilosophySection />
+      </SectionFirstReveal>
+      <SectionFirstReveal>
+        <ExcellenceSection />
+      </SectionFirstReveal>
+      <SectionFirstReveal>
+        <SpecializationSection />
+      </SectionFirstReveal>
+      <SectionFirstReveal>
+        <MetricsSection />
+      </SectionFirstReveal>
     </>
   );
 };

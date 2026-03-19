@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { useTranslations } from 'next-intl';
 
+import SectionFirstReveal from '@/components/UI/section/SectionFirstReveal';
 import { AboutSectionECommerse } from '@/components/sections/portfolio/project/AboutSection';
 import { ImplementationSection } from '@/components/sections/portfolio/project/ImplementationSection';
 import ChallengesSection from '@/components/sections/portfolio/project/ChallengesSection';
@@ -32,46 +33,64 @@ const ECommers = () => {
 
   return (
     <>
-      <section className="pt-42 pb-37.5">
-        <h1 className="text-title-3xl md:text-title-5xl lg:text-title-6xl font-wadik text-center uppercase">
-          E-commerce
-        </h1>
-      </section>
-      <AboutSectionECommerse />
-      <ImplementationSection
-        list={implementations}
-        subtitle={t('subtitle')}
-        translateKey="ImplementationECommerce"
-      />
-      <ChallengesSection
-        list={challenges}
-        image="/images/projects/e-commers/challenges.jpg"
-        position="0% 50%"
-        translateKey="ChallengesECommerce"
-      />
-      <PlanningSection
-        list={planning}
-        translateKey="PlanningECommerce"
-        image={'/images/projects/e-commers/planning.png'}
-        imageStyle="relative w-full max-w-157.5 aspect-157.5/139"
-      />
-      <FeaturesSection list={features} translateKey="FeaturesECommerce" />
-      <ScreensSection imagePath="/images/projects/e-commers/screens.png" />
-      <ProptotypeSection
-        translateKey="PrototypeECommerce"
-        leftBgImage={'/images/projects/e-commers/left-bg.png'}
-        rightBgImage={'/images/projects/e-commers/right-bg.png'}
-      >
-        <iframe
-          src="https://embed.figma.com/proto/8M2Etv0l9Hgs656uoInQmT/e-commerce?scaling=scale-down&content-scaling=fixed&page-id=0%3A1&node-id=0-8167&starting-point-node-id=0%3A8167&embed-host=share&hide-ui=1"
-          allowFullScreen
-          title="Interactive prototype of the E-commerce App"
-          width="354px"
-          height="797px"
-          className="scale-70 xl:scale-100"
+      <SectionFirstReveal>
+        <section className="pt-42 pb-37.5">
+          <h1 className="text-title-3xl md:text-title-5xl lg:text-title-6xl font-wadik text-center uppercase">
+            E-commerce
+          </h1>
+        </section>
+      </SectionFirstReveal>
+      <SectionFirstReveal>
+        <AboutSectionECommerse />
+      </SectionFirstReveal>
+      <SectionFirstReveal>
+        <ImplementationSection
+          list={implementations}
+          subtitle={t('subtitle')}
+          translateKey="ImplementationECommerce"
         />
-      </ProptotypeSection>
-      <TechnologySection list={technologies} translateKey="TechnologyECommerce" />
+      </SectionFirstReveal>
+      <SectionFirstReveal>
+        <ChallengesSection
+          list={challenges}
+          image="/images/projects/e-commers/challenges.jpg"
+          position="0% 50%"
+          translateKey="ChallengesECommerce"
+        />
+      </SectionFirstReveal>
+      <SectionFirstReveal>
+        <PlanningSection
+          list={planning}
+          translateKey="PlanningECommerce"
+          image={'/images/projects/e-commers/planning.png'}
+          imageStyle="relative w-full max-w-157.5 aspect-157.5/139"
+        />
+      </SectionFirstReveal>
+      <SectionFirstReveal>
+        <FeaturesSection list={features} translateKey="FeaturesECommerce" />
+      </SectionFirstReveal>
+      <SectionFirstReveal>
+        <ScreensSection imagePath="/images/projects/e-commers/screens.png" />
+      </SectionFirstReveal>
+      <SectionFirstReveal>
+        <ProptotypeSection
+          translateKey="PrototypeECommerce"
+          leftBgImage={'/images/projects/e-commers/left-bg.png'}
+          rightBgImage={'/images/projects/e-commers/right-bg.png'}
+        >
+          <iframe
+            src="https://embed.figma.com/proto/8M2Etv0l9Hgs656uoInQmT/e-commerce?scaling=scale-down&content-scaling=fixed&page-id=0%3A1&node-id=0-8167&starting-point-node-id=0%3A8167&embed-host=share&hide-ui=1"
+            allowFullScreen
+            title="Interactive prototype of the E-commerce App"
+            width="354px"
+            height="797px"
+            className="scale-70 xl:scale-100"
+          />
+        </ProptotypeSection>
+      </SectionFirstReveal>
+      <SectionFirstReveal>
+        <TechnologySection list={technologies} translateKey="TechnologyECommerce" />
+      </SectionFirstReveal>
     </>
   );
 };

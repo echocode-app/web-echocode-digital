@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import SectionFirstReveal from '@/components/UI/section/SectionFirstReveal';
 import HeroSection from '@/components/sections/directions/game/HeroSection';
 import SolutionSection from '@/components/sections/directions/game/SolutionSection';
 import UniversesSection from '@/components/sections/directions/game/UniversesSection';
@@ -18,10 +19,16 @@ export async function generateMetadata(): Promise<Metadata> {
 const GameDevelopment = () => {
   return (
     <>
-      <HeroSection />
+      <SectionFirstReveal>
+        <HeroSection />
+      </SectionFirstReveal>
       <StaticGradientLine />
-      <SolutionSection />
-      <UniversesSection />
+      <SectionFirstReveal>
+        <SolutionSection />
+      </SectionFirstReveal>
+      <SectionFirstReveal>
+        <UniversesSection />
+      </SectionFirstReveal>
     </>
   );
 };
