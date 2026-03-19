@@ -1,23 +1,28 @@
-import Image from 'next/image';
+'use client';
+
+import StaticHeroBackground from '@/components/UI/hero-background/StaticHeroBackground';
+import { locales } from '@/i18n/config';
+import dynamic from 'next/dynamic';
+import { usePathname } from 'next/navigation';
+
+const localeHomePaths = new Set(locales.map((locale) => `/${locale}`));
+const HomeHeroBackground = dynamic(
+  () => import('@/components/UI/hero-background/HomeHeroBackground'),
+  {
+    ssr: false,
+    loading: () => null,
+  },
+);
 
 const HeroBackground = () => {
-  return (
-    <div
-      className="absolute top-31 left-[50%] w-screen h-[48vh]
-       md:top-20 md:w-[70vw] md:h-[76vh] max-w-190 max-h-173.5
-    translate-x-[-50%] backdrop-blur-[10px] -z-10"
-    >
-      <div className="relative w-full h-full ">
-        <Image
-          src={'/UI/backgrounds/hero-bg.png'}
-          alt="bg"
-          priority
-          fill
-          className="object-cover"
-        />
-      </div>
-    </div>
-  );
+  const pathname = usePathname();
+  const isHomePage = pathname === '/' || (pathname ? localeHomePaths.has(pathname) : false);
+
+  if (isHomePage) {
+    return <HomeHeroBackground />;
+  }
+
+  return <StaticHeroBackground />;
 };
 
 export default HeroBackground;

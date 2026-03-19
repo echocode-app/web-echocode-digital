@@ -1,0 +1,158 @@
+@keyframes hero-orb-ambient {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(0.988);
+  }
+  50% {
+    opacity: 0.78;
+    transform: scale(1.018);
+  }
+}
+
+@keyframes hero-orb-reveal {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@layer components {
+  .hero-background-orb {
+    --hero-pointer-x: 50%;
+    --hero-pointer-y: 49%;
+    --hero-activation: 0.18;
+    --hero-cta-progress: 0;
+    --hero-shift-x: 0px;
+    --hero-shift-y: 0px;
+
+    pointer-events: none;
+    opacity: 0;
+    animation: hero-orb-reveal 480ms ease-out forwards;
+  }
+
+  .hero-background-orb__inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 999px;
+    overflow: hidden;
+    isolation: isolate;
+    backdrop-filter: blur(3px);
+    transform: translate3d(var(--hero-shift-x), var(--hero-shift-y), 0);
+    transition: transform 220ms ease-out;
+    mask-image: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 1) 58%,
+      rgba(255, 255, 255, 0.78) 67%,
+      rgba(255, 255, 255, 0.16) 74%,
+      transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 1) 58%,
+      rgba(255, 255, 255, 0.78) 67%,
+      rgba(255, 255, 255, 0.16) 74%,
+      transparent 100%
+    );
+  }
+
+  .hero-background-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .hero-background-svg--base {
+    color: rgba(255, 255, 255, 0.44);
+    opacity: calc(0.76 + var(--hero-activation) * 0.2);
+    filter: blur(0.04px);
+    transform: translate3d(var(--hero-shift-x), var(--hero-shift-y), 0)
+      scale(calc(1 + var(--hero-activation) * 0.03));
+    transform-origin: center;
+    transition:
+      transform 140ms ease-out,
+      opacity 120ms ease-out;
+    animation: hero-orb-ambient 4.2s ease-in-out infinite;
+  }
+
+  .hero-glyph {
+    transition:
+      fill 180ms ease,
+      stroke 180ms ease,
+      opacity 180ms ease;
+  }
+
+  .hero-glyph--stroke {
+    fill: rgb(255 255 255 / calc(var(--hero-cta-progress) * 0.82));
+  }
+
+  .hero-background-overlay {
+    position: absolute;
+    inset: 0;
+  }
+
+  .hero-background-glow,
+  .hero-background-ripple {
+    position: absolute;
+    inset: 8%;
+    border-radius: 999px;
+    pointer-events: none;
+  }
+
+  .hero-background-glow {
+    filter: blur(34px);
+    mix-blend-mode: screen;
+  }
+
+  .hero-background-glow--primary {
+    background: radial-gradient(
+      circle at 50% 47%,
+      rgba(255, 255, 255, 0.03) 0%,
+      rgba(255, 255, 255, 0.01) 18%,
+      transparent 38%
+    );
+  }
+
+  @media (max-width: 1023px) {
+    .hero-background-orb__inner {
+      transform: none;
+      transition: none;
+      mask-image: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 1) 0%,
+        rgba(255, 255, 255, 1) 76%,
+        rgba(255, 255, 255, 0.18) 86%,
+        transparent 100%
+      );
+      -webkit-mask-image: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 1) 0%,
+        rgba(255, 255, 255, 1) 76%,
+        rgba(255, 255, 255, 0.18) 86%,
+        transparent 100%
+      );
+    }
+
+    .hero-background-svg--base {
+      transform: none;
+      animation-duration: 5.2s;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-background-orb {
+      opacity: 1;
+      animation: none;
+    }
+
+    .hero-background-svg--base {
+      animation: none;
+    }
+  }
+}

@@ -12,6 +12,7 @@ const OrderLink = () => {
       href="/contact"
       scroll={false}
       onClick={rememberContactModalReturnPath}
+      data-hero-cta="true"
       className="
     block mx-auto w-fit px-4 py-2 md:px-6 
     font-title text-[8px] md:text-title-xs font-bold uppercase
