@@ -13,10 +13,14 @@ const PartnerList = ({ list }: PartnerListProps) => {
   const { containerRef, trackRef, items, trackStyle } = usePartnersCarousel(list);
 
   return (
-    <div ref={containerRef} className="relative overflow-hidden isolate">
+    <div
+      ref={containerRef}
+      className="relative overflow-hidden isolate"
+      style={{ contain: 'layout paint style' }}
+    >
       <ul
         ref={trackRef}
-        className="flex h-30 w-max items-center gap-0 will-change-transform"
+        className="flex h-30 w-max items-center gap-0 transform-gpu will-change-transform"
         style={trackStyle}
       >
         {items.map(({ key, dynamicScale, slotWidth, opacity, yOffset, ...item }) => (

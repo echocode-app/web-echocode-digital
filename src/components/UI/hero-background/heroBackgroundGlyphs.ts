@@ -12,11 +12,12 @@ export interface HeroBackgroundGlyph {
 
 const VIEWBOX_SIZE = 640;
 const CENTER = VIEWBOX_SIZE / 2;
-const MAX_RADIUS = 290;
+const MAX_RADIUS = 314;
 const STEP = 20;
-const EDGE_FADE_START = 0.78;
+const EDGE_FADE_START = 0.84;
 
 const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max);
+const roundGlyphValue = (value: number) => Number(value.toFixed(3));
 
 const createHeroBackgroundGlyphs = (): HeroBackgroundGlyph[] => {
   const glyphs: HeroBackgroundGlyph[] = [];
@@ -39,13 +40,15 @@ const createHeroBackgroundGlyphs = (): HeroBackgroundGlyph[] => {
       const seed = row * 37 + column * 17;
       const edgeFade =
         distanceRatio > EDGE_FADE_START ? 1 - (distanceRatio - EDGE_FADE_START) / 0.22 : 1;
-      const sizeJitter = ((seed % 11) - 5) * 0.16;
-      const size = clamp(3.2 + radialStrength * 1.68 + sizeJitter, 3.0, 5.6);
-      const opacity = clamp((0.2 + radialStrength * 0.24) * edgeFade, 0.14, 0.5);
+      const sizeJitter = ((seed % 11) - 5) * 0.24;
+      const size = roundGlyphValue(clamp(4.8 + radialStrength * 2.52 + sizeJitter, 4.5, 8.4));
+      const opacity = roundGlyphValue(
+        clamp((0.11 + radialStrength * 0.15) * edgeFade, 0.07, 0.28),
+      );
       const twinkleDelay = -((seed % 19) * 0.27);
-      const twinkleDuration = 2.2 + (seed % 9) * 0.19;
-      const twinkleBoost = 0.34 + (seed % 6) * 0.065;
-      const twinkleScale = 0.12 + (seed % 5) * 0.026;
+      const twinkleDuration = roundGlyphValue(2.2 + (seed % 9) * 0.19);
+      const twinkleBoost = roundGlyphValue(0.34 + (seed % 6) * 0.065);
+      const twinkleScale = roundGlyphValue(0.12 + (seed % 5) * 0.026);
 
       glyphs.push({
         id: `${row}-${column}`,

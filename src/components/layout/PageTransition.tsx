@@ -23,7 +23,7 @@ const PageTransition = ({ children }: PageTransitionProps) => {
     progress.set(0);
 
     const controls = animate(progress, 1, {
-      duration: 0.4,
+      duration: 0.55,
       ease: [0.2, 1, 0.3, 1],
     });
 

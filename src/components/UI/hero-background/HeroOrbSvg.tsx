@@ -25,15 +25,15 @@ const HeroOrbSvg = ({ className }: HeroOrbSvgProps) => {
               className="hero-glyph hero-glyph--dot"
               cx={glyph.x}
               cy={glyph.y}
-              r={glyph.size * 0.5}
+              r={(glyph.size * 0.5).toFixed(3)}
               fill="currentColor"
               style={
                 {
-                  '--glyph-base-opacity': glyph.opacity,
+                  '--glyph-base-opacity': `${glyph.opacity}`,
                   '--glyph-twinkle-delay': `${glyph.twinkleDelay}s`,
                   '--glyph-twinkle-duration': `${glyph.twinkleDuration}s`,
-                  '--glyph-twinkle-boost': glyph.twinkleBoost,
-                  '--glyph-twinkle-scale': glyph.twinkleScale,
+                  '--glyph-twinkle-boost': `${glyph.twinkleBoost}`,
+                  '--glyph-twinkle-scale': `${glyph.twinkleScale}`,
                 } as CSSProperties
               }
             />

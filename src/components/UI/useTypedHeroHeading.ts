@@ -20,6 +20,7 @@ type UseTypedHeroHeadingParams = {
 
 type UseTypedHeroHeadingResult = {
   displayedText: string;
+  hasStarted: boolean;
   isDesktop: boolean;
   isReducedMotion: boolean;
   isFinished: boolean;
@@ -31,6 +32,7 @@ export function useTypedHeroHeading({
   shouldSkipTyping,
 }: UseTypedHeroHeadingParams): UseTypedHeroHeadingResult {
   const [displayedText, setDisplayedText] = useState('');
+  const [hasStarted, setHasStarted] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
   const [isReducedMotion, setIsReducedMotion] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
@@ -47,6 +49,7 @@ export function useTypedHeroHeading({
 
     const finishTyping = () => {
       setDisplayedText(text);
+      setHasStarted(true);
       setIsFinished(true);
     };
 
@@ -68,6 +71,7 @@ export function useTypedHeroHeading({
       }
 
       setDisplayedText('');
+      setHasStarted(false);
       setIsFinished(false);
 
       if (reducedMotionMediaQuery.matches) {
@@ -79,6 +83,7 @@ export function useTypedHeroHeading({
       let delay = INITIAL_TYPING_DELAY_MS;
 
       const typeNextCharacter = () => {
+        setHasStarted(true);
         index += 1;
         setDisplayedText(text.slice(0, index));
 
@@ -94,11 +99,37 @@ export function useTypedHeroHeading({
       typingTimerRef.current = window.setTimeout(typeNextCharacter, INITIAL_DELAY_MS);
     };
 
+    const waitForStableLayout = async () => {
+      if (typeof document !== 'undefined' && 'fonts' in document) {
+        try {
+          await (document.fonts as FontFaceSet).ready;
+        } catch {}
+      }
+
+      await new Promise<void>((resolve) => {
+        window.requestAnimationFrame(() => {
+          window.requestAnimationFrame(() => resolve());
+        });
+      });
+    };
+
+    const prepareAndStartTyping = () => {
+      void waitForStableLayout().then(() => {
+        if (readVisitedFlag(visitedKey) || shouldSkipTyping) {
+          finishTyping();
+          return;
+        }
+
+        startTyping();
+      });
+    };
+
     const handleMediaChange = () => {
       syncMediaState();
 
       if (!desktopMediaQuery.matches) {
         clearTypingTimer();
+        setHasStarted(false);
         return;
       }
 
@@ -107,7 +138,7 @@ export function useTypedHeroHeading({
         return;
       }
 
-      startTyping();
+      prepareAndStartTyping();
     };
 
     syncMediaState();
@@ -115,7 +146,7 @@ export function useTypedHeroHeading({
     if (readVisitedFlag(visitedKey) || shouldSkipTyping) {
       finishTyping();
     } else if (desktopMediaQuery.matches) {
-      startTyping();
+      prepareAndStartTyping();
     }
 
     desktopMediaQuery.addEventListener('change', handleMediaChange);
@@ -130,6 +161,7 @@ export function useTypedHeroHeading({
 
   return {
     displayedText,
+    hasStarted,
     isDesktop,
     isReducedMotion,
     isFinished,

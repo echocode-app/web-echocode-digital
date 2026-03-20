@@ -28,9 +28,10 @@ const PartnerItem = ({
     >
       <div
         className="flex h-20 w-33 items-center justify-center rounded-secondary 
-        bg-gray7/90 backdrop-blur-[6px] 
-        transition-transform duration-200 ease-out will-change-transform"
+        bg-gray7/90 backdrop-blur-xs 
+        transform-gpu transition-transform duration-200 ease-out will-change-transform"
         style={{
+          contain: 'layout paint',
           transform: `translateY(${yOffset}px) scale(${dynamicScale})`,
           opacity,
           zIndex: Math.round(dynamicScale * 100),
