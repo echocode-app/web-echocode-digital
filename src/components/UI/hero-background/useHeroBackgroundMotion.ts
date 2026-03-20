@@ -21,6 +21,7 @@ export const useHeroBackgroundMotion = () => {
     const reducedMotionMediaQuery = window.matchMedia(REDUCED_MOTION_MEDIA_QUERY);
 
     let frameId = 0;
+    let measureFrameId = 0;
     let currentX = 50;
     let currentY = 49;
     let currentActivation = 0.18;
@@ -29,9 +30,29 @@ export const useHeroBackgroundMotion = () => {
     let targetY = currentY;
     let targetActivation = currentActivation;
     let targetCtaProgress = 0;
+    let heroRect = node.getBoundingClientRect();
+    let ctaRect: DOMRect | null = null;
 
     const shouldUseDesktopMotion = () =>
       desktopMediaQuery.matches && !reducedMotionMediaQuery.matches;
+
+    const updateRects = () => {
+      heroRect = node.getBoundingClientRect();
+      ctaRect =
+        document.querySelector<HTMLElement>('[data-hero-cta="true"]')?.getBoundingClientRect() ??
+        null;
+    };
+
+    const scheduleRectMeasurement = () => {
+      if (measureFrameId !== 0) {
+        return;
+      }
+
+      measureFrameId = window.requestAnimationFrame(() => {
+        measureFrameId = 0;
+        updateRects();
+      });
+    };
 
     const syncNodeState = () => {
       const shiftX = (currentX - 50) * 2.2;
@@ -88,21 +109,17 @@ export const useHeroBackgroundMotion = () => {
         return;
       }
 
-      const rect = node.getBoundingClientRect();
-
-      if (rect.width === 0 || rect.height === 0) {
+      if (heroRect.width === 0 || heroRect.height === 0) {
         return;
       }
 
       const expandedLeft = -window.innerWidth * 0.12;
       const expandedWidth = window.innerWidth * 1.24;
       const normalizedX = clamp((event.clientX - expandedLeft) / expandedWidth, 0.01, 0.99);
-      const normalizedY = clamp((event.clientY - rect.top) / rect.height, 0.08, 0.68);
+      const normalizedY = clamp((event.clientY - heroRect.top) / heroRect.height, 0.08, 0.68);
       const distanceFromCenter = Math.hypot(normalizedX - 0.5, normalizedY - 0.49);
-      const ctaNode = document.querySelector<HTMLElement>('[data-hero-cta="true"]');
-      const ctaRect = ctaNode?.getBoundingClientRect();
       const isInsideCta =
-        ctaRect !== undefined &&
+        ctaRect !== null &&
         event.clientX >= ctaRect.left &&
         event.clientX <= ctaRect.right &&
         event.clientY >= ctaRect.top &&
@@ -121,11 +138,9 @@ export const useHeroBackgroundMotion = () => {
         return;
       }
 
-      const rect = node.getBoundingClientRect();
-
       if (
-        event.clientY < rect.top ||
-        event.clientY > rect.bottom ||
+        event.clientY < heroRect.top ||
+        event.clientY > heroRect.bottom ||
         event.clientX < -window.innerWidth * 0.14 ||
         event.clientX > window.innerWidth * 1.14
       ) {
@@ -143,15 +158,19 @@ export const useHeroBackgroundMotion = () => {
     };
 
     const handleMediaChange = () => {
+      updateRects();
       resetMotion();
     };
 
+    updateRects();
     syncNodeState();
     resetMotion();
 
     window.addEventListener('pointermove', handleWindowPointerMove, { passive: true });
     window.addEventListener('pointerout', handleWindowPointerLeave);
     window.addEventListener('blur', resetMotion);
+    window.addEventListener('resize', scheduleRectMeasurement, { passive: true });
+    window.addEventListener('scroll', scheduleRectMeasurement, { passive: true });
     desktopMediaQuery.addEventListener('change', handleMediaChange);
     reducedMotionMediaQuery.addEventListener('change', handleMediaChange);
 
@@ -160,9 +179,15 @@ export const useHeroBackgroundMotion = () => {
         window.cancelAnimationFrame(frameId);
       }
 
+      if (measureFrameId !== 0) {
+        window.cancelAnimationFrame(measureFrameId);
+      }
+
       window.removeEventListener('pointermove', handleWindowPointerMove);
       window.removeEventListener('pointerout', handleWindowPointerLeave);
       window.removeEventListener('blur', resetMotion);
+      window.removeEventListener('resize', scheduleRectMeasurement);
+      window.removeEventListener('scroll', scheduleRectMeasurement);
       desktopMediaQuery.removeEventListener('change', handleMediaChange);
       reducedMotionMediaQuery.removeEventListener('change', handleMediaChange);
     };

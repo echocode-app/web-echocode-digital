@@ -1,3 +1,5 @@
+import type { CSSProperties } from 'react';
+
 import {
   HERO_BACKGROUND_GLYPHS,
   HERO_BACKGROUND_VIEWBOX_SIZE,
@@ -17,92 +19,23 @@ const HeroOrbSvg = ({ className }: HeroOrbSvgProps) => {
     >
       <g shapeRendering="geometricPrecision">
         {HERO_BACKGROUND_GLYPHS.map((glyph) => {
-          if (glyph.type === 'dot') {
-            return (
-              <circle
-                key={glyph.id}
-                className="hero-glyph hero-glyph--dot"
-                cx={glyph.x}
-                cy={glyph.y}
-                r={glyph.size * 0.34}
-                fill="currentColor"
-                opacity={glyph.opacity}
-              />
-            );
-          }
-
-          if (glyph.type === 'ring') {
-            return (
-              <circle
-                key={glyph.id}
-                className="hero-glyph hero-glyph--stroke"
-                cx={glyph.x}
-                cy={glyph.y}
-                r={glyph.size * 0.58}
-                fill="transparent"
-                stroke="currentColor"
-                strokeWidth={glyph.strokeWidth}
-                opacity={glyph.opacity}
-              />
-            );
-          }
-
-          if (glyph.type === 'square') {
-            const side = glyph.size * 0.92;
-
-            return (
-              <rect
-                key={glyph.id}
-                className="hero-glyph hero-glyph--stroke"
-                x={glyph.x - side / 2}
-                y={glyph.y - side / 2}
-                width={side}
-                height={side}
-                fill="transparent"
-                stroke="currentColor"
-                strokeWidth={glyph.strokeWidth}
-                opacity={glyph.opacity}
-              />
-            );
-          }
-
-          if (glyph.type === 'diamond') {
-            const side = glyph.size * 0.92;
-
-            return (
-              <rect
-                key={glyph.id}
-                className="hero-glyph hero-glyph--stroke"
-                x={glyph.x - side / 2}
-                y={glyph.y - side / 2}
-                width={side}
-                height={side}
-                fill="transparent"
-                stroke="currentColor"
-                strokeWidth={glyph.strokeWidth}
-                opacity={glyph.opacity}
-                transform={`rotate(45 ${glyph.x} ${glyph.y})`}
-              />
-            );
-          }
-
-          const triangleRadius = glyph.size * 0.72;
-          const topX = glyph.x;
-          const topY = glyph.y - triangleRadius;
-          const leftX = glyph.x - triangleRadius * 0.86;
-          const leftY = glyph.y + triangleRadius * 0.58;
-          const rightX = glyph.x + triangleRadius * 0.86;
-          const rightY = leftY;
-
           return (
-            <path
+            <circle
               key={glyph.id}
-              className="hero-glyph hero-glyph--stroke"
-              d={`M ${topX} ${topY} L ${rightX} ${rightY} L ${leftX} ${leftY} Z`}
-              fill="transparent"
-              stroke="currentColor"
-              strokeWidth={glyph.strokeWidth}
-              opacity={glyph.opacity}
+              className="hero-glyph hero-glyph--dot"
+              cx={glyph.x}
+              cy={glyph.y}
+              r={glyph.size * 0.5}
+              fill="currentColor"
+              style={
+                {
+                  '--glyph-base-opacity': glyph.opacity,
+                  '--glyph-twinkle-delay': `${glyph.twinkleDelay}s`,
+                  '--glyph-twinkle-duration': `${glyph.twinkleDuration}s`,
+                  '--glyph-twinkle-boost': glyph.twinkleBoost,
+                  '--glyph-twinkle-scale': glyph.twinkleScale,
+                } as CSSProperties
+              }
             />
           );
         })}
