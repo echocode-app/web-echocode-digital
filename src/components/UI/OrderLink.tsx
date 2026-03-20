@@ -24,6 +24,8 @@ const OrderLink = () => {
     after:transition-opacity after:duration-500 after:-z-10
     hover:after:opacity-100 
     shadow-[0_2.688px_25.061px_0_rgba(253,38,108,0.55)]
+ hover:[&::after]:animate-[section-gradient-drift_5s_ease-in-out_infinite]
+after:bg-size-[200%_200%]
   "
     >
       <span className="relative z-10">{t('orderButton')}</span>

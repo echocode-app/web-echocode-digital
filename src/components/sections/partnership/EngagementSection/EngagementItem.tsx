@@ -17,7 +17,11 @@ const EngagementItem = ({ title, desc, priority }: EngagementItemProps) => {
        overflow-hidden duration-main"
     >
       <div className="absolute inset-0 bg-main-border transition-opacity duration-main" />
-      <div className="absolute inset-0 bg-main-gradient opacity-0 group-hover:opacity-100 transition-opacity duration-main" />
+      <div
+        className="absolute inset-0 bg-main-gradient opacity-0 group-hover:opacity-100 transition-opacity duration-main 
+      
+      animate-[section-gradient-drift_5s_ease-in-out_infinite]  bg-size-[200%_200%]"
+      />
       <div className="absolute inset-0.5 bg-black rounded-[calc(var(--radius-secondary)-2px)] z-0" />
       <h3 className="font-title text-[20px] z-10 pointer-events-none uppercase font-bold">
         {t(title)}

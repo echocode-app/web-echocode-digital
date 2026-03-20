@@ -181,6 +181,14 @@
     will-change: background-position;
   }
 
+  .bg-main-gradient-animated {
+    background-image: var(--background-image-main-gradient);
+    background-size: 200% 200%;
+    background-position: 0% 50%;
+    animation: section-gradient-drift 5s ease-in-out infinite;
+    will-change: background-position;
+  }
+
   .animate-portfolio-reveal {
     animation: portfolio-reveal 800ms cubic-bezier(0.22, 1, 0.36, 1) both;
   }

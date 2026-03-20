@@ -6,12 +6,13 @@ import NavLink from './NavLink';
 export const navLinkBaseClass =
   'relative font-main uppercase ' +
   'bg-main-gradient bg-clip-text bg-transparent ' +
-  ' duration-main ' +
+  'transition-all duration-main ' +
   'group-hover:text-transparent group-hover:bg-clip-text group-hover:after:opacity-100 ' +
   'hover:text-transparent hover:bg-clip-text ' +
   'after:absolute after:left-0 after:-bottom-[-2px] after:h-px after:w-full ' +
   'after:bg-main-gradient after:opacity-0 after:transition-opacity ' +
-  'after:duration-main hover:after:opacity-100';
+  'after:duration-main hover:after:opacity-100 ' +
+  'after:[animation:section-gradient-drift_5s_ease-in-out_infinite]  after:bg-size-[200%_200%] [animation:section-gradient-drift_5s_ease-in-out_infinite]  bg-size-[200%_200%] ';
 
 const NavList = () => {
   const t = useTranslations('Layout.Header.navigation');

@@ -44,7 +44,7 @@ const VacanciesItem = ({
       </div>
       <Link
         href={`/career/${vacancySlug ? vacancySlug : vacancyId}`}
-        className="relative z-0 overflow-hidden mx-auto min-[490px]:mx-0 h-fit w-fit
+        className="relative z-0 overflow-hidden mx-auto min-[490px]:mx-0 h-fit w-fit animate-[section-gradient-drift_5s_ease-in-out_infinite]  bg-size-[200%_200%]
          font-wadik text-[10px] bg-main-gradient px-5.5 py-2 rounded-base uppercase duration-main hover:shadow-[0_2.688px_25.061px_0_rgba(253,38,108,0.55)]"
       >
         <span className="relative z-10 pointer-events-none">{t('applyBtn')}</span>
