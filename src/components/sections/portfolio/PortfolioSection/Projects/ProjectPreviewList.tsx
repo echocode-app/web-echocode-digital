@@ -19,7 +19,8 @@ const ProjectPreviewList = ({ list }: ProjectPreviewListProps) => {
         className="
        gap-5 gap-y-8 pt-5 w-full mx-auto grid grid-cols-1 justify-center justify-items-center
        min-[580px]:grid-cols-[repeat(2,minmax(320px,320px))]
-       md:grid-cols-[repeat(3,minmax(320px,320px))]"
+       md:grid-cols-[repeat(2,minmax(320px,320px))]
+       lg:grid-cols-[repeat(3,minmax(320px,320px))]"
       >
         {visibleItems.map((item) => (
           <ProjectPreviewItem key={item.id} {...item} className="animate-portfolio-reveal" />

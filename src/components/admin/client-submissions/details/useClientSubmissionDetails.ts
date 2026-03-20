@@ -1,13 +1,17 @@
 'use client';
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import type { ClientSubmissionCommentDto, ClientSubmissionStatus } from '@/server/forms/client-project/clientProject.types';
+import type {
+  ClientSubmissionCommentDto,
+  ClientSubmissionStatus,
+} from '@/server/forms/client-project/clientProject.types';
 import type { AdminToastState, AdminToastTone } from '@/components/admin/ui/AdminToast';
 import {
   addClientSubmissionComment,
   fetchClientSubmissionDetails,
   updateClientSubmissionStatus,
 } from '@/components/admin/client-submissions/shared/clientSubmissions.api';
+import { notifyClientSubmissionsOverviewRefresh } from '@/components/admin/client-submissions/useClientSubmissionsOverview';
 import { getAllowedStatusOptions } from '@/components/admin/client-submissions/shared/clientSubmissions.constants';
 import type {
   ClientSubmissionDetailsItemDto,
@@ -52,20 +56,24 @@ export function useClientSubmissionDetails(submissionId: string) {
     return `${details.firstName} ${details.lastName}`.trim() || 'Client submission';
   }, [details]);
 
-  const onStatusChange = useCallback(async (nextStatus: ClientSubmissionStatus) => {
-    if (!details) return;
-    setIsStatusSaving(true);
+  const onStatusChange = useCallback(
+    async (nextStatus: ClientSubmissionStatus) => {
+      if (!details) return;
+      setIsStatusSaving(true);
 
-    try {
-      await updateClientSubmissionStatus({ submissionId: details.id, status: nextStatus });
-      setDetails((prev) => (prev ? { ...prev, status: nextStatus } : prev));
-      showToast('success', `Status updated to "${nextStatus}".`);
-    } catch (error) {
-      showToast('error', error instanceof Error ? error.message : 'Unable to update status.');
-    } finally {
-      setIsStatusSaving(false);
-    }
-  }, [details, showToast]);
+      try {
+        await updateClientSubmissionStatus({ submissionId: details.id, status: nextStatus });
+        setDetails((prev) => (prev ? { ...prev, status: nextStatus } : prev));
+        notifyClientSubmissionsOverviewRefresh();
+        showToast('success', `Status updated to "${nextStatus}".`);
+      } catch (error) {
+        showToast('error', error instanceof Error ? error.message : 'Unable to update status.');
+      } finally {
+        setIsStatusSaving(false);
+      }
+    },
+    [details, showToast],
+  );
 
   const onAddComment = useCallback(async () => {
     if (!details) return;

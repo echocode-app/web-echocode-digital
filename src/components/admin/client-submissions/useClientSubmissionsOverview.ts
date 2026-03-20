@@ -3,11 +3,12 @@
 import { useCallback, useEffect, useState } from 'react';
 import type { ClientSubmissionsOverviewDto } from '@/server/forms/client-project/clientProject.types';
 import { getFirebaseClientAuth } from '@/lib/firebase/client';
+import { ADMIN_OVERVIEW_POLL_INTERVAL_MS } from '@/components/admin/shared/adminPolling';
 import { EMPTY_CLIENT_SUBMISSION_STATUS_COUNTS } from '@/shared/admin/constants';
 
 type LoadState = 'loading' | 'ready' | 'error';
 const CLIENT_SUBMISSIONS_OVERVIEW_REFRESH_EVENT = 'client-submissions:overview-refresh';
-const POLL_INTERVAL_MS = 15000;
+const POLL_INTERVAL_MS = ADMIN_OVERVIEW_POLL_INTERVAL_MS;
 const FALLBACK_OVERVIEW: ClientSubmissionsOverviewDto = {
   totals: {
     currentMonth: 0,
@@ -89,25 +90,15 @@ export function useClientSubmissionsOverview() {
 
   useEffect(() => {
     const onRefresh = () => setRefreshTick((prev) => prev + 1);
-    const onFocus = () => setRefreshTick((prev) => prev + 1);
-    const onVisibility = () => {
-      if (document.visibilityState === 'visible') {
-        setRefreshTick((prev) => prev + 1);
-      }
-    };
 
     const intervalId = window.setInterval(() => {
       setRefreshTick((prev) => prev + 1);
     }, POLL_INTERVAL_MS);
 
     window.addEventListener(CLIENT_SUBMISSIONS_OVERVIEW_REFRESH_EVENT, onRefresh);
-    window.addEventListener('focus', onFocus);
-    document.addEventListener('visibilitychange', onVisibility);
 
     return () => {
       window.removeEventListener(CLIENT_SUBMISSIONS_OVERVIEW_REFRESH_EVENT, onRefresh);
-      window.removeEventListener('focus', onFocus);
-      document.removeEventListener('visibilitychange', onVisibility);
       window.clearInterval(intervalId);
     };
   }, []);

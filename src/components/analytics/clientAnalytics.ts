@@ -1,10 +1,9 @@
 'use client';
 
 import { captureFirstTouchAttribution, getStoredAttribution } from '@/lib/analytics/utm';
+import { getClientSiteConfig } from '@/lib/site/clientSiteContext';
 
 const SESSION_STORAGE_KEY = 'echocode_client_session_id';
-const DEFAULT_SITE_ID = 'echocode_digital';
-const DEFAULT_SITE_HOST = 'www.echocode.digital';
 
 type ClientAnalyticsAttribution = {
   source: string;
@@ -20,13 +19,6 @@ type ClientAnalyticsContextPayload = {
 
 function createClientSessionId(): string {
   return `sess_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 10)}`;
-}
-
-function getClientSiteHost(): string {
-  if (typeof window === 'undefined') return DEFAULT_SITE_HOST;
-
-  const normalized = window.location.host.trim();
-  return normalized.length > 0 ? normalized : DEFAULT_SITE_HOST;
 }
 
 function getClientAttribution(): ClientAnalyticsAttribution | undefined {
@@ -55,10 +47,11 @@ export function getClientAnalyticsSessionId(): string {
 
 export function getClientAnalyticsContextPayload(): ClientAnalyticsContextPayload {
   const attribution = getClientAttribution();
+  const siteConfig = getClientSiteConfig();
 
   return {
-    siteId: DEFAULT_SITE_ID,
-    siteHost: getClientSiteHost(),
+    siteId: siteConfig.siteId,
+    siteHost: siteConfig.siteHost,
     ...(attribution ? { attribution } : {}),
   };
 }

@@ -26,9 +26,11 @@ import type {
   SoftDeleteClientSubmissionResponseDto,
   UpdateClientSubmissionStatusResponseDto,
 } from '@/server/forms/client-project/clientProject.types';
+import { readThroughTtlCache } from '@/server/lib/ttlCache';
 import { CLIENT_SUBMISSION_STATUS_VALUES } from '@/shared/admin/constants';
 
 const STATUS_OPTIONS = [...CLIENT_SUBMISSION_STATUS_VALUES] as const;
+const OVERVIEW_CACHE_TTL_MS = 20_000;
 
 function assertSupportedStatus(
   status: string,
@@ -70,7 +72,9 @@ export async function listAdminClientSubmissions(
 }
 
 export async function getAdminClientSubmissionsOverview(): Promise<ClientSubmissionsOverviewDto> {
-  return getClientSubmissionsOverview();
+  return readThroughTtlCache('admin:overview:client-submissions', OVERVIEW_CACHE_TTL_MS, () =>
+    getClientSubmissionsOverview(),
+  );
 }
 
 async function attachClientSubmissionReviewerProfile(

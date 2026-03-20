@@ -1,6 +1,11 @@
 import { getFirestoreDb } from '@/server/firebase/firestore';
 import { FieldValue, Timestamp } from 'firebase-admin/firestore';
 import { randomUUID } from 'node:crypto';
+import {
+  recordOverviewCreated,
+  recordOverviewDeleted,
+  recordOverviewStatusChanged,
+} from '@/server/admin/submissions/overviewStats.repository';
 import { ApiError } from '@/server/lib/errors';
 import {
   fromCreatedSubmissionSnapshot,
@@ -49,7 +54,17 @@ export async function createSubmissionRecord(
   try {
     await docRef.set(toSubmissionFirestoreCreateDoc(input));
     const snapshot = await docRef.get();
-    return fromCreatedSubmissionSnapshot(snapshot);
+    const created = fromCreatedSubmissionSnapshot(snapshot);
+
+    if (input.siteId === 'echocode_app') {
+      await recordOverviewCreated({
+        kind: 'echocode_app_submissions',
+        createdAt: created.createdAt.toDate(),
+        status: 'new',
+      }).catch(() => undefined);
+    }
+
+    return created;
   } catch (cause) {
     if (cause instanceof ApiError) throw cause;
 
@@ -61,9 +76,7 @@ export async function createSubmissionRecord(
   }
 }
 
-export async function updateSubmissionStatusRecord(
-  input: UpdateSubmissionStatusInput,
-): Promise<{
+export async function updateSubmissionStatusRecord(input: UpdateSubmissionStatusInput): Promise<{
   updated: UpdateSubmissionStatusResponseDto;
   previousStatus: SubmissionWorkflowStatus;
 }> {
@@ -85,6 +98,11 @@ export async function updateSubmissionStatusRecord(
     if (!previousStatus) {
       throw ApiError.fromCode('INTERNAL_ERROR', 'Submission status is invalid');
     }
+    const createdAt = existingData.createdAt;
+    if (!(createdAt instanceof Timestamp)) {
+      throw ApiError.fromCode('INTERNAL_ERROR', 'Submission createdAt is invalid');
+    }
+    const siteId = existingData.siteId;
 
     await docRef.update({
       status: input.status,
@@ -111,6 +129,15 @@ export async function updateSubmissionStatusRecord(
       );
     }
 
+    if (siteId === 'echocode_app') {
+      await recordOverviewStatusChanged({
+        kind: 'echocode_app_submissions',
+        createdAt: createdAt.toDate(),
+        previousStatus,
+        nextStatus: input.status,
+      }).catch(() => undefined);
+    }
+
     return {
       updated: {
         id: snapshot.id,
@@ -118,7 +145,8 @@ export async function updateSubmissionStatusRecord(
         updatedAt: timestampToIsoString(data.updatedAt),
         updatedBy: typeof data.updatedBy === 'string' ? data.updatedBy : null,
         reviewedBy: typeof data.reviewedBy === 'string' ? data.reviewedBy : null,
-        reviewedAt: data.reviewedAt instanceof Timestamp ? timestampToIsoString(data.reviewedAt) : null,
+        reviewedAt:
+          data.reviewedAt instanceof Timestamp ? timestampToIsoString(data.reviewedAt) : null,
       },
       previousStatus,
     };
@@ -233,6 +261,13 @@ export async function softDeleteSubmissionRecord(
     if (!data || isDeletedSubmissionDoc(data)) {
       throw ApiError.fromCode('BAD_REQUEST', `Submission "${input.submissionId}" not found`);
     }
+    const createdAt = data.createdAt;
+    const previousStatus = normalizeStoredSubmissionStatus(data.status) ?? 'new';
+    const siteId = data.siteId;
+
+    if (!(createdAt instanceof Timestamp)) {
+      throw ApiError.fromCode('INTERNAL_ERROR', 'Submission createdAt is invalid');
+    }
 
     await docRef.update({
       deletedBy: input.adminUid,
@@ -245,6 +280,14 @@ export async function softDeleteSubmissionRecord(
     const updatedData = updatedSnapshot.data();
     if (!updatedData || !(updatedData.updatedAt instanceof Timestamp)) {
       throw ApiError.fromCode('INTERNAL_ERROR', 'Updated submission payload is missing');
+    }
+
+    if (siteId === 'echocode_app') {
+      await recordOverviewDeleted({
+        kind: 'echocode_app_submissions',
+        createdAt: createdAt.toDate(),
+        status: previousStatus,
+      }).catch(() => undefined);
     }
 
     return {

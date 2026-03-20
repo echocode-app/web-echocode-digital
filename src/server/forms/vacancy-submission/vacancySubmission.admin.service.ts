@@ -31,6 +31,9 @@ import type {
   VacancySubmissionsListResponseDto,
   VacancySubmissionsOverviewDto,
 } from '@/server/forms/vacancy-submission/vacancySubmission.types';
+import { readThroughTtlCache } from '@/server/lib/ttlCache';
+
+const OVERVIEW_CACHE_TTL_MS = 20_000;
 
 export async function listAdminVacancySubmissions(
   query: VacancySubmissionListQueryInput,
@@ -65,7 +68,9 @@ export async function listAdminVacancySubmissions(
 }
 
 export async function getAdminVacancySubmissionsOverview(): Promise<VacancySubmissionsOverviewDto> {
-  return getVacancySubmissionsOverview();
+  return readThroughTtlCache('admin:overview:vacancy-submissions', OVERVIEW_CACHE_TTL_MS, () =>
+    getVacancySubmissionsOverview(),
+  );
 }
 
 async function attachVacancySubmissionCvUrl(

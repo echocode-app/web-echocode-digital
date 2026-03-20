@@ -1,5 +1,10 @@
 import { FieldPath, FieldValue, Timestamp } from 'firebase-admin/firestore';
 import { randomUUID } from 'node:crypto';
+import {
+  recordOverviewCreated,
+  recordOverviewDeleted,
+  recordOverviewStatusChanged,
+} from '@/server/admin/submissions/overviewStats.repository';
 import { getFirestoreDb } from '@/server/firebase/firestore';
 import { ApiError } from '@/server/lib/errors';
 import {
@@ -76,6 +81,12 @@ export async function createClientSubmissionRecord(input: {
     }
 
     assertTimestamp(data.createdAt, `client_submissions/${docRef.id}.createdAt`);
+
+    await recordOverviewCreated({
+      kind: 'client_submissions',
+      createdAt: data.createdAt.toDate(),
+      status: 'new',
+    }).catch(() => undefined);
 
     return {
       id: docRef.id,
@@ -327,6 +338,15 @@ export async function updateClientSubmissionStatus(input: {
     const reviewedAt = updatedData.reviewedAt;
     const reviewedAtIso = reviewedAt instanceof Timestamp ? toIso(reviewedAt) : null;
 
+    assertTimestamp(data.createdAt, `client_submissions/${input.submissionId}.createdAt`);
+
+    await recordOverviewStatusChanged({
+      kind: 'client_submissions',
+      createdAt: data.createdAt.toDate(),
+      previousStatus,
+      nextStatus: input.status,
+    }).catch(() => undefined);
+
     return {
       previousStatus,
       updated: {
@@ -369,6 +389,10 @@ export async function softDeleteClientSubmission(input: {
       throw ApiError.fromCode('BAD_REQUEST', 'Submission is already deleted');
     }
 
+    assertTimestamp(data.createdAt, `client_submissions/${input.submissionId}.createdAt`);
+    const deletedStatus =
+      typeof data.status === 'string' ? (data.status as ClientSubmissionStatus) : 'new';
+
     await docRef.update({
       isDeleted: true,
       deletedAt: FieldValue.serverTimestamp(),
@@ -383,6 +407,12 @@ export async function softDeleteClientSubmission(input: {
     }
 
     assertTimestamp(updatedData.updatedAt, `client_submissions/${input.submissionId}.updatedAt`);
+
+    await recordOverviewDeleted({
+      kind: 'client_submissions',
+      createdAt: data.createdAt.toDate(),
+      status: deletedStatus,
+    }).catch(() => undefined);
 
     return {
       id: input.submissionId,

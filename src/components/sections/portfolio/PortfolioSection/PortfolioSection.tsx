@@ -1,4 +1,5 @@
 import SectionContainer from '@/components/UI/section/SectionContainer';
+import SectionGradientLine from '@/components/UI/section/SectionGradientLine';
 import PortfolioFilter from './Filter/PlatformFilter';
 import ProjectList from './Projects/ProjectList';
 
@@ -41,7 +42,7 @@ const PortfolioSection = async ({ projectsFilter }: PortfolioSectionProps) => {
 
             {filteredProjects.length > 0 && (
               <div className="pt-5">
-                <div className="bg-section-gradient-animated w-full h-px max-w-250 mx-auto mb-6" />
+                <SectionGradientLine height="1" fullWidth />
                 <ProjectPreviewList list={filteredProjects} />
               </div>
             )}

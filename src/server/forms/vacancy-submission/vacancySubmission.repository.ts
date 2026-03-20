@@ -1,5 +1,10 @@
 import { FieldPath, FieldValue, Timestamp } from 'firebase-admin/firestore';
 import { randomUUID } from 'node:crypto';
+import {
+  recordOverviewCreated,
+  recordOverviewDeleted,
+  recordOverviewStatusChanged,
+} from '@/server/admin/submissions/overviewStats.repository';
 import { getFirestoreDb } from '@/server/firebase/firestore';
 import { ApiError } from '@/server/lib/errors';
 import {
@@ -73,6 +78,12 @@ export async function createVacancySubmissionRecord(input: {
     }
 
     assertTimestamp(data.createdAt, `vacancy_submissions/${docRef.id}.createdAt`);
+
+    await recordOverviewCreated({
+      kind: 'vacancy_submissions',
+      createdAt: data.createdAt.toDate(),
+      status: 'new',
+    }).catch(() => undefined);
 
     return {
       id: docRef.id,
@@ -324,7 +335,7 @@ export async function updateVacancySubmissionStatus(input: {
   const docRef = firestore.collection(VACANCY_SUBMISSIONS_COLLECTION).doc(input.submissionId);
 
   try {
-    return await firestore.runTransaction(async (tx) => {
+    const result = await firestore.runTransaction(async (tx) => {
       const snapshot = await tx.get(docRef);
       if (!snapshot.exists) {
         throw ApiError.fromCode(
@@ -343,6 +354,11 @@ export async function updateVacancySubmissionStatus(input: {
 
       const previousStatus = toModerationStatus(data.status);
       const now = Timestamp.now();
+      const createdAt = data.createdAt;
+
+      if (!(createdAt instanceof Timestamp)) {
+        throw ApiError.fromCode('INTERNAL_ERROR', 'Vacancy submission createdAt is invalid');
+      }
 
       tx.update(docRef, {
         status: input.status,
@@ -352,6 +368,7 @@ export async function updateVacancySubmissionStatus(input: {
       });
 
       return {
+        createdAt: createdAt.toDate(),
         previousStatus,
         updated: {
           id: snapshot.id,
@@ -362,6 +379,18 @@ export async function updateVacancySubmissionStatus(input: {
         },
       };
     });
+
+    await recordOverviewStatusChanged({
+      kind: 'vacancy_submissions',
+      createdAt: result.createdAt,
+      previousStatus: result.previousStatus,
+      nextStatus: input.status,
+    }).catch(() => undefined);
+
+    return {
+      previousStatus: result.previousStatus,
+      updated: result.updated,
+    };
   } catch (cause) {
     if (cause instanceof ApiError) throw cause;
     throw ApiError.fromCode('FIREBASE_UNAVAILABLE', 'Failed to update vacancy submission status', {
@@ -437,7 +466,7 @@ export async function softDeleteVacancySubmission(input: {
   const docRef = firestore.collection(VACANCY_SUBMISSIONS_COLLECTION).doc(input.submissionId);
 
   try {
-    return await firestore.runTransaction(async (tx) => {
+    const result = await firestore.runTransaction(async (tx) => {
       const snapshot = await tx.get(docRef);
       if (!snapshot.exists) {
         throw ApiError.fromCode(
@@ -455,6 +484,11 @@ export async function softDeleteVacancySubmission(input: {
       }
 
       const now = Timestamp.now();
+      const createdAt = data.createdAt;
+
+      if (!(createdAt instanceof Timestamp)) {
+        throw ApiError.fromCode('INTERNAL_ERROR', 'Vacancy submission createdAt is invalid');
+      }
 
       tx.update(docRef, {
         isDeleted: true,
@@ -464,11 +498,25 @@ export async function softDeleteVacancySubmission(input: {
       });
 
       return {
+        createdAt: createdAt.toDate(),
+        previousStatus: toModerationStatus(data.status),
         id: snapshot.id,
         isDeleted: true,
         updatedAt: toIso(now),
       };
     });
+
+    await recordOverviewDeleted({
+      kind: 'vacancy_submissions',
+      createdAt: result.createdAt,
+      status: result.previousStatus,
+    }).catch(() => undefined);
+
+    return {
+      id: result.id,
+      isDeleted: true,
+      updatedAt: result.updatedAt,
+    };
   } catch (cause) {
     if (cause instanceof ApiError) throw cause;
     throw ApiError.fromCode('FIREBASE_UNAVAILABLE', 'Failed to delete vacancy submission', {

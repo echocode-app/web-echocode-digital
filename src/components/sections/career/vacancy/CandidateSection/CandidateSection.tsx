@@ -1,4 +1,5 @@
 import { useTranslations } from 'next-intl';
+import SectionGradientLine from '@/components/UI/section/SectionGradientLine';
 import { VacancyData } from '../types/vacancy';
 import VacancyForm from './CandidateForm';
 import VacancyImage from './CandidateImage';
@@ -12,7 +13,7 @@ const CandidateSection = ({ vacancyData }: CandidateSectionProps) => {
 
   return (
     <section className="pb-10 md:pb-4.5">
-      <div className="mb-10 bg-main-gradient w-full max-w-305 mx-auto h-px" />
+      <SectionGradientLine height="1" fullWidth />
       <div
         className="relative max-w-318 px-8 mx-auto flex flex-col  xl:flex-row xl:justify-between 
       items-center xl:items-start gap-58 xl:gap-40"

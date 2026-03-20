@@ -9,6 +9,7 @@ import {
   fetchVacancyCandidateDetails,
   updateVacancyCandidateStatus,
 } from '@/components/admin/vacancy-candidates/shared/vacancyCandidates.api';
+import { notifyVacancyCandidatesOverviewRefresh } from '@/components/admin/vacancy-candidates/useVacancyCandidatesOverview';
 import { getAllowedStatusOptions } from '@/components/admin/client-submissions/shared/clientSubmissions.constants';
 import type {
   LoadState,
@@ -61,6 +62,7 @@ export function useVacancyCandidateDetails(submissionId: string) {
       try {
         await updateVacancyCandidateStatus({ submissionId: details.id, status: nextStatus });
         setDetails((prev) => (prev ? { ...prev, status: nextStatus } : prev));
+        notifyVacancyCandidatesOverviewRefresh();
         showToast('success', `Status updated to "${nextStatus}".`);
       } catch (error) {
         showToast('error', error instanceof Error ? error.message : 'Unable to update status.');

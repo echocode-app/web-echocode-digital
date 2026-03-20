@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { ADMIN_TABLE_POLL_INTERVAL_MS } from '@/components/admin/shared/adminPolling';
 import type { AdminToastState, AdminToastTone } from '@/components/admin/ui/AdminToast';
 import { getTodayIsoInAdminTimeZone } from '@/shared/time/europeKiev';
 
@@ -159,14 +160,10 @@ export function useModerationTableCore<
   useEffect(() => {
     const intervalId = window.setInterval(() => {
       setRefreshTick((prev) => prev + 1);
-    }, 30000);
-
-    const onFocus = () => setRefreshTick((prev) => prev + 1);
-    window.addEventListener('focus', onFocus);
+    }, ADMIN_TABLE_POLL_INTERVAL_MS);
 
     return () => {
       window.clearInterval(intervalId);
-      window.removeEventListener('focus', onFocus);
     };
   }, []);
 
