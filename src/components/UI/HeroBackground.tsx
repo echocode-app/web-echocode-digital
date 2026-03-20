@@ -1,21 +1,33 @@
 'use client';
 
+import DefaultHeroBackground from '@/components/UI/hero-background/DefaultHeroBackground';
 import HomeHeroBackground from '@/components/UI/hero-background/HomeHeroBackground';
-import StaticHeroBackground from '@/components/UI/hero-background/StaticHeroBackground';
+import { peekContactModalReturnPath } from '@/components/modals/ContactUsModal/contactModal.navigation';
 import { locales } from '@/i18n/config';
 import { usePathname } from 'next/navigation';
 
 const localeHomePaths = new Set(locales.map((locale) => `/${locale}`));
 
+const resolveBackgroundPathname = (pathname: string | null) => {
+  if (pathname !== '/contact' && pathname !== '/contact/success') {
+    return pathname ?? '/';
+  }
+
+  const returnPath = peekContactModalReturnPath()?.path;
+  return returnPath?.split('?')[0]?.split('#')[0] ?? '/';
+};
+
 const HeroBackground = () => {
   const pathname = usePathname();
-  const isHomePage = pathname === '/' || (pathname ? localeHomePaths.has(pathname) : false);
+  const resolvedPathname = resolveBackgroundPathname(pathname);
+  const isHomePage =
+    resolvedPathname === '/' || (resolvedPathname ? localeHomePaths.has(resolvedPathname) : false);
 
   if (isHomePage) {
     return <HomeHeroBackground />;
   }
 
-  return <StaticHeroBackground />;
+  return <DefaultHeroBackground />;
 };
 
 export default HeroBackground;

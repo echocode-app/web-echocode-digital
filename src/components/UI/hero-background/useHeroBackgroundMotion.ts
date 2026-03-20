@@ -7,7 +7,13 @@ const REDUCED_MOTION_MEDIA_QUERY = '(prefers-reduced-motion: reduce)';
 
 const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max);
 
-export const useHeroBackgroundMotion = () => {
+type UseHeroBackgroundMotionOptions = {
+  ctaSelector?: string;
+};
+
+export const useHeroBackgroundMotion = ({
+  ctaSelector = '[data-hero-cta="true"]',
+}: UseHeroBackgroundMotionOptions = {}) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -42,9 +48,9 @@ export const useHeroBackgroundMotion = () => {
 
     const updateRects = () => {
       heroRect = node.getBoundingClientRect();
-      ctaRect =
-        document.querySelector<HTMLElement>('[data-hero-cta="true"]')?.getBoundingClientRect() ??
-        null;
+      ctaRect = ctaSelector
+        ? document.querySelector<HTMLElement>(ctaSelector)?.getBoundingClientRect() ?? null
+        : null;
     };
 
     const scheduleRectMeasurement = () => {
@@ -197,7 +203,7 @@ export const useHeroBackgroundMotion = () => {
       resetMotion();
     };
 
-    const ctaNode = document.querySelector<HTMLElement>('[data-hero-cta="true"]');
+    const ctaNode = ctaSelector ? document.querySelector<HTMLElement>(ctaSelector) : null;
     const resizeObserver =
       typeof ResizeObserver !== 'undefined'
         ? new ResizeObserver(() => {
@@ -255,7 +261,7 @@ export const useHeroBackgroundMotion = () => {
       desktopMediaQuery.removeEventListener('change', handleMediaChange);
       reducedMotionMediaQuery.removeEventListener('change', handleMediaChange);
     };
-  }, []);
+  }, [ctaSelector]);
 
   return containerRef;
 };

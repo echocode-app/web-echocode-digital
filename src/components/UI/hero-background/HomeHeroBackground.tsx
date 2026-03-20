@@ -1,15 +1,11 @@
 'use client';
 
-import HeroOrbSvg from '@/components/UI/hero-background/HeroOrbSvg';
-import { useHeroBackgroundMotion } from '@/components/UI/hero-background/useHeroBackgroundMotion';
+import OrbHeroBackground from '@/components/UI/hero-background/OrbHeroBackground';
 
 const HomeHeroBackground = () => {
-  const containerRef = useHeroBackgroundMotion();
-
   return (
-    <div
-      ref={containerRef}
-      aria-hidden="true"
+    <OrbHeroBackground
+      ctaSelector='[data-hero-cta="true"]'
       className="
         hero-background-orb
         absolute left-1/2 top-18
@@ -19,12 +15,7 @@ const HomeHeroBackground = () => {
         lg:top-15 lg:h-124 lg:w-[min(98vw,112rem)]
         -z-10
       "
-    >
-      <div className="hero-background-orb__inner">
-        <div className="hero-background-glow hero-background-glow--primary" />
-        <HeroOrbSvg className="hero-background-svg hero-background-svg--base" />
-      </div>
-    </div>
+    />
   );
 };
 
