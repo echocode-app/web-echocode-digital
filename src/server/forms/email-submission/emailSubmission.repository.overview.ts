@@ -1,57 +1,64 @@
 import { Timestamp } from 'firebase-admin/firestore';
 import { getFirestoreDb } from '@/server/firebase/firestore';
+import {
+  getOverviewStats,
+  replaceOverviewStats,
+} from '@/server/admin/submissions/overviewStats.repository';
 import { ApiError } from '@/server/lib/errors';
-import { emptyModerationStatusCounts, toModerationStatus } from '@/server/forms/shared/moderation.repository';
+import {
+  emptyModerationStatusCounts,
+  toModerationStatus,
+} from '@/server/forms/shared/moderation.repository';
 import {
   EMAIL_SUBMISSIONS_COLLECTION,
-  EMAIL_SUBMISSION_STATUS_ORDER,
   isEmailSubmissionSoftDeleted,
 } from '@/server/forms/email-submission/emailSubmission.repository.shared';
-import type { EmailSubmissionStatus, EmailSubmissionsOverviewDto } from '@/server/forms/email-submission/emailSubmission.types';
+import type { EmailSubmissionsOverviewDto } from '@/server/forms/email-submission/emailSubmission.types';
 
-async function countEmailSubmissions(input?: {
-  status?: EmailSubmissionStatus;
-  range?: { start: Date; end: Date };
-}): Promise<number> {
+async function listActiveEmailSubmissionsInRange(input: {
+  start: Date;
+  end: Date;
+}): Promise<FirebaseFirestore.QueryDocumentSnapshot[]> {
   const firestore = getFirestoreDb();
-  let query: FirebaseFirestore.Query = firestore.collection(EMAIL_SUBMISSIONS_COLLECTION);
-
-  if (input?.status) {
-    query = query.where('status', '==', input.status);
-  }
-
-  if (input?.range) {
-    query = query
-      .where('createdAt', '>=', Timestamp.fromDate(input.range.start))
-      .where('createdAt', '<', Timestamp.fromDate(input.range.end));
-  }
 
   let snapshot: FirebaseFirestore.QuerySnapshot;
   try {
-    snapshot = await query.get();
+    snapshot = await firestore
+      .collection(EMAIL_SUBMISSIONS_COLLECTION)
+      .where('createdAt', '>=', Timestamp.fromDate(input.start))
+      .where('createdAt', '<', Timestamp.fromDate(input.end))
+      .get();
   } catch (cause) {
-    throw ApiError.fromCode('FIREBASE_UNAVAILABLE', 'Failed to count email submissions', { cause });
+    throw ApiError.fromCode('FIREBASE_UNAVAILABLE', 'Failed to load email submissions overview', {
+      cause,
+    });
   }
 
-  return snapshot.docs.reduce((acc, doc) => {
-    const data = doc.data();
-    return isEmailSubmissionSoftDeleted(data) ? acc : acc + 1;
-  }, 0);
+  return snapshot.docs.filter((doc) => !isEmailSubmissionSoftDeleted(doc.data()));
 }
 
-async function buildStatusesByMonthFromYearScan(year: number): Promise<EmailSubmissionsOverviewDto['statusesByMonth']> {
+async function listAllActiveEmailSubmissions(): Promise<FirebaseFirestore.QueryDocumentSnapshot[]> {
   const firestore = getFirestoreDb();
+
+  let snapshot: FirebaseFirestore.QuerySnapshot;
+  try {
+    snapshot = await firestore.collection(EMAIL_SUBMISSIONS_COLLECTION).get();
+  } catch (cause) {
+    throw ApiError.fromCode('FIREBASE_UNAVAILABLE', 'Failed to load email submissions overview', {
+      cause,
+    });
+  }
+
+  return snapshot.docs.filter((doc) => !isEmailSubmissionSoftDeleted(doc.data()));
+}
+
+async function buildStatusesByMonthFromYearScan(
+  year: number,
+): Promise<EmailSubmissionsOverviewDto['statusesByMonth']> {
   const yearStart = new Date(Date.UTC(year, 0, 1));
   const yearEnd = new Date(Date.UTC(year + 1, 0, 1));
 
-  const pointByMonth = new Map<string, {
-    month: string;
-    new: number;
-    viewed: number;
-    processed: number;
-    rejected: number;
-    deferred: number;
-  }>();
+  const pointByMonth = new Map<string, EmailSubmissionsOverviewDto['statusesByMonth'][number]>();
 
   Array.from({ length: 12 }, (_, monthIndex) => {
     const month = String(monthIndex + 1).padStart(2, '0');
@@ -65,23 +72,21 @@ async function buildStatusesByMonthFromYearScan(year: number): Promise<EmailSubm
     });
   });
 
-  let snapshot: FirebaseFirestore.QuerySnapshot;
+  let docs: FirebaseFirestore.QueryDocumentSnapshot[];
   try {
-    snapshot = await firestore
-      .collection(EMAIL_SUBMISSIONS_COLLECTION)
-      .where('createdAt', '>=', Timestamp.fromDate(yearStart))
-      .where('createdAt', '<', Timestamp.fromDate(yearEnd))
-      .get();
+    docs = await listActiveEmailSubmissionsInRange({
+      start: yearStart,
+      end: yearEnd,
+    });
   } catch {
     return Array.from(pointByMonth.values());
   }
 
-  snapshot.docs.forEach((doc) => {
+  docs.forEach((doc) => {
     const data = doc.data();
-    if (isEmailSubmissionSoftDeleted(data)) return;
-
     const createdAt = data.createdAt;
     const status = toModerationStatus(data.status);
+
     if (!(createdAt instanceof Timestamp)) return;
 
     const month = String(createdAt.toDate().getUTCMonth() + 1).padStart(2, '0');
@@ -95,30 +100,52 @@ async function buildStatusesByMonthFromYearScan(year: number): Promise<EmailSubm
 }
 
 export async function getEmailSubmissionsOverview(): Promise<EmailSubmissionsOverviewDto> {
+  const cachedStats = await getOverviewStats('email_submissions');
+  if (cachedStats) {
+    return cachedStats;
+  }
+
   const now = new Date();
+  const yearStart = new Date(Date.UTC(now.getUTCFullYear(), 0, 1));
+  const yearEnd = new Date(Date.UTC(now.getUTCFullYear() + 1, 0, 1));
   const monthStart = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1));
   const monthEnd = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() + 1, 1));
 
-  const [currentMonth, allTime, statusCounts] = await Promise.all([
-    countEmailSubmissions({ range: { start: monthStart, end: monthEnd } }),
-    countEmailSubmissions(),
-    Promise.all(EMAIL_SUBMISSION_STATUS_ORDER.map((status) => countEmailSubmissions({ status }))),
+  const [docsAllTime, docsInYear] = await Promise.all([
+    listAllActiveEmailSubmissions(),
+    listActiveEmailSubmissionsInRange({
+      start: yearStart,
+      end: yearEnd,
+    }),
   ]);
 
   const byStatus = emptyModerationStatusCounts();
-  // Keep ordering deterministic for UI status cards and chart legends.
-  EMAIL_SUBMISSION_STATUS_ORDER.forEach((status, index) => {
-    byStatus[status] = statusCounts[index] ?? 0;
+
+  docsAllTime.forEach((doc) => {
+    const status = toModerationStatus(doc.data().status);
+    byStatus[status] += 1;
   });
+
+  const currentMonth = docsInYear.reduce((count, doc) => {
+    const createdAt = doc.data().createdAt;
+    if (!(createdAt instanceof Timestamp)) return count;
+
+    const createdDate = createdAt.toDate();
+    return createdDate >= monthStart && createdDate < monthEnd ? count + 1 : count;
+  }, 0);
 
   const statusesByMonth = await buildStatusesByMonthFromYearScan(now.getUTCFullYear());
 
-  return {
+  const overview = {
     totals: {
       currentMonth,
-      allTime,
+      allTime: docsAllTime.length,
     },
     byStatus,
     statusesByMonth,
   };
+
+  await replaceOverviewStats('email_submissions', overview);
+
+  return overview;
 }

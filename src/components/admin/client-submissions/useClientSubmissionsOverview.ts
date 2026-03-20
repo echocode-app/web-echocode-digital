@@ -3,11 +3,12 @@
 import { useCallback, useEffect, useState } from 'react';
 import type { ClientSubmissionsOverviewDto } from '@/server/forms/client-project/clientProject.types';
 import { getFirebaseClientAuth } from '@/lib/firebase/client';
+import { ADMIN_OVERVIEW_POLL_INTERVAL_MS } from '@/components/admin/shared/adminPolling';
 import { EMPTY_CLIENT_SUBMISSION_STATUS_COUNTS } from '@/shared/admin/constants';
 
 type LoadState = 'loading' | 'ready' | 'error';
 const CLIENT_SUBMISSIONS_OVERVIEW_REFRESH_EVENT = 'client-submissions:overview-refresh';
-const POLL_INTERVAL_MS = 15000;
+const POLL_INTERVAL_MS = ADMIN_OVERVIEW_POLL_INTERVAL_MS;
 const FALLBACK_OVERVIEW: ClientSubmissionsOverviewDto = {
   totals: {
     currentMonth: 0,

@@ -6,11 +6,12 @@ import {
   getAdminIdTokenOrThrow,
   withAuthHeaders,
 } from '@/components/admin/moderation/shared/adminModeration.api';
+import { ADMIN_OVERVIEW_POLL_INTERVAL_MS } from '@/components/admin/shared/adminPolling';
 import { EMPTY_CLIENT_SUBMISSION_STATUS_COUNTS } from '@/shared/admin/constants';
 
 type LoadState = 'loading' | 'ready' | 'error';
 const VACANCY_CANDIDATES_OVERVIEW_REFRESH_EVENT = 'vacancy-candidates:overview-refresh';
-const POLL_INTERVAL_MS = 15000;
+const POLL_INTERVAL_MS = ADMIN_OVERVIEW_POLL_INTERVAL_MS;
 const FALLBACK_OVERVIEW: VacancySubmissionsOverviewDto = {
   totals: {
     currentMonth: 0,

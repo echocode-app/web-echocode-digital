@@ -1,5 +1,10 @@
 import { FieldPath, FieldValue, Timestamp } from 'firebase-admin/firestore';
 import { randomUUID } from 'node:crypto';
+import {
+  recordOverviewCreated,
+  recordOverviewDeleted,
+  recordOverviewStatusChanged,
+} from '@/server/admin/submissions/overviewStats.repository';
 import { getFirestoreDb } from '@/server/firebase/firestore';
 import { ApiError } from '@/server/lib/errors';
 import {
@@ -65,6 +70,12 @@ export async function createEmailSubmissionRecord(input: {
     }
 
     assertTimestamp(data.createdAt, `email_submissions/${docRef.id}.createdAt`);
+
+    await recordOverviewCreated({
+      kind: 'email_submissions',
+      createdAt: data.createdAt.toDate(),
+      status: 'new',
+    }).catch(() => undefined);
 
     return {
       id: docRef.id,
@@ -291,7 +302,7 @@ export async function updateEmailSubmissionStatus(input: {
   const docRef = firestore.collection(EMAIL_SUBMISSIONS_COLLECTION).doc(input.submissionId);
 
   try {
-    return await firestore.runTransaction(async (tx) => {
+    const result = await firestore.runTransaction(async (tx) => {
       const snapshot = await tx.get(docRef);
       if (!snapshot.exists) {
         throw ApiError.fromCode(
@@ -310,6 +321,11 @@ export async function updateEmailSubmissionStatus(input: {
 
       const previousStatus = toModerationStatus(data.status);
       const now = Timestamp.now();
+      const createdAt = data.createdAt;
+
+      if (!(createdAt instanceof Timestamp)) {
+        throw ApiError.fromCode('INTERNAL_ERROR', 'Email submission createdAt is invalid');
+      }
 
       tx.update(docRef, {
         status: input.status,
@@ -319,6 +335,7 @@ export async function updateEmailSubmissionStatus(input: {
       });
 
       return {
+        createdAt: createdAt.toDate(),
         previousStatus,
         updated: {
           id: snapshot.id,
@@ -329,6 +346,18 @@ export async function updateEmailSubmissionStatus(input: {
         },
       };
     });
+
+    await recordOverviewStatusChanged({
+      kind: 'email_submissions',
+      createdAt: result.createdAt,
+      previousStatus: result.previousStatus,
+      nextStatus: input.status,
+    }).catch(() => undefined);
+
+    return {
+      previousStatus: result.previousStatus,
+      updated: result.updated,
+    };
   } catch (cause) {
     if (cause instanceof ApiError) throw cause;
     throw ApiError.fromCode('FIREBASE_UNAVAILABLE', 'Failed to update email submission status', {
@@ -404,7 +433,7 @@ export async function softDeleteEmailSubmission(input: {
   const docRef = firestore.collection(EMAIL_SUBMISSIONS_COLLECTION).doc(input.submissionId);
 
   try {
-    return await firestore.runTransaction(async (tx) => {
+    const result = await firestore.runTransaction(async (tx) => {
       const snapshot = await tx.get(docRef);
       if (!snapshot.exists) {
         throw ApiError.fromCode(
@@ -422,6 +451,12 @@ export async function softDeleteEmailSubmission(input: {
       }
 
       const now = Timestamp.now();
+      const createdAt = data.createdAt;
+      const previousStatus = toModerationStatus(data.status);
+
+      if (!(createdAt instanceof Timestamp)) {
+        throw ApiError.fromCode('INTERNAL_ERROR', 'Email submission createdAt is invalid');
+      }
 
       tx.update(docRef, {
         isDeleted: true,
@@ -431,11 +466,25 @@ export async function softDeleteEmailSubmission(input: {
       });
 
       return {
+        createdAt: createdAt.toDate(),
+        previousStatus,
         id: snapshot.id,
         isDeleted: true,
         updatedAt: toIso(now),
       };
     });
+
+    await recordOverviewDeleted({
+      kind: 'email_submissions',
+      createdAt: result.createdAt,
+      status: result.previousStatus,
+    }).catch(() => undefined);
+
+    return {
+      id: result.id,
+      isDeleted: true,
+      updatedAt: result.updatedAt,
+    };
   } catch (cause) {
     if (cause instanceof ApiError) throw cause;
     throw ApiError.fromCode('FIREBASE_UNAVAILABLE', 'Failed to delete email submission', { cause });

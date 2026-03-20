@@ -1,4 +1,8 @@
 import { Timestamp } from 'firebase-admin/firestore';
+import {
+  getOverviewStats,
+  replaceOverviewStats,
+} from '@/server/admin/submissions/overviewStats.repository';
 import { getFirestoreDb } from '@/server/firebase/firestore';
 import { ApiError } from '@/server/lib/errors';
 import {
@@ -100,68 +104,81 @@ export async function getVacancySubmissionsOverview(): Promise<VacancySubmission
   const now = new Date();
   const monthStart = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1));
   const monthEnd = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() + 1, 1));
+  const cachedStats = await getOverviewStats('vacancy_submissions');
 
-  const docsInYear = await listAllActiveVacancySubmissionsInYear(now.getUTCFullYear());
   const docsAllTime = await listAllActiveVacancySubmissions();
-  const byStatus = emptyModerationStatusCounts();
+  let stats = cachedStats;
 
-  const statusesByMonthMap = new Map<
-    string,
-    {
-      month: string;
-      new: number;
-      viewed: number;
-      processed: number;
-      rejected: number;
-      deferred: number;
-    }
-  >();
+  if (!stats) {
+    const docsInYear = await listAllActiveVacancySubmissionsInYear(now.getUTCFullYear());
+    const byStatus = emptyModerationStatusCounts();
 
-  Array.from({ length: 12 }, (_, monthIndex) => {
-    const month = String(monthIndex + 1).padStart(2, '0');
-    statusesByMonthMap.set(month, {
-      month,
-      new: 0,
-      viewed: 0,
-      processed: 0,
-      rejected: 0,
-      deferred: 0,
+    const statusesByMonthMap = new Map<
+      string,
+      {
+        month: string;
+        new: number;
+        viewed: number;
+        processed: number;
+        rejected: number;
+        deferred: number;
+      }
+    >();
+
+    Array.from({ length: 12 }, (_, monthIndex) => {
+      const month = String(monthIndex + 1).padStart(2, '0');
+      statusesByMonthMap.set(month, {
+        month,
+        new: 0,
+        viewed: 0,
+        processed: 0,
+        rejected: 0,
+        deferred: 0,
+      });
     });
-  });
 
-  let currentMonth = 0;
-  docsAllTime.forEach((doc) => {
-    const data = doc.data();
-    const status = toModerationStatus(data.status);
+    let currentMonth = 0;
+    docsAllTime.forEach((doc) => {
+      const data = doc.data();
+      const status = toModerationStatus(data.status);
 
-    byStatus[status] += 1;
-  });
+      byStatus[status] += 1;
+    });
 
-  docsInYear.forEach((doc) => {
-    const data = doc.data();
-    const status = toModerationStatus(data.status);
-    const createdAt = data.createdAt;
+    docsInYear.forEach((doc) => {
+      const data = doc.data();
+      const status = toModerationStatus(data.status);
+      const createdAt = data.createdAt;
 
-    if (!(createdAt instanceof Timestamp)) return;
+      if (!(createdAt instanceof Timestamp)) return;
 
-    const createdDate = createdAt.toDate();
-    if (createdDate >= monthStart && createdDate < monthEnd) {
-      currentMonth += 1;
-    }
+      const createdDate = createdAt.toDate();
+      if (createdDate >= monthStart && createdDate < monthEnd) {
+        currentMonth += 1;
+      }
 
-    const month = String(createdDate.getUTCMonth() + 1).padStart(2, '0');
-    const point = statusesByMonthMap.get(month);
-    if (!point) return;
-    point[status] += 1;
-  });
+      const month = String(createdDate.getUTCMonth() + 1).padStart(2, '0');
+      const point = statusesByMonthMap.get(month);
+      if (!point) return;
+      point[status] += 1;
+    });
+
+    stats = {
+      totals: {
+        currentMonth,
+        allTime: docsAllTime.length,
+      },
+      byStatus,
+      statusesByMonth: Array.from(statusesByMonthMap.values()),
+    };
+
+    await replaceOverviewStats('vacancy_submissions', stats).catch(() => undefined);
+  }
 
   return {
-    totals: {
-      currentMonth,
-      allTime: docsAllTime.length,
-    },
-    byStatus,
-    statusesByMonth: Array.from(statusesByMonthMap.values()),
+    totals: stats.totals,
+    byStatus: stats.byStatus,
+    statusesByMonth: stats.statusesByMonth,
     byVacancy: buildVacancyGroups(docsAllTime),
   };
 }

@@ -30,6 +30,9 @@ import type {
   SoftDeleteEmailSubmissionResponseDto,
   UpdateEmailSubmissionStatusResponseDto,
 } from '@/server/forms/email-submission/emailSubmission.types';
+import { readThroughTtlCache } from '@/server/lib/ttlCache';
+
+const OVERVIEW_CACHE_TTL_MS = 20_000;
 
 export async function listAdminEmailSubmissions(
   query: EmailSubmissionListQueryInput,
@@ -63,7 +66,9 @@ export async function listAdminEmailSubmissions(
 }
 
 export async function getAdminEmailSubmissionsOverview(): Promise<EmailSubmissionsOverviewDto> {
-  return getEmailSubmissionsOverview();
+  return readThroughTtlCache('admin:overview:email-submissions', OVERVIEW_CACHE_TTL_MS, () =>
+    getEmailSubmissionsOverview(),
+  );
 }
 
 async function attachEmailSubmissionReviewerProfile(

@@ -12,6 +12,11 @@ function buildRelativeUrl(pathname: string, searchParams: URLSearchParams): stri
   return query ? `${pathname}?${query}` : pathname;
 }
 
+function normalizeOptionalText(value: string | null | undefined): string | null {
+  const normalized = value?.trim();
+  return normalized ? normalized : null;
+}
+
 export default function PageViewTracker() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -26,8 +31,9 @@ export default function PageViewTracker() {
     void postClientAnalyticsEvent('/api/analytics/page-view', {
       path: pathname,
       url: absoluteUrl,
-      title: typeof document !== 'undefined' ? document.title : null,
-      referrer: typeof document !== 'undefined' ? document.referrer || null : null,
+      title: typeof document !== 'undefined' ? normalizeOptionalText(document.title) : null,
+      referrer:
+        typeof document !== 'undefined' ? normalizeOptionalText(document.referrer) : null,
       source: 'website',
       ...analyticsContext,
     });

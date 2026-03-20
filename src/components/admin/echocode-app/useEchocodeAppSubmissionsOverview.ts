@@ -2,13 +2,14 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import { fetchAdminData } from '@/components/admin/api/fetchAdminData';
+import { ADMIN_OVERVIEW_POLL_INTERVAL_MS } from '@/components/admin/shared/adminPolling';
 import type { EchocodeAppSubmissionsOverviewDto } from '@/server/admin/echocode-app';
 import { EMPTY_CLIENT_SUBMISSION_STATUS_COUNTS } from '@/shared/admin/constants';
 
 type LoadState = 'loading' | 'ready' | 'error';
 
 const ECHOCODE_APP_SUBMISSIONS_OVERVIEW_REFRESH_EVENT = 'echocode-app-submissions:overview-refresh';
-const POLL_INTERVAL_MS = 15000;
+const POLL_INTERVAL_MS = ADMIN_OVERVIEW_POLL_INTERVAL_MS;
 const FALLBACK_OVERVIEW: EchocodeAppSubmissionsOverviewDto = {
   totals: {
     currentMonth: 0,
