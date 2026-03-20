@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { useLocale, useTranslations } from 'next-intl';
 
+import TypedHeroHeading from '@/components/UI/TypedHeroHeading';
 import SectionContainer from '@/components/UI/section/SectionContainer';
 
 const HeroSection = () => {
@@ -14,11 +15,10 @@ const HeroSection = () => {
         <div className="flex flex-col md:flex-row items-center justify-between">
           <div>
             <div className="max-w-165">
-              <h2
+              <TypedHeroHeading
+                text={t('title')}
                 className={`${enStyle} text-title-3xl md:text-title-5xl min-[1040px]:text-title-6xl font-title text-center md:text-left`}
-              >
-                {t('title')}
-              </h2>
+              />
             </div>
             <p className="font-wadik text-title-sm text-center md:text-start mt-4">
               Mobile Development

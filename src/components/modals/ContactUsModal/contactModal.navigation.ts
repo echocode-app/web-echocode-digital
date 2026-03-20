@@ -57,3 +57,26 @@ export function consumeContactModalReturnPath(): ContactModalReturnState | null 
     return isValidInternalPath(stored) ? { path: stored, scrollY: 0 } : null;
   }
 }
+
+export function peekContactModalReturnPath(): ContactModalReturnState | null {
+  if (typeof window === 'undefined') return null;
+
+  const stored = window.sessionStorage.getItem(CONTACT_MODAL_RETURN_PATH_KEY);
+  if (!stored) return null;
+
+  try {
+    const parsed = JSON.parse(stored) as Partial<ContactModalReturnState>;
+    const path = parsed.path ?? null;
+    if (!isValidInternalPath(path)) return null;
+    const scrollY = Number.isFinite(parsed.scrollY)
+      ? Math.max(0, Math.trunc(parsed.scrollY as number))
+      : 0;
+
+    return {
+      path,
+      scrollY,
+    };
+  } catch {
+    return isValidInternalPath(stored) ? { path: stored, scrollY: 0 } : null;
+  }
+}
