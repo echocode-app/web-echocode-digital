@@ -5,6 +5,8 @@ import FooterSocialLink from './FooterSocialLink';
 import EmailLink from '../EmailLink';
 import SocailLinks from './SocialLinks';
 import FooterNavLogo from './FooterNavLogo';
+import Link from 'next/link';
+import Image from 'next/image';
 
 const FooterNavigation = () => {
   const t = useTranslations('Layout.Footer');
@@ -14,6 +16,21 @@ const FooterNavigation = () => {
       <div className="md:flex md:justify-between md:mb-8 lg:mb-0 lg:w-185.5">
         <div>
           <FooterNavLogo />
+          <Link
+            href={'https://echocode.app/'}
+            target="blank"
+            rel="noreferrer"
+            className="group flex gap-2 mb-2.5 font-wadik text-title-xs text-accent"
+          >
+            <span className="text-black">.APP</span>
+            <Image
+              src={'/UI/link-icon-black.svg'}
+              alt="Rigth Arrow"
+              width={10}
+              height={10}
+              className="group-hover:scale-120 duration-main  will-change-transform"
+            />
+          </Link>
           <p className="w-66 mb-8 md:mb-0 text-main-xs leading-[1.2] text-secondary-gray">
             {t('subtitle')}
           </p>

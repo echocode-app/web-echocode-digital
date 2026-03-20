@@ -42,10 +42,13 @@ const ContactUsBtn = () => {
         after:content-[''] after:absolute after:inset-0 
         after:bg-main-gradient after:opacity-0 after:rounded-full
         after:transition-opacity after:duration-500 after:-z-10
+       
+hover:[&::after]:animate-[section-gradient-drift_5s_ease-in-out_infinite]
+after:bg-size-[200%_200%]
 
         hover:after:opacity-100 
         hover:shadow-[0_2.688px_25.061px_0_rgba(253,38,108,0.55)]
-        ${isSyncedHover ? 'after:opacity-100 shadow-[0_2.688px_25.061px_0_rgba(253,38,108,0.55)]' : ''}
+        ${isSyncedHover ? 'after:opacity-100 shadow-[0_2.688px_25.061px_0_rgba(253,38,108,0.55)] [&::after]:animate-[section-gradient-drift_5s_linear_infinite] after:bg-size-[200%_200%]' : ''}
       `}
         >
           <div className="relative z-10 w-6.5 h-5.5">

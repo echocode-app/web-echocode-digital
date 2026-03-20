@@ -25,7 +25,9 @@ const SubmitBtn = ({ isDisable, status }: SubmitBtnProps) => {
         ? 'Try again'
         : t('submitBtn');
 
-  const buttonColor = success ? 'bg-[#34C759]' : 'bg-main-gradient';
+  const buttonColor = success
+    ? 'bg-[#34C759]'
+    : 'bg-main-gradient animate-[section-gradient-drift_5s_ease-in-out_infinite]  bg-size-[200%_200%]';
   const isDisabled = isDisable || pending || success ? 'cursor-not-allowed' : 'cursor-pointer';
 
   return (
