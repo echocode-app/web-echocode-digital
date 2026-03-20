@@ -143,9 +143,11 @@ const ContactUsModal = () => {
               className="relative inline-block font-semibold text-accent transition-all duration-main
                 before:pointer-events-none before:absolute before:inset-0 before:content-[attr(data-text)]
                 before:bg-main-gradient before:bg-clip-text before:text-transparent before:opacity-0
+                before:animate-[section-gradient-drift_5s_ease-in-out_infinite] before:bg-size-[200%_200%]
                 before:transition-opacity before:duration-main
                 after:absolute after:left-0 after:bottom-0.5 after:h-px after:w-full
                 after:bg-main-gradient after:opacity-0 after:transition-opacity after:duration-main
+                after:animate-[section-gradient-drift_5s_ease-in-out_infinite] after:bg-size-[200%_200%]
                 hover:before:opacity-100 hover:after:opacity-100
                 focus-visible:before:opacity-100 focus-visible:after:opacity-100"
             >
