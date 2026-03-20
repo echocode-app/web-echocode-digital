@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 
+import TypedHeroHeading from '@/components/UI/TypedHeroHeading';
 import SectionFirstReveal from '@/components/UI/section/SectionFirstReveal';
 import AboutSectionCleaning from '@/components/sections/portfolio/project/AboutSection/AboutSectionCleaning';
 import ChallengesSection from '@/components/sections/portfolio/project/ChallengesSection';
@@ -30,9 +31,10 @@ const Cleaning = () => {
     <>
       <SectionFirstReveal>
         <section className="pt-42 pb-37.5">
-          <h1 className="text-title-3xl md:text-title-5xl lg:text-title-6xl font-wadik text-center">
-            CLEANING-APP
-          </h1>
+          <TypedHeroHeading
+            text="CLEANING-APP"
+            className="text-title-3xl md:text-title-5xl lg:text-title-6xl font-wadik text-center"
+          />
         </section>
       </SectionFirstReveal>
       <SectionFirstReveal>

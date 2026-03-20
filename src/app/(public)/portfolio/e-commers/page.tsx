@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { useTranslations } from 'next-intl';
 
+import TypedHeroHeading from '@/components/UI/TypedHeroHeading';
 import SectionFirstReveal from '@/components/UI/section/SectionFirstReveal';
 import { AboutSectionECommerse } from '@/components/sections/portfolio/project/AboutSection';
 import { ImplementationSection } from '@/components/sections/portfolio/project/ImplementationSection';
@@ -35,9 +36,10 @@ const ECommers = () => {
     <>
       <SectionFirstReveal>
         <section className="pt-42 pb-37.5">
-          <h1 className="text-title-3xl md:text-title-5xl lg:text-title-6xl font-wadik text-center uppercase">
-            E-commerce
-          </h1>
+          <TypedHeroHeading
+            text="E-commerce"
+            className="text-title-3xl md:text-title-5xl lg:text-title-6xl font-wadik text-center uppercase"
+          />
         </section>
       </SectionFirstReveal>
       <SectionFirstReveal>

@@ -1,5 +1,6 @@
 @import 'tailwindcss';
 @import '../styles/root.css';
+@import '../styles/hero-background.css';
 
 :root {
   --main-bg-color: #000000;
@@ -49,5 +50,16 @@ body {
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes hero-heading-cursor-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
   }
 }

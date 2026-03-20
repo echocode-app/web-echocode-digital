@@ -17,6 +17,35 @@ type ClientAnalyticsContextPayload = {
   attribution?: ClientAnalyticsAttribution;
 };
 
+function isLocalhostHost(host: string | null | undefined): boolean {
+  const normalized = host?.trim().toLowerCase();
+  if (!normalized) return false;
+
+  return (
+    normalized === 'localhost' ||
+    normalized.startsWith('localhost:') ||
+    normalized === '127.0.0.1' ||
+    normalized.startsWith('127.0.0.1:') ||
+    normalized === '0.0.0.0' ||
+    normalized.startsWith('0.0.0.0:') ||
+    normalized === '[::1]' ||
+    normalized.startsWith('[::1]:') ||
+    normalized === '::1'
+  );
+}
+
+function shouldDisableClientAnalytics(): boolean {
+  if (process.env.NODE_ENV !== 'production') {
+    return true;
+  }
+
+  if (typeof window === 'undefined') {
+    return false;
+  }
+
+  return isLocalhostHost(window.location.host);
+}
+
 function createClientSessionId(): string {
   return `sess_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 10)}`;
 }
@@ -67,6 +96,10 @@ export async function postClientAnalyticsEvent(
   url: string,
   payload: Record<string, unknown>,
 ): Promise<void> {
+  if (shouldDisableClientAnalytics()) {
+    return;
+  }
+
   try {
     await fetch(url, {
       method: 'POST',
