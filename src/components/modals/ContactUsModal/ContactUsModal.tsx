@@ -138,8 +138,8 @@ const ContactUsModal = () => {
           <div className="flex flex-wrap md:gap-1 text-main-sm mb-2 md:mb-8">
             <p className="text-white">{t('subtitle')}</p>
             <Link
-              href={'mailto:hello@echocode.app'}
-              data-text="hello@echocode.app"
+              href={'mailto:hello@echocode.digital'}
+              data-text="hello@echocode.digital"
               className="relative inline-block font-semibold text-accent transition-all duration-main
                 before:pointer-events-none before:absolute before:inset-0 before:content-[attr(data-text)]
                 before:bg-main-gradient before:bg-clip-text before:text-transparent before:opacity-0
@@ -149,7 +149,7 @@ const ContactUsModal = () => {
                 hover:before:opacity-100 hover:after:opacity-100
                 focus-visible:before:opacity-100 focus-visible:after:opacity-100"
             >
-              hello@echocode.app
+              hello@echocode.digital
             </Link>
           </div>
           <ContactUsForm
