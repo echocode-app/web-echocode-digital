@@ -162,12 +162,8 @@ export function useModerationTableCore<
       setRefreshTick((prev) => prev + 1);
     }, ADMIN_TABLE_POLL_INTERVAL_MS);
 
-    const onFocus = () => setRefreshTick((prev) => prev + 1);
-    window.addEventListener('focus', onFocus);
-
     return () => {
       window.clearInterval(intervalId);
-      window.removeEventListener('focus', onFocus);
     };
   }, []);
 

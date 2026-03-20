@@ -9,6 +9,7 @@ import {
   fetchEmailSubmissionDetails,
   updateEmailSubmissionStatus,
 } from '@/components/admin/email-submissions/shared/emailSubmissions.api';
+import { notifyEmailSubmissionsOverviewRefresh } from '@/components/admin/email-submissions/useEmailSubmissionsOverview';
 import { getAllowedStatusOptions } from '@/components/admin/client-submissions/shared/clientSubmissions.constants';
 import type {
   EmailSubmissionDetailsItemDto,
@@ -58,6 +59,7 @@ export function useEmailSubmissionDetails(submissionId: string) {
       try {
         await updateEmailSubmissionStatus({ submissionId: details.id, status: nextStatus });
         setDetails((prev) => (prev ? { ...prev, status: nextStatus } : prev));
+        notifyEmailSubmissionsOverviewRefresh();
         showToast('success', `Status updated to "${nextStatus}".`);
       } catch (error) {
         showToast('error', error instanceof Error ? error.message : 'Unable to update status.');

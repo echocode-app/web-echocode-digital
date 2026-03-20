@@ -90,25 +90,15 @@ export function useClientSubmissionsOverview() {
 
   useEffect(() => {
     const onRefresh = () => setRefreshTick((prev) => prev + 1);
-    const onFocus = () => setRefreshTick((prev) => prev + 1);
-    const onVisibility = () => {
-      if (document.visibilityState === 'visible') {
-        setRefreshTick((prev) => prev + 1);
-      }
-    };
 
     const intervalId = window.setInterval(() => {
       setRefreshTick((prev) => prev + 1);
     }, POLL_INTERVAL_MS);
 
     window.addEventListener(CLIENT_SUBMISSIONS_OVERVIEW_REFRESH_EVENT, onRefresh);
-    window.addEventListener('focus', onFocus);
-    document.addEventListener('visibilitychange', onVisibility);
 
     return () => {
       window.removeEventListener(CLIENT_SUBMISSIONS_OVERVIEW_REFRESH_EVENT, onRefresh);
-      window.removeEventListener('focus', onFocus);
-      document.removeEventListener('visibilitychange', onVisibility);
       window.clearInterval(intervalId);
     };
   }, []);
