@@ -145,12 +145,16 @@ function readMetadata(record: Record<string, unknown>): Record<string, unknown> 
 function toRankedRows<T extends { views: number }>(
   map: Map<string, number>,
   total: number,
-  limit: number,
+  limit: number | null,
   buildRow: (label: string, views: number, sharePct: number) => T,
 ): T[] {
-  return Array.from(map.entries())
-    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
-    .slice(0, limit)
+  const sortedEntries = Array.from(map.entries()).sort(
+    (a, b) => b[1] - a[1] || a[0].localeCompare(b[0]),
+  );
+
+  const limitedEntries = limit === null ? sortedEntries : sortedEntries.slice(0, limit);
+
+  return limitedEntries
     .map(([label, views]) =>
       buildRow(label, views, total > 0 ? sanitizeNumber((views / total) * 100) : 0),
     );
@@ -254,7 +258,7 @@ export async function getAdminEchocodeAppOverview(
   const countries = toRankedRows(
     countryCounts,
     pageViewsCurrent,
-    MAX_LIST_ROWS,
+    null,
     (country, views, sharePct) => ({ country, views, sharePct }),
   );
   const topPages: EchocodeAppTopPageDto[] = toRankedRows(

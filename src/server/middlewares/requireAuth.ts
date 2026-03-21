@@ -2,6 +2,7 @@ import {
   bootstrapAdminIfAllowed,
   extractIdToken,
   getAuthenticatedUserProfile,
+  syncAuthenticatedAdminRole,
   verifyIdToken,
 } from '@/server/auth/auth.service';
 import { ApiError } from '@/server/lib/errors';
@@ -37,6 +38,14 @@ export async function requireAuth(
       role = profile.role;
       roleClaim = role;
     }
+
+    // Server-trusted access registry is the source of truth for admin panel access.
+    role = await syncAuthenticatedAdminRole({
+      uid: verified.uid,
+      email: verified.email ?? null,
+      fallbackRole: role,
+    });
+    roleClaim = role;
 
     return {
       uid: verified.uid,

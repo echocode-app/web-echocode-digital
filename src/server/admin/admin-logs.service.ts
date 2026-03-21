@@ -5,6 +5,9 @@ import { getFirestoreDb } from '@/server/firebase/firestore';
 import { ApiError } from '@/server/lib/errors';
 
 export type AdminActionType =
+  | 'admin.access.invite'
+  | 'admin.access.update'
+  | 'admin.access.revoke'
   | 'submissions.status.update'
   | 'submissions.comment.add'
   | 'submissions.soft_delete'
@@ -22,6 +25,7 @@ export type AdminActionType =
   | 'admin.login';
 
 export type AdminEntityType =
+  | 'admin_access'
   | 'submission'
   | 'client_submission'
   | 'email_submission'

@@ -7,6 +7,14 @@ import type {
 
 const ADMIN_USERS_COLLECTION = 'admin_users';
 
+export type AdminUserProfileRecord = {
+  uid: string;
+  email: string | null;
+  displayName: string | null;
+  position: string | null;
+  roleLabel: string | null;
+};
+
 function normalizeOptionalString(value: unknown): string | null {
   if (typeof value !== 'string') return null;
   const normalized = value.trim();
@@ -43,6 +51,58 @@ export async function getAdminUserProfileByUid(
     };
   } catch (cause) {
     throw ApiError.fromCode('FIREBASE_UNAVAILABLE', 'Failed to load admin user profile', { cause });
+  }
+}
+
+export async function upsertAdminUserProfile(input: {
+  uid: string;
+  email: string | null;
+  displayName: string | null;
+  roleLabel: string | null;
+}): Promise<void> {
+  const normalizedUid = typeof input.uid === 'string' ? input.uid.trim() : '';
+  if (!normalizedUid) {
+    throw ApiError.fromCode('BAD_REQUEST', 'Admin user profile requires a valid uid');
+  }
+
+  try {
+    await getFirestoreDb()
+      .collection(ADMIN_USERS_COLLECTION)
+      .doc(normalizedUid)
+      .set(
+        {
+          email: normalizeOptionalString(input.email),
+          displayName: normalizeOptionalString(input.displayName),
+          roleLabel: normalizeOptionalString(input.roleLabel),
+        },
+        { merge: true },
+      );
+  } catch (cause) {
+    throw ApiError.fromCode('FIREBASE_UNAVAILABLE', 'Failed to persist admin user profile', {
+      cause,
+    });
+  }
+}
+
+export async function listAdminUserProfiles(): Promise<AdminUserProfileRecord[]> {
+  try {
+    const snapshot = await getFirestoreDb().collection(ADMIN_USERS_COLLECTION).get();
+
+    return snapshot.docs.map((doc) => {
+      const data = doc.data();
+
+      return {
+        uid: doc.id,
+        email: normalizeOptionalString(data.email),
+        displayName: normalizeOptionalString(data.displayName),
+        position: normalizeOptionalString(data.position),
+        roleLabel: normalizeOptionalString(data.roleLabel),
+      };
+    });
+  } catch (cause) {
+    throw ApiError.fromCode('FIREBASE_UNAVAILABLE', 'Failed to list admin user profiles', {
+      cause,
+    });
   }
 }
 

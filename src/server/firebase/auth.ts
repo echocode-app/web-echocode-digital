@@ -69,6 +69,27 @@ export async function setFirebaseCustomUserClaims(
   }
 }
 
+export async function listFirebaseUsers(): Promise<UserRecord[]> {
+  try {
+    const users: UserRecord[] = [];
+    let pageToken: string | undefined;
+
+    do {
+      const page = await getFirebaseAuth().listUsers(1000, pageToken);
+      users.push(...page.users);
+      pageToken = page.pageToken;
+    } while (pageToken);
+
+    return users;
+  } catch (cause) {
+    throw ApiError.fromCode(
+      'FIREBASE_UNAVAILABLE',
+      'Failed to list Firebase users',
+      { cause },
+    );
+  }
+}
+
 export function isFirebaseAuthAvailable(): boolean {
   try {
     getFirebaseAuth();

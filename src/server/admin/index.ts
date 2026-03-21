@@ -1,5 +1,16 @@
 export { getAdminMe } from '@/server/admin/admin-me.service';
 export {
+  createAdminAccess,
+  listAdminAccess,
+  updateAdminAccess,
+  createAdminAccessSchema,
+  updateAdminAccessSchema,
+  type AdminAccessEntryDto,
+  type AdminAccessListDto,
+  type CreateAdminAccessInput,
+  type UpdateAdminAccessInput,
+} from '@/server/admin/access';
+export {
   getAdminSubmissionsList,
   setAdminSubmissionStatus,
   updateSubmissionStatusSchema,

@@ -53,3 +53,62 @@
         $ref: '../openapi.yaml#/components/responses/Unauthorized'
       '403':
         $ref: '../openapi.yaml#/components/responses/Forbidden'
+
+/api/admin/access:
+  get:
+    tags: [Admin Core]
+    operationId: listAdminAccess
+    summary: List admin access registry entries
+    responses:
+      '200':
+        description: Admin access registry
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/SuccessEnvelope'
+      '401':
+        $ref: '../openapi.yaml#/components/responses/Unauthorized'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/Forbidden'
+  post:
+    tags: [Admin Core]
+    operationId: createAdminAccess
+    summary: Create or pre-approve admin access entry
+    responses:
+      '200':
+        description: Saved admin access entry
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/SuccessEnvelope'
+      '400':
+        $ref: '../openapi.yaml#/components/responses/BadRequest'
+      '401':
+        $ref: '../openapi.yaml#/components/responses/Unauthorized'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/Forbidden'
+
+/api/admin/access/{email}:
+  patch:
+    tags: [Admin Core]
+    operationId: updateAdminAccess
+    summary: Update role, status or profile fields for admin access entry
+    parameters:
+      - name: email
+        in: path
+        required: true
+        schema:
+          type: string
+    responses:
+      '200':
+        description: Updated admin access entry
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/SuccessEnvelope'
+      '400':
+        $ref: '../openapi.yaml#/components/responses/BadRequest'
+      '401':
+        $ref: '../openapi.yaml#/components/responses/Unauthorized'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/Forbidden'

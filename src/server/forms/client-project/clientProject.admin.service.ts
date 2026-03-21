@@ -212,17 +212,6 @@ export async function softDeleteAdminClientSubmission(input: {
     adminUid: input.adminUid,
   });
 
-  await logAdminAction({
-    adminUid: input.adminUid,
-    actionType: 'client_submission.soft_delete',
-    entityType: 'client_submission',
-    entityId: input.submissionId,
-    metadata: {
-      actorEmail: input.adminEmail,
-      deletedAt: result.updatedAt,
-    },
-  });
-
   return result;
 }
 

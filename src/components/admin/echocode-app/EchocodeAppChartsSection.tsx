@@ -75,9 +75,11 @@ function ChartLegend({ rows, emptyMessage }: { rows: GeographyChartRow[]; emptyM
 function FullBreakdownList({
   rows,
   emptyMessage,
+  description = 'All rows for the selected period, 7 rows per page.',
 }: {
   rows: GeographyChartRow[];
   emptyMessage: string;
+  description?: string;
 }) {
   const [page, setPage] = useState(0);
 
@@ -99,9 +101,7 @@ function FullBreakdownList({
       <div className="flex items-center justify-between gap-3">
         <div>
           <p className="font-title text-title-2xs text-white">Full breakdown</p>
-          <p className="font-main text-main-xs text-gray60">
-            All sources for the selected period, 7 rows per page.
-          </p>
+          <p className="font-main text-main-xs text-gray60">{description}</p>
         </div>
         {totalPages > 1 ? (
           <div className="flex items-center gap-2">
@@ -160,6 +160,7 @@ function EchocodeAppRadialWidget({
   onPeriodChange,
   rows,
   fullRows,
+  fullRowsDescription,
 }: {
   title: string;
   info: string;
@@ -168,6 +169,7 @@ function EchocodeAppRadialWidget({
   onPeriodChange: (next: DashboardPeriod) => void;
   rows: GeographyChartRow[];
   fullRows?: GeographyChartRow[];
+  fullRowsDescription?: string;
 }) {
   return (
     <div className="min-w-0">
@@ -189,6 +191,7 @@ function EchocodeAppRadialWidget({
               key={`${period}-${fullRows.length}-${fullRows[0]?.key ?? 'empty'}`}
               rows={fullRows}
               emptyMessage={emptyMessage}
+              description={fullRowsDescription}
             />
           </div>
         ) : null}
@@ -220,6 +223,18 @@ export default function EchocodeAppChartsSection() {
       }),
     [utmOverview?.referrers],
   );
+  const geographyFullRows = useMemo(
+    () =>
+      (countryOverview?.geography.countries ?? []).map((item, index) => ({
+        key: item.country,
+        label: toCountryLabel(item.country),
+        views: item.views,
+        sharePct: item.sharePct,
+        color: '',
+        colorIndex: index % DOT_COLOR_CLASS.length,
+      })),
+    [countryOverview?.geography.countries],
+  );
   const referrerFullRows = useMemo(
     () =>
       (utmOverview?.referrers ?? []).map((item, index) => ({
@@ -249,6 +264,8 @@ export default function EchocodeAppChartsSection() {
           period={countryPeriod}
           onPeriodChange={setCountryPeriod}
           rows={geographyRows}
+          fullRows={geographyFullRows}
+          fullRowsDescription="All countries for the selected period, 7 rows per page."
         />
       )}
 
@@ -267,6 +284,7 @@ export default function EchocodeAppChartsSection() {
           onPeriodChange={setUtmPeriod}
           rows={referrerRows}
           fullRows={referrerFullRows}
+          fullRowsDescription="All sources for the selected period, 7 rows per page."
         />
       )}
     </section>

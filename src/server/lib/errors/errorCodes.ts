@@ -27,6 +27,7 @@ export const API_ERROR_CATALOG = {
   FORBIDDEN: { status: 403, publicMessage: 'Forbidden' },
   PERMISSION_DENIED: { status: 403, publicMessage: 'Forbidden' },
   INTERNAL_ENDPOINT_DISABLED: { status: 403, publicMessage: 'Forbidden' },
+  NOT_FOUND: { status: 404, publicMessage: 'Not found' },
   NOT_IMPLEMENTED: { status: 501, publicMessage: 'Not implemented' },
   INTERNAL_ERROR: { status: 500, publicMessage: 'Unexpected server error' },
   SERVICE_UNAVAILABLE: { status: 503, publicMessage: 'Service unavailable' },

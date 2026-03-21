@@ -4,6 +4,7 @@ export type Role = 'admin' | 'developer' | 'manager';
 
 export type Permission =
   | 'admin.access'
+  | 'admin.settings.read'
   | 'admin.settings'
   | 'admin.logs.read'
   | 'submissions.read'
@@ -15,6 +16,7 @@ export type Permission =
 export const ADMIN_ACCESS_PERMISSION = 'admin.access';
 const ALL_ADMIN_PERMISSIONS: readonly Permission[] = [
   'admin.access',
+  'admin.settings.read',
   'admin.settings',
   'admin.logs.read',
   'submissions.read',
@@ -34,6 +36,7 @@ const MANAGER_ALLOWED_PERMISSIONS: readonly Permission[] = [
 
 const DEVELOPER_READONLY_PERMISSIONS: readonly Permission[] = [
   'admin.access',
+  'admin.settings.read',
   'admin.logs.read',
   'submissions.read',
   'audit.read',
@@ -41,6 +44,7 @@ const DEVELOPER_READONLY_PERMISSIONS: readonly Permission[] = [
 
 const DEVELOPER_FULL_PERMISSIONS: readonly Permission[] = [
   'admin.access',
+  'admin.settings.read',
   'admin.logs.read',
   'submissions.read',
   'submissions.update',
@@ -76,10 +80,13 @@ export function isRole(value: unknown): value is Role {
 }
 
 /** Evaluates role permissions using explicit role-to-scope mapping */
-export function hasPermission(
-  role: Role,
-  permission: Permission,
-): boolean {
+export function hasPermission(role: Role, permission: Permission): boolean {
   const permissions = ROLE_PERMISSIONS[role];
   return permissions.includes(permission);
+}
+
+export function getRoleLabel(role: Role): string {
+  if (role === 'admin') return 'Admin';
+  if (role === 'developer') return 'Developer';
+  return 'Manager';
 }

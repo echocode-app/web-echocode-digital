@@ -59,14 +59,5 @@ export async function logEmailSubmissionSoftDelete(input: {
   submissionId: string;
   deletedAt: string;
 }): Promise<void> {
-  await logAdminAction({
-    adminUid: input.adminUid,
-    actionType: 'email_submission.soft_delete',
-    entityType: 'email_submission',
-    entityId: input.submissionId,
-    metadata: {
-      actorEmail: input.adminEmail,
-      deletedAt: input.deletedAt,
-    },
-  });
+  void input;
 }

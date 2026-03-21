@@ -94,7 +94,6 @@
 
 - Admin API для client submissions:
 - додано `DELETE /api/admin/submissions/clients/delete?submissionId=...` для soft delete.
-- додано логування дії в `admin_logs` з `actionType: client_submission.soft_delete`.
 
 - Client submission attachments:
 - у Firestore для нових заявок зберігається `imageName` (оригінальна назва файлу).
@@ -255,24 +254,74 @@ Environment policy:
 - admin access enforcement через middleware wrapper
 - повернення актуального профілю з Firebase Admin SDK
 
-## Auth/Role модель (поточний стан)
+### `GET /api/admin/access`
+
+Призначення: повертає registry доступів до адмінки.
+
+Що входить у список:
+
+- вручну додані access entries
+- legacy записи, які вже були синхронізовані в `admin_users`
+- користувачі Firebase, у яких уже є `role` claim (`admin` / `developer` / `manager`)
+
+### `POST /api/admin/access`
+
+Призначення: pre-approve нового користувача до першого входу.
+
+Що зберігає:
+
+- email
+- display name
+- position
+- role
+
+### `PATCH /api/admin/access/{email}`
+
+Призначення: оновлення ролі, статусу та профільних полів існуючого access entry.
+
+## Auth / Roles (поточний стан)
 
 - Ролі: `admin`, `developer`, `manager`
 - Permissions: централізовані в `ROLE_PERMISSIONS`
 - Перевірка прав: `requirePermission(...)`
 - `admin` має повний доступ
-- `developer` має повний доступ у `development`, а також у non-dev за замовчуванням (`DEVELOPER_ACCESS_MODE=full`)
-- для переходу на read-only для `developer` достатньо перемкнути `DEVELOPER_ACCESS_MODE=readonly`
-- `manager` має доступ до бізнес-операцій, але без `admin.settings` та `audit.read`
+- `developer` задуманий як support / read-oriented role; локально в `development` може мати ширші права
+- для non-dev режим `developer` визначається `DEVELOPER_ACCESS_MODE`
+- `manager` має доступ до бізнес-операцій, але без `admin.settings`
 
 #### API-рівень (RBAC)
 
-| Дія / доступ                                           | Anonymous | Manager | Developer        | Admin |
-| ------------------------------------------------------ | --------- | ------- | ---------------- | ----- |
-| Доступ до admin API (`admin.access`)                   | ❌        | ✅      | ✅ (`full` mode) | ✅    |
-| Операційні write-дії (submissions/vacancies/portfolio) | ❌        | ✅      | ✅ (`full` mode) | ✅    |
-| `admin.settings`                                       | ❌        | ❌      | ✅ (`full` mode) | ✅    |
-| `audit.read` (логування дій в адмінпанелі)             | ❌        | ❌      | ✅ (`full` mode) | ✅    |
+| Дія / доступ                                           | Anonymous | Manager | Developer            | Admin |
+| ------------------------------------------------------ | --------- | ------- | -------------------- | ----- |
+| Доступ до admin API (`admin.access`)                   | ❌        | ✅      | ✅                   | ✅    |
+| Операційні write-дії (submissions/vacancies/portfolio) | ❌        | ✅      | env-dependent        | ✅    |
+| `admin.settings.read`                                  | ❌        | ❌      | ✅                   | ✅    |
+| `admin.settings`                                       | ❌        | ❌      | env-dependent / no   | ✅    |
+| `admin.logs.read`                                      | ❌        | ❌      | ✅                   | ✅    |
+
+## Admin UI map
+
+- `/admin/dashboard` - `.digital` traffic, geography, referrers, top pages
+- `/admin/echocode-app` - `.app` traffic and submission slice
+- `/admin/submissions`, `/admin/submissions/clients`, `/admin/submissions/emails` - `.digital` moderation areas
+- `/admin/vacancies`, `/admin/vacancies/candidates` - vacancy content + candidate queue
+- `/admin/portfolio` - portfolio preview cards and media
+- `/admin/settings` - admin access registry, role comparison, invite/pre-approve flow
+- `/admin/info` - короткий guide по адмінці
+- `/admin/info/utm` - ready-to-use UTM links for `.digital` and `.app`
+
+## Logging policy (current)
+
+Не логуємо все підряд.
+
+Залишаємо логування тільки там, де воно реально допомагає команді:
+
+- коментарі в moderation flows
+- зміни статусів submissions
+- зміни вакансій
+- створення / видалення portfolio items
+
+Navigation для `/admin/logs` зараз прибрана із sidebar, але сам route/API може лишатися для внутрішнього використання.
 
 #### Firestore Client SDK rules-рівень
 

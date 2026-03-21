@@ -65,6 +65,10 @@ paths:
     $ref: './paths/admin-core.yaml#/~1api~1admin~1me'
   /api/admin/logs:
     $ref: './paths/admin-core.yaml#/~1api~1admin~1logs'
+  /api/admin/access:
+    $ref: './paths/admin-core.yaml#/~1api~1admin~1access'
+  /api/admin/access/{email}:
+    $ref: './paths/admin-core.yaml#/~1api~1admin~1access~1{email}'
 
   /api/admin/dashboard/overview:
     $ref: './paths/admin-dashboard.yaml#/~1api~1admin~1dashboard~1overview'
