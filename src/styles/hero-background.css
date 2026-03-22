@@ -2,11 +2,11 @@
   0%,
   100% {
     opacity: 0.5;
-    transform: scale(0.988);
+    transform: scale(0.976);
   }
   50% {
     opacity: 0.78;
-    transform: scale(1.018);
+    transform: scale(1.04);
   }
 }
 
@@ -17,25 +17,25 @@
     transform: scale(1);
   }
   16% {
-    opacity: calc(var(--glyph-base-opacity) * 0.88);
-    transform: scale(0.978);
+    opacity: calc(var(--glyph-base-opacity) * 0.92);
+    transform: scale(0.976);
   }
   34% {
     opacity: calc(
-      var(--glyph-base-opacity) * (1.04 + var(--glyph-twinkle-boost) * var(--hero-cta-progress))
+      var(--glyph-base-opacity) * (1.02 + var(--glyph-twinkle-boost) * 0.72 * var(--hero-cta-progress))
     );
-    transform: scale(calc(1 + var(--glyph-twinkle-scale) * 1.18 * var(--hero-cta-progress)));
+    transform: scale(calc(1 + var(--glyph-twinkle-scale) * 1.46 * var(--hero-cta-progress)));
   }
   54% {
-    opacity: calc(var(--glyph-base-opacity) * (0.72 + 0.14 * (1 - var(--hero-cta-progress))));
-    transform: scale(calc(1 - var(--glyph-twinkle-scale) * 0.68 * var(--hero-cta-progress)));
+    opacity: calc(var(--glyph-base-opacity) * (0.8 + 0.1 * (1 - var(--hero-cta-progress))));
+    transform: scale(calc(1 - var(--glyph-twinkle-scale) * 0.56 * var(--hero-cta-progress)));
   }
   74% {
     opacity: calc(
       var(--glyph-base-opacity) *
-        (1.02 + var(--glyph-twinkle-boost) * 0.58 * var(--hero-cta-progress))
+        (1.01 + var(--glyph-twinkle-boost) * 0.42 * var(--hero-cta-progress))
     );
-    transform: scale(calc(1 + var(--glyph-twinkle-scale) * 0.94 * var(--hero-cta-progress)));
+    transform: scale(calc(1 + var(--glyph-twinkle-scale) * 1.12 * var(--hero-cta-progress)));
   }
 }
 
@@ -47,8 +47,8 @@
     --hero-cta-progress: 0;
     --hero-shift-x: 0px;
     --hero-shift-y: 0px;
-    --hero-spread-scale-x: 1.12;
-    --hero-spread-scale-y: 1.04;
+    --hero-spread-scale-x: 1.16;
+    --hero-spread-scale-y: 1.07;
     --hero-focus-shift-x: 0px;
     --hero-focus-shift-y: 0px;
 
@@ -113,13 +113,13 @@
       scaleX(
         calc(
           var(--hero-spread-scale-x) - var(--hero-cta-progress) * 0.22 + var(--hero-activation) *
-            0.015 + var(--hero-cta-progress) * 0.025
+            0.02 + var(--hero-cta-progress) * 0.03
         )
       )
       scaleY(
         calc(
           var(--hero-spread-scale-y) - var(--hero-cta-progress) * 0.14 + var(--hero-activation) *
-            0.012 + var(--hero-cta-progress) * 0.02
+            0.016 + var(--hero-cta-progress) * 0.024
         )
       );
     transform-origin: center;
@@ -134,6 +134,30 @@
     --hero-focus-shift-y: 18px;
   }
 
+  .hero-background-orb[data-cta-active='true'] .hero-background-svg--base {
+    color: rgba(255, 255, 255, 0.94);
+    mask-image: radial-gradient(
+      circle at 50% 61%,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 0.96) 18%,
+      rgba(255, 255, 255, 0.84) 34%,
+      rgba(255, 255, 255, 0.56) 52%,
+      rgba(255, 255, 255, 0.22) 70%,
+      rgba(255, 255, 255, 0.08) 84%,
+      transparent 100%
+    );
+    -webkit-mask-image: radial-gradient(
+      circle at 50% 61%,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 0.96) 18%,
+      rgba(255, 255, 255, 0.84) 34%,
+      rgba(255, 255, 255, 0.56) 52%,
+      rgba(255, 255, 255, 0.22) 70%,
+      rgba(255, 255, 255, 0.08) 84%,
+      transparent 100%
+    );
+  }
+
   .hero-glyph {
     transition:
       fill 220ms ease,
@@ -145,7 +169,7 @@
   .hero-glyph--dot {
     opacity: var(--glyph-base-opacity);
     animation-name: hero-glyph-firefly;
-    animation-duration: var(--glyph-twinkle-duration);
+    animation-duration: calc(var(--glyph-twinkle-duration) * 1.18);
     animation-delay: var(--glyph-twinkle-delay);
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
