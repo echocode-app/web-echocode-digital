@@ -9,7 +9,7 @@ const HeaderLogo = () => {
   const scrollToTop = useScrollToTop('/');
 
   return (
-    <Link href={'/'} className="flex items-center lg:mr-9.25 gap-3 z-10" onClick={scrollToTop}>
+    <Link href={'/'} className="flex items-center lg:mr-9.25 gap-6 z-10" onClick={scrollToTop}>
       <Logo />
       <p className="font-wadik hidden xl:block text-title-xs uppercase">echocode</p>
     </Link>
