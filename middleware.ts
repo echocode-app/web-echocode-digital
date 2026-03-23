@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 const ADMIN_HOSTS = new Set(['echocode.cloud', 'www.echocode.cloud']);
+const PUBLIC_HOSTS = new Set(['echocode.digital', 'www.echocode.digital']);
 
 function normalizeHost(value: string | null): string {
   if (!value) return '';
@@ -20,12 +21,28 @@ function isPublicPath(pathname: string): boolean {
 }
 
 export function middleware(request: NextRequest) {
-  const host = normalizeHost(request.headers.get('x-forwarded-host') ?? request.headers.get('host'));
+  const host = normalizeHost(
+    request.headers.get('x-forwarded-host') ?? request.headers.get('host'),
+  );
+  const { pathname, search } = request.nextUrl;
+
+  if (PUBLIC_HOSTS.has(host)) {
+    if (pathname.startsWith('/api/admin')) {
+      return new NextResponse('Not Found', { status: 404 });
+    }
+
+    if (pathname === '/admin' || pathname.startsWith('/admin/')) {
+      const targetUrl = request.nextUrl.clone();
+      targetUrl.pathname = '/';
+      targetUrl.search = '';
+      return NextResponse.redirect(targetUrl);
+    }
+  }
+
   if (!ADMIN_HOSTS.has(host)) {
     return NextResponse.next();
   }
 
-  const { pathname, search } = request.nextUrl;
   if (!isPublicPath(pathname)) {
     return NextResponse.next();
   }
