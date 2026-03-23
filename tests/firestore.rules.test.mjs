@@ -49,12 +49,18 @@ async function run() {
         slug: 'frontend-engineer',
         isPublished: true,
         createdAt: now,
+        level: 'Middle',
+        isHot: true,
+        updatedBy: 'admin-uid',
       });
       await setDoc(doc(db, 'vacancies/v-draft'), {
         title: 'Internal Vacancy Draft',
         slug: 'internal-vacancy-draft',
         isPublished: false,
         createdAt: now,
+        level: 'Senior',
+        isHot: false,
+        updatedBy: 'admin-uid',
       });
       await setDoc(doc(db, 'portfolio/p-public'), {
         title: 'Project Alpha',
@@ -135,6 +141,9 @@ async function run() {
         slug: 'frontend-engineer',
         isPublished: true,
         createdAt: now,
+        level: 'Middle',
+        isHot: false,
+        updatedBy: 'admin-uid',
       }),
     );
     await assertFails(
@@ -146,6 +155,9 @@ async function run() {
     await assertSucceeds(
       updateDoc(doc(adminDb, 'vacancies/v1'), {
         title: 'Senior Frontend Engineer',
+        level: 'Senior',
+        isHot: true,
+        updatedBy: 'admin-uid',
         updatedAt: new Date(),
       }),
     );
@@ -172,6 +184,11 @@ async function run() {
         title: 'Project Alpha',
         slug: 'project-alpha',
         createdAt: now,
+        image: '/images/portfolio/projects/dummy.png',
+        platforms: ['ios', 'android'],
+        categories: ['utility'],
+        entryType: 'preview_card',
+        updatedBy: 'admin-uid',
       }),
     );
     await assertFails(
@@ -183,6 +200,10 @@ async function run() {
     await assertSucceeds(
       updateDoc(doc(adminDb, 'portfolio/p1'), {
         summary: 'Cross-platform cleaning marketplace',
+        image: '/images/portfolio/projects/food.png',
+        platforms: ['ios', 'android', 'web'],
+        categories: ['utility', 'health'],
+        updatedBy: 'admin-uid',
         updatedAt: new Date(),
       }),
     );

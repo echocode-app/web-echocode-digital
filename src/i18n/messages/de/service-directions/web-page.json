@@ -1,0 +1,79 @@
+{
+  "WebPage": {
+    "HeroSection": { "title": "WIR BAUEN DIE DIGITALE ZUKUNFT" },
+    "StrategySection": {
+      "title": "EXPERTISE & STRATEGIE",
+      "subtitle": "Jede Codezeile ist ein Business-Asset. Wir fokussieren uns auf architektonische Integrität, um technische Schulden zu minimieren und den ROI zu maximieren.",
+      "list": {
+        "list01": "ERFOLGREICHE RELEASES",
+        "list02": "DURCHSCHNITTLICHE UPTIME"
+      }
+    },
+    "SolutionsSection": {
+      "title": "KERNLÖSUNGEN",
+      "solutions": {
+        "sol01": {
+          "title": "ENTERPRISE-SYSTEME",
+          "desc": "Individuelle ERP/CRM-Architekturen für vollständige Geschäftsautomatisierung und Datenharmonie."
+        },
+        "sol02": {
+          "title": "HIGH-LOAD PLATTFORMEN",
+          "desc": "Engineering für Millionen von Nutzern mit Zero-Downtime-Architektur und globaler Performance."
+        },
+        "sol03": {
+          "title": "E-COMMERCE LÖSUNGEN",
+          "desc": "Skalierbare Online-Shops mit Fokus auf Conversion-Rates und nahtlose Multi-Vendor-Integrationen."
+        }
+      }
+    },
+    "EngineeringSection": {
+      "title": "ENGINEERING-STANDARDS",
+      "subtitle": "WIR BAUEN NICHT NUR ANWENDUNGEN – WIR BAUEN DIGITALE FESTUNGEN.",
+      "engineeringList": {
+        "list01": {
+          "title": "GEHÄRTETE SICHERHEIT",
+          "eng01": "OWASP Top 10 Konformität",
+          "eng02": "Datenverschlüsselung (AES-256 Standard)",
+          "eng03": "Erweitertes Identitätsmanagement (OIDC)"
+        },
+        "list02": {
+          "title": "UNENDLICHE SKALIERBARKEIT",
+          "eng01": "Microservices-Architektur (Service Mesh)",
+          "eng02": "Auto-Scaling Kubernetes-Cluster",
+          "eng03": "Multi-Region Datenbank-Replikation"
+        },
+        "list03": {
+          "title": "WEB2APP LÖSUNGEN",
+          "eng01": "App Store & Google Play",
+          "eng02": "Intelligente Push-Benachrichtigungen",
+          "eng03": "PWA & Offline-Zugriff"
+        }
+      }
+    },
+    "DevelopmentSection": {
+      "title": "ENTWICKLUNGSZYKLUS",
+      "developments": {
+        "dev01": {
+          "title": "01. ANALYSE",
+          "subTitle": "DISCOVERY",
+          "desc": "Tiefgehende Analyse der Geschäftslogik, Marktlandschaft und technischen Machbarkeit."
+        },
+        "dev02": {
+          "title": "02. VISION",
+          "subTitle": "DESIGN",
+          "desc": "Architekturplanung, technische Dokumentation und UX-Prototyping."
+        },
+        "dev03": {
+          "title": "03. BUILD",
+          "subTitle": "CODING",
+          "desc": "Modulare Entwicklung mit Best Practices und automatisierten Testsystemen."
+        },
+        "dev04": {
+          "title": "04. OPTIMIERUNG",
+          "subTitle": "SKALIERUNG",
+          "desc": "Deployment, Lastüberwachung und kontinuierliche Performance-Optimierung."
+        }
+      }
+    }
+  }
+}

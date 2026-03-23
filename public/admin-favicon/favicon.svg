@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Echocode Admin">
+  <defs>
+    <linearGradient id="adminGradient" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#f3d07f"/>
+      <stop offset="100%" stop-color="#f2d8e6"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="#141111"/>
+  <path
+    d="M18 46V18h10.8c8.4 0 13.2 4.9 13.2 14s-4.8 14-13.2 14H18Zm8.6-6.5c5.4 0 8.5-2.7 8.5-7.5s-3.1-7.5-8.5-7.5H25v15h1.6Z"
+    fill="url(#adminGradient)"
+  />
+</svg>

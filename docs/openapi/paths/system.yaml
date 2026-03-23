@@ -1,0 +1,35 @@
+/api/health:
+  get:
+    tags: [System]
+    operationId: getHealth
+    summary: Liveness endpoint
+    security: []
+    responses:
+      '200':
+        description: Health status
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/SuccessEnvelope'
+      '400':
+        $ref: '../openapi.yaml#/components/responses/BadRequest'
+
+/api/internal/firebase-check:
+  get:
+    tags: [System]
+    operationId: getInternalFirebaseCheck
+    summary: Internal Firebase connectivity smoke check
+    description: Available only in non-production and when enabled via env.
+    responses:
+      '200':
+        description: Firebase checks passed
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/SuccessEnvelope'
+      '400':
+        $ref: '../openapi.yaml#/components/responses/BadRequest'
+      '401':
+        $ref: '../openapi.yaml#/components/responses/Unauthorized'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/Forbidden'

@@ -8,13 +8,13 @@ interface LocationImageProps {
 
 const LocationImage = ({ image, title, gradient }: LocationImageProps) => {
   return (
-    <div className="relative w-full sm:w-76.5 h-50 mb-4 overflow-hidden">
+    <div className="relative w-full sm:max-w-76.5 aspect-306/200 max-h-50 mb-4 overflow-hidden">
       <div
         className={`absolute top-0 right-0 rotate-90 translate-y-20 translate-x-21 
   flex items-center w-51 h-9.25 z-1 overflow-hidden
  ${gradient}`}
       >
-        <div className="flex w-max animate-[marquee-reverse_8s_linear_infinite] will-change-transform">
+        <div className="flex aspect-306/200 animate-[marquee-reverse_8s_linear_infinite] will-change-transform">
           <AnimationList title={title} />
           <AnimationList title={title} />
         </div>
@@ -24,7 +24,7 @@ const LocationImage = ({ image, title, gradient }: LocationImageProps) => {
         alt={title}
         fill
         sizes="306px"
-        className="object-cover rounded-l-secondary"
+        className="object-cover rounded-l-secondary w-full"
       />
     </div>
   );

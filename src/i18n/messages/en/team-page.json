@@ -1,0 +1,48 @@
+{
+  "TeamPage": {
+    "HeroSection": {
+      "title": "Real product people"
+    },
+    "philosophySection": {
+      "title": "Team Philosophy",
+      "subtitle": "Great products are not created by isolated developers. They are built by small, focused, cross-functional teams.",
+      "desc": "All aligned around one goal — making your product succeed."
+    },
+    "WorkSection": {
+      "title": "How We Work",
+      "workList": {
+        "work01": {
+          "title": "Dedicated",
+          "description": "Each team is fully committed to your project. No context shifts, no distractions."
+        },
+        "work02": {
+          "title": "Responsible",
+          "description": "We take full responsibility for the outcome, not just completing tickets."
+        },
+        "work03": {
+          "title": "Optimized",
+          "description": "Balancing speed, stability, and revenue to ensure business growth."
+        }
+      }
+    },
+    "StepsSection": {
+      "subtitle": "Your product is built by a team with a proven track record of end-to-end delivery.",
+      "stepsList": {
+        "step01": { "title": "Launched apps with millions of users" },
+        "step02": { "title": "Survived App Store rejections and complex compliance" },
+        "step03": { "title": "Scaled systems under real-world massive traffic" },
+        "step04": { "title": "Built and maintained high-monetization products" }
+      }
+    },
+    "TransparencySection": {
+      "title": "Transparency",
+      "subtitle": "NO BLACK BOX.",
+      "transparencyList": {
+        "trans01": { "title": "Real sprint progress" },
+        "trans02": { "title": "Real product metrics" },
+        "trans03": { "title": "Real QA reports" },
+        "trans04": { "title": "Real release readiness" }
+      }
+    }
+  }
+}

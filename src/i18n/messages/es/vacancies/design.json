@@ -1,0 +1,86 @@
+{
+  "VacancyDesignerPage": {
+    "valueSection": {
+      "title": "Diseño que demuestra su valor",
+      "subtitle": "En Echocode el diseño no se trata solo de lo visual. Se trata de crear hipótesis que se convierten en crecimiento medible del producto. Buscamos un diseñador que entienda el valor empresarial de las decisiones de producto y pueda justificarlas con datos y comportamiento del usuario."
+    },
+    "descriptionSections": {
+      "section01": {
+        "title": "¿En qué trabajarás?",
+        "val01": {
+          "title": "Diseño de producto end-to-end:",
+          "desc": "Participación en la creación de la estrategia del producto junto con el CEO y el equipo de ingeniería."
+        },
+        "val02": {
+          "title": "Diseño de conversión:",
+          "desc": "Creación y prueba de interfaces que aumentan el LTV y las conversiones."
+        },
+        "val03": {
+          "title": "Sistema de diseño:",
+          "desc": "Mantenimiento y evolución de un sistema de diseño escalable en Figma."
+        },
+        "val04": {
+          "title": "Feedback de usuarios:",
+          "desc": "Análisis del feedback y mejora iterativa de la UX."
+        }
+      },
+      "section02": {
+        "title": "Nuestras expectativas",
+        "val01": {
+          "title": "Portfolio sólido",
+          "desc": "Experiencia con productos móviles (iOS / Android)."
+        },
+        "val02": {
+          "title": "Nivel experto en Figma",
+          "desc": "Conocimiento profundo de Auto Layout, Variables y Prototyping."
+        },
+        "val03": {
+          "title": "Comprensión de la psicología del usuario",
+          "desc": "Conocimiento del comportamiento del usuario y economía conductual."
+        },
+        "val04": {
+          "title": "Comprensión de limitaciones técnicas de plataformas",
+          "desc": "Saber qué es fácil de implementar para los desarrolladores y qué no."
+        }
+      },
+      "section03": {
+        "title": "Tus Soft Skills",
+        "val01": {
+          "title": "Capacidad de justificar decisiones de diseño",
+          "desc": "Cada decisión se basa en hipótesis, datos e impacto medible."
+        },
+        "val02": {
+          "title": "Disposición a trabajar con métricas de producto",
+          "desc": "Trabajamos con conversiones, funnels y flujos, no solo estética."
+        },
+        "val03": {
+          "title": "Alto nivel de autonomía",
+          "desc": "Capacidad de llevar una tarea desde la idea hasta un resultado medible."
+        }
+      }
+    },
+    "selectionSection": {
+      "title": "Etapas de selección",
+      "step01": {
+        "title": "Paso 01",
+        "subTitle": "Revisión de portfolio",
+        "desc": "Evaluamos pensamiento de diseño, lógica de decisiones e impacto real."
+      },
+      "step02": {
+        "title": "Paso 02",
+        "subTitle": "Design Challenge",
+        "desc": "Evaluamos cómo formulas hipótesis y trabajas con restricciones."
+      },
+      "step03": {
+        "title": "Paso 03",
+        "subTitle": "Entrevista",
+        "desc": "Conversación con el equipo de producto sobre enfoque, proceso y colaboración."
+      },
+      "step04": {
+        "title": "Paso 04",
+        "subTitle": "Oferta",
+        "desc": "Oferta transparente e inicio de cooperación sin pasos innecesarios."
+      }
+    }
+  }
+}

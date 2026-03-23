@@ -8,7 +8,8 @@ const SocailLinks = () => {
         <Link
           href={'https://t.me/echocode_app'}
           target="blank"
-          className="flex justify-center items-center w-10 h-10 bg-base-gray rounded-full"
+          className="flex justify-center items-center w-10 h-10 bg-base-gray rounded-full 
+          hover:bg-accent duration-main"
         >
           <div className="relative w-4.5 h-3.5">
             <Image src="/UI/social-icons/telegram.svg" fill alt="Telegram" />
@@ -19,7 +20,8 @@ const SocailLinks = () => {
         <Link
           href={'http://instagram.com/echocode.app'}
           target="blank"
-          className="flex justify-center items-center w-10 h-10 bg-base-gray rounded-full"
+          className="flex justify-center items-center w-10 h-10 bg-base-gray rounded-full
+          hover:bg-accent duration-main"
         >
           <div className="relative w-4.5 h-4.5">
             <Image src="/UI/social-icons/insta.svg" fill alt="Instagram" />

@@ -2,11 +2,14 @@
 
 import { useState } from 'react';
 import { motion } from 'motion/react';
+import { useTranslations } from 'next-intl';
 
 import directions from '@/data/directions/directions.json';
 import DirectionItem from './DirectionItem';
+
 const DirectionList = () => {
   const [isShowLastItems, setIsShowLastItems] = useState(false);
+  const t = useTranslations('HomePage.DirectionsSection');
 
   return (
     <>
@@ -34,9 +37,9 @@ const DirectionList = () => {
           onClick={() => setIsShowLastItems(true)}
           className="block mx-auto md:mx-0 md:ml-auto px-6 py-2 font-title text-title-sm 
       rounded-base border-2 border-accent shadow-button
-       hover:bg-accent duration-main cursor-pointer"
+       hover:bg-accent duration-main cursor-pointer uppercase"
         >
-          Load More
+          {t('loadMoreBtn')}
         </button>
       )}
     </>

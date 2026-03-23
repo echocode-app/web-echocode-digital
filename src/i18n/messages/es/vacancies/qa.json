@@ -1,0 +1,86 @@
+{
+  "VacancyQAPage": {
+    "valueSection": {
+      "title": "QA que demuestra su valor",
+      "subtitle": "En Echocode, QA no se trata solo de encontrar errores, sino de validar hipótesis que mejoran el producto. Buscamos un ingeniero QA con un fuerte enfoque analítico que pueda justificar sus decisiones basándose en datos y experiencia del usuario."
+    },
+    "descriptionSections": {
+      "section01": {
+        "title": "¿En qué trabajarás?",
+        "val01": {
+          "title": "Calidad de extremo a extremo:",
+          "desc": "Ciclo completo de pruebas de productos móviles y web complejos."
+        },
+        "val02": {
+          "title": "Responsabilidad de procesos:",
+          "desc": "Construcción y optimización de procesos QA dentro de equipos de producto."
+        },
+        "val03": {
+          "title": "QA basado en datos:",
+          "desc": "Trabajo con métricas de estabilidad y análisis de las causas raíz de errores en producción."
+        },
+        "val04": {
+          "title": "Impulso de automatización:",
+          "desc": "Oportunidad de implementar pruebas automatizadas para acelerar CI/CD."
+        }
+      },
+      "section02": {
+        "title": "Requisitos",
+        "val01": {
+          "title": "Experiencia en pruebas multiplataforma",
+          "desc": "Más de 2 años de experiencia en pruebas Mobile (iOS/Android) y Web."
+        },
+        "val02": {
+          "title": "Conocimiento de cliente-servidor y APIs",
+          "desc": "Comprensión profunda de arquitectura cliente-servidor e interacción con APIs (Postman/Charles)."
+        },
+        "val03": {
+          "title": "Herramientas de crashes y analítica",
+          "desc": "Experiencia con Crashlytics, Firebase y herramientas de analítica."
+        },
+        "val04": {
+          "title": "Conocimiento de SDLC y Agile",
+          "desc": "Comprensión del ciclo de vida del desarrollo de software y metodologías Agile."
+        }
+      },
+      "section03": {
+        "title": "Valoramos",
+        "val01": {
+          "title": "Orientación al detalle y pensamiento analítico",
+          "desc": "Alta atención al detalle y pensamiento crítico."
+        },
+        "val02": {
+          "title": "Comunicación clara y resolución de problemas",
+          "desc": "Capacidad para comunicar problemas claramente y proponer soluciones."
+        },
+        "val03": {
+          "title": "Experiencia en Fintech o productos de alta carga",
+          "desc": "Experiencia trabajando con productos Fintech o de alto tráfico."
+        }
+      }
+    },
+    "selectionSection": {
+      "title": "Etapas de selección",
+      "step01": {
+        "title": "Paso 01",
+        "subTitle": "Llamada de screening",
+        "desc": "Evaluamos tu conocimiento de SDLC, priorización y capacidad para detectar vulnerabilidades del producto."
+      },
+      "step02": {
+        "title": "Paso 02",
+        "subTitle": "Análisis de caso práctico",
+        "desc": "Evaluación de pruebas, hipótesis y limitaciones."
+      },
+      "step03": {
+        "title": "Paso 03",
+        "subTitle": "Entrevista técnica",
+        "desc": "Profundización en metodologías de testing, herramientas e integración Agile."
+      },
+      "step04": {
+        "title": "Paso 04",
+        "subTitle": "Oferta",
+        "desc": "Propuesta clara de colaboración enfocada en tu crecimiento y en la calidad del producto."
+      }
+    }
+  }
+}

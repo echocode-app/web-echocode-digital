@@ -1,0 +1,22 @@
+[
+  {
+    "title": "step01.title",
+    "subTitle": "step01.subTitle",
+    "desc": "step01.desc"
+  },
+  {
+    "title": "step02.title",
+    "subTitle": "step02.subTitle",
+    "desc": "step02.desc"
+  },
+  {
+    "title": "step03.title",
+    "subTitle": "step03.subTitle",
+    "desc": "step03.desc"
+  },
+  {
+    "title": "step04.title",
+    "subTitle": "step04.subTitle",
+    "desc": "step04.desc"
+  }
+]

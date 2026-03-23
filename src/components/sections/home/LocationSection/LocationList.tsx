@@ -1,3 +1,5 @@
+import { useTranslations } from 'next-intl';
+
 import LocationImage from './LocationImage';
 
 const { kyiv, berlin, global } = {
@@ -7,19 +9,21 @@ const { kyiv, berlin, global } = {
 };
 
 const LocationList = () => {
+  const t = useTranslations('HomePage.LocationsSection');
+
   return (
-    <ul className="flex flex-col sm:flex-row flex-wrap  justify-center gap-10">
-      <li>
+    <ul className="grid grid-cols-1 min-[580px]:grid-cols-2 md:grid-cols-3 justify-items-center gap-10">
+      <li className="w-full sm:max-w-76.5">
         <LocationImage image="/images/locations/kyiv.png" title="ПривIт" gradient={kyiv} />
-        <h3 className="font-title text-title-sm">Kyiv</h3>
+        <h3 className="font-title text-title-sm uppercase">{t('locations.kyiv')}</h3>
       </li>
-      <li>
+      <li className="w-full sm:max-w-76.5">
         <LocationImage image="/images/locations/berlin.png" title="Guten Tag" gradient={berlin} />
-        <h3 className="font-title text-title-sm">berlin</h3>
+        <h3 className="font-title text-title-sm uppercase">{t('locations.berlin')}</h3>
       </li>
-      <li>
+      <li className="w-full sm:max-w-76.5">
         <LocationImage image="/images/locations/remote.jpg" title="global" gradient={global} />
-        <h3 className="font-title text-title-sm">Remote</h3>
+        <h3 className="font-title text-title-sm uppercase">{t('locations.remote')}</h3>
       </li>
     </ul>
   );

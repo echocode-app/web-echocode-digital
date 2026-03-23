@@ -1,0 +1,18 @@
+{
+  "ProjectModal": {
+    "title": "МАЄТЕ ІДЕЮ ПРОЄКТУ?",
+    "subtitle": "Отримайте професійну консультацію. Скористайтесь формою або напишіть нам на email:",
+    "projectForm": {
+      "firstNamePlaceholder": "Ім'я*",
+      "lastNamePlaceholder": "Прізвище*",
+      "emailPlaceholder": "Email*",
+      "filePlaceholder": "прикріпіть файл",
+      "needsLabel": "Про ваші потреби...",
+      "needsPlaceholder": "наприклад: дизайн мобільного застосунку для фінтех-стартапу",
+      "submitBtn": "Надіслати",
+      "submitSending": "Надсилаємо...",
+      "successBtn": "Запит отримано. Ми скоро зв’яжемось.",
+      "submitMessage": "ДЯКУЄМО!"
+    }
+  }
+}

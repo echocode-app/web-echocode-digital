@@ -1,0 +1,145 @@
+/api/admin/portfolio:
+  get:
+    tags: [Admin Portfolio]
+    operationId: listAdminPortfolioPreviewProjects
+    summary: List dynamic portfolio preview cards
+    security:
+      - bearerAuth: []
+    responses:
+      '200':
+        description: Dynamic portfolio preview cards
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/SuccessEnvelope'
+      '401':
+        $ref: '../openapi.yaml#/components/responses/Unauthorized'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/Forbidden'
+  post:
+    tags: [Admin Portfolio]
+    operationId: createAdminPortfolioPreviewProject
+    summary: Create a dynamic portfolio preview card
+    security:
+      - bearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - title
+              - platforms
+              - categories
+              - image
+            properties:
+              title:
+                type: string
+              platforms:
+                type: array
+                items:
+                  type: string
+              categories:
+                type: array
+                items:
+                  type: string
+              image:
+                type: object
+                required:
+                  - path
+                  - originalName
+                  - mimeType
+                  - sizeBytes
+                properties:
+                  path:
+                    type: string
+                  originalName:
+                    type: string
+                  mimeType:
+                    type: string
+                  sizeBytes:
+                    type: integer
+    responses:
+      '200':
+        description: Dynamic portfolio preview card created
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/SuccessEnvelope'
+      '400':
+        $ref: '../openapi.yaml#/components/responses/BadRequest'
+      '401':
+        $ref: '../openapi.yaml#/components/responses/Unauthorized'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/Forbidden'
+
+/api/admin/portfolio/image/init:
+  post:
+    tags: [Admin Portfolio]
+    operationId: initAdminPortfolioPreviewImageUpload
+    summary: Initialize signed upload URL for a portfolio preview image
+    security:
+      - bearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - file
+            properties:
+              file:
+                type: object
+                required:
+                  - originalName
+                  - mimeType
+                  - sizeBytes
+                properties:
+                  originalName:
+                    type: string
+                  mimeType:
+                    type: string
+                  sizeBytes:
+                    type: integer
+    responses:
+      '200':
+        description: Signed upload URL for portfolio image
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/SuccessEnvelope'
+      '400':
+        $ref: '../openapi.yaml#/components/responses/BadRequest'
+      '401':
+        $ref: '../openapi.yaml#/components/responses/Unauthorized'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/Forbidden'
+
+/api/admin/portfolio/{projectId}:
+  delete:
+    tags: [Admin Portfolio]
+    operationId: deleteAdminPortfolioPreviewProject
+    summary: Delete a dynamic portfolio preview card
+    security:
+      - bearerAuth: []
+    parameters:
+      - in: path
+        name: projectId
+        required: true
+        schema:
+          type: string
+    responses:
+      '200':
+        description: Dynamic portfolio preview card deleted
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/SuccessEnvelope'
+      '400':
+        $ref: '../openapi.yaml#/components/responses/BadRequest'
+      '401':
+        $ref: '../openapi.yaml#/components/responses/Unauthorized'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/Forbidden'

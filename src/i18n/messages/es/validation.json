@@ -1,0 +1,51 @@
+{
+  "VacancyValidation": {
+    "file": {
+      "nameRequired": "El nombre del archivo es obligatorio",
+      "nameTooLong": "El nombre del archivo es demasiado largo",
+      "mimeRequired": "El tipo MIME es obligatorio",
+      "mimeTooLong": "El tipo MIME es demasiado largo",
+      "mimeInvalid": "Permitido: PDF, DOC, DOCX, RTF, ODT, TXT",
+      "sizePositive": "El tamaño del archivo debe ser mayor que 0",
+      "sizeMax": "El archivo debe ser ≤ 5 MB",
+      "pathRequired": "La ruta es obligatoria",
+      "pathTooLong": "La ruta es demasiado larga",
+      "pathInvalid": "Formato de ruta de almacenamiento inválido"
+    },
+    "profileUrl": {
+      "required": "La URL es obligatoria",
+      "invalid": "Debe ser una URL válida",
+      "maxLength": "La URL debe contener como máximo 2048 caracteres",
+      "scheme": "La URL debe comenzar con http:// o https://"
+    },
+    "cv": {
+      "required": "El CV es obligatorio"
+    }
+  },
+  "ProjectValidation": {
+    "name": {
+      "min": "Debe contener al menos 2 caracteres",
+      "max": "Debe contener como máximo 40 caracteres",
+      "pattern": "Solo se permiten letras, espacios, apóstrofes y guiones"
+    },
+    "email": {
+      "invalid": "Debe ser un correo electrónico válido",
+      "max": "El correo electrónico es demasiado largo"
+    },
+    "description": {
+      "max": "La descripción es demasiado larga"
+    },
+    "attachment": {
+      "invalidType": "Tipo de archivo no compatible. Use image, PDF, Office, TXT, CSV, RTF o ZIP.",
+      "size": "El archivo debe ser menor de 10MB"
+    }
+  },
+  "EmailSubmitValidation": {
+    "email": {
+      "min": "El correo electrónico es demasiado corto",
+      "max": "El correo electrónico es demasiado largo",
+      "invalid": "Ingrese un correo electrónico válido",
+      "domain": "El dominio debe contener un punto y ser válido"
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "VacancyValidation": {
+    "file": {
+      "nameRequired": "Ім’я файлу обов’язкове",
+      "nameTooLong": "Ім’я файлу занадто довге",
+      "mimeRequired": "Тип MIME обов’язковий",
+      "mimeTooLong": "Тип MIME занадто довгий",
+      "mimeInvalid": "Дозволено: PDF, DOC, DOCX, RTF, ODT, TXT",
+      "sizePositive": "Розмір файлу має бути більшим за 0",
+      "sizeMax": "Файл має бути ≤ 5 МБ",
+      "pathRequired": "Шлях обов’язковий",
+      "pathTooLong": "Шлях занадто довгий",
+      "pathInvalid": "Невірний формат шляху збереження"
+    },
+    "profileUrl": {
+      "required": "URL обов’язковий",
+      "invalid": "Вкажіть коректний URL",
+      "maxLength": "URL має містити не більше 2048 символів",
+      "scheme": "URL має починатися з http:// або https://"
+    },
+    "cv": {
+      "required": "CV обов’язкове"
+    }
+  },
+  "ProjectValidation": {
+    "name": {
+      "min": "Має містити щонайменше 2 символи",
+      "max": "Має містити не більше 40 символів",
+      "pattern": "Дозволені лише літери, пробіли, апострофи та дефіси"
+    },
+    "email": {
+      "invalid": "Вкажіть коректний email",
+      "max": "Email занадто довгий"
+    },
+    "description": {
+      "max": "Опис занадто довгий"
+    },
+    "attachment": {
+      "invalidType": "Непідтримуваний тип файлу. Використовуйте image, PDF, Office, TXT, CSV, RTF або ZIP.",
+      "size": "Файл має бути менше 10MB"
+    }
+  },
+  "EmailSubmitValidation": {
+    "email": {
+      "min": "Email занадто короткий",
+      "max": "Email занадто довгий",
+      "invalid": "Введіть коректний email",
+      "domain": "Домен має містити крапку та бути коректним"
+    }
+  }
+}

@@ -2,17 +2,20 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { useLockBodyScroll } from '@/hooks/useLockBodyScroll';
+import { useScrollToTop } from '@/hooks/useScrollToTop';
 
 import MobaileNavList from './MobileNavList';
-import LanguageSwitcher from '@/components/I18n/LanguageSwitcher';
+import LanguageSwitcher from '@/components/UI/LanguageSwitcher';
 import Logo from '@/components/UI/Logo';
-import Link from 'next/link';
 
 const MobileMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenDropdown, setIsOpenDropdown] = useState(false);
+  const scrollToTop = useScrollToTop('/');
+
   useLockBodyScroll(isOpen);
 
   const handleCloseAll = () => {
@@ -28,6 +31,11 @@ const MobileMenu = () => {
       }
       return next;
     });
+  };
+
+  const handleLogoClick = () => {
+    handleCloseAll();
+    scrollToTop();
   };
 
   return (
@@ -50,7 +58,7 @@ const MobileMenu = () => {
          `}
       >
         <div className="flex items-center justify-between mb-7">
-          <Link href={'/'} onClick={handleCloseAll}>
+          <Link href={'/'} onClick={handleLogoClick}>
             <Logo />
           </Link>
           <button onClick={handleToggleMenu} className="relative w-10 h-10" aria-label="Close menu">
@@ -64,7 +72,7 @@ const MobileMenu = () => {
           isOpenDropdown={isOpenDropdown}
           setIsOpenDropdown={setIsOpenDropdown}
         />
-        <div className="mt-8 flex justify-end">
+        <div className="mt-8 flex justify-start">
           <LanguageSwitcher />
         </div>
       </div>

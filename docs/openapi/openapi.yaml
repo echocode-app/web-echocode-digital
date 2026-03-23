@@ -1,0 +1,576 @@
+openapi: 3.1.0
+info:
+  title: Echocode API
+  version: 1.1.0
+  description: |
+    Canonical backend API contract for public form submissions and admin moderation/dashboard endpoints.
+    Response envelope format:
+    - success: `{ "success": true, "data": ... }`
+    - error: `{ "success": false, "error": { "code", "message" } }`
+  license:
+    name: Proprietary
+    identifier: Proprietary
+servers:
+  - url: https://api.echocode.digital
+  - url: http://127.0.0.1:3000
+tags:
+  - name: System
+    description: Health and internal infrastructure checks.
+  - name: Public Forms
+    description: Public endpoints for form submit flows.
+  - name: Admin Core
+    description: Authenticated admin account and audit endpoints.
+  - name: Admin Dashboard
+    description: Dashboard and geography analytics.
+  - name: Admin Echocode App
+    description: Dedicated analytics and legacy submissions slice for the external echocode.app site.
+  - name: Admin Submissions Legacy
+    description: Legacy submissions moderation endpoints.
+  - name: Admin Client Submissions
+    description: Client project moderation queue.
+  - name: Admin Email Submissions
+    description: Footer email moderation queue.
+  - name: Admin Vacancy Candidates
+    description: Canonical vacancy candidates moderation queue.
+  - name: Admin Vacancies
+    description: Manage public vacancy visibility and metadata.
+  - name: Admin Vacancy Submissions
+    description: Legacy compatibility alias for vacancy candidates queue.
+security:
+  - bearerAuth: []
+paths:
+  /api/health:
+    $ref: './paths/system.yaml#/~1api~1health'
+  /api/internal/firebase-check:
+    $ref: './paths/system.yaml#/~1api~1internal~1firebase-check'
+
+  /api/analytics/page-view:
+    $ref: './paths/public-forms.yaml#/~1api~1analytics~1page-view'
+  /api/forms/uploads/init:
+    $ref: './paths/public-forms.yaml#/~1api~1forms~1uploads~1init'
+  /api/forms/submissions:
+    $ref: './paths/public-forms.yaml#/~1api~1forms~1submissions'
+  /api/forms/client-project:
+    $ref: './paths/public-forms.yaml#/~1api~1forms~1client-project'
+  /api/forms/client-project/image/init:
+    $ref: './paths/public-forms.yaml#/~1api~1forms~1client-project~1image~1init'
+  /api/forms/client-project/analytics:
+    $ref: './paths/public-forms.yaml#/~1api~1forms~1client-project~1analytics'
+  /api/forms/email-submissions:
+    $ref: './paths/public-forms.yaml#/~1api~1forms~1email-submissions'
+  /api/forms/vacancy-submissions:
+    $ref: './paths/public-forms.yaml#/~1api~1forms~1vacancy-submissions'
+
+  /api/admin/me:
+    $ref: './paths/admin-core.yaml#/~1api~1admin~1me'
+  /api/admin/logs:
+    $ref: './paths/admin-core.yaml#/~1api~1admin~1logs'
+  /api/admin/access:
+    $ref: './paths/admin-core.yaml#/~1api~1admin~1access'
+  /api/admin/access/{email}:
+    $ref: './paths/admin-core.yaml#/~1api~1admin~1access~1{email}'
+
+  /api/admin/dashboard/overview:
+    $ref: './paths/admin-dashboard.yaml#/~1api~1admin~1dashboard~1overview'
+  /api/admin/dashboard/geography:
+    $ref: './paths/admin-dashboard.yaml#/~1api~1admin~1dashboard~1geography'
+  /api/admin/dashboard/site-slice:
+    $ref: './paths/admin-dashboard.yaml#/~1api~1admin~1dashboard~1site-slice'
+  /api/admin/echocode-app/overview:
+    $ref: './paths/admin-echocode-app.yaml#/~1api~1admin~1echocode-app~1overview'
+  /api/admin/echocode-app/submissions:
+    $ref: './paths/admin-echocode-app.yaml#/~1api~1admin~1echocode-app~1submissions'
+  /api/admin/echocode-app/submissions/overview:
+    $ref: './paths/admin-echocode-app.yaml#/~1api~1admin~1echocode-app~1submissions~1overview'
+
+  /api/admin/submissions:
+    $ref: './paths/admin-submissions-legacy.yaml#/~1api~1admin~1submissions'
+  /api/admin/submissions/status:
+    $ref: './paths/admin-submissions-legacy.yaml#/~1api~1admin~1submissions~1status'
+  /api/admin/submissions/overview:
+    $ref: './paths/admin-submissions-legacy.yaml#/~1api~1admin~1submissions~1overview'
+
+  /api/admin/submissions/clients:
+    $ref: './paths/admin-submissions-clients.yaml#/~1api~1admin~1submissions~1clients'
+  /api/admin/submissions/clients/overview:
+    $ref: './paths/admin-submissions-clients.yaml#/~1api~1admin~1submissions~1clients~1overview'
+  /api/admin/submissions/clients/{submissionId}:
+    $ref: './paths/admin-submissions-clients.yaml#/~1api~1admin~1submissions~1clients~1{submissionId}'
+  /api/admin/submissions/clients/status:
+    $ref: './paths/admin-submissions-clients.yaml#/~1api~1admin~1submissions~1clients~1status'
+  /api/admin/submissions/clients/comment:
+    $ref: './paths/admin-submissions-clients.yaml#/~1api~1admin~1submissions~1clients~1comment'
+  /api/admin/submissions/clients/delete:
+    $ref: './paths/admin-submissions-clients.yaml#/~1api~1admin~1submissions~1clients~1delete'
+
+  /api/admin/submissions/emails:
+    $ref: './paths/admin-submissions-emails.yaml#/~1api~1admin~1submissions~1emails'
+  /api/admin/submissions/emails/overview:
+    $ref: './paths/admin-submissions-emails.yaml#/~1api~1admin~1submissions~1emails~1overview'
+  /api/admin/submissions/emails/{submissionId}:
+    $ref: './paths/admin-submissions-emails.yaml#/~1api~1admin~1submissions~1emails~1{submissionId}'
+  /api/admin/submissions/emails/status:
+    $ref: './paths/admin-submissions-emails.yaml#/~1api~1admin~1submissions~1emails~1status'
+  /api/admin/submissions/emails/comment:
+    $ref: './paths/admin-submissions-emails.yaml#/~1api~1admin~1submissions~1emails~1comment'
+  /api/admin/submissions/emails/delete:
+    $ref: './paths/admin-submissions-emails.yaml#/~1api~1admin~1submissions~1emails~1delete'
+
+  /api/admin/vacancies/candidates:
+    $ref: './paths/admin-vacancies-candidates.yaml#/~1api~1admin~1vacancies~1candidates'
+  /api/admin/vacancies:
+    $ref: './paths/admin-vacancies.yaml#/~1api~1admin~1vacancies'
+  /api/admin/vacancies/{vacancyId}:
+    $ref: './paths/admin-vacancies.yaml#/~1api~1admin~1vacancies~1{vacancyId}'
+  /api/admin/portfolio:
+    $ref: './paths/admin-portfolio.yaml#/~1api~1admin~1portfolio'
+  /api/admin/portfolio/image/init:
+    $ref: './paths/admin-portfolio.yaml#/~1api~1admin~1portfolio~1image~1init'
+  /api/admin/portfolio/{projectId}:
+    $ref: './paths/admin-portfolio.yaml#/~1api~1admin~1portfolio~1{projectId}'
+  /api/admin/vacancies/candidates/overview:
+    $ref: './paths/admin-vacancies-candidates.yaml#/~1api~1admin~1vacancies~1candidates~1overview'
+  /api/admin/vacancies/candidates/{submissionId}:
+    $ref: './paths/admin-vacancies-candidates.yaml#/~1api~1admin~1vacancies~1candidates~1{submissionId}'
+  /api/admin/vacancies/candidates/status:
+    $ref: './paths/admin-vacancies-candidates.yaml#/~1api~1admin~1vacancies~1candidates~1status'
+  /api/admin/vacancies/candidates/comment:
+    $ref: './paths/admin-vacancies-candidates.yaml#/~1api~1admin~1vacancies~1candidates~1comment'
+  /api/admin/vacancies/candidates/delete:
+    $ref: './paths/admin-vacancies-candidates.yaml#/~1api~1admin~1vacancies~1candidates~1delete'
+
+  /api/admin/submissions/vacancies:
+    $ref: './paths/admin-submissions-vacancies.yaml#/~1api~1admin~1submissions~1vacancies'
+  /api/admin/submissions/vacancies/overview:
+    $ref: './paths/admin-submissions-vacancies.yaml#/~1api~1admin~1submissions~1vacancies~1overview'
+  /api/admin/submissions/vacancies/{submissionId}:
+    $ref: './paths/admin-submissions-vacancies.yaml#/~1api~1admin~1submissions~1vacancies~1{submissionId}'
+  /api/admin/submissions/vacancies/status:
+    $ref: './paths/admin-submissions-vacancies.yaml#/~1api~1admin~1submissions~1vacancies~1status'
+  /api/admin/submissions/vacancies/comment:
+    $ref: './paths/admin-submissions-vacancies.yaml#/~1api~1admin~1submissions~1vacancies~1comment'
+  /api/admin/submissions/vacancies/delete:
+    $ref: './paths/admin-submissions-vacancies.yaml#/~1api~1admin~1submissions~1vacancies~1delete'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  parameters:
+    SubmissionIdPath:
+      name: submissionId
+      in: path
+      required: true
+      schema:
+        type: string
+    SubmissionIdQuery:
+      name: submissionId
+      in: query
+      required: true
+      schema:
+        type: string
+    Cursor:
+      name: cursor
+      in: query
+      schema:
+        type: string
+    Limit20:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 20
+    DateFrom:
+      name: dateFrom
+      in: query
+      schema:
+        type: string
+        format: date
+    DateTo:
+      name: dateTo
+      in: query
+      schema:
+        type: string
+        format: date
+    StatusModeration:
+      name: status
+      in: query
+      schema:
+        $ref: '#/components/schemas/ModerationStatus'
+    Period:
+      name: period
+      in: query
+      schema:
+        type: string
+        enum: [week, month, year]
+        default: week
+
+  responses:
+    Unauthorized:
+      description: Missing or invalid token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    Forbidden:
+      description: Authenticated but lacks permission.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    BadRequest:
+      description: Validation or request format error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+
+  schemas:
+    SuccessEnvelope:
+      type: object
+      required: [success, data]
+      properties:
+        success:
+          type: boolean
+          const: true
+        data:
+          type: object
+
+    ErrorEnvelope:
+      type: object
+      required: [success, error]
+      properties:
+        success:
+          type: boolean
+          const: false
+        error:
+          type: object
+          required: [code, message]
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+
+    ModerationStatus:
+      type: string
+      enum: [new, viewed, processed, rejected, deferred]
+
+    UploadInitRequest:
+      type: object
+      required: [formType, file]
+      properties:
+        formType:
+          type: string
+          enum: [project, vacancy]
+        file:
+          $ref: '#/components/schemas/FileMetaInput'
+
+    UploadInitResponse:
+      type: object
+      required: [uploadUrl, path, method, expiresAt, headers]
+      properties:
+        uploadUrl:
+          type: string
+          format: uri
+        path:
+          type: string
+        method:
+          type: string
+          const: PUT
+        expiresAt:
+          type: string
+          format: date-time
+        headers:
+          type: object
+          properties:
+            Content-Type:
+              type: string
+
+    FileMetaInput:
+      type: object
+      required: [path, originalName, mimeType, sizeBytes]
+      properties:
+        path:
+          type: string
+        originalName:
+          type: string
+        mimeType:
+          type: string
+        sizeBytes:
+          type: integer
+          minimum: 1
+
+    SiteContextInput:
+      type: object
+      properties:
+        siteId:
+          type: string
+          description: |
+            Optional explicit site identifier for cross-site ingestion.
+            `echocode_app` is used for the external static app site.
+          example: echocode_app
+        siteHost:
+          type: string
+          description: Canonical host of the originating site.
+          example: echocode.app
+
+    AttributionInput:
+      type: object
+      required: [source]
+      properties:
+        source:
+          type: string
+        medium:
+          type: string
+        campaign:
+          type: string
+
+    PageViewTrackRequest:
+      allOf:
+        - $ref: '#/components/schemas/SiteContextInput'
+        - type: object
+          required: [path, url]
+          properties:
+            path:
+              type: string
+            url:
+              type: string
+            title:
+              type: [string, 'null']
+            referrer:
+              type: [string, 'null']
+            source:
+              type: string
+              example: echocode_app
+            attribution:
+              $ref: '#/components/schemas/AttributionInput'
+
+    LegacyProjectSubmissionRequest:
+      allOf:
+        - $ref: '#/components/schemas/SiteContextInput'
+        - type: object
+          additionalProperties: true
+          description: |
+            Legacy project submission payload. The backend still accepts the existing flexible body,
+            but cross-site integrations should send `siteId` and `siteHost` explicitly.
+
+    ClientProjectCreateRequest:
+      allOf:
+        - $ref: '#/components/schemas/SiteContextInput'
+        - type: object
+          required: [firstName, lastName, email]
+          properties:
+            firstName: { type: string }
+            lastName: { type: string }
+            email:
+              type: string
+              format: email
+            description: { type: string }
+            image:
+              $ref: '#/components/schemas/FileMetaInput'
+            attribution:
+              $ref: '#/components/schemas/AttributionInput'
+
+    EmailSubmissionCreateRequest:
+      allOf:
+        - $ref: '#/components/schemas/SiteContextInput'
+        - type: object
+          required: [email]
+          properties:
+            email:
+              type: string
+              format: email
+            source:
+              type: string
+            attribution:
+              $ref: '#/components/schemas/AttributionInput'
+
+    VacancySnapshotInput:
+      type: object
+      required: [vacancyId]
+      properties:
+        vacancyId: { type: string }
+        vacancySlug: { type: string }
+        vacancyTitle: { type: string }
+        level: { type: string }
+        conditions:
+          type: array
+          items: { type: string }
+        employmentType: { type: string }
+
+    VacancySubmissionCreateRequest:
+      allOf:
+        - $ref: '#/components/schemas/SiteContextInput'
+        - type: object
+          required: [profileUrl, cvFile, vacancy]
+          properties:
+            profileUrl:
+              type: string
+              format: uri
+            cvFile:
+              $ref: '#/components/schemas/FileMetaInput'
+            vacancy:
+              $ref: '#/components/schemas/VacancySnapshotInput'
+            attribution:
+              $ref: '#/components/schemas/AttributionInput'
+
+    CreateEntityResponse:
+      type: object
+      required: [id, status, createdAt]
+      properties:
+        id: { type: string }
+        status:
+          $ref: '#/components/schemas/ModerationStatus'
+        createdAt:
+          type: string
+          format: date-time
+
+    UpdateStatusRequest:
+      type: object
+      required: [status]
+      properties:
+        status:
+          $ref: '#/components/schemas/ModerationStatus'
+
+    UpdateStatusResponse:
+      type: object
+      required: [id, status, updatedAt, reviewedBy, reviewedAt]
+      properties:
+        id: { type: string }
+        status:
+          $ref: '#/components/schemas/ModerationStatus'
+        updatedAt:
+          type: string
+          format: date-time
+        reviewedBy:
+          type: [string, 'null']
+        reviewedAt:
+          type: [string, 'null']
+          format: date-time
+
+    AddCommentRequest:
+      type: object
+      required: [comment]
+      properties:
+        comment:
+          type: string
+          minLength: 1
+          maxLength: 1200
+
+    GenericCommentResponse:
+      type: object
+      required: [id, comment, updatedAt]
+      properties:
+        id: { type: string }
+        comment:
+          type: object
+          required: [id, text, authorUid, authorEmail, createdAt]
+          properties:
+            id: { type: string }
+            text: { type: string }
+            authorUid: { type: string }
+            authorEmail: { type: [string, 'null'] }
+            createdAt:
+              type: string
+              format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    SoftDeleteResponse:
+      type: object
+      required: [id, isDeleted, updatedAt]
+      properties:
+        id: { type: string }
+        isDeleted:
+          type: boolean
+          const: true
+        updatedAt:
+          type: string
+          format: date-time
+
+    GenericListEnvelope:
+      allOf:
+        - $ref: '#/components/schemas/SuccessEnvelope'
+        - type: object
+          properties:
+            data:
+              type: object
+              required: [items, page]
+              properties:
+                items:
+                  type: array
+                  items:
+                    type: object
+                page:
+                  type: object
+                  required: [limit, nextCursor, hasNextPage]
+                  properties:
+                    limit: { type: integer }
+                    nextCursor: { type: [string, 'null'] }
+                    hasNextPage: { type: boolean }
+
+    GenericOverviewEnvelope:
+      allOf:
+        - $ref: '#/components/schemas/SuccessEnvelope'
+        - type: object
+          properties:
+            data:
+              type: object
+
+    GenericDetailsEnvelope:
+      allOf:
+        - $ref: '#/components/schemas/SuccessEnvelope'
+        - type: object
+          properties:
+            data:
+              type: object
+              required: [item]
+              properties:
+                item:
+                  type: object
+
+    UpdateStatusEnvelope:
+      allOf:
+        - $ref: '#/components/schemas/SuccessEnvelope'
+        - type: object
+          properties:
+            data:
+              $ref: '#/components/schemas/UpdateStatusResponse'
+
+    AddCommentEnvelope:
+      allOf:
+        - $ref: '#/components/schemas/SuccessEnvelope'
+        - type: object
+          properties:
+            data:
+              $ref: '#/components/schemas/GenericCommentResponse'
+
+    SoftDeleteEnvelope:
+      allOf:
+        - $ref: '#/components/schemas/SuccessEnvelope'
+        - type: object
+          properties:
+            data:
+              $ref: '#/components/schemas/SoftDeleteResponse'
+
+    CreateEntityEnvelope:
+      allOf:
+        - $ref: '#/components/schemas/SuccessEnvelope'
+        - type: object
+          properties:
+            data:
+              $ref: '#/components/schemas/CreateEntityResponse'
+
+    UploadInitEnvelope:
+      allOf:
+        - $ref: '#/components/schemas/SuccessEnvelope'
+        - type: object
+          properties:
+            data:
+              $ref: '#/components/schemas/UploadInitResponse'

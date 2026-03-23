@@ -1,0 +1,23 @@
+{
+  "Error404Page": {
+    "title": "Page Not Found",
+    "description": "Your search has ventured beyond the known universe."
+  },
+  "Error503Page": {
+    "title": "Service temporarily unavailable",
+    "description": "The server is currently unable to handle the request. Please try again in a few minutes."
+  },
+  "Error500Page": {
+    "title": "Internal Server Error",
+    "description": "Something went wrong on our end. We're already working to fix the issue."
+  },
+  "PortfolioError": {
+    "title": "No projects found",
+    "description": "Try changing your filters.",
+    "resetButton": "Reset Filters"
+  },
+  "VacancyError": {
+    "title": "No open positions",
+    "description": "We’re not hiring right now, but new opportunities may open soon."
+  }
+}

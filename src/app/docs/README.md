@@ -11,17 +11,98 @@
 
 - `curl http://localhost:3000/api/health`
 - `curl http://localhost:3000/api/internal/firebase-check`
-- `curl http://localhost:3000/api/admin/me`
 
 - `curl -i -H "Authorization: Bearer invalid-token" http://localhost:3000/api/admin/me`
 - `curl -i -H "Authorization: Bearer valid-token" http://localhost:3000/api/admin/me`
 
-- `npm run test:firestore:rules`
-- `npm run test:storage:rules`
 - `npm run check`
 
 7. Оновити документацію, якщо змінився контракт API або серверна поведінка
 8. Комітити тільки після повністю успішного `npm run check`
+
+## Mock Submission Smoke Test
+
+- локальний seed script для нових moderation queues:
+- `BASE_URL=http://127.0.0.1:3000 npm run seed:mock:submissions`
+- скрипт створює:
+- кілька `/api/forms/email-submissions`
+- кілька `/api/forms/vacancy-submissions` для `iosdev`, `qaengineer`, `designer`
+- для vacancy flow скрипт проходить повний сценарій `uploads/init -> signed PUT -> vacancy-submissions`
+
+## `.digital` End-to-End Smoke Test
+
+- команда:
+- `BASE_URL=http://127.0.0.1:3000 npm run test:smoke:digital`
+- що перевіряє:
+- `GET /api/internal/firebase-check`
+- `POST /api/analytics/page-view`
+- `POST /api/forms/email-submissions`
+- `POST /api/forms/client-project`
+- `POST /api/forms/uploads/init` + signed `PUT` + `POST /api/forms/vacancy-submissions`
+- скрипт верифікує результат напряму в Firestore / Storage
+- усі створені mock-дані автоматично видаляються в кінці
+- якщо cleanup був перерваний:
+- `npm run test:smoke:digital:cleanup -- --run-id <run-id>`
+
+## QA Manual Checklist
+
+- окремий manual QA guide:
+- `src/app/docs/QA_CHECKLIST.md`
+- там зібрано:
+- короткий опис проєкту
+- localization / responsive / breakpoints
+- checklist по public UI
+- checklist по admin
+- мінімальний DevTools flow для QA без Postman/API-first підходу
+
+## Останні зміни серверної логіки (лаконічно)
+
+- API handoff docs for frontend integration:
+- `docs/openapi/openapi.yaml` - OpenAPI contract for all active API routes.
+- `docs/openapi/SCENARIOS.md` - most common frontend/backend integration scenarios.
+- `src/app/docs/SUBMISSIONS_INTEGRATION_HANDOFF.md` - practical integration checklist for frontend.
+- admin portfolio preview flow:
+- `GET /api/admin/portfolio` - list dynamic preview cards
+- `POST /api/admin/portfolio/image/init` - init signed upload URL for portfolio image
+- `POST /api/admin/portfolio` - create dynamic preview card using uploaded image metadata
+- `DELETE /api/admin/portfolio/{projectId}` - delete dynamic preview card
+- `slug`/internal id for dynamic preview cards is generated automatically from the title on the server
+- canonical vacancy candidates moderation namespace: `/api/admin/vacancies/candidates/*`
+- legacy compatibility alias remains available: `/api/admin/submissions/vacancies/*` (deprecated)
+- local/open-app documentation route: `/docs/api`
+- public page-view analytics route: `/api/analytics/page-view`
+- `/api/analytics/page-view` now supports cross-origin ingestion for approved external frontends via `OPTIONS` + `POST` CORS headers
+- `/api/forms/submissions` now supports the same cross-origin public ingestion flow for external frontend sites
+- public `.digital` frontend now mounts `PageViewTracker` in the public layout, so page views, geography, top pages, and referrer/UTM widgets are fed automatically on page load and route changes
+- public `.digital` form clients now send shared client analytics context (`siteId`, `siteHost`, first-touch attribution, client session header) across email, vacancy, and client-project flows
+- `.digital` dashboard now also has a dedicated page-view site slice API:
+- `/api/admin/dashboard/site-slice`
+- it powers page views / countries KPIs, top pages, geography list, and referrer/UTM widgets scoped to `siteId = echocode_digital`
+- dedicated admin slice for `echocode.app`:
+- `/admin/echocode-app`
+- `/admin/echocode-app/submissions`
+- dedicated admin APIs:
+- `/api/admin/echocode-app/overview`
+- `/api/admin/echocode-app/submissions`
+- `/api/admin/echocode-app/submissions/overview`
+- analytics and legacy submissions persistence are now site-aware via `siteId` / `siteHost`
+- `.digital` dashboard/metrics are explicitly scoped to the main site slice, while `/admin/echocode-app` stays isolated to `siteId = echocode_app`
+
+- `client_submissions`:
+- додано `soft delete` (поля `isDeleted`, `deletedAt`, `deletedBy`) без фізичного видалення документа.
+- list/read логіка оновлена: soft-deleted записи приховуються з активного переліку.
+
+- Admin API для client submissions:
+- додано `DELETE /api/admin/submissions/clients/delete?submissionId=...` для soft delete.
+
+- Client submission attachments:
+- у Firestore для нових заявок зберігається `imageName` (оригінальна назва файлу).
+- details DTO повертає `imageName` для коректного відображення в адмінці.
+
+- Dashboard/Submissions aggregates:
+- `totalSubmissions` у dashboard враховує обидва джерела: `submissions` + `client_submissions`.
+- метрики `Success vs errors`/funnel працюють на `analytics_events` і поточних діапазонах `Europe/Kiev`.
+- backend groundwork для `page_view` tracking вже задіяно і змонтовано в public layout.
 
 ## Що вже реалізовано у серверному фундаменті
 
@@ -173,24 +254,74 @@ Environment policy:
 - admin access enforcement через middleware wrapper
 - повернення актуального профілю з Firebase Admin SDK
 
-## Auth/Role модель (поточний стан)
+### `GET /api/admin/access`
+
+Призначення: повертає registry доступів до адмінки.
+
+Що входить у список:
+
+- вручну додані access entries
+- legacy записи, які вже були синхронізовані в `admin_users`
+- користувачі Firebase, у яких уже є `role` claim (`admin` / `developer` / `manager`)
+
+### `POST /api/admin/access`
+
+Призначення: pre-approve нового користувача до першого входу.
+
+Що зберігає:
+
+- email
+- display name
+- position
+- role
+
+### `PATCH /api/admin/access/{email}`
+
+Призначення: оновлення ролі, статусу та профільних полів існуючого access entry.
+
+## Auth / Roles (поточний стан)
 
 - Ролі: `admin`, `developer`, `manager`
 - Permissions: централізовані в `ROLE_PERMISSIONS`
 - Перевірка прав: `requirePermission(...)`
 - `admin` має повний доступ
-- `developer` має повний доступ у `development`, а також у non-dev за замовчуванням (`DEVELOPER_ACCESS_MODE=full`)
-- для переходу на read-only для `developer` достатньо перемкнути `DEVELOPER_ACCESS_MODE=readonly`
-- `manager` має доступ до бізнес-операцій, але без `admin.settings` та `audit.read`
+- `developer` задуманий як support / read-oriented role; локально в `development` може мати ширші права
+- для non-dev режим `developer` визначається `DEVELOPER_ACCESS_MODE`
+- `manager` має доступ до бізнес-операцій, але без `admin.settings`
 
 #### API-рівень (RBAC)
 
-| Дія / доступ                                           | Anonymous | Manager | Developer        | Admin |
-| ------------------------------------------------------ | --------- | ------- | ---------------- | ----- |
-| Доступ до admin API (`admin.access`)                   | ❌        | ✅      | ✅ (`full` mode) | ✅    |
-| Операційні write-дії (submissions/vacancies/portfolio) | ❌        | ✅      | ✅ (`full` mode) | ✅    |
-| `admin.settings`                                       | ❌        | ❌      | ✅ (`full` mode) | ✅    |
-| `audit.read` (логування дій в адмінпанелі)             | ❌        | ❌      | ✅ (`full` mode) | ✅    |
+| Дія / доступ                                           | Anonymous | Manager | Developer            | Admin |
+| ------------------------------------------------------ | --------- | ------- | -------------------- | ----- |
+| Доступ до admin API (`admin.access`)                   | ❌        | ✅      | ✅                   | ✅    |
+| Операційні write-дії (submissions/vacancies/portfolio) | ❌        | ✅      | env-dependent        | ✅    |
+| `admin.settings.read`                                  | ❌        | ❌      | ✅                   | ✅    |
+| `admin.settings`                                       | ❌        | ❌      | env-dependent / no   | ✅    |
+| `admin.logs.read`                                      | ❌        | ❌      | ✅                   | ✅    |
+
+## Admin UI map
+
+- `/admin/dashboard` - `.digital` traffic, geography, referrers, top pages
+- `/admin/echocode-app` - `.app` traffic and submission slice
+- `/admin/submissions`, `/admin/submissions/clients`, `/admin/submissions/emails` - `.digital` moderation areas
+- `/admin/vacancies`, `/admin/vacancies/candidates` - vacancy content + candidate queue
+- `/admin/portfolio` - portfolio preview cards and media
+- `/admin/settings` - admin access registry, role comparison, invite/pre-approve flow
+- `/admin/info` - короткий guide по адмінці
+- `/admin/info/utm` - ready-to-use UTM links for `.digital` and `.app`
+
+## Logging policy (current)
+
+Не логуємо все підряд.
+
+Залишаємо логування тільки там, де воно реально допомагає команді:
+
+- коментарі в moderation flows
+- зміни статусів submissions
+- зміни вакансій
+- створення / видалення portfolio items
+
+Navigation для `/admin/logs` зараз прибрана із sidebar, але сам route/API може лишатися для внутрішнього використання.
 
 #### Firestore Client SDK rules-рівень
 
@@ -226,10 +357,12 @@ Environment policy:
 - `read` для `admin` або публічно лише якщо `isPublished == true`
 - `write` тільки для `admin`
 - immutable поле: `slug`
+- керовані business-поля: `level`, `isHot`
 - `portfolio/{id}`:
 - `read` для `admin` або публічно лише якщо `isPublished == true`
 - `write` тільки для `admin`
 - immutable поле: `slug`
+- dynamic preview cards may additionally store: `image`, `imagePath`, `platforms`, `categories`, `entryType`, `updatedBy`
 - `_internal_firebase_checks/{id}`: повний deny для client SDK
 - fallback `/{document=**}`: deny all
 
@@ -253,6 +386,7 @@ Environment policy:
 - `create`: `admin` / `developer` / `manager`
 - `replace/delete`: тільки `admin` / `developer`
 - тільки зображення, максимум `5MB`
+- current admin portfolio preview implementation initializes uploads under `uploads/portfolio/drafts/{generatedId}` and stores the resulting public image URL + storage path in Firestore
 
 - `uploads/vacancies/{vacancyId}/{fileName}`
 - `read`: публічний
@@ -294,20 +428,20 @@ Environment policy:
 
 ### Project form (`formType = project`)
 
-| Поле            | Обов'язкове | Валідація                                 |
-| --------------- | ----------- | ----------------------------------------- |
-| `firstName`     | ✅          | 2-20 символів, лише літери/пробіл/`'`/`-` |
-| `lastName`      | ✅          | 2-20 символів, лише літери/пробіл/`'`/`-` |
-| `email`         | ✅          | валідний email, max 30                    |
-| `needs`         | ❌          | якщо передано: 10-1000 символів           |
-| `attachment`    | ❌          | один файл, який проходить file schema      |
+| Поле         | Обов'язкове | Валідація                                 |
+| ------------ | ----------- | ----------------------------------------- |
+| `firstName`  | ✅          | 2-20 символів, лише літери/пробіл/`'`/`-` |
+| `lastName`   | ✅          | 2-20 символів, лише літери/пробіл/`'`/`-` |
+| `email`      | ✅          | валідний email, max 30                    |
+| `needs`      | ❌          | якщо передано: 10-1000 символів           |
+| `attachment` | ❌          | один файл, який проходить file schema     |
 
 ### Candidate form (`formType = candidate`)
 
-| Поле          | Обов'язкове | Валідація                                        |
-| ------------- | ----------- | ------------------------------------------------ |
-| `cvFile`      | ✅          | document MIME, max 20MB, safe `uploads/...` path |
-| `profileUrl`  | ✅          | валідний `http/https` URL, max 2048              |
+| Поле         | Обов'язкове | Валідація                                        |
+| ------------ | ----------- | ------------------------------------------------ |
+| `cvFile`     | ✅          | document MIME, max 20MB, safe `uploads/...` path |
+| `profileUrl` | ✅          | валідний `http/https` URL, max 2048              |
 
 ### File constraints
 
@@ -317,6 +451,32 @@ Environment policy:
 | `document` | `pdf/doc/docx/rtf/odt/txt`                  | до 20MB |
 
 `buildSubmissionDraft(...)` нормалізує payload у стабільну server shape перед записом у БД.
+
+## Forms Submissions (implemented backend scope)
+
+### Project Form Create
+
+- `POST /api/forms/submissions` (public, no auth)
+- підтримується `formType = project`; `candidate` поки повертає `NOT_IMPLEMENTED`
+- Firestore schema (MVP, `submissions/{docId}`): `formType`, `status`, `contact`, `content`, `attachments`, `createdAt`, `updatedAt`
+- success response: `{ success: true, data: { id, status, createdAt } }`
+
+### Project File Upload Flow
+
+- `POST /api/forms/uploads/init` генерує signed `PUT` URL з TTL `10min`
+- tmp path format: `uploads/submissions/tmp/<uuid>` (без розширення)
+- submit-time verification у `POST /api/forms/submissions`: prefix + object existence + `contentType` + `size` cross-check
+- Storage bucket має бути явно заданий через `FIREBASE_STORAGE_BUCKET` (fail-fast без fallback bucket)
+- zero-byte files відхиляються і на init-policy, і на verification
+- MVP limitations: tmp file лишається фінальним шляхом; orphan tmp files не прибираються автоматично; finalize/move відсутній
+
+### Admin Submissions List
+
+- `GET /api/admin/submissions` (`auth: true`, permission: `submissions.read`)
+- pagination strategy: offset (`page`, `limit`) + `count()` для `total/totalPages`
+- sorting: тільки `createdAt` (`asc|desc`), optional `status` filter
+- response DTO item: `id`, `formType`, `status`, `contact.{name,email}`, `hasAttachment`, `createdAt`
+- internal fields (`content.message`, `attachments[]`, `updatedAt`) не експонуються
 
 ## Ключові env-параметри (поточна ітерація)
 
@@ -330,3 +490,33 @@ Environment policy:
 - `FIREBASE_CHECK_STORAGE`
 - `INTERNAL_FIREBASE_CHECK_ENABLED`
 - `ADMIN_BOOTSTRAP_EMAILS`
+
+## Admin Dashboard Overview (server module)
+
+### Endpoint
+
+- `GET /api/admin/dashboard/overview`
+- wrapper: `withAdminApi(...)`
+- required permission: `admin.access`
+- runtime: `nodejs`
+
+### Server module structure
+
+- `src/server/admin/dashboard/dashboard.types.ts` - DTO/types contract
+- `src/server/admin/dashboard/dashboard.repository.ts` - Firestore aggregation logic
+- `src/server/admin/dashboard/dashboard.mapper.ts` - response normalization/sanitization
+- `src/server/admin/dashboard/dashboard.service.ts` - orchestration boundary
+- `src/server/admin/dashboard/index.ts` - module exports
+
+### Response highlights
+
+- KPI bundle with WoW trend and MoM delta
+- chart datasets (`submissionsTrend`, `trafficVsLeads`, `topVacancies`, `leadDistribution`, `leadDistributionYear`, `leadDistributionYearMonthly`)
+- executive data (`alerts`, `funnel`, `sources`, `leadQualityRatio`, `bestDay`, top entities, growth velocity, conversion drop-off)
+
+### Aggregation constraints
+
+- time-range based queries only: `last7`, `previous7`, `last30`, `previous30`, `YTD`
+- count-first strategy with Firestore `count()` where possible
+- no unbounded collection scans in dashboard repository logic
+- dynamic source aggregation (no hardcoded source allow-list)

@@ -1,0 +1,13 @@
+{
+  "VacancyCommon": {
+    "vacancyForm": {
+      "title": "Bist du der/die Richtige?",
+      "subtitle": "Senden Sie Ihren Lebenslauf und einen Link zu LinkedIn oder GitHub.",
+      "cvLabel": "Ihr Lebenslauf",
+      "cvPlaceholder": "Ihr Lebenslauf",
+      "linkLabel": "LinkedIn/GitHub-Link",
+      "linkPlaceholder": "Link einfügen",
+      "submitBtn": "Für diese Position bewerben"
+    }
+  }
+}

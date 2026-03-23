@@ -1,0 +1,23 @@
+{
+  "Error404Page": {
+    "title": "Seite nicht gefunden",
+    "description": "Ihre Suche ist über das bekannte Universum hinaus gegangen."
+  },
+  "Error503Page": {
+    "title": "Dienst vorübergehend nicht verfügbar",
+    "description": "Der Server kann die Anfrage derzeit nicht verarbeiten. Bitte versuchen Sie es in ein paar Minuten erneut."
+  },
+  "Error500Page": {
+    "title": "Interner Serverfehler",
+    "description": "Auf unserer Seite ist etwas schiefgelaufen. Wir arbeiten bereits an der Lösung."
+  },
+  "PortfolioError": {
+    "title": "Keine Projekte gefunden",
+    "description": "Versuchen Sie, Ihre Filter zu ändern.",
+    "resetButton": "Filter zurücksetzen"
+  },
+  "VacancyError": {
+    "title": "Keine offenen Stellen",
+    "description": "Wir stellen derzeit nicht ein, aber bald könnten neue Möglichkeiten verfügbar sein."
+  }
+}

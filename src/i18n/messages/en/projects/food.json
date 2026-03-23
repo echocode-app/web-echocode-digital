@@ -1,0 +1,154 @@
+{
+  "AboutSectionFood": {
+    "aboutProject": {
+      "title": "About a Project",
+      "description": "Food & Drinks is a mobile application developed for a nationwide restaurant chain to enhance customer engagement and streamline the food ordering experience. The app offers users a visually rich and intuitive interface to browse the menu, discover seasonal offers, and participate in the brand’s loyalty program — all via their smartphone. It integrates geolocation, multichannel notifications (push, email, SMS), and QR code scanning for seamless in-store and digital interaction."
+    },
+    "projectIdea": {
+      "title": "Project Idea",
+      "intro": "The client's vision was to create a modern, scalable food-ordering solution that would:",
+      "list": {
+        "item1": "Provide a full digital menu with intuitive navigation",
+        "item2": "Support loyalty point tracking and personalized offers",
+        "item3": "Enable seasonal promotions and campaign updates",
+        "item4": "Integrate QR functionality for in-store engagement",
+        "item5": "Deliver timely notifications via multiple channels"
+      }
+    }
+  },
+  "ImplementationFood": {
+    "title": "Implementation",
+    "subtitle": "We moved from planning to execution through structured product development stages.",
+    "step01": {
+      "title": "01. STRATEGY",
+      "subTitle": "Analysis",
+      "desc": "Сompetitor research User journey mapping"
+    },
+    "step02": {
+      "title": "02. UX／UI",
+      "subTitle": "Design",
+      "desc": "Clean interface focused on accessibility and promotion visibility"
+    },
+    "step03": {
+      "title": "03. CODE",
+      "subTitle": "Development",
+      "desc": "Two-week sprints with continuous feature delivery and feedback"
+    },
+    "step04": {
+      "title": "04. DEVOPS",
+      "subTitle": "Integration",
+      "desc": "CRM, loyalty systems, and internal platform connections"
+    },
+    "step05": {
+      "title": "05. GROWTH",
+      "subTitle": "Release ＆ ASO",
+      "desc": "Functional, UI, and load testing across devices and OS versions"
+    }
+  },
+  "ChallengesFood": {
+    "title": "Challenges We Solved",
+    "feature01": {
+      "title": "Complex Catalog:",
+      "subtitle": "Scalable multi-level structure (Women, Men, Kids)"
+    },
+    "feature02": {
+      "title": "UX Optimization:",
+      "subtitle": "Optimized interface for fast browsing, filtering, and ordering"
+    },
+    "feature03": {
+      "title": "Flexible Products:",
+      "subtitle": "Designed the system to handle new brands, SKUs, and seasonal campaigns"
+    },
+    "feature04": {
+      "title": "Mobile-first UI:",
+      "subtitle": "Delivered a clean, adaptive layout that remains intuitive across devices"
+    }
+  },
+  "PlanningFood": {
+    "title": "Planning",
+    "block01": {
+      "title": "Input",
+      "desc01": "Visual and intuitive mobile menu",
+      "desc02": "Loyalty program integration",
+      "desc03": "Real-time promotions",
+      "desc04": "Geolocation-based filtering",
+      "desc05": "In-store engagement via QR",
+      "desc06": "Personalized notifications"
+    },
+    "block02": {
+      "title": "Analysis",
+      "desc01": "Market and competitor research",
+      "desc02": "Stakeholder interviews & scoping workshops",
+      "desc03": "User journey mapping based on in-store behavior",
+      "desc04": "Persona creation for key user groups"
+    },
+    "block03": {
+      "title": "Outcomes",
+      "desc01": "High-fidelity UI prototypes",
+      "desc02": "Scalable and documented app architecture",
+      "desc03": "CRM & loyalty system integration plan",
+      "desc04": "Feature roadmap with engagement mechanics"
+    }
+  },
+  "FeaturesFood": {
+    "title": "Main Features of the Project",
+    "feature01": {
+      "title": "Visual Menu Browsing",
+      "desc": "Categorized dishes with rich visuals and details"
+    },
+    "feature02": {
+      "title": "Favorites",
+      "desc": "Users can save favorite items for quick reordering"
+    },
+    "feature03": {
+      "title": "Geolocation",
+      "desc": "Detects nearby restaurants and filters results by distance"
+    },
+    "feature04": {
+      "title": "Loyalty Program",
+      "desc": "Users track point balance, history, and rewards"
+    },
+    "feature05": {
+      "title": "Promotions ＆ News",
+      "desc": "Live feed of seasonal offers and announcements"
+    },
+    "feature06": {
+      "title": "QR Scanner",
+      "desc": "Enables users to unlock offers or earn rewards in-store"
+    }
+  },
+  "ScreensFood": {
+    "title": "SCREENS"
+  },
+  "PrototypeFood": {
+    "title": "Interactive Prototype",
+    "subtitle": "Explore the design in action — click through to experience how it works"
+  },
+  "TechnologyFood": {
+    "title": "Technology Stack",
+    "block01": {
+      "title": "Platform",
+      "desc": "Swift"
+    },
+    "block02": {
+      "title": "Utilities",
+      "desc": "QR scanning SDK"
+    },
+    "block03": {
+      "title": "Backend",
+      "desc": "Integration via Loyalty Platform API"
+    },
+    "block04": {
+      "title": "CMS",
+      "desc": "Custom solution for menu & campaign management"
+    },
+    "block05": {
+      "title": "Project Management",
+      "desc": "Scrum methodology with 2-week sprints"
+    },
+    "block06": {
+      "title": "Notifications",
+      "desc": "Firebase Cloud Messaging, Twilio"
+    }
+  }
+}

@@ -1,0 +1,145 @@
+/api/admin/submissions/vacancies:
+  get:
+    tags: [Admin Vacancy Submissions]
+    operationId: listAdminVacancySubmissionsLegacy
+    summary: List vacancy submissions queue (legacy compatibility alias)
+    deprecated: true
+    parameters:
+      - $ref: '../openapi.yaml#/components/parameters/Limit20'
+      - $ref: '../openapi.yaml#/components/parameters/Cursor'
+      - $ref: '../openapi.yaml#/components/parameters/StatusModeration'
+      - name: vacancyKey
+        in: query
+        schema:
+          type: string
+      - $ref: '../openapi.yaml#/components/parameters/DateFrom'
+      - $ref: '../openapi.yaml#/components/parameters/DateTo'
+    responses:
+      '200':
+        description: Queue page
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/GenericListEnvelope'
+      '401':
+        $ref: '../openapi.yaml#/components/responses/Unauthorized'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/Forbidden'
+
+/api/admin/submissions/vacancies/overview:
+  get:
+    tags: [Admin Vacancy Submissions]
+    operationId: getAdminVacancySubmissionsOverviewLegacy
+    summary: Get vacancy queue overview and grouping (legacy compatibility alias)
+    deprecated: true
+    responses:
+      '200':
+        description: Overview payload
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/GenericOverviewEnvelope'
+      '401':
+        $ref: '../openapi.yaml#/components/responses/Unauthorized'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/Forbidden'
+
+/api/admin/submissions/vacancies/{submissionId}:
+  get:
+    tags: [Admin Vacancy Submissions]
+    operationId: getAdminVacancySubmissionDetailsLegacy
+    summary: Get vacancy submission details (legacy compatibility alias)
+    deprecated: true
+    parameters:
+      - $ref: '../openapi.yaml#/components/parameters/SubmissionIdPath'
+    responses:
+      '200':
+        description: Details payload
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/GenericDetailsEnvelope'
+      '400':
+        $ref: '../openapi.yaml#/components/responses/BadRequest'
+      '401':
+        $ref: '../openapi.yaml#/components/responses/Unauthorized'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/Forbidden'
+
+/api/admin/submissions/vacancies/status:
+  patch:
+    tags: [Admin Vacancy Submissions]
+    operationId: updateAdminVacancySubmissionStatusLegacy
+    summary: Update vacancy submission moderation status (legacy compatibility alias)
+    deprecated: true
+    parameters:
+      - $ref: '../openapi.yaml#/components/parameters/SubmissionIdQuery'
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../openapi.yaml#/components/schemas/UpdateStatusRequest'
+    responses:
+      '200':
+        description: Updated
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/UpdateStatusEnvelope'
+      '400':
+        $ref: '../openapi.yaml#/components/responses/BadRequest'
+      '401':
+        $ref: '../openapi.yaml#/components/responses/Unauthorized'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/Forbidden'
+
+/api/admin/submissions/vacancies/comment:
+  post:
+    tags: [Admin Vacancy Submissions]
+    operationId: addAdminVacancySubmissionCommentLegacy
+    summary: Add moderator comment to vacancy submission (legacy compatibility alias)
+    deprecated: true
+    parameters:
+      - $ref: '../openapi.yaml#/components/parameters/SubmissionIdQuery'
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../openapi.yaml#/components/schemas/AddCommentRequest'
+    responses:
+      '200':
+        description: Comment added
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/AddCommentEnvelope'
+      '400':
+        $ref: '../openapi.yaml#/components/responses/BadRequest'
+      '401':
+        $ref: '../openapi.yaml#/components/responses/Unauthorized'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/Forbidden'
+
+/api/admin/submissions/vacancies/delete:
+  delete:
+    tags: [Admin Vacancy Submissions]
+    operationId: softDeleteAdminVacancySubmissionLegacy
+    summary: Soft delete vacancy submission (legacy compatibility alias)
+    deprecated: true
+    parameters:
+      - $ref: '../openapi.yaml#/components/parameters/SubmissionIdQuery'
+    responses:
+      '200':
+        description: Soft deleted
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/SoftDeleteEnvelope'
+      '400':
+        $ref: '../openapi.yaml#/components/responses/BadRequest'
+      '401':
+        $ref: '../openapi.yaml#/components/responses/Unauthorized'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/Forbidden'

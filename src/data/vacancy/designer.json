@@ -1,0 +1,93 @@
+{
+  "translateKey": "VacancyDesignerPage",
+  "heroSection": {
+    "image": { "path": "/images/rabbits/hero/vacancy/designer.png" }
+  },
+  "valueSection": {
+    "title": "valueSection.title",
+    "subtitle": "valueSection.subtitle"
+  },
+  "descriptionSections": [
+    {
+      "title": "descriptionSections.section01.title",
+      "values": [
+        {
+          "title": "descriptionSections.section01.val01.title",
+          "desc": "descriptionSections.section01.val01.desc"
+        },
+        {
+          "title": "descriptionSections.section01.val02.title",
+          "desc": "descriptionSections.section01.val02.desc"
+        },
+        {
+          "title": "descriptionSections.section01.val03.title",
+          "desc": "descriptionSections.section01.val03.desc"
+        },
+        {
+          "title": "descriptionSections.section01.val04.title",
+          "desc": "descriptionSections.section01.val04.desc"
+        }
+      ]
+    },
+    {
+      "title": "descriptionSections.section02.title",
+      "values": [
+        {
+          "title": "descriptionSections.section02.val01.title",
+          "desc": "descriptionSections.section02.val01.desc"
+        },
+        {
+          "title": "descriptionSections.section02.val02.title",
+          "desc": "descriptionSections.section02.val02.desc"
+        },
+        {
+          "title": "descriptionSections.section02.val03.title",
+          "desc": "descriptionSections.section02.val03.desc"
+        },
+        {
+          "title": "descriptionSections.section02.val04.title",
+          "desc": "descriptionSections.section02.val04.desc"
+        }
+      ]
+    },
+    {
+      "title": "descriptionSections.section03.title",
+      "values": [
+        {
+          "title": "descriptionSections.section03.val01.title",
+          "desc": "descriptionSections.section03.val01.desc"
+        },
+        {
+          "title": "descriptionSections.section03.val02.title",
+          "desc": "descriptionSections.section03.val02.desc"
+        },
+        {
+          "title": "descriptionSections.section03.val03.title",
+          "desc": "descriptionSections.section03.val03.desc"
+        }
+      ]
+    }
+  ],
+  "selectionSection": [
+    {
+      "title": "selectionSection.step01.title",
+      "subTitle": "selectionSection.step01.subTitle",
+      "desc": "selectionSection.step01.desc"
+    },
+    {
+      "title": "selectionSection.step02.title",
+      "subTitle": "selectionSection.step02.subTitle",
+      "desc": "selectionSection.step02.desc"
+    },
+    {
+      "title": "selectionSection.step03.title",
+      "subTitle": "selectionSection.step03.subTitle",
+      "desc": "selectionSection.step03.desc"
+    },
+    {
+      "title": "selectionSection.step04.title",
+      "subTitle": "selectionSection.step04.subTitle",
+      "desc": "selectionSection.step04.desc"
+    }
+  ]
+}

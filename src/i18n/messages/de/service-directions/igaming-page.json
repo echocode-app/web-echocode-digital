@@ -1,0 +1,52 @@
+{
+  "IGamingPage": {
+    "HeroSection": { "title": "SKALIERUNG. ERTRAG. DOMINANZ" },
+    "SolutionsSection": {
+      "title": "Lösungsökosystem",
+      "solutionsList": {
+        "sol01": {
+          "title": "Technologie-Stack",
+          "desc": "Entwicklung und Wartung von Systemen jeder Komplexität. Wir schaffen Infrastruktur, die Spitzenlasten standhält und den reibungslosen Betrieb Ihrer Produkte weltweit gewährleistet."
+        },
+        "sol02": {
+          "title": "Organisches Wachstum",
+          "desc": "Tiefgehende Optimierung der Präsenz in globalen Netzwerken und Stores. Wir bringen Produkte mit unserer eigenen ASO- und SEO-Promotionsmethodik an die Spitze."
+        },
+        "sol03": {
+          "title": "Traffic-Management",
+          "desc": "Systematische Steuerung von Nutzerströmen. Stabile Gewinnung von hochwertigem Traffic und Markenreputationsmanagement auf internationaler Ebene."
+        }
+      }
+    },
+    "FoundationSection": {
+      "title": "Das Fundament unseres Vertrauens",
+      "list": {
+        "found01": "Globale Skalierung",
+        "found02": "24/7 Stabilität",
+        "found03": "Datenorientiert",
+        "found04": "Asset-Wachstum"
+      }
+    },
+    "DominateSection": {
+      "title": "ASO: Dominanz in den Suchergebnissen",
+      "desc": "Wir verwandeln Sichtbarkeit in echte Installationen. Unsere ASO-Strategie kombiniert präzise Daten, Nutzerpsychologie und ein tiefes Verständnis der Algorithmen von App Store und Google Play.",
+      "list": {
+        "dom01": {
+          "title": "01. ANALYSE",
+          "subtitle": "Keyword-Recherche",
+          "desc": "Suche nach relevanten Keywords mit hohem Traffic und geringer Konkurrenz. Wir finden Einstiegspunkte, wo andere sie nicht sehen."
+        },
+        "dom02": {
+          "title": "02. VISION",
+          "subtitle": "Visuelle ASO-Optimierung",
+          "desc": "Erstellung von Icons und Screenshots, die die CTR um 25% oder mehr steigern. Visuelle Kommunikation, die Nutzer dazu bringt, auf „Get“ zu klicken."
+        },
+        "dom03": {
+          "title": "03. BUILD",
+          "subtitle": "Tiefe Lokalisierung",
+          "desc": "Anpassung von Metadaten an kulturelle Besonderheiten bestimmter GEOs: Brasilien, Indien, Europa. Wir sprechen den Markt in seiner eigenen Sprache an."
+        }
+      }
+    }
+  }
+}

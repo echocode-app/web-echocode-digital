@@ -3,11 +3,11 @@ import Link from 'next/link';
 const EmailLink = () => {
   return (
     <Link
-      href="mailto:hello@echocode.com"
-      className="block w-65.5 mx-auto mb-4 lg:mb-0 font-title text-title-base text-base-gray uppercase
+      href="mailto:hello@echocode.digital"
+      className="block text-center mx-auto mb-4 lg:mb-0 font-wadik text-title-base text-base-gray uppercase
       hover:text-accent duration-main"
     >
-      hello<span className="text-[9px] ">@</span>echocode.com
+      hello<span className="text-[9px]">@</span>echocode.digital
     </Link>
   );
 };

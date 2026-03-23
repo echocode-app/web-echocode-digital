@@ -43,7 +43,7 @@ service cloud.firestore {
     }
 
     function isSubmissionStatus(status) {
-      return status in ['new', 'in_review', 'done', 'rejected'];
+      return status in ['new', 'in_review', 'contacted', 'rejected', 'closed'];
     }
 
     function isValidSubmissionShape(data) {
@@ -90,7 +90,10 @@ service cloud.firestore {
           'summary',
           'description',
           'tags',
-          'language'
+          'language',
+          'level',
+          'isHot',
+          'updatedBy'
         ]) &&
         data.title is string &&
         data.slug is string &&
@@ -102,7 +105,10 @@ service cloud.firestore {
         optionalString(data, 'summary') &&
         optionalString(data, 'description') &&
         optionalList(data, 'tags') &&
-        optionalString(data, 'language');
+        optionalString(data, 'language') &&
+        optionalString(data, 'level') &&
+        optionalBool(data, 'isHot') &&
+        optionalString(data, 'updatedBy');
     }
 
     function isValidPortfolioShape(data) {
@@ -118,7 +124,13 @@ service cloud.firestore {
           'stack',
           'industry',
           'coverImage',
-          'gallery'
+          'gallery',
+          'image',
+          'imagePath',
+          'platforms',
+          'categories',
+          'entryType',
+          'updatedBy'
         ]) &&
         data.title is string &&
         data.slug is string &&
@@ -130,7 +142,13 @@ service cloud.firestore {
         optionalList(data, 'stack') &&
         optionalString(data, 'industry') &&
         optionalString(data, 'coverImage') &&
-        optionalList(data, 'gallery');
+        optionalList(data, 'gallery') &&
+        optionalString(data, 'image') &&
+        optionalString(data, 'imagePath') &&
+        optionalList(data, 'platforms') &&
+        optionalList(data, 'categories') &&
+        optionalString(data, 'entryType') &&
+        optionalString(data, 'updatedBy');
     }
 
     function isPubliclyReadableContent(data) {

@@ -5,7 +5,7 @@
     "position": "50% 50%",
     "image": "/images/directions/mobile.png",
     "title": "Mobile Development",
-    "description": "Premium native iOS and Android\napplications. We focus on high-speed performance,\nintuitive UX, and secure backend integration."
+    "descriptionKey": "directions.mobile.description"
   },
   {
     "id": 2,
@@ -13,7 +13,7 @@
     "position": "50% 50%",
     "image": "/images/directions/web.png",
     "title": "Web Development",
-    "description": "Custom web ecosystems and PWA.\nFocused on stability, fast load times, and efficient business logic."
+    "descriptionKey": "directions.web.description"
   },
   {
     "id": 3,
@@ -21,7 +21,7 @@
     "position": "50% 78%",
     "image": "/images/directions/game.png",
     "title": "Game Development",
-    "description": "Pushing the boundaries of digital\ninteraction to forge next-generation immersive gameplay experiences."
+    "descriptionKey": "directions.game.description"
   },
   {
     "id": 4,
@@ -29,7 +29,7 @@
     "position": "50% 50%",
     "image": "/images/directions/igaming.png",
     "title": "IGAMING",
-    "description": "High-frequency entertainment ecosystems.\nWe engineer scalable architectures for high-load operations\nand secure transactional infrastructure."
+    "descriptionKey": "directions.igaming.description"
   },
   {
     "id": 5,
@@ -37,6 +37,6 @@
     "position": "50% 32%",
     "image": "/images/directions/qa.png",
     "title": "QA",
-    "description": "Precision-driven system resilience.\nWe eliminate architectural vulnerabilities through rigorous\nautomated cycles to ensure absolute operational stability."
+    "descriptionKey": "directions.qa.description"
   }
 ]

@@ -1,0 +1,40 @@
+{
+  "GamePage": {
+    "HeroSection": { "title": "LEVEL UP Reality" },
+    "SolutionsSection": {
+      "title": "Solutions Ecosystem",
+      "solutionsList": {
+        "sol01": {
+          "title": "ADVANCED GAME ENGINES",
+          "desc": "We leverage cutting-edge engines to create photorealistic graphics and complex physics. Optimization for hardware ensures maximum FPS and seamless gameplay."
+        },
+        "sol02": {
+          "title": "CONCEPT ＆ 3D ART",
+          "desc": "From initial sketches to the final render. We build unique game worlds, characters, and environments that define your project's visual identity."
+        },
+        "sol03": {
+          "title": "GAME ECONOMY ＆ OPS",
+          "desc": "Designing sustainable in-game economies and monetization systems. We ensure long-term player retention through regular updates and live events."
+        }
+      }
+    },
+    "UniversesSection": {
+      "title": "DON׳T JUST DEVELOP GAMES. CREATE UNIVERSES",
+      "desc": "Become an architect of game experiences. In our team, you don't just write scripts — you shape the emotions of millions of gamers worldwide.",
+      "list": {
+        "uni01": {
+          "title": "PLAYER-CENTRIC CULTURE",
+          "desc": "We focus on the player experience. Every mechanic and every pixel must serve one goal: providing pure gaming satisfaction."
+        },
+        "uni02": {
+          "title": "CREATIVE FREEDOM",
+          "desc": "No rigid boundaries. We encourage experimentation with gameplay and emerging technologies to drive innovation."
+        },
+        "uni03": {
+          "title": "FULL OWNERSHIP",
+          "desc": "You have a voice in level design, balancing, and narrative. Your individual contribution determines the fate of the entire project."
+        }
+      }
+    }
+  }
+}

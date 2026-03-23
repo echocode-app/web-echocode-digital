@@ -1,18 +1,21 @@
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 
 import PageTitle from '@/components/UI/PageTitle';
 import SectionContainer from '@/components/UI/section/SectionContainer';
 
 const HeroSection = () => {
+  const t = useTranslations('WebPage.HeroSection');
+
   return (
-    <section className="pt-31 pb-2">
+    <section className="pt-33 pb-2">
       <SectionContainer>
         <div className="flex flex-col md:flex-row items-center justify-between">
           <div>
-            <div className="max-w-152.5">
-              <PageTitle>BUILD DIGITAL FUTURE</PageTitle>
+            <div className="max-w-160">
+              <PageTitle>{t('title')}</PageTitle>
             </div>
-            <p className="font-title text-title-sm text-center md:text-start mt-4">
+            <p className="font-wadik text-title-sm text-center md:text-start mt-4">
               WEB development
             </p>
           </div>

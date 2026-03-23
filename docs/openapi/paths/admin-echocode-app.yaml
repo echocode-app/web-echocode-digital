@@ -1,0 +1,68 @@
+/api/admin/echocode-app/overview:
+  get:
+    tags: [Admin Echocode App]
+    operationId: getAdminEchocodeAppOverview
+    summary: Get echocode.app analytics overview
+    description: |
+      Returns isolated analytics aggregates for the external `echocode.app` site slice.
+      Metrics are scoped to records persisted with `siteId = echocode_app`.
+    parameters:
+      - $ref: '../openapi.yaml#/components/parameters/Period'
+    responses:
+      '200':
+        description: Echocode.app analytics overview payload
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/SuccessEnvelope'
+      '401':
+        $ref: '../openapi.yaml#/components/responses/Unauthorized'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/Forbidden'
+
+/api/admin/echocode-app/submissions:
+  get:
+    tags: [Admin Echocode App]
+    operationId: listAdminEchocodeAppSubmissions
+    summary: List echocode.app legacy submissions
+    description: |
+      Returns the moderation list for legacy `submissions` records created from `echocode.app`.
+      The backend always scopes the result set to `siteId = echocode_app`.
+    parameters:
+      - $ref: '../openapi.yaml#/components/parameters/Limit20'
+      - $ref: '../openapi.yaml#/components/parameters/Cursor'
+      - $ref: '../openapi.yaml#/components/parameters/DateFrom'
+      - $ref: '../openapi.yaml#/components/parameters/DateTo'
+      - $ref: '../openapi.yaml#/components/parameters/StatusModeration'
+    responses:
+      '200':
+        description: Echocode.app submissions page
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/SuccessEnvelope'
+      '401':
+        $ref: '../openapi.yaml#/components/responses/Unauthorized'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/Forbidden'
+
+/api/admin/echocode-app/submissions/overview:
+  get:
+    tags: [Admin Echocode App]
+    operationId: getAdminEchocodeAppSubmissionsOverview
+    summary: Get echocode.app submissions moderation overview
+    description: |
+      Returns moderation totals and status counts for legacy `submissions` records
+      created from `echocode.app`. The backend always scopes the result set to
+      `siteId = echocode_app` and reports only active, non-deleted records.
+    responses:
+      '200':
+        description: Echocode.app submissions moderation overview payload
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/SuccessEnvelope'
+      '401':
+        $ref: '../openapi.yaml#/components/responses/Unauthorized'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/Forbidden'

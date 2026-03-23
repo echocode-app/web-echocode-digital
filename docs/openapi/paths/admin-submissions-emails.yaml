@@ -1,0 +1,135 @@
+/api/admin/submissions/emails:
+  get:
+    tags: [Admin Email Submissions]
+    operationId: listAdminEmailSubmissions
+    summary: List email submissions queue
+    parameters:
+      - $ref: '../openapi.yaml#/components/parameters/Limit20'
+      - $ref: '../openapi.yaml#/components/parameters/Cursor'
+      - $ref: '../openapi.yaml#/components/parameters/StatusModeration'
+      - $ref: '../openapi.yaml#/components/parameters/DateFrom'
+      - $ref: '../openapi.yaml#/components/parameters/DateTo'
+    responses:
+      '200':
+        description: Queue page
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/GenericListEnvelope'
+      '401':
+        $ref: '../openapi.yaml#/components/responses/Unauthorized'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/Forbidden'
+
+/api/admin/submissions/emails/overview:
+  get:
+    tags: [Admin Email Submissions]
+    operationId: getAdminEmailSubmissionsOverview
+    summary: Get email queue overview counters
+    responses:
+      '200':
+        description: Overview
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/GenericOverviewEnvelope'
+      '401':
+        $ref: '../openapi.yaml#/components/responses/Unauthorized'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/Forbidden'
+
+/api/admin/submissions/emails/{submissionId}:
+  get:
+    tags: [Admin Email Submissions]
+    operationId: getAdminEmailSubmissionDetails
+    summary: Get email submission details (auto-marks new as viewed)
+    parameters:
+      - $ref: '../openapi.yaml#/components/parameters/SubmissionIdPath'
+    responses:
+      '200':
+        description: Details payload
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/GenericDetailsEnvelope'
+      '400':
+        $ref: '../openapi.yaml#/components/responses/BadRequest'
+      '401':
+        $ref: '../openapi.yaml#/components/responses/Unauthorized'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/Forbidden'
+
+/api/admin/submissions/emails/status:
+  patch:
+    tags: [Admin Email Submissions]
+    operationId: updateAdminEmailSubmissionStatus
+    summary: Update email submission moderation status
+    parameters:
+      - $ref: '../openapi.yaml#/components/parameters/SubmissionIdQuery'
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../openapi.yaml#/components/schemas/UpdateStatusRequest'
+    responses:
+      '200':
+        description: Updated
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/UpdateStatusEnvelope'
+      '400':
+        $ref: '../openapi.yaml#/components/responses/BadRequest'
+      '401':
+        $ref: '../openapi.yaml#/components/responses/Unauthorized'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/Forbidden'
+
+/api/admin/submissions/emails/comment:
+  post:
+    tags: [Admin Email Submissions]
+    operationId: addAdminEmailSubmissionComment
+    summary: Add moderator comment to email submission
+    parameters:
+      - $ref: '../openapi.yaml#/components/parameters/SubmissionIdQuery'
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../openapi.yaml#/components/schemas/AddCommentRequest'
+    responses:
+      '200':
+        description: Comment added
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/AddCommentEnvelope'
+      '400':
+        $ref: '../openapi.yaml#/components/responses/BadRequest'
+      '401':
+        $ref: '../openapi.yaml#/components/responses/Unauthorized'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/Forbidden'
+
+/api/admin/submissions/emails/delete:
+  delete:
+    tags: [Admin Email Submissions]
+    operationId: softDeleteAdminEmailSubmission
+    summary: Soft delete email submission
+    parameters:
+      - $ref: '../openapi.yaml#/components/parameters/SubmissionIdQuery'
+    responses:
+      '200':
+        description: Soft deleted
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/SoftDeleteEnvelope'
+      '400':
+        $ref: '../openapi.yaml#/components/responses/BadRequest'
+      '401':
+        $ref: '../openapi.yaml#/components/responses/Unauthorized'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/Forbidden'

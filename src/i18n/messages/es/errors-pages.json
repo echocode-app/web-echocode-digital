@@ -1,0 +1,23 @@
+{
+  "Error404Page": {
+    "title": "Página no encontrada",
+    "description": "Tu búsqueda ha ido más allá del universo conocido."
+  },
+  "Error503Page": {
+    "title": "Servicio temporalmente no disponible",
+    "description": "El servidor no puede procesar la solicitud en este momento. Inténtalo de nuevo en unos minutos."
+  },
+  "Error500Page": {
+    "title": "Error interno del servidor",
+    "description": "Algo salió mal de nuestro lado. Ya estamos trabajando para solucionarlo."
+  },
+  "PortfolioError": {
+    "title": "No se encontraron proyectos",
+    "description": "Intenta cambiar tus filtros.",
+    "resetButton": "Restablecer filtros"
+  },
+  "VacancyError": {
+    "title": "No hay puestos disponibles",
+    "description": "Actualmente no estamos contratando, pero pronto podrían abrirse nuevas oportunidades."
+  }
+}

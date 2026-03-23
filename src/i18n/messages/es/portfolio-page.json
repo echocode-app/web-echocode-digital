@@ -1,0 +1,10 @@
+{
+  "PortfolioPage": {
+    "HeroSection": {
+      "title": "Casos de proyectos seleccionados"
+    },
+    "ProjectsSection": {
+      "niche": "Nicho"
+    }
+  }
+}

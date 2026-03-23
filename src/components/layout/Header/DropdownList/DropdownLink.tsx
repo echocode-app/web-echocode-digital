@@ -26,7 +26,9 @@ const DropdownLink = ({ children, link }: DropdownLinkProps) => {
     before:opacity-0 
     before:transition-opacity before:duration-main
     hover:before:opacity-100
-    z-10 before:-z-10`}
+    z-10 before:-z-10 
+    before:animate-[section-gradient-drift_5s_ease-in-out_infinite]  before:bg-size-[200%_200%]
+    `}
     >
       {children}
     </Link>

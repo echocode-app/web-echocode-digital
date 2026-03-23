@@ -1,0 +1,9 @@
+[
+  { "image": "/images/technologies/aws.svg", "desc": "Aws", "scale": "1.1" },
+  { "image": "/images/technologies/postgre.svg", "desc": "Postgre", "scale": "1.2" },
+  { "image": "/images/technologies/react.svg", "desc": "React" },
+  { "image": "/images/technologies/docker.svg", "desc": "Docker" },
+  { "image": "/images/technologies/go.svg", "desc": "Go" },
+  { "image": "/images/technologies/node.svg", "desc": "Node" },
+  { "image": "/images/technologies/next.svg", "desc": "Next" }
+]

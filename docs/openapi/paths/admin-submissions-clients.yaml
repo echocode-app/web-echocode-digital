@@ -1,0 +1,135 @@
+/api/admin/submissions/clients:
+  get:
+    tags: [Admin Client Submissions]
+    operationId: listAdminClientSubmissions
+    summary: List client submissions queue
+    parameters:
+      - $ref: '../openapi.yaml#/components/parameters/Limit20'
+      - $ref: '../openapi.yaml#/components/parameters/Cursor'
+      - $ref: '../openapi.yaml#/components/parameters/StatusModeration'
+      - $ref: '../openapi.yaml#/components/parameters/DateFrom'
+      - $ref: '../openapi.yaml#/components/parameters/DateTo'
+    responses:
+      '200':
+        description: Queue page
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/GenericListEnvelope'
+      '401':
+        $ref: '../openapi.yaml#/components/responses/Unauthorized'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/Forbidden'
+
+/api/admin/submissions/clients/overview:
+  get:
+    tags: [Admin Client Submissions]
+    operationId: getAdminClientSubmissionsOverview
+    summary: Get client queue overview counters
+    responses:
+      '200':
+        description: Overview
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/GenericOverviewEnvelope'
+      '401':
+        $ref: '../openapi.yaml#/components/responses/Unauthorized'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/Forbidden'
+
+/api/admin/submissions/clients/{submissionId}:
+  get:
+    tags: [Admin Client Submissions]
+    operationId: getAdminClientSubmissionDetails
+    summary: Get client submission details (auto-marks new as viewed)
+    parameters:
+      - $ref: '../openapi.yaml#/components/parameters/SubmissionIdPath'
+    responses:
+      '200':
+        description: Details payload
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/GenericDetailsEnvelope'
+      '400':
+        $ref: '../openapi.yaml#/components/responses/BadRequest'
+      '401':
+        $ref: '../openapi.yaml#/components/responses/Unauthorized'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/Forbidden'
+
+/api/admin/submissions/clients/status:
+  patch:
+    tags: [Admin Client Submissions]
+    operationId: updateAdminClientSubmissionStatus
+    summary: Update client submission moderation status
+    parameters:
+      - $ref: '../openapi.yaml#/components/parameters/SubmissionIdQuery'
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../openapi.yaml#/components/schemas/UpdateStatusRequest'
+    responses:
+      '200':
+        description: Updated
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/UpdateStatusEnvelope'
+      '400':
+        $ref: '../openapi.yaml#/components/responses/BadRequest'
+      '401':
+        $ref: '../openapi.yaml#/components/responses/Unauthorized'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/Forbidden'
+
+/api/admin/submissions/clients/comment:
+  post:
+    tags: [Admin Client Submissions]
+    operationId: addAdminClientSubmissionComment
+    summary: Add moderator comment to client submission
+    parameters:
+      - $ref: '../openapi.yaml#/components/parameters/SubmissionIdQuery'
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../openapi.yaml#/components/schemas/AddCommentRequest'
+    responses:
+      '200':
+        description: Comment added
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/AddCommentEnvelope'
+      '400':
+        $ref: '../openapi.yaml#/components/responses/BadRequest'
+      '401':
+        $ref: '../openapi.yaml#/components/responses/Unauthorized'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/Forbidden'
+
+/api/admin/submissions/clients/delete:
+  delete:
+    tags: [Admin Client Submissions]
+    operationId: softDeleteAdminClientSubmission
+    summary: Soft delete client submission
+    parameters:
+      - $ref: '../openapi.yaml#/components/parameters/SubmissionIdQuery'
+    responses:
+      '200':
+        description: Soft deleted
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/SoftDeleteEnvelope'
+      '400':
+        $ref: '../openapi.yaml#/components/responses/BadRequest'
+      '401':
+        $ref: '../openapi.yaml#/components/responses/Unauthorized'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/Forbidden'

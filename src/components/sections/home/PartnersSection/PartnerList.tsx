@@ -1,20 +1,37 @@
+'use client';
+
 import PartnerItem from './PartnerItem';
+import { usePartnersCarousel } from './usePartnersCarousel';
+
+type Partner = { image: string; desc: string; scale: string };
 
 interface PartnerListProps {
-  list: { image: string; desc: string; scale: string }[];
+  list: Partner[];
 }
 
 const PartnerList = ({ list }: PartnerListProps) => {
-  const double = [...list, ...list];
+  const { containerRef, trackRef, items, trackStyle } = usePartnersCarousel(list);
 
   return (
-    <div className="relative overflow-hidden group">
+    <div
+      ref={containerRef}
+      className="relative overflow-hidden isolate"
+      style={{ contain: 'layout paint style' }}
+    >
       <ul
-        className="flex items-center h-28 w-max animate-[marquee_50s_linear_infinite]
-       group-hover:[animation-play-state:paused]"
+        ref={trackRef}
+        className="flex h-30 w-max items-center gap-0 transform-gpu will-change-transform"
+        style={trackStyle}
       >
-        {double.map((items, i) => (
-          <PartnerItem key={i} {...items} />
+        {items.map(({ key, dynamicScale, slotWidth, opacity, yOffset, ...item }) => (
+          <PartnerItem
+            key={key}
+            {...item}
+            dynamicScale={dynamicScale}
+            slotWidth={slotWidth}
+            opacity={opacity}
+            yOffset={yOffset}
+          />
         ))}
       </ul>
     </div>

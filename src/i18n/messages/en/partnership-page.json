@@ -1,0 +1,54 @@
+{
+  "PartnershipPage": {
+    "HeroSection": {
+      "title": "INVESTING IN YOUR GROWTH"
+    },
+    "EngagementSection": {
+      "title": "ENGAGEMENT MODELS",
+      "engagementList": {
+        "subtitle": "PRIORITY",
+        "enga01": {
+          "title": "FIXED PRICE",
+          "description": "Clear deadlines and a fixed budget. Perfect for projects with specific technical requirements.",
+          "priority": "Predictability"
+        },
+        "enga02": {
+          "title": "Time ＆ Material",
+          "description": "Hourly-based billing for maximum agility. Ideal for projects with shifting requirements.",
+          "priority": "FLEXIBILITY"
+        },
+        "enga03": {
+          "title": "HYBRID",
+          "description": "Base cost + performance bonuses. We share the risks and success together with you.",
+          "priority": "Scalability"
+        },
+        "enga04": {
+          "title": "REV. SHARE",
+          "description": "Full product immersion. We invest our time and expertise in exchange for a share of the profit.",
+          "priority": "Long-term Growth"
+        }
+      }
+    },
+    "SolutionsSection": {
+      "title": "Data-Driven Solutions",
+      "solutionsList": {
+        "sol01": {
+          "title": "ANALYTICS",
+          "desc": "Full funnel transparency. Amplitude and AppsFlyer for a deep understanding of user behavior."
+        },
+        "sol02": {
+          "title": "ATTRIBUTION",
+          "desc": "Accurate tracking of traffic sources and optimization of advertising budgets based on ROAS."
+        },
+        "sol03": {
+          "title": "MONETIZATIOn",
+          "desc": "Payment system integration and paywall optimization via RevenueCat, Adapty, and Stripe for Web & App."
+        },
+        "sol04": {
+          "title": "OPTIMIZATION",
+          "desc": "Constant improvement of conversion rates through systematic A/B testing and feedback analysis."
+        }
+      }
+    }
+  }
+}

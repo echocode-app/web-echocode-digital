@@ -1,0 +1,86 @@
+{
+  "VacancyIOSPage": {
+    "valueSection": {
+      "title": "Código que crece contigo",
+      "subtitle": "Echocode.app busca un Trainee iOS Developer ambicioso listo para abandonar el \"código por el código\" y centrarse en crear productos que generen ingresos. Trabajamos en el nicho de aplicaciones móviles para el mercado global, por lo que millones de personas verán tu código."
+    },
+    "descriptionSections": {
+      "section01": {
+        "title": "¿En qué trabajarás?",
+        "val01": {
+          "title": "Experiencia real:",
+          "desc": "Trabajar en productos reales, no en tareas académicas o ficticias."
+        },
+        "val02": {
+          "title": "Mentoría:",
+          "desc": "Acceso directo a ingenieros Senior que te ayudarán a crecer a Junior en pocos meses."
+        },
+        "val03": {
+          "title": "Mentalidad de producto:",
+          "desc": "Te enseñaremos a entender métricas, retención y monetización."
+        },
+        "val04": {
+          "title": "Trabajo remoto y flexibilidad:",
+          "desc": "Trabaja desde cualquier lugar, lo importante es el resultado."
+        }
+      },
+      "section02": {
+        "title": "Requisitos (Lo esencial)",
+        "val01": {
+          "title": "Fundamentos de Swift y OOP",
+          "desc": "Conocimiento básico de Swift y principios de OOP."
+        },
+        "val02": {
+          "title": "Conocimiento de UIKit (SwiftUI es un plus)",
+          "desc": "Conocimiento básico de UIKit (SwiftUI es una gran ventaja)."
+        },
+        "val03": {
+          "title": "Arquitectura básica de apps móviles",
+          "desc": "Comprensión de cómo funciona una app móvil (ciclo de vida de View, interacción con API)."
+        },
+        "val04": {
+          "title": "Mentalidad de producto",
+          "desc": "Deseo de entender por qué construimos una función, no solo cómo."
+        }
+      },
+      "section03": {
+        "title": "Tu stack de habilidades",
+        "val01": {
+          "title": "Proyectos personales / práctica en Xcode",
+          "desc": "Proyectos personales o experiencia con Xcode."
+        },
+        "val02": {
+          "title": "Fundamentos de arquitectura (MVVM)",
+          "desc": "Conocimiento básico de arquitecturas como MVVM."
+        },
+        "val03": {
+          "title": "Fundamentos de Git",
+          "desc": "Comprensión de Git."
+        }
+      }
+    },
+    "selectionSection": {
+      "title": "Etapas de selección",
+      "step01": {
+        "title": "Paso 01",
+        "subTitle": "Revisión (CV y GitHub)",
+        "desc": "Evaluación de tu experiencia, stack y calidad de código."
+      },
+      "step02": {
+        "title": "Paso 02",
+        "subTitle": "Tarea de prueba",
+        "desc": "Un reto práctico para demostrar tu lógica, resolución de problemas y pensamiento arquitectónico."
+      },
+      "step03": {
+        "title": "Paso 03",
+        "subTitle": "Entrevista técnica",
+        "desc": "Una conversación profunda sobre tu experiencia y decisiones técnicas."
+      },
+      "step04": {
+        "title": "Paso 04",
+        "subTitle": "Oferta",
+        "desc": "Definición de condiciones y presentación de una propuesta clara de colaboración."
+      }
+    }
+  }
+}

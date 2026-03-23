@@ -7,6 +7,7 @@ import {
 import { env } from '@/server/config/env';
 import { ApiError } from '@/server/lib/errors';
 import { isRole, type Role } from '@/server/auth/roles';
+import { syncAdminAccessForLogin } from '@/server/admin/access';
 
 /** Minimal authenticated user profile returned to API consumers */
 export type AuthenticatedUserProfile = {
@@ -91,10 +92,7 @@ export async function verifyIdToken(token: string): Promise<VerifiedAuthPayload>
 }
 
 /** Bootstraps developer role only for allowlisted emails that currently have no role */
-export async function bootstrapAdminIfAllowed(
-  uid: string,
-  email?: string
-): Promise<void> {
+export async function bootstrapAdminIfAllowed(uid: string, email?: string): Promise<void> {
   if (!email) return;
 
   if (!env.adminBootstrapEmails.includes(email.toLowerCase())) return;
@@ -111,18 +109,12 @@ export async function bootstrapAdminIfAllowed(
     await getFirebaseUser(uid);
   } catch (cause) {
     if (cause instanceof ApiError) throw cause;
-    throw ApiError.fromCode(
-      'INTERNAL_ERROR',
-      'Failed to set Firebase custom claims',
-      { cause },
-    );
+    throw ApiError.fromCode('INTERNAL_ERROR', 'Failed to set Firebase custom claims', { cause });
   }
 }
 
 /** Loads latest server-trusted user profile from Firebase Admin SDK */
-export async function getAuthenticatedUserProfile(
-  uid: string,
-): Promise<AuthenticatedUserProfile> {
+export async function getAuthenticatedUserProfile(uid: string): Promise<AuthenticatedUserProfile> {
   const user = await getFirebaseUser(uid);
 
   return {
@@ -130,4 +122,12 @@ export async function getAuthenticatedUserProfile(
     email: user.email ?? null,
     role: isRole(user.customClaims?.role) ? user.customClaims.role : null,
   };
+}
+
+export async function syncAuthenticatedAdminRole(input: {
+  uid: string;
+  email: string | null;
+  fallbackRole: Role | null;
+}): Promise<Role | null> {
+  return syncAdminAccessForLogin(input);
 }

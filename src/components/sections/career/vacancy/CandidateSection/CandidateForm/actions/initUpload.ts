@@ -1,0 +1,47 @@
+import {
+  getClientAnalyticsContextPayload,
+  getClientAnalyticsHeaders,
+} from '@/components/analytics/clientAnalytics';
+import { InitUploadApiResponse, InitUploadResult, UploadedFile } from '../types/candidate';
+
+const initUpload = async (file: File): Promise<InitUploadResult> => {
+  const analyticsContext = getClientAnalyticsContextPayload();
+  const payload: UploadedFile = {
+    formType: 'vacancy',
+    file: {
+      path: '',
+      originalName: file.name,
+      mimeType: file.type,
+      sizeBytes: file.size,
+    },
+    ...analyticsContext,
+  };
+
+  const res = await fetch('/api/forms/uploads/init', {
+    method: 'POST',
+    headers: getClientAnalyticsHeaders(),
+    body: JSON.stringify(payload),
+  });
+
+  if (!res.ok) {
+    throw new Error(`Upload init failed: ${res.statusText}`);
+  }
+
+  const data: InitUploadApiResponse = await res.json();
+
+  if (!data.success || !data.data?.uploadUrl || !data.data?.path) {
+    throw new Error('Invalid init response');
+  }
+
+  return {
+    path: data.data.path,
+    uploadUrl: data.data.uploadUrl,
+    method: data.data.method,
+    headers: data.data.headers,
+    originalName: file.name,
+    mimeType: file.type,
+    sizeBytes: file.size,
+  };
+};
+
+export default initUpload;

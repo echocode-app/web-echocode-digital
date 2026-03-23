@@ -1,0 +1,27 @@
+{
+  "Layout": {
+    "Header": {
+      "navigation": {
+        "services": "Service Directions",
+        "portfolio": "Portfolio",
+        "partnership": "Partnership",
+        "team": "Team",
+        "career": "Career"
+      }
+    },
+    "Footer": {
+      "title": "HAVE A PROJECT IN MIND?",
+      "subtitle": "We design digital architectures that change the game. Every pixel and line of code is engineered for peak performance.",
+      "nav": {
+        "services": "Services",
+        "portfolio": "Portfolio",
+        "partnership": "Partnership",
+        "careers": "Careers"
+      },
+      "contactUsBtn": "Contact us",
+      "mailTitle": "Just send us your contact email and we will contact you.",
+      "mailSubtitle": "Your email",
+      "license": "ECHOCODE. ALL RIGHTS RESERVED."
+    }
+  }
+}

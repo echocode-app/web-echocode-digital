@@ -1,7 +1,7 @@
 [
   { "image": "/images/services/revenue.png", "desc": "Revenue" },
   { "image": "/images/services/pushwoosh.png", "desc": "Pushwoosh" },
-  { "image": "/images/services/openai.png", "desc": "OpenAI" },
+  { "image": "/images/services/render.png", "desc": "Render" },
   { "image": "/images/services/onesignal.png", "desc": "OneSignal" },
   { "image": "/images/services/amplitude.png", "desc": "Amplitude" },
   { "image": "/images/services/figma.png", "desc": "Figma" },

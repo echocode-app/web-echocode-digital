@@ -9,9 +9,9 @@ interface PortfolioItemProps {
 
 const PortfolioItem = ({ link, image, title }: PortfolioItemProps) => {
   return (
-    <li className="group">
+    <li className="group w-full sm:max-w-76.5">
       <Link href={link}>
-        <div className="relative w-full min-h-50 sm:w-76.5 sm:h-50  mb-4 overflow-hidden rounded-secondary">
+        <div className="relative w-full sm:max-w-76.5 aspect-306/200 mb-4 overflow-hidden rounded-secondary">
           <Image
             src={image}
             alt={title}
@@ -21,7 +21,7 @@ const PortfolioItem = ({ link, image, title }: PortfolioItemProps) => {
             will-change-transform"
           />
         </div>
-        <h3 className="font-title mb-px text-title-sm group-hover:text-accent duration-main">
+        <h3 className="font-wadik mb-px text-title-sm group-hover:text-accent duration-main">
           {title}
         </h3>
         <p

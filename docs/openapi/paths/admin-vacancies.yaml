@@ -1,0 +1,56 @@
+/api/admin/vacancies:
+  get:
+    tags: [Admin Vacancies]
+    operationId: listAdminVacancies
+    summary: List managed public vacancies
+    responses:
+      '200':
+        description: Managed vacancy settings
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/SuccessEnvelope'
+      '401':
+        $ref: '../openapi.yaml#/components/responses/Unauthorized'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/Forbidden'
+
+/api/admin/vacancies/{vacancyId}:
+  patch:
+    tags: [Admin Vacancies]
+    operationId: updateAdminVacancy
+    summary: Update visibility and metadata for a predefined vacancy
+    parameters:
+      - name: vacancyId
+        in: path
+        required: true
+        schema:
+          type: string
+          enum: [iosdev, qaengineer, designer]
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              isPublished:
+                type: boolean
+              hotPosition:
+                type: boolean
+              level:
+                type: [string, 'null']
+                enum: [Intern, Trainee, Junior, Middle, Senior, Lead, Principal, Head, null]
+    responses:
+      '200':
+        description: Updated vacancy settings
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/SuccessEnvelope'
+      '400':
+        $ref: '../openapi.yaml#/components/responses/BadRequest'
+      '401':
+        $ref: '../openapi.yaml#/components/responses/Unauthorized'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/Forbidden'

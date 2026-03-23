@@ -1,0 +1,17 @@
+[
+  {
+    "title": "sol01.title",
+    "desc": "sol01.desc",
+    "technologies": ["#UNITY", "#CROSS-PLATFORM"]
+  },
+  {
+    "title": "sol02.title",
+    "desc": "sol02.desc",
+    "technologies": ["#IMMERSIVE-DESIGN"]
+  },
+  {
+    "title": "sol03.title",
+    "desc": "sol03.desc",
+    "technologies": ["#MONETIZATION", "#LIVEOPS"]
+  }
+]

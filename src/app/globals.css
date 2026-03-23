@@ -1,5 +1,6 @@
 @import 'tailwindcss';
 @import '../styles/root.css';
+@import '../styles/hero-background.css';
 
 :root {
   --main-bg-color: #000000;
@@ -12,6 +13,17 @@ body {
   background-color: var(--main-bg-color);
 
   color: var(--main-text-color);
+}
+
+/* Keep admin interactions explicit without affecting the public site styling. */
+.admin-ui-shell a,
+.admin-ui-shell button:not(:disabled),
+.admin-ui-shell [role='button'],
+.admin-ui-shell input[type='button'],
+.admin-ui-shell input[type='submit'],
+.admin-ui-shell input[type='reset'],
+.admin-ui-shell summary {
+  cursor: pointer;
 }
 
 @keyframes marquee {
@@ -38,5 +50,16 @@ body {
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes hero-heading-cursor-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
   }
 }

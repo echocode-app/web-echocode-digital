@@ -1,0 +1,103 @@
+{
+  "AboutSectionCleaning": {
+    "aboutProject": {
+      "title": "Sobre el proyecto",
+      "description": "Cleaning Service es una aplicación nativa para iOS desarrollada para una empresa de limpieza que conecta a los clientes con limpiadores profesionales. La aplicación permite a los clientes programar servicios de limpieza, gestionar pagos de forma segura y comunicarse directamente con los limpiadores. Un panel de administración permite la gestión completa de usuarios, servicios, pedidos y métricas de rendimiento."
+    },
+    "projectIdea": {
+      "title": "Idea del proyecto",
+      "list": {
+        "item1": "El objetivo era crear una plataforma de doble cara que simplifique el proceso de reserva para los clientes y la gestión de carga de trabajo para los limpiadores.",
+        "item2": "Desde la perspectiva del cliente, la app permite solicitudes de servicio rápidas con precios transparentes y reseñas confiables.",
+        "item3": "Desde la perspectiva del limpiador, ofrece un flujo constante de pedidos, programación flexible y comunicación directa con los clientes."
+      }
+    }
+  },
+  "ImplementationCleaning": {
+    "title": "Implementación",
+    "subtitle": "La fase de desarrollo incluyó:",
+    "step01": { "desc": "Construcción del backend y la base de datos" },
+    "step02": { "desc": "Diseño de interfaces nativas de iOS para ambos roles de usuario" },
+    "step03": { "desc": "Integración de Stripe para pagos seguros" },
+    "step04": { "desc": "Implementación de un sistema de mensajería bidireccional" },
+    "step05": {
+      "desc": "Desarrollo de un panel de administración para la gestión completa de usuarios y servicios"
+    },
+    "step06": {
+      "desc": "Pruebas exhaustivas en múltiples modelos de iPhone y versiones de iOS para asegurar rendimiento y compatibilidad"
+    }
+  },
+  "ChallengesCleaning": {
+    "title": "Desafíos resueltos",
+    "feature01": {
+      "title": "UI de roles duales:",
+      "subtitle": "Diseño de una interfaz limpia y escalable que soporte clientes y limpiadores"
+    },
+    "feature02": {
+      "title": "Emparejamiento dinámico:",
+      "subtitle": "Sistema para que los limpiadores respondan y los clientes seleccionen"
+    },
+    "feature03": {
+      "title": "Pagos seguros:",
+      "subtitle": "Integración de flujos de pago y reembolso vía Stripe"
+    },
+    "feature04": {
+      "title": "Acceso basado en roles:",
+      "subtitle": "Gestión de datos y permisos de usuario en el panel de administración"
+    }
+  },
+  "PlanningCleaning": {
+    "title": "Planificación",
+    "block01": {
+      "title": "Entradas",
+      "desc01": "Plataforma de doble cara para clientes y limpiadores",
+      "desc02": "Programación flexible con precios transparentes",
+      "desc03": "Integración de Stripe para pagos",
+      "desc04": "Panel de administración claro y UX simple",
+      "desc05": "Mensajería y reseñas integradas en la app"
+    },
+    "block02": {
+      "title": "Análisis",
+      "desc01": "Definidas las personas de usuario y mapeadas sus rutas",
+      "desc02": "Modelados todos los módulos de funciones",
+      "desc03": "Creación de wireframes y prototipos",
+      "desc04": "Planificación de cronograma e implementación por fases"
+    },
+    "block03": {
+      "title": "Resultados",
+      "desc01": "Aplicación nativa para iOS con interfaz intuitiva",
+      "desc02": "Pagos seguros con Stripe",
+      "desc03": "Acceso basado en roles para clientes, limpiadores y administradores",
+      "desc04": "Panel de administración con estadísticas y controles",
+      "desc05": "Sistema de retroalimentación y reseñas integrado"
+    }
+  },
+  "FeaturesCleaning": {
+    "title": "Funciones principales del proyecto",
+    "subtitle": "Panel de administración:",
+    "feature01": { "title": "Gestionar pedidos y datos de usuarios" },
+    "feature02": { "title": "Seguimiento de métricas clave y dashboards" },
+    "feature03": { "title": "Editar precios y servicios" },
+    "feature04": { "title": "Moderar reseñas" }
+  },
+  "ScreensCleaning": { "title": "PANTALLAS" },
+  "PrototypeCleaning": {
+    "title": "Prototipo interactivo",
+    "subtitle": "Explora el diseño en acción — haz clic para experimentar cómo funciona"
+  },
+  "TechnologyCleaning": {
+    "title": "Stack tecnológico",
+    "block01": { "title": "Panel de administración", "desc": "Next.js" },
+    "block02": { "title": "Backend", "desc": "Node.js" },
+    "block03": { "title": "Notificaciones", "desc": "Firebase o WebSocket personalizado" },
+    "block04": {
+      "title": "Base de datos",
+      "desc": "Solución personalizada para gestión de menú y campañas"
+    },
+    "block05": {
+      "title": "Gestión de proyectos",
+      "desc": "Metodología Scrum con sprints de dos semanas"
+    },
+    "block06": { "title": "Integración de pagos", "desc": "API de Stripe" }
+  }
+}

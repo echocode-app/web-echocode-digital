@@ -1,0 +1,51 @@
+{
+  "VacancyValidation": {
+    "file": {
+      "nameRequired": "File name is required",
+      "nameTooLong": "File name is too long",
+      "mimeRequired": "MIME type is required",
+      "mimeTooLong": "MIME type is too long",
+      "mimeInvalid": "Allowed: PDF, DOC, DOCX, RTF, ODT, TXT",
+      "sizePositive": "File size must be greater than 0",
+      "sizeMax": "File must be ≤ 5 MB",
+      "pathRequired": "Path is required",
+      "pathTooLong": "Path is too long",
+      "pathInvalid": "Invalid storage path format"
+    },
+    "profileUrl": {
+      "required": "URL is required",
+      "invalid": "Must be a valid URL",
+      "maxLength": "Must contain at most 2048 characters",
+      "scheme": "URL must start with http:// or https://"
+    },
+    "cv": {
+      "required": "CV is required"
+    }
+  },
+  "ProjectValidation": {
+    "name": {
+      "min": "Must contain at least 2 characters",
+      "max": "Must contain at most 40 characters",
+      "pattern": "Only letters, spaces, apostrophes and hyphens are allowed"
+    },
+    "email": {
+      "invalid": "Must be a valid email",
+      "max": "Email is too long"
+    },
+    "description": {
+      "max": "Description is too long"
+    },
+    "attachment": {
+      "invalidType": "Unsupported file type. Use image, PDF, Office, TXT, CSV, RTF or ZIP.",
+      "size": "File must be smaller than 10MB"
+    }
+  },
+  "EmailSubmitValidation": {
+    "email": {
+      "min": "Email is too short",
+      "max": "Email is too long",
+      "invalid": "Enter a valid email",
+      "domain": "Domain must contain a dot and be valid"
+    }
+  }
+}

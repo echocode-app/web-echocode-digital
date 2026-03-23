@@ -1,0 +1,60 @@
+/api/admin/dashboard/overview:
+  get:
+    tags: [Admin Dashboard]
+    operationId: getAdminDashboardOverview
+    summary: Get dashboard overview aggregates
+    parameters:
+      - $ref: '../openapi.yaml#/components/parameters/Period'
+    responses:
+      '200':
+        description: Dashboard overview payload
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/SuccessEnvelope'
+      '401':
+        $ref: '../openapi.yaml#/components/responses/Unauthorized'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/Forbidden'
+
+/api/admin/dashboard/geography:
+  get:
+    tags: [Admin Dashboard]
+    operationId: getAdminDashboardGeography
+    summary: Get dashboard geography metrics
+    parameters:
+      - $ref: '../openapi.yaml#/components/parameters/Period'
+    responses:
+      '200':
+        description: Geography payload
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/SuccessEnvelope'
+      '401':
+        $ref: '../openapi.yaml#/components/responses/Unauthorized'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/Forbidden'
+
+/api/admin/dashboard/site-slice:
+  get:
+    tags: [Admin Dashboard]
+    operationId: getAdminDashboardSiteSliceOverview
+    summary: Get .digital page-view site slice widgets
+    description: |
+      Returns the dedicated `.digital` page-view widgets used by the extended dashboard:
+      page views KPI, countries KPI, top pages, geography list, and referrer/UTM source mix.
+      The backend always scopes this payload to `siteId = echocode_digital`.
+    parameters:
+      - $ref: '../openapi.yaml#/components/parameters/Period'
+    responses:
+      '200':
+        description: Dashboard site slice payload
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/SuccessEnvelope'
+      '401':
+        $ref: '../openapi.yaml#/components/responses/Unauthorized'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/Forbidden'

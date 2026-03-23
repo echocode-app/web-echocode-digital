@@ -2,7 +2,7 @@ import { type AuthContext } from '@/server/middlewares/requireAuth';
 import { hasPermission, isRole, type Permission } from '@/server/auth/roles';
 import { ApiError } from '@/server/lib/errors';
 
-type RequiredPermission = Exclude<Permission, '*'>;
+type RequiredPermission = Permission;
 type PermissionMode = 'all' | 'any';
 
 /** Enforces permission checks using role-permission mapping from the auth context */

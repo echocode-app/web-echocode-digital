@@ -1,0 +1,202 @@
+/api/analytics/page-view:
+  post:
+    tags: [Public Forms]
+    operationId: trackPageView
+    summary: Track public page view event
+    description: |
+      Best-effort page view analytics endpoint used by the public site.
+      Country is resolved on the server from proxy headers (for example Vercel or Cloudflare).
+    security: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../openapi.yaml#/components/schemas/PageViewTrackRequest'
+    responses:
+      '200':
+        description: Event accepted
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/SuccessEnvelope'
+      '400':
+        $ref: '../openapi.yaml#/components/responses/BadRequest'
+    x-notes:
+      - Supports approved cross-origin browser calls from external frontend sites.
+      - The backend resolves country from proxy headers and persists site-aware metadata.
+
+/api/forms/uploads/init:
+  post:
+    tags: [Public Forms]
+    operationId: initFormUpload
+    summary: Issue signed upload URL for project/vacancy file
+    security: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../openapi.yaml#/components/schemas/UploadInitRequest'
+    responses:
+      '200':
+        description: Signed upload URL
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/UploadInitEnvelope'
+      '400':
+        $ref: '../openapi.yaml#/components/responses/BadRequest'
+
+/api/forms/submissions:
+  post:
+    tags: [Public Forms]
+    operationId: createLegacyProjectSubmission
+    summary: Create legacy submissions entry
+    description: Legacy endpoint for project submissions flow.
+    security: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../openapi.yaml#/components/schemas/LegacyProjectSubmissionRequest'
+    responses:
+      '200':
+        description: Submission created
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/CreateEntityEnvelope'
+      '400':
+        $ref: '../openapi.yaml#/components/responses/BadRequest'
+    x-notes:
+      - Supports approved cross-origin browser calls from external frontend sites.
+      - Cross-site integrations should send `siteId` and `siteHost` explicitly.
+
+/api/forms/client-project:
+  post:
+    tags: [Public Forms]
+    operationId: createClientProjectSubmission
+    summary: Create client project submission
+    security: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../openapi.yaml#/components/schemas/ClientProjectCreateRequest'
+    responses:
+      '200':
+        description: Created
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/CreateEntityEnvelope'
+      '400':
+        $ref: '../openapi.yaml#/components/responses/BadRequest'
+
+/api/forms/client-project/image/init:
+  post:
+    tags: [Public Forms]
+    operationId: initClientProjectImageUpload
+    summary: Issue signed upload URL for client project image
+    security: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [file]
+            properties:
+              file:
+                $ref: '../openapi.yaml#/components/schemas/FileMetaInput'
+    responses:
+      '200':
+        description: Upload URL issued
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/UploadInitEnvelope'
+      '400':
+        $ref: '../openapi.yaml#/components/responses/BadRequest'
+
+/api/forms/client-project/analytics:
+  post:
+    tags: [Public Forms]
+    operationId: trackClientProjectAnalyticsEvent
+    summary: Track client project modal analytics event
+    security: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [eventType]
+            properties:
+              eventType:
+                type: string
+                enum:
+                  - contact_modal_open
+                  - contact_modal_close
+                  - contact_modal_cta_click
+                  - submit_project_attempt
+                  - submit_project_error
+              metadata:
+                type: object
+                additionalProperties: true
+    responses:
+      '200':
+        description: Event accepted
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/SuccessEnvelope'
+      '400':
+        $ref: '../openapi.yaml#/components/responses/BadRequest'
+
+/api/forms/email-submissions:
+  post:
+    tags: [Public Forms]
+    operationId: createEmailSubmission
+    summary: Create email-only submission (footer)
+    security: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../openapi.yaml#/components/schemas/EmailSubmissionCreateRequest'
+    responses:
+      '200':
+        description: Created
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/CreateEntityEnvelope'
+      '400':
+        $ref: '../openapi.yaml#/components/responses/BadRequest'
+
+/api/forms/vacancy-submissions:
+  post:
+    tags: [Public Forms]
+    operationId: createVacancySubmission
+    summary: Create vacancy submission (CV + profile URL)
+    security: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../openapi.yaml#/components/schemas/VacancySubmissionCreateRequest'
+    responses:
+      '200':
+        description: Created
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/CreateEntityEnvelope'
+      '400':
+        $ref: '../openapi.yaml#/components/responses/BadRequest'

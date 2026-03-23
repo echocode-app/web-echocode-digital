@@ -1,0 +1,98 @@
+/api/admin/submissions:
+  get:
+    tags: [Admin Submissions Legacy]
+    operationId: listAdminLegacySubmissions
+    summary: List legacy submissions records
+    parameters:
+      - name: page
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 20
+      - name: sortBy
+        in: query
+        schema:
+          type: string
+          enum: [createdAt]
+          default: createdAt
+      - name: sortOrder
+        in: query
+        schema:
+          type: string
+          enum: [asc, desc]
+          default: desc
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum: [new, in_review, contacted, rejected, closed]
+    responses:
+      '200':
+        description: Legacy submissions page
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/SuccessEnvelope'
+      '401':
+        $ref: '../openapi.yaml#/components/responses/Unauthorized'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/Forbidden'
+
+/api/admin/submissions/status:
+  patch:
+    tags: [Admin Submissions Legacy]
+    operationId: updateAdminLegacySubmissionStatus
+    summary: Update legacy submission workflow status
+    parameters:
+      - $ref: '../openapi.yaml#/components/parameters/SubmissionIdQuery'
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [status]
+            properties:
+              status:
+                type: string
+                enum: [new, in_review, contacted, rejected, closed]
+    responses:
+      '200':
+        description: Status updated
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/SuccessEnvelope'
+      '400':
+        $ref: '../openapi.yaml#/components/responses/BadRequest'
+      '401':
+        $ref: '../openapi.yaml#/components/responses/Unauthorized'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/Forbidden'
+
+/api/admin/submissions/overview:
+  get:
+    tags: [Admin Submissions Legacy]
+    operationId: getAdminSubmissionsOverview
+    summary: Get submissions metrics overview
+    parameters:
+      - $ref: '../openapi.yaml#/components/parameters/Period'
+    responses:
+      '200':
+        description: Metrics overview payload
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/SuccessEnvelope'
+      '401':
+        $ref: '../openapi.yaml#/components/responses/Unauthorized'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/Forbidden'
