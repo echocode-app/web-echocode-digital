@@ -34,7 +34,7 @@ const SocailLinks = () => {
           className="flex justify-center items-center w-10 h-10 rounded-full bg-social-whatsapp 
           hover:bg-accent focus-visible:bg-accent duration-main"
         >
-          <div className="relative w-4.5 h-4.5">
+          <div className="relative w-5 h-5">
             <Image src="/UI/social-icons/whatsapp.svg" fill alt="WhatsApp" />
           </div>
         </Link>
