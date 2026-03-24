@@ -109,6 +109,7 @@
 
   /* Duration */
   --duration-main: 400ms;
+
 }
 
 @keyframes section-gradient-drift {

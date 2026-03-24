@@ -1,0 +1,42 @@
+@theme {
+  --background-image-social-instagram: radial-gradient(
+    99.11% 99.11% at 26.56% 107.7%,
+    #ffdd55 0%,
+    #ffdd55 10%,
+    #ff543e 50%,
+    #c837ab 100%
+  );
+  --color-social-telegram: rgba(0, 136, 204, 1);
+  --color-social-whatsapp: rgba(37, 211, 102, 1);
+}
+
+@layer utilities {
+  .bg-social-instagram-link {
+    position: relative;
+    isolation: isolate;
+    background: var(--background-image-social-instagram);
+    overflow: hidden;
+  }
+
+  .bg-social-instagram-link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: var(--color-accent);
+    opacity: 0;
+    transition: opacity var(--duration-main);
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .bg-social-instagram-link:hover::after,
+  .bg-social-instagram-link:focus-visible::after {
+    opacity: 1;
+  }
+
+  .bg-social-instagram-link > * {
+    position: relative;
+    z-index: 1;
+  }
+}
