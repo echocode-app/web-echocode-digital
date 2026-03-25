@@ -1,0 +1,75 @@
+{
+  "MobilePage": {
+    "HeroSection": { "title": "TWÓRZ. SKALUJ. DOMINUJ" },
+    "FullCycleSection": {
+      "title": "FULL CYCLE DEVELOPMENT",
+      "steps": {
+        "step01": {
+          "title": "01. STRATEGIA",
+          "subTitle": "Analiza",
+          "desc": "Audyt techniczny, analiza konkurencji oraz opracowanie roadmapy produktu."
+        },
+        "step02": {
+          "title": "02. UX／UI",
+          "subTitle": "Projektowanie",
+          "desc": "Tworzenie interfejsów skoncentrowanych na retencji i płynnej interakcji użytkownika."
+        },
+        "step03": {
+          "title": "03. KOD",
+          "subTitle": "Development",
+          "desc": "Kod natywny (Swift/Kotlin) z wykorzystaniem nowoczesnych wzorców clean architecture."
+        },
+        "step04": {
+          "title": "04. DEVOPS",
+          "subTitle": "Integracja",
+          "desc": "Płynne wdrożenie i integracja systemów zapewniające niezawodność oraz szybkość działania."
+        },
+        "step05": {
+          "title": "05. ROZWÓJ",
+          "subTitle": "Publikacja ＆ ASO",
+          "desc": "Optymalizacja wydań, obecności w App Store oraz funkcji ukierunkowanych na retencję."
+        }
+      }
+    },
+    "SpecializationsSection": {
+      "title": "SPECJALIZACJA PROFESJONALNA",
+      "subtitle": "Koncentrujemy się na tworzeniu produktów, które dostarczają przewidywalne rezultaty. Nasze doświadczenie obejmuje złożone rozwiązania technologiczne oraz efektywne modele monetyzacji.",
+      "specializations": {
+        "spec01": {
+          "title": "EKOSYSTEMY",
+          "subTitle": "Subskrypcyjny SaaS",
+          "desc": "Budowa systemów opartych na subskrypcji. Od optymalizacji paywalla po integrację usług analitycznych LTV."
+        },
+        "spec02": {
+          "title": "OPTYMALIZACJA",
+          "subTitle": "Utilities ＆ High-Load",
+          "desc": "Narzędzia stworzone z myślą o szybkości. Optymalizacja pamięci, tryby offline oraz przetwarzanie dużych zbiorów danych w czasie rzeczywistym."
+        },
+        "spec03": {
+          "title": "USŁUGI",
+          "subTitle": "Super-Apps",
+          "desc": "Wielomodułowe rozwiązania o złożonej logice, które zachowują szybkość i intuicyjność interfejsu."
+        },
+        "spec04": {
+          "title": "INTELIGENCJA",
+          "subTitle": "AI ＆ Data Intelligence",
+          "desc": "Wdrażanie modeli ML i przetwarzania danych w czasie rzeczywistym dla hiperpersonalizowanych doświadczeń użytkownika."
+        }
+      }
+    },
+    "MarketingSection": {
+      "title": "WZROST ＆ MARKETING",
+      "subtitle": "Profesjonalny development to tylko połowa sukcesu. Pomagamy produktom stać się widocznymi w sklepach dzięki sprawdzonym metodom optymalizacji i strategicznej promocji.",
+      "list": {
+        "list01": {
+          "title": "Optymalizacja ASO",
+          "desc": "Skalowanie do TOP-u dla docelowych słów kluczowych w App Store i Google Play, aby zdobywać stabilny ruch organiczny i obniżać koszty pozyskania użytkownika."
+        },
+        "list02": {
+          "title": "Promocja algorytmiczna",
+          "desc": "Wykorzystanie algorytmów rekomendacji i mechanik trendujących do dynamicznego wzrostu bazy użytkowników poprzez viral loops i social proof."
+        }
+      }
+    }
+  }
+}

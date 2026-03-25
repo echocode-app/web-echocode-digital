@@ -1,0 +1,89 @@
+{
+  "QAPage": {
+    "HeroSection": { "title": "Twoja stabilność to Twój zysk" },
+    "BussinessSection": {
+      "title": "Nie tylko testujemy funkcje. Chronimy kluczowe obszary biznesowe",
+      "subtitle": "Zapewniamy stabilność tam, gdzie każda awaria może kosztować utracone przychody, użytkowników i zaufanie do produktu.",
+      "list": {
+        "bus01": {
+          "title": "Checkout ＆ Płatności"
+        },
+        "bus02": {
+          "title": "Onboarding użytkownika"
+        },
+        "bus03": {
+          "title": "Integralność danych"
+        },
+        "bus04": {
+          "title": "Zabezpieczenie edge case’ów"
+        }
+      }
+    },
+    "ModerationSection": {
+      "title": "Przechodź moderację szybciej",
+      "subtitle": "Odrzucenie przez App Store lub Google Play oznacza tygodnie przestoju i utracony budżet. Znamy pułapki wytycznych Apple i Google i przygotowujemy Twój produkt do akceptacji z wyprzedzeniem.",
+      "list": {
+        "mod01": {
+          "title": "Kontrola zgodności z wytycznymi",
+          "desc": "Upewniamy się, że Twoja aplikacja spełnia wszystkie wymagania App Store i Google Play przed publikacją."
+        },
+        "mod02": {
+          "title": "Testy na prawdziwych urządzeniach",
+          "desc": "Testowanie na realnych urządzeniach z różnymi wersjami systemu i rozmiarami ekranów."
+        },
+        "mod03": {
+          "title": "Kontrola crash-free rate",
+          "desc": "Monitorowanie i utrzymywanie wysokiego poziomu stabilności wymaganego do zatwierdzenia w store’ach."
+        }
+      }
+    },
+    "ArmorSection": {
+      "title": "Wielowarstwowa ochrona Twojego produktu",
+      "steps": {
+        "step01": {
+          "title": "POZIOM 01",
+          "subTitle": "Funkcjonalność",
+          "desc": "Dogłębne manualne testy logiki. Twoi użytkownicy dostają dokładnie to, co zostało obiecane w specyfikacji."
+        },
+        "step02": {
+          "title": "POZIOM 02",
+          "subTitle": "Automatyzacja",
+          "desc": "Tworzenie automatycznych testów regresyjnych (CI/CD). Szybkie release’y bez obawy o „zepsucie” produktu."
+        },
+        "step03": {
+          "title": "POZIOM 03",
+          "subTitle": "Bezpieczeństwo",
+          "desc": "Skanowanie podatności i testy penetracyjne. Ochrona przed wyciekami i utratą danych."
+        },
+        "step04": {
+          "title": "POZIOM 04",
+          "subTitle": "Load ＆ Stress",
+          "desc": "Symulacja szczytowych obciążeń. Twój produkt pozostaje stabilny nawet przy gwałtownym wzroście ruchu użytkowników."
+        }
+      }
+    },
+    "MetricsSection": {
+      "title": "Jak jakość przekłada się na kluczowe metryki",
+      "titlePart1": "Jak jakość przekłada się",
+      "titlePart2": "na kluczowe metryki",
+      "list": {
+        "met01": {
+          "title": "Mniejszy churn",
+          "desc": "Użytkownicy zostają z Tobą dzięki niezawodności produktu."
+        },
+        "met02": {
+          "title": "Mniej zwrotów",
+          "desc": "Minimalna liczba reklamacji związanych z działaniem płatnych funkcji."
+        },
+        "met03": {
+          "title": "Lepsze oceny",
+          "desc": "Wysokie oceny 4.8+ dzięki płynnemu działaniu aplikacji bez crashy."
+        },
+        "met04": {
+          "title": "Monetyzacja",
+          "desc": "Transakcje przechodzą bez błędów nawet w najbardziej krytycznych momentach wzmożonego ruchu."
+        }
+      }
+    }
+  }
+}

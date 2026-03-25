@@ -1,0 +1,52 @@
+{
+  "IGamingPage": {
+    "HeroSection": { "title": "Scale. Yield. Dominance" },
+    "SolutionsSection": {
+      "title": "Ekosystem rozwiązań",
+      "solutionsList": {
+        "sol01": {
+          "title": "Stos technologiczny",
+          "desc": "Rozwój i utrzymanie systemów o dowolnym stopniu złożoności. Tworzymy infrastrukturę, która wytrzymuje szczytowe obciążenia i zapewnia płynne działanie Twoich aktywów na całym świecie."
+        },
+        "sol02": {
+          "title": "Wzrost organiczny",
+          "desc": "Dogłębna optymalizacja obecności w globalnych sieciach i sklepach. Wynosimy produkty na szczyt dzięki naszej autorskiej metodologii promocji ASO i SEO."
+        },
+        "sol03": {
+          "title": "Zarządzanie ruchem",
+          "desc": "Systematyczne zarządzanie przepływem użytkowników. Stabilne pozyskiwanie wysokiej jakości ruchu oraz budowanie reputacji marki na arenie międzynarodowej."
+        }
+      }
+    },
+    "FoundationSection": {
+      "title": "Fundament naszej pewności",
+      "list": {
+        "found01": "Globalne skalowanie",
+        "found02": "Odporność 24／7",
+        "found03": "Podejście oparte na danych",
+        "found04": "Wzrost aktywów"
+      }
+    },
+    "DominateSection": {
+      "title": "ASO: Zdominuj wyniki wyszukiwania",
+      "desc": "Zamieniamy widoczność w realne instalacje. Nasza strategia ASO to połączenie precyzyjnych danych, psychologii użytkownika oraz głębokiego zrozumienia algorytmów App Store i Google Play.",
+      "list": {
+        "dom01": {
+          "title": "01. ANALIZA",
+          "subtitle": "Badanie słów kluczowych",
+          "desc": "Wyszukiwanie trafnych fraz o najwyższym wolumenie ruchu i najniższej konkurencji. Znajdujemy punkty wejścia tam, gdzie inni ich nie dostrzegają."
+        },
+        "dom02": {
+          "title": "02. WIZJA",
+          "subtitle": "Wizualna optymalizacja ASO",
+          "desc": "Tworzenie ikon i screenshotów, które zwiększają CTR o 25% lub więcej. Komunikacja wizualna, która skłania użytkownika do kliknięcia „Pobierz”."
+        },
+        "dom03": {
+          "title": "03. BUDOWA",
+          "subtitle": "Głęboka lokalizacja",
+          "desc": "Dostosowanie metadanych do kulturowych niuansów konkretnych GEO: Brazylia, Indie, Europa. Mówimy do rynku jego własnym językiem."
+        }
+      }
+    }
+  }
+}
