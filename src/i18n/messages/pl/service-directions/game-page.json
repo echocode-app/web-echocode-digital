@@ -1,0 +1,40 @@
+{
+  "GamePage": {
+    "HeroSection": { "title": "LEVEL UP Reality" },
+    "SolutionsSection": {
+      "title": "Ekosystem rozwiązań",
+      "solutionsList": {
+        "sol01": {
+          "title": "ZAAWANSOWANE SILNIKI GIER",
+          "desc": "Wykorzystujemy nowoczesne silniki, aby tworzyć fotorealistyczną grafikę i złożoną fizykę. Optymalizacja pod sprzęt zapewnia maksymalny FPS i płynną rozgrywkę."
+        },
+        "sol02": {
+          "title": "KONCEPT ＆ 3D ART",
+          "desc": "Od pierwszych szkiców po finalny render. Tworzymy unikalne światy gier, postacie i środowiska, które definiują wizualną tożsamość Twojego projektu."
+        },
+        "sol03": {
+          "title": "EKONOMIA GRY ＆ OPS",
+          "desc": "Projektujemy zrównoważone ekonomie wewnątrz gry i systemy monetyzacji. Zapewniamy długoterminowe utrzymanie graczy dzięki regularnym aktualizacjom i wydarzeniom live."
+        }
+      }
+    },
+    "UniversesSection": {
+      "title": "NIE TYLKO TWÓRZ GRY. TWÓRZ UNIWERSA",
+      "desc": "Zostań architektem gamingowych doświadczeń. W naszym zespole nie tylko piszesz skrypty — kształtujesz emocje milionów graczy na całym świecie.",
+      "list": {
+        "uni01": {
+          "title": "KULTURA SKONCENTROWANA NA GRACZU",
+          "desc": "Skupiamy się na doświadczeniu gracza. Każda mechanika i każdy piksel muszą służyć jednemu celowi: dostarczaniu czystej satysfakcji z gry."
+        },
+        "uni02": {
+          "title": "KREATYWNA SWOBODA",
+          "desc": "Bez sztywnych granic. Wspieramy eksperymentowanie z gameplayem i nowymi technologiami, aby napędzać innowacje."
+        },
+        "uni03": {
+          "title": "PEŁNA ODPOWIEDZIALNOŚĆ",
+          "desc": "Masz wpływ na projektowanie poziomów, balans rozgrywki i narrację. Twój indywidualny wkład decyduje o losie całego projektu."
+        }
+      }
+    }
+  }
+}

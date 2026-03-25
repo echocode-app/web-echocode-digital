@@ -18,7 +18,7 @@ const CandidateSection = ({ vacancyData }: CandidateSectionProps) => {
         className="relative max-w-318 px-8 mx-auto flex flex-col  xl:flex-row xl:justify-between 
       items-center xl:items-start gap-58 xl:gap-40"
       >
-        <h2 className=" text-[26px] min-[490px]:text-[40px] text-left max-w-149.5 w-full font-extra uppercase font-extrabold tracking-[-0.8px]">
+        <h2 className="xl:whitespace-pre-line text-[26px] min-[490px]:text-[40px] text-left max-w-149.5 w-full font-extra uppercase font-extrabold tracking-[-0.8px]">
           {t('title')}
         </h2>
         <VacancyImage />

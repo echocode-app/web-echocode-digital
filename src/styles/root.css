@@ -109,7 +109,6 @@
 
   /* Duration */
   --duration-main: 400ms;
-
 }
 
 @keyframes section-gradient-drift {
@@ -141,7 +140,8 @@
   }
   html[lang='ua'] .font-title,
   html[lang='de'] .font-title,
-  html[lang='es'] .font-title {
+  html[lang='es'] .font-title,
+  html[lang='pl'] .font-title {
     font-family: var(--font-rubik), sans-serif;
   }
   .font-main {

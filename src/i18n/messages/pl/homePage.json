@@ -1,0 +1,65 @@
+{
+  "HomePage": {
+    "HeroSection": {
+      "subtitle": "Tworzymy wysokowydajne cyfrowe ekosystemy. Od koncepcji po dominację na rynku.",
+      "orderButton": "Złóż zamówienie"
+    },
+    "BasedOnSection": {
+      "title": "SPECJALIZUJEMY SIĘ W PEŁNYM CYKLU TWORZENIA APLIKACJI MOBILNYCH I WEBOWYCH",
+      "subtitle": "Nie tylko kodujemy: budujemy cyfrową siłę. Nasz zespół łączy głęboką wiedzę techniczną ze strategią, dostarczając produkty przewyższające rynek i redefiniujące doświadczenie użytkownika.",
+      "metrics": {
+        "delivered": "Dostarczone niestandardowe produkty na całym świecie",
+        "experts": "Eksperci IT na poziomie Senior i Middle",
+        "prototypeTimeUnit": "dni",
+        "prototypeTime": "Średni czas od pomysłu do interaktywnego prototypu",
+        "returningClients": "Powracający klienci wprowadzający kolejne wielkie pomysły w życie"
+      }
+    },
+    "DirectionsSection": {
+      "title": "Kierunki usług",
+      "directions": {
+        "mobile": {
+          "title": "Rozwój mobilny",
+          "description": "Premium natywne aplikacje iOS i Android. Skupiamy się na wysokiej wydajności, intuicyjnym UX i bezpiecznej integracji backendu."
+        },
+        "web": {
+          "title": "Rozwój webowy",
+          "description": "Niestandardowe ekosystemy webowe i PWA. Skoncentrowane na stabilności, szybkim ładowaniu i efektywnej logice biznesowej."
+        },
+        "game": {
+          "title": "Tworzenie gier",
+          "description": "Przekraczamy granice cyfrowej interakcji, tworząc immersyjne doświadczenia w grach nowej generacji."
+        },
+        "igaming": {
+          "title": "iGaming",
+          "description": "Ekosystemy rozrywki o wysokiej częstotliwości. Projektujemy skalowalne architektury dla operacji o dużym obciążeniu i bezpiecznej infrastruktury transakcyjnej."
+        },
+        "qa": {
+          "title": "QA",
+          "description": "System odporności oparty na precyzji. Eliminujemy podatności architektoniczne dzięki rygorystycznym cyklom automatyzacji, zapewniając absolutną stabilność operacyjną."
+        }
+      },
+      "loadMoreBtn": "Załaduj więcej"
+    },
+    "ServicesSection": {
+      "title": "Nasze usługi",
+      "subtitle": "Nie ograniczamy się do outsourcingu. Stajemy się Twoim dedykowanym partnerem technologicznym, zapewniając, że Twój produkt rozwija się zgodnie z trendami rynkowymi."
+    },
+    "PortfolioSection": {
+      "title": "Portfolio",
+      "subtitle": "Nasze najnowsze projekty. Od skalowalnych platform po niszowe aplikacje mobilne — dostarczamy technologię, która działa dla Twojego biznesu."
+    },
+    "PartnersSection": {
+      "title": "Partnerzy"
+    },
+    "LocationsSection": {
+      "title": "Nasze lokalizacje",
+      "subtitle": "Globalny zasięg, lokalna ekspertyza. Dzięki rozproszonym zespołom i strategicznym biurom dostarczamy rozwiązania wysokiej jakości klientom na całym świecie.",
+      "locations": {
+        "kyiv": "Kijów",
+        "berlin": "Berlin",
+        "remote": "Zdalnie"
+      }
+    }
+  }
+}

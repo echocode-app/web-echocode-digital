@@ -1,0 +1,151 @@
+{
+  "AboutSectionECommerce": {
+    "aboutProject": {
+      "title": "O projekcie",
+      "description": "E-commerce to mobilna aplikacja zakupowa zaprojektowana dla wielomarkowego sprzedawcy odzieży, skierowana do kobiet, mężczyzn i dzieci. Aplikacja zapewnia nowoczesne i uproszczone doświadczenie zakupowe — od przeglądania kategorii po składanie bezpiecznych zamówień — z naciskiem na szybkość, prostotę i przejrzystość wizualną. Obejmuje konta użytkowników, ulubione produkty, dynamiczne filtrowanie, opcje dostawy w czasie rzeczywistym oraz analitykę."
+    },
+    "projectIdea": {
+      "title": "Pomysł na projekt",
+      "intro": "Celem klienta było stworzenie elastycznej i skalowalnej platformy mobilnej, dzięki której klienci mogliby:",
+      "list": {
+        "item1": "Odkrywać nowe kolekcje modowe dla wszystkich grup wiekowych",
+        "item2": "Łatwo wyszukiwać, filtrować i przeglądać produkty według marek i rozmiarów",
+        "item3": "Zapisywać ulubione produkty i zarządzać zakupami za pomocą kilku kliknięć",
+        "item4": "Korzystać z minimalistycznego interfejsu mobile-first, który jest intuicyjny i angażujący. Głównym celem było zwiększenie zaangażowania użytkowników i poprawa konwersji mobilnych."
+      }
+    }
+  },
+  "ImplementationECommerce": {
+    "title": "Realizacja",
+    "subtitle": "Rozpoczęliśmy od dogłębnej analizy rynku oraz interfejsów najlepszych aplikacji modowych.",
+    "step01": {
+      "title": "01. STRATEGIA",
+      "subTitle": "Analiza",
+      "desc": "Analiza konkurencji Mapowanie ścieżki użytkownika"
+    },
+    "step02": {
+      "title": "02. UX／UI",
+      "subTitle": "Projektowanie",
+      "desc": "Przepływy UX i wireframe’y Czysty, modułowy projekt interfejsu"
+    },
+    "step03": {
+      "title": "03. KOD",
+      "subTitle": "Development",
+      "desc": "Zwinny rozwój aplikacji iOS Funkcje e-commerce"
+    },
+    "step04": {
+      "title": "04. DEVOPS",
+      "subTitle": "Integracja",
+      "desc": "Płatności i API dostaw Usługi zewnętrzne"
+    },
+    "step05": {
+      "title": "05. ROZWÓJ",
+      "subTitle": "Publikacja ＆ ASO",
+      "desc": "Testy i zapewnienie jakości Wdrożenie produktu"
+    }
+  },
+  "ChallengesECommerce": {
+    "title": "Wyzwania, które rozwiązaliśmy",
+    "feature01": {
+      "title": "Złożony katalog:",
+      "subtitle": "Skalowalna, wielopoziomowa struktura (Kobiety, Mężczyźni, Dzieci)"
+    },
+    "feature02": {
+      "title": "Optymalizacja UX:",
+      "subtitle": "Zoptymalizowany interfejs do szybkiego przeglądania, filtrowania i składania zamówień"
+    },
+    "feature03": {
+      "title": "Elastyczne produkty:",
+      "subtitle": "Zaprojektowaliśmy system obsługujący nowe marki, SKU i kampanie sezonowe"
+    },
+    "feature04": {
+      "title": "Interfejs mobile-first:",
+      "subtitle": "Dostarczono czysty, responsywny układ, który pozostaje intuicyjny na różnych urządzeniach"
+    }
+  },
+  "PlanningECommerce": {
+    "title": "Planowanie",
+    "block01": {
+      "title": "Założenia",
+      "desc01": "Zróżnicowany katalog dla wszystkich grup wiekowych",
+      "desc02": "Przejrzysta nawigacja i uproszczony katalog",
+      "desc03": "Interfejs mobile-first zgodny z trendami",
+      "desc04": "Bezpieczny i płynny proces zakupowy"
+    },
+    "block02": {
+      "title": "Analiza",
+      "desc01": "Warsztaty ze stakeholderami i określenie zakresu",
+      "desc02": "Mapowanie ścieżki użytkownika i przypadków brzegowych",
+      "desc03": "Zdefiniowanie kluczowych stanów UI i ekranów",
+      "desc04": "Interaktywny prototyp"
+    },
+    "block03": {
+      "title": "Rezultaty",
+      "desc01": "Gotowy do wdrożenia projekt aplikacji mobilnej",
+      "desc02": "Modułowy system UI umożliwiający skalowanie",
+      "desc03": "Pełne przekazanie do developmentu (assetów i specyfikacji)",
+      "desc04": "Plan integracji usług zewnętrznych i analityki"
+    }
+  },
+  "FeaturesECommerce": {
+    "title": "Główne funkcje projektu",
+    "feature01": {
+      "title": "Ulubione",
+      "desc": "Pozwala użytkownikom zapisywać produkty i wracać do nich później"
+    },
+    "feature02": {
+      "title": "Koszyk ＆ Checkout",
+      "desc": "Płynny i bezpieczny proces płatności za pomocą Stripe i PayPal"
+    },
+    "feature03": {
+      "title": "Historia zamówień",
+      "desc": "Podgląd poprzednich zakupów i statusów zamówień"
+    },
+    "feature04": {
+      "title": "Katalog oparty na kategoriach",
+      "desc": "Filtrowanie według płci, wieku, marki, rozmiaru i ceny"
+    },
+    "feature05": {
+      "title": "Osobiste konto użytkownika",
+      "desc": "Śledzenie zamówień, aktualizacja danych i zarządzanie preferencjami"
+    },
+    "feature06": {
+      "title": "Dostawa w czasie rzeczywistym",
+      "desc": "Integracja z FedEx (USA) i DPD (UE)"
+    }
+  },
+  "ScreensECommerce": {
+    "title": "EKRANY"
+  },
+  "PrototypeECommerce": {
+    "title": "Interaktywny prototyp",
+    "subtitle": "Poznaj projekt w działaniu — kliknij i sprawdź, jak to działa"
+  },
+  "TechnologyECommerce": {
+    "title": "Stos technologiczny",
+    "block01": {
+      "title": "Platforma",
+      "desc": "Swift"
+    },
+    "block02": {
+      "title": "Backend",
+      "desc": "FedEx API, DPD API"
+    },
+    "block03": {
+      "title": "Autoryzacja użytkownika ＆ baza danych",
+      "desc": "Firebase"
+    },
+    "block04": {
+      "title": "Integracja płatności",
+      "desc": "Stripe, PayPal"
+    },
+    "block05": {
+      "title": "Analityka",
+      "desc": "Google Analytics"
+    },
+    "block06": {
+      "title": "Zarządzanie projektem",
+      "desc": "Metodologia Scrum z 2-tygodniowymi sprintami"
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "TeamPage": {
+    "HeroSection": {
+      "title": "Prawdziwi ludzie produktu"
+    },
+    "philosophySection": {
+      "title": "Filozofia zespołu",
+      "subtitle": "Wspaniałe produkty nie powstają dzięki izolowanym deweloperom. Tworzą je małe, skupione, wielofunkcyjne zespoły.",
+      "desc": "Wszystkie zespoły są zgrane wokół jednego celu — sukcesu Twojego produktu."
+    },
+    "WorkSection": {
+      "title": "Jak pracujemy",
+      "workList": {
+        "work01": {
+          "title": "Zaangażowani",
+          "description": "Każdy zespół jest w pełni oddany Twojemu projektowi. Bez zmian kontekstu, bez rozproszeń."
+        },
+        "work02": {
+          "title": "Odpowiedzialni",
+          "description": "Bierzemy pełną odpowiedzialność za rezultat, a nie tylko za realizację zadań."
+        },
+        "work03": {
+          "title": "Zoptymalizowani",
+          "description": "Równoważymy prędkość, stabilność i przychody, aby zapewnić rozwój biznesu."
+        }
+      }
+    },
+    "StepsSection": {
+      "subtitle": "Twój produkt jest tworzony przez zespół z udokumentowanym doświadczeniem w pełnym cyklu dostarczania.",
+      "stepsList": {
+        "step01": { "title": "Uruchomione aplikacje z milionami użytkowników" },
+        "step02": { "title": "Przetrwały odrzucenia w App Store i złożone zgodności" },
+        "step03": { "title": "Skalowanie systemów przy dużym, realnym ruchu" },
+        "step04": { "title": "Tworzenie i utrzymywanie produktów o wysokiej monetyzacji" }
+      }
+    },
+    "TransparencySection": {
+      "title": "Przejrzystość",
+      "subtitle": "BEZ CZARNEJ SKRZYNKI.",
+      "transparencyList": {
+        "trans01": { "title": "Rzeczywisty postęp sprintu" },
+        "trans02": { "title": "Rzeczywiste metryki produktu" },
+        "trans03": { "title": "Rzeczywiste raporty QA" },
+        "trans04": { "title": "Rzeczywista gotowość do wydania" }
+      }
+    }
+  }
+}

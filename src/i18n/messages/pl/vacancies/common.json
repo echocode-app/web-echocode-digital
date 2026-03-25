@@ -1,0 +1,13 @@
+{
+  "VacancyCommon": {
+    "vacancyForm": {
+      "title": "Czy to właśnie\nTy?",
+      "subtitle": "Wyślij swoje CV oraz link do LinkedIn lub GitHub.",
+      "cvLabel": "Twoje CV",
+      "cvPlaceholder": "twoje CV",
+      "linkLabel": "Link do LinkedIn／GitHub",
+      "linkPlaceholder": "wklej swój link",
+      "submitBtn": "Aplikuj na to stanowisko"
+    }
+  }
+}
