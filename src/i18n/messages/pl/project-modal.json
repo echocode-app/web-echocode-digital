@@ -1,0 +1,18 @@
+{
+  "ProjectModal": {
+    "title": "MASZ PROJEKT NA MYŚLI?",
+    "subtitle": "Uzyskaj profesjonalną poradę. Skorzystaj z formularza lub napisz do nas e-mail:",
+    "projectForm": {
+      "firstNamePlaceholder": "Imię*",
+      "lastNamePlaceholder": "Nazwisko*",
+      "emailPlaceholder": "Email*",
+      "filePlaceholder": "dołącz plik",
+      "needsLabel": "O Twoich potrzebach...",
+      "needsPlaceholder": "np. Projekt aplikacji mobilnej dla fintech startupu",
+      "submitBtn": "Wyślij wiadomość",
+      "submitSending": "Wysyłanie...",
+      "successBtn": "Zapytanie odebrane. Skontaktujemy się wkrótce.",
+      "submitMessage": "DZIĘKUJEMY!"
+    }
+  }
+}

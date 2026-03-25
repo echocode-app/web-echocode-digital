@@ -1,0 +1,90 @@
+{
+  "VacancyQAPage": {
+    "valueSection": {
+      "title": "QA, które udowadnia swoją wartość",
+      "subtitle": "Design w Echocode to nie tylko wizualizacje, to hipotezy, które przekładają się na przychody. Szukamy QA z silnym podejściem analitycznym, który potrafi bronić swoich decyzji na podstawie danych i doświadczenia użytkownika."
+    },
+
+    "descriptionSections": {
+      "section01": {
+        "title": "Nad czym będziesz pracować?",
+        "val01": {
+          "title": "Kompleksowa jakość:",
+          "desc": "Pełny cykl testowania złożonych produktów mobilnych i webowych."
+        },
+        "val02": {
+          "title": "Odpowiedzialność za procesy:",
+          "desc": "Budowa i optymalizacja procesów QA w zespołach produktowych."
+        },
+        "val03": {
+          "title": "QA oparte na danych:",
+          "desc": "Praca z metrykami stabilności i analiza przyczyn błędów produkcyjnych."
+        },
+        "val04": {
+          "title": "Automatyzacja:",
+          "desc": "Możliwość wdrażania testów automatycznych w celu przyspieszenia CI/CD."
+        }
+      },
+
+      "section02": {
+        "title": "Wymagania eksperckie",
+        "val01": {
+          "title": "Doświadczenie w testowaniu cross-platform",
+          "desc": "Ponad 2 lata doświadczenia w testowaniu mobilnym (iOS/Android) i webowym."
+        },
+        "val02": {
+          "title": "Znajomość Client–Server i API",
+          "desc": "Dogłębne rozumienie architektury klient-serwer oraz interakcji z API (Postman/Charles)."
+        },
+        "val03": {
+          "title": "Narzędzia do crash i analityki",
+          "desc": "Doświadczenie w pracy z Crashlytics, Firebase oraz narzędziami analitycznymi."
+        },
+        "val04": {
+          "title": "Znajomość SDLC i Agile",
+          "desc": "Zrozumienie cyklu życia oprogramowania i metodyk Agile."
+        }
+      },
+
+      "section03": {
+        "title": "Cenimy",
+        "val01": {
+          "title": "Dokładność i analityczne myślenie",
+          "desc": "Zwracanie uwagi na szczegóły i krytyczne myślenie."
+        },
+        "val02": {
+          "title": "Jasna komunikacja i rozwiązywanie problemów",
+          "desc": "Umiejętność klarownego przedstawienia problemów i proponowania rozwiązań."
+        },
+        "val03": {
+          "title": "Doświadczenie w Fintech / produktach o dużym obciążeniu",
+          "desc": "Doświadczenie w produktach Fintech lub wysokiego obciążenia."
+        }
+      }
+    },
+
+    "selectionSection": {
+      "title": "Etapy rekrutacji",
+      "step01": {
+        "title": "Krok 01",
+        "subTitle": "Rozmowa wstępna",
+        "desc": "Oceniamy Twoją znajomość SDLC, umiejętność priorytetyzacji i wykrywania podatności produktu."
+      },
+      "step02": {
+        "title": "Krok 02",
+        "subTitle": "Analiza praktycznego case’a",
+        "desc": "Ocena testów, hipotez i ograniczeń."
+      },
+      "step03": {
+        "title": "Krok 03",
+        "subTitle": "Rozmowa techniczna",
+        "desc": "Dogłębna analiza metodologii testowania, narzędzi i doświadczenia w integracji Agile."
+      },
+      "step04": {
+        "title": "Krok 04",
+        "subTitle": "Oferta",
+        "desc": "Jasna propozycja współpracy skoncentrowana na Twoim rozwoju i wpływie na jakość produktu."
+      }
+    }
+  }
+}

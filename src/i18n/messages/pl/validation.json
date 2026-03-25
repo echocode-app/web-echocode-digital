@@ -1,0 +1,51 @@
+{
+  "VacancyValidation": {
+    "file": {
+      "nameRequired": "Nazwa pliku jest wymagana",
+      "nameTooLong": "Nazwa pliku jest zbyt długa",
+      "mimeRequired": "Typ MIME jest wymagany",
+      "mimeTooLong": "Typ MIME jest zbyt długi",
+      "mimeInvalid": "Dozwolone: PDF, DOC, DOCX, RTF, ODT, TXT",
+      "sizePositive": "Rozmiar pliku musi być większy niż 0",
+      "sizeMax": "Plik musi mieć ≤ 5 MB",
+      "pathRequired": "Ścieżka jest wymagana",
+      "pathTooLong": "Ścieżka jest zbyt długa",
+      "pathInvalid": "Nieprawidłowy format ścieżki przechowywania"
+    },
+    "profileUrl": {
+      "required": "URL jest wymagany",
+      "invalid": "Musi być poprawnym URL",
+      "maxLength": "Musi zawierać maksymalnie 2048 znaków",
+      "scheme": "URL musi zaczynać się od http:// lub https://"
+    },
+    "cv": {
+      "required": "CV jest wymagane"
+    }
+  },
+  "ProjectValidation": {
+    "name": {
+      "min": "Musi zawierać co najmniej 2 znaki",
+      "max": "Musi zawierać maksymalnie 40 znaków",
+      "pattern": "Dozwolone są tylko litery, spacje, apostrofy i myślniki"
+    },
+    "email": {
+      "invalid": "Musi być poprawnym adresem e-mail",
+      "max": "E-mail jest zbyt długi"
+    },
+    "description": {
+      "max": "Opis jest zbyt długi"
+    },
+    "attachment": {
+      "invalidType": "Nieobsługiwany typ pliku. Użyj obrazu, PDF, Office, TXT, CSV, RTF lub ZIP.",
+      "size": "Plik musi być mniejszy niż 10 MB"
+    }
+  },
+  "EmailSubmitValidation": {
+    "email": {
+      "min": "E-mail jest za krótki",
+      "max": "E-mail jest za długi",
+      "invalid": "Wprowadź poprawny e-mail",
+      "domain": "Domena musi zawierać kropkę i być poprawna"
+    }
+  }
+}

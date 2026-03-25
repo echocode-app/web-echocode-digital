@@ -1,0 +1,27 @@
+{
+  "Layout": {
+    "Header": {
+      "navigation": {
+        "services": "Kierunki usług",
+        "portfolio": "Portfolio",
+        "partnership": "Partnerstwo",
+        "team": "Zespół",
+        "career": "Kariera"
+      }
+    },
+    "Footer": {
+      "title": "MASZ PROJEKT NA MYŚLI?",
+      "subtitle": "Projektujemy cyfrowe architektury, które zmieniają zasady gry. Każdy piksel i linia kodu są zoptymalizowane pod maksymalną wydajność.",
+      "nav": {
+        "services": "Usługi",
+        "portfolio": "Portfolio",
+        "partnership": "Partnerstwo",
+        "careers": "Kariera"
+      },
+      "contactUsBtn": "Kontakt",
+      "mailTitle": "Po prostu prześlij nam swój adres e-mail, a skontaktujemy się z Tobą.",
+      "mailSubtitle": "Twój e-mail",
+      "license": "ECHOCODE. WSZELKIE PRAWA ZASTRZEŻONE."
+    }
+  }
+}

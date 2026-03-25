@@ -1,0 +1,133 @@
+{
+  "AboutSectionCleaning": {
+    "aboutProject": {
+      "title": "O projekcie",
+      "description": "Cleaning Service to natywna aplikacja iOS stworzona dla firmy sprzątającej, która łączy klientów z profesjonalnymi osobami sprzątającymi. Aplikacja umożliwia klientom zamawianie usług sprzątania, bezpieczne zarządzanie płatnościami oraz bezpośrednią komunikację z personelem sprzątającym. Panel administracyjny zapewnia pełne zarządzanie użytkownikami, usługami, zamówieniami i wskaźnikami wydajności."
+    },
+    "projectIdea": {
+      "title": "Pomysł na projekt",
+      "list": {
+        "item1": "Celem było stworzenie dwustronnej platformy upraszczającej proces rezerwacji dla klientów oraz zarządzanie harmonogramem pracy osób sprzątających.",
+        "item2": "Z perspektywy klienta aplikacja umożliwia szybkie zamawianie usług z przejrzystym cennikiem i wiarygodnymi opiniami.",
+        "item3": "Z perspektywy osoby sprzątającej oferuje stały napływ zleceń, elastyczny grafik oraz bezpośrednią komunikację z klientami."
+      }
+    }
+  },
+  "ImplementationCleaning": {
+    "title": "Realizacja",
+    "subtitle": "Etap realizacji obejmował:",
+    "step01": {
+      "desc": "Budowę backendu i bazy danych"
+    },
+    "step02": {
+      "desc": "Projektowanie natywnych interfejsów iOS dostosowanych do obu ról użytkowników"
+    },
+    "step03": {
+      "desc": "Integrację Stripe w celu zapewnienia bezpiecznych płatności"
+    },
+    "step04": {
+      "desc": "Wdrożenie dwukierunkowego systemu wiadomości"
+    },
+    "step05": {
+      "desc": "Stworzenie panelu administracyjnego do kompleksowego zarządzania użytkownikami i usługami"
+    },
+    "step06": {
+      "desc": "Dokładne testy na różnych modelach iPhone’ów i wersjach iOS w celu zapewnienia wydajności i kompatybilności"
+    }
+  },
+  "ChallengesCleaning": {
+    "title": "Wyzwania, które rozwiązaliśmy",
+    "feature01": {
+      "title": "Interfejs dla dwóch ról:",
+      "subtitle": "Zaprojektowanie przejrzystego i skalowalnego interfejsu dla klientów oraz osób sprzątających"
+    },
+    "feature02": {
+      "title": "Dynamiczne dopasowanie:",
+      "subtitle": "Stworzenie systemu, w którym osoby sprzątające mogą odpowiadać na zlecenia, a klienci wybierać najlepszą opcję"
+    },
+    "feature03": {
+      "title": "Bezpieczne płatności:",
+      "subtitle": "Integracja płatności i zwrotów za pomocą Stripe"
+    },
+    "feature04": {
+      "title": "Dostęp oparty na rolach:",
+      "subtitle": "Zarządzanie danymi użytkowników i uprawnieniami w panelu administracyjnym"
+    }
+  },
+  "PlanningCleaning": {
+    "title": "Planowanie",
+    "block01": {
+      "title": "Założenia",
+      "desc01": "Dwustronna platforma dla klientów i osób sprzątających",
+      "desc02": "Elastyczne planowanie z przejrzystym cennikiem",
+      "desc03": "Integracja Stripe do obsługi płatności",
+      "desc04": "Przejrzysty panel administracyjny i prosty UX",
+      "desc05": "Wbudowany system wiadomości i opinii"
+    },
+    "block02": {
+      "title": "Analiza",
+      "desc01": "Zdefiniowano persony użytkowników i ich ścieżki",
+      "desc02": "Zamodelowano wszystkie moduły funkcjonalne",
+      "desc03": "Przygotowano wireframe’y i prototypy",
+      "desc04": "Zaplanowano harmonogram i wdrożenie etapowe"
+    },
+    "block03": {
+      "title": "Rezultaty",
+      "desc01": "Natywna aplikacja iOS z intuicyjnym interfejsem",
+      "desc02": "Bezpieczne płatności Stripe",
+      "desc03": "Dostęp oparty na rolach dla klientów, osób sprzątających i administratorów",
+      "desc04": "Panel administracyjny ze statystykami i kontrolą",
+      "desc05": "Zintegrowany system opinii i ocen"
+    }
+  },
+  "FeaturesCleaning": {
+    "title": "Główne funkcje projektu",
+    "subtitle": "Panel administracyjny:",
+    "feature01": {
+      "title": "Zarządzanie zamówieniami i danymi użytkowników"
+    },
+    "feature02": {
+      "title": "Śledzenie kluczowych wskaźników i dashboardów"
+    },
+    "feature03": {
+      "title": "Edycja cen i usług"
+    },
+    "feature04": {
+      "title": "Moderowanie opinii"
+    }
+  },
+  "ScreensCleaning": {
+    "title": "EKRANY"
+  },
+  "PrototypeCleaning": {
+    "title": "Interaktywny prototyp",
+    "subtitle": "Poznaj projekt w działaniu — kliknij i sprawdź, jak to działa"
+  },
+  "TechnologyCleaning": {
+    "title": "Stos technologiczny",
+    "block01": {
+      "title": "Panel administracyjny",
+      "desc": "Next.js"
+    },
+    "block02": {
+      "title": "Backend",
+      "desc": "Node.js"
+    },
+    "block03": {
+      "title": "Powiadomienia",
+      "desc": "Firebase lub niestandardowy WebSocket"
+    },
+    "block04": {
+      "title": "Baza danych",
+      "desc": "Niestandardowe rozwiązanie do zarządzania menu i kampaniami"
+    },
+    "block05": {
+      "title": "Zarządzanie projektem",
+      "desc": "Metodologia Scrum z 2-tygodniowymi sprintami"
+    },
+    "block06": {
+      "title": "Integracja płatności",
+      "desc": "Stripe API"
+    }
+  }
+}

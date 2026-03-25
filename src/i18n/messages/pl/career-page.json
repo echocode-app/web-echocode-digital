@@ -1,0 +1,29 @@
+{
+  "CareerPage": {
+    "HeroSection": {
+      "title": "Buduj wspaniałe produkty"
+    },
+    "BusinessSection": {
+      "title": "Nie tylko pisz kod. Buduj biznesy",
+      "subtitle": "Tutaj stajesz się inżynierem produktu, a nie tylko wykonawcą zadań. Twój kod bezpośrednio wpływa na przychody i doświadczenie milionów użytkowników.",
+      "businessList": {
+        "bus01": {
+          "title": "Kultura produktu",
+          "description": "Dbamy o stabilność, retencję i konwersje tak samo jak o czystość kodu."
+        },
+        "bus02": {
+          "title": "Brak mikrozarządzania",
+          "description": "Masz pełną odpowiedzialność za funkcje i bezpośredni dostęp do decyzji produktowych."
+        },
+        "bus03": {
+          "title": "Rozwijaj się z nami",
+          "description": "Rozwijamy ludzi tak jak produkty: poprzez mentoring, odpowiedzialność i realny wpływ."
+        }
+      }
+    },
+    "VacanciesSection": {
+      "title": "Otwarte wakaty",
+      "applyBtn": "Aplikuj teraz"
+    }
+  }
+}

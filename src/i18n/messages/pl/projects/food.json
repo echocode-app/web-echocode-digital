@@ -1,0 +1,154 @@
+{
+  "AboutSectionFood": {
+    "aboutProject": {
+      "title": "O projekcie",
+      "description": "Food & Drinks to aplikacja mobilna stworzona dla ogólnokrajowej sieci restauracji w celu zwiększenia zaangażowania klientów i usprawnienia procesu zamawiania jedzenia. Aplikacja oferuje użytkownikom atrakcyjny wizualnie i intuicyjny interfejs do przeglądania menu, odkrywania sezonowych ofert oraz udziału w programie lojalnościowym marki — wszystko za pomocą smartfona. Integruje geolokalizację, powiadomienia wielokanałowe (push, e-mail, SMS) oraz skanowanie kodów QR, zapewniając płynną interakcję zarówno w lokalu, jak i online."
+    },
+    "projectIdea": {
+      "title": "Pomysł na projekt",
+      "intro": "Wizją klienta było stworzenie nowoczesnego i skalowalnego rozwiązania do zamawiania jedzenia, które będzie:",
+      "list": {
+        "item1": "Zapewniać pełne cyfrowe menu z intuicyjną nawigacją",
+        "item2": "Obsługiwać śledzenie punktów lojalnościowych i spersonalizowane oferty",
+        "item3": "Umożliwiać sezonowe promocje i aktualizacje kampanii",
+        "item4": "Integrwać funkcjonalność QR dla zaangażowania klientów w lokalu",
+        "item5": "Dostarczać powiadomienia na czas za pośrednictwem wielu kanałów"
+      }
+    }
+  },
+  "ImplementationFood": {
+    "title": "Realizacja",
+    "subtitle": "Przeszliśmy od planowania do wdrożenia poprzez uporządkowane etapy rozwoju produktu.",
+    "step01": {
+      "title": "01. STRATEGIA",
+      "subTitle": "Analiza",
+      "desc": "Analiza konkurencji Mapowanie ścieżki użytkownika"
+    },
+    "step02": {
+      "title": "02. UX／UI",
+      "subTitle": "Projektowanie",
+      "desc": "Przejrzysty interfejs skoncentrowany na dostępności i widoczności promocji"
+    },
+    "step03": {
+      "title": "03. KOD",
+      "subTitle": "Development",
+      "desc": "Dwutygodniowe sprinty z ciągłym dostarczaniem funkcji i zbieraniem feedbacku"
+    },
+    "step04": {
+      "title": "04. DEVOPS",
+      "subTitle": "Integracja",
+      "desc": "Połączenia z CRM, systemami lojalnościowymi i wewnętrzną platformą"
+    },
+    "step05": {
+      "title": "05. ROZWÓJ",
+      "subTitle": "Publikacja ＆ ASO",
+      "desc": "Testy funkcjonalne, UI i wydajnościowe na różnych urządzeniach i wersjach systemu"
+    }
+  },
+  "ChallengesFood": {
+    "title": "Wyzwania, które rozwiązaliśmy",
+    "feature01": {
+      "title": "Złożony katalog:",
+      "subtitle": "Skalowalna, wielopoziomowa struktura menu i kategorii"
+    },
+    "feature02": {
+      "title": "Optymalizacja UX:",
+      "subtitle": "Zoptymalizowany interfejs do szybkiego przeglądania, filtrowania i zamawiania"
+    },
+    "feature03": {
+      "title": "Elastyczne produkty:",
+      "subtitle": "Zaprojektowaliśmy system obsługujący nowe pozycje, kampanie sezonowe i promocje"
+    },
+    "feature04": {
+      "title": "Interfejs mobile-first:",
+      "subtitle": "Dostarczono czysty, responsywny układ, który pozostaje intuicyjny na różnych urządzeniach"
+    }
+  },
+  "PlanningFood": {
+    "title": "Planowanie",
+    "block01": {
+      "title": "Założenia",
+      "desc01": "Wizualne i intuicyjne menu mobilne",
+      "desc02": "Integracja programu lojalnościowego",
+      "desc03": "Promocje w czasie rzeczywistym",
+      "desc04": "Filtrowanie oparte na geolokalizacji",
+      "desc05": "Zaangażowanie klientów w lokalu dzięki QR",
+      "desc06": "Spersonalizowane powiadomienia"
+    },
+    "block02": {
+      "title": "Analiza",
+      "desc01": "Badanie rynku i analiza konkurencji",
+      "desc02": "Wywiady ze stakeholderami i warsztaty zakresowe",
+      "desc03": "Mapowanie ścieżki użytkownika na podstawie zachowań w lokalu",
+      "desc04": "Tworzenie person dla kluczowych grup użytkowników"
+    },
+    "block03": {
+      "title": "Rezultaty",
+      "desc01": "Prototypy UI high-fidelity",
+      "desc02": "Skalowalna i udokumentowana architektura aplikacji",
+      "desc03": "Plan integracji CRM i systemu lojalnościowego",
+      "desc04": "Roadmapa funkcji z mechanikami zwiększającymi zaangażowanie"
+    }
+  },
+  "FeaturesFood": {
+    "title": "Główne funkcje projektu",
+    "feature01": {
+      "title": "Przeglądanie menu wizualnego",
+      "desc": "Skategoryzowane dania z atrakcyjnymi wizualizacjami i szczegółami"
+    },
+    "feature02": {
+      "title": "Ulubione",
+      "desc": "Użytkownicy mogą zapisywać ulubione pozycje do szybkiego ponownego zamówienia"
+    },
+    "feature03": {
+      "title": "Geolokalizacja",
+      "desc": "Wykrywa pobliskie restauracje i filtruje wyniki według odległości"
+    },
+    "feature04": {
+      "title": "Program lojalnościowy",
+      "desc": "Użytkownicy śledzą saldo punktów, historię i nagrody"
+    },
+    "feature05": {
+      "title": "Promocje ＆ Aktualności",
+      "desc": "Aktualny feed sezonowych ofert i ogłoszeń"
+    },
+    "feature06": {
+      "title": "Skaner QR",
+      "desc": "Umożliwia użytkownikom odblokowywanie ofert lub zdobywanie nagród w lokalu"
+    }
+  },
+  "ScreensFood": {
+    "title": "EKRANY"
+  },
+  "PrototypeFood": {
+    "title": "Interaktywny prototyp",
+    "subtitle": "Poznaj projekt w działaniu — kliknij i sprawdź, jak to działa"
+  },
+  "TechnologyFood": {
+    "title": "Stos technologiczny",
+    "block01": {
+      "title": "Platforma",
+      "desc": "Swift"
+    },
+    "block02": {
+      "title": "Narzędzia",
+      "desc": "SDK do skanowania kodów QR"
+    },
+    "block03": {
+      "title": "Backend",
+      "desc": "Integracja przez Loyalty Platform API"
+    },
+    "block04": {
+      "title": "CMS",
+      "desc": "Niestandardowe rozwiązanie do zarządzania menu i kampaniami"
+    },
+    "block05": {
+      "title": "Zarządzanie projektem",
+      "desc": "Metodologia Scrum z 2-tygodniowymi sprintami"
+    },
+    "block06": {
+      "title": "Powiadomienia",
+      "desc": "Firebase Cloud Messaging, Twilio"
+    }
+  }
+}

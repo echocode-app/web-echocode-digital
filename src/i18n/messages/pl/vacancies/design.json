@@ -1,0 +1,90 @@
+{
+  "VacancyDesignerPage": {
+    "valueSection": {
+      "title": "Design, który udowadnia swoją wartość",
+      "subtitle": "W Echocode design to nie tylko wygląd. Chodzi o tworzenie hipotez, które przekładają się na mierzalny wzrost produktu. Szukamy projektanta, który rozumie biznesową wartość decyzji produktowych i potrafi je uzasadnić danymi oraz zachowaniami użytkowników."
+    },
+
+    "descriptionSections": {
+      "section01": {
+        "title": "Nad czym będziesz pracować?",
+        "val01": {
+          "title": "End-to-end Product Design:",
+          "desc": "Udział w tworzeniu strategii produktu wspólnie z CEO i zespołem inżynierów."
+        },
+        "val02": {
+          "title": "Conversion Design:",
+          "desc": "Projektowanie i testowanie interfejsów zwiększających LTV i wskaźniki konwersji."
+        },
+        "val03": {
+          "title": "RATEDesign System:",
+          "desc": "Utrzymywanie i rozwój skalowalnego systemu designu w Figma."
+        },
+        "val04": {
+          "title": "RATEUser Feedback:",
+          "desc": "Analiza opinii użytkowników i iteracyjne poprawki UX."
+        }
+      },
+
+      "section02": {
+        "title": "Nasze oczekiwania",
+        "val01": {
+          "title": "Silne portfolio",
+          "desc": "Doświadczenie w produktach mobilnych (iOS / Android)."
+        },
+        "val02": {
+          "title": "Ekspert Figma",
+          "desc": "Dogłębna znajomość Auto Layout, Variables i prototypowania."
+        },
+        "val03": {
+          "title": "Zrozumienie psychologii użytkownika",
+          "desc": "Znajomość zasad zachowań użytkowników i ekonomii behawioralnej."
+        },
+        "val04": {
+          "title": "Zrozumienie ograniczeń technicznych platform",
+          "desc": "Świadomość, co jest łatwe do wdrożenia dla deweloperów, a co nie."
+        }
+      },
+
+      "section03": {
+        "title": "Twój zestaw umiejętności miękkich",
+        "val01": {
+          "title": "Umiejętność uzasadniania decyzji projektowych",
+          "desc": "Każda decyzja opiera się na hipotezie, danych i mierzalnym wpływie na produkt."
+        },
+        "val02": {
+          "title": "Chęć pracy z metrykami produktu",
+          "desc": "Pracujemy z konwersjami, lejkami i flow — nie tylko z estetyką."
+        },
+        "val03": {
+          "title": "Wysoki poziom autonomii",
+          "desc": "Umiejętność samodzielnego prowadzenia zadania od pomysłu do mierzalnego rezultatu."
+        }
+      }
+    },
+
+    "selectionSection": {
+      "title": "Etapy rekrutacji",
+      "step01": {
+        "title": "Krok 01",
+        "subTitle": "Przegląd portfolio",
+        "desc": "Oceniamy myślenie projektowe, logikę podejmowania decyzji i realny wpływ na produkt."
+      },
+      "step02": {
+        "title": "Krok 02",
+        "subTitle": "Design Challenge",
+        "desc": "Oceniamy, jak formułujesz hipotezy i pracujesz w ograniczeniach."
+      },
+      "step03": {
+        "title": "Krok 03",
+        "subTitle": "Rozmowa kwalifikacyjna",
+        "desc": "Rozmowa z zespołem produktowym na temat podejścia, procesu i współpracy."
+      },
+      "step04": {
+        "title": "Krok 04",
+        "subTitle": "Oferta",
+        "desc": "Przejrzysta oferta i rozpoczęcie współpracy bez zbędnych kroków."
+      }
+    }
+  }
+}
