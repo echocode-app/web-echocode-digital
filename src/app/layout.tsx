@@ -94,7 +94,7 @@ export default async function RootLayout({
       'https://instagram.com/echocode.app',
       'https://www.behance.net/valeriimelnikov',
       'https://freelancehunt.com/freelancer/echocode.html',
-      'https://www.upwork.com/freelancers/~013b73c2c5c053c170',
+      'https://www.upwork.com/agencies/2038889063349600711/',
     ],
   };
   const websiteSchema = {
