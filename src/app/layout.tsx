@@ -91,7 +91,7 @@ export default async function RootLayout({
     sameAs: [
       'https://linkedin.com/company/echocode',
       'https://t.me/echocode_app',
-      'https://instagram.com/echocode.app',
+      'https://www.instagram.com/echocode.digital',
       'https://www.behance.net/valeriimelnikov',
       'https://freelancehunt.com/freelancer/echocode.html',
       'https://www.upwork.com/agencies/2038889063349600711/',
