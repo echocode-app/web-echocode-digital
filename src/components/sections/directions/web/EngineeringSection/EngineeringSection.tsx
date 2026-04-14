@@ -24,7 +24,7 @@ const EngineeringSection = () => {
           <EngineeringImage />
           <EngineeringList />
         </div>
-        <CarouselList duration="50" list={technologies} />
+        <CarouselList standartsSection list={technologies} />
       </SectionContainer>
     </section>
   );
