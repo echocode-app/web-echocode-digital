@@ -5,5 +5,13 @@
   { "image": "/images/technologies/docker.svg", "desc": "Docker" },
   { "image": "/images/technologies/go.svg", "desc": "Go" },
   { "image": "/images/technologies/node.svg", "desc": "Node" },
-  { "image": "/images/technologies/next.svg", "desc": "Next" }
+  { "image": "/images/technologies/next.svg", "desc": "Next" },
+  { "image": "/images/technologies/woo.svg", "desc": "woo" },
+  { "image": "/images/technologies/acf.svg", "desc": "acf" },
+  { "image": "/images/technologies/elementor.svg", "desc": "elementor" },
+  { "image": "/images/technologies/liquid.png", "desc": "liquid" },
+  { "image": "/images/technologies/shopify.svg", "desc": "shopify" },
+  { "image": "/images/technologies/opencart.svg", "desc": "opencart" },
+  { "image": "/images/technologies/graph.svg", "desc": "graph" },
+  { "image": "/images/technologies/ocmod.svg", "desc": "ocmod" }
 ]

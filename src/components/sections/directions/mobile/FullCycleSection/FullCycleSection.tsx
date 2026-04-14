@@ -18,7 +18,7 @@ const FullCycleSection = () => {
         <SectionTitle marginBottom="8px">{t('title')}</SectionTitle>
         <InvertedSectionGradientLine />
         <FullCycleList list={fullCycle} />
-        <CarouselList list={fullCycleServices} />
+        <CarouselList duration="30" list={fullCycleServices} />
       </SectionContainer>
     </section>
   );
