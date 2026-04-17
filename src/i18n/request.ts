@@ -18,6 +18,7 @@ const loadMessages = cache(async (locale: string) => {
     'portfolio-page.json',
     'career-page.json',
     'partnership-page.json',
+    'privacy-policy-page.json',
     'vacancies/ios-dev.json',
     'vacancies/common.json',
     'vacancies/qa.json',

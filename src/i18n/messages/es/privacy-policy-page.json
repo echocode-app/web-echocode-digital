@@ -1,0 +1,153 @@
+{
+  "PrivacyPolicyPage": {
+    "meta": {
+      "title": "Política de Privacidad",
+      "description": "Descubre cómo Echocode recopila, utiliza, almacena y protege los datos personales en el sitio web, incluidas las solicitudes mediante formularios, analíticas, seguimiento de sesión y atribución UTM."
+    },
+    "hero": {
+      "title": "Política de Privacidad",
+      "imageAlt": "Política de Privacidad"
+    },
+    "intro": {
+      "summary": "Esta Política de Privacidad explica cómo Echocode recopila, utiliza, almacena y divulga datos personales cuando visitas echocode.digital, envías una consulta, solicitas una vacante o interactúas de cualquier otra forma con nuestro sitio web público. Está diseñada para un sitio web de marketing que utiliza analítica first-party, parámetros de atribución y almacenamiento del navegador para comprender la calidad del tráfico y el rendimiento de las campañas."
+    },
+    "effectiveDate": "Esta política de privacidad es efectiva desde el 17.04.2026.",
+    "sections": [
+      {
+        "title": "Quiénes somos",
+        "paragraphs": [
+          "Esta Política de Privacidad se aplica al sitio web público de Echocode disponible en echocode.digital y a los formularios, páginas y flujos públicos de interacción relacionados en dicho sitio.",
+          "A efectos de este sitio web, el operador del sitio y contacto de privacidad es Melnykov Valerii. Si tienes una solicitud de privacidad, acceso a datos o eliminación de datos, puedes ponerte en contacto con nosotros utilizando los datos indicados a continuación."
+        ],
+        "bullets": [
+          "Responsable / operador del sitio web: Melnykov Valerii",
+          "Correo de privacidad: melnykov.valerii@echocode.digital",
+          "Dirección: avenida Obolonskyi 15, Kyiv 04205, Ucrania"
+        ]
+      },
+      {
+        "title": "Qué datos personales recopilamos",
+        "paragraphs": [
+          "Recopilamos la información que nos proporcionas directamente y una cantidad limitada de información técnica que se genera cuando utilizas el sitio web.",
+          "Las categorías de datos que podemos recopilar dependen de cómo interactúes con el sitio."
+        ],
+        "bullets": [
+          "Datos de consultas de proyectos: nombre, apellido, dirección de correo electrónico, detalles del mensaje y cualquier archivo o imagen opcional adjunto a una consulta de proyecto.",
+          "Datos de solicitudes de empleo: URL del perfil, metadatos del archivo CV y contexto de la vacante enviados mediante el flujo de candidatura.",
+          "Datos del formulario de correo electrónico del footer: dirección de correo electrónico y fuente del punto de entrada del contacto o suscripción.",
+          "Datos de uso y analítica: ruta visitada, URL de la página, título de la página, referrer, host del sitio, identificador del sitio, identificador de sesión y marcas temporales de eventos.",
+          "Datos de atribución de campañas: UTM source, UTM medium y UTM campaign cuando están disponibles.",
+          "Datos de geografía aproximada: ubicación a nivel de país inferida a partir de encabezados de red o de hosting para informes geográficos agregados.",
+          "No afirmamos que recopilemos la ubicación GPS precisa ni la dirección exacta del usuario a través de este sitio web."
+        ]
+      },
+      {
+        "title": "Cómo recopilamos la información",
+        "paragraphs": [
+          "Recopilamos datos de tres formas principales: directamente de los formularios que completas, automáticamente a partir de las interacciones con el sitio web y del contexto técnico que acompaña a una solicitud.",
+          "Cuando envías una solicitud de proyecto, una candidatura o un email desde el footer, la información que introduces se transmite a nuestro backend para que podamos procesarla y almacenarla.",
+          "Cuando navegas por el sitio, podemos registrar eventos propios de visualización de páginas y contexto técnico relacionado para entender el uso del sitio, la calidad del tráfico y el rendimiento de las campañas."
+        ],
+        "bullets": [
+          "Envíos directos: formularios de contacto, candidaturas y formularios solo de email.",
+          "Recopilación automática: eventos de visualización de páginas, datos de referrer, identificadores de sesión y parámetros de atribución de campañas.",
+          "Contexto técnico: encabezados de solicitud a nivel de país, información del host del sitio y metadatos de archivos necesarios para validar cargas."
+        ]
+      },
+      {
+        "title": "Por qué usamos los datos personales",
+        "paragraphs": [
+          "Utilizamos los datos personales solo en la medida razonablemente necesaria para operar el sitio web, responder a solicitudes, revisar candidaturas, proteger el servicio y evaluar el rendimiento del marketing.",
+          "Según el contexto, nuestra base jurídica puede incluir tu consentimiento, medidas adoptadas a tu solicitud antes de iniciar una relación comercial, nuestros intereses legítimos en operar y mejorar el sitio web y el cumplimiento de obligaciones legales."
+        ],
+        "bullets": [
+          "Para revisar y responder a consultas de proyectos, solicitudes de partnership y mensajes de contacto.",
+          "Para recibir, revisar y procesar candidaturas y archivos relacionados.",
+          "Para supervisar el uso del sitio, comprender las fuentes de tráfico y medir la eficacia de las campañas.",
+          "Para detectar abusos, validar uploads, mantener la estabilidad del servicio y solucionar incidencias técnicas.",
+          "Para mantener informes internos, colas de moderación y registros operativos vinculados a envíos públicos."
+        ]
+      },
+      {
+        "title": "Política de cookies y almacenamiento del navegador",
+        "paragraphs": [
+          "Este sitio web utiliza cookies y tecnologías similares, incluyendo localStorage del navegador y almacenamiento del navegador basado en sesión, para respaldar analíticas, atribución y determinadas funciones de continuidad del flujo de usuario.",
+          "Actualmente utilizamos el almacenamiento del navegador de forma limitada y propia, en lugar de crear perfiles publicitarios amplios de terceros."
+        ],
+        "bullets": [
+          "Atribución UTM: cuando llegas al sitio web con parámetros UTM, podemos almacenar datos de atribución del primer contacto, como source, medium y campaign, para asociar eventos posteriores con la fuente de tráfico original.",
+          "Seguimiento de sesión: podemos generar y almacenar un identificador de sesión en localStorage para agrupar eventos de visualización de páginas dentro de una sesión de navegación.",
+          "Continuidad de sesión: el almacenamiento del navegador basado en sesión también puede utilizarse para conservar un estado limitado dentro del sitio, por ejemplo para volver a la página correcta después de interacciones con modales.",
+          "Puedes borrar o bloquear el almacenamiento del navegador mediante la configuración de tu navegador, pero algunos flujos del sitio pueden resultar menos cómodos o menos medibles.",
+          "Cuando la legislación aplicable exija consentimiento para tecnologías de seguimiento no esenciales, controles de consentimiento adicionales podrán regir dichas tecnologías."
+        ]
+      },
+      {
+        "title": "Atribución y analítica",
+        "paragraphs": [
+          "Dado que evaluamos campañas de marketing, utilizamos eventos analíticos first-party y parámetros de atribución para entender cómo llegan los visitantes al sitio web y si esas visitas conducen a consultas o candidaturas.",
+          "Esto nos ayuda a medir la calidad de las campañas, la mezcla de fuentes, las tendencias de conversión y la distribución geográfica de alto nivel."
+        ],
+        "bullets": [
+          "Podemos asociar visualizaciones de páginas o eventos de envío con UTM source, medium y campaign cuando estos valores estén disponibles.",
+          "Podemos registrar información de referrer y un identificador de sesión generado para distinguir visitas y flujos de tráfico.",
+          "Utilizamos datos geográficos únicamente a nivel de país para informes agregados; esta política de privacidad no promete la recopilación de una ubicación precisa del dispositivo.",
+          "No vendemos tus datos personales a través de este sitio web."
+        ]
+      },
+      {
+        "title": "Cuándo compartimos información",
+        "paragraphs": [
+          "Podemos compartir información con proveedores de servicios que nos ayudan a alojar, proteger, almacenar y operar el sitio web o a procesar envíos en nuestro nombre. También podemos divulgar información cuando así lo exija la ley o cuando sea razonablemente necesario para proteger derechos, seguridad o la integridad del servicio.",
+          "No compartimos datos personales más allá de lo necesario para estos fines."
+        ],
+        "bullets": [
+          "Proveedores de hosting web, infraestructura cloud, bases de datos y almacenamiento de archivos.",
+          "Herramientas internas de administración, moderación y soporte utilizadas para procesar envíos y datos analíticos.",
+          "Asesores profesionales, auditores o autoridades cuando la divulgación sea exigida por ley o razonablemente necesaria para proteger derechos legales.",
+          "Una entidad sucesora en relación con una fusión, reorganización o transferencia de activos empresariales, si procede."
+        ]
+      },
+      {
+        "title": "Conservación y seguridad",
+        "paragraphs": [
+          "Conservamos los datos personales durante el tiempo razonablemente necesario para el fin para el que fueron recopilados, incluyendo responder a solicitudes, revisar candidaturas, mantener registros, resolver disputas y cumplir obligaciones legales u operativas.",
+          "Los datos de uso y analítica pueden conservarse durante periodos más breves o agregados, salvo que sea necesario un periodo mayor por motivos de seguridad, diagnóstico técnico o requisitos legales.",
+          "Utilizamos medidas técnicas y organizativas razonables para proteger los datos que procesamos, pero ningún sistema de transmisión o almacenamiento puede garantizar una seguridad absoluta."
+        ]
+      },
+      {
+        "title": "Transferencias internacionales de datos",
+        "paragraphs": [
+          "Nuestra infraestructura web o proveedores de servicios pueden procesar o almacenar información en países distintos al tuyo. Cuando esto ocurra, tomaremos medidas razonables para asegurar que los datos se traten con las protecciones contractuales, organizativas o legales adecuadas.",
+          "Al utilizar el sitio web y enviarnos información, entiendes que tus datos pueden ser tratados en más de una jurisdicción."
+        ]
+      },
+      {
+        "title": "Tus derechos y opciones",
+        "paragraphs": [
+          "Dependiendo de tu ubicación y de la legislación aplicable, puedes tener derecho a solicitar acceso a tus datos personales, su rectificación, supresión o limitación del tratamiento, así como a oponerte a ciertos tratamientos o retirar tu consentimiento cuando este sea la base legal.",
+          "Para ejercer un derecho de privacidad, contáctanos por email. Es posible que necesitemos verificar tu solicitud antes de actuar."
+        ],
+        "bullets": [
+          "Email: melnykov.valerii@echocode.digital",
+          "Incluye suficientes detalles para que podamos identificar el envío, visita o interacción correspondiente."
+        ]
+      },
+      {
+        "title": "Privacidad infantil",
+        "paragraphs": [
+          "Este sitio web no está dirigido a menores y no solicitamos conscientemente datos personales de niños a través del sitio web público.",
+          "Si crees que un menor nos ha proporcionado datos personales a través del sitio web, ponte en contacto con nosotros para que podamos revisar y eliminar esos datos cuando corresponda."
+        ]
+      },
+      {
+        "title": "Cambios en esta política",
+        "paragraphs": [
+          "Podemos actualizar esta Política de Privacidad de vez en cuando para reflejar cambios legales, operativos o de producto. Cuando lo hagamos, actualizaremos la fecha de vigencia en esta página.",
+          "Tu uso continuado del sitio web después de que una versión actualizada entre en vigor significa que la política actualizada se aplicará a tu uso futuro del sitio."
+        ]
+      }
+    ]
+  }
+}

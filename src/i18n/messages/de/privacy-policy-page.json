@@ -1,0 +1,153 @@
+{
+  "PrivacyPolicyPage": {
+    "meta": {
+      "title": "Datenschutzerklärung",
+      "description": "Erfahren Sie, wie Echocode personenbezogene Daten auf der Website erhebt, verwendet, speichert und schützt, einschließlich Formularübermittlungen, Analysen, Session-Tracking und UTM-Attribution."
+    },
+    "hero": {
+      "title": "Datenschutzerklärung",
+      "imageAlt": "Datenschutzerklärung"
+    },
+    "intro": {
+      "summary": "Diese Datenschutzerklärung erläutert, wie Echocode personenbezogene Daten erhebt, verwendet, speichert und offenlegt, wenn Sie echocode.digital besuchen, eine Anfrage senden, sich auf eine Stelle bewerben oder anderweitig mit unserer öffentlichen Website interagieren. Sie ist für eine Marketing-Website bestimmt, die First-Party-Analysen, Attributionsparameter und Browserspeicher verwendet, um die Qualität des Traffics und die Leistung von Kampagnen zu verstehen."
+    },
+    "effectiveDate": "Diese Datenschutzerklärung gilt ab dem 17.04.2026.",
+    "sections": [
+      {
+        "title": "Wer wir sind",
+        "paragraphs": [
+          "Diese Datenschutzerklärung gilt für die öffentliche Echocode-Website unter echocode.digital sowie für die damit verbundenen Formulare, Seiten und öffentlichen Interaktionsabläufe auf dieser Website.",
+          "Für die Zwecke dieser Website ist Melnykov Valerii der Betreiber der Website und Ansprechpartner für Datenschutzanfragen. Wenn Sie eine Datenschutzanfrage, eine Auskunftsanfrage oder eine Löschanfrage haben, können Sie uns unter den unten angegebenen Kontaktdaten erreichen."
+        ],
+        "bullets": [
+          "Verantwortlicher / Website-Betreiber: Melnykov Valerii",
+          "Datenschutz-E-Mail: melnykov.valerii@echocode.digital",
+          "Adresse: Obolonskyi Avenue 15, Kyiv 04205, Ukraine"
+        ]
+      },
+      {
+        "title": "Welche personenbezogenen Daten wir erheben",
+        "paragraphs": [
+          "Wir erheben Informationen, die Sie uns direkt bereitstellen, sowie begrenzte technische Informationen, die bei der Nutzung der Website entstehen.",
+          "Welche Datenkategorien wir erheben, hängt davon ab, wie Sie mit der Website interagieren."
+        ],
+        "bullets": [
+          "Projektanfragedaten: Vorname, Nachname, E-Mail-Adresse, Nachrichtendetails sowie optionale Dateien oder Bilder, die einer Projektanfrage beigefügt werden.",
+          "Bewerbungsdaten: Profil-URL, Metadaten der CV-Datei und Kontext der Stelle, die über den Bewerbungsablauf übermittelt werden.",
+          "Footer-E-Mail-Daten: E-Mail-Adresse und die Quelle des Kontakt- oder Abonnement-Einstiegspunkts.",
+          "Nutzungs- und Analysedaten: besuchter Pfad, Seiten-URL, Seitentitel, Referrer, Site-Host, Site-Identifier, Session-Identifier und Zeitstempel von Ereignissen.",
+          "Kampagnen-Attributionsdaten: UTM-Quelle, UTM-Medium und UTM-Kampagne, sofern verfügbar.",
+          "Ungefähre Geodaten: Standort auf Länderebene, der aus Netzwerk- oder Hosting-Headern für aggregierte geografische Berichte abgeleitet wird.",
+          "Wir erklären nicht, dass wir über diese Website präzise GPS- oder exakte Straßenstandortdaten von Nutzern erheben."
+        ]
+      },
+      {
+        "title": "Wie wir Informationen erheben",
+        "paragraphs": [
+          "Wir erheben Daten auf drei Hauptwegen: direkt aus Formularen, die Sie ausfüllen, automatisch aus Website-Interaktionen und aus technischem Kontext, der eine Anfrage begleitet.",
+          "Wenn Sie eine Projektanfrage, Bewerbung oder Footer-E-Mail senden, werden die von Ihnen eingegebenen Informationen an unser Backend übertragen, damit wir die Übermittlung verarbeiten und speichern können.",
+          "Wenn Sie die Website nutzen, können wir First-Party-Page-View-Ereignisse und dazugehörigen technischen Kontext aufzeichnen, um die Website-Nutzung, die Qualität des Traffics und die Leistung von Kampagnen zu verstehen."
+        ],
+        "bullets": [
+          "Direkte Übermittlungen: Kontaktformulare, Bewerbungen und reine E-Mail-Formulare.",
+          "Automatische Erhebung: Seitenaufruf-Ereignisse, Referrer-Daten, Sitzungskennungen und Kampagnen-Attributionsparameter.",
+          "Technischer Kontext: Anfrage-Header auf Länderebene, Site-Host-Informationen und Dateimetadaten zur Validierung von Uploads."
+        ]
+      },
+      {
+        "title": "Warum wir personenbezogene Daten verwenden",
+        "paragraphs": [
+          "Wir verwenden personenbezogene Daten nur in dem Umfang, der vernünftigerweise erforderlich ist, um die Website zu betreiben, auf Anfragen zu antworten, Bewerbungen zu prüfen, den Dienst zu schützen und die Marketingleistung zu bewerten.",
+          "Je nach Kontext kann die Rechtsgrundlage Ihre Einwilligung, Maßnahmen auf Ihre Anfrage vor Aufnahme einer Geschäftsbeziehung, unsere berechtigten Interessen am Betrieb und an der Verbesserung der Website sowie die Einhaltung rechtlicher Verpflichtungen sein."
+        ],
+        "bullets": [
+          "Um Projektanfragen, Partnerschaftsanfragen und Kontaktmitteilungen zu prüfen und zu beantworten.",
+          "Um Bewerbungen und zugehörige Dateien zu erhalten, zu prüfen und zu verarbeiten.",
+          "Um die Website-Nutzung zu überwachen, Traffic-Quellen zu verstehen und die Effektivität von Kampagnen zu messen.",
+          "Um Missbrauch zu erkennen, Uploads zu validieren, die Stabilität des Dienstes aufrechtzuerhalten und technische Probleme zu beheben.",
+          "Um interne Berichte, Moderationswarteschlangen und operative Aufzeichnungen im Zusammenhang mit öffentlichen Übermittlungen zu pflegen."
+        ]
+      },
+      {
+        "title": "Cookie-Richtlinie und Browserspeicher",
+        "paragraphs": [
+          "Diese Website verwendet Cookies und ähnliche Technologien, einschließlich Browser-localStorage und sitzungsbasiertem Browserspeicher, um Analysen, Attribution und ausgewählte Kontinuitätsfunktionen in Nutzerabläufen zu unterstützen.",
+          "Derzeit verwenden wir Browserspeicher in begrenzter First-Party-Form und nicht zur Erstellung umfassender Third-Party-Werbeprofile."
+        ],
+        "bullets": [
+          "UTM-Attribution: Wenn Sie mit UTM-Parametern auf die Website gelangen, können wir First-Touch-Attributionsdaten wie Quelle, Medium und Kampagne speichern, damit spätere Ereignisse der ursprünglichen Traffic-Quelle zugeordnet werden können.",
+          "Session-Tracking: Wir können eine Sitzungskennung in localStorage erzeugen und speichern, damit Seitenaufruf-Ereignisse innerhalb einer Browsing-Session gruppiert werden können.",
+          "Session-Kontinuität: Sitzungsbasierter Browserspeicher kann außerdem verwendet werden, um einen begrenzten Status innerhalb der Website zu erhalten, etwa die Rückkehr zur richtigen Seite nach Modal-Interaktionen.",
+          "Sie können den Browserspeicher über Ihre Browsereinstellungen löschen oder blockieren, allerdings können dadurch bestimmte Abläufe auf der Website weniger komfortabel oder weniger messbar werden.",
+          "Soweit geltendes Recht eine Einwilligung für nicht notwendige Tracking-Technologien verlangt, können zusätzliche Consent-Kontrollen diese Technologien regeln."
+        ]
+      },
+      {
+        "title": "Attribution und Analysen",
+        "paragraphs": [
+          "Da wir Marketingkampagnen auswerten, verwenden wir First-Party-Analyseereignisse und Attributionsparameter, um zu verstehen, wie Besucher auf die Website gelangen und ob diese Besuche zu Anfragen oder Bewerbungen führen.",
+          "Dies hilft uns, die Qualität von Kampagnen, den Quellenmix, Konversionstrends und die geografische Verteilung auf hoher Ebene zu messen."
+        ],
+        "bullets": [
+          "Wir können Seitenaufrufe oder Übermittlungsereignisse mit UTM-Quelle, UTM-Medium und UTM-Kampagne verknüpfen, sofern diese Werte verfügbar sind.",
+          "Wir können Referrer-Informationen und eine generierte Sitzungskennung aufzeichnen, um Besuche und Traffic-Flows besser zu unterscheiden.",
+          "Wir verwenden Geodaten nur auf Länderebene für aggregierte Berichte; diese Datenschutzerklärung verspricht keine Erhebung präziser Gerätestandorte.",
+          "Wir verkaufen Ihre personenbezogenen Daten nicht über diese Website."
+        ]
+      },
+      {
+        "title": "Wann wir Informationen weitergeben",
+        "paragraphs": [
+          "Wir können Informationen mit Dienstleistern teilen, die uns beim Hosting, bei der Sicherheit, Speicherung und dem Betrieb der Website unterstützen oder Übermittlungen in unserem Auftrag verarbeiten. Wir können Informationen auch offenlegen, wenn dies gesetzlich vorgeschrieben ist oder vernünftigerweise notwendig erscheint, um Rechte, Sicherheit oder die Integrität des Dienstes zu schützen.",
+          "Wir geben personenbezogene Daten nicht weiter, als es für diese Zwecke erforderlich ist."
+        ],
+        "bullets": [
+          "Website-Hosting-, Cloud-Infrastruktur-, Datenbank- und Dateispeicher-Anbieter.",
+          "Interne Verwaltungs-, Moderations- und Support-Tools zur Verarbeitung von Übermittlungen und Analysedaten.",
+          "Berater, Prüfer oder Behörden, wenn eine Offenlegung gesetzlich erforderlich ist oder vernünftigerweise zum Schutz rechtlicher Ansprüche notwendig ist.",
+          "Einen Rechtsnachfolger im Zusammenhang mit einer Fusion, Umstrukturierung oder Übertragung von Vermögenswerten, sofern anwendbar."
+        ]
+      },
+      {
+        "title": "Speicherung und Sicherheit",
+        "paragraphs": [
+          "Wir speichern personenbezogene Daten so lange, wie es vernünftigerweise für den Zweck erforderlich ist, für den sie erhoben wurden, einschließlich zur Beantwortung von Anfragen, Prüfung von Bewerbungen, Pflege von Unterlagen, Beilegung von Streitigkeiten und Erfüllung rechtlicher oder operativer Pflichten.",
+          "Nutzungs- und Analysedaten können für kürzere oder aggregierte Berichtszeiträume gespeichert werden, sofern keine längere Aufbewahrung aus Sicherheits-, Diagnose- oder Rechtsgründen erforderlich ist.",
+          "Wir verwenden angemessene technische und organisatorische Maßnahmen zum Schutz der von uns verarbeiteten Daten, aber kein Übertragungs- oder Speichersystem kann absolute Sicherheit garantieren."
+        ]
+      },
+      {
+        "title": "Internationale Datenübermittlungen",
+        "paragraphs": [
+          "Unsere Website-Infrastruktur oder Dienstleister können Informationen in anderen Ländern als Ihrem eigenen verarbeiten oder speichern. In diesen Fällen ergreifen wir angemessene Schritte, um sicherzustellen, dass die Daten unter geeigneten vertraglichen, organisatorischen oder rechtlichen Schutzmaßnahmen verarbeitet werden.",
+          "Durch die Nutzung der Website und die Übermittlung von Informationen an uns verstehen Sie, dass Ihre Informationen in mehr als einer Rechtsordnung verarbeitet werden können."
+        ]
+      },
+      {
+        "title": "Ihre Rechte und Wahlmöglichkeiten",
+        "paragraphs": [
+          "Abhängig von Ihrem Standort und dem anwendbaren Recht haben Sie möglicherweise das Recht, Zugang zu Ihren personenbezogenen Daten, deren Berichtigung, Löschung oder Einschränkung der Verarbeitung zu verlangen sowie bestimmten Verarbeitungen zu widersprechen oder eine Einwilligung zu widerrufen, soweit die Einwilligung die Rechtsgrundlage ist.",
+          "Um ein Datenschutzrecht auszuüben, kontaktieren Sie uns bitte per E-Mail. Wir müssen Ihre Anfrage möglicherweise verifizieren, bevor wir tätig werden."
+        ],
+        "bullets": [
+          "E-Mail: melnykov.valerii@echocode.digital",
+          "Bitte geben Sie genügend Informationen an, damit wir die betreffende Übermittlung, den Besuch oder die Interaktion identifizieren können."
+        ]
+      },
+      {
+        "title": "Datenschutz von Kindern",
+        "paragraphs": [
+          "Diese Website richtet sich nicht an Kinder, und wir fordern wissentlich keine personenbezogenen Daten von Kindern über die öffentliche Website an.",
+          "Wenn Sie glauben, dass ein Kind uns über die Website personenbezogene Daten übermittelt hat, kontaktieren Sie uns bitte, damit wir dies prüfen und die Daten gegebenenfalls löschen können."
+        ]
+      },
+      {
+        "title": "Änderungen dieser Richtlinie",
+        "paragraphs": [
+          "Wir können diese Datenschutzerklärung von Zeit zu Zeit aktualisieren, um rechtliche, operative oder produktbezogene Änderungen widerzuspiegeln. In diesem Fall aktualisieren wir das Gültigkeitsdatum auf dieser Seite.",
+          "Ihre fortgesetzte Nutzung der Website nach Inkrafttreten einer aktualisierten Version bedeutet, dass die aktualisierte Richtlinie für Ihre zukünftige Nutzung der Website gilt."
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,153 @@
+{
+  "PrivacyPolicyPage": {
+    "meta": {
+      "title": "Polityka Prywatności",
+      "description": "Dowiedz się, jak Echocode zbiera, wykorzystuje, przechowuje i chroni dane osobowe na stronie internetowej, w tym zgłoszenia z formularzy, analitykę, śledzenie sesji i atrybucję UTM."
+    },
+    "hero": {
+      "title": "Polityka Prywatności",
+      "imageAlt": "Polityka Prywatności"
+    },
+    "intro": {
+      "summary": "Niniejsza Polityka Prywatności wyjaśnia, w jaki sposób Echocode zbiera, wykorzystuje, przechowuje i ujawnia dane osobowe, gdy odwiedzasz echocode.digital, wysyłasz zapytanie, aplikujesz na stanowisko lub w inny sposób wchodzisz w interakcję z naszą publiczną stroną internetową. Została przygotowana dla strony marketingowej, która wykorzystuje analitykę first-party, parametry atrybucji i pamięć przeglądarki, aby zrozumieć jakość ruchu i skuteczność kampanii."
+    },
+    "effectiveDate": "Niniejsza polityka prywatności obowiązuje od 17.04.2026.",
+    "sections": [
+      {
+        "title": "Kim jesteśmy",
+        "paragraphs": [
+          "Niniejsza Polityka Prywatności ma zastosowanie do publicznej strony internetowej Echocode dostępnej pod adresem echocode.digital oraz do powiązanych formularzy, stron i publicznych ścieżek interakcji na tej stronie.",
+          "Na potrzeby tej strony operatorem strony i kontaktem ds. prywatności jest Melnykov Valerii. Jeśli masz wniosek dotyczący prywatności, dostępu do danych lub ich usunięcia, możesz skontaktować się z nami, korzystając z poniższych danych kontaktowych."
+        ],
+        "bullets": [
+          "Administrator / operator strony: Melnykov Valerii",
+          "E-mail ds. prywatności: melnykov.valerii@echocode.digital",
+          "Adres: Obolonskyi Avenue 15, Kyiv 04205, Ukraina"
+        ]
+      },
+      {
+        "title": "Jakie dane osobowe zbieramy",
+        "paragraphs": [
+          "Zbieramy informacje, które przekazujesz nam bezpośrednio, oraz ograniczony zakres informacji technicznych generowanych podczas korzystania ze strony internetowej.",
+          "Kategorie danych, które możemy zbierać, zależą od sposobu, w jaki korzystasz ze strony."
+        ],
+        "bullets": [
+          "Dane zapytania projektowego: imię, nazwisko, adres e-mail, szczegóły wiadomości oraz opcjonalny plik lub obraz dołączony do zapytania projektowego.",
+          "Dane aplikacyjne: URL profilu, metadane pliku CV oraz kontekst oferty pracy przesyłane w procesie aplikacyjnym.",
+          "Dane formularza e-mail w stopce: adres e-mail i źródło punktu wejścia kontaktu lub subskrypcji.",
+          "Dane użytkowania i analityki: odwiedzona ścieżka, adres URL strony, tytuł strony, referrer, host strony, identyfikator strony, identyfikator sesji oraz znaczniki czasu zdarzeń.",
+          "Dane atrybucji kampanii: UTM source, UTM medium i UTM campaign, gdy są dostępne.",
+          "Przybliżone dane geograficzne: lokalizacja na poziomie kraju wywnioskowana z nagłówków sieciowych lub hostingowych na potrzeby zagregowanych raportów geograficznych.",
+          "Nie deklarujemy, że zbieramy dokładną lokalizację GPS ani dokładny adres użytkownika za pośrednictwem tej strony internetowej."
+        ]
+      },
+      {
+        "title": "Jak zbieramy informacje",
+        "paragraphs": [
+          "Zbieramy dane na trzy główne sposoby: bezpośrednio z formularzy, które wypełniasz, automatycznie z interakcji ze stroną internetową oraz z kontekstu technicznego towarzyszącego żądaniu.",
+          "Gdy wysyłasz zapytanie projektowe, aplikację lub e-mail z footera, wprowadzone przez Ciebie informacje są przekazywane do naszego backendu, abyśmy mogli je przetworzyć i zapisać.",
+          "Podczas przeglądania strony możemy rejestrować własne zdarzenia odsłon stron oraz powiązany kontekst techniczny, aby zrozumieć sposób korzystania ze strony, jakość ruchu i skuteczność kampanii."
+        ],
+        "bullets": [
+          "Bezpośrednie zgłoszenia: formularze kontaktowe, aplikacje kandydatów i formularze wyłącznie e-mailowe.",
+          "Automatyczne zbieranie: zdarzenia odsłon stron, dane referrer, identyfikatory sesji i parametry atrybucji kampanii.",
+          "Kontekst techniczny: nagłówki żądań na poziomie kraju, informacje o hoście strony oraz metadane plików potrzebne do walidacji przesyłanych plików."
+        ]
+      },
+      {
+        "title": "Dlaczego używamy danych osobowych",
+        "paragraphs": [
+          "Używamy danych osobowych wyłącznie w zakresie rozsądnie niezbędnym do prowadzenia strony internetowej, odpowiadania na zapytania, przeglądu aplikacji, ochrony usługi i oceny skuteczności marketingu.",
+          "W zależności od kontekstu podstawą prawną może być Twoja zgoda, działania podjęte na Twoje żądanie przed rozpoczęciem relacji biznesowej, nasze uzasadnione interesy w prowadzeniu i ulepszaniu strony oraz wypełnianie obowiązków prawnych."
+        ],
+        "bullets": [
+          "Aby przeglądać i odpowiadać na zapytania projektowe, prośby partnerskie i wiadomości kontaktowe.",
+          "Aby otrzymywać, przeglądać i przetwarzać aplikacje oraz powiązane pliki.",
+          "Aby monitorować korzystanie ze strony, rozumieć źródła ruchu i mierzyć skuteczność kampanii.",
+          "Aby wykrywać nadużycia, walidować uploady, utrzymywać stabilność usługi i rozwiązywać problemy techniczne.",
+          "Aby utrzymywać wewnętrzne raportowanie, kolejki moderacyjne i rejestry operacyjne związane z publicznymi zgłoszeniami."
+        ]
+      },
+      {
+        "title": "Polityka cookies i pamięć przeglądarki",
+        "paragraphs": [
+          "Ta strona internetowa używa cookies i podobnych technologii, w tym localStorage przeglądarki i pamięci przeglądarki opartej na sesji, aby wspierać analitykę, atrybucję oraz wybrane funkcje ciągłości ścieżki użytkownika.",
+          "Obecnie używamy pamięci przeglądarki w ograniczony, własny sposób, a nie do tworzenia szerokich profili reklamowych podmiotów trzecich."
+        ],
+        "bullets": [
+          "Atrybucja UTM: gdy trafiasz na stronę z parametrami UTM, możemy zapisać dane atrybucji pierwszego kontaktu, takie jak source, medium i campaign, aby późniejsze zdarzenia można było powiązać z pierwotnym źródłem ruchu.",
+          "Śledzenie sesji: możemy generować i przechowywać identyfikator sesji w localStorage, aby grupować zdarzenia odsłon stron w ramach jednej sesji przeglądania.",
+          "Ciągłość sesji: pamięć przeglądarki oparta na sesji może być również używana do zachowania ograniczonego stanu wewnątrz strony, na przykład powrotu do właściwej strony po interakcjach z modalem.",
+          "Możesz wyczyścić lub zablokować pamięć przeglądarki w ustawieniach przeglądarki, ale niektóre ścieżki strony mogą być wtedy mniej wygodne lub mniej mierzalne.",
+          "Tam, gdzie obowiązujące prawo wymaga zgody na nieistotne technologie śledzące, dodatkowymi technologiami mogą zarządzać dodatkowe mechanizmy consent."
+        ]
+      },
+      {
+        "title": "Atrybucja i analityka",
+        "paragraphs": [
+          "Ponieważ oceniamy kampanie marketingowe, używamy własnych zdarzeń analitycznych i parametrów atrybucji, aby zrozumieć, w jaki sposób odwiedzający trafiają na stronę oraz czy te wizyty prowadzą do zapytań lub aplikacji.",
+          "Pomaga nam to mierzyć jakość kampanii, miks źródeł, trendy konwersji oraz ogólny rozkład geograficzny."
+        ],
+        "bullets": [
+          "Możemy łączyć odsłony stron lub zdarzenia wysłania z UTM source, medium i campaign, gdy te wartości są dostępne.",
+          "Możemy rejestrować informacje referrer oraz wygenerowany identyfikator sesji, aby lepiej rozróżniać wizyty i przepływy ruchu.",
+          "Używamy danych geograficznych wyłącznie na poziomie kraju do zagregowanych raportów; ta polityka prywatności nie obiecuje zbierania precyzyjnej lokalizacji urządzenia.",
+          "Nie sprzedajemy Twoich danych osobowych za pośrednictwem tej strony internetowej."
+        ]
+      },
+      {
+        "title": "Kiedy udostępniamy informacje",
+        "paragraphs": [
+          "Możemy udostępniać informacje dostawcom usług, którzy pomagają nam hostować, zabezpieczać, przechowywać i obsługiwać stronę internetową lub przetwarzać zgłoszenia w naszym imieniu. Możemy również ujawniać informacje, gdy wymaga tego prawo lub gdy jest to rozsądnie konieczne do ochrony praw, bezpieczeństwa lub integralności usługi.",
+          "Nie udostępniamy danych osobowych szerzej, niż jest to konieczne do tych celów."
+        ],
+        "bullets": [
+          "Dostawcy hostingu strony, infrastruktury cloud, baz danych i przechowywania plików.",
+          "Wewnętrzne narzędzia administracyjne, moderacyjne i wsparcia używane do przetwarzania zgłoszeń i danych analitycznych.",
+          "Doradcy zawodowi, audytorzy lub organy, gdy ujawnienie jest wymagane prawem lub rozsądnie konieczne do ochrony praw.",
+          "Podmiot sukcesyjny w związku z fuzją, reorganizacją lub przeniesieniem aktywów biznesowych, jeśli ma to zastosowanie."
+        ]
+      },
+      {
+        "title": "Przechowywanie i bezpieczeństwo",
+        "paragraphs": [
+          "Przechowujemy dane osobowe tak długo, jak jest to rozsądnie konieczne dla celu, w jakim zostały zebrane, w tym w celu odpowiadania na zapytania, przeglądu aplikacji, prowadzenia dokumentacji, rozwiązywania sporów i wypełniania obowiązków prawnych lub operacyjnych.",
+          "Dane użytkowania i analityki mogą być przechowywane przez krótsze lub zagregowane okresy raportowe, chyba że dłuższy okres jest konieczny ze względów bezpieczeństwa, diagnostyki technicznej lub wymogów prawnych.",
+          "Stosujemy rozsądne środki techniczne i organizacyjne w celu ochrony przetwarzanych danych, jednak żaden system transmisji ani przechowywania nie może zagwarantować absolutnego bezpieczeństwa."
+        ]
+      },
+      {
+        "title": "Międzynarodowe transfery danych",
+        "paragraphs": [
+          "Nasza infrastruktura strony lub dostawcy usług mogą przetwarzać lub przechowywać informacje w krajach innych niż Twój własny. W takich przypadkach podejmujemy rozsądne kroki, aby zapewnić odpowiednie kontraktowe, organizacyjne lub prawne zabezpieczenia danych.",
+          "Korzystając ze strony internetowej i przekazując nam informacje, rozumiesz, że Twoje dane mogą być przetwarzane w więcej niż jednej jurysdykcji."
+        ]
+      },
+      {
+        "title": "Twoje prawa i wybory",
+        "paragraphs": [
+          "W zależności od Twojej lokalizacji i obowiązującego prawa możesz mieć prawo żądać dostępu do swoich danych osobowych, ich sprostowania, usunięcia lub ograniczenia przetwarzania, a także prawo sprzeciwu wobec niektórych operacji przetwarzania lub wycofania zgody, gdy zgoda stanowi podstawę prawną.",
+          "Aby skorzystać z prawa dotyczącego prywatności, skontaktuj się z nami mailowo. Możemy potrzebować zweryfikować Twoje żądanie przed podjęciem działań."
+        ],
+        "bullets": [
+          "E-mail: melnykov.valerii@echocode.digital",
+          "Podaj wystarczająco dużo szczegółów, abyśmy mogli zidentyfikować odpowiednie zgłoszenie, wizytę lub interakcję."
+        ]
+      },
+      {
+        "title": "Prywatność dzieci",
+        "paragraphs": [
+          "Ta strona internetowa nie jest kierowana do dzieci i świadomie nie pozyskujemy danych osobowych dzieci za pośrednictwem publicznej strony.",
+          "Jeśli uważasz, że dziecko przekazało nam dane osobowe za pośrednictwem strony, skontaktuj się z nami, abyśmy mogli to sprawdzić i w razie potrzeby usunąć dane."
+        ]
+      },
+      {
+        "title": "Zmiany w niniejszej polityce",
+        "paragraphs": [
+          "Możemy od czasu do czasu aktualizować niniejszą Politykę Prywatności, aby odzwierciedlić zmiany prawne, operacyjne lub produktowe. Gdy to zrobimy, zaktualizujemy datę obowiązywania na tej stronie.",
+          "Dalsze korzystanie ze strony po wejściu w życie zaktualizowanej wersji oznacza, że zaktualizowana polityka będzie miała zastosowanie do przyszłego korzystania przez Ciebie ze strony."
+        ]
+      }
+    ]
+  }
+}

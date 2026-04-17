@@ -1,0 +1,153 @@
+{
+  "PrivacyPolicyPage": {
+    "meta": {
+      "title": "Privacy Policy",
+      "description": "Learn how Echocode collects, uses, stores and protects personal data on the website, including form submissions, analytics, session tracking and UTM attribution."
+    },
+    "hero": {
+      "title": "Privacy Policy",
+      "imageAlt": "Privacy Policy"
+    },
+    "intro": {
+      "summary": "This Privacy Policy explains how Echocode collects, uses, stores and discloses personal data when you visit echocode.digital, submit an inquiry, apply for a vacancy or otherwise interact with our public website. It is designed for a marketing website that uses first-party analytics, attribution parameters and browser storage to understand traffic quality and campaign performance."
+    },
+    "effectiveDate": "This privacy policy is effective as of 17.04.2026.",
+    "sections": [
+      {
+        "title": "Who We Are",
+        "paragraphs": [
+          "This Privacy Policy applies to the public Echocode website available at echocode.digital and to related forms, pages and public interaction flows on that website.",
+          "For the purposes of this website, the website operator and privacy contact is Melnykov Valerii. If you have a privacy request, data access request or deletion request, you may contact us using the details below."
+        ],
+        "bullets": [
+          "Controller / website operator: Melnykov Valerii",
+          "Privacy email: melnykov.valerii@echocode.digital",
+          "Address: 15 Obolonskyi Avenue, Kyiv 04205, Ukraine"
+        ]
+      },
+      {
+        "title": "Personal Data We Collect",
+        "paragraphs": [
+          "We collect information that you provide directly to us and limited technical information that is generated when you use the website.",
+          "The categories of data we may collect depend on how you interact with the site."
+        ],
+        "bullets": [
+          "Project inquiry data: first name, last name, email address, message details and any optional file or image attached to a project inquiry.",
+          "Career application data: profile URL, CV file metadata and vacancy context submitted through the candidate application flow.",
+          "Footer email submission data: email address and the source of the subscription or contact entry point.",
+          "Usage and analytics data: visited path, page URL, page title, referrer, site host, site identifier, session identifier and event timestamps.",
+          "Campaign attribution data: UTM source, medium and campaign values when they are available.",
+          "Approximate geography data: country-level location inferred from network or hosting headers for aggregated geography reporting.",
+          "We do not state that we collect precise GPS or exact street-level user location through this website."
+        ]
+      },
+      {
+        "title": "How We Collect Information",
+        "paragraphs": [
+          "We collect data in three main ways: directly from forms you complete, automatically from website interactions and from technical context that accompanies a request.",
+          "When you send a project request, vacancy application or footer email, the information you enter is transmitted to our backend so we can process and store the submission.",
+          "When you browse the website, we may record first-party page-view events and related technical context to understand website usage, traffic quality and campaign performance."
+        ],
+        "bullets": [
+          "Direct submissions: contact forms, candidate applications and email-only forms.",
+          "Automatic collection: page-view events, referrer data, session identifiers and campaign attribution parameters.",
+          "Technical context: country-level request headers, site host information and file metadata needed to validate uploads."
+        ]
+      },
+      {
+        "title": "Why We Use Personal Data",
+        "paragraphs": [
+          "We use personal data only to the extent reasonably necessary to operate the website, respond to requests, review applications, protect the service and evaluate marketing performance.",
+          "Depending on the context, our legal basis may include your consent, steps taken at your request before entering into a business relationship, our legitimate interests in operating and improving the website, and compliance with legal obligations."
+        ],
+        "bullets": [
+          "To review and reply to project inquiries, partnership requests and contact messages.",
+          "To receive, review and process vacancy applications and related files.",
+          "To monitor site usage, understand traffic sources and measure campaign effectiveness.",
+          "To detect abuse, validate uploads, maintain service stability and troubleshoot technical issues.",
+          "To maintain internal reporting, moderation queues and operational records linked to public submissions."
+        ]
+      },
+      {
+        "title": "Cookie Policy and Browser Storage",
+        "paragraphs": [
+          "This website uses cookies and similar technologies, including browser localStorage and session-based browser storage, to support analytics, attribution and selected user-flow continuity features.",
+          "We currently use browser storage in a limited first-party way rather than for broad third-party advertising profiles."
+        ],
+        "bullets": [
+          "UTM attribution: when you land on the website with UTM parameters, we may store first-touch attribution data such as source, medium and campaign so later events can be associated with the original traffic source.",
+          "Session tracking: we may generate and store a session identifier in localStorage so page-view events can be grouped within a browsing session.",
+          "Session continuity: session-based browser storage may also be used to preserve limited in-site flow state, such as returning to the correct page after modal interactions.",
+          "You can clear or block browser storage through your browser settings, but some site flows may then become less convenient or less measurable.",
+          "Where applicable law requires consent for non-essential tracking technologies, additional consent controls may govern those technologies."
+        ]
+      },
+      {
+        "title": "Attribution and Analytics",
+        "paragraphs": [
+          "Because we run marketing campaigns and evaluate campaign effectiveness, we use first-party analytics events and attribution parameters to understand how visitors arrive at the website and whether those visits lead to inquiries or applications.",
+          "This helps us measure campaign quality, source mix, conversion trends and high-level geography distribution."
+        ],
+        "bullets": [
+          "We may associate page views or submission events with UTM source, medium and campaign values when those values are available.",
+          "We may record referrer information and a generated session identifier to help distinguish visits and traffic flows.",
+          "We use country-level geography data for aggregate reporting only; this website privacy policy does not promise collection of precise device location.",
+          "We do not sell your personal data through this website."
+        ]
+      },
+      {
+        "title": "When We Share Information",
+        "paragraphs": [
+          "We may share information with service providers that help us host, secure, store and operate the website or process submissions on our behalf. We may also disclose information when required by law or when reasonably necessary to protect rights, safety or the integrity of the service.",
+          "We do not share personal data more broadly than necessary for these purposes."
+        ],
+        "bullets": [
+          "Website hosting, cloud infrastructure, database and file-storage providers.",
+          "Internal administration, moderation and support tooling used to process submissions and analytics.",
+          "Professional advisers, auditors or authorities when disclosure is required by law or reasonably necessary to protect legal rights.",
+          "A successor entity in connection with a merger, reorganization or transfer of business assets, if applicable."
+        ]
+      },
+      {
+        "title": "Retention and Security",
+        "paragraphs": [
+          "We retain personal data for as long as reasonably necessary for the purpose for which it was collected, including to respond to inquiries, review applications, maintain records, resolve disputes and meet legal or operational obligations.",
+          "Usage and analytics data may be retained for shorter or aggregated reporting periods unless a longer period is necessary for security, troubleshooting or legal reasons.",
+          "We use reasonable technical and organizational measures to protect the data we process, but no transmission or storage system can be guaranteed as absolutely secure."
+        ]
+      },
+      {
+        "title": "International Transfers",
+        "paragraphs": [
+          "Our website infrastructure or service providers may process or store information in countries other than your own. When that happens, we take reasonable steps to ensure the data is handled under appropriate contractual, organizational or legal protections.",
+          "By using the website and submitting information to us, you understand that your information may be processed in more than one jurisdiction."
+        ]
+      },
+      {
+        "title": "Your Rights and Choices",
+        "paragraphs": [
+          "Depending on your location and applicable law, you may have rights to request access to, correction of, deletion of or restriction of processing of your personal data, as well as the right to object to certain processing or withdraw consent where consent is the legal basis.",
+          "To exercise a privacy right, please contact us by email. We may need to verify your request before acting on it."
+        ],
+        "bullets": [
+          "Email: melnykov.valerii@echocode.digital",
+          "Please include enough detail for us to identify the relevant submission, visit or interaction."
+        ]
+      },
+      {
+        "title": "Children's Privacy",
+        "paragraphs": [
+          "This website is not directed to children, and we do not knowingly solicit personal data from children through the public website.",
+          "If you believe a child has provided personal data to us through the website, please contact us so we can review and delete that data where appropriate."
+        ]
+      },
+      {
+        "title": "Changes to This Policy",
+        "paragraphs": [
+          "We may update this Privacy Policy from time to time to reflect legal, operational or product changes. When we do, we will update the effective date on this page.",
+          "Your continued use of the website after an updated version becomes effective means the updated policy will apply to future use of the website."
+        ]
+      }
+    ]
+  }
+}
