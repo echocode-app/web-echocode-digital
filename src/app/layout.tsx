@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   },
   description:
     'Echocode is a software development company building iOS, Android, web and iGaming products, with design, QA and product-focused engineering services.',
-  applicationName: 'Echocode',
+  applicationName: 'Echocode Digital',
   keywords: [
     'Echocode',
     'software development company',
@@ -34,16 +34,16 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: '/favicon/favicon.ico' },
-      { url: '/favicon/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
-      { url: '/favicon/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.ico' },
+      { url: '/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
     ],
-    shortcut: '/favicon/favicon.ico',
-    apple: [{ url: '/favicon/apple-touch-icon.png', sizes: '180x180' }],
+    shortcut: '/favicon.ico',
+    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180' }],
   },
-  manifest: '/favicon/site.webmanifest',
+  manifest: '/site.webmanifest',
   appleWebApp: {
-    title: 'Echocode',
+    title: 'Echocode Digital',
   },
   alternates: {
     canonical: 'https://echocode.digital',
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
     siteName: 'Echocode',
     images: [
       {
-        url: '/images/rabbits/hero/design.png',
+        url: '/favicon/fulllogo.png',
         width: 1200,
         height: 630,
         alt: 'Echocode — Software Development Company',
