@@ -6,17 +6,6 @@ const SocailLinks = () => {
     <ul className="flex justify-center gap-2 lg:justify-end">
       <li>
         <Link
-          href={'https://www.instagram.com/digital.echocode'}
-          target="blank"
-          className="flex justify-center items-center w-10 h-10 rounded-full bg-social-instagram-link"
-        >
-          <div className="relative w-4.5 h-4.5">
-            <Image src="/UI/social-icons/insta.svg" fill alt="Instagram" />
-          </div>
-        </Link>
-      </li>
-      <li>
-        <Link
           href={'https://t.me/echocode_app'}
           target="blank"
           className="flex justify-center items-center w-10 h-10 rounded-full bg-social-telegram 
@@ -36,6 +25,41 @@ const SocailLinks = () => {
         >
           <div className="relative w-5 h-5">
             <Image src="/UI/social-icons/whatsapp.svg" fill alt="WhatsApp" />
+          </div>
+        </Link>
+      </li>
+      <li>
+        <Link
+          href={'https://www.instagram.com/digital.echocode'}
+          target="blank"
+          className="flex justify-center items-center w-10 h-10 rounded-full bg-social-instagram-link"
+        >
+          <div className="relative w-5 h-5">
+            <Image src="/UI/social-icons/insta.svg" fill alt="Instagram" />
+          </div>
+        </Link>
+      </li>
+      <li>
+        <Link
+          href={'https://x.com/echocodeHQ'}
+          target="blank"
+          className="flex justify-center items-center w-10 h-10 rounded-full bg-black
+         hover:bg-accent focus-visible:bg-accent duration-main"
+        >
+          <div className="relative w-4 h-4">
+            <Image src="/UI/social-icons/x.svg" fill alt="X" />
+          </div>
+        </Link>
+      </li>
+      <li>
+        <Link
+          href={'https://www.tiktok.com/@echocode_digital'}
+          target="blank"
+          className="flex justify-center items-center w-10 h-10 rounded-full bg-black
+         hover:bg-accent focus-visible:bg-accent duration-main"
+        >
+          <div className="relative w-5 h-5">
+            <Image src="/UI/social-icons/tiktok.svg" fill alt="TikTok" />
           </div>
         </Link>
       </li>
