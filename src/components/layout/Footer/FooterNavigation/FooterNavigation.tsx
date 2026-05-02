@@ -18,7 +18,7 @@ const FooterNavigation = () => {
           <FooterNavLogo />
           <Link
             href={'https://echocode.app/'}
-            target="blank"
+            target="_blank"
             rel="noreferrer"
             className="group flex gap-2 mb-2.5 font-wadik text-title-xs text-accent"
           >
@@ -54,7 +54,7 @@ const FooterNavigation = () => {
               Subscribe to
             </h3>
             <ul className="flex flex-col gap-1 w-36.5 lg:w-34.5">
-              <FooterSocialLink link="http://linkedin.com/company/echocode">
+              <FooterSocialLink link="https://linkedin.com/company/echocode">
                 LinkedIn
               </FooterSocialLink>
               <FooterSocialLink link="https://www.upwork.com/agencies/2038889063349600711/">

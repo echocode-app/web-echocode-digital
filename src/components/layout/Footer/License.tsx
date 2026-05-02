@@ -11,8 +11,9 @@ const License = () => {
         <time dateTime={CURRENT_YEAR}>{CURRENT_YEAR}</time> ECHOCODE. ALL RIGHTS RESERVED.
       </p>
       <Link
-        href="privacy-policy"
-        className="w-fit mx-auto mb-2 md:mb-0 uppercase underline text-center"
+        href="/privacy-policy"
+        className="w-fit mx-auto mb-2 md:mb-0 uppercase underline text-center 
+        transition-colors duration-main hover:text-accent focus-visible:text-accent"
       >
         Privacy Policy
       </Link>
