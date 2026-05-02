@@ -7,7 +7,8 @@ const SocailLinks = () => {
       <li>
         <Link
           href={'https://t.me/echocode_app'}
-          target="blank"
+          target="_blank"
+          rel="noreferrer"
           className="flex justify-center items-center w-10 h-10 rounded-full bg-social-telegram 
           hover:bg-accent focus-visible:bg-accent duration-main"
         >
@@ -19,7 +20,8 @@ const SocailLinks = () => {
       <li>
         <Link
           href={'https://wa.me/34683581566'}
-          target="blank"
+          target="_blank"
+          rel="noreferrer"
           className="flex justify-center items-center w-10 h-10 rounded-full bg-social-whatsapp 
           hover:bg-accent focus-visible:bg-accent duration-main"
         >
@@ -31,7 +33,8 @@ const SocailLinks = () => {
       <li>
         <Link
           href={'https://www.instagram.com/digital.echocode'}
-          target="blank"
+          target="_blank"
+          rel="noreferrer"
           className="flex justify-center items-center w-10 h-10 rounded-full bg-social-instagram-link"
         >
           <div className="relative w-5 h-5">
@@ -42,7 +45,8 @@ const SocailLinks = () => {
       <li>
         <Link
           href={'https://x.com/echocodeHQ'}
-          target="blank"
+          target="_blank"
+          rel="noreferrer"
           className="flex justify-center items-center w-10 h-10 rounded-full bg-black
          hover:bg-accent focus-visible:bg-accent duration-main"
         >
@@ -54,7 +58,8 @@ const SocailLinks = () => {
       <li>
         <Link
           href={'https://www.tiktok.com/@echocode_digital'}
-          target="blank"
+          target="_blank"
+          rel="noreferrer"
           className="flex justify-center items-center w-10 h-10 rounded-full bg-black
          hover:bg-accent focus-visible:bg-accent duration-main"
         >
