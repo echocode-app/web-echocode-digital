@@ -1,7 +1,6 @@
 'use client';
 
 import Image from 'next/image';
-import { useParams } from 'next/navigation';
 import { Locale, useLocale } from 'next-intl';
 import { useTransition, useState } from 'react';
 import { locales } from '@/i18n/config';
@@ -11,7 +10,6 @@ const LanguageSwitcher = () => {
   const locale = useLocale() as Locale;
   const router = useRouter();
   const pathname = usePathname();
-  const params = useParams();
   const [isPending, startTransition] = useTransition();
   const [open, setOpen] = useState(false);
 
@@ -22,11 +20,7 @@ const LanguageSwitcher = () => {
     }
 
     startTransition(() => {
-      router.replace(
-        // @ts-expect-error -- TypeScript narrowing for dynamic route params
-        { pathname, params },
-        { locale: nextLocale },
-      );
+      router.replace(pathname, { locale: nextLocale });
     });
     setOpen(false);
   };
