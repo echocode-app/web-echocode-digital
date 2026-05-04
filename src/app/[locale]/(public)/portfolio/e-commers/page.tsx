@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 
 import TypedHeroHeading from '@/components/UI/TypedHeroHeading';
 import SectionFirstReveal from '@/components/UI/section/SectionFirstReveal';
@@ -20,18 +20,25 @@ import planning from '@/data/portfolio/projects/planning/e-commerce.json';
 import features from '@/data/portfolio/projects/features/e-commerce.json';
 import technologies from '@/data/portfolio/projects/technologies/e-commerce.json';
 
-export async function generateMetadata(): Promise<Metadata> {
+type GenerateMetadataProps = { params: Promise<{ locale: string }> };
+
+export async function generateMetadata({ params }: GenerateMetadataProps): Promise<Metadata> {
+  const { locale } = await params;
+
   return buildPageMetadata({
     title: 'E-commerce Case Study',
     description:
       'Review Echocode’s e-commerce case study with product strategy, implementation, prototype flows and technology choices.',
     path: '/portfolio/e-commers',
+    locale,
     image: '/images/projects/e-commers/screens.png',
   });
 }
 
-const ECommers = () => {
-  const t = useTranslations('ImplementationECommerce');
+const ECommers = async ({ params }: { params: Promise<{ locale: string }> }) => {
+  const { locale } = await params;
+
+  const t = await getTranslations('ImplementationECommerce');
 
   return (
     <>
@@ -41,6 +48,7 @@ const ECommers = () => {
           { name: 'Portfolio', path: '/portfolio' },
           { name: 'E-commerce', path: '/portfolio/e-commers' },
         ]}
+        locale={locale}
       />
       <SectionFirstReveal>
         <section className="pt-42 pb-37.5">

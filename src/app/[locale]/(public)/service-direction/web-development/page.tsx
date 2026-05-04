@@ -9,17 +9,24 @@ import DevelopmentSection from '@/components/sections/directions/web/Development
 import { buildPageMetadata } from '@/lib/seo/metadata';
 import BreadcrumbJsonLd from '@/components/seo/BreadcrumbJsonLd';
 
-export async function generateMetadata(): Promise<Metadata> {
+type GenerateMetadataProps = { params: Promise<{ locale: string }> };
+
+export async function generateMetadata({ params }: GenerateMetadataProps): Promise<Metadata> {
+  const { locale } = await params;
+
   return buildPageMetadata({
     title: 'Web Development',
     description:
       'Custom web development for scalable products, high-performance platforms and resilient business systems.',
     path: '/service-direction/web-development',
+    locale,
     image: '/images/rabbits/hero/web.png',
   });
 }
 
-const WebDevelopment = () => {
+const WebDevelopment = async ({ params }: { params: Promise<{ locale: string }> }) => {
+  const { locale } = await params;
+
   return (
     <>
       <BreadcrumbJsonLd
@@ -27,6 +34,7 @@ const WebDevelopment = () => {
           { name: 'Home', path: '/' },
           { name: 'Web Development', path: '/service-direction/web-development' },
         ]}
+        locale={locale}
       />
       <SectionFirstReveal>
         <HeroSection />

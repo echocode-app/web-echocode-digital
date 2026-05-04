@@ -9,17 +9,24 @@ import ModerationSection from '@/components/sections/directions/qa/ModerationSec
 import { buildPageMetadata } from '@/lib/seo/metadata';
 import BreadcrumbJsonLd from '@/components/seo/BreadcrumbJsonLd';
 
-export async function generateMetadata(): Promise<Metadata> {
+type GenerateMetadataProps = { params: Promise<{ locale: string }> };
+
+export async function generateMetadata({ params }: GenerateMetadataProps): Promise<Metadata> {
+  const { locale } = await params;
+
   return buildPageMetadata({
     title: 'QA Services',
     description:
       'QA services for mobile and web products, including stability, moderation readiness, automation and performance validation.',
     path: '/service-direction/qa',
+    locale,
     image: '/images/rabbits/hero/qa.png',
   });
 }
 
-const QAPage = () => {
+const QAPage = async ({ params }: { params: Promise<{ locale: string }> }) => {
+  const { locale } = await params;
+
   return (
     <>
       <BreadcrumbJsonLd
@@ -27,6 +34,7 @@ const QAPage = () => {
           { name: 'Home', path: '/' },
           { name: 'QA Services', path: '/service-direction/qa' },
         ]}
+        locale={locale}
       />
       <SectionFirstReveal>
         <HeroSection />

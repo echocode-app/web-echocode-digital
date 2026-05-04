@@ -130,7 +130,7 @@ export default async function RootLayout({
     '@type': 'WebSite',
     name: 'Echocode',
     url: seoBaseUrl,
-    inLanguage: ['en', 'ua', 'de', 'es'],
+    inLanguage: ['en', 'uk', 'de', 'es', 'pl'],
   };
   const professionalServiceSchema = {
     '@context': 'https://schema.org',

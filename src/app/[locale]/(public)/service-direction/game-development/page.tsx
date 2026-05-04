@@ -7,17 +7,24 @@ import StaticGradientLine from '@/components/UI/StaticGradientLine';
 import { buildPageMetadata } from '@/lib/seo/metadata';
 import BreadcrumbJsonLd from '@/components/seo/BreadcrumbJsonLd';
 
-export async function generateMetadata(): Promise<Metadata> {
+type GenerateMetadataProps = { params: Promise<{ locale: string }> };
+
+export async function generateMetadata({ params }: GenerateMetadataProps): Promise<Metadata> {
+  const { locale } = await params;
+
   return buildPageMetadata({
     title: 'Game Development',
     description:
       'Game development services for immersive digital experiences, gameplay systems and scalable product delivery.',
     path: '/service-direction/game-development',
+    locale,
     image: '/images/rabbits/hero/game.png',
   });
 }
 
-const GameDevelopment = () => {
+const GameDevelopment = async ({ params }: { params: Promise<{ locale: string }> }) => {
+  const { locale } = await params;
+
   return (
     <>
       <BreadcrumbJsonLd
@@ -25,6 +32,7 @@ const GameDevelopment = () => {
           { name: 'Home', path: '/' },
           { name: 'Game Development', path: '/service-direction/game-development' },
         ]}
+        locale={locale}
       />
       <SectionFirstReveal>
         <HeroSection />

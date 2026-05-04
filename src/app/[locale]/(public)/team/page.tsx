@@ -9,12 +9,17 @@ import WorkSection from '@/components/sections/team/WorkSection';
 import StaticGradientLine from '@/components/UI/StaticGradientLine';
 import { buildPageMetadata } from '@/lib/seo/metadata';
 
-export async function generateMetadata(): Promise<Metadata> {
+type GenerateMetadataProps = { params: Promise<{ locale: string }> };
+
+export async function generateMetadata({ params }: GenerateMetadataProps): Promise<Metadata> {
+  const { locale } = await params;
+
   return buildPageMetadata({
     title: 'Team',
     description:
       'Meet the Echocode team: product-minded engineers, designers and QA specialists focused on building scalable digital products.',
     path: '/team',
+    locale,
     image: '/images/rabbits/hero/team.png',
   });
 }

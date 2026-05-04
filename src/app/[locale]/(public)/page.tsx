@@ -11,12 +11,17 @@ import PortfolioSection from '@/components/sections/home/PortfolioSection';
 import ServicesSection from '@/components/sections/home/ServicesSection';
 import { buildPageMetadata } from '@/lib/seo/metadata';
 
-export async function generateMetadata(): Promise<Metadata> {
+type GenerateMetadataProps = { params: Promise<{ locale: string }> };
+
+export async function generateMetadata({ params }: GenerateMetadataProps): Promise<Metadata> {
+  const { locale } = await params;
+
   return buildPageMetadata({
     title: 'Software Development Studio — iOS, Android, Web & iGaming',
     description:
       'Echocode is a software development studio building iOS, Android, web and iGaming products. Product design, QA and product-focused engineering for startups and growing companies.',
     path: '/',
+    locale,
     image: '/favicon/fulllogo.png',
   });
 }

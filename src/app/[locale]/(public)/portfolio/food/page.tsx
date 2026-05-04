@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 
 import TypedHeroHeading from '@/components/UI/TypedHeroHeading';
 import SectionFirstReveal from '@/components/UI/section/SectionFirstReveal';
@@ -20,18 +20,25 @@ import planning from '@/data/portfolio/projects/planning/food.json';
 import features from '@/data/portfolio/projects/features/food.json';
 import technologies from '@/data/portfolio/projects/technologies/food.json';
 
-export async function generateMetadata(): Promise<Metadata> {
+type GenerateMetadataProps = { params: Promise<{ locale: string }> };
+
+export async function generateMetadata({ params }: GenerateMetadataProps): Promise<Metadata> {
+  const { locale } = await params;
+
   return buildPageMetadata({
     title: 'Food & Drink Case Study',
     description:
       'See how Echocode designed and delivered a food and drink product experience, from product planning to prototype and implementation.',
     path: '/portfolio/food',
+    locale,
     image: '/images/projects/food/screens.png',
   });
 }
 
-const Food = () => {
-  const t = useTranslations('ImplementationFood');
+const Food = async ({ params }: { params: Promise<{ locale: string }> }) => {
+  const { locale } = await params;
+
+  const t = await getTranslations('ImplementationFood');
 
   return (
     <>
@@ -41,6 +48,7 @@ const Food = () => {
           { name: 'Portfolio', path: '/portfolio' },
           { name: 'Food & Drink', path: '/portfolio/food' },
         ]}
+        locale={locale}
       />
       <SectionFirstReveal>
         <section className="pt-42 pb-37.5">

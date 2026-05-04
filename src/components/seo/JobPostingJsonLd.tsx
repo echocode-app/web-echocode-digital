@@ -1,4 +1,4 @@
-import { seoBaseUrl } from '@/lib/seo/metadata';
+import { buildLocaleUrl, seoBaseUrl } from '@/lib/seo/metadata';
 
 type JobPostingJsonLdProps = {
   vacancyTitle: string;
@@ -7,6 +7,7 @@ type JobPostingJsonLdProps = {
   conditions: string[];
   employmentType: string;
   datePosted: string | null;
+  locale: string;
 };
 
 const VALID_THROUGH_DAYS = 90;
@@ -76,7 +77,7 @@ export default function JobPostingJsonLd(props: JobPostingJsonLdProps) {
       '@type': 'Country',
       name: 'Worldwide',
     },
-    url: `${seoBaseUrl}/career/${props.vacancySlug}`,
+    url: buildLocaleUrl(props.locale, `/career/${props.vacancySlug}`),
     directApply: true,
   };
 

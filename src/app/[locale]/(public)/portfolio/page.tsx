@@ -5,12 +5,17 @@ import PortfolioSection from '@/components/sections/portfolio/PortfolioSection';
 import StaticGradientLine from '@/components/UI/StaticGradientLine';
 import { buildPageMetadata } from '@/lib/seo/metadata';
 
-export async function generateMetadata(): Promise<Metadata> {
+type GenerateMetadataProps = { params: Promise<{ locale: string }> };
+
+export async function generateMetadata({ params }: GenerateMetadataProps): Promise<Metadata> {
+  const { locale } = await params;
+
   return buildPageMetadata({
     title: 'Portfolio',
     description:
       'Selected product and software development cases by Echocode across mobile, web and digital product delivery.',
     path: '/portfolio',
+    locale,
     image: '/images/rabbits/hero/portfolio.png',
   });
 }

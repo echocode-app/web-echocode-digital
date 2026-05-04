@@ -15,11 +15,11 @@ import { buildPageMetadata } from '@/lib/seo/metadata';
 import JobPostingJsonLd from '@/components/seo/JobPostingJsonLd';
 
 interface VacancyPageProps {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; locale: string }>;
 }
 
 export async function generateMetadata({ params }: VacancyPageProps): Promise<Metadata> {
-  const { slug } = await params;
+  const { slug, locale } = await params;
   const vacancy = await getPublicVacancyBySlug(slug);
 
   if (!vacancy) {
@@ -27,6 +27,7 @@ export async function generateMetadata({ params }: VacancyPageProps): Promise<Me
       title: 'Career Opportunity',
       description: 'Explore career opportunities at Echocode.',
       path: `/career/${slug}`,
+      locale,
       image: '/images/rabbits/hero/career.png',
     });
   }
@@ -35,12 +36,13 @@ export async function generateMetadata({ params }: VacancyPageProps): Promise<Me
     title: `${vacancy.vacancyTitle} ${vacancy.level}`.trim(),
     description: `Apply for the ${vacancy.vacancyTitle} role at Echocode and join a product-focused team building high-impact digital products.`,
     path: `/career/${slug}`,
+    locale,
     image: '/images/rabbits/hero/career.png',
   });
 }
 
 const VacancyPage = async ({ params }: VacancyPageProps) => {
-  const { slug } = await params;
+  const { slug, locale } = await params;
   const vacancy = await getPublicVacancyBySlug(slug);
   const careerData = handleStaticVacancy(slug);
 
@@ -69,6 +71,7 @@ const VacancyPage = async ({ params }: VacancyPageProps) => {
         conditions={conditions}
         employmentType={employmentType}
         datePosted={vacancy.datePosted}
+        locale={locale}
       />
       <SectionFirstReveal>
         <HeroSection

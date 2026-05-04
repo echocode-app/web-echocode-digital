@@ -17,17 +17,24 @@ import challenges from '@/data/portfolio/projects/challenges/cleaning.json';
 import planning from '@/data/portfolio/projects/planning/cleaning.json';
 import technologies from '@/data/portfolio/projects/technologies/cleaning.json';
 
-export async function generateMetadata(): Promise<Metadata> {
+type GenerateMetadataProps = { params: Promise<{ locale: string }> };
+
+export async function generateMetadata({ params }: GenerateMetadataProps): Promise<Metadata> {
+  const { locale } = await params;
+
   return buildPageMetadata({
     title: 'Cleaning App Case Study',
     description:
       'Explore Echocode’s cleaning app case study covering product design, implementation, interactive prototype and delivery details.',
     path: '/portfolio/cleaning',
+    locale,
     image: '/images/projects/cleaning/screens.png',
   });
 }
 
-const Cleaning = () => {
+const Cleaning = async ({ params }: { params: Promise<{ locale: string }> }) => {
+  const { locale } = await params;
+
   return (
     <>
       <BreadcrumbJsonLd
@@ -36,6 +43,7 @@ const Cleaning = () => {
           { name: 'Portfolio', path: '/portfolio' },
           { name: 'Cleaning App', path: '/portfolio/cleaning' },
         ]}
+        locale={locale}
       />
       <SectionFirstReveal>
         <section className="pt-42 pb-37.5">
