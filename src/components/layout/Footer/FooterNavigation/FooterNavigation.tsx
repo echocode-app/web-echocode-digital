@@ -5,7 +5,7 @@ import FooterSocialLink from './FooterSocialLink';
 import EmailLink from '../EmailLink';
 import SocailLinks from './SocialLinks';
 import FooterNavLogo from './FooterNavLogo';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 import Image from 'next/image';
 
 const FooterNavigation = () => {

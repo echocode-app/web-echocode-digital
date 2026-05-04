@@ -1,11 +1,11 @@
 'use client';
 
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
 
 import { useCallback, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@/i18n/navigation';
 
 import ContactUsForm from './ContactUsForm';
 import CloseBtn from './ContactUsForm/CloseBtn';

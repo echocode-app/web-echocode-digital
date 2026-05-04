@@ -1,6 +1,6 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
+import { usePathname } from '@/i18n/navigation';
 import { Fragment, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useTypedHeroHeading } from '@/components/UI/useTypedHeroHeading';
 import {

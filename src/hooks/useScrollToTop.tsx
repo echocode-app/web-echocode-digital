@@ -1,4 +1,4 @@
-import { usePathname } from 'next/navigation';
+import { usePathname } from '@/i18n/navigation';
 
 export const useScrollToTop = (currentPath: string) => {
   const pathname = usePathname();
