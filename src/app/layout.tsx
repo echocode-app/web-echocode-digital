@@ -5,13 +5,13 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getLocale, getMessages } from 'next-intl/server';
 
 import { poppins, wadik, inter, rubik } from '@/styles/fonts/fonts';
-import { buildLanguageAlternates, seoBaseUrl } from '@/lib/seo/metadata';
+import { seoBaseUrl } from '@/lib/seo/metadata';
 
 import './globals.css';
 
 // Google Tag Manager container. Manage ads and marketing tags inside GTM.
+// GA4 (G-ZB7Y7RC890) is loaded via the GTM container, not directly here.
 const GTM_ID = 'GTM-NCF8LH26';
-const GA_ID = 'G-ZB7Y7RC890';
 
 // Global SEO metadata. Page-level metadata should override this where needed.
 export const metadata: Metadata = {
@@ -53,7 +53,6 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: 'https://echocode.digital',
-    languages: buildLanguageAlternates(''),
   },
   openGraph: {
     title: 'Echocode — iOS, Android, Web & iGaming Development',
@@ -134,18 +133,6 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <head>
-        <Script
-          src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${GA_ID}');
-          `}
-        </Script>
         <Script id="google-tag-manager" strategy="afterInteractive">
           {`
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
