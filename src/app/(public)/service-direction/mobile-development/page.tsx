@@ -6,6 +6,7 @@ import MarketingSection from '@/components/sections/directions/mobile/MarketingS
 import SpecializationSection from '@/components/sections/directions/mobile/SpecializationSection';
 import StaticGradientLine from '@/components/UI/StaticGradientLine';
 import { buildPageMetadata } from '@/lib/seo/metadata';
+import BreadcrumbJsonLd from '@/components/seo/BreadcrumbJsonLd';
 
 export async function generateMetadata(): Promise<Metadata> {
   return buildPageMetadata({
@@ -20,6 +21,12 @@ export async function generateMetadata(): Promise<Metadata> {
 const Mobile = () => {
   return (
     <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: 'Home', path: '/' },
+          { name: 'Mobile Development', path: '/service-direction/mobile-development' },
+        ]}
+      />
       <SectionFirstReveal>
         <HeroSection />
       </SectionFirstReveal>

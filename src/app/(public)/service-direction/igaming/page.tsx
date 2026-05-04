@@ -6,6 +6,7 @@ import HeroSection from '@/components/sections/directions/igaming/HeroSection';
 import SolutionsSection from '@/components/sections/directions/igaming/SolutionsSection';
 import StaticGradientLine from '@/components/UI/StaticGradientLine';
 import { buildPageMetadata } from '@/lib/seo/metadata';
+import BreadcrumbJsonLd from '@/components/seo/BreadcrumbJsonLd';
 
 export async function generateMetadata(): Promise<Metadata> {
   return buildPageMetadata({
@@ -20,6 +21,12 @@ export async function generateMetadata(): Promise<Metadata> {
 const IGaming = () => {
   return (
     <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: 'Home', path: '/' },
+          { name: 'iGaming Development', path: '/service-direction/igaming' },
+        ]}
+      />
       <SectionFirstReveal>
         <HeroSection />
       </SectionFirstReveal>

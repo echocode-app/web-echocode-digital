@@ -7,6 +7,7 @@ import CoreSection from '@/components/sections/directions/web/CoreSection';
 import EngineeringSection from '@/components/sections/directions/web/EngineeringSection';
 import DevelopmentSection from '@/components/sections/directions/web/DevelopmentSection';
 import { buildPageMetadata } from '@/lib/seo/metadata';
+import BreadcrumbJsonLd from '@/components/seo/BreadcrumbJsonLd';
 
 export async function generateMetadata(): Promise<Metadata> {
   return buildPageMetadata({
@@ -21,6 +22,12 @@ export async function generateMetadata(): Promise<Metadata> {
 const WebDevelopment = () => {
   return (
     <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: 'Home', path: '/' },
+          { name: 'Web Development', path: '/service-direction/web-development' },
+        ]}
+      />
       <SectionFirstReveal>
         <HeroSection />
       </SectionFirstReveal>

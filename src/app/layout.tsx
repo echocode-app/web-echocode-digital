@@ -95,6 +95,27 @@ export default async function RootLayout({
     name: 'Echocode',
     url: seoBaseUrl,
     logo: `${seoBaseUrl}/favicon/fulllogo.png`,
+    description:
+      'Echocode is a software development studio building iOS, Android, web and iGaming products with design, QA and product-focused engineering services.',
+    foundingDate: '2023',
+    numberOfEmployees: {
+      '@type': 'QuantitativeValue',
+      minValue: 11,
+      maxValue: 50,
+    },
+    email: 'hello@echocode.digital',
+    address: [
+      {
+        '@type': 'PostalAddress',
+        addressCountry: 'UA',
+        addressLocality: 'Kyiv',
+      },
+      {
+        '@type': 'PostalAddress',
+        addressCountry: 'DE',
+        addressLocality: 'Berlin',
+      },
+    ],
     sameAs: [
       'https://linkedin.com/company/echocode',
       'https://t.me/echocodeHQ',

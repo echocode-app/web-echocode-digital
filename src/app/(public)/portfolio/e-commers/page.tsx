@@ -12,6 +12,7 @@ import ScreensSection from '@/components/sections/portfolio/project/ScreensSecti
 import ProptotypeSection from '@/components/sections/portfolio/project/PrototypeSection';
 import TechnologySection from '@/components/sections/portfolio/project/TechnologySection';
 import { buildPageMetadata } from '@/lib/seo/metadata';
+import BreadcrumbJsonLd from '@/components/seo/BreadcrumbJsonLd';
 
 import implementations from '@/data/portfolio/projects/implementations/e-commerce.json';
 import challenges from '@/data/portfolio/projects/challenges/e-commerce.json';
@@ -34,6 +35,13 @@ const ECommers = () => {
 
   return (
     <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: 'Home', path: '/' },
+          { name: 'Portfolio', path: '/portfolio' },
+          { name: 'E-commerce', path: '/portfolio/e-commers' },
+        ]}
+      />
       <SectionFirstReveal>
         <section className="pt-42 pb-37.5">
           <TypedHeroHeading

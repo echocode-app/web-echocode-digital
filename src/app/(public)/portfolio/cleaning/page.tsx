@@ -11,6 +11,7 @@ import ProptotypeSection from '@/components/sections/portfolio/project/Prototype
 import ScreensSection from '@/components/sections/portfolio/project/ScreensSection';
 import TechnologySection from '@/components/sections/portfolio/project/TechnologySection';
 import { buildPageMetadata } from '@/lib/seo/metadata';
+import BreadcrumbJsonLd from '@/components/seo/BreadcrumbJsonLd';
 
 import challenges from '@/data/portfolio/projects/challenges/cleaning.json';
 import planning from '@/data/portfolio/projects/planning/cleaning.json';
@@ -29,6 +30,13 @@ export async function generateMetadata(): Promise<Metadata> {
 const Cleaning = () => {
   return (
     <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: 'Home', path: '/' },
+          { name: 'Portfolio', path: '/portfolio' },
+          { name: 'Cleaning App', path: '/portfolio/cleaning' },
+        ]}
+      />
       <SectionFirstReveal>
         <section className="pt-42 pb-37.5">
           <TypedHeroHeading

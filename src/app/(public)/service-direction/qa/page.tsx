@@ -7,6 +7,7 @@ import HeroSection from '@/components/sections/directions/qa/HeroSection';
 import MetricsSection from '@/components/sections/directions/qa/MetricsSection';
 import ModerationSection from '@/components/sections/directions/qa/ModerationSection';
 import { buildPageMetadata } from '@/lib/seo/metadata';
+import BreadcrumbJsonLd from '@/components/seo/BreadcrumbJsonLd';
 
 export async function generateMetadata(): Promise<Metadata> {
   return buildPageMetadata({
@@ -21,6 +22,12 @@ export async function generateMetadata(): Promise<Metadata> {
 const QAPage = () => {
   return (
     <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: 'Home', path: '/' },
+          { name: 'QA Services', path: '/service-direction/qa' },
+        ]}
+      />
       <SectionFirstReveal>
         <HeroSection />
       </SectionFirstReveal>
