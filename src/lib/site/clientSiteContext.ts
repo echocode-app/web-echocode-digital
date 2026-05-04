@@ -36,8 +36,6 @@ function resolveHostSiteConfig(host: string | null): ClientSiteConfig {
   if (
     host === 'echocode.digital' ||
     host === 'www.echocode.digital' ||
-    host === 'echocode.cloud' ||
-    host === 'www.echocode.cloud' ||
     host === 'echocode-newsite.vercel.app' ||
     /^echocode-newsite(?:-[a-z0-9-]+)*\.vercel\.app$/i.test(host)
   ) {

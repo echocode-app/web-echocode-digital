@@ -33,8 +33,6 @@ const SITE_REGISTRY: readonly SiteDescriptor[] = [
       'https://echocode-newsite.vercel.app',
       'https://www.echocode.digital',
       'https://echocode.digital',
-      'https://echocode.cloud',
-      'https://www.echocode.cloud',
     ],
     allowedOriginPatterns: [ECHOCODE_NEWSITE_PREVIEW_ORIGIN_PATTERN],
     acceptedHosts: [
@@ -42,8 +40,6 @@ const SITE_REGISTRY: readonly SiteDescriptor[] = [
       'echocode-newsite.vercel.app',
       'www.echocode.digital',
       'echocode.digital',
-      'echocode.cloud',
-      'www.echocode.cloud',
     ],
     acceptedHostPatterns: [/^echocode-newsite(?:-[a-z0-9-]+)*\.vercel\.app$/i],
   },

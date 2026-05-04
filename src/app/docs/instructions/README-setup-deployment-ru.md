@@ -13,17 +13,16 @@
 ### Основные домены этого проекта
 
 - Публичный client-facing сайт: `https://www.echocode.digital/`
-- Дополнительный принимаемый домен для того же site slice: `https://echocode.cloud/`
 - Vercel preview / development deploy: `https://echocode-newsite.vercel.app/`
 
-С операционной точки зрения публичный маркетинговый сайт нужно рассматривать как домен `echocode.digital`, а доступ в админку может использоваться через cloud-домен под `/admin`, если именно так настроен routing для команды.
+И публичный маркетинговый сайт, и админка живут под одним доменом `echocode.digital`.
 
 Примеры:
 
 - публичный сайт: `https://www.echocode.digital/`
-- админка: `https://echocode.cloud/admin/...`
+- админка: `https://www.echocode.digital/admin/...`
 
-И `echocode.digital`, и `echocode.cloud` внутри проекта резолвятся как один и тот же основной site slice: `siteId = echocode_digital`.
+Домен резолвится внутри проекта как основной site slice: `siteId = echocode_digital`.
 
 ## Локальный сетап
 
@@ -130,16 +129,13 @@ curl http://localhost:3000/api/internal/firebase-check
 
 - preview / branch verification проходит на Vercel preview URL
 - production public traffic идет на `echocode.digital`
-- admin-операции могут открываться через cloud-домен, если так устроен routing команды
+- admin-операции открываются через `https://www.echocode.digital/admin/...`
 
-### Разделение доменов: публичный сайт и админка
+### Структура доменов: публичный сайт и админка
 
-Для операционной работы и документации удобно разделять роли доменов:
+Публичный маркетинговый сайт и админка живут на одном домене:
 
-- `echocode.digital` = публичный marketing / client website
-- `echocode.cloud` = operational/admin entry domain для того же задеплоенного проекта
-
-Технически эти домены могут указывать на один и тот же Next.js проект и backend, но для команды они выполняют разные практические роли.
+- `echocode.digital` = публичный marketing / client website и admin entry под `/admin`
 
 ### Client-side и server-side использование Firebase
 

@@ -13,17 +13,16 @@
 ### Main domains for this project
 
 - Public client-facing website: `https://www.echocode.digital/`
-- Additional accepted domain for the same site slice: `https://echocode.cloud/`
 - Vercel preview / development deploy: `https://echocode-newsite.vercel.app/`
 
-Operationally, the public marketing website should be treated as the `echocode.digital` domain, while admin access may be used through the cloud domain under `/admin` when that routing is configured for the team.
+Both the public marketing website and the admin area live under the same `echocode.digital` domain.
 
 Examples:
 
 - public site: `https://www.echocode.digital/`
-- admin area: `https://echocode.cloud/admin/...`
+- admin area: `https://www.echocode.digital/admin/...`
 
-Both `echocode.digital` and `echocode.cloud` are resolved inside the project as the same main site slice: `siteId = echocode_digital`.
+The domain resolves inside the project as the main site slice: `siteId = echocode_digital`.
 
 ## Local setup
 
@@ -470,16 +469,13 @@ In practice:
 
 - preview / branch verification happens on Vercel preview URLs
 - production public traffic goes to `echocode.digital`
-- admin operations may be accessed through the cloud domain if that is the team routing setup
+- admin operations are accessed through `https://www.echocode.digital/admin/...`
 
-### Domain split: public site vs admin
+### Domain layout: public site and admin
 
-For operations and documentation, it is useful to separate the roles of the domains:
+The public marketing website and the admin area share a single domain:
 
-- `echocode.digital` = public-facing marketing / client website
-- `echocode.cloud` = operational/admin entry domain for the same deployed project
-
-Technically these domains can point to the same Next.js project and backend, but they serve different practical purposes for the team.
+- `echocode.digital` = public-facing marketing / client website and admin entry under `/admin`
 
 ### Client-side vs server-side Firebase usage
 
