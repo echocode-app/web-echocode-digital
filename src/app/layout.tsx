@@ -98,8 +98,8 @@ export default async function RootLayout({
     logo: `${seoBaseUrl}/favicon/fulllogo.png`,
     sameAs: [
       'https://linkedin.com/company/echocode',
-      'https://t.me/echocode_app',
-      'https://www.instagram.com/digital.echocode',
+      'https://t.me/echocodeHQ',
+      'https://www.instagram.com/echocodeHQ',
       'https://www.behance.net/valeriimelnikov',
       'https://freelancehunt.com/freelancer/echocode.html',
       'https://www.upwork.com/agencies/2038889063349600711/',

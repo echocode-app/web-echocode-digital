@@ -6,7 +6,7 @@ const SocailLinks = () => {
     <ul className="flex justify-center gap-2 lg:justify-end">
       <li>
         <Link
-          href={'https://t.me/echocode_app'}
+          href={'https://t.me/echocodeHQ'}
           target="_blank"
           rel="noreferrer"
           className="flex justify-center items-center w-10 h-10 rounded-full bg-social-telegram 
@@ -32,7 +32,7 @@ const SocailLinks = () => {
       </li>
       <li>
         <Link
-          href={'https://www.instagram.com/digital.echocode'}
+          href={'https://www.instagram.com/echocodeHQ'}
           target="_blank"
           rel="noreferrer"
           className="flex justify-center items-center w-10 h-10 rounded-full bg-social-instagram-link"
