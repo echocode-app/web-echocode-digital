@@ -1,8 +1,7 @@
 import type { Metadata } from 'next';
 import Script from 'next/script';
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import { NextIntlClientProvider } from 'next-intl';
-import { getLocale, getMessages } from 'next-intl/server';
+import { getLocale } from 'next-intl/server';
 
 import { poppins, wadik, inter, rubik } from '@/styles/fonts/fonts';
 import { seoBaseUrl } from '@/lib/seo/metadata';
@@ -86,7 +85,6 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const locale = await getLocale();
-  const messages = await getMessages();
 
   // Structured data for search engines. Keep values aligned with public SEO metadata.
   const organizationSchema = {
@@ -192,10 +190,7 @@ export default async function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(professionalServiceSchema) }}
         />
 
-        {/* App providers and global runtime features. */}
-        <NextIntlClientProvider locale={locale} messages={messages}>
-          {children}
-        </NextIntlClientProvider>
+        {children}
         <SpeedInsights />
       </body>
     </html>
