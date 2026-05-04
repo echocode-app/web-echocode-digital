@@ -12,6 +12,7 @@ import CandidateSection from '@/components/sections/career/vacancy/CandidateSect
 import { getPublicVacancyBySlug } from '@/server/vacancies';
 import { VacancyData } from '@/components/sections/career/vacancy/types/vacancy';
 import { buildPageMetadata } from '@/lib/seo/metadata';
+import JobPostingJsonLd from '@/components/seo/JobPostingJsonLd';
 
 interface VacancyPageProps {
   params: Promise<{ slug: string }>;
@@ -61,6 +62,14 @@ const VacancyPage = async ({ params }: VacancyPageProps) => {
 
   return (
     <>
+      <JobPostingJsonLd
+        vacancyTitle={vacancyTitle}
+        vacancySlug={vacancySlug}
+        level={level}
+        conditions={conditions}
+        employmentType={employmentType}
+        datePosted={vacancy.datePosted}
+      />
       <SectionFirstReveal>
         <HeroSection
           image={heroSection.image}

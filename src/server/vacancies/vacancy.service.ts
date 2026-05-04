@@ -21,6 +21,7 @@ function toPublicVacancyItem(item: ManagedVacancyRecord): PublicVacancyListItem 
     conditions: item.conditions,
     employmentType: item.employmentType,
     hotPosition: item.hotPosition,
+    datePosted: item.createdAt ?? item.updatedAt ?? null,
   };
 }
 

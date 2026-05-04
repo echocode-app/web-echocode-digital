@@ -67,6 +67,7 @@ export type PublicVacancyListItem = VacancySubmissionContextSnapshot & {
   employmentType: string;
   level: VacancyLevel | null;
   hotPosition: boolean;
+  datePosted: string | null;
 };
 
 export type AdminVacancyListItemDto = ManagedVacancyRecord & {
