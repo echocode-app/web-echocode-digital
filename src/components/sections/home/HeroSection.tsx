@@ -10,7 +10,7 @@ const HeroSection = () => {
     <section className="pt-45 pb-31.75 md:pt-41.5 md:pb-13.5">
       <SectionContainer>
         <TypedHeroHeading
-          text="Echocode — Software Development Studio"
+          text="Echocode: Digital Studio"
           className="max-w-85.5 mx-auto mb-4 font-wadik text-title-3xl text-center
         md:max-w-170 md:text-title-6xl font-semibold  uppercase"
         />
