@@ -32,7 +32,7 @@
           "Kategorie danych, które możemy zbierać, zależą od sposobu, w jaki korzystasz ze strony."
         ],
         "bullets": [
-          "Dane zapytania projektowego: imię, nazwisko, adres e-mail, szczegóły wiadomości oraz opcjonalny plik lub obraz dołączony do zapytania projektowego.",
+          "Dane zapytania projektowego: imię, numer kierunkowy kraju, numer telefonu, adres e-mail, szczegóły wiadomości oraz opcjonalny plik lub obraz dołączony do zapytania projektowego.",
           "Dane aplikacyjne: URL profilu, metadane pliku CV oraz kontekst oferty pracy przesyłane w procesie aplikacyjnym.",
           "Dane formularza e-mail w stopce: adres e-mail i źródło punktu wejścia kontaktu lub subskrypcji.",
           "Dane użytkowania i analityki: odwiedzona ścieżka, adres URL strony, tytuł strony, referrer, host strony, identyfikator strony, identyfikator sesji oraz znaczniki czasu zdarzeń.",

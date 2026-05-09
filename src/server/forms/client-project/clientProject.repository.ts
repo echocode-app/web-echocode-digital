@@ -19,6 +19,7 @@ import {
   mapDocToListItem,
   mapDocToRecord,
 } from '@/server/forms/client-project/clientProject.repository.mappers';
+import { buildPhoneE164 } from '@/shared/validation/submissions.common';
 import { getClientSubmissionsOverview } from '@/server/forms/client-project/clientProject.repository.overview';
 import type {
   AddClientSubmissionCommentInput,
@@ -55,7 +56,9 @@ export async function createClientSubmissionRecord(input: {
 
   const doc = {
     firstName: input.payload.firstName,
-    lastName: input.payload.lastName,
+    countryCode: input.payload.countryCode,
+    phone: input.payload.phone,
+    phoneE164: buildPhoneE164(input.payload.countryCode, input.payload.phone),
     email: input.payload.email,
     description: input.payload.description?.trim() || null,
     ...(input.imageUrl

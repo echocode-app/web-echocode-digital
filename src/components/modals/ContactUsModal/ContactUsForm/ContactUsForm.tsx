@@ -49,15 +49,15 @@ const ContactUsForm = ({
           onChange={(value) => onChangeText('firstName', value)}
         />
         <ContactInput
-          name="lastName"
-          label={t('lastNamePlaceholder')}
-          value={values.lastName}
-          error={translateError(errors.lastName)}
-          autoComplete="family-name"
+          name="phone"
+          label={t('phonePlaceholder')}
+          value={values.phone}
+          error={translateError(errors.phone)}
+          autoComplete="tel-national"
           required
           disabled={isLocked}
-          onBlur={() => onBlurField('lastName')}
-          onChange={(value) => onChangeText('lastName', value)}
+          onBlur={() => onBlurField('phone')}
+          onChange={(value) => onChangeText('phone', value)}
         />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4 md:mb-8">

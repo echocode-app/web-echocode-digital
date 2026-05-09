@@ -11,13 +11,13 @@ import {
 import { useClientSubmissionsTable } from '@/components/admin/client-submissions/table/useClientSubmissionsTable';
 
 const clientSubmissionColumns: AdminDataTableColumn[] = [
-  { key: 'name', label: 'Name' },
-  { key: 'email', label: 'Email' },
-  { key: 'date', label: 'Date' },
-  { key: 'status', label: 'Status' },
-  { key: 'files', label: 'Files' },
-  { key: 'comments', label: 'Comments' },
-  { key: 'actions', label: 'Actions' },
+  { key: 'email', label: 'Email', widthClassName: 'w-[24%]' },
+  { key: 'phone', label: 'Phone', widthClassName: 'w-[16%]' },
+  { key: 'date', label: 'Date', widthClassName: 'w-36' },
+  { key: 'status', label: 'Status', widthClassName: 'w-28' },
+  { key: 'files', label: 'Files', widthClassName: 'w-16' },
+  { key: 'comments', label: 'Comments', widthClassName: 'w-24' },
+  { key: 'actions', label: 'Actions', widthClassName: 'w-64' },
 ];
 
 export default function ClientSubmissionsTable() {
@@ -40,15 +40,16 @@ export default function ClientSubmissionsTable() {
 
       <AdminDataTable
         columns={clientSubmissionColumns}
+        fixedLayout
         errorMessage={tableState.state === 'error' ? 'Unable to load client submissions.' : null}
-        pagination={(
+        pagination={
           <ClientSubmissionsPagination
             canGoPrev={tableState.canGoPrev}
             canGoNext={tableState.canGoNext}
             onPrev={actions.goPrev}
             onNext={actions.goNext}
           />
-        )}
+        }
       >
         <ClientSubmissionsTableRows
           state={tableState.state}

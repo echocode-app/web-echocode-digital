@@ -17,7 +17,8 @@ export type ClientProjectImageMetaInput = {
 
 export type ClientProjectCreateInput = {
   firstName: string;
-  lastName: string;
+  countryCode: string;
+  phone: string;
   email: string;
   description?: string;
   image?: ClientProjectImageMetaInput;
@@ -25,7 +26,9 @@ export type ClientProjectCreateInput = {
 
 export type ClientSubmissionFirestoreDoc = {
   firstName: string;
-  lastName: string;
+  countryCode: string;
+  phone: string;
+  phoneE164: string;
   email: string;
   description: string | null;
   imageUrl?: string;
@@ -61,8 +64,11 @@ export type ClientSubmissionCommentDto = {
 
 export type ClientSubmissionRecordDto = {
   id: string;
+  name: string;
   firstName: string;
-  lastName: string;
+  countryCode: string;
+  phone: string;
+  phoneE164: string;
   email: string;
   description: string | null;
   imageUrl: string | null;
@@ -80,6 +86,9 @@ export type ClientSubmissionListItemDto = {
   id: string;
   name: string;
   email: string;
+  phone: string;
+  countryCode: string;
+  phoneE164: string;
   date: string;
   status: ClientSubmissionStatus;
   hasImage: boolean;

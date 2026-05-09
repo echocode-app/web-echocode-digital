@@ -36,7 +36,7 @@ export default function EchocodeAppSubmissionsTableRows({
   getAllowedStatusOptions,
 }: EchocodeAppSubmissionsTableRowsProps) {
   if (state === 'loading') {
-    return <AdminTableLoadingRows cellWidths={['w-24', 'w-30', 'w-16', 'w-10', 'w-8', 'w-24']} />;
+    return <AdminTableLoadingRows cellWidths={['w-32', 'w-24', 'w-16', 'w-8', 'w-8', 'w-32']} />;
   }
 
   if (rows.length === 0) {
@@ -54,19 +54,26 @@ export default function EchocodeAppSubmissionsTableRows({
             className="rounded-(--radius-secondary) bg-black/20 font-main text-main-sm text-white"
           >
             <td className="px-2 py-2">
+              <div className="truncate" title={row.contact.name || undefined}>
+                {row.contact.name || '—'}
+              </div>
+              <div
+                className="mt-0.5 truncate text-main-xs text-gray60"
+                title={row.contact.email || undefined}
+              >
+                {row.contact.email || '—'}
+              </div>
+            </td>
+            <td className="px-2 py-2">
               <div className="leading-tight">
-                <p>{dateTime.date}</p>
+                <p className="whitespace-nowrap">{dateTime.date}</p>
                 <p className="mt-0.5 text-main-xs text-gray60">{dateTime.time}</p>
               </div>
             </td>
             <td className="px-2 py-2">
-              <div>{row.contact.name || '—'}</div>
-              <div className="mt-0.5 text-main-xs text-gray60">{row.contact.email || '—'}</div>
-            </td>
-            <td className="px-2 py-2">
               <EchocodeAppSubmissionStatusBadge status={row.status} />
             </td>
-            <td className="px-2 py-2">
+            <td className="px-2 py-2 text-center">
               {row.hasAttachment ? (
                 <span
                   className="inline-flex h-5 w-5 items-center justify-center"
@@ -96,8 +103,8 @@ export default function EchocodeAppSubmissionsTableRows({
                 {row.commentsCount > 0 ? row.commentsCount : '—'}
               </span>
             </td>
-            <td className="min-w-60 px-2 py-2">
-              <div className="flex w-full items-center gap-2">
+            <td className="px-2 py-2">
+              <div className="flex w-full items-center justify-end gap-2">
                 <Link
                   href={`/admin/echocode-app/submissions/${row.id}`}
                   aria-label="Open detailed view for this echocode.app submission"
@@ -109,7 +116,7 @@ export default function EchocodeAppSubmissionsTableRows({
                 >
                   <EyeIcon />
                 </Link>
-                <div className="relative ml-auto min-w-34">
+                <div className="relative min-w-34">
                   <select
                     value={row.status}
                     disabled={isApplyingStatus === row.id || isDeletingSubmission === row.id}

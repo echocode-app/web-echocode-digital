@@ -1,6 +1,13 @@
 import { z } from 'zod';
 import { validate } from '@/server/lib';
 import {
+  countryCodeSchema,
+  hasValidFullPhoneLength,
+  hasSuspiciousMixedCaseNameToken,
+  normalizePhoneDigits,
+  phoneSchema,
+} from '@/shared/validation/submissions.common';
+import {
   ALLOWED_CLIENT_PROJECT_ATTACHMENT_EXTENSIONS,
   ALLOWED_CLIENT_PROJECT_ATTACHMENT_MIME_TYPES,
   MAX_CLIENT_PROJECT_ATTACHMENT_SIZE_BYTES,
@@ -32,7 +39,10 @@ const personNameSchema = z
   .trim()
   .min(2, 'Must contain at least 2 characters')
   .max(40, 'Must contain at most 40 characters')
-  .regex(NAME_PATTERN, 'Only letters, spaces, apostrophes and hyphens are allowed');
+  .regex(NAME_PATTERN, 'Only letters, spaces, apostrophes and hyphens are allowed')
+  .refine((value) => !hasSuspiciousMixedCaseNameToken(value), {
+    message: 'Name contains suspicious mixed-case pattern',
+  });
 
 const imageMetaSchema = z.object({
   path: z
@@ -52,13 +62,29 @@ const uploadFileSchema = z.object({
   sizeBytes: z.number().int().positive().max(MAX_CLIENT_PROJECT_ATTACHMENT_SIZE_BYTES),
 });
 
-export const clientProjectCreateSchema = z.object({
-  firstName: personNameSchema,
-  lastName: personNameSchema,
-  email: z.string().trim().email('Must be a valid email').max(EMAIL_MAX_LEN, 'Email is too long'),
-  description: z.string().trim().max(DESCRIPTION_MAX_LEN, 'Description is too long').optional(),
-  image: imageMetaSchema.optional(),
-});
+export const clientProjectCreateSchema = z
+  .object({
+    firstName: personNameSchema,
+    countryCode: countryCodeSchema,
+    phone: phoneSchema,
+    email: z.string().trim().email('Must be a valid email').max(EMAIL_MAX_LEN, 'Email is too long'),
+    description: z.string().trim().max(DESCRIPTION_MAX_LEN, 'Description is too long').optional(),
+    image: imageMetaSchema.optional(),
+  })
+  .superRefine((value, ctx) => {
+    if (!hasValidFullPhoneLength(value.countryCode, value.phone)) {
+      ctx.addIssue({
+        code: 'custom',
+        path: ['phone'],
+        message: 'Full phone number must contain at most 15 digits',
+      });
+    }
+  })
+  .transform((value) => ({
+    ...value,
+    countryCode: value.countryCode.trim(),
+    phone: normalizePhoneDigits(value.phone),
+  }));
 
 export const clientProjectUploadInitSchema = z.object({
   file: uploadFileSchema,

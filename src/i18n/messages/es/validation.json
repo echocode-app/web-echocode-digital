@@ -26,11 +26,19 @@
     "name": {
       "min": "Debe contener al menos 2 caracteres",
       "max": "Debe contener como máximo 40 caracteres",
-      "pattern": "Solo se permiten letras, espacios, apóstrofes y guiones"
+      "pattern": "Solo se permiten letras, espacios, apóstrofes y guiones",
+      "suspicious": "Ingresa un nombre real, no una secuencia aleatoria de caracteres"
     },
     "email": {
       "invalid": "Debe ser un correo electrónico válido",
       "max": "El correo electrónico es demasiado largo"
+    },
+    "phone": {
+      "countryCode": "Elige un código de país válido",
+      "min": "El teléfono es demasiado corto",
+      "max": "El teléfono es demasiado largo",
+      "pattern": "Usa solo dígitos, espacios, paréntesis, puntos o guiones",
+      "digits": "El teléfono debe contener entre 4 y 15 dígitos"
     },
     "description": {
       "max": "La descripción es demasiado larga"

@@ -11,12 +11,12 @@ import {
 import { useEmailSubmissionsTable } from '@/components/admin/email-submissions/table/useEmailSubmissionsTable';
 
 const emailSubmissionColumns: AdminDataTableColumn[] = [
-  { key: 'email', label: 'Email' },
-  { key: 'source', label: 'Source' },
-  { key: 'date', label: 'Date' },
-  { key: 'status', label: 'Status' },
-  { key: 'comments', label: 'Comments' },
-  { key: 'actions', label: 'Actions' },
+  { key: 'email', label: 'Email', widthClassName: 'w-[28%]' },
+  { key: 'source', label: 'Source', widthClassName: 'w-36' },
+  { key: 'date', label: 'Date', widthClassName: 'w-36' },
+  { key: 'status', label: 'Status', widthClassName: 'w-28' },
+  { key: 'comments', label: 'Comments', widthClassName: 'w-24' },
+  { key: 'actions', label: 'Actions', widthClassName: 'w-64' },
 ];
 
 export default function EmailSubmissionsTable() {
@@ -39,6 +39,7 @@ export default function EmailSubmissionsTable() {
 
       <AdminDataTable
         columns={emailSubmissionColumns}
+        fixedLayout
         errorMessage={tableState.state === 'error' ? 'Unable to load email submissions.' : null}
         pagination={(
           <ClientSubmissionsPagination

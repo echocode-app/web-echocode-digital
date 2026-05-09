@@ -26,11 +26,19 @@
     "name": {
       "min": "Muss mindestens 2 Zeichen enthalten",
       "max": "Darf höchstens 40 Zeichen enthalten",
-      "pattern": "Nur Buchstaben, Leerzeichen, Apostrophe und Bindestriche sind erlaubt"
+      "pattern": "Nur Buchstaben, Leerzeichen, Apostrophe und Bindestriche sind erlaubt",
+      "suspicious": "Geben Sie einen echten Namen ein, keine zufällige Zeichenfolge"
     },
     "email": {
       "invalid": "Muss eine gültige E-Mail-Adresse sein",
       "max": "E-Mail ist zu lang"
+    },
+    "phone": {
+      "countryCode": "Wählen Sie eine gültige Landesvorwahl",
+      "min": "Telefonnummer ist zu kurz",
+      "max": "Telefonnummer ist zu lang",
+      "pattern": "Nur Ziffern, Leerzeichen, Klammern, Punkte oder Bindestriche verwenden",
+      "digits": "Telefonnummer muss 4 bis 15 Ziffern enthalten"
     },
     "description": {
       "max": "Beschreibung ist zu lang"

@@ -26,11 +26,19 @@
     "name": {
       "min": "Musi zawierać co najmniej 2 znaki",
       "max": "Musi zawierać maksymalnie 40 znaków",
-      "pattern": "Dozwolone są tylko litery, spacje, apostrofy i myślniki"
+      "pattern": "Dozwolone są tylko litery, spacje, apostrofy i myślniki",
+      "suspicious": "Wpisz prawdziwe imię, a nie losowy ciąg znaków"
     },
     "email": {
       "invalid": "Musi być poprawnym adresem e-mail",
       "max": "E-mail jest zbyt długi"
+    },
+    "phone": {
+      "countryCode": "Wybierz poprawny numer kierunkowy kraju",
+      "min": "Numer telefonu jest za krótki",
+      "max": "Numer telefonu jest za długi",
+      "pattern": "Użyj tylko cyfr, spacji, nawiasów, kropek lub myślników",
+      "digits": "Numer telefonu musi zawierać od 4 do 15 cyfr"
     },
     "description": {
       "max": "Opis jest zbyt długi"
