@@ -29,22 +29,32 @@ Preview / development deploy: https://echocode-newsite.vercel.app/
 
 ### Branch roles
 
-- `main` is the production branch. Every push to `main` is treated as a production release candidate and deploys to the live domain.
-- `develop` is the preview branch for active development, feature validation, and QA checks before production promotion.
-- Each new task must start from `main` in a dedicated task branch.
+- `main` is the production branch and must always represent the current live state.
+- `develop` is the preview / staging branch for new features before production.
+- Feature branches are temporary task branches for isolated development.
 
 ### Required branch flow
 
-1. Create a new branch from `main` for each task.
-2. Implement and validate the change in the task branch.
-3. Merge the task branch into `develop` for preview deployment and feature verification.
-4. After QA approval, promote the validated state from `develop` to `main`.
+1. Create a new feature branch from the latest `develop`.
+2. Keep the feature branch up to date with `develop` and `main` while working.
+3. Open a PR from the feature branch into `develop`.
+4. Test and approve the change on the `develop` preview deployment.
+5. Open a PR from `develop` into `main` only after preview verification passes.
 
-### Important release rule
+In short:
 
-- Do not push to `main` casually.
-- Use `main` only for approved production-ready changes.
-- If a change has not been verified on `develop`, it should not be merged into `main`.
+```text
+main = production
+develop = preview / staging for new features
+feature branches -> PR into develop -> test preview -> PR develop into main
+```
+
+### Synchronization rule
+
+- `develop` may be ahead of `main` only while new features are being tested.
+- If `main` is ahead of `develop`, update `develop` from `main` before starting or merging new work.
+- Feature branches must be kept current with the latest `develop` and production `main`.
+- No new feature should go directly to `main`; every feature must be verified on `develop` first.
 
 ## Commit checklist
 
