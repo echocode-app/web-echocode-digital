@@ -57,16 +57,25 @@ export default function VacancyCandidatesTableRows({
           >
             <td className="px-2 py-2">
               <div>
-                <p>{row.vacancy.vacancyTitle || row.vacancyKey}</p>
-                <p className="mt-0.5 text-main-xs text-gray60">
+                <p className="truncate" title={row.vacancy.vacancyTitle || row.vacancyKey}>
+                  {row.vacancy.vacancyTitle || row.vacancyKey}
+                </p>
+                <p
+                  className="mt-0.5 truncate text-main-xs text-gray60"
+                  title={row.vacancy.level || undefined}
+                >
                   {row.vacancy.level || 'Level not specified'}
                 </p>
               </div>
             </td>
-            <td className="px-2 py-2 break-all">{row.profileUrl}</td>
+            <td className="px-2 py-2">
+              <div className="truncate" title={row.profileUrl}>
+                {row.profileUrl}
+              </div>
+            </td>
             <td className="px-2 py-2">
               <div className="leading-tight">
-                <p>{dateTime.date}</p>
+                <p className="whitespace-nowrap">{dateTime.date}</p>
                 <p className="mt-0.5 text-main-xs text-gray60">{dateTime.time}</p>
               </div>
             </td>
@@ -104,8 +113,8 @@ export default function VacancyCandidatesTableRows({
                 {row.commentsCount > 0 ? row.commentsCount : '—'}
               </span>
             </td>
-            <td className="min-w-60 px-2 py-2">
-              <div className="flex w-full items-center gap-2">
+            <td className="px-2 py-2">
+              <div className="flex w-full items-center justify-end gap-2">
                 <Link
                   href={`/admin/vacancies/candidates/${row.id}`}
                   aria-label="Open detailed view for this candidate submission"
@@ -118,7 +127,7 @@ export default function VacancyCandidatesTableRows({
                 >
                   <EyeIcon />
                 </Link>
-                <div className="relative ml-auto min-w-34">
+                <div className="relative min-w-34">
                   <select
                     value={row.status}
                     disabled={isApplyingStatus === row.id || isDeletingSubmission === row.id}

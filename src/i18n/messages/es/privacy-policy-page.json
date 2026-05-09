@@ -32,7 +32,7 @@
           "Las categorías de datos que podemos recopilar dependen de cómo interactúes con el sitio."
         ],
         "bullets": [
-          "Datos de consultas de proyectos: nombre, apellido, dirección de correo electrónico, detalles del mensaje y cualquier archivo o imagen opcional adjunto a una consulta de proyecto.",
+          "Datos de consultas de proyectos: nombre, código de país, número de teléfono, dirección de correo electrónico, detalles del mensaje y cualquier archivo o imagen opcional adjunto a una consulta de proyecto.",
           "Datos de solicitudes de empleo: URL del perfil, metadatos del archivo CV y contexto de la vacante enviados mediante el flujo de candidatura.",
           "Datos del formulario de correo electrónico del footer: dirección de correo electrónico y fuente del punto de entrada del contacto o suscripción.",
           "Datos de uso y analítica: ruta visitada, URL de la página, título de la página, referrer, host del sitio, identificador del sitio, identificador de sesión y marcas temporales de eventos.",

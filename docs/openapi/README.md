@@ -4,6 +4,7 @@
 - `docs/openapi/openapi.yaml` - main OpenAPI entrypoint
 - `docs/openapi/paths/*.yaml` - route sections split by domain
 - `docs/openapi/SCENARIOS.md` - most common integration flows
+- `src/app/docs/CLIENT_PROJECT_FORM_FRONTEND_HANDOFF.md` - frontend handoff for the `.digital` client-project form UI.
 
 ## Validation
 Run:

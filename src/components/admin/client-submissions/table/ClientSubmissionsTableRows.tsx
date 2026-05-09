@@ -3,7 +3,10 @@ import Image from 'next/image';
 import type { ClientSubmissionStatus } from '@/server/forms/client-project/clientProject.types';
 import ClientSubmissionStatusBadge from '@/components/admin/client-submissions/shared/ClientSubmissionStatusBadge';
 import { formatDateTime } from '@/components/admin/client-submissions/shared/clientSubmissions.formatters';
-import { EyeIcon, SelectChevron } from '@/components/admin/client-submissions/shared/clientSubmissions.icons';
+import {
+  EyeIcon,
+  SelectChevron,
+} from '@/components/admin/client-submissions/shared/clientSubmissions.icons';
 import { AdminTableEmptyRow } from '@/components/admin/shared/table/AdminTableEmptyRow';
 import { AdminTableLoadingRows } from '@/components/admin/shared/table/AdminTableLoadingRows';
 import type {
@@ -33,7 +36,11 @@ export default function ClientSubmissionsTableRows({
   getAllowedStatusOptions,
 }: ClientSubmissionsTableRowsProps) {
   if (state === 'loading') {
-    return <AdminTableLoadingRows cellWidths={['w-24', 'w-30', 'w-16', 'w-20', 'w-8', 'w-8', 'w-24']} />;
+    return (
+      <AdminTableLoadingRows
+        cellWidths={['w-32', 'w-24', 'w-24', 'w-16', 'w-8', 'w-8', 'w-32']}
+      />
+    );
   }
 
   if (rows.length === 0) {
@@ -46,24 +53,46 @@ export default function ClientSubmissionsTableRows({
         const dateTime = formatDateTime(row.date);
 
         return (
-          <tr key={row.id} className="rounded-(--radius-secondary) bg-black/20 font-main text-main-sm text-white">
-            <td className="px-2 py-2">{row.name || '—'}</td>
-            <td className="px-2 py-2">{row.email || '—'}</td>
+          <tr
+            key={row.id}
+            className="rounded-(--radius-secondary) bg-black/20 font-main text-main-sm text-white"
+          >
+            <td className="px-2 py-2">
+              <div className="truncate" title={row.email || undefined}>
+                {row.email || '—'}
+              </div>
+            </td>
+            <td className="px-2 py-2">
+              <div className="truncate" title={row.phoneE164 || undefined}>
+                {row.phoneE164 || '—'}
+              </div>
+            </td>
             <td className="px-2 py-2">
               <div className="leading-tight">
-                <p>{dateTime.date}</p>
+                <p className="whitespace-nowrap">{dateTime.date}</p>
                 <p className="mt-0.5 text-main-xs text-gray60">{dateTime.time}</p>
               </div>
             </td>
             <td className="px-2 py-2">
               <ClientSubmissionStatusBadge status={row.status} />
             </td>
-            <td className="px-2 py-2">
+            <td className="px-2 py-2 text-center">
               {row.hasImage ? (
-                <span className="inline-flex h-5 w-5 items-center justify-center" title="Attachment available">
-                  <Image src="/UI/clip.svg" alt="Attachment" width={14} height={14} className="h-auto w-auto" />
+                <span
+                  className="inline-flex h-5 w-5 items-center justify-center"
+                  title="Attachment available"
+                >
+                  <Image
+                    src="/UI/clip.svg"
+                    alt="Attachment"
+                    width={14}
+                    height={14}
+                    className="h-auto w-auto"
+                  />
                 </span>
-              ) : '—'}
+              ) : (
+                '—'
+              )}
             </td>
             <td className="px-2 py-2 text-center">
               <span
@@ -76,8 +105,8 @@ export default function ClientSubmissionsTableRows({
                 {row.commentsCount > 0 ? row.commentsCount : '—'}
               </span>
             </td>
-            <td className="min-w-60 px-2 py-2">
-              <div className="flex w-full items-center gap-2">
+            <td className="px-2 py-2">
+              <div className="flex w-full items-center justify-end gap-2">
                 <Link
                   href={`/admin/submissions/clients/${row.id}`}
                   aria-label="Open detailed view for this submission"
@@ -87,17 +116,21 @@ export default function ClientSubmissionsTableRows({
                 >
                   <EyeIcon />
                 </Link>
-                <div className="relative ml-auto min-w-34">
+                <div className="relative min-w-34">
                   <select
                     value={row.status}
                     disabled={isApplyingStatus === row.id || isDeletingSubmission === row.id}
-                    onChange={(event) => void onUpdateStatus(row.id, event.target.value as ClientSubmissionStatus)}
+                    onChange={(event) =>
+                      void onUpdateStatus(row.id, event.target.value as ClientSubmissionStatus)
+                    }
                     aria-label={`Set status for submission from ${row.email || row.name || 'unknown client'}`}
                     title="Set submission status"
                     className="w-full appearance-none rounded-(--radius-secondary) border border-gray16 bg-black/30 px-2 py-1 pr-10 text-main-xs text-white outline-none"
                   >
                     {getAllowedStatusOptions(row.status).map((status) => (
-                      <option key={status} value={status}>{status}</option>
+                      <option key={status} value={status}>
+                        {status}
+                      </option>
                     ))}
                   </select>
                   <span className="absolute inset-y-0 right-3 flex items-center">

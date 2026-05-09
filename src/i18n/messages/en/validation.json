@@ -26,11 +26,19 @@
     "name": {
       "min": "Must contain at least 2 characters",
       "max": "Must contain at most 40 characters",
-      "pattern": "Only letters, spaces, apostrophes and hyphens are allowed"
+      "pattern": "Only letters, spaces, apostrophes and hyphens are allowed",
+      "suspicious": "Enter a real name, not a random character sequence"
     },
     "email": {
       "invalid": "Must be a valid email",
       "max": "Email is too long"
+    },
+    "phone": {
+      "countryCode": "Choose a valid country code",
+      "min": "Phone number is too short",
+      "max": "Phone number is too long",
+      "pattern": "Use digits, spaces, parentheses, dots or hyphens only",
+      "digits": "Phone number must contain 4 to 15 digits"
     },
     "description": {
       "max": "Description is too long"

@@ -35,7 +35,7 @@ export default function EmailSubmissionsTableRows({
   getAllowedStatusOptions,
 }: EmailSubmissionsTableRowsProps) {
   if (state === 'loading') {
-    return <AdminTableLoadingRows cellWidths={['w-30', 'w-24', 'w-16', 'w-18', 'w-8', 'w-24']} />;
+    return <AdminTableLoadingRows cellWidths={['w-32', 'w-16', 'w-24', 'w-16', 'w-8', 'w-40']} />;
   }
 
   if (rows.length === 0) {
@@ -52,11 +52,19 @@ export default function EmailSubmissionsTableRows({
             key={row.id}
             className="rounded-(--radius-secondary) bg-black/20 font-main text-main-sm text-white"
           >
-            <td className="px-2 py-2 break-all">{row.email || '—'}</td>
-            <td className="px-2 py-2">{row.source || 'footer'}</td>
+            <td className="px-2 py-2">
+              <div className="truncate" title={row.email || undefined}>
+                {row.email || '—'}
+              </div>
+            </td>
+            <td className="px-2 py-2">
+              <div className="truncate" title={row.source || undefined}>
+                {row.source || 'footer'}
+              </div>
+            </td>
             <td className="px-2 py-2">
               <div className="leading-tight">
-                <p>{dateTime.date}</p>
+                <p className="whitespace-nowrap">{dateTime.date}</p>
                 <p className="mt-0.5 text-main-xs text-gray60">{dateTime.time}</p>
               </div>
             </td>
@@ -75,8 +83,8 @@ export default function EmailSubmissionsTableRows({
                 {row.commentsCount > 0 ? row.commentsCount : '—'}
               </span>
             </td>
-            <td className="min-w-60 px-2 py-2">
-              <div className="flex w-full items-center gap-2">
+            <td className="px-2 py-2">
+              <div className="flex w-full items-center justify-end gap-2">
                 <Link
                   href={`/admin/submissions/emails/${row.id}`}
                   aria-label="Open detailed view for this email submission"
@@ -90,7 +98,7 @@ export default function EmailSubmissionsTableRows({
                 >
                   <EyeIcon />
                 </Link>
-                <div className="relative ml-auto min-w-34">
+                <div className="relative min-w-34">
                   <select
                     value={row.status}
                     disabled={isApplyingStatus === row.id || isDeletingSubmission === row.id}

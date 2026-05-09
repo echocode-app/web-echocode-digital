@@ -40,21 +40,13 @@ export function toSubmissionFirestoreCreateDoc(
 
 function assertTimestamp(value: unknown, field: string): asserts value is Timestamp {
   if (!(value instanceof Timestamp)) {
-    throw ApiError.fromCode(
-      'INTERNAL_ERROR',
-      `Created submission ${field} is missing after write`,
-    );
+    throw ApiError.fromCode('INTERNAL_ERROR', `Created submission ${field} is missing after write`);
   }
 }
 
-export function fromCreatedSubmissionSnapshot(
-  snapshot: DocumentSnapshot,
-): CreatedSubmissionRecord {
+export function fromCreatedSubmissionSnapshot(snapshot: DocumentSnapshot): CreatedSubmissionRecord {
   if (!snapshot.exists) {
-    throw ApiError.fromCode(
-      'INTERNAL_ERROR',
-      'Created submission document is missing after write',
-    );
+    throw ApiError.fromCode('INTERNAL_ERROR', 'Created submission document is missing after write');
   }
 
   const data = snapshot.data();
@@ -133,10 +125,7 @@ function toNullableSiteId(value: unknown): SiteId | null {
 
 function toIsoTimestamp(value: unknown, fallbackLabel: string): string {
   if (!(value instanceof Timestamp)) {
-    throw ApiError.fromCode(
-      'INTERNAL_ERROR',
-      `${fallbackLabel} is missing valid timestamp`,
-    );
+    throw ApiError.fromCode('INTERNAL_ERROR', `${fallbackLabel} is missing valid timestamp`);
   }
   return timestampToIsoString(value);
 }
@@ -162,19 +151,19 @@ function toAttachments(value: unknown): SubmissionAttachmentMvp[] {
       return [];
     }
 
-    return [{
-      path: attachment.path,
-      originalName: attachment.originalName,
-      mimeType: attachment.mimeType,
-      sizeBytes: attachment.sizeBytes,
-      kind: attachment.kind,
-    }];
+    return [
+      {
+        path: attachment.path,
+        originalName: attachment.originalName,
+        mimeType: attachment.mimeType,
+        sizeBytes: attachment.sizeBytes,
+        kind: attachment.kind,
+      },
+    ];
   });
 }
 
-export function toSubmissionListItemDto(
-  snapshot: QueryDocumentSnapshot,
-): SubmissionListItemDto {
+export function toSubmissionListItemDto(snapshot: QueryDocumentSnapshot): SubmissionListItemDto {
   // Admin list DTO intentionally excludes message/body and raw attachment metadata.
   const data = snapshot.data();
 
@@ -240,20 +229,13 @@ export function toSubmissionRecordDto(
 
   const status = normalizeSubmissionStatus(data.status);
   if (!status) {
-    throw ApiError.fromCode(
-      'INTERNAL_ERROR',
-      `Submission "${snapshotId}" has unsupported status`,
-    );
+    throw ApiError.fromCode('INTERNAL_ERROR', `Submission "${snapshotId}" has unsupported status`);
   }
 
   const contact = toObjectRecord(data.contact);
   const content = toObjectRecord(data.content);
 
-  if (
-    !contact ||
-    typeof contact.name !== 'string' ||
-    typeof contact.email !== 'string'
-  ) {
+  if (!contact || typeof contact.name !== 'string' || typeof contact.email !== 'string') {
     throw ApiError.fromCode(
       'INTERNAL_ERROR',
       `Submission "${snapshotId}" is missing valid contact payload`,
@@ -283,8 +265,7 @@ export function toSubmissionRecordDto(
     updatedAt,
     reviewedBy: toNullableString(data.reviewedBy),
     reviewedByProfile: null,
-    reviewedAt:
-      data.reviewedAt instanceof Timestamp ? timestampToIsoString(data.reviewedAt) : null,
+    reviewedAt: data.reviewedAt instanceof Timestamp ? timestampToIsoString(data.reviewedAt) : null,
     comments: mapComments(data.comments),
   };
 }

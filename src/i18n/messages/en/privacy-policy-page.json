@@ -32,7 +32,7 @@
           "The categories of data we may collect depend on how you interact with the site."
         ],
         "bullets": [
-          "Project inquiry data: first name, last name, email address, message details and any optional file or image attached to a project inquiry.",
+          "Project inquiry data: first name, country code, phone number, email address, message details and any optional file or image attached to a project inquiry.",
           "Career application data: profile URL, CV file metadata and vacancy context submitted through the candidate application flow.",
           "Footer email submission data: email address and the source of the subscription or contact entry point.",
           "Usage and analytics data: visited path, page URL, page title, referrer, site host, site identifier, session identifier and event timestamps.",

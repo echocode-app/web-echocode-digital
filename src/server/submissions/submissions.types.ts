@@ -6,12 +6,7 @@ import type {
 } from '@/server/forms/shared/moderation.types';
 import type { SiteId } from '@/server/sites/siteContext';
 
-export type SubmissionWorkflowStatus =
-  | 'new'
-  | 'viewed'
-  | 'processed'
-  | 'rejected'
-  | 'deferred';
+export type SubmissionWorkflowStatus = 'new' | 'viewed' | 'processed' | 'rejected' | 'deferred';
 export type SubmissionFormTypeMvp = 'project';
 
 export type SubmissionAttachmentMvp = {

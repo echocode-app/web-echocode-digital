@@ -13,12 +13,63 @@ Preview / dev deploy: https://echocode-newsite.vercel.app/
 ## Основні команди
 
 - `npm run dev` - запуск локального Next.js застосунку
+- `npm run test:lead-form-contract` - тести контракту і валідації lead form
 - `npm run typecheck` - перевірка TypeScript
 - `npm run lint` - перевірка ESLint
 - `npm run openapi:lint` - перевірка OpenAPI
-- `npm run check` - обов'язкова перевірка перед комітом (`typecheck + lint + openapi:lint + build`)
+- `npm run check` - обов'язкова перевірка перед комітом (`lead form contract test + typecheck + lint + openapi:lint + build`)
 - `npm run test:firestore:rules` - тести Firestore Rules
 - `npm run test:storage:rules` - тести Storage Rules
+
+## Чекліст перевірок
+
+### Обов'язково перед кожним комітом
+
+Виконати:
+
+```bash
+npm run check
+```
+
+Це покриває:
+
+- тести контракту lead form
+- перевірку TypeScript
+- перевірку ESLint
+- перевірку OpenAPI
+- production build
+
+### Обов'язково після змін Firebase Rules
+
+Виконати:
+
+```bash
+npm run test:firestore:rules
+npm run test:storage:rules
+```
+
+### Обов'язково перед merge у production
+
+- Злити feature-гілки в `develop`.
+- Перевірити preview deployment з `develop`.
+- Запустити `npm run check` на фінальному стані гілки.
+- Зливати `develop` у `main` тільки після успішної preview-перевірки.
+
+## Контракт Lead Form
+
+Обов'язкові поля:
+
+- `firstName`
+- `countryCode`
+- `phone`
+- `email`
+
+Опційні поля:
+
+- `description`
+- `image`
+
+Frontend має надсилати `countryCode` окремо від національного номера `phone`. Backend нормалізує форматування номера і зберігає `phone` у цифрах та `phoneE164`.
 
 ## API документація
 

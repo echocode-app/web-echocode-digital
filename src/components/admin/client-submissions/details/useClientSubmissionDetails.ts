@@ -53,7 +53,7 @@ export function useClientSubmissionDetails(submissionId: string) {
 
   const title = useMemo(() => {
     if (!details) return 'Client submission';
-    return `${details.firstName} ${details.lastName}`.trim() || 'Client submission';
+    return details.name.trim() || details.email || details.phoneE164 || 'Client submission';
   }, [details]);
 
   const onStatusChange = useCallback(

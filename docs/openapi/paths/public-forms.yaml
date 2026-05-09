@@ -79,6 +79,11 @@
     tags: [Public Forms]
     operationId: createClientProjectSubmission
     summary: Create client project submission
+    description: |
+      Creates a `.digital` client-project form submission.
+
+      Frontend handoff for the phone selector and locale defaults:
+      `src/app/docs/CLIENT_PROJECT_FORM_FRONTEND_HANDOFF.md`.
     security: []
     requestBody:
       required: true
