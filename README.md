@@ -13,12 +13,63 @@ Preview / development deploy: https://echocode-newsite.vercel.app/
 ## Main commands
 
 - `npm run dev` - run the local Next.js app
+- `npm run test:lead-form-contract` - run lead form contract and validation tests
 - `npm run typecheck` - run TypeScript validation
 - `npm run lint` - run ESLint validation
 - `npm run openapi:lint` - run OpenAPI validation
-- `npm run check` - required pre-commit validation (`typecheck + lint + openapi:lint + build`)
+- `npm run check` - required pre-commit validation (`lead form contract test + typecheck + lint + openapi:lint + build`)
 - `npm run test:firestore:rules` - run Firestore Rules tests
 - `npm run test:storage:rules` - run Storage Rules tests
+
+## Validation Checklist
+
+### Required before every commit
+
+Run:
+
+```bash
+npm run check
+```
+
+This covers:
+
+- lead form contract tests
+- TypeScript validation
+- ESLint validation
+- OpenAPI validation
+- production build
+
+### Required after Firebase Rules changes
+
+Run:
+
+```bash
+npm run test:firestore:rules
+npm run test:storage:rules
+```
+
+### Required before production merge
+
+- Merge feature branches into `develop`.
+- Test the `develop` preview deployment.
+- Run `npm run check` on the final branch state.
+- Merge `develop` into `main` only after preview verification passes.
+
+## Lead Form Contract
+
+Required fields:
+
+- `firstName`
+- `countryCode`
+- `phone`
+- `email`
+
+Optional fields:
+
+- `description`
+- `image`
+
+The frontend should send `countryCode` separately from the national `phone` value. The backend normalizes phone formatting and stores both `phone` digits and `phoneE164`.
 
 ## API documentation
 
