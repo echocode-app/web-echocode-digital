@@ -1,5 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import path from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
+import ts from 'typescript';
 
 const {
   buildPhoneE164,
@@ -8,7 +13,32 @@ const {
   phoneContactSchema,
   phoneSchema,
   projectIdentitySchema,
-} = await import('../src/shared/validation/submissions.common.ts');
+} = await importValidationModule();
+
+async function importValidationModule() {
+  const sourceUrl = new URL('../src/shared/validation/submissions.common.ts', import.meta.url);
+  const sourcePath = fileURLToPath(sourceUrl);
+  const source = await readFile(sourcePath, 'utf8');
+
+  const transpiled = ts.transpileModule(source, {
+    compilerOptions: {
+      module: ts.ModuleKind.ES2022,
+      target: ts.ScriptTarget.ES2022,
+    },
+    fileName: sourcePath,
+  });
+
+  // Node 20 cannot import .ts directly, so CI tests execute a temporary ESM build.
+  const zodUrl = await import.meta.resolve('zod');
+  const output = transpiled.outputText.replace(/from ['"]zod['"]/g, `from ${JSON.stringify(zodUrl)}`);
+  const outputDir = path.join(tmpdir(), 'echocode-lead-form-contract-tests');
+  const outputPath = path.join(outputDir, 'submissions.common.mjs');
+
+  await mkdir(outputDir, { recursive: true });
+  await writeFile(outputPath, output, 'utf8');
+
+  return import(pathToFileURL(outputPath).href);
+}
 
 test('personNameSchema accepts normal user names', () => {
   const validNames = [

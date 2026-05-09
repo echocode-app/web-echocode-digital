@@ -112,7 +112,7 @@ feature branches -> PR into develop -> test preview -> PR develop into main
 1. `git pull`
 2. `npm ci` on a fresh clone or after dependency changes
 3. Make your changes
-4. If `package.json` changed, run `npm install` to update `package-lock.json`
+4. If dependency-relevant `package.json` fields changed, run `npm install` to update `package-lock.json`
 5. `npm run check`
 6. `git add ...`
 7. `git commit -m "message"`
@@ -124,7 +124,11 @@ If Firebase Rules changed, also run:
 
 ## Lockfile rule
 
-Husky pre-commit blocks the commit if `package.json` is staged but `package-lock.json` is not.
+Husky pre-commit checks staged `package.json` changes against `HEAD`.
+
+It blocks the commit only when dependency-relevant fields changed and `package-lock.json` is not staged. These fields include dependencies, devDependencies, optionalDependencies, peerDependencies, overrides, workspaces, engines, packageManager, and package version/name metadata.
+
+Script-only changes in `package.json` do not require a lockfile update.
 
 If that happens:
 

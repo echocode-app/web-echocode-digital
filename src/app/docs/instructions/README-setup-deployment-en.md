@@ -544,7 +544,9 @@ Required flow:
 
 ## Lockfile rule
 
-If `package.json` changes, update `package-lock.json` as well.
+If dependency-relevant `package.json` fields change, update `package-lock.json` as well.
+
+Script-only `package.json` changes do not require a lockfile update.
 
 If Husky blocks the commit because `package-lock.json` is missing from staged files:
 
