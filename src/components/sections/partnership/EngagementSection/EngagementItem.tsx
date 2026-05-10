@@ -9,7 +9,7 @@ interface EngagementItemProps {
 const EngagementItem = ({ title, desc, priority }: EngagementItemProps) => {
   const t = useTranslations('PartnershipPage.EngagementSection.engagementList');
   const locale = useLocale();
-  const uaStyle = locale === 'ua' ? 'text-main-xs' : 'text-main-sm';
+  const ukStyle = locale === 'uk' ? 'text-main-xs' : 'text-main-sm';
 
   return (
     <li
@@ -32,7 +32,7 @@ const EngagementItem = ({ title, desc, priority }: EngagementItemProps) => {
         <dt className="mb-3 font-title text-title-xs text-accent z-10 pointer-events-none">
           {t('subtitle')}:
         </dt>
-        <dd className={`${uaStyle}  italic uppercase font-semibold z-10 pointer-events-none`}>
+        <dd className={`${ukStyle}  italic uppercase font-semibold z-10 pointer-events-none`}>
           {t(priority)}
         </dd>
       </dl>

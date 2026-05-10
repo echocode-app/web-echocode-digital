@@ -32,7 +32,7 @@ const CandidateForm = ({ vacancyData }: CandidateFormProps) => {
   const translateError = (key?: string) => (key ? errorsT(key) : undefined);
 
   const locale = useLocale();
-  const uaStyle = locale === 'ua' ? 'text-main-xs' : 'text-main-sm';
+  const ukStyle = locale === 'uk' ? 'text-main-xs' : 'text-main-sm';
 
   const fileRef = useRef<HTMLInputElement>(null);
   const profileUrlRef = useRef<HTMLInputElement>(null);
@@ -162,7 +162,7 @@ const CandidateForm = ({ vacancyData }: CandidateFormProps) => {
           <p className="font-title uppercase font-bold">{t('cvLabel')}</p>
           <div className=" flex gap-1 items-center">
             <Image src="/UI/clip.svg" alt="Clip" width={12} height={16} />
-            <span className={`block text-primary-gray text-main-xs leading-4 ${uaStyle}`}>
+            <span className={`block text-primary-gray text-main-xs leading-4 ${ukStyle}`}>
               {uploadingFile ? 'uploading...' : cvFile?.originalName || t('cvPlaceholder')}
             </span>
           </div>

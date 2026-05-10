@@ -1,16 +1,17 @@
-import { useTranslations } from 'next-intl';
-
-import ErrorLayout from '@/components/errors/ErrorLayout';
 import ErrorPage from '@/components/errors/ErrorPage';
 
-const NotFound = () => {
-  const t = useTranslations('Error404Page');
-
+const GlobalNotFound = () => {
   return (
-    <ErrorLayout>
-      <ErrorPage code={'404'} title={t('title')} description={t('description')} />
-    </ErrorLayout>
+    <html lang="en">
+      <body>
+        <ErrorPage
+          code={'404'}
+          title={'Page Not Found'}
+          description={'Your search has ventured beyond the known universe.'}
+        />
+      </body>
+    </html>
   );
 };
 
-export default NotFound;
+export default GlobalNotFound;
