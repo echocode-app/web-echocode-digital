@@ -12,7 +12,7 @@ export const ATTACHMENT_ACCEPT = CLIENT_PROJECT_ATTACHMENT_ACCEPT;
 
 const DEFAULT_COUNTRY_CODE_BY_LOCALE = {
   en: '+1',
-  ua: '+380',
+  uk: '+380',
   pl: '+48',
   de: '+49',
   es: '+34',

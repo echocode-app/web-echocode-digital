@@ -1,0 +1,61 @@
+import type { Metadata } from 'next';
+import SectionFirstReveal from '@/components/UI/section/SectionFirstReveal';
+import StaticGradientLine from '@/components/UI/StaticGradientLine';
+import ArmorSection from '@/components/sections/directions/qa/ArmorSection';
+import BusinessSection from '@/components/sections/directions/qa/BusinessSection';
+import HeroSection from '@/components/sections/directions/qa/HeroSection';
+import MetricsSection from '@/components/sections/directions/qa/MetricsSection';
+import ModerationSection from '@/components/sections/directions/qa/ModerationSection';
+import { AppLocale, buildPageMetadata } from '@/lib/seo/metadata';
+import BreadcrumbJsonLd from '@/components/seo/BreadcrumbJsonLd';
+
+type PageProps = {
+  params: Promise<{ locale: AppLocale }>;
+};
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { locale } = await params;
+
+  return buildPageMetadata({
+    locale,
+    title: 'QA Services',
+    description:
+      'QA services for mobile and web products, including stability, moderation readiness, automation and performance validation.',
+    path: '/service-direction/qa',
+    image: '/images/rabbits/hero/qa.png',
+  });
+}
+
+const QAPage = async ({ params }: PageProps) => {
+  const { locale } = await params;
+
+  return (
+    <>
+      <BreadcrumbJsonLd
+        locale={locale}
+        items={[
+          { name: 'Home', path: '/' },
+          { name: 'QA Services', path: '/service-direction/qa' },
+        ]}
+      />
+      <SectionFirstReveal>
+        <HeroSection />
+      </SectionFirstReveal>
+      <StaticGradientLine />
+      <SectionFirstReveal>
+        <BusinessSection />
+      </SectionFirstReveal>
+      <SectionFirstReveal>
+        <ModerationSection />
+      </SectionFirstReveal>
+      <SectionFirstReveal>
+        <ArmorSection />
+      </SectionFirstReveal>
+      <SectionFirstReveal>
+        <MetricsSection />
+      </SectionFirstReveal>
+    </>
+  );
+};
+
+export default QAPage;

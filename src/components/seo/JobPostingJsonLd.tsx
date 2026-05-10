@@ -1,6 +1,7 @@
-import { seoBaseUrl } from '@/lib/seo/metadata';
+import { AppLocale, buildAbsoluteLocalizedUrl, seoBaseUrl } from '@/lib/seo/metadata';
 
 type JobPostingJsonLdProps = {
+  locale: AppLocale;
   vacancyTitle: string;
   vacancySlug: string;
   level: string | null;
@@ -55,7 +56,9 @@ function buildDescription(input: JobPostingJsonLdProps): string {
 export default function JobPostingJsonLd(props: JobPostingJsonLdProps) {
   const datePostedIso = resolveDatePosted(props.datePosted);
   const validThroughIso = resolveValidThrough(datePostedIso);
-  const titleWithLevel = props.level ? `${props.vacancyTitle} (${props.level})` : props.vacancyTitle;
+  const titleWithLevel = props.level
+    ? `${props.vacancyTitle} (${props.level})`
+    : props.vacancyTitle;
 
   const schema = {
     '@context': 'https://schema.org',
@@ -76,7 +79,7 @@ export default function JobPostingJsonLd(props: JobPostingJsonLdProps) {
       '@type': 'Country',
       name: 'Worldwide',
     },
-    url: `${seoBaseUrl}/career/${props.vacancySlug}`,
+    url: buildAbsoluteLocalizedUrl(props.locale, `/career/${props.vacancySlug}`),
     directApply: true,
   };
 

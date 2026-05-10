@@ -2,7 +2,7 @@
 
 import { ReactNode, useEffect } from 'react';
 import { animate, motion, useMotionValue, useReducedMotion, useTransform } from 'motion/react';
-import { usePathname } from 'next/navigation';
+import { usePathname } from '@/i18n/navigation';
 
 type PageTransitionProps = {
   children: ReactNode;

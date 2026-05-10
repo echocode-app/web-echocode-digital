@@ -14,7 +14,7 @@ interface MobileNavListProps {
 const MobileNavList = ({ onClose, isOpenDropdown, setIsOpenDropdown }: MobileNavListProps) => {
   const t = useTranslations('Layout.Header.navigation');
   const locale = useLocale();
-  const textSize = locale === 'ua' ? 'text-main-sm font-semibold' : 'text-main-base-link';
+  const textSize = locale === 'uk' ? 'text-main-sm font-semibold' : 'text-main-base-link';
 
   return (
     <ul className="flex flex-col items-center gap-8">

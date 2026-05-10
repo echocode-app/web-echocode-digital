@@ -17,7 +17,7 @@ export const navLinkBaseClass =
 const NavList = () => {
   const t = useTranslations('Layout.Header.navigation');
   const locale = useLocale();
-  const textSize = locale === 'ua' ? 'text-main-sm font-semibold' : 'text-main-base-link';
+  const textSize = locale === 'uk' ? 'text-main-sm font-semibold' : 'text-main-base-link';
 
   return (
     <nav>

@@ -15,24 +15,97 @@ const SPEC_URL = '/api/docs/openapi/openapi.yaml';
 const redocContainerClassName = 'redoc-shell min-h-[70vh] bg-[#05070b]';
 
 const repositoryDocs = [
-  { title: 'Root README', path: 'README.md', description: 'Project setup, branch workflow and required checks.' },
-  { title: 'Root README UA', path: 'README.uk.md', description: 'Ukrainian project setup, branch workflow and required checks.' },
-  { title: 'Backend docs', path: 'src/app/docs/README.md', description: 'Backend documentation, smoke tests and current API implementation notes.' },
-  { title: 'Client project form handoff', path: 'src/app/docs/CLIENT_PROJECT_FORM_FRONTEND_HANDOFF.md', description: 'Frontend handoff for the new client-project form phone selector and payload.' },
-  { title: 'Submissions handoff', path: 'src/app/docs/SUBMISSIONS_INTEGRATION_HANDOFF.md', description: 'Frontend integration checklist for public submissions and admin moderation queues.' },
-  { title: 'QA checklist', path: 'src/app/docs/QA_CHECKLIST.md', description: 'Manual QA checklist for public UI, forms, admin and smoke flows.' },
-  { title: 'OpenAPI README', path: 'docs/openapi/README.md', description: 'OpenAPI documentation structure and validation command.' },
-  { title: 'OpenAPI scenarios', path: 'docs/openapi/SCENARIOS.md', description: 'Common frontend-backend API integration scenarios.' },
-  { title: 'UTM tracking', path: 'src/app/docs/utm-tracking.md', description: 'UTM tracking behavior and attribution notes.' },
-  { title: 'Analytics UTM EN', path: 'src/app/docs/instructions/README-analytics-utm-en.md', description: 'English guide for analytics, UTM attribution and dashboards.' },
-  { title: 'Analytics UTM RU', path: 'src/app/docs/instructions/README-analytics-utm-ru.md', description: 'Russian guide for analytics, UTM attribution and dashboards.' },
-  { title: 'Portfolio EN', path: 'src/app/docs/instructions/README-portfolio-en.md', description: 'English guide for portfolio content management.' },
-  { title: 'Portfolio RU', path: 'src/app/docs/instructions/README-portfolio-ru.md', description: 'Russian guide for portfolio content management.' },
-  { title: 'Setup deployment EN', path: 'src/app/docs/instructions/README-setup-deployment-en.md', description: 'English setup, deployment and environment guide.' },
-  { title: 'Setup deployment RU', path: 'src/app/docs/instructions/README-setup-deployment-ru.md', description: 'Russian setup, deployment and environment guide.' },
-  { title: 'Vacancies EN', path: 'src/app/docs/instructions/README-vacancies-en.md', description: 'English guide for vacancy management.' },
-  { title: 'Vacancies RU', path: 'src/app/docs/instructions/README-vacancies-ru.md', description: 'Russian guide for vacancy management.' },
-  { title: 'Storage scripts', path: 'scripts/storage/README.md', description: 'Storage migration and utility scripts documentation.' },
+  {
+    title: 'Root README',
+    path: 'README.md',
+    description: 'Project setup, branch workflow and required checks.',
+  },
+  {
+    title: 'Root README UK',
+    path: 'README.uk.md',
+    description: 'Ukrainian project setup, branch workflow and required checks.',
+  },
+  {
+    title: 'Backend docs',
+    path: 'src/app/docs/README.md',
+    description: 'Backend documentation, smoke tests and current API implementation notes.',
+  },
+  {
+    title: 'Client project form handoff',
+    path: 'src/app/docs/CLIENT_PROJECT_FORM_FRONTEND_HANDOFF.md',
+    description: 'Frontend handoff for the new client-project form phone selector and payload.',
+  },
+  {
+    title: 'Submissions handoff',
+    path: 'src/app/docs/SUBMISSIONS_INTEGRATION_HANDOFF.md',
+    description:
+      'Frontend integration checklist for public submissions and admin moderation queues.',
+  },
+  {
+    title: 'QA checklist',
+    path: 'src/app/docs/QA_CHECKLIST.md',
+    description: 'Manual QA checklist for public UI, forms, admin and smoke flows.',
+  },
+  {
+    title: 'OpenAPI README',
+    path: 'docs/openapi/README.md',
+    description: 'OpenAPI documentation structure and validation command.',
+  },
+  {
+    title: 'OpenAPI scenarios',
+    path: 'docs/openapi/SCENARIOS.md',
+    description: 'Common frontend-backend API integration scenarios.',
+  },
+  {
+    title: 'UTM tracking',
+    path: 'src/app/docs/utm-tracking.md',
+    description: 'UTM tracking behavior and attribution notes.',
+  },
+  {
+    title: 'Analytics UTM EN',
+    path: 'src/app/docs/instructions/README-analytics-utm-en.md',
+    description: 'English guide for analytics, UTM attribution and dashboards.',
+  },
+  {
+    title: 'Analytics UTM RU',
+    path: 'src/app/docs/instructions/README-analytics-utm-ru.md',
+    description: 'Russian guide for analytics, UTM attribution and dashboards.',
+  },
+  {
+    title: 'Portfolio EN',
+    path: 'src/app/docs/instructions/README-portfolio-en.md',
+    description: 'English guide for portfolio content management.',
+  },
+  {
+    title: 'Portfolio RU',
+    path: 'src/app/docs/instructions/README-portfolio-ru.md',
+    description: 'Russian guide for portfolio content management.',
+  },
+  {
+    title: 'Setup deployment EN',
+    path: 'src/app/docs/instructions/README-setup-deployment-en.md',
+    description: 'English setup, deployment and environment guide.',
+  },
+  {
+    title: 'Setup deployment RU',
+    path: 'src/app/docs/instructions/README-setup-deployment-ru.md',
+    description: 'Russian setup, deployment and environment guide.',
+  },
+  {
+    title: 'Vacancies EN',
+    path: 'src/app/docs/instructions/README-vacancies-en.md',
+    description: 'English guide for vacancy management.',
+  },
+  {
+    title: 'Vacancies RU',
+    path: 'src/app/docs/instructions/README-vacancies-ru.md',
+    description: 'Russian guide for vacancy management.',
+  },
+  {
+    title: 'Storage scripts',
+    path: 'scripts/storage/README.md',
+    description: 'Storage migration and utility scripts documentation.',
+  },
 ] as const;
 
 function toRepoDocUrl(pathname: string): string {

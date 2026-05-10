@@ -3,11 +3,25 @@
 import Image from 'next/image';
 import { Locale, useLocale } from 'next-intl';
 import { useTransition, useState } from 'react';
-import { changeLocaleAction } from '@/i18n/set-locale';
+import { useParams } from 'next/navigation';
+
 import { locales } from '@/i18n/config';
+import { usePathname, useRouter } from '@/i18n/navigation';
+
+const localeLabels: Record<Locale, string> = {
+  en: 'en',
+  uk: 'ua',
+  de: 'de',
+  es: 'es',
+  pl: 'pl',
+};
 
 const LanguageSwitcher = () => {
   const locale = useLocale() as Locale;
+  const pathname = usePathname();
+  const router = useRouter();
+  const params = useParams();
+
   const [isPending, startTransition] = useTransition();
   const [open, setOpen] = useState(false);
 
@@ -18,8 +32,13 @@ const LanguageSwitcher = () => {
     }
 
     startTransition(() => {
-      changeLocaleAction(nextLocale);
+      router.replace(
+        // @ts-expect-error -- same pattern as next-intl docs
+        { pathname, params },
+        { locale: nextLocale },
+      );
     });
+
     setOpen(false);
   };
 
@@ -43,7 +62,7 @@ const LanguageSwitcher = () => {
             className={`absolute transition-opacity duration-200 font-wadik text-[10px] sm:text-title-xs uppercase 
               ${isPending ? 'opacity-0' : 'opacity-100'}`}
           >
-            {locale}
+            {localeLabels[locale]}
           </span>
           {isPending && (
             <span className="absolute w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -72,7 +91,7 @@ const LanguageSwitcher = () => {
                 hover:bg-accent
                 ${lng === locale ? 'bg-accent' : ''}`}
             >
-              {lng}
+              {localeLabels[lng as Locale]}
             </button>
           ))}
         </div>

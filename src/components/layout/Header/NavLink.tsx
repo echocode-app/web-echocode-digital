@@ -1,9 +1,10 @@
 'use client';
 
 import { ReactNode } from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { Link } from '@/i18n/navigation';
+
 import { useLocale } from 'next-intl';
+import { usePathname } from '@/i18n/navigation';
 
 export const navLinkBaseClass =
   'relative font-main uppercase ' +
@@ -25,7 +26,7 @@ interface NavLinkProps {
 
 const NavLink = ({ children, link }: NavLinkProps) => {
   const locale = useLocale();
-  const textSize = locale === 'ua' ? 'text-main-sm font-semibold' : 'text-main-base-link';
+  const textSize = locale === 'uk' ? 'text-main-sm font-semibold' : 'text-main-base-link';
 
   const pathname = usePathname();
   const isActive = pathname === link || pathname.startsWith(link + '/');

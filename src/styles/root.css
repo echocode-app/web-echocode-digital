@@ -138,11 +138,11 @@
   .font-title {
     font-family: var(--font-wadik), sans-serif;
   }
-  html[lang='ua'] .font-title,
-  html[lang='de'] .font-title,
-  html[lang='es'] .font-title,
-  html[lang='pl'] .font-title {
-    font-family: var(--font-rubik), sans-serif;
+  [data-locale='uk'] .font-title,
+  [data-locale='de'] .font-title,
+  [data-locale='es'] .font-title,
+  [data-locale='pl'] .font-title {
+    font-family: var(--font-rubik), sans-serif !important;
   }
   .font-main {
     font-family: var(--font-poppins), sans-serif;

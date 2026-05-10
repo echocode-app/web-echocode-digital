@@ -1,8 +1,7 @@
-import { cookies } from 'next/headers';
 import { getRequestConfig } from 'next-intl/server';
 import { cache } from 'react';
 
-import { defaultLocale } from './config';
+import { defaultLocale, locales } from './config';
 
 const loadMessages = cache(async (locale: string) => {
   const paths = [
@@ -45,9 +44,13 @@ const loadMessages = cache(async (locale: string) => {
   );
 });
 
-export default getRequestConfig(async (params) => {
-  const store = await cookies();
-  const locale = params.locale || store.get('locale')?.value || defaultLocale;
+export default getRequestConfig(async ({ requestLocale }) => {
+  const requestedLocale = await requestLocale;
+
+  const locale: string =
+    requestedLocale && locales.includes(requestedLocale as (typeof locales)[number])
+      ? requestedLocale
+      : defaultLocale;
 
   const messages = await loadMessages(locale);
 
