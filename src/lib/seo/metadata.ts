@@ -1,20 +1,12 @@
 import type { Metadata } from 'next';
 
-import { defaultLocale, locales } from '@/i18n/config';
+import { defaultLocale, localePrefixes } from '@/i18n/config';
+import type { AppLocale } from '@/i18n/config';
 
 export const seoBaseUrl = 'https://echocode.digital';
-
-export type AppLocale = (typeof locales)[number];
+export type { AppLocale } from '@/i18n/config';
 
 const TWITTER_IMAGE = '/favicon/fulllogo.png';
-
-const localePrefixes: Record<AppLocale, string> = {
-  en: '/en',
-  uk: '/ua',
-  de: '/de',
-  es: '/es',
-  pl: '/pl',
-};
 
 const openGraphLocales: Record<AppLocale, string> = {
   en: 'en_US',

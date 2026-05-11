@@ -506,6 +506,9 @@ QA не обов'язково тестувати API через Postman. Для 
 1. Перемкнути всі доступні locale.
 2. Перевірити header, footer, hero, forms, modal, vacancy page.
 3. Перевірити, що нічого не лишилось тільки англійською без причини.
+4. Перевірити canonical URLs: `/en`, `/ua`, `/de`, `/es`, `/pl`.
+5. Перевірити, що `/uk` редіректить на `/ua`.
+6. Перевірити, що contact modal лишається в active locale: `/{locale}/contact`.
 
 ### Раунд 4. Forms
 

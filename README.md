@@ -76,6 +76,19 @@ The frontend should send `countryCode` separately from the national `phone` valu
 - Swagger UI locally and in production: `/docs/api`
 - Raw OpenAPI spec: `/api/docs/openapi/openapi.yaml`
 
+## Locale routing
+
+- Canonical locale URLs:
+  - English: `/en`
+  - Ukrainian: `/ua`
+  - German: `/de`
+  - Spanish: `/es`
+  - Polish: `/pl`
+- `/` is a locale resolver. It redirects by saved/browser locale and falls back to `/en`.
+- `/uk` is a legacy Ukrainian alias and redirects permanently to `/ua`.
+- Contact modal routes are locale-aware: `/{locale}/contact` and `/{locale}/contact/success`.
+- SEO canonical, hreflang and sitemap URLs must use the canonical locale prefixes above.
+
 ## Git workflow
 
 ### Branch roles

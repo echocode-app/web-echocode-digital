@@ -62,6 +62,8 @@
 - `docs/openapi/SCENARIOS.md` - most common frontend/backend integration scenarios.
 - `src/app/docs/SUBMISSIONS_INTEGRATION_HANDOFF.md` - practical integration checklist for frontend.
 - `src/app/docs/CLIENT_PROJECT_FORM_FRONTEND_HANDOFF.md` - короткий handoff для нової `.digital` форми з `countryCode + phone`.
+- Locale routing: canonical prefixes `/en`, `/ua`, `/de`, `/es`, `/pl`; `/` resolves locale; `/uk` redirects to `/ua`.
+- Contact modal routing: keep URLs locale-aware, e.g. `/{locale}/contact` and `/{locale}/contact/success`.
 - admin portfolio preview flow:
 - `GET /api/admin/portfolio` - list dynamic preview cards
 - `POST /api/admin/portfolio/image/init` - init signed upload URL for portfolio image

@@ -97,6 +97,17 @@
 - якщо user вручну вибрав країну, language switch не має перезаписувати його вибір;
 - якщо бізнес вирішить, що для `en` потрібен інший default, змінюється тільки mapping у constants.
 
+## Locale routing notes
+
+- Canonical locale prefixes: `/en`, `/ua`, `/de`, `/es`, `/pl`.
+- `/uk` не використовувати в нових link/href; це legacy redirect на `/ua`.
+- Contact modal URL має лишатися в активній locale:
+  - `/en/contact`
+  - `/ua/contact`
+  - `/en/contact/success`
+  - `/ua/contact/success`
+- Language switch має міняти route prefix і не скидати вже введені form values.
+
 ## Валідація
 
 Frontend validation уже підключена:

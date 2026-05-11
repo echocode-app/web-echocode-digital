@@ -1,6 +1,9 @@
 'use client';
 
-import { peekContactModalReturnPath } from '@/components/modals/ContactUsModal/contactModal.navigation';
+import {
+  isContactModalPath,
+  peekContactModalReturnPath,
+} from '@/components/modals/ContactUsModal/contactModal.navigation';
 
 export function readVisitedFlag(key: string): boolean {
   if (typeof window === 'undefined') return false;
@@ -22,10 +25,6 @@ export function writeVisitedFlag(key: string): void {
 
 export function normalizeStorageToken(value: string): string {
   return value.trim().toLowerCase().replace(/\s+/g, ' ').slice(0, 120);
-}
-
-export function isContactModalPath(pathname: string): boolean {
-  return pathname === '/contact' || pathname === '/contact/success';
 }
 
 export function normalizeRoutePathname(pathname: string): string {
