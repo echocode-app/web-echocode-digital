@@ -44,7 +44,7 @@ const ContactFile = ({ file, error, disabled, onBlur, onChange }: ContactFilePro
         aria-label="Attach file"
         title="Attach file"
         className=" 
-         flex items-center gap-1 py-4 pl-4 pr-6 w-full text-left border rounded-secondary leading-3.5 
+         flex items-center gap-1 py-3.25 pl-4 pr-6 w-full text-left border rounded-secondary leading-3.5 
          hover:border-accent focus:border-accent duration-main transition-colors
        outline-0 text-[10px] font-title text-white placeholder:text-white 
         border-white cursor-pointer disabled:cursor-not-allowed disabled:opacity-70

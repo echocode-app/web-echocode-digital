@@ -19,7 +19,7 @@ const SubmitBtn = ({ state }: SubmitBtnProps) => {
       <button
         type="submit"
         disabled={isDisabled}
-        className={`relative z-0 block w-full overflow-hidden rounded-secondary py-3 font-title text-title-base text-white shadow-button transition-all duration-500 md:py-4 ${
+        className={`relative z-0 block w-full overflow-hidden rounded-secondary py-3 px-2 font-title text-title-base text-white shadow-button transition-all duration-500 md:py-4 ${
           isSuccess
             ? 'cursor-default bg-[#39c65c]'
             : `bg-main-gradient animate-[section-gradient-drift_5s_ease-in-out_infinite] bg-size-[200%_200%] ${
@@ -30,9 +30,9 @@ const SubmitBtn = ({ state }: SubmitBtnProps) => {
         }`}
       >
         <span
-          className={`relative z-10 items-center justify-center gap-2 ${isLoading ? 'inline-flex' : 'hidden'} uppercase`}
+          className={`relative z-10 h-3.5 items-center justify-center gap-2 ${isLoading ? 'inline-flex' : 'hidden'} uppercase`}
         >
-          <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/35 border-t-white uppercase" />
+          <span className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-white/35 border-t-white uppercase" />
           {t('submitSending')}
         </span>
         <span className={`relative z-10 ${isLoading ? 'hidden' : 'inline'} uppercase`}>

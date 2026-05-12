@@ -25,8 +25,8 @@ const ContactUsBtn = () => {
 
   return (
     <div
-      className="fixed md:sticky bottom-15 md:bottom-50 md:translate-y-27.5 lg:translate-y-24.75 
-  max-w-318.5 mx-auto w-full flex justify-end px-4 md:px-8 pointer-events-none z-100"
+      className="fixed bottom-15 left-1/2 -translate-x-1/2
+  max-w-318.5 w-full flex justify-end px-4 md:px-8 pointer-events-none z-100"
     >
       <div className="pointer-events-auto">
         <Link

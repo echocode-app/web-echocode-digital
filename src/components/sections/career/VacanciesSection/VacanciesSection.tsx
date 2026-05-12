@@ -8,7 +8,7 @@ import VacanciesLoader from '@/components/UI/loaders/VacanciesLoader';
 
 const VacanciesSection = async () => {
   return (
-    <section className="pb-10 md:pb-4.5">
+    <section className="pb-10 md:pb-18.5">
       <SectionGradientLine height="1" />
       <SectionContainer>
         <div className="mx-auto w-fit mb-10">

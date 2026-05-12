@@ -11,7 +11,7 @@ const TransparencySection = () => {
   const ukStyle = locale === 'uk' ? 'text-[16px]' : 'text-[20px]';
 
   return (
-    <section className="pb-10 md:pb-0">
+    <section className="pb-10 md:pb-18.5">
       <SectionGradientLine height="1" />
       <SectionContainer>
         <SectionTitle marginBottom="4px">{t('title')}</SectionTitle>

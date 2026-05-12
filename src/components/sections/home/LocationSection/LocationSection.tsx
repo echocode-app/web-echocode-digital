@@ -11,7 +11,7 @@ const LocationSection = () => {
   const enStyle = locale === 'en' ? 'max-w-128.5' : 'max-w-[600px]';
 
   return (
-    <section className="pb-18.5 md:pb-4">
+    <section className="pb-10 md:pb-18.5">
       <SectionGradientLine height="1" />
       <SectionContainer>
         <SectionTitle marginBottom="8px">{t('title')}</SectionTitle>
