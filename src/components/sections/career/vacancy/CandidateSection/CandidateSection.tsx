@@ -12,7 +12,7 @@ const CandidateSection = ({ vacancyData }: CandidateSectionProps) => {
   const t = useTranslations('VacancyCommon.vacancyForm');
 
   return (
-    <section className="pb-10 md:pb-4.5">
+    <section className="pb-10 md:pb-18.5">
       <SectionGradientLine height="1" fullWidth />
       <div
         className="relative max-w-318 px-8 mx-auto flex flex-col  xl:flex-row xl:justify-between 

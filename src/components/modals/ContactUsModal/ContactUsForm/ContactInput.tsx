@@ -40,7 +40,7 @@ export default function ContactInput({
   const { text: visibleLabel, requiredMark } = splitRequiredMarker(label);
 
   return (
-    <div className="relative w-full">
+    <div className="relative w-full h-fit">
       <label htmlFor={inputId} className="sr-only font-main">
         {label}
       </label>
@@ -58,7 +58,7 @@ export default function ContactInput({
         aria-label={label}
         title={label}
         aria-invalid={error ? true : undefined}
-        className={`w-full h-14 px-4
+        className={`w-full h-11.5 px-4
            hover:border-accent focus:border-accent duration-main transition-colors
           border border-white text-[10px] rounded-secondary
           bg-transparent
@@ -67,7 +67,7 @@ export default function ContactInput({
         `}
       />
       <div
-        className={`pointer-events-none absolute inset-y-0 left-4 flex items-center gap-[1px] transition-opacity duration-main ${
+        className={`pointer-events-none absolute inset-y-0 left-4 flex items-center gap-px transition-opacity duration-main ${
           value ? 'opacity-0' : 'opacity-100'
         }`}
         aria-hidden="true"

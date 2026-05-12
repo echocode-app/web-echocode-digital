@@ -9,7 +9,7 @@ const SolutionsSection = () => {
   const t = useTranslations('PartnershipPage.SolutionsSection');
 
   return (
-    <section className="pb-10 md:pb-4.5">
+    <section className="pb-10 md:pb-18.5">
       <SectionGradientLine height="1" />
       <SectionContainer>
         <SectionTitle marginBottom="40px">{t('title')}</SectionTitle>
