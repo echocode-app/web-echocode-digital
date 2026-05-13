@@ -1,12 +1,14 @@
 'use client';
 
 import { useLocale, useTranslations } from 'next-intl';
+import { useEffect, useMemo, useState } from 'react';
 
 import ContactInput from '@/components/modals/ContactUsModal/ContactUsForm/ContactInput';
 import ContactFile from '@/components/modals/ContactUsModal/ContactUsForm/ContactFile';
 import YourNeedsInput from '@/components/modals/ContactUsModal/ContactUsForm/YourNeedInput';
-import { useEffect, useMemo, useState } from 'react';
+import ContactInputNumber from '@/components/modals/ContactUsModal/ContactUsForm/ContactInputNumber';
 import { createInitialValues } from '@/components/modals/ContactUsModal/ContactUsForm/clientProjectForm.constants';
+import SubmitBtn from '@/components/modals/ContactUsModal/ContactUsForm/SubmitBtn';
 import {
   FieldName,
   FormErrors,
@@ -23,7 +25,6 @@ import {
   validateAll,
   validateField,
 } from '@/components/modals/ContactUsModal/ContactUsForm/clientProjectForm.validation';
-import SubmitBtn from '@/components/modals/ContactUsModal/ContactUsForm/SubmitBtn';
 
 const CommonFooterForm = () => {
   const formErrorT = useTranslations('ProjectValidation');
@@ -170,6 +171,13 @@ const CommonFooterForm = () => {
 
   const translateError = (key?: string) => (key ? formErrorT(key) : undefined);
 
+  const clearPhoneWithoutValidation = () => {
+    setValues((prev) => ({
+      ...prev,
+      phone: '',
+    }));
+  };
+
   return (
     <form onSubmit={onSubmit} className="md:min-w-149 min-[1068]:max-w-149">
       <div className="flex flex-col md:flex-row gap-6 md:gap-6 mb-6 md:mb-8">
@@ -184,16 +192,18 @@ const CommonFooterForm = () => {
           onBlur={() => onBlurField('firstName')}
           onChange={(value) => onChangeText('firstName', value)}
         />
-        <ContactInput
+        <ContactInputNumber
           name="phone"
           label={t('phonePlaceholder')}
           value={values.phone}
+          locale={locale}
           error={translateError(errors.phone)}
-          autoComplete="tel-national"
           required
           disabled={isLocked}
           onBlur={() => onBlurField('phone')}
-          onChange={(value) => onChangeText('phone', value)}
+          onChange={(phone) => onChangeText('phone', phone)}
+          onClearWithoutValidation={clearPhoneWithoutValidation}
+          onCountryCodeChange={(countryCode) => onChangeText('countryCode', countryCode)}
         />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-6 mb-6 md:mb-8">

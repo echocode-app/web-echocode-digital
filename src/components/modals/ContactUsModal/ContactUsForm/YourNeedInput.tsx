@@ -15,7 +15,7 @@ const YourNeedsInput = ({ value, error, disabled, onBlur, onChange }: YourNeedsI
     <div className="relative">
       <label
         htmlFor="needs"
-        className=" absolute top-2 left-4
+        className="absolute top-2 left-4
        text-[10px] font-title text-white border-white font-bold uppercase"
       >
         {t('needsLabel')}
@@ -32,7 +32,7 @@ const YourNeedsInput = ({ value, error, disabled, onBlur, onChange }: YourNeedsI
         aria-label="About your needs"
         title="About your needs"
         aria-invalid={error ? true : undefined}
-        className="block min-h-2 max-h-13 resize-y overflow-y-auto pt-6 pb-1 pl-4 pr-6 border rounded-secondary leading-3.5 w-full
+        className="block min-h-2 max-h-14 resize-y overflow-y-auto pt-6 pb-1 pl-4 pr-6 border rounded-secondary leading-3.5 w-full
          hover:border-accent focus:border-accent duration-main transition-colors
        outline-0 text-main-xs font-main text-white placeholder:text-primary-gray border-white"
       />

@@ -174,6 +174,13 @@ export function useClientProjectForm(
     }
   };
 
+  const onClearPhoneWithoutValidation = () => {
+    setValues((prev) => ({
+      ...prev,
+      phone: '',
+    }));
+  };
+
   return {
     values,
     errors,
@@ -183,5 +190,6 @@ export function useClientProjectForm(
     onChangeText,
     onChangeImage,
     onBlurField,
+    onClearPhoneWithoutValidation,
   };
 }
