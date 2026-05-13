@@ -11,6 +11,7 @@ type OptionalEnv = {
   developerAccessMode: 'full' | 'readonly';
   adminBootstrapEmails: string[];
   apiVersion: string;
+  crmCaptureLeadUrl?: string;
   firebaseCheckStorage: boolean;
   internalFirebaseCheckEnabled: boolean;
   firebaseProjectId?: string;
@@ -39,6 +40,7 @@ const envSchema = z.object({
   INTERNAL_FIREBASE_CHECK_ENABLED: z.string().trim().optional(),
   ADMIN_BOOTSTRAP_EMAILS: z.string().optional(),
   API_VERSION: z.string().trim().min(1).default('v1'),
+  CRM_CAPTURE_LEAD_URL: z.url().trim().optional(),
 });
 
 function parseBooleanFlag(value: string | undefined, fallback: boolean): boolean {
@@ -98,6 +100,7 @@ function parseEnvironment(raw: NodeJS.ProcessEnv): Env {
     firebaseCredentialSource: hasAllFirebaseCredential ? 'env' : 'adc',
     nodeEnv: parsed.data.NODE_ENV,
     developerAccessMode: parsed.data.DEVELOPER_ACCESS_MODE,
+    crmCaptureLeadUrl: parsed.data.CRM_CAPTURE_LEAD_URL,
     firebaseProjectId: parsed.data.FIREBASE_PROJECT_ID,
     firebaseClientEmail: parsed.data.FIREBASE_CLIENT_EMAIL,
     firebasePrivateKey: parsed.data.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
@@ -120,6 +123,7 @@ export const requiredEnv: RequiredEnv = {
 export const optionalEnv: OptionalEnv = {
   nodeEnv: env.nodeEnv,
   developerAccessMode: env.developerAccessMode,
+  crmCaptureLeadUrl: env.crmCaptureLeadUrl,
   adminBootstrapEmails: env.adminBootstrapEmails,
   apiVersion: env.apiVersion,
   firebaseCheckStorage: env.firebaseCheckStorage,
