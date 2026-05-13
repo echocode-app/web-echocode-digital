@@ -20,7 +20,7 @@ const submitEmail = async (formData: FormData): Promise<FormState> => {
       headers: getClientAnalyticsHeaders(),
       body: JSON.stringify({
         email,
-        source: 'footer-mobile',
+        source: 'vacancy-page',
         ...analyticsContext,
       }),
     });
