@@ -1,3 +1,4 @@
+import { after } from 'next/server';
 import { parseClientProjectCreatePayload } from '@/server/forms/client-project/clientProject.validation';
 import { createClientSubmissionRecord } from '@/server/forms/client-project/clientProject.repository';
 import { resolveEventAttribution, trackEventBestEffort } from '@/server/analytics';
@@ -22,32 +23,29 @@ export async function createClientProjectSubmission(input: {
     imageUrl,
   });
 
+  after(() => sendClientProjectLeadToCrmBestEffort({ parsed }));
+
   const sessionId = input.requestHeaders?.get('x-client-session-id')?.trim() || null;
 
-  await Promise.allSettled([
-    trackEventBestEffort({
-      eventType: 'submit_project',
-      headers: input.requestHeaders,
-      metadata: {
-        source: 'client_project_modal',
-        submissionId: created.id,
-        hasAttachment: Boolean(parsed.image),
-        ...(eventAttribution
-          ? {
-              attribution: {
-                source: eventAttribution.source,
-                medium: eventAttribution.medium ?? null,
-                campaign: eventAttribution.campaign ?? null,
-              },
-            }
-          : {}),
-        ...(sessionId ? { sessionId } : {}),
-      },
-    }),
-    sendClientProjectLeadToCrmBestEffort({
-      parsed,
-    }),
-  ]);
+  await trackEventBestEffort({
+    eventType: 'submit_project',
+    headers: input.requestHeaders,
+    metadata: {
+      source: 'client_project_modal',
+      submissionId: created.id,
+      hasAttachment: Boolean(parsed.image),
+      ...(eventAttribution
+        ? {
+            attribution: {
+              source: eventAttribution.source,
+              medium: eventAttribution.medium ?? null,
+              campaign: eventAttribution.campaign ?? null,
+            },
+          }
+        : {}),
+      ...(sessionId ? { sessionId } : {}),
+    },
+  });
 
   return created;
 }

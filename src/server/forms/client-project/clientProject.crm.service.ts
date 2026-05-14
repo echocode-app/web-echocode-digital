@@ -3,7 +3,9 @@ import { logger } from '@/server/lib/logger';
 import type { ClientProjectCreateInput } from '@/server/forms/client-project/clientProject.types';
 import { buildPhoneE164 } from '@/shared/validation/submissions.common';
 
-const CRM_CAPTURE_TIMEOUT_MS = 1_500;
+const DEFAULT_CRM_CAPTURE_LEAD_URL =
+  'https://crmechodgtllead.netlify.app/.netlify/functions/capture-lead';
+const CRM_CAPTURE_TIMEOUT_MS = 10_000;
 const CRM_LEAD_PLATFORM = 'Сайт';
 
 type CrmCaptureLeadPayload = {
@@ -13,6 +15,15 @@ type CrmCaptureLeadPayload = {
   platform: string;
   message?: string;
 };
+
+async function readResponseBodySafe(response: Response): Promise<string> {
+  try {
+    const text = await response.text();
+    return text.slice(0, 1_000);
+  } catch {
+    return '';
+  }
+}
 
 function buildCrmCaptureLeadPayload(parsed: ClientProjectCreateInput): CrmCaptureLeadPayload {
   const message = parsed.description?.trim();
@@ -29,13 +40,7 @@ function buildCrmCaptureLeadPayload(parsed: ClientProjectCreateInput): CrmCaptur
 export async function sendClientProjectLeadToCrmBestEffort(input: {
   parsed: ClientProjectCreateInput;
 }): Promise<void> {
-  const crmCaptureLeadUrl = env.crmCaptureLeadUrl;
-  if (!crmCaptureLeadUrl) {
-    logger.warn('client_project_crm_capture_skipped', {
-      reason: 'missing_crm_capture_lead_url',
-    });
-    return;
-  }
+  const crmCaptureLeadUrl = env.crmCaptureLeadUrl ?? DEFAULT_CRM_CAPTURE_LEAD_URL;
 
   const payload = buildCrmCaptureLeadPayload(input.parsed);
 
@@ -49,15 +54,26 @@ export async function sendClientProjectLeadToCrmBestEffort(input: {
       signal: AbortSignal.timeout(CRM_CAPTURE_TIMEOUT_MS),
     });
 
+    const responseText = await readResponseBodySafe(response);
+
     if (!response.ok) {
-      const responseText = await response.text().catch(() => '');
       logger.warn('client_project_crm_capture_failed', {
         status: response.status,
+        statusText: response.statusText,
         crmCaptureLeadUrl,
-        responseText: responseText.slice(0, 500),
+        responseText,
         platform: payload.platform,
       });
+      return;
     }
+
+    logger.info('client_project_crm_capture_succeeded', {
+      status: response.status,
+      statusText: response.statusText,
+      crmCaptureLeadUrl,
+      responseText,
+      platform: payload.platform,
+    });
   } catch (error) {
     logger.warn('client_project_crm_capture_failed', {
       crmCaptureLeadUrl,
