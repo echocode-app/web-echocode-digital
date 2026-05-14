@@ -6,6 +6,7 @@ import {
   hasSuspiciousMixedCaseNameToken,
   normalizePhoneDigits,
   phoneSchema,
+  turnstileTokenSchema,
 } from '@/shared/validation/submissions.common';
 import {
   ALLOWED_CLIENT_PROJECT_ATTACHMENT_EXTENSIONS,
@@ -62,12 +63,14 @@ const uploadFileSchema = z.object({
   sizeBytes: z.number().int().positive().max(MAX_CLIENT_PROJECT_ATTACHMENT_SIZE_BYTES),
 });
 
+/** Public client-project submissions must carry a server-verifiable Turnstile token. */
 export const clientProjectCreateSchema = z
   .object({
     firstName: personNameSchema,
     countryCode: countryCodeSchema,
     phone: phoneSchema,
     email: z.string().trim().email('Must be a valid email').max(EMAIL_MAX_LEN, 'Email is too long'),
+    turnstileToken: turnstileTokenSchema,
     description: z.string().trim().max(DESCRIPTION_MAX_LEN, 'Description is too long').optional(),
     image: imageMetaSchema.optional(),
   })

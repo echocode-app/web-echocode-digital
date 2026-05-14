@@ -7,6 +7,7 @@ import {
 import { verifyUploadedProjectAttachment } from '@/server/submissions/submissions.upload.service';
 import { createSubmissionRecord } from '@/server/submissions/submissions.repository';
 import { toCreateSubmissionResponseDto } from '@/server/submissions/submissions.mapper';
+import { verifyTurnstileToken } from '@/server/lib/turnstile';
 import { resolveRequestSiteContext } from '@/server/sites/siteContext';
 import type {
   CreateProjectSubmissionParams,
@@ -158,6 +159,12 @@ export async function createProjectSubmission(
       'Candidate form submissions are not implemented in Commit 1',
     );
   }
+
+  // Validate the anti-bot token before upload checks and Firestore writes.
+  await verifyTurnstileToken({
+    token: parsed.turnstileToken,
+    requestHeaders: params.requestHeaders,
+  });
 
   if (parsed.attachment != null) {
     // Verify uploaded object metadata before persisting any Firestore record.

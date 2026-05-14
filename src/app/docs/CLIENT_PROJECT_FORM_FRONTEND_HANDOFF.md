@@ -15,6 +15,7 @@
   - `countryCode`
   - `phone`
   - `email`
+  - `turnstileToken`
   - `description` optional
   - `image` optional
 - Backend нормалізує телефон:
@@ -33,6 +34,7 @@
 - На введення номера записує national number у `phone`.
 - Не повертати `lastName` у `.digital` форму.
 - Не міняти endpoint-и, якщо немає окремої причини.
+- Додати Cloudflare Turnstile widget і перед submit передавати `turnstileToken` у `POST /api/forms/client-project`.
 - Зберегти optional поля:
   - `description`
   - `image`
@@ -47,7 +49,8 @@
   "firstName": "Anna",
   "countryCode": "+380",
   "phone": "501234567",
-  "email": "test@gmail.com"
+  "email": "test@gmail.com",
+  "turnstileToken": "<turnstile-token>"
 }
 ```
 
@@ -59,6 +62,7 @@
   "countryCode": "+380",
   "phone": "501234567",
   "email": "test@gmail.com",
+  "turnstileToken": "<turnstile-token>",
   "description": "Need a fintech mobile app",
   "image": {
     "path": "client-submissions/<uuid>/attachment",
@@ -73,6 +77,7 @@
 
 - `countryCode` завжди окремо.
 - `phone` без country code.
+- `turnstileToken` обовʼязковий: без нього бекенд не збереже форму.
 - Backend приймає форматування в `phone`: пробіли, `()`, `.`, `-`.
 - Макетний формат `+380 (00)-000-00` є UI-прикладом, не вимогою до payload.
 
@@ -125,6 +130,7 @@ Phone бібліотека може давати кращий UX, але backend
 
 - Submit без файлу проходить.
 - Submit з файлом проходить повний flow: init upload -> signed PUT -> submit.
+- Submit без валідного Turnstile token має повертати `403`.
 - `lastName` ніде не відправляється з `.digital` форми.
 - Phone selector реально міняє `countryCode`.
 - National number реально міняє `phone`.

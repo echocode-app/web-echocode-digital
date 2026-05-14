@@ -78,6 +78,7 @@
 - `/api/forms/submissions` now supports the same cross-origin public ingestion flow for external frontend sites
 - public `.digital` frontend now mounts `PageViewTracker` in the public layout, so page views, geography, top pages, and referrer/UTM widgets are fed automatically on page load and route changes
 - public `.digital` form clients now send shared client analytics context (`siteId`, `siteHost`, first-touch attribution, client session header) across email, vacancy, and client-project flows
+- public submit endpoints now also require a Cloudflare Turnstile token and return `403` when `siteverify` fails
 - `.digital` dashboard now also has a dedicated page-view site slice API:
 - `/api/admin/dashboard/site-slice`
 - it powers page views / countries KPIs, top pages, geography list, and referrer/UTM widgets scoped to `siteId = echocode_digital`

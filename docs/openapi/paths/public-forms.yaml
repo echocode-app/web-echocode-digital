@@ -70,9 +70,11 @@
               $ref: '../openapi.yaml#/components/schemas/CreateEntityEnvelope'
       '400':
         $ref: '../openapi.yaml#/components/responses/BadRequest'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/Forbidden'
     x-notes:
       - Supports approved cross-origin browser calls from external frontend sites.
-      - Cross-site integrations should send `siteId` and `siteHost` explicitly.
+      - Cross-site integrations should send `siteId`, `siteHost`, and `turnstileToken` explicitly.
 
 /api/forms/client-project:
   post:
@@ -100,6 +102,8 @@
               $ref: '../openapi.yaml#/components/schemas/CreateEntityEnvelope'
       '400':
         $ref: '../openapi.yaml#/components/responses/BadRequest'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/Forbidden'
 
 /api/forms/client-project/image/init:
   post:
@@ -183,6 +187,8 @@
               $ref: '../openapi.yaml#/components/schemas/CreateEntityEnvelope'
       '400':
         $ref: '../openapi.yaml#/components/responses/BadRequest'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/Forbidden'
 
 /api/forms/vacancy-submissions:
   post:
@@ -205,3 +211,5 @@
               $ref: '../openapi.yaml#/components/schemas/CreateEntityEnvelope'
       '400':
         $ref: '../openapi.yaml#/components/responses/BadRequest'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/Forbidden'

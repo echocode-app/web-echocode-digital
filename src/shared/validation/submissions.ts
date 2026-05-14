@@ -21,6 +21,7 @@ import {
   normalizePhoneDigits,
   phoneContactSchema,
   phoneSchema,
+  turnstileTokenSchema,
 } from '@/shared/validation/submissions.common';
 import {
   projectSubmissionSchema,
@@ -50,6 +51,7 @@ export {
   phoneSchema,
   projectAttachmentSchema,
   projectSubmissionSchema,
+  turnstileTokenSchema,
   type CandidateSubmissionInput,
   type ProjectSubmissionInput,
   type UploadedFileInput,

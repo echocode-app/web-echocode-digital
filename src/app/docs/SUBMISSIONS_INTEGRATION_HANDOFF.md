@@ -25,12 +25,16 @@
 
 Публічні form endpoint-и авторизації не вимагають.
 
+Усі публічні submit endpoint-и тепер вимагають `turnstileToken` від Cloudflare Turnstile.
+Бекенд перевіряє token через `siteverify` до будь-якого запису в БД.
+Якщо Cloudflare повертає `success: false`, API повертає `403`.
+
 ## Публічні endpoint-и
 
 ### Client project submit (`.digital`)
 
 - `POST /api/forms/client-project`
-- payload: `firstName`, `countryCode`, `phone`, `email`, optional `description`, optional `image`
+- payload: `firstName`, `countryCode`, `phone`, `email`, `turnstileToken`, optional `description`, optional `image`
 - frontend details: `src/app/docs/CLIENT_PROJECT_FORM_FRONTEND_HANDOFF.md`
 
 ### Client project file upload (`.digital`)
@@ -46,6 +50,7 @@
 ### Email submit
 
 - `POST /api/forms/email-submissions`
+- payload: `email`, `turnstileToken`, optional `source`
 
 ### Vacancy submit
 
@@ -59,6 +64,7 @@
 3. Створити сабміт:
 
 - `POST /api/forms/vacancy-submissions`
+- payload: `profileUrl`, `cvFile`, `vacancy`, `turnstileToken`
 
 ## Адмінка
 

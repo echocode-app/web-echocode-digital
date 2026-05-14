@@ -8,6 +8,7 @@ import {
   assertSafeCvFileName,
   parseVacancySubmissionCreatePayload,
 } from '@/server/forms/vacancy-submission/vacancySubmission.validation';
+import { verifyTurnstileToken } from '@/server/lib/turnstile';
 import type { CreateVacancySubmissionResponseDto } from '@/server/forms/vacancy-submission/vacancySubmission.types';
 
 export async function createVacancySubmission(input: {
@@ -19,6 +20,12 @@ export async function createVacancySubmission(input: {
     headers: input.requestHeaders,
   });
   const parsed = parseVacancySubmissionCreatePayload(input.rawBody);
+
+  // Require Turnstile before uploaded CV metadata is trusted.
+  await verifyTurnstileToken({
+    token: parsed.turnstileToken,
+    requestHeaders: input.requestHeaders,
+  });
 
   assertSafeCvFileName(parsed.cvFile.originalName);
 
