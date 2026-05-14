@@ -14,9 +14,9 @@ export default function FooterFormWrapper() {
   const tTitle = useTranslations('ProjectModal');
   const pathname = usePathname();
 
-  const isVacancyPage = pathname.startsWith('/career/') && pathname !== '/career';
+  const isCareerRoute = pathname === '/career' || pathname.startsWith('/career/');
 
-  if (isVacancyPage) {
+  if (isCareerRoute) {
     return (
       <>
         <div className="mb-4 md:mb-12 flex flex-col xl:flex-row xl:justify-between xl:items-end w-fit xl:w-full">
