@@ -1,7 +1,7 @@
 import { resolveEventAttribution, trackEventBestEffort } from '@/server/analytics';
 import { createEmailSubmissionRecord } from '@/server/forms/email-submission/emailSubmission.repository';
 import { parseEmailSubmissionCreatePayload } from '@/server/forms/email-submission/emailSubmission.validation';
-import { verifyTurnstileToken } from '@/server/lib/turnstile';
+import { verifyTurnstileTokenFromBody } from '@/server/lib/turnstile';
 import type { CreateEmailSubmissionResponseDto } from '@/server/forms/email-submission/emailSubmission.types';
 
 export async function createEmailSubmission(input: {
@@ -12,13 +12,12 @@ export async function createEmailSubmission(input: {
     rawBody: input.rawBody,
     headers: input.requestHeaders,
   });
-  const parsed = parseEmailSubmissionCreatePayload(input.rawBody);
-
-  // Require Turnstile before records are written.
-  await verifyTurnstileToken({
-    token: parsed.turnstileToken,
+  // Require Turnstile before payload validation or records are written.
+  await verifyTurnstileTokenFromBody({
+    rawBody: input.rawBody,
     requestHeaders: input.requestHeaders,
   });
+  const parsed = parseEmailSubmissionCreatePayload(input.rawBody);
 
   const created = await createEmailSubmissionRecord({
     payload: parsed,

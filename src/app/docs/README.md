@@ -32,7 +32,8 @@
 ## `.digital` End-to-End Smoke Test
 
 - команда:
-- `BASE_URL=http://127.0.0.1:3000 npm run test:smoke:digital`
+- `BASE_URL=http://127.0.0.1:3000 SMOKE_TURNSTILE_TOKENS=<email-token>,<client-token>,<vacancy-token> npm run test:smoke:digital`
+- локально з dummy Turnstile secret можна передати один dummy token через `SMOKE_TURNSTILE_TOKEN`
 - що перевіряє:
 - `GET /api/internal/firebase-check`
 - `POST /api/analytics/page-view`

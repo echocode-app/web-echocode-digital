@@ -4,7 +4,7 @@ import { createClientSubmissionRecord } from '@/server/forms/client-project/clie
 import { resolveEventAttribution, trackEventBestEffort } from '@/server/analytics';
 import { sendClientProjectLeadToCrmBestEffort } from '@/server/forms/client-project/clientProject.crm.service';
 import { resolveClientSubmissionImageUrl } from '@/server/forms/client-project/clientProject.upload.service';
-import { verifyTurnstileToken } from '@/server/lib/turnstile';
+import { verifyTurnstileTokenFromBody } from '@/server/lib/turnstile';
 import type { CreateClientSubmissionResponseDto } from '@/server/forms/client-project/clientProject.types';
 
 export async function createClientProjectSubmission(input: {
@@ -15,13 +15,12 @@ export async function createClientProjectSubmission(input: {
     rawBody: input.rawBody,
     headers: input.requestHeaders,
   });
-  const parsed = parseClientProjectCreatePayload(input.rawBody);
-
-  // Require Turnstile before uploads are resolved or records are written.
-  await verifyTurnstileToken({
-    token: parsed.turnstileToken,
+  // Require Turnstile before payload validation, uploads, or records are written.
+  await verifyTurnstileTokenFromBody({
+    rawBody: input.rawBody,
     requestHeaders: input.requestHeaders,
   });
+  const parsed = parseClientProjectCreatePayload(input.rawBody);
 
   const imageUrl = await resolveClientSubmissionImageUrl(parsed.image);
 

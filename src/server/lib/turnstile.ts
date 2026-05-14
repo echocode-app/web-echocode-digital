@@ -32,6 +32,14 @@ function getFailureReason(payload: TurnstileVerifyResponse | null): string {
   return errorCodes.length > 0 ? errorCodes.join(', ') : 'unknown_error';
 }
 
+function getTokenFromBody(rawBody: unknown): unknown {
+  if (typeof rawBody !== 'object' || rawBody === null || Array.isArray(rawBody)) {
+    return undefined;
+  }
+
+  return (rawBody as Record<string, unknown>).turnstileToken;
+}
+
 /** Keep malformed or oversized widget tokens out of the upstream verify request. */
 export function normalizeTurnstileToken(value: unknown): string {
   if (typeof value !== 'string') {
@@ -123,4 +131,15 @@ export async function verifyTurnstileToken(input: {
       },
     );
   }
+}
+
+/** Extract and verify the public form token before domain payload validation runs. */
+export async function verifyTurnstileTokenFromBody(input: {
+  rawBody: unknown;
+  requestHeaders?: Headers;
+}): Promise<void> {
+  await verifyTurnstileToken({
+    token: normalizeTurnstileToken(getTokenFromBody(input.rawBody)),
+    requestHeaders: input.requestHeaders,
+  });
 }

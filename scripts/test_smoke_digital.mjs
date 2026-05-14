@@ -10,6 +10,7 @@ import {
   getStorageBucket,
   parseSmokeArgs,
   resolveBaseUrl,
+  resolveTurnstileTokens,
   saveSmokeManifest,
   waitFor,
 } from './shared/digital_smoke.utils.mjs';
@@ -43,6 +44,10 @@ async function main() {
   const args = parseSmokeArgs(process.argv.slice(2));
   const runId = args.get('run-id')?.trim() || generateRunId();
   const baseUrl = resolveBaseUrl(args.get('base-url'));
+  const [emailTurnstileToken, clientTurnstileToken, vacancyTurnstileToken] = resolveTurnstileTokens(
+    args,
+    3,
+  );
   const artifacts = buildDigitalSmokeArtifacts(runId);
   const firestore = getFirestoreDb();
   const bucket = getStorageBucket();
@@ -104,6 +109,7 @@ async function main() {
       body: JSON.stringify({
         email: artifacts.emailSubmission.email,
         source: artifacts.emailSubmission.source,
+        turnstileToken: emailTurnstileToken,
         siteId: 'echocode_digital',
         siteHost: 'www.echocode.digital',
         attribution: artifacts.attribution,
@@ -147,9 +153,11 @@ async function main() {
       headers: buildJsonHeaders(artifacts.sessionId),
       body: JSON.stringify({
         firstName: artifacts.clientProject.firstName,
-        lastName: artifacts.clientProject.lastName,
+        countryCode: artifacts.clientProject.countryCode,
+        phone: artifacts.clientProject.phone,
         email: artifacts.clientProject.email,
         description: artifacts.clientProject.description,
+        turnstileToken: clientTurnstileToken,
         siteId: 'echocode_digital',
         siteHost: 'www.echocode.digital',
         attribution: artifacts.attribution,
@@ -211,6 +219,7 @@ async function main() {
       headers: buildJsonHeaders(artifacts.sessionId),
       body: JSON.stringify({
         profileUrl: artifacts.vacancy.profileUrl,
+        turnstileToken: vacancyTurnstileToken,
         cvFile: {
           path: state.uploadPath,
           originalName: artifacts.vacancy.fileName,

@@ -22,6 +22,8 @@
               $ref: '../openapi.yaml#/components/schemas/SuccessEnvelope'
       '400':
         $ref: '../openapi.yaml#/components/responses/BadRequest'
+      '429':
+        $ref: '../openapi.yaml#/components/responses/TooManyRequests'
     x-notes:
       - Supports approved cross-origin browser calls from external frontend sites.
       - The backend resolves country from proxy headers and persists site-aware metadata.
@@ -47,6 +49,8 @@
               $ref: '../openapi.yaml#/components/schemas/UploadInitEnvelope'
       '400':
         $ref: '../openapi.yaml#/components/responses/BadRequest'
+      '429':
+        $ref: '../openapi.yaml#/components/responses/TooManyRequests'
 
 /api/forms/submissions:
   post:
@@ -72,6 +76,8 @@
         $ref: '../openapi.yaml#/components/responses/BadRequest'
       '403':
         $ref: '../openapi.yaml#/components/responses/Forbidden'
+      '429':
+        $ref: '../openapi.yaml#/components/responses/TooManyRequests'
     x-notes:
       - Supports approved cross-origin browser calls from external frontend sites.
       - Cross-site integrations should send `siteId`, `siteHost`, and `turnstileToken` explicitly.
@@ -104,6 +110,8 @@
         $ref: '../openapi.yaml#/components/responses/BadRequest'
       '403':
         $ref: '../openapi.yaml#/components/responses/Forbidden'
+      '429':
+        $ref: '../openapi.yaml#/components/responses/TooManyRequests'
 
 /api/forms/client-project/image/init:
   post:
@@ -130,6 +138,8 @@
               $ref: '../openapi.yaml#/components/schemas/UploadInitEnvelope'
       '400':
         $ref: '../openapi.yaml#/components/responses/BadRequest'
+      '429':
+        $ref: '../openapi.yaml#/components/responses/TooManyRequests'
 
 /api/forms/client-project/analytics:
   post:
@@ -165,6 +175,8 @@
               $ref: '../openapi.yaml#/components/schemas/SuccessEnvelope'
       '400':
         $ref: '../openapi.yaml#/components/responses/BadRequest'
+      '429':
+        $ref: '../openapi.yaml#/components/responses/TooManyRequests'
 
 /api/forms/email-submissions:
   post:
@@ -189,6 +201,8 @@
         $ref: '../openapi.yaml#/components/responses/BadRequest'
       '403':
         $ref: '../openapi.yaml#/components/responses/Forbidden'
+      '429':
+        $ref: '../openapi.yaml#/components/responses/TooManyRequests'
 
 /api/forms/vacancy-submissions:
   post:
@@ -213,3 +227,5 @@
         $ref: '../openapi.yaml#/components/responses/BadRequest'
       '403':
         $ref: '../openapi.yaml#/components/responses/Forbidden'
+      '429':
+        $ref: '../openapi.yaml#/components/responses/TooManyRequests'

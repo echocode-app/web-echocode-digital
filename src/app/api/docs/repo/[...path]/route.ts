@@ -3,8 +3,6 @@ import path from 'node:path';
 import { NextResponse } from 'next/server';
 
 export const runtime = 'nodejs';
-
-const REPO_ROOT = process.cwd();
 const ALLOWED_MARKDOWN_FILES = new Set([
   'README.md',
   'README.uk.md',
@@ -30,10 +28,11 @@ function toAllowedMarkdownPath(segments: string[]): string | null {
   const relativePath = segments.join('/');
   if (!ALLOWED_MARKDOWN_FILES.has(relativePath)) return null;
 
-  const resolvedPath = path.join(REPO_ROOT, relativePath);
-  const normalizedRoot = `${REPO_ROOT}${path.sep}`;
+  const repoRoot = process.cwd();
+  const resolvedPath = path.join(/*turbopackIgnore: true*/ process.cwd(), relativePath);
+  const normalizedRoot = `${repoRoot}${path.sep}`;
 
-  if (resolvedPath === REPO_ROOT || resolvedPath.startsWith(normalizedRoot)) {
+  if (resolvedPath === repoRoot || resolvedPath.startsWith(normalizedRoot)) {
     return resolvedPath;
   }
 

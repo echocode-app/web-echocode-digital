@@ -7,6 +7,7 @@ import {
   getPublicIngestAllowedOrigins,
   withApi,
 } from '@/server/lib';
+import { applyPublicRateLimitStub } from '@/server/lib/rateLimit';
 import { createProjectSubmission } from '@/server/submissions';
 
 export const runtime = 'nodejs';
@@ -18,6 +19,11 @@ const corsPolicy = buildPublicIngestCorsPolicy({
 
 const handlePost = withApi(
   async ({ req, body }) => {
+    await applyPublicRateLimitStub({
+      request: req,
+      scope: 'forms.submissions.create',
+    });
+
     return createProjectSubmission({
       rawBody: body,
       requestHeaders: req.headers,

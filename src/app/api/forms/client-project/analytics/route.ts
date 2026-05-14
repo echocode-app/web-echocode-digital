@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { trackEventBestEffort } from '@/server/analytics';
 import { withApi } from '@/server/lib';
+import { applyPublicRateLimitStub } from '@/server/lib/rateLimit';
 
 export const runtime = 'nodejs';
 
@@ -17,6 +18,11 @@ const bodySchema = z.object({
 
 export const POST = withApi(
   async ({ body, req }) => {
+    await applyPublicRateLimitStub({
+      request: req,
+      scope: 'forms.client-project.analytics',
+    });
+
     const sessionId = req.headers.get('x-client-session-id')?.trim() || null;
 
     await trackEventBestEffort({
