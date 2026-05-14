@@ -13,7 +13,7 @@ const MetricsSection = () => {
   const enLocale = locale === 'en';
 
   return (
-    <section className="pb-10 md:pb-15">
+    <section className="pb-10 md:pb-18.5">
       <SectionGradientLine height="1" />
       <SectionContainer>
         <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-0 justify-center lg:justify-between">

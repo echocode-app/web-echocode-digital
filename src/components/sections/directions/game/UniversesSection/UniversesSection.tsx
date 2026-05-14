@@ -12,7 +12,7 @@ const UniversesSection = () => {
   const enStyle = locale === 'es' ? 'max-w-160' : 'max-w-185';
 
   return (
-    <section className="pb-10 md:pb-4.5">
+    <section className="pb-10 md:pb-18.5">
       <SectionGradientLine height="1" />
       <SectionContainer>
         <div className={`${enStyle} mb-2.5`}>

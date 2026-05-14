@@ -1,4 +1,7 @@
+import { localePrefixes, resolveLocalePrefix } from '@/i18n/config';
+
 const CONTACT_MODAL_RETURN_PATH_KEY = 'contact_modal_return_path';
+const localePrefixValues = Object.values(localePrefixes);
 
 function getCurrentPathWithQuery(): string {
   if (typeof window === 'undefined') return '/';
@@ -9,11 +12,35 @@ function getCurrentPathWithQuery(): string {
   return `${path}${query}${hash}`;
 }
 
+function stripLocalePrefix(pathname: string): string {
+  for (const prefix of localePrefixValues) {
+    if (pathname === prefix) return '/';
+    if (pathname.startsWith(`${prefix}/`)) return pathname.slice(prefix.length) || '/';
+  }
+
+  return pathname;
+}
+
+export function isContactModalPath(pathname: string): boolean {
+  // Intercepted contact routes can be locale-prefixed, but modal logic needs the route kind.
+  const normalizedPathname = stripLocalePrefix(pathname.split('?')[0]?.split('#')[0] || '/');
+  return normalizedPathname === '/contact' || normalizedPathname === '/contact/success';
+}
+
+export function buildLocalizedContactPath(locale: string, target: 'form' | 'success'): string {
+  // Preserve the active locale when moving between contact modal states.
+  return `${resolveLocalePrefix(locale)}/contact${target === 'success' ? '/success' : ''}`;
+}
+
+export function buildLocalizedHomePath(locale: string): string {
+  return resolveLocalePrefix(locale);
+}
+
 function isValidInternalPath(path: string | null): path is string {
   if (!path) return false;
   if (!path.startsWith('/')) return false;
   const pathname = path.split('?')[0]?.split('#')[0] ?? '';
-  if (pathname.startsWith('/contact')) return false;
+  if (isContactModalPath(pathname)) return false;
   return true;
 }
 
@@ -47,7 +74,9 @@ export function consumeContactModalReturnPath(): ContactModalReturnState | null 
     const parsed = JSON.parse(stored) as Partial<ContactModalReturnState>;
     const path = parsed.path ?? null;
     if (!isValidInternalPath(path)) return null;
-    const scrollY = Number.isFinite(parsed.scrollY) ? Math.max(0, Math.trunc(parsed.scrollY as number)) : 0;
+    const scrollY = Number.isFinite(parsed.scrollY)
+      ? Math.max(0, Math.trunc(parsed.scrollY as number))
+      : 0;
 
     return {
       path,

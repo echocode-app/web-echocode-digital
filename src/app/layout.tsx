@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Script from 'next/script';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale, getMessages } from 'next-intl/server';
 
@@ -12,6 +13,7 @@ import './globals.css';
 // Google Tag Manager container. Manage ads and marketing tags inside GTM.
 // GA4 (G-ZB7Y7RC890) is loaded via the GTM container, not directly here.
 const GTM_ID = 'GTM-NCF8LH26';
+const SHOULD_LOAD_GTM = process.env.NODE_ENV === 'production';
 
 // Global SEO metadata. Page-level metadata should override this where needed.
 export const metadata: Metadata = {
@@ -86,6 +88,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const locale = await getLocale();
+
   const messages = await getMessages();
 
   // Structured data for search engines. Keep values aligned with public SEO metadata.
@@ -130,7 +133,7 @@ export default async function RootLayout({
     '@type': 'WebSite',
     name: 'Echocode',
     url: seoBaseUrl,
-    inLanguage: ['en', 'ua', 'de', 'es'],
+    inLanguage: ['en', 'uk', 'de', 'es', 'pl'],
   };
   const professionalServiceSchema = {
     '@context': 'https://schema.org',
@@ -154,29 +157,32 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <head>
-        <Script id="google-tag-manager" strategy="afterInteractive">
-          {`
-            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer','${GTM_ID}');
-          `}
-        </Script>
+        {SHOULD_LOAD_GTM ? (
+          <Script id="google-tag-manager" strategy="afterInteractive">
+            {`
+              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+              })(window,document,'script','dataLayer','${GTM_ID}');
+            `}
+          </Script>
+        ) : null}
       </head>
       <body
         className={`${poppins.variable} ${inter.variable} ${wadik.variable} ${rubik.variable} antialiased relative`}
       >
-        {/* GTM fallback for users with JavaScript disabled. */}
-        <noscript>
-          <iframe
-            src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
-            height="0"
-            width="0"
-            style={{ display: 'none', visibility: 'hidden' }}
-            title="Google Tag Manager"
-          />
-        </noscript>
+        {SHOULD_LOAD_GTM ? (
+          <noscript>
+            <iframe
+              src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+              height="0"
+              width="0"
+              style={{ display: 'none', visibility: 'hidden' }}
+              title="Google Tag Manager"
+            />
+          </noscript>
+        ) : null}
 
         {/* SEO structured data scripts. */}
         <script
@@ -193,7 +199,11 @@ export default async function RootLayout({
         />
 
         {/* App providers and global runtime features. */}
-        <NextIntlClientProvider locale={locale} messages={messages}>
+        <NextIntlClientProvider
+          locale={locale}
+          // Make sure to provide at least the messages for `Error`
+          messages={messages}
+        >
           {children}
         </NextIntlClientProvider>
         <SpeedInsights />

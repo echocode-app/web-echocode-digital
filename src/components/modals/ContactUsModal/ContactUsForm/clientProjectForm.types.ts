@@ -1,12 +1,13 @@
 export type FormValues = {
   firstName: string;
-  lastName: string;
+  countryCode: string;
+  phone: string;
   email: string;
   description: string;
   image: File | null;
 };
 
-export type FieldName = 'firstName' | 'lastName' | 'email' | 'description' | 'image';
+export type FieldName = 'firstName' | 'countryCode' | 'phone' | 'email' | 'description' | 'image';
 
 export type FormErrors = Partial<Record<FieldName | 'form', string>>;
 

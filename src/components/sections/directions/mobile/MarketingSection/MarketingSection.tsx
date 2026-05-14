@@ -9,7 +9,7 @@ const MarketingSection = () => {
   const t = useTranslations('MobilePage.MarketingSection');
 
   return (
-    <section className="pb-10 md:pb-2">
+    <section className="pb-10 md:pb-18.5">
       <SectionGradientLine height="1" />
       <SectionContainer>
         <SectionTitle marginBottom="10px">{t('title')}</SectionTitle>

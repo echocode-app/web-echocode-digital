@@ -31,7 +31,7 @@ const PortfolioSection = async ({ projectsFilter }: PortfolioSectionProps) => {
   filteredProjects = categoriesFilter(filteredProjects, listQueries(categories));
 
   return (
-    <section className="pt-9 pb-10 md:pb-11">
+    <section className="pt-9 pb-10 md:pb-18.5">
       <SectionContainer>
         <PortfolioFilter />
         {filteredStaticProjects.length === 0 && filteredProjects.length === 0 ? (

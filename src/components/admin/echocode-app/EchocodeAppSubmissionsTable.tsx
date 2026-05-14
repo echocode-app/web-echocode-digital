@@ -11,12 +11,12 @@ import {
 import ClientSubmissionsPagination from '@/components/admin/client-submissions/table/ClientSubmissionsPagination';
 
 const ECHOCODE_APP_SUBMISSION_COLUMNS: AdminDataTableColumn[] = [
-  { key: 'createdAt', label: 'Date' },
-  { key: 'contact', label: 'Contact' },
-  { key: 'status', label: 'Status' },
-  { key: 'attachment', label: 'Files' },
-  { key: 'comments', label: 'Comments' },
-  { key: 'actions', label: 'Actions' },
+  { key: 'contact', label: 'Contact', widthClassName: 'w-[32%]' },
+  { key: 'createdAt', label: 'Date', widthClassName: 'w-36' },
+  { key: 'status', label: 'Status', widthClassName: 'w-28' },
+  { key: 'attachment', label: 'Files', widthClassName: 'w-16' },
+  { key: 'comments', label: 'Comments', widthClassName: 'w-24' },
+  { key: 'actions', label: 'Actions', widthClassName: 'w-64' },
 ];
 
 export default function EchocodeAppSubmissionsTable() {
@@ -39,6 +39,7 @@ export default function EchocodeAppSubmissionsTable() {
 
       <AdminDataTable
         columns={ECHOCODE_APP_SUBMISSION_COLUMNS}
+        fixedLayout
         errorMessage={
           tableState.state === 'error' ? 'Unable to load echocode.app submissions.' : null
         }

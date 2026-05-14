@@ -70,6 +70,7 @@
   --color-gray9: rgba(255, 255, 255, 0.09);
   --color-gray10: rgba(255, 255, 255, 0.1);
   --color-gray16: rgba(255, 255, 255, 0.16);
+  --color-gray50: rgba(255, 255, 255, 0.5);
   --color-gray60: rgba(255, 255, 255, 0.6);
   --color-gray75: rgba(255, 255, 255, 0.75);
   --color-primary-gray: #d0d0d0;
@@ -138,11 +139,11 @@
   .font-title {
     font-family: var(--font-wadik), sans-serif;
   }
-  html[lang='ua'] .font-title,
-  html[lang='de'] .font-title,
-  html[lang='es'] .font-title,
-  html[lang='pl'] .font-title {
-    font-family: var(--font-rubik), sans-serif;
+  [data-locale='uk'] .font-title,
+  [data-locale='de'] .font-title,
+  [data-locale='es'] .font-title,
+  [data-locale='pl'] .font-title {
+    font-family: var(--font-rubik), sans-serif !important;
   }
   .font-main {
     font-family: var(--font-poppins), sans-serif;
@@ -214,5 +215,29 @@
     -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
     -webkit-text-fill-color: #fff !important;
     transition: background-color 5000s ease-in-out 0s;
+  }
+
+  .scrollbar-brand {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.35) rgba(255, 255, 255, 0.08);
+  }
+
+  .scrollbar-brand::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .scrollbar-brand::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 9999px;
+  }
+
+  .scrollbar-brand::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.35);
+    border-radius: 9999px;
+  }
+
+  .scrollbar-brand::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.55);
   }
 }

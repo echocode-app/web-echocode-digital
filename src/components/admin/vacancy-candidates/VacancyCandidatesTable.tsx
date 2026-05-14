@@ -11,13 +11,13 @@ import VacancyCandidatesTableRows from '@/components/admin/vacancy-candidates/ta
 import { useVacancyCandidatesTable } from '@/components/admin/vacancy-candidates/table/useVacancyCandidatesTable';
 
 const vacancyCandidateColumns: AdminDataTableColumn[] = [
-  { key: 'vacancy', label: 'Vacancy' },
-  { key: 'profile', label: 'Profile' },
-  { key: 'date', label: 'Date' },
-  { key: 'status', label: 'Status' },
-  { key: 'cv', label: 'CV' },
-  { key: 'comments', label: 'Comments' },
-  { key: 'actions', label: 'Actions' },
+  { key: 'vacancy', label: 'Vacancy', widthClassName: 'w-[22%]' },
+  { key: 'profile', label: 'Profile', widthClassName: 'w-[24%]' },
+  { key: 'date', label: 'Date', widthClassName: 'w-36' },
+  { key: 'status', label: 'Status', widthClassName: 'w-28' },
+  { key: 'cv', label: 'CV', widthClassName: 'w-16' },
+  { key: 'comments', label: 'Comments', widthClassName: 'w-24' },
+  { key: 'actions', label: 'Actions', widthClassName: 'w-64' },
 ];
 
 export default function VacancyCandidatesTable() {
@@ -43,6 +43,7 @@ export default function VacancyCandidatesTable() {
 
       <AdminDataTable
         columns={vacancyCandidateColumns}
+        fixedLayout
         errorMessage={tableState.state === 'error' ? 'Unable to load candidate submissions.' : null}
         pagination={(
           <ClientSubmissionsPagination

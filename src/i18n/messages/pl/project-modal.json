@@ -4,7 +4,7 @@
     "subtitle": "Uzyskaj profesjonalną poradę. Skorzystaj z formularza lub napisz do nas e-mail:",
     "projectForm": {
       "firstNamePlaceholder": "Imię*",
-      "lastNamePlaceholder": "Nazwisko*",
+      "phonePlaceholder": "Telefon*",
       "emailPlaceholder": "Email*",
       "filePlaceholder": "dołącz plik",
       "needsLabel": "O Twoich potrzebach...",

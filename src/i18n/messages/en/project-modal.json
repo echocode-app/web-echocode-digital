@@ -4,7 +4,7 @@
     "subtitle": "Get professional advice. Use the form or write us an email:",
     "projectForm": {
       "firstNamePlaceholder": "First name*",
-      "lastNamePlaceholder": "last name*",
+      "phonePlaceholder": "phone*",
       "emailPlaceholder": "Email*",
       "filePlaceholder": "attach your file",
       "needsLabel": "About your needs...",

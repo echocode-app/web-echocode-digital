@@ -100,7 +100,8 @@ export async function submitClientProject(
     headers: getClientAnalyticsHeaders(),
     body: JSON.stringify({
       firstName: normalized.firstName,
-      lastName: normalized.lastName,
+      countryCode: normalized.countryCode,
+      phone: normalized.phone,
       email: normalized.email,
       ...(normalized.description ? { description: normalized.description } : {}),
       ...(imagePayload ? { image: imagePayload } : {}),

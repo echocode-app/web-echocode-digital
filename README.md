@@ -13,17 +13,81 @@ Preview / development deploy: https://echocode-newsite.vercel.app/
 ## Main commands
 
 - `npm run dev` - run the local Next.js app
+- `npm run test:lead-form-contract` - run lead form contract and validation tests
 - `npm run typecheck` - run TypeScript validation
 - `npm run lint` - run ESLint validation
 - `npm run openapi:lint` - run OpenAPI validation
-- `npm run check` - required pre-commit validation (`typecheck + lint + openapi:lint + build`)
+- `npm run check` - required pre-commit validation (`lead form contract test + typecheck + lint + openapi:lint + build`)
 - `npm run test:firestore:rules` - run Firestore Rules tests
 - `npm run test:storage:rules` - run Storage Rules tests
+
+## Validation Checklist
+
+### Required before every commit
+
+Run:
+
+```bash
+npm run check
+```
+
+This covers:
+
+- lead form contract tests
+- TypeScript validation
+- ESLint validation
+- OpenAPI validation
+- production build
+
+### Required after Firebase Rules changes
+
+Run:
+
+```bash
+npm run test:firestore:rules
+npm run test:storage:rules
+```
+
+### Required before production merge
+
+- Merge feature branches into `develop`.
+- Test the `develop` preview deployment.
+- Run `npm run check` on the final branch state.
+- Merge `develop` into `main` only after preview verification passes.
+
+## Lead Form Contract
+
+Required fields:
+
+- `firstName`
+- `countryCode`
+- `phone`
+- `email`
+
+Optional fields:
+
+- `description`
+- `image`
+
+The frontend should send `countryCode` separately from the national `phone` value. The backend normalizes phone formatting and stores both `phone` digits and `phoneE164`.
 
 ## API documentation
 
 - Swagger UI locally and in production: `/docs/api`
 - Raw OpenAPI spec: `/api/docs/openapi/openapi.yaml`
+
+## Locale routing
+
+- Canonical locale URLs:
+  - English: `/en`
+  - Ukrainian: `/ua`
+  - German: `/de`
+  - Spanish: `/es`
+  - Polish: `/pl`
+- `/` is a locale resolver. It redirects by saved/browser locale and falls back to `/en`.
+- `/uk` is a legacy Ukrainian alias and redirects permanently to `/ua`.
+- Contact modal routes are locale-aware: `/{locale}/contact` and `/{locale}/contact/success`.
+- SEO canonical, hreflang and sitemap URLs must use the canonical locale prefixes above.
 
 ## Git workflow
 
@@ -61,7 +125,7 @@ feature branches -> PR into develop -> test preview -> PR develop into main
 1. `git pull`
 2. `npm ci` on a fresh clone or after dependency changes
 3. Make your changes
-4. If `package.json` changed, run `npm install` to update `package-lock.json`
+4. If dependency-relevant `package.json` fields changed, run `npm install` to update `package-lock.json`
 5. `npm run check`
 6. `git add ...`
 7. `git commit -m "message"`
@@ -73,7 +137,11 @@ If Firebase Rules changed, also run:
 
 ## Lockfile rule
 
-Husky pre-commit blocks the commit if `package.json` is staged but `package-lock.json` is not.
+Husky pre-commit checks staged `package.json` changes against `HEAD`.
+
+It blocks the commit only when dependency-relevant fields changed and `package-lock.json` is not staged. These fields include dependencies, devDependencies, optionalDependencies, peerDependencies, overrides, workspaces, engines, packageManager, and package version/name metadata.
+
+Script-only changes in `package.json` do not require a lockfile update.
 
 If that happens:
 

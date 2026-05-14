@@ -32,7 +32,7 @@
           "Welche Datenkategorien wir erheben, hängt davon ab, wie Sie mit der Website interagieren."
         ],
         "bullets": [
-          "Projektanfragedaten: Vorname, Nachname, E-Mail-Adresse, Nachrichtendetails sowie optionale Dateien oder Bilder, die einer Projektanfrage beigefügt werden.",
+          "Projektanfragedaten: Vorname, Landesvorwahl, Telefonnummer, E-Mail-Adresse, Nachrichtendetails sowie optionale Dateien oder Bilder, die einer Projektanfrage beigefügt werden.",
           "Bewerbungsdaten: Profil-URL, Metadaten der CV-Datei und Kontext der Stelle, die über den Bewerbungsablauf übermittelt werden.",
           "Footer-E-Mail-Daten: E-Mail-Adresse und die Quelle des Kontakt- oder Abonnement-Einstiegspunkts.",
           "Nutzungs- und Analysedaten: besuchter Pfad, Seiten-URL, Seitentitel, Referrer, Site-Host, Site-Identifier, Session-Identifier und Zeitstempel von Ereignissen.",

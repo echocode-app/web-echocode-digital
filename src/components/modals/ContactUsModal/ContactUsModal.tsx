@@ -1,7 +1,7 @@
 'use client';
 
-import Link from 'next/link';
-import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/navigation';
+import { useLocale, useTranslations } from 'next-intl';
 
 import { useCallback, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
@@ -9,12 +9,18 @@ import { useRouter } from 'next/navigation';
 
 import ContactUsForm from './ContactUsForm';
 import CloseBtn from './ContactUsForm/CloseBtn';
-import { consumeContactModalReturnPath } from './contactModal.navigation';
+import {
+  buildLocalizedContactPath,
+  buildLocalizedHomePath,
+  consumeContactModalReturnPath,
+  isContactModalPath,
+} from './contactModal.navigation';
 import SectionTitle from '@/components/UI/section/SectionTitle';
 import type { SubmitState } from '@/components/modals/ContactUsModal/ContactUsForm/useClientProjectForm';
 
 const ContactUsModal = () => {
   const t = useTranslations('ProjectModal');
+  const locale = useLocale();
 
   const router = useRouter();
   const [submitState, setSubmitState] = useState<SubmitState>('idle');
@@ -49,13 +55,13 @@ const ContactUsModal = () => {
   const closeModal = useCallback(() => {
     if (isClosingBlocked) return;
     const returnState = resolveCloseTarget();
-    const target = returnState?.path ?? '/';
+    const target = returnState?.path ?? buildLocalizedHomePath(locale);
     const scrollY = returnState?.scrollY ?? 0;
 
     if (returnState) {
       window.history.back();
       window.setTimeout(() => {
-        if (window.location.pathname.startsWith('/contact')) {
+        if (isContactModalPath(window.location.pathname)) {
           navigateWithRestore(target, scrollY);
         }
       }, 180);
@@ -63,17 +69,17 @@ const ContactUsModal = () => {
     }
 
     navigateWithRestore(target, scrollY);
-  }, [isClosingBlocked, navigateWithRestore, resolveCloseTarget]);
+  }, [isClosingBlocked, locale, navigateWithRestore, resolveCloseTarget]);
 
   const closeOnSuccess = useCallback(() => {
     const returnState = resolveCloseTarget();
-    const target = returnState?.path ?? '/';
+    const target = returnState?.path ?? buildLocalizedHomePath(locale);
     const scrollY = returnState?.scrollY ?? 0;
 
     if (returnState) {
       window.history.back();
       window.setTimeout(() => {
-        if (window.location.pathname.startsWith('/contact')) {
+        if (isContactModalPath(window.location.pathname)) {
           navigateWithRestore(target, scrollY);
         }
       }, 180);
@@ -81,12 +87,16 @@ const ContactUsModal = () => {
     }
 
     navigateWithRestore(target, scrollY);
-  }, [navigateWithRestore, resolveCloseTarget]);
+  }, [locale, navigateWithRestore, resolveCloseTarget]);
 
   const navigateToSuccess = useCallback(() => {
     if (typeof window === 'undefined') return;
-    window.history.replaceState(window.history.state, '', '/contact/success');
-  }, []);
+    window.history.replaceState(
+      window.history.state,
+      '',
+      buildLocalizedContactPath(locale, 'success'),
+    );
+  }, [locale]);
 
   useEffect(() => {
     const originalStyle = window.getComputedStyle(document.body).overflow;

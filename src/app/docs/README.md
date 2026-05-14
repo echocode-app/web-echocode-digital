@@ -61,6 +61,9 @@
 - `docs/openapi/openapi.yaml` - OpenAPI contract for all active API routes.
 - `docs/openapi/SCENARIOS.md` - most common frontend/backend integration scenarios.
 - `src/app/docs/SUBMISSIONS_INTEGRATION_HANDOFF.md` - practical integration checklist for frontend.
+- `src/app/docs/CLIENT_PROJECT_FORM_FRONTEND_HANDOFF.md` - короткий handoff для нової `.digital` форми з `countryCode + phone`.
+- Locale routing: canonical prefixes `/en`, `/ua`, `/de`, `/es`, `/pl`; `/` resolves locale; `/uk` redirects to `/ua`.
+- Contact modal routing: keep URLs locale-aware, e.g. `/{locale}/contact` and `/{locale}/contact/success`.
 - admin portfolio preview flow:
 - `GET /api/admin/portfolio` - list dynamic preview cards
 - `POST /api/admin/portfolio/image/init` - init signed upload URL for portfolio image
@@ -291,13 +294,13 @@ Environment policy:
 
 #### API-рівень (RBAC)
 
-| Дія / доступ                                           | Anonymous | Manager | Developer            | Admin |
-| ------------------------------------------------------ | --------- | ------- | -------------------- | ----- |
-| Доступ до admin API (`admin.access`)                   | ❌        | ✅      | ✅                   | ✅    |
-| Операційні write-дії (submissions/vacancies/portfolio) | ❌        | ✅      | env-dependent        | ✅    |
-| `admin.settings.read`                                  | ❌        | ❌      | ✅                   | ✅    |
-| `admin.settings`                                       | ❌        | ❌      | env-dependent / no   | ✅    |
-| `admin.logs.read`                                      | ❌        | ❌      | ✅                   | ✅    |
+| Дія / доступ                                           | Anonymous | Manager | Developer          | Admin |
+| ------------------------------------------------------ | --------- | ------- | ------------------ | ----- |
+| Доступ до admin API (`admin.access`)                   | ❌        | ✅      | ✅                 | ✅    |
+| Операційні write-дії (submissions/vacancies/portfolio) | ❌        | ✅      | env-dependent      | ✅    |
+| `admin.settings.read`                                  | ❌        | ❌      | ✅                 | ✅    |
+| `admin.settings`                                       | ❌        | ❌      | env-dependent / no | ✅    |
+| `admin.logs.read`                                      | ❌        | ❌      | ✅                 | ✅    |
 
 ## Admin UI map
 
@@ -428,13 +431,14 @@ Navigation для `/admin/logs` зараз прибрана із sidebar, але
 
 ### Project form (`formType = project`)
 
-| Поле         | Обов'язкове | Валідація                                 |
-| ------------ | ----------- | ----------------------------------------- |
-| `firstName`  | ✅          | 2-20 символів, лише літери/пробіл/`'`/`-` |
-| `lastName`   | ✅          | 2-20 символів, лише літери/пробіл/`'`/`-` |
-| `email`      | ✅          | валідний email, max 30                    |
-| `needs`      | ❌          | якщо передано: 10-1000 символів           |
-| `attachment` | ❌          | один файл, який проходить file schema     |
+| Поле          | Обов'язкове | Валідація                                 |
+| ------------- | ----------- | ----------------------------------------- |
+| `firstName`   | ✅          | 2-20 символів, лише літери/пробіл/`'`/`-` |
+| `countryCode` | ✅          | `+` і 1-4 цифри                           |
+| `phone`       | ✅          | 4-15 цифр після нормалізації              |
+| `email`       | ✅          | валідний email, max 30                    |
+| `needs`       | ❌          | якщо передано: 10-1000 символів           |
+| `attachment`  | ❌          | один файл, який проходить file schema     |
 
 ### Candidate form (`formType = candidate`)
 

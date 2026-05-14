@@ -1,4 +1,4 @@
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 import ContactFile from './ContactFile';
 import ContactInput from './ContactInput';
@@ -6,6 +6,7 @@ import SubmitButton from './SubmitBtn';
 import YourNeedsInput from './YourNeedInput';
 import { useClientProjectForm } from '@/components/modals/ContactUsModal/ContactUsForm/useClientProjectForm';
 import type { SubmitState } from '@/components/modals/ContactUsModal/ContactUsForm/useClientProjectForm';
+import ContactInputNumber from './ContactInputNumber';
 
 type ContactUsFormProps = {
   onSuccessNavigate: () => void;
@@ -20,6 +21,7 @@ const ContactUsForm = ({
 }: ContactUsFormProps) => {
   const formErrorT = useTranslations('ProjectValidation');
   const t = useTranslations('ProjectModal.projectForm');
+  const locale = useLocale();
 
   const translateError = (key?: string) => (key ? formErrorT(key) : undefined);
 
@@ -32,6 +34,7 @@ const ContactUsForm = ({
     onChangeText,
     onChangeImage,
     onBlurField,
+    onClearPhoneWithoutValidation,
   } = useClientProjectForm(onSuccessNavigate, onAutoClose, onSubmitStateChange);
 
   return (
@@ -48,16 +51,18 @@ const ContactUsForm = ({
           onBlur={() => onBlurField('firstName')}
           onChange={(value) => onChangeText('firstName', value)}
         />
-        <ContactInput
-          name="lastName"
-          label={t('lastNamePlaceholder')}
-          value={values.lastName}
-          error={translateError(errors.lastName)}
-          autoComplete="family-name"
+        <ContactInputNumber
+          name="phone"
+          label={t('phonePlaceholder')}
+          value={values.phone}
+          locale={locale}
+          error={translateError(errors.phone)}
           required
           disabled={isLocked}
-          onBlur={() => onBlurField('lastName')}
-          onChange={(value) => onChangeText('lastName', value)}
+          onBlur={() => onBlurField('phone')}
+          onChange={(phone) => onChangeText('phone', phone)}
+          onClearWithoutValidation={onClearPhoneWithoutValidation}
+          onCountryCodeChange={(countryCode) => onChangeText('countryCode', countryCode)}
         />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4 md:mb-8">

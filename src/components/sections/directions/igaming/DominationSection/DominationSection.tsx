@@ -9,7 +9,7 @@ const DominationSection = () => {
   const t = useTranslations('IGamingPage.DominateSection');
 
   return (
-    <section className="pb-10">
+    <section className="pb-10 md:pb-18.5">
       <SectionContainer>
         <SectionTitle marginBottom="10px">{t('title')}</SectionTitle>
         <p className="text-main-sm mb-12">{t('desc')} </p>

@@ -1,10 +1,14 @@
 'use client';
 
+import { useLocale } from 'next-intl';
 import { useEffect, useMemo, useState } from 'react';
-import { initAttachmentUpload, submitClientProject } from '@/components/modals/ContactUsModal/ContactUsForm/clientProjectForm.api';
+import {
+  initAttachmentUpload,
+  submitClientProject,
+} from '@/components/modals/ContactUsModal/ContactUsForm/clientProjectForm.api';
 import { trackClientProjectModalEvent } from '@/components/modals/ContactUsModal/ContactUsForm/clientProjectForm.analytics';
 import {
-  INITIAL_VALUES,
+  createInitialValues,
   SUCCESS_AUTO_CLOSE_MS,
 } from '@/components/modals/ContactUsModal/ContactUsForm/clientProjectForm.constants';
 import type {
@@ -14,7 +18,10 @@ import type {
   SubmitState,
   UploadedImagePayload,
 } from '@/components/modals/ContactUsModal/ContactUsForm/clientProjectForm.types';
-import { validateAll, validateField } from '@/components/modals/ContactUsModal/ContactUsForm/clientProjectForm.validation';
+import {
+  validateAll,
+  validateField,
+} from '@/components/modals/ContactUsModal/ContactUsForm/clientProjectForm.validation';
 
 export type { SubmitState };
 
@@ -23,7 +30,8 @@ export function useClientProjectForm(
   onAutoClose: () => void,
   onSubmitStateChange?: (state: SubmitState) => void,
 ) {
-  const [values, setValues] = useState<FormValues>(INITIAL_VALUES);
+  const locale = useLocale();
+  const [values, setValues] = useState<FormValues>(() => createInitialValues(locale));
   const [errors, setErrors] = useState<FormErrors>({});
   const [touched, setTouched] = useState<Partial<Record<FieldName, boolean>>>({});
   const [submitState, setSubmitState] = useState<SubmitState>('idle');
@@ -112,7 +120,8 @@ export function useClientProjectForm(
       setErrors(fieldErrors);
       setTouched({
         firstName: true,
-        lastName: true,
+        countryCode: true,
+        phone: true,
         email: true,
         description: true,
         image: true,
@@ -165,6 +174,13 @@ export function useClientProjectForm(
     }
   };
 
+  const onClearPhoneWithoutValidation = () => {
+    setValues((prev) => ({
+      ...prev,
+      phone: '',
+    }));
+  };
+
   return {
     values,
     errors,
@@ -174,5 +190,6 @@ export function useClientProjectForm(
     onChangeText,
     onChangeImage,
     onBlurField,
+    onClearPhoneWithoutValidation,
   };
 }

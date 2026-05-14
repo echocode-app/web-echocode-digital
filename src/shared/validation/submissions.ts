@@ -15,6 +15,14 @@ import {
   type CandidateSubmissionInput,
 } from '@/shared/validation/submissions.candidate';
 import {
+  buildPhoneE164,
+  countryCodeSchema,
+  hasValidFullPhoneLength,
+  normalizePhoneDigits,
+  phoneContactSchema,
+  phoneSchema,
+} from '@/shared/validation/submissions.common';
+import {
   projectSubmissionSchema,
   type ProjectSubmissionInput,
 } from '@/shared/validation/submissions.project';
@@ -32,8 +40,14 @@ export {
   MAX_IMAGE_SIZE_BYTES,
   candidateCvFileSchema,
   candidateSubmissionSchema,
+  buildPhoneE164,
+  countryCodeSchema,
+  hasValidFullPhoneLength,
   isDocumentMimeType,
   isImageMimeType,
+  normalizePhoneDigits,
+  phoneContactSchema,
+  phoneSchema,
   projectAttachmentSchema,
   projectSubmissionSchema,
   type CandidateSubmissionInput,

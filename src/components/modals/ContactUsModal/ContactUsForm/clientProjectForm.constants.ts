@@ -10,10 +10,28 @@ export const MAX_ATTACHMENT_SIZE_BYTES = MAX_CLIENT_PROJECT_ATTACHMENT_SIZE_BYTE
 export const ALLOWED_ATTACHMENT_MIME_TYPES = ALLOWED_CLIENT_PROJECT_ATTACHMENT_MIME_TYPES;
 export const ATTACHMENT_ACCEPT = CLIENT_PROJECT_ATTACHMENT_ACCEPT;
 
-export const INITIAL_VALUES: FormValues = {
-  firstName: '',
-  lastName: '',
-  email: '',
-  description: '',
-  image: null,
-};
+const DEFAULT_COUNTRY_CODE_BY_LOCALE = {
+  en: '+1',
+  uk: '+380',
+  pl: '+48',
+  de: '+49',
+  es: '+34',
+} as const;
+
+export function resolveDefaultCountryCode(locale: string): string {
+  return (
+    DEFAULT_COUNTRY_CODE_BY_LOCALE[locale as keyof typeof DEFAULT_COUNTRY_CODE_BY_LOCALE] ??
+    DEFAULT_COUNTRY_CODE_BY_LOCALE.en
+  );
+}
+
+export function createInitialValues(locale: string): FormValues {
+  return {
+    firstName: '',
+    countryCode: resolveDefaultCountryCode(locale),
+    phone: '',
+    email: '',
+    description: '',
+    image: null,
+  };
+}

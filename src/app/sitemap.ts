@@ -1,11 +1,11 @@
 import type { MetadataRoute } from 'next';
 
+import { locales } from '@/i18n/config';
+import { buildAbsoluteLocalizedUrl, type AppLocale } from '@/lib/seo/metadata';
 import { listPublicVacancies } from '@/server/vacancies';
 
-const baseUrl = 'https://echocode.digital';
-
 // Update this when meaningfully changing static page content
-// (hero copy, services, portfolio cases, team page).
+// hero copy, services, portfolio cases, team page.
 const STATIC_LAST_MODIFIED = new Date('2026-05-01');
 
 type StaticRoute = {
@@ -15,7 +15,7 @@ type StaticRoute = {
 };
 
 const STATIC_ROUTES: readonly StaticRoute[] = [
-  { path: '', changeFrequency: 'weekly', priority: 1 },
+  { path: '/', changeFrequency: 'weekly', priority: 1 },
   { path: '/career', changeFrequency: 'weekly', priority: 0.9 },
   { path: '/partnership', changeFrequency: 'monthly', priority: 0.7 },
   { path: '/portfolio', changeFrequency: 'monthly', priority: 0.8 },
@@ -32,15 +32,29 @@ const STATIC_ROUTES: readonly StaticRoute[] = [
   { path: '/privacy-policy', changeFrequency: 'yearly', priority: 0.3 },
 ];
 
+function buildStaticEntries(): MetadataRoute.Sitemap {
+  return locales.flatMap((locale) =>
+    STATIC_ROUTES.map((route) => ({
+      url: buildAbsoluteLocalizedUrl(locale as AppLocale, route.path),
+      lastModified: STATIC_LAST_MODIFIED,
+      changeFrequency: route.changeFrequency,
+      priority: route.priority,
+    })),
+  );
+}
+
 async function buildVacancyEntries(): Promise<MetadataRoute.Sitemap> {
   try {
     const vacancies = await listPublicVacancies();
-    return vacancies.map((vacancy) => ({
-      url: `${baseUrl}/career/${vacancy.vacancySlug}`,
-      lastModified: vacancy.datePosted ? new Date(vacancy.datePosted) : STATIC_LAST_MODIFIED,
-      changeFrequency: 'weekly' as const,
-      priority: 0.7,
-    }));
+
+    return vacancies.flatMap((vacancy) =>
+      locales.map((locale) => ({
+        url: buildAbsoluteLocalizedUrl(locale as AppLocale, `/career/${vacancy.vacancySlug}`),
+        lastModified: vacancy.datePosted ? new Date(vacancy.datePosted) : STATIC_LAST_MODIFIED,
+        changeFrequency: 'weekly' as const,
+        priority: 0.7,
+      })),
+    );
   } catch (error) {
     console.error('[sitemap] failed to load vacancies, returning static routes only', error);
     return [];
@@ -48,13 +62,7 @@ async function buildVacancyEntries(): Promise<MetadataRoute.Sitemap> {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const staticEntries: MetadataRoute.Sitemap = STATIC_ROUTES.map((route) => ({
-    url: `${baseUrl}${route.path}`,
-    lastModified: STATIC_LAST_MODIFIED,
-    changeFrequency: route.changeFrequency,
-    priority: route.priority,
-  }));
-
+  const staticEntries = buildStaticEntries();
   const vacancyEntries = await buildVacancyEntries();
 
   return [...staticEntries, ...vacancyEntries];

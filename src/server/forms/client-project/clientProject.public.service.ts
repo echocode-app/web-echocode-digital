@@ -1,6 +1,8 @@
+import { after } from 'next/server';
 import { parseClientProjectCreatePayload } from '@/server/forms/client-project/clientProject.validation';
 import { createClientSubmissionRecord } from '@/server/forms/client-project/clientProject.repository';
 import { resolveEventAttribution, trackEventBestEffort } from '@/server/analytics';
+import { sendClientProjectLeadToCrmBestEffort } from '@/server/forms/client-project/clientProject.crm.service';
 import { resolveClientSubmissionImageUrl } from '@/server/forms/client-project/clientProject.upload.service';
 import type { CreateClientSubmissionResponseDto } from '@/server/forms/client-project/clientProject.types';
 
@@ -20,6 +22,8 @@ export async function createClientProjectSubmission(input: {
     payload: parsed,
     imageUrl,
   });
+
+  after(() => sendClientProjectLeadToCrmBestEffort({ parsed }));
 
   const sessionId = input.requestHeaders?.get('x-client-session-id')?.trim() || null;
 

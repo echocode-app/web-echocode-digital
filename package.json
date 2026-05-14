@@ -13,10 +13,11 @@
     "lint": "eslint",
     "openapi:lint": "redocly lint docs/openapi/openapi.yaml",
     "typecheck": "tsc --noEmit",
-    "check": "npm run typecheck && npm run lint && npm run openapi:lint && npm run build",
+    "check": "npm run test:lead-form-contract && npm run typecheck && npm run lint && npm run openapi:lint && npm run build",
     "firestore:emulators": "firebase emulators:start --only firestore",
     "test:firestore:rules": "firebase emulators:exec --only firestore \"npm run test:firestore:rules:run\"",
     "test:firestore:rules:run": "node tests/firestore.rules.test.mjs",
+    "test:lead-form-contract": "node --no-warnings --test tests/lead-form-contract.validation.test.mjs",
     "storage:emulators": "firebase emulators:start --only storage",
     "test:storage:rules": "firebase emulators:exec --only storage \"npm run test:storage:rules:run\"",
     "test:storage:rules:run": "node tests/storage.rules.test.mjs",
@@ -40,6 +41,7 @@
     "react": "19.2.3",
     "react-chartjs-2": "^5.3.1",
     "react-dom": "19.2.3",
+    "react-number-format": "^5.4.5",
     "zod": "^4.3.6"
   },
   "devDependencies": {

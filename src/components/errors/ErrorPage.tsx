@@ -9,8 +9,8 @@ interface ErrorPageProps {
 
 const ErrorPage = ({ code, title, description }: ErrorPageProps) => {
   const locale = useLocale();
-  const uaStyle =
-    locale === 'ua'
+  const ukStyle =
+    locale === 'uk'
       ? ' text-[16px] sm:text-[18px] md:text-[32px]'
       : ' text-[18px] sm:text-[22px] md:text-[40px]';
 
@@ -26,7 +26,7 @@ const ErrorPage = ({ code, title, description }: ErrorPageProps) => {
           </h1>
           <p
             className={`mb-6 max-w-[320px] md:max-w-137.5 lg:max-w-full
-           ${uaStyle} font-semibold tracking-[2px] uppercase`}
+           ${ukStyle} font-semibold tracking-[2px] uppercase`}
           >
             {title}
           </p>

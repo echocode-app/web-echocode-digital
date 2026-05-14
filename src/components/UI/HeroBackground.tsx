@@ -4,7 +4,7 @@ import DefaultHeroBackground from '@/components/UI/hero-background/DefaultHeroBa
 import HomeHeroBackground from '@/components/UI/hero-background/HomeHeroBackground';
 import { peekContactModalReturnPath } from '@/components/modals/ContactUsModal/contactModal.navigation';
 import { locales } from '@/i18n/config';
-import { usePathname } from 'next/navigation';
+import { usePathname } from '@/i18n/navigation';
 
 const localeHomePaths = new Set(locales.map((locale) => `/${locale}`));
 

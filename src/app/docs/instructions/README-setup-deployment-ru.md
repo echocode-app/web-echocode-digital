@@ -204,7 +204,9 @@ curl http://localhost:3000/api/internal/firebase-check
 
 ## Правило для lockfile
 
-Если меняется `package.json`, нужно также обновить `package-lock.json`.
+Если меняются dependency-relevant поля в `package.json`, нужно также обновить `package-lock.json`.
+
+Изменения только в scripts внутри `package.json` не требуют обновления lockfile.
 
 Если Husky блокирует commit, потому что `package-lock.json` не добавлен в staged:
 
