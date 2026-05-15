@@ -4,6 +4,7 @@ import ContactFile from './ContactFile';
 import ContactInput from './ContactInput';
 import SubmitButton from './SubmitBtn';
 import YourNeedsInput from './YourNeedInput';
+import TurnstileWidget from '@/widgets/TurnstileWidget';
 import { useClientProjectForm } from '@/components/modals/ContactUsModal/ContactUsForm/useClientProjectForm';
 import type { SubmitState } from '@/components/modals/ContactUsModal/ContactUsForm/useClientProjectForm';
 import ContactInputNumber from './ContactInputNumber';
@@ -30,11 +31,13 @@ const ContactUsForm = ({
     errors,
     submitState,
     isLocked,
+    turnstileKey,
     onSubmit,
     onChangeText,
     onChangeImage,
     onBlurField,
     onClearPhoneWithoutValidation,
+    onTurnstileVerify,
   } = useClientProjectForm(onSuccessNavigate, onAutoClose, onSubmitStateChange);
 
   return (
@@ -86,7 +89,7 @@ const ContactUsForm = ({
           onChange={onChangeImage}
         />
       </div>
-      <div className="mb-4 md:mb-8">
+      <div className="mb-4">
         <YourNeedsInput
           value={values.description}
           error={translateError(errors.description)}
@@ -94,6 +97,9 @@ const ContactUsForm = ({
           onBlur={() => onBlurField('description')}
           onChange={(value) => onChangeText('description', value)}
         />
+      </div>
+      <div className="mx-auto w-fit min-h-[71.5px]">
+        <TurnstileWidget key={turnstileKey} onVerify={onTurnstileVerify} />
       </div>
       <div className="min-h-5 mb-1" aria-live="polite">
         <p

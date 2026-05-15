@@ -4,7 +4,10 @@ import {
 } from '@/components/analytics/clientAnalytics';
 import { CandidateSubmissionPayload } from '../types/candidate';
 
-export async function submitCandidate(payload: CandidateSubmissionPayload) {
+export async function submitCandidate(
+  payload: CandidateSubmissionPayload,
+  turnstileToken?: string,
+) {
   const analyticsContext = getClientAnalyticsContextPayload();
   const res = await fetch('/api/forms/vacancy-submissions', {
     method: 'POST',
@@ -12,6 +15,7 @@ export async function submitCandidate(payload: CandidateSubmissionPayload) {
     body: JSON.stringify({
       ...payload,
       ...analyticsContext,
+      turnstileToken,
     }),
   });
 

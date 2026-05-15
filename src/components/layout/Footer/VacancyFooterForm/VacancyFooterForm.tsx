@@ -1,12 +1,13 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import SubmitArrow from './SubmitArrow';
 import { submitEmail } from './api/submitEmail';
 import { emailSchema } from './shemas/emailSchema';
+import TurnstileWidget from '@/widgets/TurnstileWidget';
 
 type FormState = {
   success?: boolean;
@@ -20,6 +21,8 @@ const VacancyFooterForm = () => {
   const [state, setState] = useState<FormState>({});
   const [localError, setLocalError] = useState<string | null>(null);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState('');
+  const [turnstileKey, setTurnstileKey] = useState(0);
 
   const locale = useLocale();
 
@@ -28,6 +31,20 @@ const VacancyFooterForm = () => {
   const formRef = useRef<HTMLFormElement>(null);
   const t = useTranslations('Layout.Footer');
   const errorsT = useTranslations('EmailSubmitValidation');
+
+  const resetTurnstile = useCallback(() => {
+    setTurnstileToken('');
+    setTurnstileKey((prev) => prev + 1);
+  }, []);
+
+  const handleTurnstileVerify = useCallback((token: string) => {
+    setTurnstileToken(token);
+    setLocalError(null);
+    setState((prev) => ({
+      ...prev,
+      error: undefined,
+    }));
+  }, []);
 
   const handleLocalValidate = (e: React.FocusEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -47,16 +64,23 @@ const VacancyFooterForm = () => {
       return;
     }
 
+    if (!turnstileToken) {
+      setState({ error: 'Please complete verification.' });
+      return;
+    }
+
     setLocalError(null);
 
-    const response = await submitEmail(formData);
+    const response = await submitEmail(formData, turnstileToken);
     setState(response);
 
     if (response.success) {
       formRef.current?.reset();
       setShowSuccess(true);
-
+      resetTurnstile();
       setTimeout(() => setShowSuccess(false), 2000);
+    } else {
+      resetTurnstile();
     }
   };
 
@@ -68,6 +92,9 @@ const VacancyFooterForm = () => {
 
   return (
     <div className={`${deEsLocale} w-full`}>
+      <div className="mb-1 flex min-h-[71.5px] w-full justify-center">
+        <TurnstileWidget key={turnstileKey} onVerify={handleTurnstileVerify} />
+      </div>
       <strong className="block mb-2 font-medium leading-none text-[12px]">{t('mailTitle')}</strong>
       <form
         ref={formRef}

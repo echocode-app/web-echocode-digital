@@ -91,6 +91,7 @@ export async function initAttachmentUpload(file: File): Promise<UploadedImagePay
 export async function submitClientProject(
   values: FormValues,
   imagePayload?: UploadedImagePayload,
+  turnstileToken?: string,
 ): Promise<{ ok: boolean; status: number }> {
   const normalized = normalize(values);
   const analyticsContext = getClientAnalyticsContextPayload();
@@ -101,6 +102,7 @@ export async function submitClientProject(
     body: JSON.stringify({
       firstName: normalized.firstName,
       countryCode: normalized.countryCode,
+      turnstileToken,
       phone: normalized.phone,
       email: normalized.email,
       ...(normalized.description ? { description: normalized.description } : {}),
