@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import Image from 'next/image';
 import { useLocale, useTranslations } from 'next-intl';
 
@@ -15,6 +15,7 @@ import {
   profileUrlSchema,
   uploadFileBaseSchema,
 } from './schemas/candidate-schema';
+import TurnstileWidget from '@/widgets/TurnstileWidget';
 
 interface CandidateFormProps {
   vacancyData: VacancyData;
@@ -23,6 +24,7 @@ interface CandidateFormProps {
 interface FormErrors {
   profileUrl?: string;
   cvFile?: string;
+  form?: string;
 }
 
 const CandidateForm = ({ vacancyData }: CandidateFormProps) => {
@@ -43,6 +45,21 @@ const CandidateForm = ({ vacancyData }: CandidateFormProps) => {
   const [errors, setErrors] = useState<FormErrors>({});
   const [submitStatus, setSubmitStatus] = useState<SubmitStatus>('idle');
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const [turnstileToken, setTurnstileToken] = useState('');
+  const [turnstileKey, setTurnstileKey] = useState(0);
+
+  const resetTurnstile = () => {
+    setTurnstileToken('');
+    setTurnstileKey((prev) => prev + 1);
+  };
+
+  const handleTurnstileVerify = useCallback((token: string) => {
+    setTurnstileToken(token);
+    setErrors((prev) => ({
+      ...prev,
+      form: undefined,
+    }));
+  }, []);
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -122,13 +139,21 @@ const CandidateForm = ({ vacancyData }: CandidateFormProps) => {
       },
     };
 
+    if (!turnstileToken) {
+      setErrors((prev) => ({
+        ...prev,
+        form: 'Please complete verification.',
+      }));
+      return;
+    }
+
     setSubmitStatus('pending');
     setErrors({});
 
     try {
-      await submitCandidate(payload);
+      await submitCandidate(payload, turnstileToken);
       setSubmitStatus('success');
-
+      resetTurnstile();
       timeoutRef.current = setTimeout(() => {
         setSubmitStatus('idle');
         setCvFile(null);
@@ -140,7 +165,12 @@ const CandidateForm = ({ vacancyData }: CandidateFormProps) => {
       }, 5000);
     } catch (err) {
       console.error(err);
+      setErrors((prev) => ({
+        ...prev,
+        form: 'Submission failed. Please try again.',
+      }));
       setSubmitStatus('error');
+      resetTurnstile();
     }
   };
 
@@ -227,7 +257,21 @@ const CandidateForm = ({ vacancyData }: CandidateFormProps) => {
           </p>
         )}
       </div>
-      <SubmitBtn status={submitStatus} isDisable={uploadingFile} />
+      <div className=" mb-4 flex min-h-[71.5px] w-full justify-center">
+        <TurnstileWidget key={turnstileKey} onVerify={handleTurnstileVerify} />
+      </div>
+      <div className="relative">
+        <div className="absolute -top-4 left-0" aria-live="polite">
+          <p
+            className={`text-red-500 text-[10px] transition-opacity duration-main ${
+              errors.form ? 'opacity-100' : 'opacity-0'
+            }`}
+          >
+            {errors.form ?? ' '}
+          </p>
+        </div>
+        <SubmitBtn status={submitStatus} isDisable={uploadingFile} />
+      </div>
     </form>
   );
 };

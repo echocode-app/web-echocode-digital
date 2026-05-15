@@ -11,7 +11,7 @@ type FormState = {
   };
 };
 
-const submitEmail = async (formData: FormData): Promise<FormState> => {
+const submitEmail = async (formData: FormData, turnstileToken?: string): Promise<FormState> => {
   try {
     const email = formData.get('email');
     const analyticsContext = getClientAnalyticsContextPayload();
@@ -21,6 +21,7 @@ const submitEmail = async (formData: FormData): Promise<FormState> => {
       body: JSON.stringify({
         email,
         source: 'career-page',
+        turnstileToken,
         ...analyticsContext,
       }),
     });

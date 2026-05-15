@@ -1,7 +1,7 @@
 'use client';
 
 import { useLocale } from 'next-intl';
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import {
   initAttachmentUpload,
   submitClientProject,
@@ -35,10 +35,25 @@ export function useClientProjectForm(
   const [errors, setErrors] = useState<FormErrors>({});
   const [touched, setTouched] = useState<Partial<Record<FieldName, boolean>>>({});
   const [submitState, setSubmitState] = useState<SubmitState>('idle');
+  const [turnstileToken, setTurnstileToken] = useState('');
+  const [turnstileKey, setTurnstileKey] = useState(0);
 
   const isLocked = submitState === 'loading' || submitState === 'success';
 
   const canSubmit = useMemo(() => !isLocked, [isLocked]);
+
+  const resetTurnstile = useCallback(() => {
+    setTurnstileToken('');
+    setTurnstileKey((prev) => prev + 1);
+  }, []);
+
+  const onTurnstileVerify = useCallback((token: string) => {
+    setTurnstileToken(token);
+    setErrors((prev) => ({
+      ...prev,
+      form: undefined,
+    }));
+  }, []);
 
   useEffect(() => {
     void trackClientProjectModalEvent('contact_modal_open');
@@ -129,6 +144,11 @@ export function useClientProjectForm(
       return;
     }
 
+    if (!turnstileToken) {
+      setErrors({ form: 'Please complete verification.' });
+      return;
+    }
+
     setSubmitState('loading');
     setErrors((prev) => ({ ...prev, form: undefined }));
 
@@ -140,13 +160,15 @@ export function useClientProjectForm(
         imagePayload = await initAttachmentUpload(values.image);
       }
 
-      const response = await submitClientProject(values, imagePayload);
+      const response = await submitClientProject(values, imagePayload, turnstileToken);
 
       if (!response.ok) {
         void trackClientProjectModalEvent('submit_project_error', {
           stage: 'submit_response',
           status: response.status,
         });
+
+        resetTurnstile();
 
         if (response.status === 429) {
           setErrors({ form: 'Too many requests. Please wait a bit and try again.' });
@@ -159,6 +181,7 @@ export function useClientProjectForm(
 
       setErrors({});
       setSubmitState('success');
+      resetTurnstile();
     } catch (error) {
       void trackClientProjectModalEvent('submit_project_error', {
         stage: 'submit',
@@ -171,6 +194,7 @@ export function useClientProjectForm(
             : 'Submission failed. Please check your connection and try again.',
       });
       setSubmitState('idle');
+      resetTurnstile();
     }
   };
 
@@ -186,10 +210,12 @@ export function useClientProjectForm(
     errors,
     submitState,
     isLocked,
+    turnstileKey,
     onSubmit,
     onChangeText,
     onChangeImage,
     onBlurField,
     onClearPhoneWithoutValidation,
+    onTurnstileVerify,
   };
 }
