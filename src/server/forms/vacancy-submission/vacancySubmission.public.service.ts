@@ -23,6 +23,7 @@ export async function createVacancySubmission(input: {
   await verifyTurnstileTokenFromBody({
     rawBody: input.rawBody,
     requestHeaders: input.requestHeaders,
+    expectedAction: 'vacancy-submission',
   });
   const parsed = parseVacancySubmissionCreatePayload(input.rawBody);
 

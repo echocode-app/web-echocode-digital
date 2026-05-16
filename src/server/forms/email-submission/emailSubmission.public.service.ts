@@ -16,6 +16,7 @@ export async function createEmailSubmission(input: {
   await verifyTurnstileTokenFromBody({
     rawBody: input.rawBody,
     requestHeaders: input.requestHeaders,
+    expectedAction: 'email-submission',
   });
   const parsed = parseEmailSubmissionCreatePayload(input.rawBody);
 

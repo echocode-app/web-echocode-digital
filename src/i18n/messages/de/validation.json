@@ -10,7 +10,8 @@
       "sizeMax": "Die Datei muss ≤ 5 MB sein",
       "pathRequired": "Pfad ist erforderlich",
       "pathTooLong": "Pfad ist zu lang",
-      "pathInvalid": "Ungültiges Speicherpfadformat"
+      "pathInvalid": "Ungültiges Speicherpfadformat",
+      "uploadFailed": "Dateiupload fehlgeschlagen"
     },
     "profileUrl": {
       "required": "URL ist erforderlich",
@@ -20,6 +21,15 @@
     },
     "cv": {
       "required": "Lebenslauf ist erforderlich"
+    },
+    "form": {
+      "turnstileRequired": "Bitte schließen Sie die Verifizierung ab.",
+      "turnstileFailed": "Verifizierung fehlgeschlagen. Bitte versuchen Sie es erneut.",
+      "turnstileUnavailable": "Die Verifizierung ist vorübergehend nicht verfügbar. Bitte versuchen Sie es später erneut.",
+      "rateLimit": "Zu viele Anfragen. Bitte warten Sie kurz und versuchen Sie es erneut.",
+      "serviceUnavailable": "Der Dienst ist vorübergehend nicht verfügbar. Bitte versuchen Sie es in Kürze erneut.",
+      "submitFailed": "Übermittlung fehlgeschlagen. Bitte versuchen Sie es erneut.",
+      "networkFailed": "Übermittlung fehlgeschlagen. Bitte prüfen Sie Ihre Verbindung und versuchen Sie es erneut."
     }
   },
   "ProjectValidation": {
@@ -46,6 +56,15 @@
     "attachment": {
       "invalidType": "Nicht unterstützter Dateityp. Verwenden Sie image, PDF, Office, TXT, CSV, RTF oder ZIP.",
       "size": "Die Datei muss kleiner als 10MB sein"
+    },
+    "form": {
+      "turnstileRequired": "Bitte schließen Sie die Verifizierung ab.",
+      "turnstileFailed": "Verifizierung fehlgeschlagen. Bitte versuchen Sie es erneut.",
+      "turnstileUnavailable": "Die Verifizierung ist vorübergehend nicht verfügbar. Bitte versuchen Sie es später erneut.",
+      "rateLimit": "Zu viele Anfragen. Bitte warten Sie kurz und versuchen Sie es erneut.",
+      "serviceUnavailable": "Der Dienst ist vorübergehend nicht verfügbar. Bitte versuchen Sie es in Kürze erneut.",
+      "submitFailed": "Übermittlung fehlgeschlagen. Bitte versuchen Sie es erneut.",
+      "networkFailed": "Übermittlung fehlgeschlagen. Bitte prüfen Sie Ihre Verbindung und versuchen Sie es erneut."
     }
   },
   "EmailSubmitValidation": {
@@ -54,6 +73,15 @@
       "max": "E-Mail ist zu lang",
       "invalid": "Geben Sie eine gültige E-Mail ein",
       "domain": "Die Domain muss einen Punkt enthalten und gültig sein"
+    },
+    "form": {
+      "turnstileRequired": "Bitte schließen Sie die Verifizierung ab.",
+      "turnstileFailed": "Verifizierung fehlgeschlagen. Bitte versuchen Sie es erneut.",
+      "turnstileUnavailable": "Die Verifizierung ist vorübergehend nicht verfügbar. Bitte versuchen Sie es später erneut.",
+      "rateLimit": "Zu viele Anfragen. Bitte warten Sie kurz und versuchen Sie es erneut.",
+      "serviceUnavailable": "Der Dienst ist vorübergehend nicht verfügbar. Bitte versuchen Sie es in Kürze erneut.",
+      "submitFailed": "E-Mail konnte nicht gesendet werden. Bitte versuchen Sie es erneut.",
+      "networkFailed": "E-Mail konnte nicht gesendet werden. Bitte prüfen Sie Ihre Verbindung und versuchen Sie es erneut."
     }
   }
 }

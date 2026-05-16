@@ -27,6 +27,14 @@ import {
 } from '@/components/modals/ContactUsModal/ContactUsForm/clientProjectForm.validation';
 import TurnstileWidget from '@/widgets/TurnstileWidget';
 
+function resolveSubmitErrorKey(status: number): string {
+  if (status === 403) return 'form.turnstileFailed';
+  if (status === 429) return 'form.rateLimit';
+  if (status === 503) return 'form.serviceUnavailable';
+
+  return 'form.submitFailed';
+}
+
 const CommonFooterForm = () => {
   const formErrorT = useTranslations('ProjectValidation');
   const t = useTranslations('ProjectModal.projectForm');
@@ -53,6 +61,14 @@ const CommonFooterForm = () => {
     setErrors((prev) => ({
       ...prev,
       form: undefined,
+    }));
+  }, []);
+
+  const onTurnstileError = useCallback(() => {
+    setTurnstileToken('');
+    setErrors((prev) => ({
+      ...prev,
+      form: 'form.turnstileUnavailable',
     }));
   }, []);
 
@@ -143,7 +159,7 @@ const CommonFooterForm = () => {
     if (!turnstileToken) {
       setErrors((prev) => ({
         ...prev,
-        form: 'Please complete verification.',
+        form: 'form.turnstileRequired',
       }));
       return;
     }
@@ -152,28 +168,33 @@ const CommonFooterForm = () => {
     setErrors((prev) => ({ ...prev, form: undefined }));
 
     try {
-      void trackClientProjectModalEvent('submit_project_attempt', { stage: 'before_submit' });
+      void trackClientProjectModalEvent('submit_project_attempt', {
+        stage: 'before_submit',
+        source: 'client_project_footer',
+      });
       let imagePayload: UploadedImagePayload | undefined;
 
       if (values.image) {
         imagePayload = await initAttachmentUpload(values.image);
       }
 
-      const response = await submitClientProject(values, imagePayload, turnstileToken);
+      const response = await submitClientProject(
+        values,
+        imagePayload,
+        turnstileToken,
+        'client_project_footer',
+      );
 
       if (!response.ok) {
         void trackClientProjectModalEvent('submit_project_error', {
           stage: 'submit_response',
           status: response.status,
+          source: 'client_project_footer',
         });
 
         resetTurnstile();
 
-        if (response.status === 429) {
-          setErrors({ form: 'Too many requests. Please wait a bit and try again.' });
-        } else {
-          setErrors({ form: 'Submission failed. Please try again.' });
-        }
+        setErrors({ form: resolveSubmitErrorKey(response.status) });
         setSubmitState('idle');
         return;
       }
@@ -185,13 +206,9 @@ const CommonFooterForm = () => {
       void trackClientProjectModalEvent('submit_project_error', {
         stage: 'submit',
         message: error instanceof Error ? error.message : 'unknown_error',
+        source: 'client_project_footer',
       });
-      setErrors({
-        form:
-          error instanceof Error && error.message
-            ? error.message
-            : 'Submission failed. Please check your connection and try again.',
-      });
+      setErrors({ form: 'form.networkFailed' });
       setSubmitState('idle');
       resetTurnstile();
     }
@@ -224,6 +241,7 @@ const CommonFooterForm = () => {
           name="phone"
           label={t('phonePlaceholder')}
           value={values.phone}
+          countryCode={values.countryCode}
           locale={locale}
           error={translateError(errors.phone)}
           required
@@ -265,7 +283,12 @@ const CommonFooterForm = () => {
         />
       </div>
       <div className="mx-auto w-fit mb-4 min-h-[71.5px]">
-        <TurnstileWidget key={turnstileKey} onVerify={setTurnstileToken} />
+        <TurnstileWidget
+          key={turnstileKey}
+          action="client-project"
+          onVerify={onTurnstileVerify}
+          onError={onTurnstileError}
+        />
       </div>
       <div className="relative">
         <SubmitBtn state={submitState} />
@@ -273,7 +296,7 @@ const CommonFooterForm = () => {
           <p
             className={`text-main-xs text-[#ff8d8d] transition-opacity duration-main ${errors.form ? 'opacity-100' : 'opacity-0'}`}
           >
-            {errors.form ?? ' '}
+            {translateError(errors.form) ?? ' '}
           </p>
         </div>
       </div>

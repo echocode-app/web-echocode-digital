@@ -46,6 +46,14 @@ const VacancyFooterForm = () => {
     }));
   }, []);
 
+  const handleTurnstileError = useCallback(() => {
+    setTurnstileToken('');
+    setState((prev) => ({
+      ...prev,
+      error: 'form.turnstileUnavailable',
+    }));
+  }, []);
+
   const handleLocalValidate = (e: React.FocusEvent<HTMLInputElement>) => {
     const value = e.target.value;
     const result = emailSchema.safeParse({ email: value });
@@ -65,7 +73,7 @@ const VacancyFooterForm = () => {
     }
 
     if (!turnstileToken) {
-      setState({ error: 'Please complete verification.' });
+      setState({ error: 'form.turnstileRequired' });
       return;
     }
 
@@ -88,12 +96,19 @@ const VacancyFooterForm = () => {
     ? errorsT(localError)
     : state.fieldErrors?.email?.[0]
       ? errorsT(state.fieldErrors.email[0])
-      : state.error;
+      : state.error
+        ? errorsT(state.error)
+        : undefined;
 
   return (
     <div className={`${deEsLocale} w-full`}>
       <div className="mb-1 flex min-h-[71.5px] w-full justify-center">
-        <TurnstileWidget key={turnstileKey} onVerify={handleTurnstileVerify} />
+        <TurnstileWidget
+          key={turnstileKey}
+          action="email-submission"
+          onVerify={handleTurnstileVerify}
+          onError={handleTurnstileError}
+        />
       </div>
       <strong className="block mb-2 font-medium leading-none text-[12px]">{t('mailTitle')}</strong>
       <form
@@ -140,7 +155,7 @@ const VacancyFooterForm = () => {
               exit={{ opacity: 0, y: -5 }}
               transition={{ duration: 0.5 }}
             >
-              ✅ Success submit!
+              {t('mailSuccess')}
             </motion.div>
           )}
         </AnimatePresence>

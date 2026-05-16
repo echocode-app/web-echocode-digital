@@ -6,7 +6,7 @@ import { CandidateSubmissionPayload } from '../types/candidate';
 
 export async function submitCandidate(
   payload: CandidateSubmissionPayload,
-  turnstileToken?: string,
+  turnstileToken: string,
 ) {
   const analyticsContext = getClientAnalyticsContextPayload();
   const res = await fetch('/api/forms/vacancy-submissions', {
@@ -22,7 +22,7 @@ export async function submitCandidate(
   if (!res.ok) {
     const text = await res.text();
     console.error('Submission failed:', text);
-    throw new Error(`Submission failed: ${res.statusText}`);
+    throw new Error(`Submission failed: ${res.status}`);
   }
 
   return { success: true };

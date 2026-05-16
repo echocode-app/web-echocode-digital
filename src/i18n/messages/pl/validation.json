@@ -10,7 +10,8 @@
       "sizeMax": "Plik musi mieć ≤ 5 MB",
       "pathRequired": "Ścieżka jest wymagana",
       "pathTooLong": "Ścieżka jest zbyt długa",
-      "pathInvalid": "Nieprawidłowy format ścieżki przechowywania"
+      "pathInvalid": "Nieprawidłowy format ścieżki przechowywania",
+      "uploadFailed": "Nie udało się przesłać pliku"
     },
     "profileUrl": {
       "required": "URL jest wymagany",
@@ -20,6 +21,15 @@
     },
     "cv": {
       "required": "CV jest wymagane"
+    },
+    "form": {
+      "turnstileRequired": "Ukończ weryfikację.",
+      "turnstileFailed": "Weryfikacja nie powiodła się. Spróbuj ponownie.",
+      "turnstileUnavailable": "Weryfikacja jest tymczasowo niedostępna. Spróbuj później.",
+      "rateLimit": "Zbyt wiele żądań. Poczekaj chwilę i spróbuj ponownie.",
+      "serviceUnavailable": "Usługa jest tymczasowo niedostępna. Spróbuj wkrótce ponownie.",
+      "submitFailed": "Nie udało się wysłać formularza. Spróbuj ponownie.",
+      "networkFailed": "Nie udało się wysłać formularza. Sprawdź połączenie i spróbuj ponownie."
     }
   },
   "ProjectValidation": {
@@ -46,6 +56,15 @@
     "attachment": {
       "invalidType": "Nieobsługiwany typ pliku. Użyj obrazu, PDF, Office, TXT, CSV, RTF lub ZIP.",
       "size": "Plik musi być mniejszy niż 10 MB"
+    },
+    "form": {
+      "turnstileRequired": "Ukończ weryfikację.",
+      "turnstileFailed": "Weryfikacja nie powiodła się. Spróbuj ponownie.",
+      "turnstileUnavailable": "Weryfikacja jest tymczasowo niedostępna. Spróbuj później.",
+      "rateLimit": "Zbyt wiele żądań. Poczekaj chwilę i spróbuj ponownie.",
+      "serviceUnavailable": "Usługa jest tymczasowo niedostępna. Spróbuj wkrótce ponownie.",
+      "submitFailed": "Nie udało się wysłać formularza. Spróbuj ponownie.",
+      "networkFailed": "Nie udało się wysłać formularza. Sprawdź połączenie i spróbuj ponownie."
     }
   },
   "EmailSubmitValidation": {
@@ -54,6 +73,15 @@
       "max": "E-mail jest za długi",
       "invalid": "Wprowadź poprawny e-mail",
       "domain": "Domena musi zawierać kropkę i być poprawna"
+    },
+    "form": {
+      "turnstileRequired": "Ukończ weryfikację.",
+      "turnstileFailed": "Weryfikacja nie powiodła się. Spróbuj ponownie.",
+      "turnstileUnavailable": "Weryfikacja jest tymczasowo niedostępna. Spróbuj później.",
+      "rateLimit": "Zbyt wiele żądań. Poczekaj chwilę i spróbuj ponownie.",
+      "serviceUnavailable": "Usługa jest tymczasowo niedostępna. Spróbuj wkrótce ponownie.",
+      "submitFailed": "Nie udało się wysłać e-maila. Spróbuj ponownie.",
+      "networkFailed": "Nie udało się wysłać e-maila. Sprawdź połączenie i spróbuj ponownie."
     }
   }
 }

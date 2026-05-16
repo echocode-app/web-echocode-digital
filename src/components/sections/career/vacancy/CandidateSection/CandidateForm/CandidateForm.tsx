@@ -27,6 +27,16 @@ interface FormErrors {
   form?: string;
 }
 
+function resolveCandidateSubmitErrorKey(error: unknown): string {
+  const message = error instanceof Error ? error.message : '';
+
+  if (message.includes('403')) return 'form.turnstileFailed';
+  if (message.includes('429')) return 'form.rateLimit';
+  if (message.includes('503')) return 'form.serviceUnavailable';
+
+  return 'form.submitFailed';
+}
+
 const CandidateForm = ({ vacancyData }: CandidateFormProps) => {
   const t = useTranslations('VacancyCommon.vacancyForm');
   const errorsT = useTranslations('VacancyValidation');
@@ -58,6 +68,14 @@ const CandidateForm = ({ vacancyData }: CandidateFormProps) => {
     setErrors((prev) => ({
       ...prev,
       form: undefined,
+    }));
+  }, []);
+
+  const handleTurnstileError = useCallback(() => {
+    setTurnstileToken('');
+    setErrors((prev) => ({
+      ...prev,
+      form: 'form.turnstileUnavailable',
     }));
   }, []);
 
@@ -94,7 +112,7 @@ const CandidateForm = ({ vacancyData }: CandidateFormProps) => {
     } catch (err) {
       console.error(err);
       setCvFile(null);
-      setFileErrors(['File upload failed']);
+      setFileErrors(['file.uploadFailed']);
     } finally {
       setUploadingFile(false);
     }
@@ -142,7 +160,7 @@ const CandidateForm = ({ vacancyData }: CandidateFormProps) => {
     if (!turnstileToken) {
       setErrors((prev) => ({
         ...prev,
-        form: 'Please complete verification.',
+        form: 'form.turnstileRequired',
       }));
       return;
     }
@@ -167,7 +185,7 @@ const CandidateForm = ({ vacancyData }: CandidateFormProps) => {
       console.error(err);
       setErrors((prev) => ({
         ...prev,
-        form: 'Submission failed. Please try again.',
+        form: resolveCandidateSubmitErrorKey(err),
       }));
       setSubmitStatus('error');
       resetTurnstile();
@@ -258,7 +276,12 @@ const CandidateForm = ({ vacancyData }: CandidateFormProps) => {
         )}
       </div>
       <div className=" mb-4 flex min-h-[71.5px] w-full justify-center">
-        <TurnstileWidget key={turnstileKey} onVerify={handleTurnstileVerify} />
+        <TurnstileWidget
+          key={turnstileKey}
+          action="vacancy-submission"
+          onVerify={handleTurnstileVerify}
+          onError={handleTurnstileError}
+        />
       </div>
       <div className="relative">
         <div className="absolute -top-4 left-0" aria-live="polite">
@@ -267,7 +290,7 @@ const CandidateForm = ({ vacancyData }: CandidateFormProps) => {
               errors.form ? 'opacity-100' : 'opacity-0'
             }`}
           >
-            {errors.form ?? ' '}
+            {translateError(errors.form) ?? ' '}
           </p>
         </div>
         <SubmitBtn status={submitStatus} isDisable={uploadingFile} />

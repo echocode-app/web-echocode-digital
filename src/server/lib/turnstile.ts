@@ -3,7 +3,7 @@ import { ApiError } from '@/server/lib/errors';
 
 const TURNSTILE_VERIFY_URL = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
 const TURNSTILE_TOKEN_MAX_LENGTH = 2048;
-const TURNSTILE_VERIFY_TIMEOUT_MS = 10_000;
+const TURNSTILE_VERIFY_TIMEOUT_MS = 5_000;
 
 type TurnstileVerifyResponse = {
   success: boolean;
@@ -30,6 +30,31 @@ function getClientIp(headers: Headers | undefined): string | null {
 function getFailureReason(payload: TurnstileVerifyResponse | null): string {
   const errorCodes = payload?.['error-codes']?.filter(Boolean) ?? [];
   return errorCodes.length > 0 ? errorCodes.join(', ') : 'unknown_error';
+}
+
+function normalizeHostname(value: string | null | undefined): string | null {
+  const trimmed = value?.trim().toLowerCase();
+  if (!trimmed) return null;
+
+  if (trimmed.includes('://')) {
+    try {
+      return new URL(trimmed).hostname || null;
+    } catch {
+      return null;
+    }
+  }
+
+  return trimmed.split(':')[0] || null;
+}
+
+function getExpectedHostname(headers: Headers | undefined): string | null {
+  if (!headers) return null;
+
+  return (
+    normalizeHostname(headers.get('origin')) ??
+    normalizeHostname(headers.get('referer')) ??
+    normalizeHostname(headers.get('host'))
+  );
 }
 
 function getTokenFromBody(rawBody: unknown): unknown {
@@ -62,6 +87,7 @@ export function normalizeTurnstileToken(value: unknown): string {
 export async function verifyTurnstileToken(input: {
   token: string;
   requestHeaders?: Headers;
+  expectedAction?: string;
 }): Promise<void> {
   const secret = env.cloudflareTurnstileSecretKey;
   if (!secret) {
@@ -131,15 +157,41 @@ export async function verifyTurnstileToken(input: {
       },
     );
   }
+
+  // Bind verified tokens to the browser origin and widget action that submitted them.
+  const verifiedHostname = normalizeHostname(payload.hostname);
+  const expectedHostname = getExpectedHostname(input.requestHeaders);
+
+  if (expectedHostname && verifiedHostname !== expectedHostname) {
+    throw ApiError.fromCode(
+      'FORBIDDEN',
+      `Turnstile hostname mismatch: expected ${expectedHostname}, got ${verifiedHostname ?? 'missing'}`,
+      {
+        publicMessage: 'Turnstile verification failed',
+      },
+    );
+  }
+
+  if (input.expectedAction && payload.action !== input.expectedAction) {
+    throw ApiError.fromCode(
+      'FORBIDDEN',
+      `Turnstile action mismatch: expected ${input.expectedAction}, got ${payload.action ?? 'missing'}`,
+      {
+        publicMessage: 'Turnstile verification failed',
+      },
+    );
+  }
 }
 
 /** Extract and verify the public form token before domain payload validation runs. */
 export async function verifyTurnstileTokenFromBody(input: {
   rawBody: unknown;
   requestHeaders?: Headers;
+  expectedAction?: string;
 }): Promise<void> {
   await verifyTurnstileToken({
     token: normalizeTurnstileToken(getTokenFromBody(input.rawBody)),
     requestHeaders: input.requestHeaders,
+    expectedAction: input.expectedAction,
   });
 }

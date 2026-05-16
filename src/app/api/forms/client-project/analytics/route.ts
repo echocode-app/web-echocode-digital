@@ -24,13 +24,16 @@ export const POST = withApi(
     });
 
     const sessionId = req.headers.get('x-client-session-id')?.trim() || null;
+    const metadata = body.metadata ?? {};
+    const source =
+      metadata.source === 'client_project_footer' ? 'client_project_footer' : 'client_project_modal';
 
     await trackEventBestEffort({
       eventType: body.eventType,
       headers: req.headers,
       metadata: {
-        ...(body.metadata ?? {}),
-        source: 'client_project_modal',
+        ...metadata,
+        source,
         ...(sessionId ? { sessionId } : {}),
       },
     });

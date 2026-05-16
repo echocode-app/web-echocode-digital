@@ -25,6 +25,14 @@ import {
 
 export type { SubmitState };
 
+function resolveSubmitErrorKey(status: number): string {
+  if (status === 403) return 'form.turnstileFailed';
+  if (status === 429) return 'form.rateLimit';
+  if (status === 503) return 'form.serviceUnavailable';
+
+  return 'form.submitFailed';
+}
+
 export function useClientProjectForm(
   onSuccessNavigate: () => void,
   onAutoClose: () => void,
@@ -52,6 +60,14 @@ export function useClientProjectForm(
     setErrors((prev) => ({
       ...prev,
       form: undefined,
+    }));
+  }, []);
+
+  const onTurnstileError = useCallback(() => {
+    setTurnstileToken('');
+    setErrors((prev) => ({
+      ...prev,
+      form: 'form.turnstileUnavailable',
     }));
   }, []);
 
@@ -145,7 +161,7 @@ export function useClientProjectForm(
     }
 
     if (!turnstileToken) {
-      setErrors({ form: 'Please complete verification.' });
+      setErrors({ form: 'form.turnstileRequired' });
       return;
     }
 
@@ -160,7 +176,12 @@ export function useClientProjectForm(
         imagePayload = await initAttachmentUpload(values.image);
       }
 
-      const response = await submitClientProject(values, imagePayload, turnstileToken);
+      const response = await submitClientProject(
+        values,
+        imagePayload,
+        turnstileToken,
+        'client_project_modal',
+      );
 
       if (!response.ok) {
         void trackClientProjectModalEvent('submit_project_error', {
@@ -170,11 +191,7 @@ export function useClientProjectForm(
 
         resetTurnstile();
 
-        if (response.status === 429) {
-          setErrors({ form: 'Too many requests. Please wait a bit and try again.' });
-        } else {
-          setErrors({ form: 'Submission failed. Please try again.' });
-        }
+        setErrors({ form: resolveSubmitErrorKey(response.status) });
         setSubmitState('idle');
         return;
       }
@@ -187,12 +204,7 @@ export function useClientProjectForm(
         stage: 'submit',
         message: error instanceof Error ? error.message : 'unknown_error',
       });
-      setErrors({
-        form:
-          error instanceof Error && error.message
-            ? error.message
-            : 'Submission failed. Please check your connection and try again.',
-      });
+      setErrors({ form: 'form.networkFailed' });
       setSubmitState('idle');
       resetTurnstile();
     }
@@ -217,5 +229,6 @@ export function useClientProjectForm(
     onBlurField,
     onClearPhoneWithoutValidation,
     onTurnstileVerify,
+    onTurnstileError,
   };
 }
