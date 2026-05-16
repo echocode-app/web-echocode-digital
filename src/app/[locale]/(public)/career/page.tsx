@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 const Career = () => {
   return (
     <>
-      <SectionFirstReveal>
+      <SectionFirstReveal initialVisible>
         <HeroSection />
       </SectionFirstReveal>
       <StaticGradientLine />

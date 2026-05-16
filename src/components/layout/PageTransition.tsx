@@ -1,6 +1,6 @@
 'use client';
 
-import { ReactNode, useEffect } from 'react';
+import { ReactNode, useEffect, useRef } from 'react';
 import { animate, motion, useMotionValue, useReducedMotion, useTransform } from 'motion/react';
 import { usePathname } from '@/i18n/navigation';
 
@@ -13,9 +13,16 @@ const PageTransition = ({ children }: PageTransitionProps) => {
   const prefersReducedMotion = useReducedMotion();
   const progress = useMotionValue(1);
   const opacity = useTransform(progress, [0, 1], [0.68, 1]);
+  const hasMountedRef = useRef(false);
 
   useEffect(() => {
     if (prefersReducedMotion) {
+      progress.set(1);
+      return;
+    }
+
+    if (!hasMountedRef.current) {
+      hasMountedRef.current = true;
       progress.set(1);
       return;
     }

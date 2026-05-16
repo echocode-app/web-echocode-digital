@@ -76,7 +76,7 @@ const VacancyPage = async ({ params }: VacancyPageProps) => {
         employmentType={employmentType}
         datePosted={vacancy.datePosted}
       />
-      <SectionFirstReveal>
+      <SectionFirstReveal initialVisible>
         <HeroSection
           image={heroSection.image}
           title={vacancyTitle}

@@ -20,6 +20,7 @@ const HeroSection = () => {
               alt="Portfolio"
               fill
               priority
+              sizes="(min-width: 768px) 222px, 180px"
               className="object-cover"
             />
           </div>

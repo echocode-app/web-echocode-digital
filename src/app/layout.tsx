@@ -158,7 +158,7 @@ export default async function RootLayout({
     <html lang={locale}>
       <head>
         {SHOULD_LOAD_GTM ? (
-          <Script id="google-tag-manager" strategy="afterInteractive">
+          <Script id="google-tag-manager" strategy="lazyOnload">
             {`
               (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
               new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],

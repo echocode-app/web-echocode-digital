@@ -38,7 +38,7 @@ const QAPage = async ({ params }: PageProps) => {
           { name: 'QA Services', path: '/service-direction/qa' },
         ]}
       />
-      <SectionFirstReveal>
+      <SectionFirstReveal initialVisible>
         <HeroSection />
       </SectionFirstReveal>
       <StaticGradientLine />

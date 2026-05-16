@@ -47,7 +47,7 @@ const Cleaning = async ({ params }: PageProps) => {
           { name: 'Cleaning App', path: '/portfolio/cleaning' },
         ]}
       />
-      <SectionFirstReveal>
+      <SectionFirstReveal initialVisible>
         <section className="pt-42 pb-37.5">
           <TypedHeroHeading
             text="CLEANING-APP"

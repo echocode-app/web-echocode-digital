@@ -20,6 +20,7 @@ const HeroSection = () => {
               alt="Partnership"
               fill
               priority
+              sizes="(min-width: 768px) 280px, 200px"
               className="object-cover -scale-x-100"
             />
           </div>

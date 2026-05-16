@@ -37,7 +37,7 @@ const IGaming = async ({ params }: PageProps) => {
           { name: 'iGaming Development', path: '/service-direction/igaming' },
         ]}
       />
-      <SectionFirstReveal>
+      <SectionFirstReveal initialVisible>
         <HeroSection />
       </SectionFirstReveal>
       <StaticGradientLine />

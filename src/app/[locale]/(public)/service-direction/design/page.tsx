@@ -38,7 +38,7 @@ const Design = async ({ params }: PageProps) => {
           { name: 'Product Design', path: '/service-direction/design' },
         ]}
       />
-      <SectionFirstReveal>
+      <SectionFirstReveal initialVisible>
         <HeroSection />
       </SectionFirstReveal>
       <StaticGradientLine />

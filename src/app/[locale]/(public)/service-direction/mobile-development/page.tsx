@@ -37,7 +37,7 @@ const Mobile = async ({ params }: PageProps) => {
           { name: 'Mobile Development', path: '/service-direction/mobile-development' },
         ]}
       />
-      <SectionFirstReveal>
+      <SectionFirstReveal initialVisible>
         <HeroSection />
       </SectionFirstReveal>
       <StaticGradientLine />

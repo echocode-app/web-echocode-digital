@@ -36,7 +36,7 @@ const GameDevelopment = async ({ params }: PageProps) => {
           { name: 'Game Development', path: '/service-direction/game-development' },
         ]}
       />
-      <SectionFirstReveal>
+      <SectionFirstReveal initialVisible>
         <HeroSection />
       </SectionFirstReveal>
       <StaticGradientLine />
