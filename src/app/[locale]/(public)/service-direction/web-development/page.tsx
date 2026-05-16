@@ -38,7 +38,7 @@ const WebDevelopment = async ({ params }: PageProps) => {
           { name: 'Web Development', path: '/service-direction/web-development' },
         ]}
       />
-      <SectionFirstReveal>
+      <SectionFirstReveal initialVisible>
         <HeroSection />
       </SectionFirstReveal>
       <StaticGradientLine />

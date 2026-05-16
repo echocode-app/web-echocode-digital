@@ -21,6 +21,7 @@
       "contactUsBtn": "Kontakt",
       "mailTitle": "Po prostu prześlij nam swój adres e-mail, a skontaktujemy się z Tobą.",
       "mailSubtitle": "Twój e-mail",
+      "mailSuccess": "Wysłano pomyślnie!",
       "license": "ECHOCODE. WSZELKIE PRAWA ZASTRZEŻONE."
     }
   }

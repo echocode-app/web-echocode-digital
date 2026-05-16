@@ -20,6 +20,7 @@ const HeroSection = () => {
               alt="Team"
               fill
               priority
+              sizes="(min-width: 768px) 260px, 200px"
               className="object-cover -scale-x-100"
             />
           </div>

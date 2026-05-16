@@ -30,7 +30,7 @@ const Portfolio = async ({ searchParams }: SearchParamsProps) => {
   const projectsFilter = await searchParams;
   return (
     <>
-      <SectionFirstReveal>
+      <SectionFirstReveal initialVisible>
         <HeroSection />
       </SectionFirstReveal>
       <StaticGradientLine />

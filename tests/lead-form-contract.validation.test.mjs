@@ -13,6 +13,7 @@ const {
   phoneContactSchema,
   phoneSchema,
   projectIdentitySchema,
+  turnstileTokenSchema,
 } = await importValidationModule();
 
 async function importValidationModule() {
@@ -94,6 +95,11 @@ test('phone contact schemas reject unsupported and overlong phone values', () =>
   });
 
   assert.equal(parsed.success, false);
+});
+
+test('turnstileTokenSchema requires a non-empty token', () => {
+  assert.equal(turnstileTokenSchema.safeParse('cf-turnstile-token').success, true);
+  assert.equal(turnstileTokenSchema.safeParse('   ').success, false);
 });
 
 test('shared echocode.app project contract keeps firstName + lastName + email', () => {

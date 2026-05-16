@@ -23,6 +23,7 @@ const HeroSection = () => {
               src={'/images/rabbits/hero/igaming.png'}
               alt="iGaming"
               fill
+              sizes="(min-width: 768px) 318px, 200px"
               className="object-cover -scale-x-100 z-1"
             />
           </div>

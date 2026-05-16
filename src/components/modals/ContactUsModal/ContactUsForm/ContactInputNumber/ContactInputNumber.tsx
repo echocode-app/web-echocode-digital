@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { PatternFormat } from 'react-number-format';
 
@@ -12,10 +12,14 @@ const getCountryByLocale = (locale?: string) => {
   return COUNTRIES.find((country) => country.lang === lang) ?? COUNTRIES[0];
 };
 
+const getCountryByCode = (countryCode: string | undefined, locale?: string) =>
+  COUNTRIES.find((country) => country.code === countryCode) ?? getCountryByLocale(locale);
+
 type ContactInputNumberProps = {
   label: string;
   name: string;
   value: string;
+  countryCode: string;
   locale?: string;
   error?: string;
   autoComplete?: string;
@@ -31,6 +35,7 @@ export default function ContactInputNumber({
   label,
   name,
   value,
+  countryCode,
   locale,
   error,
   disabled,
@@ -43,6 +48,10 @@ export default function ContactInputNumber({
 
   const [selectedCountry, setSelectedCountry] = useState(getCountryByLocale(locale));
   const [isSelectorOpen, setIsSelectorOpen] = useState(false);
+
+  useEffect(() => {
+    setSelectedCountry(getCountryByCode(countryCode, locale));
+  }, [countryCode, locale]);
 
   return (
     <div className="relative w-full h-fit">

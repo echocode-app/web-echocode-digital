@@ -24,6 +24,41 @@ export function resolveBaseUrl(value) {
   return raw ?? DEFAULT_BASE_URL;
 }
 
+export function resolveTurnstileTokens(args, count) {
+  const raw =
+    normalizeOptionalString(args.get('turnstile-tokens')) ??
+    normalizeOptionalString(args.get('turnstile-token')) ??
+    normalizeOptionalString(process.env.SMOKE_TURNSTILE_TOKENS) ??
+    normalizeOptionalString(process.env.SMOKE_TURNSTILE_TOKEN) ??
+    normalizeOptionalString(process.env.TURNSTILE_TOKEN);
+
+  if (!raw) {
+    throw new Error(
+      'Digital smoke requires Turnstile tokens. Pass --turnstile-tokens or set SMOKE_TURNSTILE_TOKENS.',
+    );
+  }
+
+  const tokens = raw
+    .split(',')
+    .map((token) => token.trim())
+    .filter(Boolean);
+
+  if (tokens.length === 0) {
+    throw new Error('Turnstile token list cannot be empty.');
+  }
+
+  if (tokens.length === 1) {
+    // Single-token reuse is intended only for local dummy Turnstile test keys.
+    return Array.from({ length: count }, () => tokens[0]);
+  }
+
+  if (tokens.length < count) {
+    throw new Error(`Expected ${count} Turnstile tokens, received ${tokens.length}.`);
+  }
+
+  return tokens.slice(0, count);
+}
+
 export function buildDigitalSmokeArtifacts(runId) {
   const tag = `smoke-${runId}`;
 
@@ -48,7 +83,8 @@ export function buildDigitalSmokeArtifacts(runId) {
     },
     clientProject: {
       firstName: 'Smoke',
-      lastName: 'Digital',
+      countryCode: '+380',
+      phone: '501234567',
       email: `client-${tag}@echocode.test`,
       description: `Smoke test client project ${runId}`,
     },

@@ -20,6 +20,8 @@ export type ClientProjectCreateInput = {
   countryCode: string;
   phone: string;
   email: string;
+  /** Widget token verified before persistence; never stored. */
+  turnstileToken: string;
   description?: string;
   image?: ClientProjectImageMetaInput;
 };

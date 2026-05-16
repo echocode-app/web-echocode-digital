@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { validate } from '@/server/lib';
+import { turnstileTokenSchema } from '@/shared/validation/submissions.common';
 import {
   decodeModerationCursor,
   encodeModerationCursor,
@@ -16,9 +17,11 @@ import type {
 
 const EMAIL_MAX_LEN = 120;
 
+/** Public email submissions must carry a server-verifiable Turnstile token. */
 export const emailSubmissionCreateSchema = z.object({
   email: z.string().trim().email('Must be a valid email').max(EMAIL_MAX_LEN, 'Email is too long'),
   source: z.string().trim().min(1).max(80).optional(),
+  turnstileToken: turnstileTokenSchema,
 });
 
 export const emailSubmissionListQuerySchema = moderationListQuerySchema;

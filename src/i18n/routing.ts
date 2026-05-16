@@ -8,6 +8,8 @@ export const routing = defineRouting({
   // Used when no locale matches
   defaultLocale,
   localeDetection: true,
+  // Prefixed locale URLs are canonical, so we do not need a response cookie per page view.
+  localeCookie: false,
   localePrefix: {
     mode: 'always',
     prefixes: {

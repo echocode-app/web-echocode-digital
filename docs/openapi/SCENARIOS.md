@@ -3,11 +3,13 @@
 ## 1) Vacancy submit (CV + profile URL)
 1. Call `POST /api/forms/uploads/init` with `formType: vacancy` and CV metadata.
 2. Upload file via returned signed `PUT` URL.
-3. Call `POST /api/forms/vacancy-submissions` with `profileUrl`, uploaded `cvFile`, and `vacancy` snapshot.
+3. Generate a Cloudflare Turnstile token on the frontend.
+4. Call `POST /api/forms/vacancy-submissions` with `profileUrl`, uploaded `cvFile`, `vacancy` snapshot, and `turnstileToken`.
 
 ## 2) Footer mobile email submit
-1. Call `POST /api/forms/email-submissions` with `{ email, source }`.
-2. Expect `status: new` and submission id in response.
+1. Generate a Cloudflare Turnstile token on the frontend.
+2. Call `POST /api/forms/email-submissions` with `{ email, source, turnstileToken }`.
+3. Expect `status: new` and submission id in response.
 
 ## 3) Admin moderation flow (any queue)
 1. Load list endpoint:

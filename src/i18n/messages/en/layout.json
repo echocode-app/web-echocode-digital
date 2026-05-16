@@ -21,6 +21,7 @@
       "contactUsBtn": "Contact us",
       "mailTitle": "Just send us your contact email and we will contact you.",
       "mailSubtitle": "Your email",
+      "mailSuccess": "Success submit!",
       "license": "ECHOCODE. ALL RIGHTS RESERVED."
     }
   }

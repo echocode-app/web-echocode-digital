@@ -4,12 +4,17 @@ import { type ReactNode, useEffect, useRef } from 'react';
 
 interface SectionFirstRevealProps {
   children: ReactNode;
+  initialVisible?: boolean;
 }
 
-const SectionFirstReveal = ({ children }: SectionFirstRevealProps) => {
+const SectionFirstReveal = ({ children, initialVisible = false }: SectionFirstRevealProps) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (initialVisible) {
+      return;
+    }
+
     const node = wrapperRef.current;
 
     if (!node || typeof window === 'undefined') {
@@ -53,17 +58,21 @@ const SectionFirstReveal = ({ children }: SectionFirstRevealProps) => {
     return () => {
       observer.disconnect();
     };
-  }, []);
+  }, [initialVisible]);
 
   return (
     <div
       ref={wrapperRef}
-      className="
-        opacity-0 translate-y-3
-        motion-reduce:opacity-100! motion-reduce:translate-y-0!
-        transition-[opacity,transform] duration-420 ease-out
-        will-change-transform
-      "
+      className={
+        initialVisible
+          ? 'opacity-100 translate-y-0 will-change-auto'
+          : `
+            opacity-0 translate-y-3
+            motion-reduce:opacity-100! motion-reduce:translate-y-0!
+            transition-[opacity,transform] duration-420 ease-out
+            will-change-transform
+          `
+      }
     >
       {children}
     </div>

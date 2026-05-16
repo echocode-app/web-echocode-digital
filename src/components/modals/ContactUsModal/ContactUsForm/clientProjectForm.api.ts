@@ -21,6 +21,7 @@ type UploadInitPayload = {
 };
 
 type CreateSubmissionPayload = { success: boolean };
+export type ClientProjectSubmitSource = 'client_project_modal' | 'client_project_footer';
 type ErrorPayload = {
   error?: {
     message?: string;
@@ -90,7 +91,9 @@ export async function initAttachmentUpload(file: File): Promise<UploadedImagePay
 
 export async function submitClientProject(
   values: FormValues,
-  imagePayload?: UploadedImagePayload,
+  imagePayload: UploadedImagePayload | undefined,
+  turnstileToken: string,
+  source: ClientProjectSubmitSource = 'client_project_modal',
 ): Promise<{ ok: boolean; status: number }> {
   const normalized = normalize(values);
   const analyticsContext = getClientAnalyticsContextPayload();
@@ -101,8 +104,10 @@ export async function submitClientProject(
     body: JSON.stringify({
       firstName: normalized.firstName,
       countryCode: normalized.countryCode,
+      turnstileToken,
       phone: normalized.phone,
       email: normalized.email,
+      source,
       ...(normalized.description ? { description: normalized.description } : {}),
       ...(imagePayload ? { image: imagePayload } : {}),
       ...analyticsContext,
@@ -110,9 +115,6 @@ export async function submitClientProject(
   });
 
   if (!response.ok) {
-    if (response.status === 503) {
-      throw new Error('Service is temporarily unavailable. Please try again shortly.');
-    }
     return { ok: false, status: response.status };
   }
 

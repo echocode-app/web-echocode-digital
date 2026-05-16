@@ -1,3 +1,5 @@
+import { after } from 'next/server';
+
 import { pageViewBodySchema, trackPageView } from '@/server/analytics';
 import {
   appendCorsHeaders,
@@ -22,10 +24,16 @@ const handlePost = withApi(
       scope: 'analytics.page-view',
     });
 
-    return trackPageView({
-      body,
-      requestHeaders: req.headers,
+    const requestHeaders = new Headers(req.headers);
+
+    after(() => {
+      void trackPageView({
+        body,
+        requestHeaders,
+      });
     });
+
+    return { ok: true };
   },
   {
     auth: false,

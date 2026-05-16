@@ -32,7 +32,8 @@
 ## `.digital` End-to-End Smoke Test
 
 - команда:
-- `BASE_URL=http://127.0.0.1:3000 npm run test:smoke:digital`
+- `BASE_URL=http://127.0.0.1:3000 SMOKE_TURNSTILE_TOKENS=<email-token>,<client-token>,<vacancy-token> npm run test:smoke:digital`
+- локально з dummy Turnstile secret можна передати один dummy token через `SMOKE_TURNSTILE_TOKEN`
 - що перевіряє:
 - `GET /api/internal/firebase-check`
 - `POST /api/analytics/page-view`
@@ -78,6 +79,7 @@
 - `/api/forms/submissions` now supports the same cross-origin public ingestion flow for external frontend sites
 - public `.digital` frontend now mounts `PageViewTracker` in the public layout, so page views, geography, top pages, and referrer/UTM widgets are fed automatically on page load and route changes
 - public `.digital` form clients now send shared client analytics context (`siteId`, `siteHost`, first-touch attribution, client session header) across email, vacancy, and client-project flows
+- public submit endpoints now also require a Cloudflare Turnstile token and return `403` when `siteverify` fails
 - `.digital` dashboard now also has a dedicated page-view site slice API:
 - `/api/admin/dashboard/site-slice`
 - it powers page views / countries KPIs, top pages, geography list, and referrer/UTM widgets scoped to `siteId = echocode_digital`

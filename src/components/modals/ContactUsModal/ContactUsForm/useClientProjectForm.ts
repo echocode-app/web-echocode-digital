@@ -1,7 +1,7 @@
 'use client';
 
 import { useLocale } from 'next-intl';
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import {
   initAttachmentUpload,
   submitClientProject,
@@ -25,6 +25,14 @@ import {
 
 export type { SubmitState };
 
+function resolveSubmitErrorKey(status: number): string {
+  if (status === 403) return 'form.turnstileFailed';
+  if (status === 429) return 'form.rateLimit';
+  if (status === 503) return 'form.serviceUnavailable';
+
+  return 'form.submitFailed';
+}
+
 export function useClientProjectForm(
   onSuccessNavigate: () => void,
   onAutoClose: () => void,
@@ -35,10 +43,33 @@ export function useClientProjectForm(
   const [errors, setErrors] = useState<FormErrors>({});
   const [touched, setTouched] = useState<Partial<Record<FieldName, boolean>>>({});
   const [submitState, setSubmitState] = useState<SubmitState>('idle');
+  const [turnstileToken, setTurnstileToken] = useState('');
+  const [turnstileKey, setTurnstileKey] = useState(0);
 
   const isLocked = submitState === 'loading' || submitState === 'success';
 
   const canSubmit = useMemo(() => !isLocked, [isLocked]);
+
+  const resetTurnstile = useCallback(() => {
+    setTurnstileToken('');
+    setTurnstileKey((prev) => prev + 1);
+  }, []);
+
+  const onTurnstileVerify = useCallback((token: string) => {
+    setTurnstileToken(token);
+    setErrors((prev) => ({
+      ...prev,
+      form: undefined,
+    }));
+  }, []);
+
+  const onTurnstileError = useCallback(() => {
+    setTurnstileToken('');
+    setErrors((prev) => ({
+      ...prev,
+      form: 'form.turnstileUnavailable',
+    }));
+  }, []);
 
   useEffect(() => {
     void trackClientProjectModalEvent('contact_modal_open');
@@ -129,6 +160,11 @@ export function useClientProjectForm(
       return;
     }
 
+    if (!turnstileToken) {
+      setErrors({ form: 'form.turnstileRequired' });
+      return;
+    }
+
     setSubmitState('loading');
     setErrors((prev) => ({ ...prev, form: undefined }));
 
@@ -140,7 +176,12 @@ export function useClientProjectForm(
         imagePayload = await initAttachmentUpload(values.image);
       }
 
-      const response = await submitClientProject(values, imagePayload);
+      const response = await submitClientProject(
+        values,
+        imagePayload,
+        turnstileToken,
+        'client_project_modal',
+      );
 
       if (!response.ok) {
         void trackClientProjectModalEvent('submit_project_error', {
@@ -148,29 +189,24 @@ export function useClientProjectForm(
           status: response.status,
         });
 
-        if (response.status === 429) {
-          setErrors({ form: 'Too many requests. Please wait a bit and try again.' });
-        } else {
-          setErrors({ form: 'Submission failed. Please try again.' });
-        }
+        resetTurnstile();
+
+        setErrors({ form: resolveSubmitErrorKey(response.status) });
         setSubmitState('idle');
         return;
       }
 
       setErrors({});
       setSubmitState('success');
+      resetTurnstile();
     } catch (error) {
       void trackClientProjectModalEvent('submit_project_error', {
         stage: 'submit',
         message: error instanceof Error ? error.message : 'unknown_error',
       });
-      setErrors({
-        form:
-          error instanceof Error && error.message
-            ? error.message
-            : 'Submission failed. Please check your connection and try again.',
-      });
+      setErrors({ form: 'form.networkFailed' });
       setSubmitState('idle');
+      resetTurnstile();
     }
   };
 
@@ -186,10 +222,13 @@ export function useClientProjectForm(
     errors,
     submitState,
     isLocked,
+    turnstileKey,
     onSubmit,
     onChangeText,
     onChangeImage,
     onBlurField,
     onClearPhoneWithoutValidation,
+    onTurnstileVerify,
+    onTurnstileError,
   };
 }

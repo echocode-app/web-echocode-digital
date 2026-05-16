@@ -6,8 +6,10 @@ export type PublicRateLimitInput = {
   scope:
     | 'analytics.page-view'
     | 'forms.uploads.init'
+    | 'forms.submissions.create'
     | 'forms.client-project.submit'
     | 'forms.client-project.image.init'
+    | 'forms.client-project.analytics'
     | 'forms.email-submissions.create'
     | 'forms.vacancy-submissions.create';
 };
@@ -20,8 +22,10 @@ type ScopePolicy = {
 const RATE_LIMIT_POLICIES: Record<PublicRateLimitInput['scope'], ScopePolicy> = {
   'analytics.page-view': { limit: 120, windowMs: 60_000 },
   'forms.uploads.init': { limit: 20, windowMs: 60_000 },
+  'forms.submissions.create': { limit: 8, windowMs: 60_000 },
   'forms.client-project.image.init': { limit: 12, windowMs: 60_000 },
   'forms.client-project.submit': { limit: 8, windowMs: 60_000 },
+  'forms.client-project.analytics': { limit: 60, windowMs: 60_000 },
   'forms.email-submissions.create': { limit: 12, windowMs: 60_000 },
   'forms.vacancy-submissions.create': { limit: 8, windowMs: 60_000 },
 };
@@ -33,9 +37,20 @@ type Entry = {
 
 const IN_MEMORY_RATE_LIMITER = new Map<string, Entry>();
 
+function getClientIp(request: NextRequest): string {
+  // Prefer trusted proxy headers before falling back to a shared anonymous bucket.
+  const forwardedFor = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim();
+  if (forwardedFor) return forwardedFor;
+
+  const cfConnectingIp = request.headers.get('cf-connecting-ip')?.trim();
+  if (cfConnectingIp) return cfConnectingIp;
+
+  const realIp = request.headers.get('x-real-ip')?.trim();
+  return realIp || 'unknown';
+}
+
 export async function applyPublicRateLimitStub(input: PublicRateLimitInput): Promise<void> {
-  const forwardedFor = input.request.headers.get('x-forwarded-for');
-  const clientIp = forwardedFor?.split(',')[0]?.trim() || 'unknown';
+  const clientIp = getClientIp(input.request);
   const policy = RATE_LIMIT_POLICIES[input.scope];
   const now = Date.now();
   const key = `${input.scope}:${clientIp}`;

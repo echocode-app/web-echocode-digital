@@ -11,7 +11,15 @@ type FormState = {
   };
 };
 
-const submitEmail = async (formData: FormData): Promise<FormState> => {
+function resolveEmailSubmitErrorKey(status: number): string {
+  if (status === 403) return 'form.turnstileFailed';
+  if (status === 429) return 'form.rateLimit';
+  if (status === 503) return 'form.serviceUnavailable';
+
+  return 'form.submitFailed';
+}
+
+const submitEmail = async (formData: FormData, turnstileToken: string): Promise<FormState> => {
   try {
     const email = formData.get('email');
     const analyticsContext = getClientAnalyticsContextPayload();
@@ -20,17 +28,18 @@ const submitEmail = async (formData: FormData): Promise<FormState> => {
       headers: getClientAnalyticsHeaders(),
       body: JSON.stringify({
         email,
-        source: 'career-page',
+        source: 'career_footer',
+        turnstileToken,
         ...analyticsContext,
       }),
     });
 
-    if (!res.ok) throw new Error('Request failed');
+    if (!res.ok) return { error: resolveEmailSubmitErrorKey(res.status) };
 
     return { success: true };
   } catch (err) {
     console.error(err);
-    return { error: 'Failed to submit email' };
+    return { error: 'form.networkFailed' };
   }
 };
 

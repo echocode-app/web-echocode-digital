@@ -31,7 +31,14 @@ const HeroSection = ({ title, level, employmentType, image }: HeroSectionProps) 
             )}
           </div>
           <div className="relative w-50 h-50 md:min-w-81 md:h-81">
-            <Image src={image.path} alt="Vacancy" fill priority className="object-contain" />
+            <Image
+              src={image.path}
+              alt="Vacancy"
+              fill
+              priority
+              sizes="(min-width: 768px) 324px, 200px"
+              className="object-contain"
+            />
           </div>
         </div>
       </SectionContainer>

@@ -51,7 +51,7 @@ const Food = async ({ params }: PageProps) => {
           { name: 'Food & Drink', path: '/portfolio/food' },
         ]}
       />
-      <SectionFirstReveal>
+      <SectionFirstReveal initialVisible>
         <section className="pt-42 pb-37.5">
           <TypedHeroHeading
             text="FOOD ＆ DRINK"

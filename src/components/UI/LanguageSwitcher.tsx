@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { Locale, useLocale } from 'next-intl';
-import { useTransition, useState } from 'react';
+import { useEffect, useTransition, useState } from 'react';
 import { useParams } from 'next/navigation';
 
 import { locales } from '@/i18n/config';
@@ -16,6 +16,8 @@ const localeLabels: Record<Locale, string> = {
   pl: 'pl',
 };
 
+const LOCALE_SWITCH_SCROLL_KEY = 'echocode_locale_switch_scroll_y';
+
 const LanguageSwitcher = () => {
   const locale = useLocale() as Locale;
   const pathname = usePathname();
@@ -25,17 +27,34 @@ const LanguageSwitcher = () => {
   const [isPending, startTransition] = useTransition();
   const [open, setOpen] = useState(false);
 
+  useEffect(() => {
+    const storedScrollY = window.sessionStorage.getItem(LOCALE_SWITCH_SCROLL_KEY);
+    if (!storedScrollY) return;
+
+    window.sessionStorage.removeItem(LOCALE_SWITCH_SCROLL_KEY);
+
+    const scrollY = Number(storedScrollY);
+    if (!Number.isFinite(scrollY)) return;
+
+    // Locale switches remount translated routes, so restore the user's reading position.
+    requestAnimationFrame(() => {
+      window.scrollTo({ top: Math.max(0, scrollY), behavior: 'auto' });
+    });
+  }, [locale, pathname]);
+
   const handleChangeLocale = (nextLocale: Locale) => {
     if (nextLocale === locale) {
       setOpen(false);
       return;
     }
 
+    window.sessionStorage.setItem(LOCALE_SWITCH_SCROLL_KEY, String(window.scrollY || 0));
+
     startTransition(() => {
       router.replace(
         // @ts-expect-error -- same pattern as next-intl docs
         { pathname, params },
-        { locale: nextLocale },
+        { locale: nextLocale, scroll: false },
       );
     });
 

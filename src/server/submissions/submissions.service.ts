@@ -7,6 +7,7 @@ import {
 import { verifyUploadedProjectAttachment } from '@/server/submissions/submissions.upload.service';
 import { createSubmissionRecord } from '@/server/submissions/submissions.repository';
 import { toCreateSubmissionResponseDto } from '@/server/submissions/submissions.mapper';
+import { verifyTurnstileTokenFromBody } from '@/server/lib/turnstile';
 import { resolveRequestSiteContext } from '@/server/sites/siteContext';
 import type {
   CreateProjectSubmissionParams,
@@ -139,6 +140,11 @@ export async function createProjectSubmission(
   // Run contract guards before shared schema validation to keep stable error codes.
   assertPreParseSubmissionGuards(params.rawBody, params.requestHeaders, eventAttribution);
 
+  // Validate the anti-bot token before domain payload validation and Firestore writes.
+  await verifyTurnstileTokenFromBody({
+    rawBody: params.rawBody,
+    requestHeaders: params.requestHeaders,
+  });
   const parsed = parseSubmissionCreatePayload(params.rawBody);
 
   if (parsed.formType === 'candidate') {

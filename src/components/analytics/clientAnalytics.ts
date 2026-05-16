@@ -92,6 +92,22 @@ export function getClientAnalyticsHeaders(): Record<string, string> {
   };
 }
 
+function scheduleClientAnalytics(task: () => void): void {
+  if (typeof window === 'undefined') {
+    task();
+    return;
+  }
+
+  // Keep analytics best-effort and off the initial render critical path.
+  const requestIdleCallback = window.requestIdleCallback;
+  if (typeof requestIdleCallback === 'function') {
+    requestIdleCallback(task, { timeout: 1500 });
+    return;
+  }
+
+  globalThis.setTimeout(task, 0);
+}
+
 export async function postClientAnalyticsEvent(
   url: string,
   payload: Record<string, unknown>,
@@ -100,14 +116,14 @@ export async function postClientAnalyticsEvent(
     return;
   }
 
-  try {
-    await fetch(url, {
+  scheduleClientAnalytics(() => {
+    void fetch(url, {
       method: 'POST',
       headers: getClientAnalyticsHeaders(),
       body: JSON.stringify(payload),
       keepalive: true,
+    }).catch(() => {
+      // Best-effort analytics should never block the user flow.
     });
-  } catch {
-    // Best-effort analytics should never block the user flow.
-  }
+  });
 }

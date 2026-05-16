@@ -51,7 +51,7 @@ const ECommers = async ({ params }: PageProps) => {
           { name: 'E-commerce', path: '/portfolio/e-commers' },
         ]}
       />
-      <SectionFirstReveal>
+      <SectionFirstReveal initialVisible>
         <section className="pt-42 pb-37.5">
           <TypedHeroHeading
             text="E-commerce"

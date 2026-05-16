@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server';
 
 export const runtime = 'nodejs';
 
-const OPENAPI_ROOT = path.join(process.cwd(), 'docs', 'openapi');
+const OPENAPI_ROOT = path.join(/*turbopackIgnore: true*/ process.cwd(), 'docs', 'openapi');
 
 function resolveContentType(filePath: string): string {
   if (filePath.endsWith('.yaml') || filePath.endsWith('.yml')) {
@@ -51,7 +51,7 @@ export async function GET(
   }
 
   try {
-    const contents = await readFile(filePath, 'utf8');
+    const contents = await readFile(/*turbopackIgnore: true*/ filePath, 'utf8');
 
     return new NextResponse(contents, {
       status: 200,

@@ -14,6 +14,8 @@ import type {
 export type EmailSubmissionCreateInput = {
   email: string;
   source?: string;
+  /** Widget token verified before persistence; never stored. */
+  turnstileToken: string;
 };
 
 export type EmailSubmissionStatus = ModerationStatus;

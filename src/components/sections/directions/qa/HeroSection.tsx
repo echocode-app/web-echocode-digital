@@ -25,6 +25,7 @@ const HeroSection = () => {
               alt="QA"
               fill
               priority
+              sizes="(min-width: 768px) 260px, 200px"
               className="object-cover"
             />
           </div>

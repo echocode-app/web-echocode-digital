@@ -20,6 +20,8 @@ export type VacancySubmissionCvInput = {
 };
 
 export type VacancySubmissionCreateInput = {
+  /** Widget token verified before persistence; never stored. */
+  turnstileToken: string;
   profileUrl: string;
   cvFile: VacancySubmissionCvInput;
   vacancy: VacancySubmissionContextSnapshot;

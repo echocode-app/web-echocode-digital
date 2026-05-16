@@ -4,6 +4,7 @@ import ContactFile from './ContactFile';
 import ContactInput from './ContactInput';
 import SubmitButton from './SubmitBtn';
 import YourNeedsInput from './YourNeedInput';
+import TurnstileWidget from '@/widgets/TurnstileWidget';
 import { useClientProjectForm } from '@/components/modals/ContactUsModal/ContactUsForm/useClientProjectForm';
 import type { SubmitState } from '@/components/modals/ContactUsModal/ContactUsForm/useClientProjectForm';
 import ContactInputNumber from './ContactInputNumber';
@@ -30,11 +31,14 @@ const ContactUsForm = ({
     errors,
     submitState,
     isLocked,
+    turnstileKey,
     onSubmit,
     onChangeText,
     onChangeImage,
     onBlurField,
     onClearPhoneWithoutValidation,
+    onTurnstileVerify,
+    onTurnstileError,
   } = useClientProjectForm(onSuccessNavigate, onAutoClose, onSubmitStateChange);
 
   return (
@@ -55,6 +59,7 @@ const ContactUsForm = ({
           name="phone"
           label={t('phonePlaceholder')}
           value={values.phone}
+          countryCode={values.countryCode}
           locale={locale}
           error={translateError(errors.phone)}
           required
@@ -86,7 +91,7 @@ const ContactUsForm = ({
           onChange={onChangeImage}
         />
       </div>
-      <div className="mb-4 md:mb-8">
+      <div className="mb-4">
         <YourNeedsInput
           value={values.description}
           error={translateError(errors.description)}
@@ -95,11 +100,19 @@ const ContactUsForm = ({
           onChange={(value) => onChangeText('description', value)}
         />
       </div>
+      <div className="mx-auto w-fit min-h-[71.5px]">
+        <TurnstileWidget
+          key={turnstileKey}
+          action="client-project"
+          onVerify={onTurnstileVerify}
+          onError={onTurnstileError}
+        />
+      </div>
       <div className="min-h-5 mb-1" aria-live="polite">
         <p
           className={`text-main-xs text-[#ff8d8d] transition-opacity duration-main ${errors.form ? 'opacity-100' : 'opacity-0'}`}
         >
-          {errors.form ?? ' '}
+          {translateError(errors.form) ?? ' '}
         </p>
       </div>
       <SubmitButton state={submitState} />

@@ -10,7 +10,8 @@
       "sizeMax": "File must be ≤ 5 MB",
       "pathRequired": "Path is required",
       "pathTooLong": "Path is too long",
-      "pathInvalid": "Invalid storage path format"
+      "pathInvalid": "Invalid storage path format",
+      "uploadFailed": "File upload failed"
     },
     "profileUrl": {
       "required": "URL is required",
@@ -20,6 +21,15 @@
     },
     "cv": {
       "required": "CV is required"
+    },
+    "form": {
+      "turnstileRequired": "Please complete verification.",
+      "turnstileFailed": "Verification failed. Please try again.",
+      "turnstileUnavailable": "Verification is temporarily unavailable. Please try again later.",
+      "rateLimit": "Too many requests. Please wait a bit and try again.",
+      "serviceUnavailable": "Service is temporarily unavailable. Please try again shortly.",
+      "submitFailed": "Submission failed. Please try again.",
+      "networkFailed": "Submission failed. Please check your connection and try again."
     }
   },
   "ProjectValidation": {
@@ -46,6 +56,15 @@
     "attachment": {
       "invalidType": "Unsupported file type. Use image, PDF, Office, TXT, CSV, RTF or ZIP.",
       "size": "File must be smaller than 10MB"
+    },
+    "form": {
+      "turnstileRequired": "Please complete verification.",
+      "turnstileFailed": "Verification failed. Please try again.",
+      "turnstileUnavailable": "Verification is temporarily unavailable. Please try again later.",
+      "rateLimit": "Too many requests. Please wait a bit and try again.",
+      "serviceUnavailable": "Service is temporarily unavailable. Please try again shortly.",
+      "submitFailed": "Submission failed. Please try again.",
+      "networkFailed": "Submission failed. Please check your connection and try again."
     }
   },
   "EmailSubmitValidation": {
@@ -54,6 +73,15 @@
       "max": "Email is too long",
       "invalid": "Enter a valid email",
       "domain": "Domain must contain a dot and be valid"
+    },
+    "form": {
+      "turnstileRequired": "Please complete verification.",
+      "turnstileFailed": "Verification failed. Please try again.",
+      "turnstileUnavailable": "Verification is temporarily unavailable. Please try again later.",
+      "rateLimit": "Too many requests. Please wait a bit and try again.",
+      "serviceUnavailable": "Service is temporarily unavailable. Please try again shortly.",
+      "submitFailed": "Submission failed. Please try again.",
+      "networkFailed": "Submission failed. Please check your connection and try again."
     }
   }
 }

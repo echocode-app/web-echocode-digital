@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 const Team = () => {
   return (
     <>
-      <SectionFirstReveal>
+      <SectionFirstReveal initialVisible>
         <HeroSection />
       </SectionFirstReveal>
       <StaticGradientLine />

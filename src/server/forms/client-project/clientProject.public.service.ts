@@ -4,15 +4,33 @@ import { createClientSubmissionRecord } from '@/server/forms/client-project/clie
 import { resolveEventAttribution, trackEventBestEffort } from '@/server/analytics';
 import { sendClientProjectLeadToCrmBestEffort } from '@/server/forms/client-project/clientProject.crm.service';
 import { resolveClientSubmissionImageUrl } from '@/server/forms/client-project/clientProject.upload.service';
+import { verifyTurnstileTokenFromBody } from '@/server/lib/turnstile';
 import type { CreateClientSubmissionResponseDto } from '@/server/forms/client-project/clientProject.types';
+
+function resolveClientProjectSource(rawBody: unknown): 'client_project_modal' | 'client_project_footer' {
+  if (typeof rawBody !== 'object' || rawBody === null || Array.isArray(rawBody)) {
+    return 'client_project_modal';
+  }
+
+  return (rawBody as Record<string, unknown>).source === 'client_project_footer'
+    ? 'client_project_footer'
+    : 'client_project_modal';
+}
 
 export async function createClientProjectSubmission(input: {
   rawBody: unknown;
   requestHeaders?: Headers;
 }): Promise<CreateClientSubmissionResponseDto> {
+  const source = resolveClientProjectSource(input.rawBody);
   const eventAttribution = resolveEventAttribution({
     rawBody: input.rawBody,
     headers: input.requestHeaders,
+  });
+  // Require Turnstile before payload validation, uploads, or records are written.
+  await verifyTurnstileTokenFromBody({
+    rawBody: input.rawBody,
+    requestHeaders: input.requestHeaders,
+    expectedAction: 'client-project',
   });
   const parsed = parseClientProjectCreatePayload(input.rawBody);
 
@@ -31,7 +49,7 @@ export async function createClientProjectSubmission(input: {
     eventType: 'submit_project',
     headers: input.requestHeaders,
     metadata: {
-      source: 'client_project_modal',
+      source,
       submissionId: created.id,
       hasAttachment: Boolean(parsed.image),
       ...(eventAttribution

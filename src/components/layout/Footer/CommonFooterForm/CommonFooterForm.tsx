@@ -1,7 +1,7 @@
 'use client';
 
 import { useLocale, useTranslations } from 'next-intl';
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import ContactInput from '@/components/modals/ContactUsModal/ContactUsForm/ContactInput';
 import ContactFile from '@/components/modals/ContactUsModal/ContactUsForm/ContactFile';
@@ -25,6 +25,15 @@ import {
   validateAll,
   validateField,
 } from '@/components/modals/ContactUsModal/ContactUsForm/clientProjectForm.validation';
+import TurnstileWidget from '@/widgets/TurnstileWidget';
+
+function resolveSubmitErrorKey(status: number): string {
+  if (status === 403) return 'form.turnstileFailed';
+  if (status === 429) return 'form.rateLimit';
+  if (status === 503) return 'form.serviceUnavailable';
+
+  return 'form.submitFailed';
+}
 
 const CommonFooterForm = () => {
   const formErrorT = useTranslations('ProjectValidation');
@@ -35,10 +44,33 @@ const CommonFooterForm = () => {
   const [errors, setErrors] = useState<FormErrors>({});
   const [touched, setTouched] = useState<Partial<Record<FieldName, boolean>>>({});
   const [submitState, setSubmitState] = useState<SubmitState>('idle');
+  const [turnstileToken, setTurnstileToken] = useState('');
+  const [turnstileKey, setTurnstileKey] = useState(0);
 
   const isLocked = submitState === 'loading' || submitState === 'success';
 
   const canSubmit = useMemo(() => !isLocked, [isLocked]);
+
+  const resetTurnstile = useCallback(() => {
+    setTurnstileToken('');
+    setTurnstileKey((prev) => prev + 1);
+  }, []);
+
+  const onTurnstileVerify = useCallback((token: string) => {
+    setTurnstileToken(token);
+    setErrors((prev) => ({
+      ...prev,
+      form: undefined,
+    }));
+  }, []);
+
+  const onTurnstileError = useCallback(() => {
+    setTurnstileToken('');
+    setErrors((prev) => ({
+      ...prev,
+      form: 'form.turnstileUnavailable',
+    }));
+  }, []);
 
   useEffect(() => {
     if (submitState !== 'success') {
@@ -124,48 +156,61 @@ const CommonFooterForm = () => {
       return;
     }
 
+    if (!turnstileToken) {
+      setErrors((prev) => ({
+        ...prev,
+        form: 'form.turnstileRequired',
+      }));
+      return;
+    }
+
     setSubmitState('loading');
     setErrors((prev) => ({ ...prev, form: undefined }));
 
     try {
-      void trackClientProjectModalEvent('submit_project_attempt', { stage: 'before_submit' });
+      void trackClientProjectModalEvent('submit_project_attempt', {
+        stage: 'before_submit',
+        source: 'client_project_footer',
+      });
       let imagePayload: UploadedImagePayload | undefined;
 
       if (values.image) {
         imagePayload = await initAttachmentUpload(values.image);
       }
 
-      const response = await submitClientProject(values, imagePayload);
+      const response = await submitClientProject(
+        values,
+        imagePayload,
+        turnstileToken,
+        'client_project_footer',
+      );
 
       if (!response.ok) {
         void trackClientProjectModalEvent('submit_project_error', {
           stage: 'submit_response',
           status: response.status,
+          source: 'client_project_footer',
         });
 
-        if (response.status === 429) {
-          setErrors({ form: 'Too many requests. Please wait a bit and try again.' });
-        } else {
-          setErrors({ form: 'Submission failed. Please try again.' });
-        }
+        resetTurnstile();
+
+        setErrors({ form: resolveSubmitErrorKey(response.status) });
         setSubmitState('idle');
         return;
       }
 
       setErrors({});
       setSubmitState('success');
+      resetTurnstile();
     } catch (error) {
       void trackClientProjectModalEvent('submit_project_error', {
         stage: 'submit',
         message: error instanceof Error ? error.message : 'unknown_error',
+        source: 'client_project_footer',
       });
-      setErrors({
-        form:
-          error instanceof Error && error.message
-            ? error.message
-            : 'Submission failed. Please check your connection and try again.',
-      });
+      setErrors({ form: 'form.networkFailed' });
       setSubmitState('idle');
+      resetTurnstile();
     }
   };
 
@@ -196,6 +241,7 @@ const CommonFooterForm = () => {
           name="phone"
           label={t('phonePlaceholder')}
           value={values.phone}
+          countryCode={values.countryCode}
           locale={locale}
           error={translateError(errors.phone)}
           required
@@ -227,7 +273,7 @@ const CommonFooterForm = () => {
           onChange={onChangeImage}
         />
       </div>
-      <div className="mb-4 md:mb-8">
+      <div className="mb-4">
         <YourNeedsInput
           value={values.description}
           error={translateError(errors.description)}
@@ -236,14 +282,24 @@ const CommonFooterForm = () => {
           onChange={(value) => onChangeText('description', value)}
         />
       </div>
-      <div className="absolute min-h-5 mb-1" aria-live="polite">
-        <p
-          className={`text-main-xs text-[#ff8d8d] transition-opacity duration-main ${errors.form ? 'opacity-100' : 'opacity-0'}`}
-        >
-          {errors.form ?? ' '}
-        </p>
+      <div className="mx-auto w-fit mb-4 min-h-[71.5px]">
+        <TurnstileWidget
+          key={turnstileKey}
+          action="client-project"
+          onVerify={onTurnstileVerify}
+          onError={onTurnstileError}
+        />
       </div>
-      <SubmitBtn state={submitState} />
+      <div className="relative">
+        <SubmitBtn state={submitState} />
+        <div className="absolute left-0 min-h-5 mb-1 -top-5" aria-live="polite">
+          <p
+            className={`text-main-xs text-[#ff8d8d] transition-opacity duration-main ${errors.form ? 'opacity-100' : 'opacity-0'}`}
+          >
+            {translateError(errors.form) ?? ' '}
+          </p>
+        </div>
+      </div>
     </form>
   );
 };

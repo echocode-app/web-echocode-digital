@@ -10,7 +10,8 @@
       "sizeMax": "El archivo debe ser ≤ 5 MB",
       "pathRequired": "La ruta es obligatoria",
       "pathTooLong": "La ruta es demasiado larga",
-      "pathInvalid": "Formato de ruta de almacenamiento inválido"
+      "pathInvalid": "Formato de ruta de almacenamiento inválido",
+      "uploadFailed": "No se pudo subir el archivo"
     },
     "profileUrl": {
       "required": "La URL es obligatoria",
@@ -20,6 +21,15 @@
     },
     "cv": {
       "required": "El CV es obligatorio"
+    },
+    "form": {
+      "turnstileRequired": "Completa la verificación.",
+      "turnstileFailed": "La verificación falló. Inténtalo de nuevo.",
+      "turnstileUnavailable": "La verificación no está disponible temporalmente. Inténtalo más tarde.",
+      "rateLimit": "Demasiadas solicitudes. Espera un momento e inténtalo de nuevo.",
+      "serviceUnavailable": "El servicio no está disponible temporalmente. Inténtalo de nuevo en breve.",
+      "submitFailed": "No se pudo enviar el formulario. Inténtalo de nuevo.",
+      "networkFailed": "No se pudo enviar el formulario. Revisa tu conexión e inténtalo de nuevo."
     }
   },
   "ProjectValidation": {
@@ -46,6 +56,15 @@
     "attachment": {
       "invalidType": "Tipo de archivo no compatible. Use image, PDF, Office, TXT, CSV, RTF o ZIP.",
       "size": "El archivo debe ser menor de 10MB"
+    },
+    "form": {
+      "turnstileRequired": "Completa la verificación.",
+      "turnstileFailed": "La verificación falló. Inténtalo de nuevo.",
+      "turnstileUnavailable": "La verificación no está disponible temporalmente. Inténtalo más tarde.",
+      "rateLimit": "Demasiadas solicitudes. Espera un momento e inténtalo de nuevo.",
+      "serviceUnavailable": "El servicio no está disponible temporalmente. Inténtalo de nuevo en breve.",
+      "submitFailed": "No se pudo enviar el formulario. Inténtalo de nuevo.",
+      "networkFailed": "No se pudo enviar el formulario. Revisa tu conexión e inténtalo de nuevo."
     }
   },
   "EmailSubmitValidation": {
@@ -54,6 +73,15 @@
       "max": "El correo electrónico es demasiado largo",
       "invalid": "Ingrese un correo electrónico válido",
       "domain": "El dominio debe contener un punto y ser válido"
+    },
+    "form": {
+      "turnstileRequired": "Completa la verificación.",
+      "turnstileFailed": "La verificación falló. Inténtalo de nuevo.",
+      "turnstileUnavailable": "La verificación no está disponible temporalmente. Inténtalo más tarde.",
+      "rateLimit": "Demasiadas solicitudes. Espera un momento e inténtalo de nuevo.",
+      "serviceUnavailable": "El servicio no está disponible temporalmente. Inténtalo de nuevo en breve.",
+      "submitFailed": "No se pudo enviar el email. Inténtalo de nuevo.",
+      "networkFailed": "No se pudo enviar el email. Revisa tu conexión e inténtalo de nuevo."
     }
   }
 }
