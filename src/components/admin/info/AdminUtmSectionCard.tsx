@@ -82,14 +82,12 @@ export default function AdminUtmSectionCard({
             >
               <div className="flex items-start justify-between gap-3">
                 <div className="space-y-1">
-                  <div className="flex items-center gap-2">
-                    <h3 className="font-title text-title-xs text-white">{preset.label}</h3>
-                    <InfoTooltip label={`${preset.label} usage`} text={preset.usage} />
-                  </div>
+                  <h3 className="font-title text-title-xs text-white">{preset.label}</h3>
                   <p className="font-main text-main-xs text-gray60">{preset.channel}</p>
                 </div>
 
                 <div className="flex items-center gap-2">
+                  <InfoTooltip label={`${preset.label} usage`} text={preset.usage} />
                   {copied ? (
                     <span className="font-main text-main-xs text-accent-hover">Copied</span>
                   ) : null}
@@ -97,7 +95,10 @@ export default function AdminUtmSectionCard({
                 </div>
               </div>
 
-              <div className="mt-3 rounded-(--radius-secondary) border border-gray16/80 bg-black/30 px-3 py-2 font-main text-main-xs text-gray75">
+              <div className="mt-3 rounded-(--radius-secondary) 
+              border border-gray16/80 bg-black/30 
+              px-3 py-2 
+              font-main text-main-xs text-gray75">
                 <p className="break-all">{link}</p>
               </div>
 

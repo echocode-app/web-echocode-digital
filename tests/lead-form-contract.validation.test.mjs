@@ -15,6 +15,7 @@ const {
   projectIdentitySchema,
   turnstileTokenSchema,
 } = await importValidationModule();
+const { projectSubmissionSchema } = await importProjectValidationModule();
 
 async function importValidationModule() {
   const sourceUrl = new URL('../src/shared/validation/submissions.common.ts', import.meta.url);
@@ -39,6 +40,57 @@ async function importValidationModule() {
   await writeFile(outputPath, output, 'utf8');
 
   return import(pathToFileURL(outputPath).href);
+}
+
+async function transpileTsModuleToTemp(sourceRelativePath, outputName, replacements = {}) {
+  const sourceUrl = new URL(sourceRelativePath, import.meta.url);
+  const sourcePath = fileURLToPath(sourceUrl);
+  const source = await readFile(sourcePath, 'utf8');
+
+  const transpiled = ts.transpileModule(source, {
+    compilerOptions: {
+      module: ts.ModuleKind.ES2022,
+      target: ts.ScriptTarget.ES2022,
+    },
+    fileName: sourcePath,
+  });
+
+  let output = transpiled.outputText;
+  const zodUrl = await import.meta.resolve('zod');
+  output = output.replace(/from ['"]zod['"]/g, `from ${JSON.stringify(zodUrl)}`);
+
+  Object.entries(replacements).forEach(([from, to]) => {
+    output = output.replaceAll(from, to);
+  });
+
+  const outputDir = path.join(tmpdir(), 'echocode-lead-form-contract-tests');
+  const outputPath = path.join(outputDir, outputName);
+
+  await mkdir(outputDir, { recursive: true });
+  await writeFile(outputPath, output, 'utf8');
+
+  return pathToFileURL(outputPath).href;
+}
+
+async function importProjectValidationModule() {
+  const commonUrl = await transpileTsModuleToTemp(
+    '../src/shared/validation/submissions.common.ts',
+    'submissions.common.project.mjs',
+  );
+  const filesUrl = await transpileTsModuleToTemp(
+    '../src/shared/validation/submissions.files.ts',
+    'submissions.files.project.mjs',
+  );
+  const projectUrl = await transpileTsModuleToTemp(
+    '../src/shared/validation/submissions.project.ts',
+    'submissions.project.mjs',
+    {
+      "from '@/shared/validation/submissions.common'": `from ${JSON.stringify(commonUrl)}`,
+      "from '@/shared/validation/submissions.files'": `from ${JSON.stringify(filesUrl)}`,
+    },
+  );
+
+  return import(projectUrl);
 }
 
 test('personNameSchema accepts normal user names', () => {
@@ -119,4 +171,40 @@ test('shared echocode.app project contract keeps firstName + lastName + email', 
   };
 
   assert.equal(projectIdentitySchema.safeParse(invalidPayload).success, false);
+});
+
+test('echocode.app project submit contract accepts needs without captcha token', () => {
+  const parsed = projectSubmissionSchema.safeParse({
+    formType: 'project',
+    siteId: 'echocode_app',
+    siteHost: 'echocode.app',
+    source: 'contact_modal',
+    firstName: 'Anna',
+    lastName: 'Kotliar',
+    email: 'anna@example.com',
+    needs: 'Project details here',
+  });
+
+  assert.equal(parsed.success, true);
+});
+
+test('echocode.app project submit contract accepts optional attachment', () => {
+  const parsed = projectSubmissionSchema.safeParse({
+    formType: 'project',
+    siteId: 'echocode_app',
+    siteHost: 'echocode.app',
+    source: 'contact_modal',
+    firstName: 'Anna',
+    lastName: 'Kotliar',
+    email: 'anna@example.com',
+    needs: 'Project details here',
+    attachment: {
+      path: 'uploads/tmp/brief',
+      originalName: 'brief.pdf',
+      mimeType: 'application/pdf',
+      sizeBytes: 12345,
+    },
+  });
+
+  assert.equal(parsed.success, true);
 });

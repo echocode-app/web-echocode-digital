@@ -17,6 +17,7 @@ import { resolveEventAttribution, trackEventBestEffort } from '@/server/analytic
 import { getFirebaseStorageBucket } from '@/server/firebase/storage';
 import { validate } from '@/server/lib';
 import { ApiError } from '@/server/lib/errors';
+import { resolveStrictRequestSiteContext } from '@/server/sites/siteContext';
 
 const initUploadFileSchema = z.object({
   originalName: z.string().trim().min(1).max(255),
@@ -26,6 +27,15 @@ const initUploadFileSchema = z.object({
 
 export const submissionUploadInitRequestSchema = z.object({
   formType: z.enum(['project', 'vacancy']),
+  siteId: z.enum(['echocode_digital', 'echocode_app']).optional(),
+  siteHost: z.string().trim().min(1).max(255).optional(),
+  source: z
+    .string()
+    .trim()
+    .min(1)
+    .max(64)
+    .regex(/^[a-z0-9_-]+$/i)
+    .optional(),
   file: initUploadFileSchema,
 });
 
@@ -54,10 +64,7 @@ function isAllowedProjectAttachmentMime(mimeType: string): boolean {
   return isImageMimeType(mimeType) || isDocumentMimeType(mimeType);
 }
 
-function assertProjectAttachmentPolicy(input: {
-  mimeType: string;
-  sizeBytes: number;
-}): void {
+function assertProjectAttachmentPolicy(input: { mimeType: string; sizeBytes: number }): void {
   if (input.sizeBytes <= 0) {
     throw ApiError.fromCode(
       'ATTACHMENT_VERIFICATION_FAILED',
@@ -72,9 +79,7 @@ function assertProjectAttachmentPolicy(input: {
     );
   }
 
-  const maxSize = isImageMimeType(input.mimeType)
-    ? MAX_IMAGE_SIZE_BYTES
-    : MAX_DOCUMENT_SIZE_BYTES;
+  const maxSize = isImageMimeType(input.mimeType) ? MAX_IMAGE_SIZE_BYTES : MAX_DOCUMENT_SIZE_BYTES;
 
   if (input.sizeBytes > maxSize) {
     throw ApiError.fromCode(
@@ -84,10 +89,7 @@ function assertProjectAttachmentPolicy(input: {
   }
 }
 
-function assertVacancyCvPolicy(input: {
-  mimeType: string;
-  sizeBytes: number;
-}): void {
+function assertVacancyCvPolicy(input: { mimeType: string; sizeBytes: number }): void {
   if (input.sizeBytes <= 0) {
     throw ApiError.fromCode(
       'ATTACHMENT_VERIFICATION_FAILED',
@@ -120,10 +122,7 @@ function assertTmpUploadPath(path: string): void {
   }
 
   if (!SUBMISSIONS_TMP_UPLOAD_PATH_PATTERN.test(path)) {
-    throw ApiError.fromCode(
-      'ATTACHMENT_VERIFICATION_FAILED',
-      'Attachment path format is invalid',
-    );
+    throw ApiError.fromCode('ATTACHMENT_VERIFICATION_FAILED', 'Attachment path format is invalid');
   }
 }
 
@@ -143,6 +142,15 @@ export async function createProjectUploadInit(
     headers: params.requestHeaders,
   });
   const parsed = validate(submissionUploadInitRequestSchema, params.rawBody);
+  const siteContext = resolveStrictRequestSiteContext({
+    headers: params.requestHeaders,
+    explicitSiteId: parsed.siteId ?? null,
+    explicitSiteHost: parsed.siteHost ?? null,
+  });
+
+  if (!siteContext) {
+    throw ApiError.fromCode('FORBIDDEN', 'Invalid public upload site context');
+  }
 
   if (parsed.formType === 'project') {
     assertProjectAttachmentPolicy({
@@ -172,20 +180,23 @@ export async function createProjectUploadInit(
     });
     uploadUrl = signedUrl;
   } catch (cause) {
-    throw ApiError.fromCode(
-      'FIREBASE_UNAVAILABLE',
-      'Failed to generate signed upload URL',
-      { cause },
-    );
+    throw ApiError.fromCode('FIREBASE_UNAVAILABLE', 'Failed to generate signed upload URL', {
+      cause,
+    });
   }
 
   await trackEventBestEffort({
     eventType: parsed.formType === 'project' ? 'submit_project' : 'submit_vacancy',
     headers: params.requestHeaders,
+    source: parsed.source ?? siteContext.defaultSource,
+    siteId: siteContext.siteId,
+    siteHost: siteContext.siteHost,
     metadata: {
       stage: 'upload_init',
       formType: parsed.formType,
       mimeType: parsed.file.mimeType,
+      siteId: siteContext.siteId,
+      siteHost: siteContext.siteHost,
       ...(eventAttribution
         ? {
             attribution: {
