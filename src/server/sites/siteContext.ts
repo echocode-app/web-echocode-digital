@@ -2,6 +2,8 @@ const WEB_ECHOCODE_APP_PREVIEW_ORIGIN_PATTERN =
   /^https:\/\/web-echocode-app(?:-[a-z0-9-]+)?\.vercel\.app$/i;
 const ECHOCODE_NEWSITE_PREVIEW_ORIGIN_PATTERN =
   /^https:\/\/echocode-newsite(?:-[a-z0-9-]+)*\.vercel\.app$/i;
+const LOCALHOST_ORIGIN_PATTERN = /^https?:\/\/(?:localhost|127\.0\.0\.1)(?::\d+)?$/i;
+const LOCALHOST_HOST_PATTERN = /^(?:localhost|127\.0\.0\.1)(?::\d+)?$/i;
 
 export const SITE_IDS = ['echocode_digital', 'echocode_app'] as const;
 
@@ -34,14 +36,17 @@ const SITE_REGISTRY: readonly SiteDescriptor[] = [
       'https://www.echocode.digital',
       'https://echocode.digital',
     ],
-    allowedOriginPatterns: [ECHOCODE_NEWSITE_PREVIEW_ORIGIN_PATTERN],
+    allowedOriginPatterns: [LOCALHOST_ORIGIN_PATTERN, ECHOCODE_NEWSITE_PREVIEW_ORIGIN_PATTERN],
     acceptedHosts: [
       'localhost:3000',
       'echocode-newsite.vercel.app',
       'www.echocode.digital',
       'echocode.digital',
     ],
-    acceptedHostPatterns: [/^echocode-newsite(?:-[a-z0-9-]+)*\.vercel\.app$/i],
+    acceptedHostPatterns: [
+      LOCALHOST_HOST_PATTERN,
+      /^echocode-newsite(?:-[a-z0-9-]+)*\.vercel\.app$/i,
+    ],
   },
   {
     siteId: 'echocode_app',
@@ -53,14 +58,17 @@ const SITE_REGISTRY: readonly SiteDescriptor[] = [
       'https://www.echocode.app',
       'https://web-echocode-app.vercel.app',
     ],
-    allowedOriginPatterns: [WEB_ECHOCODE_APP_PREVIEW_ORIGIN_PATTERN],
+    allowedOriginPatterns: [LOCALHOST_ORIGIN_PATTERN, WEB_ECHOCODE_APP_PREVIEW_ORIGIN_PATTERN],
     acceptedHosts: [
       'localhost:3000',
       'echocode.app',
       'www.echocode.app',
       'web-echocode-app.vercel.app',
     ],
-    acceptedHostPatterns: [/^web-echocode-app(?:-[a-z0-9-]+)?\.vercel\.app$/i],
+    acceptedHostPatterns: [
+      LOCALHOST_HOST_PATTERN,
+      /^web-echocode-app(?:-[a-z0-9-]+)?\.vercel\.app$/i,
+    ],
   },
 ] as const;
 
@@ -117,6 +125,27 @@ function matchSiteByOrigin(origin: string | null): SiteDescriptor | null {
       return site.allowedOriginPatterns?.some((pattern) => pattern.test(normalizedOrigin)) ?? false;
     }) ?? null
   );
+}
+
+function isOriginAllowedForSite(origin: string | null, site: SiteDescriptor): boolean {
+  const normalizedOrigin = normalizeOptionalString(origin);
+  if (!normalizedOrigin) return true;
+
+  if (site.allowedOrigins.includes(normalizedOrigin)) {
+    return true;
+  }
+
+  return site.allowedOriginPatterns?.some((pattern) => pattern.test(normalizedOrigin)) ?? false;
+}
+
+function isHostAcceptedForSite(host: string | null, site: SiteDescriptor): boolean {
+  if (!host) return true;
+
+  if (site.acceptedHosts.includes(host)) {
+    return true;
+  }
+
+  return site.acceptedHostPatterns?.some((pattern) => pattern.test(host)) ?? false;
 }
 
 function getRequestHost(headers: Headers | undefined): string | null {
@@ -178,6 +207,63 @@ export function resolveRequestSiteContext(
     siteHost: DEFAULT_SITE.siteHost,
     defaultSource: DEFAULT_SITE.defaultSource,
   };
+}
+
+export function resolveStrictRequestSiteContext(
+  input: {
+    headers?: Headers;
+    explicitSiteId?: string | null;
+    explicitSiteHost?: string | null;
+  } = {},
+): ResolvedSiteContext | null {
+  const explicitSiteId = normalizeOptionalString(input.explicitSiteId);
+  const explicitSiteHost = normalizeHost(input.explicitSiteHost);
+  const requestOrigin = input.headers?.get('origin') ?? null;
+
+  if (explicitSiteId) {
+    const byId = matchSiteById(explicitSiteId);
+    if (!byId) return null;
+    if (!isHostAcceptedForSite(explicitSiteHost, byId)) return null;
+    if (!isOriginAllowedForSite(requestOrigin, byId)) return null;
+
+    return {
+      siteId: byId.siteId,
+      siteHost: byId.siteHost,
+      defaultSource: byId.defaultSource,
+    };
+  }
+
+  if (explicitSiteHost) {
+    const bySiteHost = matchSiteByHost(explicitSiteHost);
+    if (!bySiteHost) return null;
+    if (!isOriginAllowedForSite(requestOrigin, bySiteHost)) return null;
+
+    return {
+      siteId: bySiteHost.siteId,
+      siteHost: bySiteHost.siteHost,
+      defaultSource: bySiteHost.defaultSource,
+    };
+  }
+
+  const byOrigin = matchSiteByOrigin(requestOrigin);
+  if (byOrigin) {
+    return {
+      siteId: byOrigin.siteId,
+      siteHost: byOrigin.siteHost,
+      defaultSource: byOrigin.defaultSource,
+    };
+  }
+
+  const byRequestHost = matchSiteByHost(getRequestHost(input.headers));
+  if (byRequestHost) {
+    return {
+      siteId: byRequestHost.siteId,
+      siteHost: byRequestHost.siteHost,
+      defaultSource: byRequestHost.defaultSource,
+    };
+  }
+
+  return null;
 }
 
 export function getPublicIngestAllowedOrigins(): string[] {

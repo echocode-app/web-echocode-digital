@@ -25,7 +25,7 @@ export type SubmissionDraft = {
   email?: string;
   name?: string;
   message?: string;
-  source: string;
+  source?: string;
   attachments: SubmissionAttachment[];
   metadata?: Record<string, unknown>;
 };
@@ -56,14 +56,13 @@ export function buildSubmissionDraft(input: SubmissionCreateInput): SubmissionDr
       email: input.email,
       name,
       message: input.needs,
-      source: 'website',
+      source: input.source,
       attachments: input.attachment ? [toAttachment(input.attachment)] : [],
     };
   }
 
   return {
     formType: input.formType,
-    source: 'website',
     attachments: [toAttachment(input.cvFile)],
     metadata: {
       profileUrl: input.profileUrl,

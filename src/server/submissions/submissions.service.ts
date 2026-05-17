@@ -8,7 +8,11 @@ import { verifyUploadedProjectAttachment } from '@/server/submissions/submission
 import { createSubmissionRecord } from '@/server/submissions/submissions.repository';
 import { toCreateSubmissionResponseDto } from '@/server/submissions/submissions.mapper';
 import { verifyTurnstileTokenFromBody } from '@/server/lib/turnstile';
-import { resolveRequestSiteContext } from '@/server/sites/siteContext';
+import {
+  resolveStrictRequestSiteContext,
+  type ResolvedSiteContext,
+} from '@/server/sites/siteContext';
+import { requiresCaptcha } from '@/server/submissions/submissions.captchaPolicy';
 import type {
   CreateProjectSubmissionParams,
   CreateSubmissionRecordInput,
@@ -63,7 +67,7 @@ function assertPreParseSubmissionGuards(
 
 function toCreateRecordInputFromProjectDraft(
   draft: ReturnType<typeof buildSubmissionDraft>,
-  siteContext: ReturnType<typeof resolveRequestSiteContext>,
+  siteContext: ResolvedSiteContext,
 ): CreateSubmissionRecordInput {
   if (draft.formType !== 'project') {
     throw ApiError.fromCode(
@@ -90,7 +94,7 @@ function toCreateRecordInputFromProjectDraft(
     formType: 'project',
     siteId: siteContext.siteId,
     siteHost: siteContext.siteHost,
-    source: siteContext.defaultSource,
+    source: draft.source ?? siteContext.defaultSource,
     contact: {
       email: draft.email,
       name: draft.name,
@@ -121,7 +125,7 @@ function withAttributionMetadata(
 export async function createProjectSubmission(
   params: CreateProjectSubmissionParams,
 ): Promise<CreateSubmissionResponseDto> {
-  const siteContext = resolveRequestSiteContext({
+  const siteContext = resolveStrictRequestSiteContext({
     headers: params.requestHeaders,
     explicitSiteId:
       isObjectRecord(params.rawBody) && typeof params.rawBody.siteId === 'string'
@@ -132,6 +136,10 @@ export async function createProjectSubmission(
         ? params.rawBody.siteHost
         : null,
   });
+  if (!siteContext) {
+    throw ApiError.fromCode('FORBIDDEN', 'Invalid public form site context');
+  }
+
   const eventAttribution = resolveEventAttribution({
     rawBody: params.rawBody,
     headers: params.requestHeaders,
@@ -140,11 +148,13 @@ export async function createProjectSubmission(
   // Run contract guards before shared schema validation to keep stable error codes.
   assertPreParseSubmissionGuards(params.rawBody, params.requestHeaders, eventAttribution);
 
-  // Validate the anti-bot token before domain payload validation and Firestore writes.
-  await verifyTurnstileTokenFromBody({
-    rawBody: params.rawBody,
-    requestHeaders: params.requestHeaders,
-  });
+  if (requiresCaptcha(siteContext)) {
+    // Digital forms keep bot protection; app submissions are handled by a trusted site policy.
+    await verifyTurnstileTokenFromBody({
+      rawBody: params.rawBody,
+      requestHeaders: params.requestHeaders,
+    });
+  }
   const parsed = parseSubmissionCreatePayload(params.rawBody);
 
   if (parsed.formType === 'candidate') {
