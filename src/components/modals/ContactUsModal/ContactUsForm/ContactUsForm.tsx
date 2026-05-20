@@ -43,7 +43,7 @@ const ContactUsForm = ({
 
   return (
     <form onSubmit={onSubmit}>
-      <div className="flex flex-col md:flex-row gap-4 mb-4 md:mb-8">
+      <div className="flex flex-col gap-4 md:gap-6 mb-4 md:mb-6">
         <ContactInput
           name="firstName"
           label={t('firstNamePlaceholder')}
@@ -70,7 +70,7 @@ const ContactUsForm = ({
           onCountryCodeChange={(countryCode) => onChangeText('countryCode', countryCode)}
         />
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4 md:mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-1 gap-4 mb-4 md:mb-6">
         <ContactInput
           name="email"
           label={t('emailPlaceholder')}
@@ -83,13 +83,13 @@ const ContactUsForm = ({
           onBlur={() => onBlurField('email')}
           onChange={(value) => onChangeText('email', value)}
         />
-        <ContactFile
+        {/* <ContactFile
           file={values.image}
           error={translateError(errors.image)}
           disabled={isLocked}
           onBlur={() => onBlurField('image')}
           onChange={onChangeImage}
-        />
+        /> */}
       </div>
       <div className="mb-4">
         <YourNeedsInput
