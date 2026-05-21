@@ -129,7 +129,7 @@ const ContactUsModal = () => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.4 }}
     >
-      <div className="px-4 md:px-8 max-w-280 w-full">
+      <div className="px-4 md:px-8 max-w-160 w-full">
         <motion.div
           onClick={(e) => e.stopPropagation()}
           className="relative  w-full flex flex-col mx-auto p-5 pt-10 md:pt-15 md:pb-6 md:px-5 lg:p-15 lg:pb-8

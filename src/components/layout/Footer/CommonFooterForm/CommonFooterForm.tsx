@@ -252,7 +252,7 @@ const CommonFooterForm = () => {
           onCountryCodeChange={(countryCode) => onChangeText('countryCode', countryCode)}
         />
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-6 mb-6 md:mb-8">
+      <div className="grid grid-cols-1 gap-6 md:gap-6 mb-6 md:mb-8">
         <ContactInput
           name="email"
           label={t('emailPlaceholder')}
@@ -265,13 +265,13 @@ const CommonFooterForm = () => {
           onBlur={() => onBlurField('email')}
           onChange={(value) => onChangeText('email', value)}
         />
-        <ContactFile
+        {/* <ContactFile
           file={values.image}
           error={translateError(errors.image)}
           disabled={isLocked}
           onBlur={() => onBlurField('image')}
           onChange={onChangeImage}
-        />
+        /> */}
       </div>
       <div className="mb-4">
         <YourNeedsInput
