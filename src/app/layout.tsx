@@ -7,6 +7,7 @@ import { getLocale, getMessages } from 'next-intl/server';
 
 import { poppins, wadik, inter, rubik } from '@/styles/fonts/fonts';
 import { seoBaseUrl } from '@/lib/seo/metadata';
+import EchoTrackingScript from '@/components/analytics/EchoTrackingScript';
 
 import './globals.css';
 
@@ -157,6 +158,7 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <head>
+        <EchoTrackingScript />
         {SHOULD_LOAD_GTM ? (
           <Script id="google-tag-manager" strategy="lazyOnload">
             {`

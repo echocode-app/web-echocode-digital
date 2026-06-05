@@ -14,6 +14,12 @@ type CrmCaptureLeadPayload = {
   email: string;
   platform: string;
   message?: string;
+  gclid?: string;
+  utm_source?: string;
+  utm_medium?: string;
+  utm_campaign?: string;
+  utm_term?: string;
+  utm_content?: string;
 };
 
 async function readResponseBodySafe(response: Response): Promise<string> {
@@ -34,6 +40,12 @@ function buildCrmCaptureLeadPayload(parsed: ClientProjectCreateInput): CrmCaptur
     email: parsed.email,
     platform: CRM_LEAD_PLATFORM,
     ...(message ? { message } : {}),
+    ...(parsed.gclid ? { gclid: parsed.gclid } : {}),
+    ...(parsed.utm_source ? { utm_source: parsed.utm_source } : {}),
+    ...(parsed.utm_medium ? { utm_medium: parsed.utm_medium } : {}),
+    ...(parsed.utm_campaign ? { utm_campaign: parsed.utm_campaign } : {}),
+    ...(parsed.utm_term ? { utm_term: parsed.utm_term } : {}),
+    ...(parsed.utm_content ? { utm_content: parsed.utm_content } : {}),
   };
 }
 
