@@ -24,6 +24,7 @@ import type {
 const NAME_PATTERN = /^[\p{L}\p{M}' -]+$/u;
 const EMAIL_MAX_LEN = 120;
 const DESCRIPTION_MAX_LEN = 2000;
+const TRACKING_VALUE_MAX_LEN = 512;
 const SUSPICIOUS_EXTENSION_PATTERN = /(exe|dll|bat|cmd|com|msi|sh|php|pl|py|jar|apk|bin)$/i;
 const ATTACHMENT_PATH_PATTERN = /^client-submissions\/[0-9a-zA-Z_-]+\/(image|attachment)$/;
 
@@ -63,6 +64,8 @@ const uploadFileSchema = z.object({
   sizeBytes: z.number().int().positive().max(MAX_CLIENT_PROJECT_ATTACHMENT_SIZE_BYTES),
 });
 
+const trackingValueSchema = z.string().trim().min(1).max(TRACKING_VALUE_MAX_LEN);
+
 /** Public client-project submissions must carry a server-verifiable Turnstile token. */
 export const clientProjectCreateSchema = z
   .object({
@@ -73,6 +76,12 @@ export const clientProjectCreateSchema = z
     turnstileToken: turnstileTokenSchema,
     description: z.string().trim().max(DESCRIPTION_MAX_LEN, 'Description is too long').optional(),
     image: imageMetaSchema.optional(),
+    gclid: trackingValueSchema.optional(),
+    utm_source: trackingValueSchema.optional(),
+    utm_medium: trackingValueSchema.optional(),
+    utm_campaign: trackingValueSchema.optional(),
+    utm_term: trackingValueSchema.optional(),
+    utm_content: trackingValueSchema.optional(),
   })
   .superRefine((value, ctx) => {
     if (!hasValidFullPhoneLength(value.countryCode, value.phone)) {

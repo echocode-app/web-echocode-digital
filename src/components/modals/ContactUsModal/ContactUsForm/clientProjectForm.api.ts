@@ -3,6 +3,7 @@ import {
   getClientAnalyticsContextPayload,
   getClientAnalyticsHeaders,
 } from '@/components/analytics/clientAnalytics';
+import { getEchoTrackingPayload } from '@/lib/analytics/echoTracking';
 import type {
   FormValues,
   UploadedImagePayload,
@@ -97,6 +98,7 @@ export async function submitClientProject(
 ): Promise<{ ok: boolean; status: number }> {
   const normalized = normalize(values);
   const analyticsContext = getClientAnalyticsContextPayload();
+  const echoTracking = getEchoTrackingPayload();
 
   const response = await fetch('/api/forms/client-project', {
     method: 'POST',
@@ -111,6 +113,7 @@ export async function submitClientProject(
       ...(normalized.description ? { description: normalized.description } : {}),
       ...(imagePayload ? { image: imagePayload } : {}),
       ...analyticsContext,
+      ...echoTracking,
     }),
   });
 
