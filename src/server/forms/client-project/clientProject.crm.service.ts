@@ -1,6 +1,7 @@
 import { env } from '@/server/config/env';
 import { logger } from '@/server/lib/logger';
 import type { ClientProjectCreateInput } from '@/server/forms/client-project/clientProject.types';
+import { getClientProjectTrackingKeys } from '@/server/forms/client-project/clientProject.tracking';
 import { buildPhoneE164 } from '@/shared/validation/submissions.common';
 
 const DEFAULT_CRM_CAPTURE_LEAD_URL =
@@ -51,10 +52,26 @@ function buildCrmCaptureLeadPayload(parsed: ClientProjectCreateInput): CrmCaptur
 
 export async function sendClientProjectLeadToCrmBestEffort(input: {
   parsed: ClientProjectCreateInput;
+  submissionId: string;
+  source: 'client_project_modal' | 'client_project_footer';
+  hasAttachment: boolean;
 }): Promise<void> {
   const crmCaptureLeadUrl = env.crmCaptureLeadUrl ?? DEFAULT_CRM_CAPTURE_LEAD_URL;
 
   const payload = buildCrmCaptureLeadPayload(input.parsed);
+  const trackingKeys = getClientProjectTrackingKeys(input.parsed);
+  const payloadKeys = Object.keys(payload).sort();
+
+  logger.info('client_project_crm_capture_started', {
+    submissionId: input.submissionId,
+    source: input.source,
+    hasAttachment: input.hasAttachment,
+    hasTracking: trackingKeys.length > 0,
+    trackingKeys,
+    payloadKeys,
+    crmCaptureLeadUrl,
+    platform: payload.platform,
+  });
 
   try {
     const response = await fetch(crmCaptureLeadUrl, {
@@ -70,26 +87,44 @@ export async function sendClientProjectLeadToCrmBestEffort(input: {
 
     if (!response.ok) {
       logger.warn('client_project_crm_capture_failed', {
+        submissionId: input.submissionId,
+        source: input.source,
         status: response.status,
         statusText: response.statusText,
         crmCaptureLeadUrl,
         responseText,
         platform: payload.platform,
+        hasAttachment: input.hasAttachment,
+        hasTracking: trackingKeys.length > 0,
+        trackingKeys,
+        payloadKeys,
       });
       return;
     }
 
     logger.info('client_project_crm_capture_succeeded', {
+      submissionId: input.submissionId,
+      source: input.source,
       status: response.status,
       statusText: response.statusText,
       crmCaptureLeadUrl,
       responseText,
       platform: payload.platform,
+      hasAttachment: input.hasAttachment,
+      hasTracking: trackingKeys.length > 0,
+      trackingKeys,
+      payloadKeys,
     });
   } catch (error) {
     logger.warn('client_project_crm_capture_failed', {
+      submissionId: input.submissionId,
+      source: input.source,
       crmCaptureLeadUrl,
       platform: payload.platform,
+      hasAttachment: input.hasAttachment,
+      hasTracking: trackingKeys.length > 0,
+      trackingKeys,
+      payloadKeys,
       error,
     });
   }

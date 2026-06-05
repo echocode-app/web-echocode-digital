@@ -3,7 +3,9 @@ import { parseClientProjectCreatePayload } from '@/server/forms/client-project/c
 import { createClientSubmissionRecord } from '@/server/forms/client-project/clientProject.repository';
 import { resolveEventAttribution, trackEventBestEffort } from '@/server/analytics';
 import { sendClientProjectLeadToCrmBestEffort } from '@/server/forms/client-project/clientProject.crm.service';
+import { getClientProjectTrackingKeys } from '@/server/forms/client-project/clientProject.tracking';
 import { resolveClientSubmissionImageUrl } from '@/server/forms/client-project/clientProject.upload.service';
+import { logger } from '@/server/lib/logger';
 import { verifyTurnstileTokenFromBody } from '@/server/lib/turnstile';
 import type { CreateClientSubmissionResponseDto } from '@/server/forms/client-project/clientProject.types';
 
@@ -41,7 +43,26 @@ export async function createClientProjectSubmission(input: {
     imageUrl,
   });
 
-  after(() => sendClientProjectLeadToCrmBestEffort({ parsed }));
+  const trackingKeys = getClientProjectTrackingKeys(parsed);
+  const hasAttachment = Boolean(parsed.image);
+
+  logger.info('client_project_submit_persisted', {
+    submissionId: created.id,
+    source,
+    hasAttachment,
+    hasTracking: trackingKeys.length > 0,
+    trackingKeys,
+    crmCaptureScheduled: true,
+  });
+
+  after(() =>
+    sendClientProjectLeadToCrmBestEffort({
+      parsed,
+      submissionId: created.id,
+      source,
+      hasAttachment,
+    }),
+  );
 
   const sessionId = input.requestHeaders?.get('x-client-session-id')?.trim() || null;
 
@@ -51,7 +72,7 @@ export async function createClientProjectSubmission(input: {
     metadata: {
       source,
       submissionId: created.id,
-      hasAttachment: Boolean(parsed.image),
+      hasAttachment,
       ...(eventAttribution
         ? {
             attribution: {
