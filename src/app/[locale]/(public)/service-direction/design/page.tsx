@@ -22,7 +22,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     description:
       'Product design services focused on UX research, flow architecture, design systems, motion and conversion performance.',
     path: '/service-direction/design',
-    image: '/images/rabbits/hero/design.png',
   });
 }
 

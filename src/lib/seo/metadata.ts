@@ -6,7 +6,7 @@ import type { AppLocale } from '@/i18n/config';
 export const seoBaseUrl = 'https://echocode.digital';
 export type { AppLocale } from '@/i18n/config';
 
-const TWITTER_IMAGE = '/favicon/fulllogo.png';
+const SOCIAL_PREVIEW_IMAGE = '/favicon/fulllogo.png';
 
 const openGraphLocales: Record<AppLocale, string> = {
   en: 'en_US',
@@ -21,7 +21,6 @@ type PageMetadataInput = {
   title: string;
   description: string;
   path: string;
-  image?: string;
 };
 
 export type BreadcrumbItem = {
@@ -57,7 +56,6 @@ export function buildPageMetadata({
   title,
   description,
   path,
-  image = '/images/rabbits/hero/design.png',
 }: PageMetadataInput): Metadata {
   const absoluteUrl = buildAbsoluteLocalizedUrl(locale, path);
 
@@ -75,7 +73,7 @@ export function buildPageMetadata({
       siteName: 'Echocode',
       images: [
         {
-          url: image,
+          url: SOCIAL_PREVIEW_IMAGE,
           width: 1200,
           height: 630,
           alt: `${title} | Echocode`,
@@ -88,7 +86,7 @@ export function buildPageMetadata({
       card: 'summary_large_image',
       title: `${title} | Echocode`,
       description,
-      images: [TWITTER_IMAGE],
+      images: [SOCIAL_PREVIEW_IMAGE],
     },
   };
 }

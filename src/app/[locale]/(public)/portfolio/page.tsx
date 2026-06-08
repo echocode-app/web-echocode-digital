@@ -18,7 +18,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     description:
       'Selected product and software development cases by Echocode across mobile, web and digital product delivery.',
     path: '/portfolio',
-    image: '/images/rabbits/hero/portfolio.png',
   });
 }
 

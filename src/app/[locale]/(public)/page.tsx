@@ -24,7 +24,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     description:
       'Echocode is a software development studio building iOS, Android, web and iGaming products. Product design, QA and product-focused engineering for startups and growing companies.',
     path: '/',
-    image: '/favicon/fulllogo.png',
   });
 }
 

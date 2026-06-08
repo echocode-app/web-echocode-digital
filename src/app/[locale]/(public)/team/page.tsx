@@ -22,7 +22,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     description:
       'Meet the Echocode team: product-minded engineers, designers and QA specialists focused on building scalable digital products.',
     path: '/team',
-    image: '/images/rabbits/hero/team.png',
   });
 }
 

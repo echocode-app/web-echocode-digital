@@ -31,7 +31,6 @@ export async function generateMetadata({ params }: VacancyPageProps): Promise<Me
       title: 'Career Opportunity',
       description: 'Explore career opportunities at Echocode.',
       path: `/career/${slug}`,
-      image: '/images/rabbits/hero/career.png',
     });
   }
 
@@ -40,7 +39,6 @@ export async function generateMetadata({ params }: VacancyPageProps): Promise<Me
     title: `${vacancy.vacancyTitle} ${vacancy.level}`.trim(),
     description: `Apply for the ${vacancy.vacancyTitle} role at Echocode and join a product-focused team building high-impact digital products.`,
     path: `/career/${slug}`,
-    image: '/images/rabbits/hero/career.png',
   });
 }
 

@@ -20,7 +20,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     description:
       'Game development services for immersive digital experiences, gameplay systems and scalable product delivery.',
     path: '/service-direction/game-development',
-    image: '/images/rabbits/hero/game.png',
   });
 }
 

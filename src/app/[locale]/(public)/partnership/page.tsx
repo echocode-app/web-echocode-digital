@@ -19,7 +19,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     description:
       'Explore partnership models, analytics, attribution and monetization services for product growth with Echocode.',
     path: '/partnership',
-    image: '/images/rabbits/hero/partnership.png',
   });
 }
 

@@ -33,7 +33,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     description:
       'Review Echocode’s e-commerce case study with product strategy, implementation, prototype flows and technology choices.',
     path: '/portfolio/e-commers',
-    image: '/images/projects/e-commers/screens.png',
   });
 }
 

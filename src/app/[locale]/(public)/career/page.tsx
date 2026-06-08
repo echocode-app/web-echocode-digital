@@ -20,7 +20,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     description:
       'Join Echocode and build high-impact mobile, web and product experiences with a product-focused engineering team.',
     path: '/career',
-    image: '/images/rabbits/hero/career.png',
   });
 }
 
