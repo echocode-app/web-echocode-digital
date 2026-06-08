@@ -4,7 +4,6 @@ import { useLocale, useTranslations } from 'next-intl';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import ContactInput from '@/components/modals/ContactUsModal/ContactUsForm/ContactInput';
-import ContactFile from '@/components/modals/ContactUsModal/ContactUsForm/ContactFile';
 import YourNeedsInput from '@/components/modals/ContactUsModal/ContactUsForm/YourNeedInput';
 import ContactInputNumber from '@/components/modals/ContactUsModal/ContactUsForm/ContactInputNumber';
 import { createInitialValues } from '@/components/modals/ContactUsModal/ContactUsForm/clientProjectForm.constants';
@@ -98,24 +97,6 @@ const CommonFooterForm = () => {
       setErrors((prevErrors) => ({
         ...prevErrors,
         [field]: touched[field] || prevErrors[field] ? fieldError : prevErrors[field],
-        form: undefined,
-      }));
-
-      return nextValues;
-    });
-  };
-
-  const onChangeImage = (file: File | null) => {
-    setValues((prev) => {
-      const nextValues = {
-        ...prev,
-        image: file,
-      };
-
-      const fieldError = validateField('image', nextValues);
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        image: touched.image || prevErrors.image ? fieldError : prevErrors.image,
         form: undefined,
       }));
 
@@ -265,13 +246,6 @@ const CommonFooterForm = () => {
           onBlur={() => onBlurField('email')}
           onChange={(value) => onChangeText('email', value)}
         />
-        {/* <ContactFile
-          file={values.image}
-          error={translateError(errors.image)}
-          disabled={isLocked}
-          onBlur={() => onBlurField('image')}
-          onChange={onChangeImage}
-        /> */}
       </div>
       <div className="mb-4">
         <YourNeedsInput

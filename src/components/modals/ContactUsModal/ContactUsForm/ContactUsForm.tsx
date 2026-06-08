@@ -1,6 +1,5 @@
 import { useLocale, useTranslations } from 'next-intl';
 
-import ContactFile from './ContactFile';
 import ContactInput from './ContactInput';
 import SubmitButton from './SubmitBtn';
 import YourNeedsInput from './YourNeedInput';
@@ -34,7 +33,6 @@ const ContactUsForm = ({
     turnstileKey,
     onSubmit,
     onChangeText,
-    onChangeImage,
     onBlurField,
     onClearPhoneWithoutValidation,
     onTurnstileVerify,
@@ -83,13 +81,6 @@ const ContactUsForm = ({
           onBlur={() => onBlurField('email')}
           onChange={(value) => onChangeText('email', value)}
         />
-        {/* <ContactFile
-          file={values.image}
-          error={translateError(errors.image)}
-          disabled={isLocked}
-          onBlur={() => onBlurField('image')}
-          onChange={onChangeImage}
-        /> */}
       </div>
       <div className="mb-4">
         <YourNeedsInput
