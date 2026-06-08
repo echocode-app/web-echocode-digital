@@ -22,7 +22,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     description:
       'Custom web development for scalable products, high-performance platforms and resilient business systems.',
     path: '/service-direction/web-development',
-    image: '/images/rabbits/hero/web.png',
   });
 }
 

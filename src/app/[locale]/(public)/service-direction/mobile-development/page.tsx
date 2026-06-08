@@ -21,7 +21,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     description:
       'Native mobile app development for iOS and Android, from product strategy and UX/UI to ASO and growth support.',
     path: '/service-direction/mobile-development',
-    image: '/images/rabbits/hero/mobile.png',
   });
 }
 

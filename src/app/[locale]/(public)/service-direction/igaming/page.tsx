@@ -21,7 +21,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     description:
       'iGaming software development focused on scalable infrastructure, traffic systems, ASO and product growth.',
     path: '/service-direction/igaming',
-    image: '/images/rabbits/hero/igaming.png',
   });
 }
 

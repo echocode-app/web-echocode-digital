@@ -30,7 +30,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     description:
       'Explore Echocode’s cleaning app case study covering product design, implementation, interactive prototype and delivery details.',
     path: '/portfolio/cleaning',
-    image: '/images/projects/cleaning/screens.png',
   });
 }
 

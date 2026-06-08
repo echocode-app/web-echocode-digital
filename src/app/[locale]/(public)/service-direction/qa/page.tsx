@@ -22,7 +22,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     description:
       'QA services for mobile and web products, including stability, moderation readiness, automation and performance validation.',
     path: '/service-direction/qa',
-    image: '/images/rabbits/hero/qa.png',
   });
 }
 

@@ -20,7 +20,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: t('title'),
     description: t('description'),
     path: '/privacy-policy',
-    image: '/images/rabbits/hero/privacy.png',
   });
 }
 

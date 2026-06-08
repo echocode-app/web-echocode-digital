@@ -33,7 +33,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     description:
       'See how Echocode designed and delivered a food and drink product experience, from product planning to prototype and implementation.',
     path: '/portfolio/food',
-    image: '/images/projects/food/screens.png',
   });
 }
 
