@@ -12,7 +12,7 @@ const FooterNavigation = () => {
   const t = useTranslations('Layout.Footer');
 
   return (
-    <div className="mb-12 py-8 px-4 lg:px-10 lg:flex lg:justify-between bg-white rounded-base">
+    <div className="mb-12 py-8 px-4 lg:px-10 lg:flex lg:justify-between bg-white rounded-base z-10">
       <div className="md:flex md:justify-between md:mb-8 lg:mb-0 lg:w-185.5">
         <div>
           <FooterNavLogo />
