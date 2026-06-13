@@ -1,52 +1,64 @@
 {
   "WebPage": {
-    "HeroSection": { "title": "TWÓRZ CYFROWĄ PRZYSZŁOŚĆ" },
+    "HeroSection": {
+      "title": "Tworzenie stron, które zwiększają sprzedaż",
+      "subtitle": "Projektujemy i rozwijamy kompletne rozwiązania webowe: od landing page’y po złożone systemy firmowe z integracjami CRM i ERP."
+    },
     "StrategySection": {
-      "title": "EKSPERTYZA ＆ STRATEGIA",
-      "subtitle": "Każda linia kodu to zasób biznesowy. Koncentrujemy się na integralności architektury, aby minimalizować dług technologiczny i maksymalizować ROI.",
+      "title": "EKSPERTYZA I STRATEGIA",
+      "subtitle": "Nie tylko piszemy kod. Tworzymy szybkie i niezawodne systemy webowe, które automatyzują rutynowe zadania, obsługują duży ruch i pomagają firmie skalować się bez utraty klientów.",
+      "points": {
+        "point01": "Ładowanie poniżej 1 sekundy",
+        "point02": "Dostępność 24/7",
+        "point03": "Pełne bezpieczeństwo danych",
+        "point04": "Skalowalność"
+      },
       "list": {
-        "list01": "UDANE WDROŻENIA",
-        "list02": "ŚREDNI UPTIME"
+        "list01": "Udane projekty",
+        "list02": "Niezawodność systemu"
       }
+    },
+    "DevCasesSection": {
+      "title": "Case studies web developmentu"
     },
     "SolutionsSection": {
       "title": "KLUCZOWE ROZWIĄZANIA",
       "solutions": {
         "sol01": {
-          "title": "SYSTEMY ENTERPRISE",
-          "desc": "Dedykowane architektury ERP/CRM zaprojektowane z myślą o pełnej automatyzacji biznesu i spójności danych."
+          "title": "SYSTEMY FIRMOWE",
+          "desc": "Tworzymy dedykowane systemy ERP i CRM dopasowane do procesów biznesowych. Automatyzujemy rutynę, łączymy dane w jeden ekosystem i pomagamy obniżać koszty."
         },
         "sol02": {
           "title": "PLATFORMY HIGH-LOAD",
-          "desc": "Inżynieria dla milionów użytkowników z architekturą zero-downtime i globalną wydajnością."
+          "desc": "Niezawodne rozwiązania webowe, które działają stabilnie nawet podczas szczytowego ruchu. Twój projekt obsłuży napływ klientów i będzie działał 24/7 bez awarii technicznych i spadków wydajności."
         },
         "sol03": {
           "title": "ROZWIĄZANIA E-COMMERCE",
-          "desc": "Skalowalne sklepy internetowe skoncentrowane na konwersji i bezproblemowych integracjach multi-vendor."
+          "desc": "Wychodzimy poza standardowe sklepy internetowe. Tworzymy unikalne platformy e-commerce dopasowane do specyfiki biznesu, z własnymi programami lojalnościowymi i płatnościami wielowalutowymi."
         }
       }
     },
     "EngineeringSection": {
-      "title": "STANDARDY INŻYNIERSKIE",
-      "subtitle": "NIE TYLKO TWORZYMY APLIKACJE — BUDUJEMY CYFROWE TWIERDZE.",
+      "title": "STANDARDY INŻYNIERYJNE",
+      "subtitle": "NIE TYLKO TWORZYMY STRONY INTERNETOWE — BUDUJEMY CYFROWE FORTECE.",
       "engineeringList": {
         "list01": {
           "title": "WZMOCNIONE BEZPIECZEŃSTWO",
-          "eng01": "Zgodność z OWASP Top 10",
-          "eng02": "Szyfrowanie danych (standard AES-256)",
-          "eng03": "Zaawansowane zarządzanie tożsamością (OIDC)"
+          "eng01": "Ochrona systemu przed cyberatakami i naruszeniami",
+          "eng02": "Niezawodne szyfrowanie danych biznesowych i baz klientów",
+          "eng03": "Bezpieczne uwierzytelnianie i kontrola dostępu"
         },
         "list02": {
-          "title": "NIESKOŃCZONA SKALOWALNOŚĆ",
-          "eng01": "Architektura mikroserwisowa (Service Mesh)",
-          "eng02": "Klastry Kubernetes z auto-scalingiem",
-          "eng03": "Replikacja baz danych między regionami"
+          "title": "ELASTYCZNA SKALOWALNOŚĆ",
+          "eng01": "Stabilna wydajność platformy podczas szczytowych obciążeń",
+          "eng02": "Automatyczne skalowanie zasobów przy nagłych wzrostach ruchu",
+          "eng03": "Kopie zapasowe i ochrona przed utratą danych"
         },
         "list03": {
-          "title": "ROZWIĄZANIA WEB2APP",
-          "eng01": "App Store ＆ Google Play",
-          "eng02": "Inteligentne powiadomienia push",
-          "eng03": "PWA ＆ dostęp offline"
+          "title": "INTEGRACJE",
+          "eng01": "Głęboka synchronizacja z systemami CRM i ERP",
+          "eng02": "Konfiguracja bezpiecznych bramek płatniczych i usług dostawy",
+          "eng03": "Automatyzacja wymiany danych między narzędziami biznesowymi przez API"
         }
       }
     },
@@ -56,21 +68,21 @@
         "dev01": {
           "title": "01. ANALIZA",
           "subTitle": "DISCOVERY",
-          "desc": "Dogłębna analiza logiki biznesowej, rynku oraz wykonalności technicznej."
+          "desc": "Dogłębna analiza logiki biznesowej, rynku i wykonalności technicznej."
         },
         "dev02": {
           "title": "02. WIZJA",
           "subTitle": "DESIGN",
-          "desc": "Projektowanie architektury, dokumentacja techniczna oraz prototypowanie UX."
+          "desc": "Projektowanie architektury, dokumentacja techniczna i prototypowanie UX."
         },
         "dev03": {
           "title": "03. BUDOWA",
           "subTitle": "CODING",
-          "desc": "Modułowy rozwój kodu zgodnie z best practices oraz zautomatyzowanymi testami."
+          "desc": "Modularny rozwój kodu z wykorzystaniem najlepszych praktyk i testów automatycznych."
         },
         "dev04": {
           "title": "04. OPTYMALIZACJA",
-          "subTitle": "SCALE",
+          "subTitle": "SKALA",
           "desc": "Wdrożenie, monitoring obciążenia i ciągłe dostrajanie wydajności."
         }
       }

@@ -15,11 +15,11 @@ const EngineeringSection = () => {
   const ukStyle = locale === 'uk' ? 'text-main-xs' : 'text-main-sm';
 
   return (
-    <section className="mb-9">
+    <section className="mb-10">
       <SectionGradientLine height="1" />
       <SectionContainer>
         <SectionTitle marginBottom="10px">{t('title')}</SectionTitle>
-        <p className={`mb-10 ${ukStyle}`}>{t('subtitle')}</p>
+        <p className={`lg:mb-10 ${ukStyle}`}>{t('subtitle')}</p>
         <div className="flex flex-col lg:flex-row items-center lg:justify-between  gap-6 lg:gap-0 mb-10">
           <EngineeringImage />
           <EngineeringList />

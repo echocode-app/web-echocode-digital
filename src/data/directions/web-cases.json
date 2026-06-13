@@ -1,0 +1,23 @@
+[
+  {
+    "image": "/images/directions/web/cases/adminpanel.png",
+    "title": "E-commers／adminpanel",
+    "platforms": ["Development", "ui／ux Design"],
+    "id": "adminpanel",
+    "categories": ["health", "everyday", "utility"]
+  },
+  {
+    "image": "/images/directions/web/cases/casa-natura.png",
+    "title": "casa natura",
+    "platforms": ["Development", "ui/ux Design"],
+    "id": "casa-natura",
+    "categories": ["everyday", "utility"]
+  },
+  {
+    "image": "/images/directions/web/cases/detailing.png",
+    "title": "detailing service",
+    "platforms": ["Development", "ui/ux Design"],
+    "id": "e-commers",
+    "categories": ["e-commerce", "utility", "creative"]
+  }
+]

@@ -143,10 +143,10 @@ const ContactUsModal = () => {
             <CloseBtn onClose={closeModal} disabled={isClosingBlocked} />
           </div>
           <div className=" md:mb-2.5">
-            <SectionTitle>{t('title')}</SectionTitle>
+            <h2 className="block text-title-2xl font-title uppercase">{t('title')}</h2>
           </div>
           <div className="flex flex-wrap md:gap-1 text-main-sm mb-2 md:mb-8">
-            <p className="text-white">{t('subtitle')}</p>
+            <p className="text-white text-main-xs">{t('subtitle')}</p>
             <Link
               href={'mailto:hello@echocode.digital'}
               data-text="hello@echocode.digital"
