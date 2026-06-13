@@ -1,7 +1,7 @@
 {
   "ProjectModal": {
-    "title": "MASZ PROJEKT NA MYŚLI?",
-    "subtitle": "Uzyskaj profesjonalną poradę. Skorzystaj z formularza lub napisz do nas e-mail:",
+    "title": "Wiemy, jak spełnić potrzeby Twojego biznesu",
+    "subtitle": "Opowiedz nam o swoim projekcie. Przeanalizujemy zapytanie, dobierzemy optymalny stack technologiczny i opracujemy strategię krok po kroku",
     "projectForm": {
       "firstNamePlaceholder": "Imię*",
       "phonePlaceholder": "Telefon*",

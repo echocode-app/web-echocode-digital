@@ -8,6 +8,7 @@ import EngineeringSection from '@/components/sections/directions/web/Engineering
 import DevelopmentSection from '@/components/sections/directions/web/DevelopmentSection';
 import { AppLocale, buildPageMetadata } from '@/lib/seo/metadata';
 import BreadcrumbJsonLd from '@/components/seo/BreadcrumbJsonLd';
+import DevCasesSection from '@/components/sections/directions/web/DevCasesSection';
 
 type PageProps = {
   params: Promise<{ locale: AppLocale }>;
@@ -43,6 +44,9 @@ const WebDevelopment = async ({ params }: PageProps) => {
       <StaticGradientLine />
       <SectionFirstReveal>
         <StrategySection />
+      </SectionFirstReveal>
+      <SectionFirstReveal>
+        <DevCasesSection />
       </SectionFirstReveal>
       <SectionFirstReveal>
         <CoreSection />

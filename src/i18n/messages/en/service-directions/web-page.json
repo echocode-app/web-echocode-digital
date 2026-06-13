@@ -1,52 +1,64 @@
 {
   "WebPage": {
-    "HeroSection": { "title": "BUILD DIGITAL FUTURE" },
+    "HeroSection": {
+      "title": "Web development that drives sales",
+      "subtitle": "We design and develop turnkey web solutions: from landing pages to complex corporate systems with CRM and ERP integrations."
+    },
     "StrategySection": {
       "title": "EXPERTISE ＆ STRATEGY",
-      "subtitle": "Every line of code is a business asset. We focus on architectural integrity to minimize technical debt and maximize ROI.",
+      "subtitle": "We don't just write code. We develop fast and reliable web systems that automate routine tasks, handle high traffic, and help your business scale without losing customers.",
+      "points": {
+        "point01": "Loading times under 1 second",
+        "point02": "24/7 uptime",
+        "point03": "Absolute data security",
+        "point04": "Scalability"
+      },
       "list": {
-        "list01": "SUCCESSFUL RELEASES",
-        "list02": "AVERAGE UPTIME"
+        "list01": "Successful Projects",
+        "list02": "System Reliability"
       }
+    },
+    "DevCasesSection": {
+      "title": "Web Development Cases"
     },
     "SolutionsSection": {
       "title": "CORE SOLUTIONS",
       "solutions": {
         "sol01": {
           "title": "ENTERPRISE SYSTEMS",
-          "desc": "Bespoke ERP/CRM architectures designed for full business automation and data harmony."
+          "desc": "We develop custom ERP and CRM systems tailored to your business processes. We automate routine tasks, consolidate all data into a single ecosystem, and help reduce costs."
         },
         "sol02": {
           "title": "HIGH-LOAD PLATFORMS",
-          "desc": "Engineering for millions of users with zero-downtime architecture and global performance."
+          "desc": "Reliable web solutions that perform consistently even during peak traffic. Your project will handle the influx of customers and run 24/7 without technical glitches or slowdowns."
         },
         "sol03": {
           "title": "E-COMMERCE SOLUTIONS",
-          "desc": "Scalable storefronts focusing on conversion rates and seamless multi-vendor integrations."
+          "desc": "We go beyond the scope of typical online stores. We create unique e-commerce platforms tailored to the specifics of your business, featuring custom loyalty programs and multi-currency checkouts."
         }
       }
     },
     "EngineeringSection": {
       "title": "ENGINEERING STANDARDS",
-      "subtitle": "WE DON'T JUST BUILD APPLICATIONS; WE BUILD DIGITAL FORTRESSES.",
+      "subtitle": "WE DON'T JUST BUILD WEBSITES—WE BUILD DIGITAL FORTRESSES.",
       "engineeringList": {
         "list01": {
-          "title": "HARDENED SECURITY",
-          "eng01": "OWASP Top 10 Compliance",
-          "eng02": "Data Encryption (AES-256 standard)",
-          "eng03": "Advanced Identity Management (OIDC)"
+          "title": "ENHANCED SECURITY",
+          "eng01": "Protection of the system against cyberattacks and breaches",
+          "eng02": "Reliable encryption of commercial data and customer databases",
+          "eng03": "Secure authentication and access control"
         },
         "list02": {
-          "title": "INFINITE SCALABILITY",
-          "eng01": "Microservices Architecture (Service Mesh)",
-          "eng02": "Auto-scaling Kubernetes Clusters",
-          "eng03": "Multi-region Database Replication"
+          "title": "FLEXIBLE SCALABILITY",
+          "eng01": "Stable platform performance during peak loads",
+          "eng02": "Automatic resource scaling during sudden traffic spikes",
+          "eng03": "Backup and data loss protection"
         },
         "list03": {
-          "title": "WEB2APP SOLUTIONS",
-          "eng01": "App Store & Google Play",
-          "eng02": "Smart Push Notifications",
-          "eng03": "PWA & Offline Access"
+          "title": "INTEGRATIONS",
+          "eng01": "Deep synchronization with your CRM and ERP systems",
+          "eng02": "Setup of secure payment gateways and delivery services",
+          "eng03": "Automation of data exchange between business tools through APIs"
         }
       }
     },

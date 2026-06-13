@@ -11,7 +11,6 @@ import SectionTitle from '@/components/UI/section/SectionTitle';
 
 export default function FooterFormWrapper() {
   const t = useTranslations('Layout.Footer');
-  const tTitle = useTranslations('ProjectModal');
   const pathname = usePathname();
 
   const isCareerRoute = pathname === '/career' || pathname.startsWith('/career/');
@@ -20,7 +19,7 @@ export default function FooterFormWrapper() {
     return (
       <>
         <div className="mb-4 md:mb-12 flex flex-col xl:flex-row xl:justify-between xl:items-end w-fit xl:w-full">
-          <h2 className="mb-4 xl:mb-0 font-extra font-extrabold text-[40px] w-fit leading-none">
+          <h2 className="mb-4 xl:mb-0 font-extra font-extrabold text-[32px] md:text-[40px] w-fit leading-none uppercase">
             {t('title')}
           </h2>
           <VacancyFooterForm key={pathname} />
@@ -30,17 +29,29 @@ export default function FooterFormWrapper() {
   }
 
   return (
-    <div className="flex justify-between flex-col min-[1068]:flex-row gap-2 pb-10">
-      <div className="relative">
-        <div className="md:mb-2.5">
-          <SectionTitle>{tTitle('title')}</SectionTitle>
+    <div className="flex justify-between flex-col min-[1068]:flex-row gap-4 pb-10">
+      <div className="relative flex flex-col min-[954px]:flex-row min-[1068px]:flex-col justify-between gap-2">
+        <div>
+          <div className="md:mb-6 max-w-150">
+            <SectionTitle>{t('title')}</SectionTitle>
+          </div>
+          <p className="text-main-sm mb-2 md:mb-0 max-w-122.5 text-white">{t('subtitle')} </p>
         </div>
-        <p className="text-main-sm mb-2 md:mb-8 max-w-145 text-white">
-          {tTitle('subtitle')}{' '}
+        <div className="flex items-end">
+          <div className="relative w-28.5 h-37 order-1 min-[954px]:order-2 min-[1068px]:order-1">
+            <Image
+              src={'/images/rabbits/footer.png'}
+              alt="CV"
+              fill
+              sizes="296px"
+              className="object-contain scale-x-100 min-[954px]:-scale-x-100 min-[1068px]:scale-x-100"
+            />
+          </div>
+
           <Link
             href="mailto:hello@echocode.digital"
             data-text="hello@echocode.digital"
-            className="relative inline-block font-semibold text-accent transition-all duration-main
+            className="relative order-2 min-[954px]:order-1 min-[1068px]:order-2 inline-block text-main-sm font-semibold text-accent transition-all duration-main
       before:pointer-events-none before:absolute before:inset-0 before:content-[attr(data-text)]
       before:bg-main-gradient before:bg-clip-text before:text-transparent before:opacity-0
       before:animate-[section-gradient-drift_5s_ease-in-out_infinite] before:bg-size-[200%_200%]
@@ -53,18 +64,6 @@ export default function FooterFormWrapper() {
           >
             hello@echocode.digital
           </Link>
-        </p>
-
-        <div className=" md:absolute right-1/2 md:right-0 md:bottom-0 md:translate-x-16 min-[1068px]:translate-x-0">
-          <div className="relative w-55.5 h-37 mx-auto md:mx-0">
-            <Image
-              src={'/images/rabbits/resume.png'}
-              alt="CV"
-              fill
-              sizes="296px"
-              className="object-contain -scale-x-100 md:scale-x-100 min-[1068px]:-scale-x-100"
-            />
-          </div>
         </div>
       </div>
       <CommonFooterForm key={pathname} />

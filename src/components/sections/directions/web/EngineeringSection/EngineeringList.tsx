@@ -18,16 +18,16 @@ const EngineeringList = () => {
           {t('list01.title')}
         </h3>
         <ul className="px-2 text-main-sm text-gray75 pointer-events-none">
-          <li className="flex gap-2 items-center">
-            <div className="w-0.75 h-0.75 bg-gray75 rounded-full" />
+          <li className="flex items-start gap-2">
+            <div className="mt-2.25 h-0.75 w-0.75 shrink-0 rounded-full bg-gray75" />
             <p>{t('list01.eng01')}</p>
           </li>
-          <li className="flex gap-2 items-center">
-            <div className="w-0.75 h-0.75 bg-gray75 rounded-full" />
+          <li className="flex gap-2 items-start">
+            <div className="mt-2.25 h-0.75 w-0.75 shrink-0 rounded-full bg-gray75" />
             <p>{t('list01.eng02')}</p>
           </li>
-          <li className="flex gap-2 items-center">
-            <div className="w-0.75 h-0.75 bg-gray75 rounded-full" />
+          <li className="flex gap-2 items-start">
+            <div className="mt-2.25 h-0.75 w-0.75 shrink-0 rounded-full bg-gray75" />
             <p>{t('list01.eng03')}</p>
           </li>
         </ul>
@@ -40,16 +40,16 @@ const EngineeringList = () => {
           {t('list02.title')}
         </h3>
         <ul className="px-2 text-main-sm text-gray75 pointer-events-none">
-          <li className="flex gap-2 items-center">
-            <div className="w-0.75 h-0.75 bg-gray75 rounded-full" />
+          <li className="flex gap-2 items-start">
+            <div className="mt-2.25 h-0.75 w-0.75 shrink-0 rounded-full bg-gray75" />
             <p>{t('list02.eng01')}</p>
           </li>
-          <li className="flex gap-2 items-center">
-            <div className="w-0.75 h-0.75 bg-gray75 rounded-full" />
+          <li className="flex gap-2 items-start">
+            <div className="mt-2.25 h-0.75 w-0.75 shrink-0 rounded-full bg-gray75" />
             <p>{t('list02.eng02')}</p>
           </li>
-          <li className="flex gap-2 items-center">
-            <div className="w-0.75 h-0.75 bg-gray75 rounded-full" />
+          <li className="flex gap-2 items-start">
+            <div className="mt-2.25 h-0.75 w-0.75 shrink-0 rounded-full bg-gray75" />
             <p>{t('list02.eng03')}</p>
           </li>
         </ul>
@@ -62,16 +62,16 @@ const EngineeringList = () => {
           {t('list03.title')}
         </h3>
         <ul className="px-2 text-main-sm text-gray75 pointer-events-none">
-          <li className="flex gap-2 items-center">
-            <div className="w-0.75 h-0.75 bg-gray75 rounded-full" />
+          <li className="flex gap-2 items-start">
+            <div className="mt-2.25 h-0.75 w-0.75 shrink-0 rounded-full bg-gray75" />
             <p>{t('list03.eng01')}</p>
           </li>
-          <li className="flex gap-2 items-center">
-            <div className="w-0.75 h-0.75 bg-gray75 rounded-full" />
+          <li className="flex gap-2 items-start">
+            <div className="mt-2.25 h-0.75 w-0.75 shrink-0 rounded-full bg-gray75" />
             <p>{t('list03.eng02')}</p>
           </li>
-          <li className="flex gap-2 items-center">
-            <div className="w-0.75 h-0.75 bg-gray75 rounded-full" />
+          <li className="flex gap-2 items-start">
+            <div className="mt-2.25 h-0.75 w-0.75 shrink-0 rounded-full bg-gray75" />
             <p>{t('list03.eng03')}</p>
           </li>
         </ul>

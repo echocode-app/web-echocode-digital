@@ -1,53 +1,64 @@
 {
   "WebPage": {
-    "HeroSection": { "title": "CONSTRUIMOS EL FUTURO DIGITAL" },
-
+    "HeroSection": {
+      "title": "Desarrollo web que impulsa las ventas",
+      "subtitle": "Diseñamos y desarrollamos soluciones web llave en mano: desde landing pages hasta sistemas corporativos complejos con integraciones CRM y ERP."
+    },
     "StrategySection": {
-      "title": "EXPERTISE Y ESTRATEGIA",
-      "subtitle": "Cada línea de código es un activo empresarial. Nos enfocamos en la integridad arquitectónica para minimizar la deuda técnica y maximizar el ROI.",
+      "title": "EXPERIENCIA Y ESTRATEGIA",
+      "subtitle": "No solo escribimos código. Desarrollamos sistemas web rápidos y fiables que automatizan tareas rutinarias, soportan alto tráfico y ayudan a tu negocio a escalar sin perder clientes.",
+      "points": {
+        "point01": "Carga en menos de 1 segundo",
+        "point02": "Disponibilidad 24/7",
+        "point03": "Seguridad total de datos",
+        "point04": "Escalabilidad"
+      },
       "list": {
-        "list01": "LANZAMIENTOS EXITOSOS",
-        "list02": "UPTIME PROMEDIO"
+        "list01": "Proyectos exitosos",
+        "list02": "Fiabilidad del sistema"
       }
     },
+    "DevCasesSection": {
+      "title": "Casos de desarrollo web"
+    },
     "SolutionsSection": {
-      "title": "SOLUCIONES PRINCIPALES",
+      "title": "SOLUCIONES CLAVE",
       "solutions": {
         "sol01": {
           "title": "SISTEMAS EMPRESARIALES",
-          "desc": "Arquitecturas ERP/CRM personalizadas diseñadas para la automatización completa del negocio y la armonía de datos."
+          "desc": "Desarrollamos sistemas ERP y CRM personalizados según los procesos de tu negocio. Automatizamos tareas rutinarias, unificamos los datos en un único ecosistema y ayudamos a reducir costes."
         },
         "sol02": {
           "title": "PLATAFORMAS DE ALTA CARGA",
-          "desc": "Ingeniería para millones de usuarios con arquitectura sin interrupciones y rendimiento global."
+          "desc": "Soluciones web fiables que funcionan de forma estable incluso durante picos de tráfico. Tu proyecto soportará la afluencia de clientes y funcionará 24/7 sin fallos técnicos ni ralentizaciones."
         },
         "sol03": {
           "title": "SOLUCIONES E-COMMERCE",
-          "desc": "Tiendas escalables enfocadas en la conversión y en integraciones fluidas con múltiples vendedores."
+          "desc": "Vamos más allá de las tiendas online tradicionales. Creamos plataformas e-commerce únicas, adaptadas a tu negocio, con programas de fidelización personalizados y pagos multidivisa."
         }
       }
     },
     "EngineeringSection": {
       "title": "ESTÁNDARES DE INGENIERÍA",
-      "subtitle": "NO SOLO CONSTRUIMOS APLICACIONES, CONSTRUIMOS FORTALEZAS DIGITALES.",
+      "subtitle": "NO SOLO CREAMOS SITIOS WEB — CONSTRUIMOS FORTALEZAS DIGITALES.",
       "engineeringList": {
         "list01": {
           "title": "SEGURIDAD REFORZADA",
-          "eng01": "Cumplimiento OWASP Top 10",
-          "eng02": "Cifrado de datos (estándar AES-256)",
-          "eng03": "Gestión avanzada de identidad (OIDC)"
+          "eng01": "Protección del sistema contra ciberataques y brechas",
+          "eng02": "Cifrado fiable de datos comerciales y bases de clientes",
+          "eng03": "Autenticación segura y control de acceso"
         },
         "list02": {
-          "title": "ESCALABILIDAD INFINITA",
-          "eng01": "Arquitectura de microservicios (Service Mesh)",
-          "eng02": "Clusters de Kubernetes con auto-scaling",
-          "eng03": "Replicación de bases de datos multi-región"
+          "title": "ESCALABILIDAD FLEXIBLE",
+          "eng01": "Rendimiento estable de la plataforma durante cargas máximas",
+          "eng02": "Escalado automático de recursos ante picos repentinos de tráfico",
+          "eng03": "Copias de seguridad y protección contra pérdida de datos"
         },
         "list03": {
-          "title": "SOLUCIONES WEB2APP",
-          "eng01": "App Store y Google Play",
-          "eng02": "Notificaciones Push Inteligentes",
-          "eng03": "PWA y Acceso sin Conexión"
+          "title": "INTEGRACIONES",
+          "eng01": "Sincronización profunda con tus sistemas CRM y ERP",
+          "eng02": "Configuración de pasarelas de pago seguras y servicios de entrega",
+          "eng03": "Automatización del intercambio de datos entre herramientas empresariales mediante APIs"
         }
       }
     },
@@ -56,23 +67,23 @@
       "developments": {
         "dev01": {
           "title": "01. ANÁLISIS",
-          "subTitle": "DESCUBRIMIENTO",
+          "subTitle": "DISCOVERY",
           "desc": "Análisis profundo de la lógica de negocio, el mercado y la viabilidad técnica."
         },
         "dev02": {
           "title": "02. VISIÓN",
           "subTitle": "DISEÑO",
-          "desc": "Diseño arquitectónico, documentación técnica y prototipado UX."
+          "desc": "Planificación de arquitectura, documentación técnica y prototipado UX."
         },
         "dev03": {
-          "title": "03. CONSTRUCCIÓN",
-          "subTitle": "CODIFICACIÓN",
-          "desc": "Desarrollo modular utilizando buenas prácticas y pruebas automatizadas."
+          "title": "03. DESARROLLO",
+          "subTitle": "CODING",
+          "desc": "Desarrollo modular de código con buenas prácticas y pruebas automatizadas."
         },
         "dev04": {
           "title": "04. OPTIMIZACIÓN",
-          "subTitle": "ESCALADO",
-          "desc": "Despliegue, monitoreo de carga y ajuste continuo del rendimiento."
+          "subTitle": "ESCALA",
+          "desc": "Despliegue, monitoreo de carga y mejora continua del rendimiento."
         }
       }
     }
