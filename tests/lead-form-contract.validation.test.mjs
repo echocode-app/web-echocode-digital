@@ -13,7 +13,8 @@ const {
   phoneContactSchema,
   phoneSchema,
   projectIdentitySchema,
-  turnstileTokenSchema,
+  // turnstileTokenSchema,
+  captchaTokenSchema,
 } = await importValidationModule();
 const { projectSubmissionSchema } = await importProjectValidationModule();
 
@@ -32,7 +33,10 @@ async function importValidationModule() {
 
   // Node 20 cannot import .ts directly, so CI tests execute a temporary ESM build.
   const zodUrl = await import.meta.resolve('zod');
-  const output = transpiled.outputText.replace(/from ['"]zod['"]/g, `from ${JSON.stringify(zodUrl)}`);
+  const output = transpiled.outputText.replace(
+    /from ['"]zod['"]/g,
+    `from ${JSON.stringify(zodUrl)}`,
+  );
   const outputDir = path.join(tmpdir(), 'echocode-lead-form-contract-tests');
   const outputPath = path.join(outputDir, 'submissions.common.mjs');
 
@@ -149,9 +153,14 @@ test('phone contact schemas reject unsupported and overlong phone values', () =>
   assert.equal(parsed.success, false);
 });
 
-test('turnstileTokenSchema requires a non-empty token', () => {
-  assert.equal(turnstileTokenSchema.safeParse('cf-turnstile-token').success, true);
-  assert.equal(turnstileTokenSchema.safeParse('   ').success, false);
+// test('turnstileTokenSchema requires a non-empty token', () => {
+//   assert.equal(turnstileTokenSchema.safeParse('cf-turnstile-token').success, true);
+//   assert.equal(turnstileTokenSchema.safeParse('   ').success, false);
+// });
+
+test('captchaTokenSchema requires a non-empty token', () => {
+  assert.equal(captchaTokenSchema.safeParse('recaptcha-token').success, true);
+  assert.equal(captchaTokenSchema.safeParse('   ').success, false);
 });
 
 test('shared echocode.app project contract keeps firstName + lastName + email', () => {

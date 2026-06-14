@@ -21,7 +21,8 @@ export type ClientProjectCreateInput = {
   phone: string;
   email: string;
   /** Widget token verified before persistence; never stored. */
-  turnstileToken: string;
+  // turnstileToken: string;
+  captchaToken: string;
   description?: string;
   image?: ClientProjectImageMetaInput;
   gclid?: string;

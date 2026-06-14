@@ -19,7 +19,7 @@ function resolveEmailSubmitErrorKey(status: number): string {
   return 'form.submitFailed';
 }
 
-const submitEmail = async (formData: FormData, turnstileToken: string): Promise<FormState> => {
+const submitEmail = async (formData: FormData, captchaToken: string): Promise<FormState> => {
   try {
     const email = formData.get('email');
     const analyticsContext = getClientAnalyticsContextPayload();
@@ -29,7 +29,8 @@ const submitEmail = async (formData: FormData, turnstileToken: string): Promise<
       body: JSON.stringify({
         email,
         source: 'career_footer',
-        turnstileToken,
+        // turnstileToken,
+        captchaToken,
         ...analyticsContext,
       }),
     });

@@ -6,7 +6,8 @@ import { CandidateSubmissionPayload } from '../types/candidate';
 
 export async function submitCandidate(
   payload: CandidateSubmissionPayload,
-  turnstileToken: string,
+  // turnstileToken: string,
+  captchaToken: string,
 ) {
   const analyticsContext = getClientAnalyticsContextPayload();
   const res = await fetch('/api/forms/vacancy-submissions', {
@@ -15,7 +16,8 @@ export async function submitCandidate(
     body: JSON.stringify({
       ...payload,
       ...analyticsContext,
-      turnstileToken,
+      // turnstileToken,
+      captchaToken,
     }),
   });
 

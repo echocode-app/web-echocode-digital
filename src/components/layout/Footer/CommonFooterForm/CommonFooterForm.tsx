@@ -24,7 +24,8 @@ import {
   validateAll,
   validateField,
 } from '@/components/modals/ContactUsModal/ContactUsForm/clientProjectForm.validation';
-import TurnstileWidget from '@/widgets/TurnstileWidget';
+// import TurnstileWidget from '@/widgets/TurnstileWidget';
+import RecaptchaWidget from '@/widgets/RecaptchaWidget';
 
 function resolveSubmitErrorKey(status: number): string {
   if (status === 403) return 'form.turnstileFailed';
@@ -43,33 +44,57 @@ const CommonFooterForm = () => {
   const [errors, setErrors] = useState<FormErrors>({});
   const [touched, setTouched] = useState<Partial<Record<FieldName, boolean>>>({});
   const [submitState, setSubmitState] = useState<SubmitState>('idle');
-  const [turnstileToken, setTurnstileToken] = useState('');
-  const [turnstileKey, setTurnstileKey] = useState(0);
+  // const [turnstileToken, setTurnstileToken] = useState('');
+  // const [turnstileKey, setTurnstileKey] = useState(0);
+
+  const [captchaToken, setCaptchaToken] = useState('');
+  const [captchaKey, setCaptchaKey] = useState(0);
 
   const isLocked = submitState === 'loading' || submitState === 'success';
 
   const canSubmit = useMemo(() => !isLocked, [isLocked]);
 
-  const resetTurnstile = useCallback(() => {
-    setTurnstileToken('');
-    setTurnstileKey((prev) => prev + 1);
+  const resetCaptcha = useCallback(() => {
+    setCaptchaToken('');
+    setCaptchaKey((prev) => prev + 1);
   }, []);
 
-  const onTurnstileVerify = useCallback((token: string) => {
-    setTurnstileToken(token);
+  const onCaptchaVerify = useCallback((token: string) => {
+    setCaptchaToken(token);
     setErrors((prev) => ({
       ...prev,
       form: undefined,
     }));
   }, []);
 
-  const onTurnstileError = useCallback(() => {
-    setTurnstileToken('');
+  const onCaptchaError = useCallback(() => {
+    setCaptchaToken('');
     setErrors((prev) => ({
       ...prev,
       form: 'form.turnstileUnavailable',
     }));
   }, []);
+
+  // const resetTurnstile = useCallback(() => {
+  //   setTurnstileToken('');
+  //   setTurnstileKey((prev) => prev + 1);
+  // }, []);
+
+  // const onTurnstileVerify = useCallback((token: string) => {
+  //   setTurnstileToken(token);
+  //   setErrors((prev) => ({
+  //     ...prev,
+  //     form: undefined,
+  //   }));
+  // }, []);
+
+  // const onTurnstileError = useCallback(() => {
+  //   setTurnstileToken('');
+  //   setErrors((prev) => ({
+  //     ...prev,
+  //     form: 'form.turnstileUnavailable',
+  //   }));
+  // }, []);
 
   useEffect(() => {
     if (submitState !== 'success') {
@@ -137,7 +162,15 @@ const CommonFooterForm = () => {
       return;
     }
 
-    if (!turnstileToken) {
+    // if (!turnstileToken) {
+    //   setErrors((prev) => ({
+    //     ...prev,
+    //     form: 'form.turnstileRequired',
+    //   }));
+    //   return;
+    // }
+
+    if (!captchaToken) {
       setErrors((prev) => ({
         ...prev,
         form: 'form.turnstileRequired',
@@ -159,10 +192,17 @@ const CommonFooterForm = () => {
         imagePayload = await initAttachmentUpload(values.image);
       }
 
+      // const response = await submitClientProject(
+      //   values,
+      //   imagePayload,
+      //   turnstileToken,
+      //   'client_project_footer',
+      // );
+
       const response = await submitClientProject(
         values,
         imagePayload,
-        turnstileToken,
+        captchaToken,
         'client_project_footer',
       );
 
@@ -173,7 +213,9 @@ const CommonFooterForm = () => {
           source: 'client_project_footer',
         });
 
-        resetTurnstile();
+        // resetTurnstile();
+
+        resetCaptcha();
 
         setErrors({ form: resolveSubmitErrorKey(response.status) });
         setSubmitState('idle');
@@ -182,7 +224,8 @@ const CommonFooterForm = () => {
 
       setErrors({});
       setSubmitState('success');
-      resetTurnstile();
+      // resetTurnstile();
+      resetCaptcha();
     } catch (error) {
       void trackClientProjectModalEvent('submit_project_error', {
         stage: 'submit',
@@ -191,7 +234,8 @@ const CommonFooterForm = () => {
       });
       setErrors({ form: 'form.networkFailed' });
       setSubmitState('idle');
-      resetTurnstile();
+      // resetTurnstile();
+      resetCaptcha();
     }
   };
 
@@ -256,12 +300,18 @@ const CommonFooterForm = () => {
           onChange={(value) => onChangeText('description', value)}
         />
       </div>
-      <div className="mx-auto w-fit mb-4 min-h-[71.5px]">
-        <TurnstileWidget
+      <div className="mx-auto w-fit mb-5 min-h-19.5">
+        {/* <TurnstileWidget
           key={turnstileKey}
           action="client-project"
           onVerify={onTurnstileVerify}
           onError={onTurnstileError}
+        /> */}
+
+        <RecaptchaWidget
+          resetSignal={captchaKey}
+          onVerify={onCaptchaVerify}
+          onError={onCaptchaError}
         />
       </div>
       <div className="relative">

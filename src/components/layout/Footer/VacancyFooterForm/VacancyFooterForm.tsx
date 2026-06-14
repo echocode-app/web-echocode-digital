@@ -7,7 +7,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import SubmitArrow from './SubmitArrow';
 import { submitEmail } from './api/submitEmail';
 import { emailSchema } from './shemas/emailSchema';
-import TurnstileWidget from '@/widgets/TurnstileWidget';
+// import TurnstileWidget from '@/widgets/TurnstileWidget';
+import RecaptchaWidget from '@/widgets/RecaptchaWidget';
 
 type FormState = {
   success?: boolean;
@@ -21,8 +22,11 @@ const VacancyFooterForm = () => {
   const [state, setState] = useState<FormState>({});
   const [localError, setLocalError] = useState<string | null>(null);
   const [showSuccess, setShowSuccess] = useState(false);
-  const [turnstileToken, setTurnstileToken] = useState('');
-  const [turnstileKey, setTurnstileKey] = useState(0);
+  // const [turnstileToken, setTurnstileToken] = useState('');
+  // const [turnstileKey, setTurnstileKey] = useState(0);
+
+  const [captchaToken, setCaptchaToken] = useState('');
+  const [captchaKey, setCaptchaKey] = useState(0);
 
   const locale = useLocale();
 
@@ -32,13 +36,35 @@ const VacancyFooterForm = () => {
   const t = useTranslations('Layout.Footer');
   const errorsT = useTranslations('EmailSubmitValidation');
 
-  const resetTurnstile = useCallback(() => {
-    setTurnstileToken('');
-    setTurnstileKey((prev) => prev + 1);
+  // const resetTurnstile = useCallback(() => {
+  //   setTurnstileToken('');
+  //   setTurnstileKey((prev) => prev + 1);
+  // }, []);
+
+  // const handleTurnstileVerify = useCallback((token: string) => {
+  //   setTurnstileToken(token);
+  //   setLocalError(null);
+  //   setState((prev) => ({
+  //     ...prev,
+  //     error: undefined,
+  //   }));
+  // }, []);
+
+  // const handleTurnstileError = useCallback(() => {
+  //   setTurnstileToken('');
+  //   setState((prev) => ({
+  //     ...prev,
+  //     error: 'form.turnstileUnavailable',
+  //   }));
+  // }, []);
+
+  const resetCaptcha = useCallback(() => {
+    setCaptchaToken('');
+    setCaptchaKey((prev) => prev + 1);
   }, []);
 
-  const handleTurnstileVerify = useCallback((token: string) => {
-    setTurnstileToken(token);
+  const handleCaptchaVerify = useCallback((token: string) => {
+    setCaptchaToken(token);
     setLocalError(null);
     setState((prev) => ({
       ...prev,
@@ -46,8 +72,8 @@ const VacancyFooterForm = () => {
     }));
   }, []);
 
-  const handleTurnstileError = useCallback(() => {
-    setTurnstileToken('');
+  const handleCaptchaError = useCallback(() => {
+    setCaptchaToken('');
     setState((prev) => ({
       ...prev,
       error: 'form.turnstileUnavailable',
@@ -72,23 +98,31 @@ const VacancyFooterForm = () => {
       return;
     }
 
-    if (!turnstileToken) {
+    // if (!turnstileToken) {
+    //   setState({ error: 'form.turnstileRequired' });
+    //   return;
+    // }
+
+    if (!captchaToken) {
       setState({ error: 'form.turnstileRequired' });
       return;
     }
 
     setLocalError(null);
 
-    const response = await submitEmail(formData, turnstileToken);
+    // const response = await submitEmail(formData, turnstileToken);
+    const response = await submitEmail(formData, captchaToken);
     setState(response);
 
     if (response.success) {
       formRef.current?.reset();
       setShowSuccess(true);
-      resetTurnstile();
+      // resetTurnstile();
+      resetCaptcha();
       setTimeout(() => setShowSuccess(false), 2000);
     } else {
-      resetTurnstile();
+      // resetTurnstile();
+      resetCaptcha();
     }
   };
 
@@ -102,12 +136,17 @@ const VacancyFooterForm = () => {
 
   return (
     <div className={`${deEsLocale} w-full`}>
-      <div className="mb-1 flex min-h-[71.5px] w-full justify-center">
-        <TurnstileWidget
+      <div className="mb-2 flex min-h-19.5 w-full justify-center">
+        {/* <TurnstileWidget
           key={turnstileKey}
           action="email-submission"
           onVerify={handleTurnstileVerify}
           onError={handleTurnstileError}
+        /> */}
+        <RecaptchaWidget
+          resetSignal={captchaKey}
+          onVerify={handleCaptchaVerify}
+          onError={handleCaptchaError}
         />
       </div>
       <strong className="block mb-2 font-medium leading-none text-[12px]">{t('mailTitle')}</strong>

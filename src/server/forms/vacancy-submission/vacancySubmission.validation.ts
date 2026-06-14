@@ -2,7 +2,8 @@ import { z } from 'zod';
 import { candidateCvFileSchema } from '@/shared/validation/submissions';
 import {
   profileUrlSchema,
-  turnstileTokenSchema,
+  // turnstileTokenSchema,
+  captchaTokenSchema,
 } from '@/shared/validation/submissions.common';
 import { SUBMISSIONS_TMP_UPLOAD_PATH_PATTERN } from '@/shared/forms/submissionsUpload.constants';
 import { validate } from '@/server/lib';
@@ -42,7 +43,8 @@ const vacancySnapshotSchema = z.object({
 
 /** Public vacancy submissions must carry a server-verifiable Turnstile token. */
 export const vacancySubmissionCreateSchema = z.object({
-  turnstileToken: turnstileTokenSchema,
+  // turnstileToken: turnstileTokenSchema,
+  captchaToken: captchaTokenSchema,
   profileUrl: profileUrlSchema.max(600),
   cvFile: cvFileSchema,
   vacancy: vacancySnapshotSchema,
