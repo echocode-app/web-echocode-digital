@@ -8,7 +8,7 @@ const HeroSection = () => {
   const t = useTranslations('PartnershipPage.HeroSection');
 
   return (
-    <section className="pt-32 md:pb-11.5">
+    <section className="pt-35 md:pb-11.5">
       <SectionContainer>
         <div className="flex flex-col md:flex-row items-center justify-between">
           <div className="max-w-160 mb-2 md:mb-0">
