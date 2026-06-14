@@ -21,6 +21,7 @@ import type { SubmitState } from '@/components/modals/ContactUsModal/ContactUsFo
 const ContactUsModal = () => {
   const t = useTranslations('ProjectModal');
   const locale = useLocale();
+  const enStyle = locale === 'en' ? '' : '';
 
   const router = useRouter();
   const [submitState, setSubmitState] = useState<SubmitState>('idle');
@@ -132,7 +133,7 @@ const ContactUsModal = () => {
       <div className="px-4 md:px-8 max-w-160 w-full">
         <motion.div
           onClick={(e) => e.stopPropagation()}
-          className="relative  w-full flex flex-col mx-auto p-5 pt-10 md:pt-15 md:pb-6 md:px-5 lg:p-15 lg:pb-8
+          className="relative  w-full flex flex-col mx-auto p-5 pb-2.5 pt-10 md:pt-15 md:pb-6 md:px-5 lg:p-15 lg:pb-8
            rounded-secondary border bg-[rgba(0,0,0,0.8)] border-white backdrop-blur-[26px]"
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -143,7 +144,9 @@ const ContactUsModal = () => {
             <CloseBtn onClose={closeModal} disabled={isClosingBlocked} />
           </div>
           <div className=" md:mb-2.5">
-            <h2 className="block text-title-2xl font-title uppercase">{t('title')}</h2>
+            <h2 className="block text-title-base font-bold md:text-title-2xl font-title uppercase">
+              {t('title')}
+            </h2>
           </div>
           <div className="flex flex-wrap md:gap-1 text-main-sm mb-2 md:mb-8">
             <p className="text-white text-main-xs">{t('subtitle')}</p>
