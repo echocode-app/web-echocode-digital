@@ -2,7 +2,8 @@ import { z } from 'zod';
 import {
   projectIdentitySchema,
   projectNeedsSchema,
-  turnstileTokenSchema,
+  // turnstileTokenSchema,
+  captchaTokenSchema,
 } from '@/shared/validation/submissions.common';
 import { projectAttachmentSchema } from '@/shared/validation/submissions.files';
 
@@ -21,7 +22,8 @@ export const projectSubmissionSchema = projectIdentitySchema.extend({
   siteId: siteIdSchema.optional(),
   siteHost: siteHostSchema.optional(),
   source: submissionSourceSchema.optional(),
-  turnstileToken: turnstileTokenSchema.optional(),
+  // turnstileToken: turnstileTokenSchema.optional(),
+  captchaToken: captchaTokenSchema.optional(),
   needs: projectNeedsSchema.optional(),
   attachment: projectAttachmentSchema.optional(),
 });

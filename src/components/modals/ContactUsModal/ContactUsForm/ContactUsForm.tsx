@@ -3,7 +3,8 @@ import { useLocale, useTranslations } from 'next-intl';
 import ContactInput from './ContactInput';
 import SubmitButton from './SubmitBtn';
 import YourNeedsInput from './YourNeedInput';
-import TurnstileWidget from '@/widgets/TurnstileWidget';
+// import TurnstileWidget from '@/widgets/TurnstileWidget';
+import RecaptchaWidget from '@/widgets/RecaptchaWidget';
 import { useClientProjectForm } from '@/components/modals/ContactUsModal/ContactUsForm/useClientProjectForm';
 import type { SubmitState } from '@/components/modals/ContactUsModal/ContactUsForm/useClientProjectForm';
 import ContactInputNumber from './ContactInputNumber';
@@ -30,13 +31,16 @@ const ContactUsForm = ({
     errors,
     submitState,
     isLocked,
-    turnstileKey,
+    // turnstileKey,
+    captchaKey,
     onSubmit,
     onChangeText,
     onBlurField,
     onClearPhoneWithoutValidation,
-    onTurnstileVerify,
-    onTurnstileError,
+    // onTurnstileVerify,
+    onCaptchaVerify,
+    // onTurnstileError,
+    onCaptchaError,
   } = useClientProjectForm(onSuccessNavigate, onAutoClose, onSubmitStateChange);
 
   return (
@@ -91,12 +95,17 @@ const ContactUsForm = ({
           onChange={(value) => onChangeText('description', value)}
         />
       </div>
-      <div className="mx-auto w-fit min-h-[71.5px]">
-        <TurnstileWidget
+      <div className="mx-auto w-fit min-h-19.5">
+        {/* <TurnstileWidget
           key={turnstileKey}
           action="client-project"
           onVerify={onTurnstileVerify}
           onError={onTurnstileError}
+        /> */}
+        <RecaptchaWidget
+          resetSignal={captchaKey}
+          onVerify={onCaptchaVerify}
+          onError={onCaptchaError}
         />
       </div>
       <div className="min-h-5 mb-1" aria-live="polite">

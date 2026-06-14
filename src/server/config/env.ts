@@ -11,7 +11,8 @@ type OptionalEnv = {
   developerAccessMode: 'full' | 'readonly';
   adminBootstrapEmails: string[];
   apiVersion: string;
-  cloudflareTurnstileSecretKey?: string;
+  // cloudflareTurnstileSecretKey?: string;
+  recaptchaSecretKey?: string;
   crmCaptureLeadUrl?: string;
   firebaseCheckStorage: boolean;
   internalFirebaseCheckEnabled: boolean;
@@ -42,7 +43,8 @@ const envSchema = z.object({
   ADMIN_BOOTSTRAP_EMAILS: z.string().optional(),
   API_VERSION: z.string().trim().min(1).default('v1'),
   // Server-only secret used to verify public form Turnstile tokens.
-  CLOUDFLARE_TURNSTILE_SECRET_KEY: z.string().trim().min(1).optional(),
+  // CLOUDFLARE_TURNSTILE_SECRET_KEY: z.string().trim().min(1).optional(),
+  RECAPTCHA_SECRET_KEY: z.string().trim().min(1).optional(),
   CRM_CAPTURE_LEAD_URL: z.url().trim().optional(),
 });
 
@@ -65,9 +67,7 @@ function normalizeBootstrapEmails(value: string | undefined): string[] {
 
     const parsed = emailSchema.safeParse(email);
     if (!parsed.success) {
-      throw new ConfigurationError(
-        `Invalid email in ADMIN_BOOTSTRAP_EMAILS: ${email}`,
-      );
+      throw new ConfigurationError(`Invalid email in ADMIN_BOOTSTRAP_EMAILS: ${email}`);
     }
 
     uniqueEmails.add(email);
@@ -82,9 +82,7 @@ function parseEnvironment(raw: NodeJS.ProcessEnv): Env {
   if (!parsed.success) {
     const firstIssue = parsed.error.issues[0];
     const path = firstIssue.path.join('.') || '(root)';
-    throw new ConfigurationError(
-      `Environment configuration error: ${path} ${firstIssue.message}`,
-    );
+    throw new ConfigurationError(`Environment configuration error: ${path} ${firstIssue.message}`);
   }
 
   const hasProjectId = !!parsed.data.FIREBASE_PROJECT_ID;
@@ -103,7 +101,8 @@ function parseEnvironment(raw: NodeJS.ProcessEnv): Env {
     firebaseCredentialSource: hasAllFirebaseCredential ? 'env' : 'adc',
     nodeEnv: parsed.data.NODE_ENV,
     developerAccessMode: parsed.data.DEVELOPER_ACCESS_MODE,
-    cloudflareTurnstileSecretKey: parsed.data.CLOUDFLARE_TURNSTILE_SECRET_KEY,
+    // cloudflareTurnstileSecretKey: parsed.data.CLOUDFLARE_TURNSTILE_SECRET_KEY,
+    recaptchaSecretKey: parsed.data.RECAPTCHA_SECRET_KEY,
     crmCaptureLeadUrl: parsed.data.CRM_CAPTURE_LEAD_URL,
     firebaseProjectId: parsed.data.FIREBASE_PROJECT_ID,
     firebaseClientEmail: parsed.data.FIREBASE_CLIENT_EMAIL,
@@ -127,7 +126,8 @@ export const requiredEnv: RequiredEnv = {
 export const optionalEnv: OptionalEnv = {
   nodeEnv: env.nodeEnv,
   developerAccessMode: env.developerAccessMode,
-  cloudflareTurnstileSecretKey: env.cloudflareTurnstileSecretKey,
+  // cloudflareTurnstileSecretKey: env.cloudflareTurnstileSecretKey,
+  recaptchaSecretKey: env.recaptchaSecretKey,
   crmCaptureLeadUrl: env.crmCaptureLeadUrl,
   adminBootstrapEmails: env.adminBootstrapEmails,
   apiVersion: env.apiVersion,

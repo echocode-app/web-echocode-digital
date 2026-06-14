@@ -1,7 +1,8 @@
 import { resolveEventAttribution, trackEventBestEffort } from '@/server/analytics';
 import { createEmailSubmissionRecord } from '@/server/forms/email-submission/emailSubmission.repository';
 import { parseEmailSubmissionCreatePayload } from '@/server/forms/email-submission/emailSubmission.validation';
-import { verifyTurnstileTokenFromBody } from '@/server/lib/turnstile';
+// import { verifyTurnstileTokenFromBody } from '@/server/lib/turnstile';
+import { verifyRecaptchaTokenFromBody } from '@/server/lib/recaptcha';
 import type { CreateEmailSubmissionResponseDto } from '@/server/forms/email-submission/emailSubmission.types';
 
 export async function createEmailSubmission(input: {
@@ -13,11 +14,17 @@ export async function createEmailSubmission(input: {
     headers: input.requestHeaders,
   });
   // Require Turnstile before payload validation or records are written.
-  await verifyTurnstileTokenFromBody({
+  // await verifyTurnstileTokenFromBody({
+  //   rawBody: input.rawBody,
+  //   requestHeaders: input.requestHeaders,
+  //   expectedAction: 'email-submission',
+  // });
+
+  await verifyRecaptchaTokenFromBody({
     rawBody: input.rawBody,
     requestHeaders: input.requestHeaders,
-    expectedAction: 'email-submission',
   });
+
   const parsed = parseEmailSubmissionCreatePayload(input.rawBody);
 
   const created = await createEmailSubmissionRecord({

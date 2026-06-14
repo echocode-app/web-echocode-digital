@@ -15,7 +15,8 @@ import {
   profileUrlSchema,
   uploadFileBaseSchema,
 } from './schemas/candidate-schema';
-import TurnstileWidget from '@/widgets/TurnstileWidget';
+// import TurnstileWidget from '@/widgets/TurnstileWidget';
+import RecaptchaWidget from '@/widgets/RecaptchaWidget';
 
 interface CandidateFormProps {
   vacancyData: VacancyData;
@@ -55,24 +56,48 @@ const CandidateForm = ({ vacancyData }: CandidateFormProps) => {
   const [errors, setErrors] = useState<FormErrors>({});
   const [submitStatus, setSubmitStatus] = useState<SubmitStatus>('idle');
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const [turnstileToken, setTurnstileToken] = useState('');
-  const [turnstileKey, setTurnstileKey] = useState(0);
+  // const [turnstileToken, setTurnstileToken] = useState('');
+  // const [turnstileKey, setTurnstileKey] = useState(0);
 
-  const resetTurnstile = () => {
-    setTurnstileToken('');
-    setTurnstileKey((prev) => prev + 1);
+  const [captchaToken, setCaptchaToken] = useState('');
+  const [captchaKey, setCaptchaKey] = useState(0);
+
+  // const resetTurnstile = () => {
+  //   setTurnstileToken('');
+  //   setTurnstileKey((prev) => prev + 1);
+  // };
+
+  // const handleTurnstileVerify = useCallback((token: string) => {
+  //   setTurnstileToken(token);
+  //   setErrors((prev) => ({
+  //     ...prev,
+  //     form: undefined,
+  //   }));
+  // }, []);
+
+  // const handleTurnstileError = useCallback(() => {
+  //   setTurnstileToken('');
+  //   setErrors((prev) => ({
+  //     ...prev,
+  //     form: 'form.turnstileUnavailable',
+  //   }));
+  // }, []);
+
+  const resetCaptcha = () => {
+    setCaptchaToken('');
+    setCaptchaKey((prev) => prev + 1);
   };
 
-  const handleTurnstileVerify = useCallback((token: string) => {
-    setTurnstileToken(token);
+  const handleCaptchaVerify = useCallback((token: string) => {
+    setCaptchaToken(token);
     setErrors((prev) => ({
       ...prev,
       form: undefined,
     }));
   }, []);
 
-  const handleTurnstileError = useCallback(() => {
-    setTurnstileToken('');
+  const handleCaptchaError = useCallback(() => {
+    setCaptchaToken('');
     setErrors((prev) => ({
       ...prev,
       form: 'form.turnstileUnavailable',
@@ -157,7 +182,15 @@ const CandidateForm = ({ vacancyData }: CandidateFormProps) => {
       },
     };
 
-    if (!turnstileToken) {
+    // if (!turnstileToken) {
+    //   setErrors((prev) => ({
+    //     ...prev,
+    //     form: 'form.turnstileRequired',
+    //   }));
+    //   return;
+    // }
+
+    if (!captchaToken) {
       setErrors((prev) => ({
         ...prev,
         form: 'form.turnstileRequired',
@@ -169,9 +202,10 @@ const CandidateForm = ({ vacancyData }: CandidateFormProps) => {
     setErrors({});
 
     try {
-      await submitCandidate(payload, turnstileToken);
+      await submitCandidate(payload, captchaToken);
       setSubmitStatus('success');
-      resetTurnstile();
+      // resetTurnstile();
+      resetCaptcha();
       timeoutRef.current = setTimeout(() => {
         setSubmitStatus('idle');
         setCvFile(null);
@@ -188,7 +222,8 @@ const CandidateForm = ({ vacancyData }: CandidateFormProps) => {
         form: resolveCandidateSubmitErrorKey(err),
       }));
       setSubmitStatus('error');
-      resetTurnstile();
+      // resetTurnstile();
+      resetCaptcha();
     }
   };
 
@@ -275,12 +310,17 @@ const CandidateForm = ({ vacancyData }: CandidateFormProps) => {
           </p>
         )}
       </div>
-      <div className=" mb-4 flex min-h-[71.5px] w-full justify-center">
-        <TurnstileWidget
+      <div className="flex mb-5 min-h-19.5 w-full justify-center">
+        {/* <TurnstileWidget
           key={turnstileKey}
           action="vacancy-submission"
           onVerify={handleTurnstileVerify}
           onError={handleTurnstileError}
+        /> */}
+        <RecaptchaWidget
+          resetSignal={captchaKey}
+          onVerify={handleCaptchaVerify}
+          onError={handleCaptchaError}
         />
       </div>
       <div className="relative">
