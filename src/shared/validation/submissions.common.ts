@@ -7,7 +7,8 @@ const COUNTRY_CODE_PATTERN = /^\+[1-9]\d{0,3}$/;
 const NAME_TOKEN_PATTERN = /[\p{L}\p{M}]+/gu;
 const UPPERCASE_LETTER_PATTERN = /\p{Lu}/u;
 const LOWERCASE_LETTER_PATTERN = /\p{Ll}/u;
-const TURNSTILE_TOKEN_MAX_LENGTH = 2048;
+// const TURNSTILE_TOKEN_MAX_LENGTH = 2048;
+const CAPTCHA_TOKEN_MAX_LENGTH = 4096;
 
 // Blocks long bot-like mixed-case tokens while allowing human casing like McDonald.
 export function hasSuspiciousMixedCaseNameToken(value: string): boolean {
@@ -56,11 +57,17 @@ export const profileUrlSchema = z
   });
 
 /** Cloudflare Turnstile token returned by the frontend widget. */
-export const turnstileTokenSchema = z
+// export const turnstileTokenSchema = z
+//   .string()
+//   .trim()
+//   .min(1, 'Turnstile token is required')
+//   .max(TURNSTILE_TOKEN_MAX_LENGTH, 'Turnstile token is too long');
+
+export const captchaTokenSchema = z
   .string()
   .trim()
-  .min(1, 'Turnstile token is required')
-  .max(TURNSTILE_TOKEN_MAX_LENGTH, 'Turnstile token is too long');
+  .min(1, 'Captcha token is required')
+  .max(CAPTCHA_TOKEN_MAX_LENGTH, 'Captcha token is too long');
 
 export function normalizePhoneDigits(value: string): string {
   return value.replace(/\D/g, '');

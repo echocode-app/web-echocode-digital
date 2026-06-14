@@ -43,28 +43,52 @@ export function useClientProjectForm(
   const [errors, setErrors] = useState<FormErrors>({});
   const [touched, setTouched] = useState<Partial<Record<FieldName, boolean>>>({});
   const [submitState, setSubmitState] = useState<SubmitState>('idle');
-  const [turnstileToken, setTurnstileToken] = useState('');
-  const [turnstileKey, setTurnstileKey] = useState(0);
+  // const [turnstileToken, setTurnstileToken] = useState('');
+  // const [turnstileKey, setTurnstileKey] = useState(0);
+
+  const [captchaToken, setCaptchaToken] = useState('');
+  const [captchaKey, setCaptchaKey] = useState(0);
 
   const isLocked = submitState === 'loading' || submitState === 'success';
 
   const canSubmit = useMemo(() => !isLocked, [isLocked]);
 
-  const resetTurnstile = useCallback(() => {
-    setTurnstileToken('');
-    setTurnstileKey((prev) => prev + 1);
+  // const resetTurnstile = useCallback(() => {
+  //   setTurnstileToken('');
+  //   setTurnstileKey((prev) => prev + 1);
+  // }, []);
+
+  const resetCaptcha = useCallback(() => {
+    setCaptchaToken('');
+    setCaptchaKey((prev) => prev + 1);
   }, []);
 
-  const onTurnstileVerify = useCallback((token: string) => {
-    setTurnstileToken(token);
+  // const onTurnstileVerify = useCallback((token: string) => {
+  //   setTurnstileToken(token);
+  //   setErrors((prev) => ({
+  //     ...prev,
+  //     form: undefined,
+  //   }));
+  // }, []);
+
+  const onCaptchaVerify = useCallback((token: string) => {
+    setCaptchaToken(token);
     setErrors((prev) => ({
       ...prev,
       form: undefined,
     }));
   }, []);
 
-  const onTurnstileError = useCallback(() => {
-    setTurnstileToken('');
+  // const onTurnstileError = useCallback(() => {
+  //   setTurnstileToken('');
+  //   setErrors((prev) => ({
+  //     ...prev,
+  //     form: 'form.turnstileUnavailable',
+  //   }));
+  // }, []);
+
+  const onCaptchaError = useCallback(() => {
+    setCaptchaToken('');
     setErrors((prev) => ({
       ...prev,
       form: 'form.turnstileUnavailable',
@@ -160,7 +184,12 @@ export function useClientProjectForm(
       return;
     }
 
-    if (!turnstileToken) {
+    // if (!turnstileToken) {
+    //   setErrors({ form: 'form.turnstileRequired' });
+    //   return;
+    // }
+
+    if (!captchaToken) {
       setErrors({ form: 'form.turnstileRequired' });
       return;
     }
@@ -176,10 +205,17 @@ export function useClientProjectForm(
         imagePayload = await initAttachmentUpload(values.image);
       }
 
+      // const response = await submitClientProject(
+      //   values,
+      //   imagePayload,
+      //   turnstileToken,
+      //   'client_project_modal',
+      // );
+
       const response = await submitClientProject(
         values,
         imagePayload,
-        turnstileToken,
+        captchaToken,
         'client_project_modal',
       );
 
@@ -189,7 +225,9 @@ export function useClientProjectForm(
           status: response.status,
         });
 
-        resetTurnstile();
+        // resetTurnstile();
+
+        resetCaptcha();
 
         setErrors({ form: resolveSubmitErrorKey(response.status) });
         setSubmitState('idle');
@@ -198,7 +236,8 @@ export function useClientProjectForm(
 
       setErrors({});
       setSubmitState('success');
-      resetTurnstile();
+      // resetTurnstile();
+      resetCaptcha();
     } catch (error) {
       void trackClientProjectModalEvent('submit_project_error', {
         stage: 'submit',
@@ -206,7 +245,8 @@ export function useClientProjectForm(
       });
       setErrors({ form: 'form.networkFailed' });
       setSubmitState('idle');
-      resetTurnstile();
+      // resetTurnstile();
+      resetCaptcha();
     }
   };
 
@@ -222,13 +262,16 @@ export function useClientProjectForm(
     errors,
     submitState,
     isLocked,
-    turnstileKey,
+    // turnstileKey,
+    captchaKey,
     onSubmit,
     onChangeText,
     onChangeImage,
     onBlurField,
     onClearPhoneWithoutValidation,
-    onTurnstileVerify,
-    onTurnstileError,
+    // onTurnstileVerify,
+    onCaptchaVerify,
+    // onTurnstileError,
+    onCaptchaError,
   };
 }

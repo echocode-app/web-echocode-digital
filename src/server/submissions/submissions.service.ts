@@ -7,7 +7,8 @@ import {
 import { verifyUploadedProjectAttachment } from '@/server/submissions/submissions.upload.service';
 import { createSubmissionRecord } from '@/server/submissions/submissions.repository';
 import { toCreateSubmissionResponseDto } from '@/server/submissions/submissions.mapper';
-import { verifyTurnstileTokenFromBody } from '@/server/lib/turnstile';
+// import { verifyTurnstileTokenFromBody } from '@/server/lib/turnstile';
+import { verifyRecaptchaTokenFromBody } from '@/server/lib/recaptcha';
 import {
   resolveStrictRequestSiteContext,
   type ResolvedSiteContext,
@@ -150,7 +151,11 @@ export async function createProjectSubmission(
 
   if (requiresCaptcha(siteContext)) {
     // Digital forms keep bot protection; app submissions are handled by a trusted site policy.
-    await verifyTurnstileTokenFromBody({
+    // await verifyTurnstileTokenFromBody({
+    //   rawBody: params.rawBody,
+    //   requestHeaders: params.requestHeaders,
+    // });
+    await verifyRecaptchaTokenFromBody({
       rawBody: params.rawBody,
       requestHeaders: params.requestHeaders,
     });
