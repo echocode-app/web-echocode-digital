@@ -57,7 +57,7 @@ const FooterNavigation = () => {
               <FooterSocialLink link="https://linkedin.com/company/echocode">
                 LinkedIn
               </FooterSocialLink>
-              <FooterSocialLink link="https://www.fiverr.com/s/8zrXA6q ">
+              <FooterSocialLink link="https://www.fiverr.com/s/8zrXA6q">
                 Fiverr
               </FooterSocialLink>
               <FooterSocialLink link="https://freelancehunt.com/freelancer/echocode.html">

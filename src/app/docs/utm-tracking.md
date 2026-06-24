@@ -71,7 +71,7 @@ Domain:
 | Instagram Bio     | `https://www.echocode.digital/?utm_source=instagram&utm_medium=social&utm_campaign=bio_link`              |
 | Telegram Channel  | `https://www.echocode.digital/?utm_source=telegram&utm_medium=social&utm_campaign=channel_post`           |
 | Freelancehunt     | `https://www.echocode.digital/?utm_source=freelancehunt&utm_medium=marketplace&utm_campaign=profile_link` |
-| Upwork            | `https://www.echocode.digital/?utm_source=upwork&utm_medium=marketplace&utm_campaign=profile_link`        |
+| Fiverr            | `https://www.echocode.digital/?utm_source=fiverr&utm_medium=marketplace&utm_campaign=profile_link`        |
 | Email Signature   | `https://www.echocode.digital/?utm_source=email&utm_medium=outbound&utm_campaign=signature_link`          |
 | Clutch            | `https://www.echocode.digital/?utm_source=clutch&utm_medium=marketplace&utm_campaign=profile_link`        |
 | Behance           | `https://www.echocode.digital/?utm_source=behance&utm_medium=social&utm_campaign=portfolio_link`          |

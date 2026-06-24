@@ -102,7 +102,7 @@ In practice this means:
 | LinkedIn | `https://echocode.digital/?utm_source=linkedin&utm_medium=social&utm_campaign=digital_outreach` | `https://echocode.app/?utm_source=linkedin&utm_medium=social&utm_campaign=app_founder_post` | Use `.digital` for agency/service promotion, `.app` for product discovery or app growth content. |
 | Instagram | not primary preset in current admin set for `.digital` | `https://echocode.app/?utm_source=instagram&utm_medium=social&utm_campaign=app_profile_link` | Use mostly for `.app`; for `.digital`, create a dedicated social link only if Instagram is used for agency traffic consistently. |
 | Telegram | not primary preset in current admin set for `.digital` | `https://echocode.app/?utm_source=telegram&utm_medium=community&utm_campaign=app_channel_post` | Use for founder/community posts; keep Telegram under `community` rather than `social` if you want it separated. |
-| Upwork | `https://echocode.digital/?utm_source=upwork&utm_medium=marketplace&utm_campaign=digital_profile` | not recommended as a primary `.app` channel | Use only for agency lead generation and service traffic. |
+| Fiverr | `https://echocode.digital/?utm_source=fiverr&utm_medium=marketplace&utm_campaign=digital_profile` | not recommended as a primary `.app` channel | Use only for agency lead generation and service traffic. |
 | Freelancehunt | `https://echocode.digital/?utm_source=freelancehunt&utm_medium=marketplace&utm_campaign=digital_profile` | not recommended as a primary `.app` channel | Use only for agency traffic coming from marketplace profiles and bids. |
 | Email signature | `https://echocode.digital/?utm_source=email&utm_medium=outbound&utm_campaign=digital_signature` | not primary preset | Good for founder, sales, and partnership signatures; keep separate from cold outreach. |
 | Cold email | `https://echocode.digital/?utm_source=cold_email&utm_medium=outbound&utm_campaign=digital_outreach` | not primary preset | Use when you need outbound email attribution separate from signature clicks. |
@@ -121,7 +121,7 @@ In practice this means:
 ### Minimal recommendations by channel
 
 - LinkedIn: best default channel for both B2B agency traffic and founder-led app announcements.
-- Upwork / Freelancehunt / Clutch: use only for `echocode.digital`.
+- Fiverr / Freelancehunt / Clutch: use only for `echocode.digital`.
 - Behance / Dribbble: route traffic to `echocode.digital`, because this is agency and portfolio intent.
 - Product Hunt / Reddit / X / YouTube / creator campaigns: use mainly for `echocode.app`.
 - Meta Ads: decide campaign goal first; service leads go to `.digital`, product growth goes to `.app`.

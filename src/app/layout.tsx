@@ -126,7 +126,7 @@ export default async function RootLayout({
       'https://www.instagram.com/echocodeHQ',
       'https://www.behance.net/valeriimelnikov',
       'https://freelancehunt.com/freelancer/echocode.html',
-      'https://www.upwork.com/agencies/2038889063349600711/',
+      'https://www.fiverr.com/s/8zrXA6q',
     ],
   };
   const websiteSchema = {

@@ -130,9 +130,9 @@ export const ADMIN_UTM_SECTIONS: AdminUtmSection[] = [
           'Use in company posts, founder posts, direct outreach or comments that send traffic to the agency site.',
       },
       {
-        label: 'Upwork Profile',
-        channel: 'Upwork',
-        source: 'upwork',
+        label: 'Fiverr Profile',
+        channel: 'Fiverr',
+        source: 'fiverr',
         medium: 'marketplace',
         campaign: 'digital_profile',
         usage:
