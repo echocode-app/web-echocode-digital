@@ -145,9 +145,7 @@ const CommonFooterForm = () => {
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);
-    // const honeypotAddress = String(formData.get('address') ?? '');
-
-    const honeypotAddress = 'bot';
+    const honeypotAddress = String(formData.get('address') ?? '');
 
     if (!canSubmit) {
       return;
