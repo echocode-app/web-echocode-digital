@@ -166,6 +166,9 @@ export function useClientProjectForm(
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    const formData = new FormData(event.currentTarget);
+    const honeypotAddress = String(formData.get('address') ?? '');
+
     if (!canSubmit) {
       return;
     }
@@ -217,6 +220,7 @@ export function useClientProjectForm(
         imagePayload,
         captchaToken,
         'client_project_modal',
+        honeypotAddress,
       );
 
       if (!response.ok) {

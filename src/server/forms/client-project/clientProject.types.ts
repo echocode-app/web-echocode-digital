@@ -23,6 +23,7 @@ export type ClientProjectCreateInput = {
   /** Widget token verified before persistence; never stored. */
   // turnstileToken: string;
   captchaToken: string;
+  address?: string;
   description?: string;
   image?: ClientProjectImageMetaInput;
   gclid?: string;
@@ -43,6 +44,7 @@ export type ClientSubmissionFirestoreDoc = {
   imageUrl?: string;
   imagePath?: string;
   imageName?: string;
+  honeypotTripped?: boolean;
   status: ClientSubmissionStatus;
   isDeleted?: boolean;
   deletedAt?: FieldValue;
@@ -82,6 +84,7 @@ export type ClientSubmissionRecordDto = {
   description: string | null;
   imageUrl: string | null;
   imageName: string | null;
+  honeypotTripped: boolean;
   status: ClientSubmissionStatus;
   createdAt: string;
   updatedAt: string;
@@ -99,6 +102,7 @@ export type ClientSubmissionListItemDto = {
   countryCode: string;
   phoneE164: string;
   date: string;
+  honeypotTripped: boolean;
   status: ClientSubmissionStatus;
   hasImage: boolean;
   commentsCount: number;

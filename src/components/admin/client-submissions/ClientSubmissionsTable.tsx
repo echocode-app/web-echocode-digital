@@ -15,6 +15,7 @@ const clientSubmissionColumns: AdminDataTableColumn[] = [
   { key: 'phone', label: 'Phone', widthClassName: 'w-[16%]' },
   { key: 'date', label: 'Date', widthClassName: 'w-36' },
   { key: 'status', label: 'Status', widthClassName: 'w-28' },
+  { key: 'bot', label: 'Bot', widthClassName: 'w-16', headerClassName: 'text-center' },
   { key: 'files', label: 'Files', widthClassName: 'w-16' },
   { key: 'comments', label: 'Comments', widthClassName: 'w-24' },
   { key: 'actions', label: 'Actions', widthClassName: 'w-64' },

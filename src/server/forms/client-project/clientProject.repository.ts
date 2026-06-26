@@ -50,6 +50,7 @@ function isSoftDeleted(data: Record<string, unknown>): boolean {
 export async function createClientSubmissionRecord(input: {
   payload: ClientProjectCreateInput;
   imageUrl: string | null;
+  honeypotTripped: boolean;
 }): Promise<CreateClientSubmissionResponseDto> {
   const firestore = getFirestoreDb();
   const docRef = firestore.collection(CLIENT_SUBMISSIONS_COLLECTION).doc();
@@ -68,6 +69,7 @@ export async function createClientSubmissionRecord(input: {
           imageName: input.payload.image?.originalName,
         }
       : {}),
+    honeypotTripped: input.honeypotTripped,
     status: 'new',
     isDeleted: false,
     createdAt: FieldValue.serverTimestamp(),

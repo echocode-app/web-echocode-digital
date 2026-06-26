@@ -144,6 +144,11 @@ const CommonFooterForm = () => {
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    const formData = new FormData(event.currentTarget);
+    // const honeypotAddress = String(formData.get('address') ?? '');
+
+    const honeypotAddress = 'bot';
+
     if (!canSubmit) {
       return;
     }
@@ -204,6 +209,7 @@ const CommonFooterForm = () => {
         imagePayload,
         captchaToken,
         'client_project_footer',
+        honeypotAddress,
       );
 
       if (!response.ok) {
@@ -250,6 +256,24 @@ const CommonFooterForm = () => {
 
   return (
     <form onSubmit={onSubmit} className="md:min-w-149 min-[1068]:max-w-149">
+      <label
+        htmlFor="address"
+        className="pointer-events-none absolute -left-2499.75 h-px w-px opacity-0"
+      >
+        Address *
+      </label>
+
+      <input
+        id="address"
+        type="text"
+        name="address"
+        autoComplete="street-address"
+        tabIndex={-1}
+        aria-hidden="true"
+        data-required="true"
+        aria-required="true"
+        className="pointer-events-none absolute -left-2499.75 h-px w-px opacity-0"
+      />
       <div className="flex flex-col md:flex-row gap-6 md:gap-6 mb-6 md:mb-8">
         <ContactInput
           name="firstName"

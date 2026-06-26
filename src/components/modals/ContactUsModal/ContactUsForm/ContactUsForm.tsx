@@ -45,6 +45,24 @@ const ContactUsForm = ({
 
   return (
     <form onSubmit={onSubmit}>
+      <label
+        htmlFor="address"
+        className="pointer-events-none absolute -left-2499.75 h-px w-px opacity-0"
+      >
+        Address *
+      </label>
+
+      <input
+        id="address"
+        type="text"
+        name="address"
+        autoComplete="street-address"
+        tabIndex={-1}
+        aria-hidden="true"
+        data-required="true"
+        aria-required="true"
+        className="pointer-events-none absolute -left-2499.75 h-px w-px opacity-0"
+      />
       <div className="flex flex-col gap-4 md:gap-6 mb-4 md:mb-6">
         <ContactInput
           name="firstName"

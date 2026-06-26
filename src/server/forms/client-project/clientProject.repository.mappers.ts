@@ -77,6 +77,7 @@ export function mapDocToRecord(
     description: typeof data.description === 'string' ? data.description : null,
     imageUrl: typeof data.imageUrl === 'string' ? data.imageUrl : null,
     imageName: typeof data.imageName === 'string' ? data.imageName : null,
+    honeypotTripped: data.honeypotTripped === true,
     status: typeof data.status === 'string' ? (data.status as ClientSubmissionStatus) : 'new',
     createdAt: toIso(data.createdAt),
     updatedAt: toIso(data.updatedAt),
@@ -103,6 +104,7 @@ export function mapDocToListItem(
     countryCode: readString(data, 'countryCode'),
     phoneE164: resolvePhoneE164(data),
     date: toIso(data.createdAt),
+    honeypotTripped: data.honeypotTripped === true,
     status: typeof data.status === 'string' ? (data.status as ClientSubmissionStatus) : 'new',
     hasImage: typeof data.imageUrl === 'string' && data.imageUrl.length > 0,
     commentsCount:
