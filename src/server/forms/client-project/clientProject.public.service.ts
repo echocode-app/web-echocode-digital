@@ -9,6 +9,7 @@ import { logger } from '@/server/lib/logger';
 // import { verifyTurnstileTokenFromBody } from '@/server/lib/turnstile';
 import { verifyRecaptchaTokenFromBody } from '@/server/lib/recaptcha';
 import type { CreateClientSubmissionResponseDto } from '@/server/forms/client-project/clientProject.types';
+import { isHoneypotTripped, logHoneypotCrmSkip } from '@/server/lib/honeypot';
 
 function resolveClientProjectSource(
   rawBody: unknown,
@@ -31,17 +32,14 @@ export async function createClientProjectSubmission(input: {
     rawBody: input.rawBody,
     headers: input.requestHeaders,
   });
-  // Require Turnstile before payload validation, uploads, or records are written.
-  // await verifyTurnstileTokenFromBody({
-  //   rawBody: input.rawBody,
-  //   requestHeaders: input.requestHeaders,
-  //   expectedAction: 'client-project',
-  // });
+
+  const honeypotTripped = isHoneypotTripped(input.rawBody);
 
   await verifyRecaptchaTokenFromBody({
     rawBody: input.rawBody,
     requestHeaders: input.requestHeaders,
   });
+
   const parsed = parseClientProjectCreatePayload(input.rawBody);
 
   const imageUrl = await resolveClientSubmissionImageUrl(parsed.image);
@@ -49,6 +47,7 @@ export async function createClientProjectSubmission(input: {
   const created = await createClientSubmissionRecord({
     payload: parsed,
     imageUrl,
+    honeypotTripped,
   });
 
   const trackingKeys = getClientProjectTrackingKeys(parsed);
@@ -60,17 +59,24 @@ export async function createClientProjectSubmission(input: {
     hasAttachment,
     hasTracking: trackingKeys.length > 0,
     trackingKeys,
-    crmCaptureScheduled: true,
+    crmCaptureScheduled: !honeypotTripped,
   });
 
-  after(() =>
-    sendClientProjectLeadToCrmBestEffort({
-      parsed,
+  if (!honeypotTripped) {
+    after(() =>
+      sendClientProjectLeadToCrmBestEffort({
+        parsed,
+        submissionId: created.id,
+        source,
+        hasAttachment,
+      }),
+    );
+  } else {
+    logHoneypotCrmSkip('client-project', {
       submissionId: created.id,
-      source,
-      hasAttachment,
-    }),
-  );
+      rawBody: input.rawBody,
+    });
+  }
 
   const sessionId = input.requestHeaders?.get('x-client-session-id')?.trim() || null;
 
@@ -81,6 +87,7 @@ export async function createClientProjectSubmission(input: {
       source,
       submissionId: created.id,
       hasAttachment,
+      honeypotTripped,
       ...(eventAttribution
         ? {
             attribution: {

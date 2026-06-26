@@ -96,6 +96,7 @@ export async function submitClientProject(
   // turnstileToken: string,
   captchaToken: string,
   source: ClientProjectSubmitSource = 'client_project_modal',
+  address = '',
 ): Promise<{ ok: boolean; status: number }> {
   const normalized = normalize(values);
   const analyticsContext = getClientAnalyticsContextPayload();
@@ -112,6 +113,7 @@ export async function submitClientProject(
       phone: normalized.phone,
       email: normalized.email,
       source,
+      address,
       ...(normalized.description ? { description: normalized.description } : {}),
       ...(imagePayload ? { image: imagePayload } : {}),
       ...analyticsContext,

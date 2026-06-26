@@ -38,13 +38,13 @@ export default function ClientSubmissionsTableRows({
   if (state === 'loading') {
     return (
       <AdminTableLoadingRows
-        cellWidths={['w-32', 'w-24', 'w-24', 'w-16', 'w-8', 'w-8', 'w-32']}
+        cellWidths={['w-32', 'w-24', 'w-24', 'w-16', 'w-16', 'w-8', 'w-8', 'w-32']}
       />
     );
   }
 
   if (rows.length === 0) {
-    return <AdminTableEmptyRow colSpan={7} message="No client submissions found." />;
+    return <AdminTableEmptyRow colSpan={8} message="No client submissions found." />;
   }
 
   return (
@@ -75,6 +75,15 @@ export default function ClientSubmissionsTableRows({
             </td>
             <td className="px-2 py-2">
               <ClientSubmissionStatusBadge status={row.status} />
+            </td>
+            <td className="px-1 py-2 text-center align-middle">
+              {row.honeypotTripped ? (
+                <span className="mx-auto inline-flex h-6 w-12 items-center justify-center rounded-full border border-[#ff6d7a]/60 bg-[#ff6d7a]/10 font-main text-[10px] font-semibold uppercase text-[#ff9ea7]">
+                  Bot
+                </span>
+              ) : (
+                <span className="mx-auto block w-12 text-center text-gray60">—</span>
+              )}
             </td>
             <td className="px-2 py-2 text-center">
               {row.hasImage ? (

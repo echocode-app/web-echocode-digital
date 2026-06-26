@@ -76,6 +76,7 @@ export const clientProjectCreateSchema = z
     email: z.string().trim().email('Must be a valid email').max(EMAIL_MAX_LEN, 'Email is too long'),
     // turnstileToken: turnstileTokenSchema,
     captchaToken: captchaTokenSchema,
+    address: z.string().trim().max(200).optional(),
     description: z.string().trim().max(DESCRIPTION_MAX_LEN, 'Description is too long').optional(),
     image: imageMetaSchema.optional(),
     gclid: trackingValueSchema.optional(),

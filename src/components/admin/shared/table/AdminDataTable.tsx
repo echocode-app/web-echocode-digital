@@ -11,6 +11,7 @@ export type AdminDataTableColumn = {
   key: string;
   label: string;
   widthClassName?: string;
+  headerClassName?: string;
 };
 
 export function AdminDataTable({
@@ -30,7 +31,7 @@ export function AdminDataTable({
     <article className={`${tableShellClassName} max-w-full`}>
       <table
         className={`${
-          fixedLayout ? 'table-fixed min-w-[1080px]' : 'min-w-full'
+          fixedLayout ? 'table-fixed min-w-270' : 'min-w-full'
         } w-full border-separate border-spacing-y-2`}
       >
         <colgroup>
@@ -41,7 +42,10 @@ export function AdminDataTable({
         <thead>
           <tr className={headerRowClassName}>
             {columns.map((column) => (
-              <th key={column.key} className={headerCellClassName}>
+              <th
+                key={column.key}
+                className={`${headerCellClassName} ${column.headerClassName ?? ''}`}
+              >
                 {column.label}
               </th>
             ))}
