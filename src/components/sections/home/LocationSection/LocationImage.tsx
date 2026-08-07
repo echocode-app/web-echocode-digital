@@ -4,9 +4,10 @@ interface LocationImageProps {
   image: string;
   title: string;
   gradient: string;
+  fixInvertedExclamation?: boolean;
 }
 
-const LocationImage = ({ image, title, gradient }: LocationImageProps) => {
+const LocationImage = ({ image, title, gradient, fixInvertedExclamation }: LocationImageProps) => {
   return (
     <div className="relative w-full sm:max-w-76.5 aspect-306/200 max-h-50 mb-4 overflow-hidden">
       <div
@@ -15,8 +16,8 @@ const LocationImage = ({ image, title, gradient }: LocationImageProps) => {
  ${gradient}`}
       >
         <div className="flex aspect-306/200 animate-[marquee-reverse_8s_linear_infinite] will-change-transform">
-          <AnimationList title={title} />
-          <AnimationList title={title} />
+          <AnimationList title={title} fixInvertedExclamation={fixInvertedExclamation} />
+          <AnimationList title={title} fixInvertedExclamation={fixInvertedExclamation} />
         </div>
       </div>
       <Image
