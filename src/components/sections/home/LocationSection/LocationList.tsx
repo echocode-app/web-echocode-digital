@@ -18,7 +18,12 @@ const LocationList = () => {
         <h3 className="font-title text-title-sm uppercase">{t('locations.kyiv')}</h3>
       </li>
       <li className="w-full sm:max-w-76.5">
-        <LocationImage image="/images/locations/alicante.png" title="¡Hola!" gradient={alicante} />
+        <LocationImage
+          image="/images/locations/alicante.png"
+          title="¡Hola!"
+          gradient={alicante}
+          fixInvertedExclamation
+        />
         <h3 className="font-title text-title-sm uppercase">{t('locations.alicante')}</h3>
       </li>
       <li className="w-full sm:max-w-76.5">
