@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     siteName: 'Echocode',
     images: [
       {
-        url: '/favicon/fulllogo.png',
+        url: '/favicon/og-cover.png',
         width: 1200,
         height: 630,
         alt: 'Echocode — Software Development Company',
@@ -79,7 +79,7 @@ export const metadata: Metadata = {
     title: 'Echocode — iOS, Android, Web & iGaming Development',
     description:
       'Software development company for mobile, web and iGaming products. Design, QA and product-focused engineering.',
-    images: ['/favicon/fulllogo.png'],
+    images: ['/favicon/og-cover.png'],
   },
 };
 

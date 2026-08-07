@@ -6,7 +6,7 @@ import type { AppLocale } from '@/i18n/config';
 export const seoBaseUrl = 'https://echocode.digital';
 export type { AppLocale } from '@/i18n/config';
 
-const SOCIAL_PREVIEW_IMAGE = '/favicon/fulllogo.png';
+const SOCIAL_PREVIEW_IMAGE = '/favicon/og-cover.png';
 
 const openGraphLocales: Record<AppLocale, string> = {
   en: 'en_US',
