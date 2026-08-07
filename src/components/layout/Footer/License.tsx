@@ -28,12 +28,12 @@ const License = () => {
         </Link>{' '}
         |{' '}
         <Link
-          href="https://maps.google.com/?q=Berlin+city+center"
+          href="https://www.google.com/maps/search/?api=1&query=Alicante+city+center"
           target="_blank"
           rel="noreferrer"
           className="transition-colors duration-main hover:text-accent focus-visible:text-accent"
         >
-          BERLIN
+          ALICANTE
         </Link>
       </p>
     </div>
