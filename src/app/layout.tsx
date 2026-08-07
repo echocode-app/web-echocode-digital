@@ -116,8 +116,8 @@ export default async function RootLayout({
       },
       {
         '@type': 'PostalAddress',
-        addressCountry: 'DE',
-        addressLocality: 'Berlin',
+        addressCountry: 'ES',
+        addressLocality: 'Alicante',
       },
     ],
     sameAs: [
