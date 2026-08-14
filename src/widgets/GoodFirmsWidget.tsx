@@ -1,5 +1,5 @@
 type GoodFirmsWidgetProps = {
-  variant?: 'horizontal' | 'stars' | 'starsLine';
+  variant?: 'horizontal' | 'stars' | 'starsLine' | 'poweredByStar';
 };
 
 const WIDGET_CONFIG = {
@@ -20,6 +20,12 @@ const WIDGET_CONFIG = {
     pattern: 'star-no-review-line',
     height: 70,
     width: 450,
+  },
+  poweredByStar: {
+    type: 'goodfirms-widget-t8',
+    pattern: 'poweredby-star',
+    height: 60,
+    width: 300,
   },
 };
 
@@ -60,7 +66,7 @@ export default function GoodFirmsWidget({ variant = 'horizontal' }: GoodFirmsWid
   `;
 
   return (
-    <div className="mb-4 lg:mb-0 min-h-[70px] w-full overflow-hidden">
+    <div className="mb-4 lg:mb-0 min-h-[60px] w-full overflow-hidden">
       <iframe
         title="GoodFirms Widget"
         srcDoc={widgetHtml}
