@@ -36,14 +36,16 @@ export default function GoodFirmsWidget({ variant = 'horizontal' }: GoodFirmsWid
   }, []);
 
   return (
-    <div className="mb-4 flex min-h-[61px] w-full justify-center items-center">
-      <div
-        className="goodfirm-widget"
-        data-widget-type={config.type}
-        data-widget-pattern={config.pattern}
-        data-height={config.height}
-        data-company-id="211069"
-      />
+    <div className="mb-4 flex min-h-[61px] w-full justify-center">
+      <div className="translate-x-4">
+        <div
+          className="goodfirm-widget"
+          data-widget-type={config.type}
+          data-widget-pattern={config.pattern}
+          data-height={config.height}
+          data-company-id="211069"
+        />
+      </div>
     </div>
   );
 }
