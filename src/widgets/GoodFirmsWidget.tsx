@@ -19,7 +19,7 @@ const WIDGET_CONFIG = {
     type: 'goodfirms-widget-t6',
     pattern: 'star-no-review-line',
     height: 70,
-    width: 300,
+    width: 450,
   },
 };
 
@@ -60,13 +60,13 @@ export default function GoodFirmsWidget({ variant = 'horizontal' }: GoodFirmsWid
   `;
 
   return (
-    <div className="mb-4 lg:mb-0 min-h-[61px] w-fit mx-auto">
+    <div className="mb-4 lg:mb-0 min-h-[70px] w-full overflow-hidden">
       <iframe
         title="GoodFirms Widget"
         srcDoc={widgetHtml}
         width={config.width}
         height={config.height}
-        className="block border-0 translate-x-8"
+        className="mx-auto block max-w-full border-0"
         scrolling="no"
       />
     </div>
