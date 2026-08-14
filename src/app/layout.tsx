@@ -159,6 +159,12 @@ export default async function RootLayout({
     <html lang={locale}>
       <head>
         <EchoTrackingScript />
+        <Script
+          id="goodfirms-widget-script"
+          src="https://assets.goodfirms.co/assets/js/widget.min.js"
+          strategy="beforeInteractive"
+          data-cookieconsent="ignore"
+        />
         {SHOULD_LOAD_GTM ? (
           <Script id="google-tag-manager" strategy="lazyOnload">
             {`
