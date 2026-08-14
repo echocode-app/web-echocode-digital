@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { usePathname } from 'next/navigation';
 
 type GoodFirmsWidgetProps = {
   variant?: 'horizontal' | 'stars';
@@ -23,19 +24,20 @@ const GOODFIRMS_SCRIPT_SRC = 'https://assets.goodfirms.co/assets/js/widget.min.j
 
 export default function GoodFirmsWidget({ variant = 'horizontal' }: GoodFirmsWidgetProps) {
   const config = WIDGET_CONFIG[variant];
+  const pathname = usePathname();
   const widgetRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const retryTimers: ReturnType<typeof setTimeout>[] = [];
+    const timers: ReturnType<typeof setTimeout>[] = [];
 
-    const isWidgetRendered = () => {
+    const isRendered = () => {
       const widget = widgetRef.current;
 
       return Boolean(widget && widget.innerHTML.trim().length > 0);
     };
 
-    const loadGoodFirmsScript = () => {
-      if (isWidgetRendered()) return;
+    const reloadGoodFirms = () => {
+      if (isRendered()) return;
 
       document
         .querySelectorAll<HTMLScriptElement>(`script[src="${GOODFIRMS_SCRIPT_SRC}"]`)
@@ -50,20 +52,28 @@ export default function GoodFirmsWidget({ variant = 'horizontal' }: GoodFirmsWid
       document.body.appendChild(script);
     };
 
-    loadGoodFirmsScript();
+    const scheduleReload = () => {
+      [100, 700, 1600, 3000, 6000].forEach((delay) => {
+        timers.push(setTimeout(reloadGoodFirms, delay));
+      });
+    };
 
-    [700, 1600, 3000].forEach((delay) => {
-      retryTimers.push(
-        setTimeout(() => {
-          loadGoodFirmsScript();
-        }, delay),
-      );
-    });
+    widgetRef.current?.replaceChildren();
+    scheduleReload();
+
+    window.addEventListener('load', scheduleReload);
+    window.addEventListener('pageshow', scheduleReload);
+    window.addEventListener('CookiebotOnAccept', scheduleReload);
+    window.addEventListener('CookiebotOnConsentReady', scheduleReload);
 
     return () => {
-      retryTimers.forEach(clearTimeout);
+      timers.forEach(clearTimeout);
+      window.removeEventListener('load', scheduleReload);
+      window.removeEventListener('pageshow', scheduleReload);
+      window.removeEventListener('CookiebotOnAccept', scheduleReload);
+      window.removeEventListener('CookiebotOnConsentReady', scheduleReload);
     };
-  }, []);
+  }, [pathname]);
 
   return (
     <div className="mb-4 lg:mb-0 min-h-[61px] w-fit mx-auto">
