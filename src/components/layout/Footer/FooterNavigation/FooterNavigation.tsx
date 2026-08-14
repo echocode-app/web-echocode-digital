@@ -7,6 +7,7 @@ import SocailLinks from './SocialLinks';
 import FooterNavLogo from './FooterNavLogo';
 import { Link } from '@/i18n/navigation';
 import Image from 'next/image';
+import GoodFirmsWidget from '@/widgets/GoodFirmsWidget';
 
 const FooterNavigation = () => {
   const t = useTranslations('Layout.Footer');
@@ -57,9 +58,7 @@ const FooterNavigation = () => {
               <FooterSocialLink link="https://linkedin.com/company/echocode">
                 LinkedIn
               </FooterSocialLink>
-              <FooterSocialLink link="https://www.fiverr.com/s/8zrXA6q">
-                Fiverr
-              </FooterSocialLink>
+              <FooterSocialLink link="https://www.fiverr.com/s/8zrXA6q">Fiverr</FooterSocialLink>
               <FooterSocialLink link="https://freelancehunt.com/freelancer/echocode.html">
                 Freelancehunt
               </FooterSocialLink>
@@ -72,6 +71,7 @@ const FooterNavigation = () => {
       </div>
       <div className="lg:flex lg:flex-col lg:justify-between">
         <EmailLink />
+        <GoodFirmsWidget variant="horizontal" />
         <SocailLinks />
       </div>
     </div>
