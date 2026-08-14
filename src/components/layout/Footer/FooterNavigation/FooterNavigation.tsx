@@ -71,7 +71,7 @@ const FooterNavigation = () => {
       </div>
       <div className="lg:flex lg:flex-col lg:justify-between">
         <EmailLink />
-        <GoodFirmsWidget variant="stars" />
+        <GoodFirmsWidget variant="starsLine" />
         <SocailLinks />
       </div>
     </div>

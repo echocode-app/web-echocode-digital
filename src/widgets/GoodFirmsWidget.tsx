@@ -1,5 +1,5 @@
 type GoodFirmsWidgetProps = {
-  variant?: 'horizontal' | 'stars';
+  variant?: 'horizontal' | 'stars' | 'starsLine';
 };
 
 const WIDGET_CONFIG = {
@@ -13,6 +13,12 @@ const WIDGET_CONFIG = {
     type: 'goodfirms-widget-t6',
     pattern: 'star-no-review',
     height: 100,
+    width: 300,
+  },
+  starsLine: {
+    type: 'goodfirms-widget-t6',
+    pattern: 'star-no-review-line',
+    height: 70,
     width: 300,
   },
 };
