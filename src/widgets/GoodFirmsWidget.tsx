@@ -36,9 +36,9 @@ export default function GoodFirmsWidget({ variant = 'horizontal' }: GoodFirmsWid
   }, []);
 
   return (
-    <div className="mb-4 md:mb-0 min-h-[61px] w-fit mx-auto">
+    <div className="mb-4 lg:mb-0 min-h-[61px] w-fit mx-auto">
       <div
-        className="goodfirm-widget"
+        className="goodfirm-widget translate-x-8"
         data-widget-type={config.type}
         data-widget-pattern={config.pattern}
         data-height={config.height}
